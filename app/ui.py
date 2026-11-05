@@ -8,7 +8,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import streamlit as st
 
-from app import pipeline, retrieval
+from app import guards, pipeline, retrieval
 from app.config import load_config, is_mock
 
 st.set_page_config(page_title="AI Lawyer for India", page_icon="⚖️", layout="centered")
@@ -59,6 +59,8 @@ def show_details(r: pipeline.TurnResult) -> None:
                 if c:
                     st.markdown(f"- `{cid}` {c['doc_title']}, {c['unit']} {c['unit_number']} | fetched {c['fetched_on']} "
                                 f"| verified: **{c['verified']}** | [{c['status']}] | [source]({c['source_url']})")
+                    for note in guards.source_notes(c):
+                        (st.warning if "REVIEW" in note or note == guards.CAUTION else st.caption)(note)
         if r.retrieved:
             st.write("**Retrieved (rank order)**")
             st.table([{"id": x["id"], "score": round(x["score"], 3)} for x in r.retrieved])

@@ -4,7 +4,7 @@ import json
 import logging
 import re
 
-from . import llm
+from . import guards, llm
 from .config import load_config, read_prompt
 
 log = logging.getLogger("ai_lawyer.router")
@@ -14,14 +14,16 @@ VALID_CATS = {"consumer", "wages", "tenancy", "out_of_scope", "unclear"}
 
 def keyword_flags(text: str) -> list[str]:
     cfg = load_config()["escalation"]
+    text = guards.norm(text)
     low = text.lower()
     flags = []
     for kw in cfg.get("keywords_en", []):
         if re.search(r"(?<!\w)" + re.escape(kw.lower()) + r"(?!\w)", low):
             flags.append(f"keyword:{kw}")
     for kw in cfg.get("keywords_hi", []):
-        if kw in text:
+        if guards.norm(kw) in text:
             flags.append(f"keyword:{kw}")
+    flags += guards.minor_flags(text)
     return flags
 
 
@@ -52,7 +54,7 @@ def route(case_file: dict, history: list[dict], user_text: str) -> tuple[dict, d
     """Returns (router_json, info). info = {"attempts": n, "error": str|None}."""
     system = read_prompt("router.md")
     recent = "\n".join(f"{h['role']}: {h['text']}" for h in history[-6:]) or "(none)"
-    user = (f"CASE FILE SO FAR: {json.dumps(case_file, ensure_ascii=False)}\n"
+    user = (f"TODAY: {guards.today().isoformat()}\nCASE FILE SO FAR: {json.dumps(case_file, ensure_ascii=False)}\n"
             f"RECENT CONVERSATION:\n{recent}\n\nUSER MESSAGE: {user_text}\n=== END ===")
     msgs = [{"role": "system", "content": system}, {"role": "user", "content": user}]
     err = None
@@ -76,6 +78,8 @@ def escalation(user_text: str, router_json: dict, case_file: dict) -> dict:
     cfg = load_config()
     esc = cfg["escalation"]
     hard = keyword_flags(user_text) + [f"llm:{f}" for f in router_json.get("escalation_flags", [])]
+    if case_file.get("minor_stated") and "minor_age" not in hard:
+        hard.append("minor_age")  # a stated age under 18 stays in force for the whole session
     if router_json["category"] == "out_of_scope":
         hard.append("out_of_scope_topic")
     soft = []

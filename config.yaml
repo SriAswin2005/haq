@@ -1,21 +1,45 @@
-# Model names are assumptions to verify against provider docs (see docs/ASSUMPTIONS.md).
+# Model routing (2026-11-05). Each role is an ORDERED fallback chain: the first usable model
+# wins; on a 429, daily quota, 5xx, timeout or unknown model the client moves to the next one.
+# rpm / tpm (input tokens) / rpd are this account's free-tier limits from AI Studio, so the
+# client paces itself and skips a model before Google refuses it. Check names and chains:
+#   python -m app.models          (python -m app.models --probe sends 1 tiny request per model)
+# Why this order:
+#  - Flash-Lite (15 RPM, 500/day) carries routine traffic; a 30-case eval is ~50 router + ~60 main calls.
+#  - router and main START on DIFFERENT Flash-Lite models, so each gets its own 500/day.
+#  - Gemma 4 (30 RPM, 14.4K/day, but only 16K tokens/min = about 2-3 answer calls a minute) is the deep reserve.
+#  - judge starts on Gemma: a different model family from the answer model is a more independent check.
+#  - Flash (5 RPM, 20/day) is the last resort only. For the interview demo, move gemini-3.5-flash to the top of main.
+# Interview swap: put their model FIRST in a chain (old single-dict form also works), e.g.
+#   - {provider: openai_compatible, model: "<their model>", base_url: "<their url>", api_key_env: KUKU_API_KEY}
 models:
-  router: {provider: gemini, model: "gemini-2.5-flash"}
-  main:   {provider: gemini, model: "gemini-2.5-flash"}
-  judge:  {provider: gemini, model: "gemini-2.5-flash"}
-embeddings: {provider: gemini, model: "gemini-embedding-001"}
-corpus: {path: data/sample}        # switch to data/corpus for the real corpus
+  router:
+    - {provider: gemini, model: "gemini-3.1-flash-lite", rpm: 15, tpm: 250000, rpd: 495}
+    - {provider: gemini, model: "gemma-4-31b-it",       rpm: 30, tpm: 16000,  rpd: 14000}
+    - {provider: gemini, model: "gemini-3.5-flash-lite", rpm: 15, tpm: 250000, rpd: 495}
+    - {provider: gemini, model: "gemma-4-26b-a4b-it",   rpm: 30, tpm: 16000,  rpd: 14000}  # 500s in probe 2026-11-05
+    - {provider: gemini, model: "gemini-2.5-flash-lite"}   # limits unknown; 429 handling covers it
+  main:
+    - {provider: gemini, model: "gemini-3.5-flash-lite", rpm: 15, tpm: 250000, rpd: 495}
+    - {provider: gemini, model: "gemini-3.1-flash-lite", rpm: 15, tpm: 250000, rpd: 495}
+    - {provider: gemini, model: "gemma-4-31b-it",       rpm: 30, tpm: 16000,  rpd: 14000}
+    - {provider: gemini, model: "gemini-2.5-flash-lite"}   # limits unknown; 429 handling covers it
+    - {provider: gemini, model: "gemini-3.5-flash",     rpm: 5,  tpm: 250000, rpd: 19}
+  judge:
+    - {provider: gemini, model: "gemma-4-31b-it",       rpm: 30, tpm: 16000,  rpd: 14000}
+    - {provider: gemini, model: "gemini-3.1-flash-lite", rpm: 15, tpm: 250000, rpd: 495}
+    - {provider: gemini, model: "gemma-4-26b-a4b-it",   rpm: 30, tpm: 16000,  rpd: 14000}  # 500s in probe 2026-11-05
+# Embeddings never fall back to another model: two models' vectors are not comparable.
+embeddings: {provider: gemini, model: "gemini-embedding-001", rpm: 100, tpm: 30000, batch: 20}
+corpus: {path: data/corpus}        # switched 2026-11-05 after validate_corpus.py passed (122 chunks); data/sample for dev
 retrieval: {top_k: 6, min_score: 0.0}   # calibrate from outputs/calibration.md
 verifier: {llm_judge: true, max_regenerations: 1}
 escalation:
   high_amount_inr: 500000
   limitation_warn_months: 30
-  keywords_en: [arrest, arrested, police, fir, summons, "court notice", bail, violence, beat, beating, threat, threaten, threatened, harass, harassment, "locked out", "lock out", evict, eviction, divorce, custody, maintenance, alimony, inheritance, "last will", "property ownership", minor, "my child", cheque bounce, "cheque bounced"]
-  keywords_hi: ["गिरफ्तार", "पुलिस", "एफआईआर", "समन", "जमानत", "हिंसा", "मारपीट", "धमकी", "धमका", "परेशान", "ताला", "बेदखल", "तलाक", "कस्टडी", "गुजारा भत्ता", "विरासत", "वसीयत", "नाबालिग", "चेक बाउंस"]
-llm: {min_interval_s: 4, max_retries: 3}
+  keywords_en: [arrest, arrested, police, fir, summons, "court notice", bail, violence, beat, beating, threat, threaten, threatened, harass, harassment, "locked out", "lock out", evict, eviction, divorce, custody, maintenance, alimony, inheritance, "last will", "property ownership", minor, "my child", cheque bounce, "cheque bounced", jail, ipc, bns, "420", "cheating case", "fraud case", "police case", "case karunga", "case kar dunga"]
+  keywords_hi: ["गिरफ्तार", "पुलिस", "एफआईआर", "समन", "जमानत", "हिंसा", "मारपीट", "धमकी", "धमका", "परेशान", "ताला", "बेदखल", "तलाक", "कस्टडी", "गुजारा भत्ता", "विरासत", "वसीयत", "नाबालिग", "चेक बाउंस", "जेल", "धोखाधड़ी", "केस करूंगा", "केस करूँगा", "केस कर दूंगा"]
+llm: {min_interval_s: 0, max_wait_s: 8, max_total_wait_s: 75}   # per-model pacing comes from rpm/tpm above
 mock: false
 languages: [en-IN, hi-IN]
 covered_states: [UP]
 voice: {stt: sarvam, tts: sarvam, stt_fallback: gemini}
-# Interview swap example (replace the main block, no code change):
-#   main: {provider: openai_compatible, model: "<their model>", base_url: "<their url>", api_key_env: "KUKU_API_KEY"}

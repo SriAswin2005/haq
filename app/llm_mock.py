@@ -92,6 +92,10 @@ def _router(messages) -> str:
         cf["amount_inr"] = int((m.group(1) or m.group(2)).replace(",", "") or 0)
     if state:
         cf["state"] = state
+    me = re.search(r"\b(20\d{2}-\d{2}(?:-\d{2})?)\b", um) or \
+        re.search(r"\b((?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\s+20\d{2})\b", um, re.I)
+    if me:
+        cf["event_date"] = me.group(1)
     missing = []
     if cat in ("tenancy", "wages") and not state:
         missing.append("state or city")

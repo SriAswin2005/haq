@@ -6,7 +6,7 @@ import time
 import uuid
 from dataclasses import dataclass, field
 
-from . import drafts, llm, retrieval, router, verifier
+from . import drafts, guards, llm, retrieval, router, verifier
 from .config import ROOT, load_config, read_prompt, resolve
 
 log = logging.getLogger("ai_lawyer.pipeline")
@@ -58,7 +58,7 @@ def _reason_text(reasons: list[str], m: dict) -> str:
 
 
 def _facts_line(case_file: dict, m: dict) -> str:
-    keys = [k for k in case_file if case_file[k] not in (None, "", [], {})]
+    keys = [k for k in case_file if case_file[k] not in (None, "", [], {}) and k not in ("minor_stated", "category")]
     if not keys:
         return m["no_facts"]
     return "; ".join(f"{k.replace('_', ' ')}: {case_file[k]}" for k in keys)
@@ -119,6 +119,11 @@ def _answer_prompt(lang, chunks, case_file, missing, user_text, issues=None) -> 
     return [{"role": "system", "content": read_prompt("answer.md")}, {"role": "user", "content": user}]
 
 
+def _answer_script_ok(answer: dict, lang: str) -> bool:
+    text = " ".join(b.get("text", "") for b in answer.get("blocks", []) if isinstance(b, dict))
+    return guards.script_ok(text, lang)
+
+
 def _valid_answer(d) -> bool:
     return isinstance(d, dict) and isinstance(d.get("blocks"), list)
 
@@ -164,10 +169,36 @@ def handle_turn(session: Session, user_text: str, input_mode: str = "text",
                   "citations": res.citations, "verifier": res.verifier,
                   "escalation_reasons": res.escalation_reasons,
                   "models": cfg.get("models"), "mock": llm.is_mock()})
+    res = _case_law_line(res, user_text, trace)
     res.trace = trace
     session.history.append({"role": "user", "text": user_text})
     session.history.append({"role": "assistant", "text": res.reply_text})
     _trace_write(trace)
+    return res
+
+
+def _case_law_line(res: TurnResult, user_text: str, trace: dict) -> TurnResult:
+    """Deterministic: if the user asks for cases/judgments and no judgment chunk was retrieved, say so."""
+    if not guards.case_law_request(user_text):
+        return res
+    try:
+        by_id = {c["id"]: c for c in retrieval.get_index()["chunks"]}
+    except Exception:
+        by_id = {}
+    ids = [r["id"] for r in res.retrieved] + list(res.citations)
+    if any(by_id.get(i, {}).get("doc_type") == "judgment" for i in ids):
+        return res
+    m = _m(res.reply_lang)
+    line = m["no_case_law"]
+    if line not in res.reply_text:
+        disc = m["disclaimer"]
+        if res.reply_text.rstrip().endswith(disc):
+            head = res.reply_text.rstrip()[: -len(disc)].rstrip()
+            res.reply_text = f"{head}\n\n{line}\n\n{disc}"
+        else:
+            res.reply_text = f"{res.reply_text.rstrip()}\n\n{line}"
+    res.needs_lawyer = True
+    trace["case_law_request"] = True
     return res
 
 
@@ -186,8 +217,19 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
     m = _m(lang)
     cf = session.case_file
     for k, v in (rj.get("case_file_update") or {}).items():
+        if k == "months_since_event":  # never trust LLM date arithmetic; recomputed in code below
+            continue
         if v not in (None, "", [], {}):
             cf[k] = v
+    cf.pop("months_since_event", None)
+    ed = guards.parse_event_date(cf.get("event_date")) if cf.get("event_date") else None
+    if ed is None:
+        ed = guards.relative_event_date(user_text)  # "2 months ago", "3 साल पहले": also code, not LLM
+    if ed:
+        cf["event_date"] = ed
+        cf["months_since_event"] = guards.months_since(ed)
+    elif cf.get("event_date"):
+        trace["event_date_unparsed"] = cf.pop("event_date")
     if rj.get("state_or_city"):
         cf["state"] = rj["state_or_city"]
     cat = rj["category"]
@@ -201,6 +243,8 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
     state_code = state.upper() if state and state.upper() in covered else None
     esc = router.escalation(user_text, rj, cf)
     reasons = esc["reasons"]
+    if "minor_age" in reasons:
+        cf["minor_stated"] = True
 
     # ---- mode: practice (P2, not built)
     if session.mode == "practice":
@@ -262,6 +306,15 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
     for attempt in range(max_regen + 1):
         msgs = _answer_prompt(lang, chunks, cf, missing, user_text, prior)
         answer = _generate_answer(msgs)
+        if answer is not None and not _answer_script_ok(answer, lang):  # Hindi user got a non-Hindi body: retry once
+            retry = msgs[:-1] + [{"role": "user", "content": msgs[-1]["content"] + "\n\n" + read_prompt(
+                "language_retry.md").format(lang=lang, language_name="Hindi" if lang.lower().startswith("hi") else lang)}]
+            a2 = _generate_answer(retry)
+            trace["language_retry"] = True
+            if a2 is not None and _answer_script_ok(a2, lang):
+                answer = a2
+            else:
+                trace["language_warning"] = f"reply body not in the script of {lang} after one retry"
         if answer is None:
             issues = ["model returned no usable answer"]
         else:
@@ -300,9 +353,11 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
     body = "\n\n".join(paras)
     if cited:
         body += "\n\n" + "\n".join(_source_line(by_id[c], m) for c in cited)
+    old_note_chunks = []  # chunks behind our own "no longer in force" note; the final scan must see them
     for o in sr["old_law"][:1]:
         if sr["top_score"] and o["score"] >= 0.8 * sr["top_score"] and o["chunk"]["status"] in ("repealed", "superseded"):
             body += "\n\n" + m["old_law"].format(title=o["chunk"]["doc_title"])
+            old_note_chunks.append(o["chunk"])
     if answer.get("gaps"):
         body += "\n\n" + m["gaps"] + "\n- " + "\n- ".join(str(g) for g in answer["gaps"][:4])
     needs_lawyer = bool(answer.get("needs_lawyer")) or bool(reasons)
@@ -319,7 +374,7 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
                 cited.append(a)
     body += "\n\n" + m["disclaimer"]
     # final-text scan: nothing invented may have crept into the rendered reply
-    final_chunks = chunks + [c for c in (retrieval.get_index()["chunks"]) if c["id"] in cited]
+    final_chunks = chunks + old_note_chunks + [c for c in (retrieval.get_index()["chunks"]) if c["id"] in cited]
     final_issues = verifier.scan_patterns(body, final_chunks)
     if final_issues:
         trace["final_scan_issues"] = final_issues
