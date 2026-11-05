@@ -15,7 +15,7 @@ Return ONE JSON object with exactly these keys:
   "category": "consumer|wages|tenancy|out_of_scope|unclear",
   "language": "BCP-47 code of the language the person wrote in, e.g. en-IN or hi-IN",
   "state_or_city": "state code 'UP' if they are in Uttar Pradesh or a UP city, 'other' if another state, null if not stated",
-  "case_file_update": {"only facts the person stated in THIS message, e.g. amount_inr (number), event_date, months_since_event (number), what_happened, proof (list), already_tried (list), counterparty_name, counterparty_type, person_name, state": "..."},
+  "case_file_update": {"only facts the person stated in THIS message, e.g. amount_inr (number), event_date, months_since_event (number), what_happened, proof (list), already_tried (list), counterparty_name, counterparty_type, person_name, property_address, tenancy_start_date, vacated_date, deposit_paid_date, payment_mode, state": "..."},
   "missing_facts": ["at most 2 facts that would change the answer and are not yet known"],
   "escalation_flags": ["short snake_case reasons if the message involves arrest/police/FIR/court notice, violence/threat/harassment, lock-out or forced eviction, family matters, property ownership, inheritance, minors; otherwise empty"],
   "english_retrieval_query": "a short English search query describing the legal question, for searching a law database. Translate if needed. No names."

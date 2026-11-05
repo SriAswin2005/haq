@@ -176,6 +176,11 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
     rj, info = router.route(session.case_file, session.history, user_text)
     trace["router"] = rj
     trace["router_info"] = {k: v for k, v in info.items() if k != "raw"}
+    if info.get("error") and rj["category"] == "unclear":  # model unreachable: say so, do not pretend to clarify
+        lang0 = lang_hint or session.lang
+        text, cites, ret = safe_response(lang0, session.case_file, session.case_file.get("state"), [], False, error=True)
+        return TurnResult(text, lang0, "unclear", "refuse_unverified", cites, ret, True, ["service_error"],
+                          {"status": "failed", "issues": [f"router failed: {info['error']}"]}, None, trace)
     lang = lang_hint or rj.get("language") or session.lang
     session.lang = lang
     m = _m(lang)

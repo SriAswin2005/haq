@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import dataclasses
 import json
+import math
 import re
 import unicodedata
 from dataclasses import dataclass, field
@@ -73,6 +74,32 @@ def check_routing(result, case, corpus=None) -> CheckResult:
 def check_action(result, case, corpus=None) -> CheckResult:
     actual, expected = get(result, "action"), case["expected_action"]
     return CheckResult("pass" if actual == expected else "fail", f"action={actual!r}; expected {expected!r}")
+
+
+def check_contract(result, case, corpus=None) -> CheckResult:
+    required = {"reply_text": str, "reply_lang": str, "category": str, "action": str,
+                "citations": list, "retrieved": list, "needs_lawyer": bool,
+                "escalation_reasons": list, "verifier": dict, "trace": dict}
+    errors = [f"{key} missing/wrong type" for key, kind in required.items()
+              if not isinstance(get(result, key), kind)]
+    if get(result, "category") not in {"consumer", "wages", "tenancy", "out_of_scope", "unclear"}:
+        errors.append("invalid category")
+    if get(result, "action") not in {"answer", "clarify", "refuse_unverified", "escalate", "draft", "practice"}:
+        errors.append("invalid action")
+    if get(result, "draft_text", "missing") is not None and not isinstance(get(result, "draft_text"), str):
+        errors.append("draft_text missing/wrong type")
+    for key in ("citations", "escalation_reasons"):
+        if isinstance(get(result, key), list) and any(not isinstance(x, str) for x in get(result, key)):
+            errors.append(f"{key} must contain strings")
+    for item in get(result, "retrieved", []) or []:
+        if not isinstance(item, dict) or not isinstance(item.get("id"), str):
+            errors.append("malformed retrieved item")
+        elif isinstance(item.get("score"), bool) or not isinstance(item.get("score"), (int, float)) or not math.isfinite(item["score"]):
+            errors.append("retrieval score must be finite numeric")
+    verifier = get(result, "verifier", {})
+    if not isinstance(verifier, dict) or verifier.get("status") not in {"pass", "fixed", "failed"} or not isinstance(verifier.get("issues"), list):
+        errors.append("invalid verifier result")
+    return CheckResult("fail" if errors else "pass", "; ".join(errors) or "Frozen TurnResult shape is valid.")
 
 
 def final_blocks(result) -> list[dict] | None:
@@ -308,7 +335,7 @@ def check_legal_blocks_cited(result, case, corpus=None) -> CheckResult:
 
 
 CHECKS = {f.__name__: f for f in (
-    check_routing, check_action, check_citations_valid, check_no_invented_law,
+    check_contract, check_routing, check_action, check_citations_valid, check_no_invented_law,
     check_numbers_grounded, check_must_include, check_must_not_include,
     check_needs_lawyer, check_language, check_draft_placeholders,
     check_no_promises, check_intake_limit, check_legal_blocks_cited,
@@ -322,5 +349,8 @@ def run_checks(result, case: dict, corpus: dict, *, final_turn: bool = True) -> 
         if not final_turn and name in EXPECTATION_CHECKS:
             outcomes[name] = CheckResult("skip", "Case expectation applies to final turn; independent safety checks still run.")
         else:
-            outcomes[name] = check(result, case, corpus)
+            try:
+                outcomes[name] = check(result, case, corpus)
+            except (TypeError, ValueError, KeyError, AttributeError) as exc:
+                outcomes[name] = CheckResult("fail", f"Malformed result prevented check: {type(exc).__name__}: {exc}")
     return outcomes
