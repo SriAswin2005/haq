@@ -9,3 +9,6 @@
 
 - 2026-11-05 (round 2 real review): Fixed a checker false positive for a long negated guarantee and a false pass where generic source-review language concealed conflicting dates. Added regressions; no case expectation changed. An offline rescore of the 122-chunk captures is stored in check_revision_review.json, with raw hashes unchanged and zero additional API calls.
 - 2026-11-05 (round 2 calibration): Candidate thresholds now cover non-dominated acceptance/refusal tradeoffs, and error rates are computed at the exact six-decimal values printed for config.
+
+- 2026-11-06: Published the completed frozen 119-chunk real run real-20261105T161021.563148Z. All 30 expected-law flags remain false. Current real_findings.jsonl contains only the date-conflict finding reproduced in this run; the earlier interest-claim finding is preserved in the pre-fix run's agent_review.json and is not carried forward as a current failure.
+- 2026-11-06: Added snapshot execution/collection and source-checked review tooling. The final capture has 30 unchanged raw files / 33 turns, with no additional API calls for collection or review.

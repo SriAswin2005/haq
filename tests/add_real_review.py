@@ -59,11 +59,20 @@ def main():
     # before the automated failure list. Never open a raw file for writing.
     if not base_path.exists():
         base_path.write_text(base, encoding="utf-8")
-    separator = "\n## Severity "
+    first_severity = min((f["severity"] for f in findings), default=2)
+    separator = f"\n## Severity {first_severity}:"
     at = base.find(separator)
+    if at == -1:
+        at = base.find("\n## Infrastructure")
     if at == -1:
         at = len(base)
     combined = base[:at] + "\n" + "\n".join(lines) + "\n" + base[at:]
+    frozen = run / "frozen_inputs.json"
+    if frozen.exists():
+        revision = json.loads(frozen.read_text(encoding="utf-8"))
+        notice = (f"Evaluated frozen inputs captured at {revision['frozen_at']}. "
+                  "The manifest and frozen_inputs.json identify the tested revision; subsequent checkout edits are outside this report.\n")
+        combined = combined.replace("# Evaluation bugs\n", "# Evaluation bugs\n\n" + notice, 1)
     (run / "BUGS.md").write_text(combined, encoding="utf-8")
     (ROOT / "tests/BUGS.md").write_text(combined, encoding="utf-8")
     write_json(run / "agent_review.json", {"reviewed_at": utc_now(), "source": str(args.findings),

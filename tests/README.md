@@ -94,3 +94,12 @@ This validates every quote against the selected run's raw replies, inputs and
 corpus snapshot, preserves `BUGS_automated.md`, and changes no raw files or
 quantitative metrics. It is a targeted agent review with human confirmation
 pending, not a replacement for a full independent judge run.
+
+When app, config or corpus files are changing in parallel, use
+`python tests/run_frozen_eval.py --sleep 6`. It copies the required inputs into
+ignored `tests/_scratch`, passes credentials only through the process environment,
+and runs the real pipeline there. It then copies raw bytes into the canonical
+`outputs/runs/` archive and regenerates derived reports using the same checks.
+`frozen_inputs.json` and `collection.json` record the tested revision and byte
+identity. Later checkout changes require their own run; these results do not
+silently claim to cover them. The frozen app's quota cache is isolated too.

@@ -100,8 +100,11 @@ def make_draft(category: str, case_file: dict, state: str | None) -> dict:
     chunks = [h["chunk"] for h in res["hits"]] if gate_ok else []
     basis, cites = _legal_basis(chunks, category, spec["basis_intro"])
     text = text.replace("{LEGAL_BASIS}", basis)
+    conflicted = {c.get("field") for c in case_file.get("conflicts") or []}
     for ph, key in spec["fields"].items():
         v = case_file.get(key)
+        if key in conflicted:            # two different values given: leave the blank for the person to confirm
+            continue
         if v not in (None, "", []):
             text = text.replace(ph, _fmt(key, v))
     missing = sorted(set(re.findall(r"\[●[^\]]*\]", text)))

@@ -25,7 +25,9 @@ from app.config import load_config, is_mock
 
 st.set_page_config(page_title="AI Lawyer for India", page_icon="⚖️", layout="centered")
 
-LANGS = {"Auto-detect": None, "English": "en-IN", "हिन्दी (Hindi)": "hi-IN"}
+LANGS = {"Auto-detect": None, "English": "en-IN", "हिन्दी (Hindi)": "hi-IN", "తెలుగు (Telugu)": "te-IN",
+         "தமிழ் (Tamil)": "ta-IN", "বাংলা (Bengali)": "bn-IN", "मराठी (Marathi)": "mr-IN",
+         "ಕನ್ನಡ (Kannada)": "kn-IN", "മലയാളം (Malayalam)": "ml-IN", "ગુજરાતી (Gujarati)": "gu-IN"}
 MODES = {"Advice": "advice", "Draft (notice / complaint)": "draft", "Practice (not built yet)": "practice"}
 
 if "session" not in st.session_state:
@@ -35,7 +37,8 @@ if "session" not in st.session_state:
     st.session_state.heard = set()  # hashes of recordings already processed
 
 st.title("⚖️ AI Lawyer for India")
-st.caption("Everyday legal problems: consumer refunds, unpaid salary, rental deposits. Type or speak, in English or Hindi.")
+st.caption("Everyday legal problems: consumer refunds, unpaid salary, rental deposits. Type or speak in English or Hindi; "
+           "other Indian languages get an automatic translation of the verified English answer.")
 
 idx = retrieval.get_index()
 if idx["has_sample"]:

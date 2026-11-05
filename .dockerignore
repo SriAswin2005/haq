@@ -1,0 +1,12 @@
+.env
+.venv
+.git
+__pycache__
+*.pyc
+outputs/runs
+outputs/live_trace.jsonl
+tests/_scratch
+data/index/quota_state.json
+data/index/available_models.json
+data/index/embeddings_mock-hash.json
+outputs/feedback.jsonl

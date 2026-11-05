@@ -30,12 +30,17 @@
       "unclear": "I could not tell what kind of problem this is",
       "keyword": "your message mentions something that needs a lawyer (such as police, court, violence, threats, eviction or family matters)",
       "minor_age": "you mentioned an age under 18, and matters involving minors need a real lawyer or legal aid",
-      "llm_soft": "this is a question a lawyer should look at with you (for example court cases or the chances of winning)"
+      "llm_soft": "this is a question a lawyer should look at with you (for example court cases or the chances of winning)",
+      "llm_hard": "this involves a matter I cannot safely handle here (for example criminal law, child protection, police or family matters)"
     },
     "ask_state": "Which state or city are you in? State laws differ for this kind of problem, and I need this to look up the right rules.",
     "no_case_law": "I can't cite court cases; I don't have verified judgments.",
     "draft_intro_wages": "Here is a draft demand notice for your unpaid wages. Anything I do not know is left as a [● placeholder] for you to fill in.",
-    "draft_intro_consumer": "Here is a draft complaint to the company's grievance officer, followed by the facts to keep ready if it is not resolved. Anything I do not know is left as a [● placeholder] for you to fill in."
+    "draft_intro_consumer": "Here is a draft complaint to the company's grievance officer, followed by the facts to keep ready if it is not resolved. Anything I do not know is left as a [● placeholder] for you to fill in.",
+    "oos_info": "What you can do right now: a free legal aid office can explain this law to you and tell you whether it applies to your situation.",
+    "pruned_note": "I left out one point because I could not match it exactly to the official text. A lawyer or legal aid office can confirm it.",
+    "conflict_intro": "Please check: you gave two different values, and I used the newer one.",
+    "conflict_line": "- {field}: earlier {earlier}, now {now}"
   },
   "hi": {
     "disclaimer": "यह कानूनी जानकारी है, कानूनी सलाह नहीं।",
@@ -68,11 +73,16 @@
       "unclear": "मैं समझ नहीं पाया कि समस्या किस तरह की है",
       "keyword": "आपके संदेश में पुलिस, अदालत, हिंसा, धमकी, बेदखली या पारिवारिक मामले जैसी बात है जिसमें वकील चाहिए",
       "minor_age": "आपने 18 से कम उम्र बताई है, और नाबालिग से जुड़े मामलों में असली वकील या कानूनी सहायता ज़रूरी है",
-      "llm_soft": "यह ऐसा सवाल है जिसे वकील के साथ देखना चाहिए (जैसे अदालती फैसले या केस जीतने की संभावना)"
+      "llm_soft": "यह ऐसा सवाल है जिसे वकील के साथ देखना चाहिए (जैसे अदालती फैसले या केस जीतने की संभावना)",
+      "llm_hard": "यह ऐसा मामला है जिसे मैं यहाँ सुरक्षित रूप से नहीं संभाल सकता (जैसे आपराधिक कानून, बच्चों की सुरक्षा, पुलिस या पारिवारिक मामले)"
     },
     "ask_state": "आप किस राज्य या शहर में हैं? इस तरह की समस्या में राज्य के कानून अलग होते हैं, सही नियम खोजने के लिए मुझे यह चाहिए।",
     "no_case_law": "मैं अदालती केस या फैसलों का हवाला नहीं दे सकता; मेरे पास जाँचे हुए फैसले नहीं हैं।",
     "draft_intro_wages": "यह आपकी बकाया तनख़्वाह के लिए डिमांड नोटिस का मसौदा है (नोटिस अंग्रेज़ी में है)। जो जानकारी मेरे पास नहीं है वह [● खाली जगह] में छोड़ी गई है।",
-    "draft_intro_consumer": "यह कंपनी के शिकायत अधिकारी (Grievance Officer) को भेजने के लिए शिकायत का मसौदा है (अंग्रेज़ी में), साथ में वे बातें जो हल न होने पर उपभोक्ता शिकायत के लिए तैयार रखनी हैं। जो जानकारी मेरे पास नहीं है वह [● खाली जगह] में छोड़ी गई है।"
+    "draft_intro_consumer": "यह कंपनी के शिकायत अधिकारी (Grievance Officer) को भेजने के लिए शिकायत का मसौदा है (अंग्रेज़ी में), साथ में वे बातें जो हल न होने पर उपभोक्ता शिकायत के लिए तैयार रखनी हैं। जो जानकारी मेरे पास नहीं है वह [● खाली जगह] में छोड़ी गई है।",
+    "oos_info": "आप अभी यह कर सकते हैं: मुफ़्त कानूनी सहायता कार्यालय आपको यह कानून समझा सकता है और बता सकता है कि यह आपकी स्थिति पर लागू होता है या नहीं।",
+    "pruned_note": "एक बात मैंने छोड़ दी क्योंकि उसे आधिकारिक कानून के शब्दों से ठीक-ठीक मिला नहीं पाया। वकील या कानूनी सहायता कार्यालय इसकी पुष्टि कर सकते हैं।",
+    "conflict_intro": "कृपया जाँच लें: आपने दो अलग जानकारी दी, मैंने नई वाली ली है।",
+    "conflict_line": "- {field}: पहले {earlier}, अब {now}"
   }
 }

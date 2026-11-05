@@ -33,3 +33,6 @@ Format: `date | who | assumption | why`. Append only.
 2026-11-05 | codex | The first real round-2 run omits the harness --judge flag but leaves config.verifier.llm_judge=true untouched. | The user requested no --judge first; the app owner controls its verifier toggle, and the extra independent harness judge is separate.
 
 2026-11-05 | codex | Preserve the first complete 122-chunk real run and run a fresh evaluation on the now-finished 119-chunk cleanup. | Corpus files changed during the first process, but app.retrieval caches its initial index; its outputs cover the old snapshot and cannot validate the cleaned corpus. All mapped IDs survive the cleanup.
+
+2026-11-06 | codex | The final published eval is the frozen revision captured at 2026-11-05 16:10 UTC, with 119 corpus chunks; later checkout changes are outside its scope. | A clean source snapshot prevents concurrent prompt/config/application edits from mixing versions during a long real run.
+2026-11-06 | codex | The 0.720954 threshold is an in-sample balanced-error candidate, not an automatically chosen production setting; 0.665437 is the coverage-preserving alternative. | Seven answerable and three unsupported-subtopic labels overlap substantially; all legal expectations remain unverified by a human.

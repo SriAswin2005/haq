@@ -97,3 +97,17 @@ Voice, the other two draft types and practice mode are still unbuilt. `retrieval
 - Streamlit AppTest (mock): load, text turn and salary draft run with no exceptions. All suites pass: app/tests 18, fallback 13, voice 14, tests.test_checks, corpus validator.
 - Still open: practice mode (P2), live voice test, and "where to complain" still a gap in one live deposit answer (forum chunks retrieved; the prompt may need a nudge).
 - **Fixes from the first real eval** (`outputs/runs/real-20261105T155525…`, 12/30): helplines are rendered as "name: numbers", with the numbers copied verbatim from the chunk (long English text no longer swamps Hindi replies). The old-law note appears only when the user mentions that law, and the chunk is recorded in `retrieved`. Aid-search citations are always listed in `retrieved`. answer.md rules 13 (say "I could not verify" for laws the user claims) and 14 (no guarantees).
+
+## Update 2026-11-06 (review chat): new web UI "Haq"
+- Streamlit replaced as the main UI by a FastAPI server (`app/server.py`: /api/turn, /api/stt, /api/tts, /api/meta) and a vanilla HTML/CSS/JS single-page app (`app/web/`). Run it with `python -m app.serve`. Streamlit `app/ui.py` is kept as a fallback.
+- UI: chat with a mic (MediaRecorder → /api/stt) and non-blocking text-to-speech (the text shows first, audio follows). Source stamps link to the official text. A live "case file" panel shows the extracted facts, what's still needed and the laws used. Draft sheet with highlighted placeholders, copy and download. "How I got this answer" shows models, model switches, matches, timing, translation and voice. 10 languages. Responsive down to a phone.
+- Chats are stored in the browser's localStorage, with JSON and text export. The server is stateless across restarts: the browser sends the saved state with each turn.
+- Hosting: `Dockerfile`, `.dockerignore`, and a Hugging Face Spaces YAML header in README.md.
+- Checks: `python -m app.selfcheck_server` (14/14). Headless Chrome screenshots at desktop and mobile sizes in mock mode, no console errors.
+
+## Update 2026-11-06 early morning (review chat): product round
+- **Engine.** Claim-level pruning (`pipeline._prune_unverified`) fixes over-refusal: 4 of the 18 real failures were whole answers discarded over one unverified sentence. Conflict detection for dates and amounts (`CONFLICT_KEYS`), shown in answers and drafts. A progress hook (`pipeline.progress_cb`, `_emit`) streams stages.
+- **Server.** `/api/turn/stream` (SSE), per-IP rate limits, security headers/CSP, `/api/feedback` (privacy-safe), `/api/stats`, a bounded session cache, and PWA routes (`/manifest.webmanifest`, `/sw.js`).
+- **UI.** i18n (en/hi/te interface), first-run privacy dialog, live stage text, feedback row, delete chat, install button, conflicts panel, notices that re-translate on language change.
+- **Tests.** app/tests 21 (new: test_pruning, test_conflicts). selfcheck_server 21/21. Fallback 13/13, voice 16/16, corpus validator OK. Headless Chrome screenshots at desktop and mobile size, in English and Hindi, with no console errors or warnings.
+- **Not live-tested yet** (no API access from the sandbox). Codex's round-3 brief covers the live run.

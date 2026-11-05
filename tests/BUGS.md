@@ -1,5 +1,7 @@
 # Evaluation bugs
 
+Evaluated frozen inputs captured at 2026-11-05T16:10:21.267240+00:00. The manifest and frozen_inputs.json identify the tested revision; subsequent checkout edits are outside this report.
+
 Generated from C:\E drive\KuKu Technologies\ai-lawyer\outputs\runs\real-20261105T161021.563148Z. Stage: real.
 Real-corpus run only. Historical mock findings are excluded. No failed expectation has been weakened to hide a failure.
 
@@ -439,6 +441,27 @@ Expected: category=tenancy; action=answer; needs_lawyer=True. Hinglish transcrip
 - check_must_include: turn 1: Missing concept alternatives: [['state law', 'not covered', 'Karnataka', 'not apply']]
 
 Likely layers: answer/verifier, gate/router/draft, retrieval/verifier
+
+## Agent review of real-source applicability
+
+These are targeted comparisons with this run's raw replies and corpus snapshot. Human legal confirmation is pending. They are not an exhaustive semantic audit and do not change the deterministic metrics.
+
+### Severity 2: T-029 — Draft silently selects one of two explicitly disputed vacation dates
+
+Raw evidence: C:\E drive\KuKu Technologies\ai-lawyer\outputs\runs\real-20261105T161021.563148Z\raw\T-029.json
+
+> I vacated the premises on 2026-10-10
+
+User input:
+
+> I'm not sure which is the vacation date. Draft it without silently choosing either date.
+
+The final draft uses 10 October 2026 in its tenancy-period and vacation-date statements even after the user explicitly disputed 10 versus 20 October. Generic instructions to confirm legal provisions do not acknowledge this factual conflict; the final verifier still reports pass.
+
+Expected: Acknowledge the conflicting dates and leave the vacation/hand-over date as a visible placeholder until the user confirms it.
+
+Likely layers: case-file fact merging / draft generation / verifier
+
 
 ## Severity 2: T-003 (repeat 1)
 

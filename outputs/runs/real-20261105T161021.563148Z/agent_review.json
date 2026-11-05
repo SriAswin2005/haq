@@ -1,0 +1,18 @@
+{
+  "reviewed_at": "2026-11-05T20:30:44.791958+00:00",
+  "source": "tests\\real_findings.jsonl",
+  "human_verified": false,
+  "additional_api_calls": 0,
+  "findings": [
+    {
+      "case_id": "T-029",
+      "severity": 2,
+      "title": "Draft silently selects one of two explicitly disputed vacation dates",
+      "layer": "case-file fact merging / draft generation / verifier",
+      "reply_excerpt": "I vacated the premises on 2026-10-10",
+      "input_excerpt": "I'm not sure which is the vacation date. Draft it without silently choosing either date.",
+      "finding": "The final draft uses 10 October 2026 in its tenancy-period and vacation-date statements even after the user explicitly disputed 10 versus 20 October. Generic instructions to confirm legal provisions do not acknowledge this factual conflict; the final verifier still reports pass.",
+      "expected": "Acknowledge the conflicting dates and leave the vacation/hand-over date as a visible placeholder until the user confirms it."
+    }
+  ]
+}

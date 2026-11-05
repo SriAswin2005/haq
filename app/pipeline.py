@@ -1,4 +1,5 @@
 """handle_turn(): the ONLY entry point tests and the UI use (Architecture Sections 6, 7, 8, 10)."""
+import contextvars
 import json
 import logging
 import re
@@ -47,11 +48,118 @@ def _m(lang: str) -> dict:
     return _MSG["hi"] if lang.lower().startswith("hi") else _MSG["en"]
 
 
+LANG_NAMES = {"te": "Telugu", "ta": "Tamil", "bn": "Bengali", "mr": "Marathi", "gu": "Gujarati", "kn": "Kannada",
+              "ml": "Malayalam", "pa": "Punjabi", "od": "Odia", "or": "Odia", "ur": "Urdu", "as": "Assamese"}
+
+
+def _translate_target(lang: str | None) -> bool:
+    if not lang or lang.lower().startswith(("en", "hi")):
+        return False
+    allowed = [x.lower() for x in (load_config().get("translate_languages") or [])]
+    return lang.lower() in allowed or lang.split("-")[0].lower() in allowed
+
+
+_KEEP = re.compile(r"https?://\S+|[A-Z]{2,}-[A-Z0-9-]+|\d[\d,]*")
+
+
+def _keep_tokens(text: str) -> set[str]:
+    return {t.replace(",", "").rstrip(".)") for t in _KEEP.findall(text)}
+
+
+def _translate_reply(res: "TurnResult", trace: dict) -> "TurnResult":
+    """Translate the finished, verified English reply. Every number, id and URL must survive unchanged;
+    otherwise retry once, then keep English with a note. The English original stays in the trace."""
+    target = trace.get("translate_to")
+    if not target:
+        return res
+    name = LANG_NAMES.get(target.split("-")[0].lower(), target)
+    if llm.is_mock():
+        trace["translation"] = {"to": target, "status": "skipped_mock"}
+        return res
+    must = _keep_tokens(res.reply_text)
+    prompt = read_prompt("translate.md")
+    last_missing = []
+    for attempt in range(2):
+        try:
+            out = llm.generate([{"role": "user", "content": prompt.format(language_name=name, text=res.reply_text)}],
+                               role="translate").strip()
+        except llm.LLMError as e:
+            trace["translation"] = {"to": target, "status": "failed", "error": str(e)}
+            break
+        out = re.sub(r"^```\w*\s*|\s*```$", "", out).strip()
+        missing = sorted(must - _keep_tokens(out))
+        plausible = len(out) >= 0.3 * len(res.reply_text) and not out.lstrip().startswith(("{", "["))
+        if out and plausible and not missing:
+            trace["translation"] = {"to": target, "status": "ok", "attempts": attempt + 1,
+                                    "english_original": res.reply_text}
+            res.reply_text = out
+            res.reply_lang = target
+            return res
+        last_missing = missing
+    trace.setdefault("translation", {"to": target, "status": "failed", "missing_tokens": last_missing[:10]})
+    res.reply_text += ("\n\n(I could not translate this reliably into " + name +
+                       ", so it is shown in English to keep every number and source exact.)")
+    return res
+
+
+def _prune_unverified(answer: dict, issues: list[str], chunks: list[dict], cf: dict, m: dict,
+                      trace: dict) -> tuple[dict, list[str], str]:
+    """Claim-level fallback. After the regeneration still fails, drop ONLY the blocks the verifier
+    flagged and re-verify the rest (code checks + judge). A failed claim is never shown; verified
+    claims are not thrown away with it. Needs at least one verified legal block to answer."""
+    bad = {}
+    for i in issues:
+        mm = re.match(r"block (\d+):", i)
+        if not mm:                       # an answer-level problem: cannot prune safely
+            return answer, issues, "failed"
+        bad.setdefault(int(mm.group(1)), []).append(i)
+    blocks = answer.get("blocks") or []
+    kept = [b for k, b in enumerate(blocks) if k not in bad]
+    if not any(isinstance(b, dict) and b.get("type") == "legal" for b in kept):
+        return answer, issues, "failed"
+    pruned = dict(answer, blocks=kept)
+    pruned["gaps"] = list(answer.get("gaps") or []) + [m["pruned_note"]]
+    re_issues, vinfo = verifier.verify(pruned, chunks, cf)
+    trace["pruned"] = {"removed_blocks": sorted(bad), "reasons": [x for v in bad.values() for x in v][:6],
+                       "recheck": re_issues, "judge": vinfo.get("judge")}
+    if re_issues:
+        return answer, issues, "failed"
+    return pruned, [], "pruned"
+
+
+CONFLICT_KEYS = {"amount_inr", "monthly_wage_inr", "event_date", "vacated_date", "tenancy_start_date",
+                 "deposit_paid_date", "job_start_date", "last_working_date", "purchase_date", "order_id"}
+
+
+def _norm_fact(v) -> str:
+    return re.sub(r"[\s,₹]|rs\.?|inr", "", str(v).lower())
+
+
+def _conflict_lines(cf: dict, m: dict) -> str:
+    out = []
+    for c in cf.get("conflicts") or []:
+        out.append(m["conflict_line"].format(field=c["field"].replace("_", " "), earlier=c["earlier"], now=c["now"]))
+    return "\n".join(out)
+
+
+# Progress hook: the web server sets a callback to stream real stage updates to the browser.
+progress_cb: contextvars.ContextVar = contextvars.ContextVar("progress_cb", default=None)
+
+
+def _emit(stage: str) -> None:
+    cb = progress_cb.get()
+    if cb:
+        try:
+            cb(stage)
+        except Exception:  # progress is cosmetic; never break a turn over it
+            pass
+
+
 def _reason_text(reasons: list[str], m: dict) -> str:
     labels, out = m["reason_labels"], []
     for r in reasons:
-        if r.startswith("llm:") and not router.HARD_LLM.search(r):
-            key = "llm_soft"
+        if r.startswith("llm:"):
+            key = "llm_hard" if router.HARD_LLM.search(r) else "llm_soft"
         else:
             key = "keyword" if r.startswith(("keyword:", "llm:")) else r
         t = labels.get(key)
@@ -122,7 +230,8 @@ def safe_response(lang: str, case_file: dict, state: str | None, reasons: list[s
             parts.append(m["escalate_reason"] + rt)
     else:
         parts.append(m["no_verified"])
-    parts += [m["can_do_now"], aid]
+    info_only = "out_of_scope_topic" in reasons and not any(k in case_file for k in ("amount_inr", "counterparty_name"))
+    parts += [m["oos_info"] if info_only else m["can_do_now"], aid]
     parts.append(m["disclaimer"])
     return "\n\n".join(parts), cites, ret
 
@@ -207,6 +316,9 @@ def handle_turn(session: Session, user_text: str, input_mode: str = "text",
                   "escalation_reasons": res.escalation_reasons,
                   "models": cfg.get("models"), "mock": llm.is_mock()})
     res = _case_law_line(res, user_text, trace)
+    if trace.get("translate_to"):
+        _emit("translating")
+    res = _translate_reply(res, trace)
     have = {r["id"] for r in res.retrieved}
     extra = [{"id": c, "score": _last_aid.get(c, 0.0), "via": "aid_search"} for c in res.citations if c not in have]
     if extra:  # e.g. legal-aid helplines found by the separate aid search
@@ -246,6 +358,7 @@ def _case_law_line(res: TurnResult, user_text: str, trace: dict) -> TurnResult:
 
 def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
     # ---- route
+    _emit("understanding")
     rj, info = router.route(session.case_file, session.history, user_text)
     trace["router"] = rj
     trace["router_info"] = {k: v for k, v in info.items() if k != "raw"}
@@ -256,12 +369,22 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
                           {"status": "failed", "issues": [f"router failed: {info['error']}"]}, None, trace)
     lang = lang_hint or rj.get("language") or session.lang
     session.lang = lang
+    if _translate_target(lang):           # e.g. te-IN: work in English (verifier, scans), translate at the end
+        trace["translate_to"] = lang
+        lang = "en-IN"
     m = _m(lang)
     cf = session.case_file
     for k, v in (rj.get("case_file_update") or {}).items():
         if k == "months_since_event":  # never trust LLM date arithmetic; recomputed in code below
             continue
         if v not in (None, "", [], {}):
+            old = cf.get(k)
+            if k in CONFLICT_KEYS and old not in (None, "", [], {}) and _norm_fact(old) != _norm_fact(v):
+                # the person gave two different values: keep the newest, but record and surface the conflict
+                cf.setdefault("conflicts", [])
+                cf["conflicts"] = [c for c in cf["conflicts"] if c.get("field") != k] + \
+                    [{"field": k, "earlier": old, "now": v}]
+                trace.setdefault("conflicts", []).append({"field": k, "earlier": old, "now": v})
             cf[k] = v
     cf.pop("months_since_event", None)
     ed = guards.parse_event_date(cf.get("event_date")) if cf.get("event_date") else None
@@ -309,6 +432,7 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
     juris = ["central"] + ([state_code] if state_code else [])
     query = rj.get("english_retrieval_query") or user_text
     rcfg = cfg["retrieval"]
+    _emit("searching")
     sr = retrieval.search(query, [cat, "common"], juris,
                           extra_queries=(rcfg.get("forum_queries") or {}).get(cat), extra_k=int(rcfg.get("forum_extra", 2)))
     retrieved = [{"id": h["id"], "score": h["score"]} for h in sr["hits"]]
@@ -321,6 +445,7 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
         if cat not in drafts.DRAFTS:
             return TurnResult(m["draft_only_deposit"] + "\n\n" + m["disclaimer"], lang, cat, "clarify", [], retrieved,
                               False, reasons, {"status": "pass", "issues": []}, None, trace)
+        _emit("drafting")
         d = drafts.make_draft(cat, cf, state_code)
         trace["draft"] = {"kind": d["kind"], "file_name": d["file_name"], "missing": d["missing"],
                           "scan_issues": d["scan_issues"]}
@@ -328,7 +453,10 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
             text, cites, ret = safe_response(lang, cf, state_code, reasons, False)
             return TurnResult(text, lang, cat, "refuse_unverified", cites, retrieved, True, reasons,
                               {"status": "failed", "issues": d["scan_issues"]}, None, trace)
-        reply = f"{m.get('draft_intro_' + cat, m['draft_intro'])}\n\n{d['text']}\n\n{m['draft_footer']}"
+        intro = m.get('draft_intro_' + cat, m['draft_intro'])
+        if cf.get("conflicts"):
+            intro += " " + m["conflict_intro"] + " " + _conflict_lines(cf, m).replace("\n", " ")
+        reply = f"{intro}\n\n{d['text']}\n\n{m['draft_footer']}"
         return TurnResult(reply, lang, cat, "draft", d["citations"], d["retrieved"] or retrieved, bool(reasons),
                           reasons, {"status": "pass", "issues": []}, d["text"] + "\n\n" + m["draft_footer"], trace)
 
@@ -350,6 +478,7 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
     prior = None
     for attempt in range(max_regen + 1):
         msgs = _answer_prompt(lang, chunks, cf, missing, user_text, prior)
+        _emit("writing" if attempt == 0 else "rewriting")
         answer = _generate_answer(msgs)
         if answer is not None and not _answer_script_ok(answer, lang):  # Hindi user got a non-Hindi body: retry once
             retry = msgs[:-1] + [{"role": "user", "content": msgs[-1]["content"] + "\n\n" + read_prompt(
@@ -373,6 +502,7 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
                             continue
                     keep.append(b)
                 answer["blocks"] = keep
+            _emit("checking")
             issues, vinfo = verifier.verify(answer, chunks, cf)
             trace["judge"] = vinfo.get("judge")
         issues_hist.append(list(issues))
@@ -381,6 +511,8 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
             break
         prior = issues
     trace["verifier_history"] = issues_hist
+    if status == "failed" and answer is not None:
+        answer, issues, status = _prune_unverified(answer, issues, chunks, cf, m, trace)
     if status == "failed":
         text, cites, ret = safe_response(lang, cf, state_code, reasons, False)
         return TurnResult(text, lang, cat, "refuse_unverified", cites, retrieved, True, reasons,
@@ -429,6 +561,8 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
         for a in aid_ids:
             if a not in cited:
                 cited.append(a)
+    if cf.get("conflicts"):
+        body += "\n\n" + m["conflict_intro"] + "\n" + _conflict_lines(cf, m)
     body += "\n\n" + m["disclaimer"]
     # final-text scan: nothing invented may have crept into the rendered reply
     final_chunks = chunks + old_note_chunks + [c for c in (retrieval.get_index()["chunks"]) if c["id"] in cited]

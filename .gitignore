@@ -5,3 +5,4 @@ __pycache__/
 *.pyc
 outputs/live_trace.jsonl
 .venv/
+outputs/feedback.jsonl

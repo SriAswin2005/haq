@@ -24,6 +24,11 @@ models:
     - {provider: gemini, model: "gemma-4-31b-it",       rpm: 30, tpm: 16000,  rpd: 14000}
     - {provider: gemini, model: "gemini-2.5-flash-lite"}   # limits unknown; 429 handling covers it
     - {provider: gemini, model: "gemini-3.5-flash",     rpm: 5,  tpm: 250000, rpd: 19}
+  translate:
+    - {provider: gemini, model: "gemini-3.1-flash-lite", rpm: 15, tpm: 250000, rpd: 495}
+    - {provider: gemini, model: "gemini-3.5-flash-lite", rpm: 15, tpm: 250000, rpd: 495}
+    - {provider: gemini, model: "gemma-4-31b-it",       rpm: 30, tpm: 16000,  rpd: 14000}
+    - {provider: gemini, model: "gemini-2.5-flash-lite"}
   judge:
     - {provider: gemini, model: "gemma-4-31b-it",       rpm: 30, tpm: 16000,  rpd: 14000}
     - {provider: gemini, model: "gemini-3.1-flash-lite", rpm: 15, tpm: 250000, rpd: 495}
@@ -48,6 +53,9 @@ escalation:
 llm: {min_interval_s: 0, max_wait_s: 8, max_total_wait_s: 75}   # per-model pacing comes from rpm/tpm above
 mock: false
 languages: [en-IN, hi-IN]
+# Other Indian languages: the pipeline runs in English and the final verified reply is translated.
+# A code check requires every number, id and URL to survive translation; otherwise English is shown with a note.
+translate_languages: [te, ta, bn, mr, gu, kn, ml, pa, od, ur]
 covered_states: [UP]
 voice:
   # Ordered chains: free Google models first, paid Sarvam credits only if every Google model fails.

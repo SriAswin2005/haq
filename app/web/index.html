@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Haq: free legal help for everyday problems</title>
+<meta name="description" content="Describe a rental deposit, unpaid salary or refund problem in your own language. Get answers grounded in Indian law, with sources, and a ready-to-send notice.">
+<meta name="theme-color" content="#2E3A8C">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="/static/icons/icon-192.png">
+<link rel="apple-touch-icon" href="/static/icons/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;500;600;700&family=Noto+Serif:wght@400;600&family=Noto+Sans+Telugu:wght@400;600&family=Noto+Sans+Tamil:wght@400;600&family=Noto+Sans+Bengali:wght@400;600&family=Noto+Sans+Kannada:wght@400;600&family=Noto+Sans+Malayalam:wght@400;600&family=Noto+Sans+Gujarati:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<div class="app" id="app">
+
+  <aside class="shelf" id="shelf" aria-label="Your chats and settings">
+    <div class="brand">
+      <span class="seal" aria-hidden="true">हक़</span>
+      <div>
+        <div class="brand-name">Haq</div>
+        <div class="brand-sub" data-i18n="brandSub">Know where you stand</div>
+      </div>
+    </div>
+
+    <button class="btn-new" id="btnNew" type="button" data-i18n="newCase">Start a new case</button>
+
+    <nav class="chats" id="chatList" aria-label="Saved chats"></nav>
+
+    <div class="settings">
+      <label class="field">
+        <span data-i18n="replyLang">Reply language</span>
+        <select id="selLang"></select>
+      </label>
+
+      <fieldset class="field seg" id="segMode">
+        <legend data-i18n="whatNeed">What do you need?</legend>
+        <label><input type="radio" name="mode" value="advice" checked><span data-i18n="modeAdvice">Understand my options</span></label>
+        <label><input type="radio" name="mode" value="draft"><span data-i18n="modeDraft">Draft a notice or complaint</span></label>
+      </fieldset>
+
+      <label class="field">
+        <span data-i18n="readAloud">Read answers aloud</span>
+        <select id="selSpeak">
+          <option value="voice" data-i18n="speakVoice">When I speak</option>
+          <option value="always" data-i18n="speakAlways">Always</option>
+          <option value="never" data-i18n="speakNever">Never</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="shelf-foot">
+      <button type="button" class="btn-install" id="btnInstall" hidden data-i18n="installApp">Install app</button>
+      <p class="privacy" data-i18n="privacy">Chats are saved only in this browser.</p>
+      <div class="foot-actions">
+        <button type="button" class="link" id="btnExport" data-i18n="exportAll">Export all chats</button>
+        <button type="button" class="link danger" id="btnClear" data-i18n="deleteAll">Delete all chats</button>
+      </div>
+    </div>
+  </aside>
+
+  <main class="desk" id="desk">
+    <header class="desk-head">
+      <button class="icon-btn only-mobile" id="btnShelf" type="button" aria-controls="shelf" aria-expanded="false" data-i18n="chats">Chats</button>
+      <div class="desk-title">
+        <h1 id="chatTitle">New case</h1>
+        <p class="scope" data-i18n="scope">Rental deposits, unpaid salary and refunds. Uttar Pradesh in depth, central law elsewhere.</p>
+      </div>
+      <div class="head-actions">
+        <button class="icon-btn" id="btnTxt" type="button" data-i18n="saveText">Save as text</button>
+        <button class="icon-btn quiet" id="btnDelChat" type="button" data-i18n="deleteChat">Delete this chat</button>
+        <button class="icon-btn only-narrow" id="btnFile" type="button" aria-controls="casefile" aria-expanded="false"><span data-i18n="caseFile">Case file</span> <span class="count" id="factCount">0</span></button>
+      </div>
+    </header>
+
+    <div class="notice" id="modeNotice" hidden></div>
+
+    <section class="log" id="log" aria-live="polite" aria-label="Conversation"></section>
+
+    <form class="composer" id="composer" autocomplete="off">
+      <button type="button" class="mic" id="btnMic" aria-label="Speak your problem">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v6a3 3 0 0 0 3 3Zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-2.08A7 7 0 0 0 19 12h-2Z"/></svg>
+      </button>
+      <div class="input-wrap">
+        <textarea id="txt" rows="1" placeholder="Describe what happened…" aria-label="Describe your problem, in any language" data-i18n-ph="placeholder"></textarea>
+        <div class="rec-state" id="recState" hidden></div>
+      </div>
+      <button type="submit" class="send" id="btnSend" data-i18n="send">Send</button>
+    </form>
+    <p class="legal-note" data-i18n="legalNote">Legal information, not legal advice. For high-value or urgent matters, talk to a lawyer or free legal aid (NALSA 15100).</p>
+  </main>
+
+  <aside class="casefile" id="casefile" aria-label="Your case file">
+    <div class="folder">
+      <div class="tab" data-i18n="caseFile">Case file</div>
+      <div class="tape" aria-hidden="true"></div>
+      <div class="folder-body" id="fileBody"></div>
+    </div>
+  </aside>
+
+  <div class="scrim" id="scrim" hidden></div>
+</div>
+
+<dialog class="first-run" id="firstRun" aria-labelledby="frTitle">
+  <h2 id="frTitle" data-i18n="firstRunTitle">Before you start</h2>
+  <p data-i18n="firstRunBody"></p>
+  <form method="dialog"><button class="btn-new" value="ok" data-i18n="firstRunOk">I understand</button></form>
+</dialog>
+
+<template id="tplEmpty">
+  <div class="empty">
+    <h2 data-i18n="emptyH">What happened?</h2>
+    <p data-i18n="emptyP"></p>
+    <div class="examples">
+      <button type="button" class="example" data-text="I left my flat in Lucknow two months ago and the landlord won't return my ₹30,000 deposit.">I left my flat in Lucknow two months ago and the landlord won't return my ₹30,000 deposit.</button>
+      <button type="button" class="example" data-text="मालिक ने दो महीने की तनख्वाह नहीं दी, मैंने नौकरी छोड़ दी है। कानपुर, 40000 रुपये।">मालिक ने दो महीने की तनख्वाह नहीं दी, मैंने नौकरी छोड़ दी है। कानपुर, 40000 रुपये।</button>
+      <button type="button" class="example" data-text="An online store delivered a broken phone and refuses to refund my ₹15,000.">An online store delivered a broken phone and refuses to refund my ₹15,000.</button>
+      <button type="button" class="example" data-text="నా ఇంటి యజమాని నా డిపాజిట్ తిరిగి ఇవ్వడం లేదు. నేను ఏం చేయాలి?">నా ఇంటి యజమాని నా డిపాజిట్ తిరిగి ఇవ్వడం లేదు. నేను ఏం చేయాలి?</button>
+    </div>
+  </div>
+</template>
+
+<script src="/static/i18n.js"></script>
+<script src="/static/app.js"></script>
+</body>
+</html>
