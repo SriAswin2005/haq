@@ -103,3 +103,22 @@ and runs the real pipeline there. It then copies raw bytes into the canonical
 `frozen_inputs.json` and `collection.json` record the tested revision and byte
 identity. Later checkout changes require their own run; these results do not
 silently claim to cover them. The frozen app's quota cache is isolated too.
+
+## Round 3
+
+`tests/cases.jsonl` now has 40 cases. T-001..T-030 are unchanged from the 21:40 before archive; T-031..T-040 add the requested language, draft, conflict and injection scenarios. All law-verification flags remain false.
+
+Run `python tests/test_server_api.py` for the offline TestClient suite. It blocks outbound requests, uses temporary feedback/cache/trace files, and covers SSE stage/result ordering, terminal errors, shared 429 limiting, consent-gated conversation text, and browser-state restoration. `--real` requires GEMINI_API_KEY already in the process environment; a key in .env does not opt in. In Codex's restricted Windows sandbox, async socket-pair setup may block; run the mock suite in the normal terminal/outside that restriction.
+
+After the 40-case real run completes, generate the cohort comparison and trace performance report with `python tests/round3_reports.py --run outputs/runs/<new-real-run>`. It verifies all 30 old case dictionaries and baseline raw hashes, separates the ten additions, reports exact trace.pruned presence and final refusal counts, uses linear p50/p95 quantiles without dropping outliers, and never infers a served model from configuration.
+
+Final round-three archive: outputs/runs/real-20261105T214345.363908Z (21/40 strict passes; unchanged original cohort 17/30 versus 12/30). Reproduce derived artifacts without API calls, in order:
+
+```powershell
+python tests/round3_reports.py --run outputs/runs/real-20261105T214345.363908Z
+python tests/round3_bugs.py --run outputs/runs/real-20261105T214345.363908Z
+python tests/add_real_review.py --run outputs/runs/real-20261105T214345.363908Z --findings tests/round3_real_findings.jsonl
+python tests/audit_round3.py --run outputs/runs/real-20261105T214345.363908Z
+```
+
+The first step rebuilds summary/CSV/calibration and comparison/performance reports; the next two attach trace and quote-validated reviews. The audit checks frozen inputs, before preservation, raw publication identity, report identity, unverified-law flags and secret-value absence. Mock API evidence is separate from the real legal evaluation. API result files now record source hashes before/after their tests so parallel edits are visible.

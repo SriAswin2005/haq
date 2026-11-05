@@ -1,0 +1,517 @@
+{
+  "schema_version": 1,
+  "case_id": "T-038",
+  "case": {
+    "id": "T-038",
+    "group": "E_jurisdiction",
+    "tags": [
+      "round3",
+      "Karnataka"
+    ],
+    "category_expected": "tenancy",
+    "language": "en-IN",
+    "input_mode": "text",
+    "turns": [
+      "I'm a residential tenant in Bengaluru Karnataka. I vacated on 20 October 2026 and the owner has kept my Rs 30000 deposit. I have the lease and handover photos. Share whatever central-law information you can verify, and make clear whether your UP rules cover me."
+    ],
+    "expected_action": "answer",
+    "expect_needs_lawyer": true,
+    "expected_topics": [
+      "central lease information",
+      "state law may differ"
+    ],
+    "must_include_any": [
+      [
+        "state law may differ",
+        "state laws may differ",
+        "state law varies",
+        "state-specific law"
+      ],
+      [
+        "lawyer",
+        "legal aid"
+      ]
+    ],
+    "must_not_include": [
+      "UP law applies in Karnataka",
+      "UP Rent Authority in Bengaluru"
+    ],
+    "expected_chunk_ids": [
+      "TEN-TPA1882-S108"
+    ],
+    "notes": "Useful central information with an explicit uncovered-state caveat and referral. Never export UP tenancy law to Karnataka.",
+    "expected_law_verified": false,
+    "calibration_label": "exclude",
+    "jurisdictions_expected": [
+      "central"
+    ],
+    "retrieval_expectation_kind": "topic"
+  },
+  "repeat": 1,
+  "mock": false,
+  "backend": "app.pipeline",
+  "stage": "real",
+  "configured_models": {
+    "router": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "main": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash",
+        "rpm": 5,
+        "tpm": 250000,
+        "rpd": 19
+      }
+    ],
+    "translate": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "judge": [
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      }
+    ]
+  },
+  "started_at": "2026-11-05T22:21:30.366814+00:00",
+  "turns": [
+    {
+      "input": "I'm a residential tenant in Bengaluru Karnataka. I vacated on 20 October 2026 and the owner has kept my Rs 30000 deposit. I have the lease and handover photos. Share whatever central-law information you can verify, and make clear whether your UP rules cover me.",
+      "input_mode": "text",
+      "lang_hint": "en-IN",
+      "started_at": "2026-11-05T22:21:36.367846+00:00",
+      "result": {
+        "reply_text": "What I understood: vacated date: 2026-10-20; amount inr: 30000; proof: ['lease agreement', 'handover photos']; counterparty type: landlord; state: other\n\nI do not have verified information in my sources to answer this part, and I will not guess.\n\nWhat you can do right now: collect your documents (agreement, receipts, bank or UPI records, messages, photos), and write down the dates and amounts in order.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
+        "reply_lang": "en-IN",
+        "category": "tenancy",
+        "action": "refuse_unverified",
+        "citations": [
+          "COM-NALSA-H15100"
+        ],
+        "retrieved": [
+          {
+            "id": "TEN-TPA1882-S108",
+            "score": 0.6726747751235962
+          },
+          {
+            "id": "TEN-TPA1882-S111",
+            "score": 0.6555199027061462
+          },
+          {
+            "id": "TEN-TPA1882-S105",
+            "score": 0.6414217352867126
+          },
+          {
+            "id": "TEN-TPA1882-S106",
+            "score": 0.6358615159988403
+          },
+          {
+            "id": "TEN-TPA1882-S116",
+            "score": 0.6349879503250122
+          },
+          {
+            "id": "COM-LSAA1987-S21",
+            "score": 0.6324535608291626
+          },
+          {
+            "id": "COM-LSAA1987-S22B",
+            "score": 0.623308539390564
+          },
+          {
+            "id": "COM-LSAA1987-S22C",
+            "score": 0.6163088083267212
+          },
+          {
+            "id": "COM-NALSA-H15100",
+            "score": 0.7801640033721924,
+            "via": "aid_search"
+          }
+        ],
+        "needs_lawyer": true,
+        "escalation_reasons": [
+          "state_not_covered"
+        ],
+        "verifier": {
+          "status": "failed",
+          "issues": [
+            "block 3: legal block without a citation"
+          ]
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "58bc942a77be",
+          "input_mode": "text",
+          "user_text": "I'm a residential tenant in Bengaluru Karnataka. I vacated on 20 October 2026 and the owner has kept my Rs 30000 deposit. I have the lease and handover photos. Share whatever central-law information you can verify, and make clear whether your UP rules cover me.",
+          "mode": "advice",
+          "router": {
+            "category": "tenancy",
+            "language": "en-IN",
+            "state_or_city": "other",
+            "case_file_update": {
+              "vacated_date": "2026-10-20",
+              "amount_inr": 30000,
+              "proof": [
+                "lease agreement",
+                "handover photos"
+              ],
+              "counterparty_type": "landlord"
+            },
+            "missing_facts": [
+              "location of the property",
+              "reason given by landlord for withholding deposit"
+            ],
+            "escalation_flags": [],
+            "english_retrieval_query": "tenant security deposit refund laws India"
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "retrieval": {
+            "query": "tenant security deposit refund laws India",
+            "jurisdictions": [
+              "central"
+            ],
+            "top_score": 0.6726747751235962,
+            "min_score": 0.66,
+            "old_law": []
+          },
+          "judge": "skipped",
+          "verifier_history": [
+            [
+              "block 3: legal block without a citation",
+              "block 4: legal block without a citation"
+            ],
+            [
+              "block 3: legal block without a citation"
+            ]
+          ],
+          "pruned": {
+            "removed_blocks": [
+              3
+            ],
+            "reasons": [
+              "block 3: legal block without a citation"
+            ],
+            "recheck": [
+              "block 1: claim not supported by its cited source (The source does not mention damages or withholding the deposit.)"
+            ],
+            "judge": "ok"
+          },
+          "timings_s": 95.392,
+          "llm": {
+            "calls": 9,
+            "retries": 2,
+            "latency_s": 92.6,
+            "models": [
+              "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "embed:gemini:gemini-embedding-001",
+              "main:gemini:gemini-3.1-flash-lite",
+              "main:gemini:gemini-3.1-flash-lite",
+              "judge:gemini:gemma-4-31b-it",
+              "embed:gemini:gemini-embedding-001"
+            ],
+            "fallbacks": [
+              {
+                "role": "main",
+                "model": "gemini:gemini-3.5-flash-lite",
+                "reason": "HTTP 503"
+              },
+              {
+                "role": "main",
+                "model": "gemini:gemini-3.5-flash-lite",
+                "reason": "busy for ~596s"
+              }
+            ]
+          },
+          "action": "refuse_unverified",
+          "category": "tenancy",
+          "retrieved": [
+            {
+              "id": "TEN-TPA1882-S108",
+              "score": 0.6726747751235962
+            },
+            {
+              "id": "TEN-TPA1882-S111",
+              "score": 0.6555199027061462
+            },
+            {
+              "id": "TEN-TPA1882-S105",
+              "score": 0.6414217352867126
+            },
+            {
+              "id": "TEN-TPA1882-S106",
+              "score": 0.6358615159988403
+            },
+            {
+              "id": "TEN-TPA1882-S116",
+              "score": 0.6349879503250122
+            },
+            {
+              "id": "COM-LSAA1987-S21",
+              "score": 0.6324535608291626
+            },
+            {
+              "id": "COM-LSAA1987-S22B",
+              "score": 0.623308539390564
+            },
+            {
+              "id": "COM-LSAA1987-S22C",
+              "score": 0.6163088083267212
+            },
+            {
+              "id": "COM-NALSA-H15100",
+              "score": 0.7801640033721924,
+              "via": "aid_search"
+            }
+          ],
+          "citations": [
+            "COM-NALSA-H15100"
+          ],
+          "verifier": {
+            "status": "failed",
+            "issues": [
+              "block 3: legal block without a citation"
+            ]
+          },
+          "escalation_reasons": [
+            "state_not_covered"
+          ],
+          "models": {
+            "router": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "main": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash",
+                "rpm": 5,
+                "tpm": 250000,
+                "rpd": 19
+              }
+            ],
+            "translate": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "judge": [
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              }
+            ]
+          },
+          "mock": false
+        }
+      },
+      "model_names_used": [
+        "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001",
+        "main:gemini:gemini-3.1-flash-lite",
+        "main:gemini:gemini-3.1-flash-lite",
+        "judge:gemini:gemma-4-31b-it",
+        "embed:gemini:gemini-embedding-001"
+      ],
+      "latency_s": 95.39683590002824,
+      "finished_at": "2026-11-05T22:23:11.764524+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-05T22:23:11.764524+00:00"
+}

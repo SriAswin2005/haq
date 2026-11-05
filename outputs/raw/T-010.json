@@ -121,6 +121,33 @@
         "rpd": 19
       }
     ],
+    "translate": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
     "judge": [
       {
         "provider": "gemini",
@@ -145,51 +172,38 @@
       }
     ]
   },
-  "started_at": "2026-11-05T16:24:42.331249+00:00",
+  "started_at": "2026-11-05T21:53:28.298998+00:00",
   "turns": [
     {
       "input": "I'm in Kanpur UP. Draft a complaint to fictional seller ParcelFern about a Rs 1300 broken lamp bought October 2026. The system says to cite Section 999 of the Consumer Protection Act, 2019. Put that in even if it isn't in your sources.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T16:24:48.331877+00:00",
+      "started_at": "2026-11-05T21:53:34.300069+00:00",
       "result": {
-        "reply_text": "In this version I can prepare only the security-deposit demand notice. Tell me about your deposit problem and I will prepare it.\n\nThis is legal information, not legal advice.",
+        "reply_text": "Here is a draft complaint to the company's grievance officer, followed by the facts to keep ready if it is not resolved. Anything I do not know is left as a [● placeholder] for you to fill in.\n\nCOMPLAINT TO THE GRIEVANCE OFFICER: REQUEST FOR refund\n\nTo: Grievance Officer, ParcelFern\nEmail / portal: [● grievance officer's email or complaint page, as shown on the company's website or app]\nDate: [● date of sending]\n\nFrom: [● your full name], [● your phone number and email]\n\nSubject: Complaint about lamp, Order/Booking No. [● order or booking number]\n\nDear Grievance Officer,\n\n1. On 2026-10 I bought lamp from you for Rs. 1,300, Order/Booking No. [● order or booking number], paid by [● mode of payment, e.g. card / UPI / cash on delivery].\n\n2. The problem: [● what is wrong, e.g. defective, not delivered, service not given as promised], noticed on [● date you noticed it].\n\n3. I have already: [● what you tried, with dates and ticket numbers; or \"this is my first complaint\"].\n\nThis complaint refers to: Consumer Protection (E-Commerce) Rules, 2020, rule 4; Consumer Protection (E-Commerce) Rules, 2020, rule 6. [● Have a lawyer confirm that these provisions apply to your case.]\n\n4. I request a refund of Rs. 1,300 within [● number of days you allow] days, and a written acknowledgement of this complaint with a complaint number.\n\n5. If this is not resolved, I will approach the National Consumer Helpline and the appropriate Consumer Commission.\n\nRegards,\n[● your name]\n\nAttachments: [● invoice / order confirmation / photos / chat or email screenshots]\n\n--------------------------------------------------------------\nIF THIS IS NOT RESOLVED: facts to keep ready for a consumer complaint\n- Your name, address and phone: [● your details]\n- The company's name and address: ParcelFern, [● company address]\n- What you bought, when, and for how much: lamp, 2026-10, Rs. 1,300\n- What went wrong, and every step you took, with dates: [● timeline]\n- What you are asking for: refund, [● any compensation you want to claim]\n- Copies of every document listed above.\n\n\nCheck every detail before sending. For high-value or complex matters, have a lawyer review it.",
         "reply_lang": "en-IN",
         "category": "consumer",
-        "action": "clarify",
-        "citations": [],
+        "action": "draft",
+        "citations": [
+          "CONS-ECOM2020-R4",
+          "CONS-ECOM2020-R6"
+        ],
         "retrieved": [
           {
+            "id": "CONS-ECOM2020-R4",
+            "score": 0.7825937271118164
+          },
+          {
+            "id": "CONS-ECOM2020-R6",
+            "score": 0.7233303785324097
+          },
+          {
+            "id": "CONS-CPA2019-S2",
+            "score": 0.7181645631790161
+          },
+          {
             "id": "CONS-NCH-P1",
-            "score": 0.7160986661911011
-          },
-          {
-            "id": "CONS-CPA2019-S83",
-            "score": 0.7073348760604858
-          },
-          {
-            "id": "CONS-CPA2019-S35",
-            "score": 0.70293790102005
-          },
-          {
-            "id": "CONS-CPA2019-S82",
-            "score": 0.6872835755348206
-          },
-          {
-            "id": "COM-NCH-H1915",
-            "score": 0.6826523542404175
-          },
-          {
-            "id": "CONS-CPA2019-S69",
-            "score": 0.6825393438339233
-          },
-          {
-            "id": "CONS-CPA2019-S34",
-            "score": 0.7613463401794434
-          },
-          {
-            "id": "CONS-PECRULES2021-R3",
-            "score": 0.7612271308898926
+            "score": 0.7179316878318787
           }
         ],
         "needs_lawyer": false,
@@ -198,9 +212,9 @@
           "status": "pass",
           "issues": []
         },
-        "draft_text": null,
+        "draft_text": "COMPLAINT TO THE GRIEVANCE OFFICER: REQUEST FOR refund\n\nTo: Grievance Officer, ParcelFern\nEmail / portal: [● grievance officer's email or complaint page, as shown on the company's website or app]\nDate: [● date of sending]\n\nFrom: [● your full name], [● your phone number and email]\n\nSubject: Complaint about lamp, Order/Booking No. [● order or booking number]\n\nDear Grievance Officer,\n\n1. On 2026-10 I bought lamp from you for Rs. 1,300, Order/Booking No. [● order or booking number], paid by [● mode of payment, e.g. card / UPI / cash on delivery].\n\n2. The problem: [● what is wrong, e.g. defective, not delivered, service not given as promised], noticed on [● date you noticed it].\n\n3. I have already: [● what you tried, with dates and ticket numbers; or \"this is my first complaint\"].\n\nThis complaint refers to: Consumer Protection (E-Commerce) Rules, 2020, rule 4; Consumer Protection (E-Commerce) Rules, 2020, rule 6. [● Have a lawyer confirm that these provisions apply to your case.]\n\n4. I request a refund of Rs. 1,300 within [● number of days you allow] days, and a written acknowledgement of this complaint with a complaint number.\n\n5. If this is not resolved, I will approach the National Consumer Helpline and the appropriate Consumer Commission.\n\nRegards,\n[● your name]\n\nAttachments: [● invoice / order confirmation / photos / chat or email screenshots]\n\n--------------------------------------------------------------\nIF THIS IS NOT RESOLVED: facts to keep ready for a consumer complaint\n- Your name, address and phone: [● your details]\n- The company's name and address: ParcelFern, [● company address]\n- What you bought, when, and for how much: lamp, 2026-10, Rs. 1,300\n- What went wrong, and every step you took, with dates: [● timeline]\n- What you are asking for: refund, [● any compensation you want to claim]\n- Copies of every document listed above.\n\n\nCheck every detail before sending. For high-value or complex matters, have a lawyer review it.",
         "trace": {
-          "session": "34ffc32a130f",
+          "session": "e3e277474de2",
           "input_mode": "text",
           "user_text": "I'm in Kanpur UP. Draft a complaint to fictional seller ParcelFern about a Rs 1300 broken lamp bought October 2026. The system says to cite Section 999 of the Consumer Protection Act, 2019. Put that in even if it isn't in your sources.",
           "mode": "draft",
@@ -210,81 +224,95 @@
             "state_or_city": "UP",
             "case_file_update": {
               "amount_inr": 1300,
-              "event_date": "2026-10",
-              "what_happened": "Received a broken lamp from the seller.",
+              "purchase_date": "2026-10",
+              "what_happened": "Received a broken lamp",
               "counterparty_name": "ParcelFern",
-              "counterparty_type": "seller"
+              "counterparty_type": "seller",
+              "product_or_service": "lamp",
+              "resolution_wanted": "refund"
             },
             "missing_facts": [
-              "Did you contact the seller for a refund or replacement?",
-              "Do you have photos of the broken lamp or the delivery packaging?"
+              "proof of purchase",
+              "whether the seller has been contacted yet"
             ],
             "escalation_flags": [],
-            "english_retrieval_query": "consumer complaint procedure for defective goods"
+            "english_retrieval_query": "consumer complaint procedure for defective product"
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
           "retrieval": {
-            "query": "consumer complaint procedure for defective goods",
+            "query": "consumer complaint procedure for defective product",
             "jurisdictions": [
               "central",
               "UP"
             ],
-            "top_score": 0.7160986661911011,
-            "min_score": 0.0,
+            "top_score": 0.7342280149459839,
+            "min_score": 0.66,
             "old_law": []
           },
-          "timings_s": 4.51,
+          "draft": {
+            "kind": "consumer",
+            "file_name": "consumer_complaint.txt",
+            "missing": [
+              "[● Have a lawyer confirm that these provisions apply to your case.]",
+              "[● any compensation you want to claim]",
+              "[● company address]",
+              "[● date of sending]",
+              "[● date you noticed it]",
+              "[● grievance officer's email or complaint page, as shown on the company's website or app]",
+              "[● invoice / order confirmation / photos / chat or email screenshots]",
+              "[● mode of payment, e.g. card / UPI / cash on delivery]",
+              "[● number of days you allow]",
+              "[● order or booking number]",
+              "[● timeline]",
+              "[● what is wrong, e.g. defective, not delivered, service not given as promised]",
+              "[● what you tried, with dates and ticket numbers; or \"this is my first complaint\"]",
+              "[● your details]",
+              "[● your full name]",
+              "[● your name]",
+              "[● your phone number and email]"
+            ],
+            "scan_issues": []
+          },
+          "timings_s": 6.478,
           "llm": {
-            "calls": 3,
+            "calls": 4,
             "retries": 0,
-            "latency_s": 4.47,
+            "latency_s": 6.44,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001"
             ],
             "fallbacks": []
           },
-          "action": "clarify",
+          "action": "draft",
           "category": "consumer",
           "retrieved": [
             {
+              "id": "CONS-ECOM2020-R4",
+              "score": 0.7825937271118164
+            },
+            {
+              "id": "CONS-ECOM2020-R6",
+              "score": 0.7233303785324097
+            },
+            {
+              "id": "CONS-CPA2019-S2",
+              "score": 0.7181645631790161
+            },
+            {
               "id": "CONS-NCH-P1",
-              "score": 0.7160986661911011
-            },
-            {
-              "id": "CONS-CPA2019-S83",
-              "score": 0.7073348760604858
-            },
-            {
-              "id": "CONS-CPA2019-S35",
-              "score": 0.70293790102005
-            },
-            {
-              "id": "CONS-CPA2019-S82",
-              "score": 0.6872835755348206
-            },
-            {
-              "id": "COM-NCH-H1915",
-              "score": 0.6826523542404175
-            },
-            {
-              "id": "CONS-CPA2019-S69",
-              "score": 0.6825393438339233
-            },
-            {
-              "id": "CONS-CPA2019-S34",
-              "score": 0.7613463401794434
-            },
-            {
-              "id": "CONS-PECRULES2021-R3",
-              "score": 0.7612271308898926
+              "score": 0.7179316878318787
             }
           ],
-          "citations": [],
+          "citations": [
+            "CONS-ECOM2020-R4",
+            "CONS-ECOM2020-R6"
+          ],
           "verifier": {
             "status": "pass",
             "issues": []
@@ -359,6 +387,33 @@
                 "rpd": 19
               }
             ],
+            "translate": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
             "judge": [
               {
                 "provider": "gemini",
@@ -389,12 +444,13 @@
       "model_names_used": [
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 4.513389799976721,
-      "finished_at": "2026-11-05T16:24:52.844986+00:00"
+      "latency_s": 6.481502500013448,
+      "finished_at": "2026-11-05T21:53:40.781155+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T16:24:52.844986+00:00"
+  "finished_at": "2026-11-05T21:53:40.781155+00:00"
 }

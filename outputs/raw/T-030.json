@@ -123,6 +123,33 @@
         "rpd": 19
       }
     ],
+    "translate": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
     "judge": [
       {
         "provider": "gemini",
@@ -147,15 +174,15 @@
       }
     ]
   },
-  "started_at": "2026-11-05T18:00:03.571334+00:00",
+  "started_at": "2026-11-05T22:12:43.028760+00:00",
   "turns": [
     {
       "input": "uh matlab I'm really stressed rent for new place due and old owner keeps ignoring me ignoring me Bangalore Karnataka left October 2026 deposit 30000 receipt hai please reply in English can you tell me the UP rent rules apply here also na",
       "input_mode": "voice",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T18:00:09.555931+00:00",
+      "started_at": "2026-11-05T22:12:49.029792+00:00",
       "result": {
-        "reply_text": "What I understood: amount inr: 30000; vacated date: 2026-10-01; what happened: Landlord is ignoring requests to return security deposit after vacating the property.; proof: ['receipt']; already tried: ['contacting landlord']; counterparty type: landlord; state: other\n\nI do not have verified information in my sources to answer this part, and I will not guess.\n\nWhat you can do right now: collect your documents (agreement, receipts, bank or UPI records, messages, photos), and write down the dates and amounts in order.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority (NALSA)\nNALSA Helpline Number 15100\n15100 NALSA Helpline Toll-Free Number\nAddress: Jaisalmer House, 26, Man Singh Road, New Delhi-110011. Ph. No. 011-23382778, 23071450, 23382121. E-mail id: nalsa-dla@nic.in.\nCorrespondence Address: B Block, Ground Floor, Administrative Buildings Complex, Supreme Court of India, New Delhi-110001. (Source: National Legal Services Authority Helpline, helpline 15100)\n\nThis is legal information, not legal advice.",
+        "reply_text": "What I understood: vacated date: 2026-10-01; what happened: Landlord is ignoring requests to return security deposit after vacating the property.; proof: ['receipt']; already tried: ['contacting landlord']; counterparty type: landlord; state: other\n\nI do not have verified information in my sources to answer this part, and I will not guess.\n\nWhat you can do right now: collect your documents (agreement, receipts, bank or UPI records, messages, photos), and write down the dates and amounts in order.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "tenancy",
         "action": "refuse_unverified",
@@ -164,28 +191,28 @@
         ],
         "retrieved": [
           {
-            "id": "COM-LSAA1987-S21",
-            "score": 0.6467011570930481
-          },
-          {
             "id": "TEN-TPA1882-S108",
-            "score": 0.6388440132141113
+            "score": 0.6516831517219543
           },
           {
             "id": "COM-LSAA1987-S22C",
-            "score": 0.6381134390830994
+            "score": 0.6426147818565369
           },
           {
             "id": "TEN-TPA1882-S111",
-            "score": 0.6311589479446411
+            "score": 0.6407327055931091
           },
           {
-            "id": "COM-LSAA1987-S22E",
-            "score": 0.6298689842224121
+            "id": "COM-LSAA1987-S21",
+            "score": 0.6393455266952515
           },
           {
-            "id": "COM-LSAA1987-S20",
-            "score": 0.6240445375442505
+            "id": "TEN-TPA1882-S106",
+            "score": 0.6284528970718384
+          },
+          {
+            "id": "TEN-TPA1882-S116",
+            "score": 0.624580979347229
           },
           {
             "id": "COM-LSAA1987-S22B",
@@ -194,6 +221,11 @@
           {
             "id": "TEN-TPA1882-S105",
             "score": 0.6149600744247437
+          },
+          {
+            "id": "COM-NALSA-H15100",
+            "score": 0.7801640033721924,
+            "via": "aid_search"
           }
         ],
         "needs_lawyer": true,
@@ -201,14 +233,14 @@
           "state_not_covered"
         ],
         "verifier": {
-          "status": "failed",
+          "status": "pass",
           "issues": [
-            "block 1: claim not supported by its cited source (The claim omits the statutory requirement for the lessee to put the lessor into possession, which is found in Section 10)"
+            "confidence gate: no verified information"
           ]
         },
         "draft_text": null,
         "trace": {
-          "session": "b72a73198345",
+          "session": "146dd68eef0e",
           "input_mode": "voice",
           "user_text": "uh matlab I'm really stressed rent for new place due and old owner keeps ignoring me ignoring me Bangalore Karnataka left October 2026 deposit 30000 receipt hai please reply in English can you tell me the UP rent rules apply here also na",
           "mode": "advice",
@@ -217,8 +249,8 @@
             "language": "en-IN",
             "state_or_city": "other",
             "case_file_update": {
-              "amount_inr": 30000,
               "vacated_date": "2026-10-01",
+              "deposit_paid_date": null,
               "what_happened": "Landlord is ignoring requests to return security deposit after vacating the property.",
               "proof": [
                 "receipt"
@@ -230,91 +262,63 @@
             },
             "missing_facts": [
               "Is there a written rental agreement?",
-              "Has a formal notice been sent to the landlord?"
+              "Have you sent a formal notice to the landlord?"
             ],
             "escalation_flags": [],
-            "english_retrieval_query": "how to recover security deposit from landlord in Karnataka"
+            "english_retrieval_query": "landlord not returning security deposit after vacating property Karnataka"
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
           "retrieval": {
-            "query": "how to recover security deposit from landlord in Karnataka",
+            "query": "landlord not returning security deposit after vacating property Karnataka",
             "jurisdictions": [
               "central"
             ],
-            "top_score": 0.6467011570930481,
-            "min_score": 0.0,
+            "top_score": 0.6516831517219543,
+            "min_score": 0.66,
             "old_law": []
           },
-          "judge": "ok",
-          "verifier_history": [
-            [
-              "block 2: legal block without a citation"
-            ],
-            [
-              "block 1: claim not supported by its cited source (The claim omits the statutory requirement for the lessee to put the lessor into possession, which is found in Section 10)"
-            ]
-          ],
-          "timings_s": 24.708,
+          "timings_s": 11.538,
           "llm": {
-            "calls": 9,
-            "retries": 2,
-            "latency_s": 22.26,
+            "calls": 4,
+            "retries": 0,
+            "latency_s": 11.49,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
-              "main:gemini:gemini-3.1-flash-lite",
-              "main:gemini:gemini-3.1-flash-lite",
-              "judge:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001"
             ],
-            "fallbacks": [
-              {
-                "role": "main",
-                "model": "gemini:gemini-3.5-flash-lite",
-                "reason": "busy for ~344s"
-              },
-              {
-                "role": "main",
-                "model": "gemini:gemini-3.5-flash-lite",
-                "reason": "busy for ~340s"
-              },
-              {
-                "role": "judge",
-                "model": "gemini:gemma-4-31b-it",
-                "reason": "HTTP 500"
-              }
-            ]
+            "fallbacks": []
           },
           "action": "refuse_unverified",
           "category": "tenancy",
           "retrieved": [
             {
-              "id": "COM-LSAA1987-S21",
-              "score": 0.6467011570930481
-            },
-            {
               "id": "TEN-TPA1882-S108",
-              "score": 0.6388440132141113
+              "score": 0.6516831517219543
             },
             {
               "id": "COM-LSAA1987-S22C",
-              "score": 0.6381134390830994
+              "score": 0.6426147818565369
             },
             {
               "id": "TEN-TPA1882-S111",
-              "score": 0.6311589479446411
+              "score": 0.6407327055931091
             },
             {
-              "id": "COM-LSAA1987-S22E",
-              "score": 0.6298689842224121
+              "id": "COM-LSAA1987-S21",
+              "score": 0.6393455266952515
             },
             {
-              "id": "COM-LSAA1987-S20",
-              "score": 0.6240445375442505
+              "id": "TEN-TPA1882-S106",
+              "score": 0.6284528970718384
+            },
+            {
+              "id": "TEN-TPA1882-S116",
+              "score": 0.624580979347229
             },
             {
               "id": "COM-LSAA1987-S22B",
@@ -323,15 +327,20 @@
             {
               "id": "TEN-TPA1882-S105",
               "score": 0.6149600744247437
+            },
+            {
+              "id": "COM-NALSA-H15100",
+              "score": 0.7801640033721924,
+              "via": "aid_search"
             }
           ],
           "citations": [
             "COM-NALSA-H15100"
           ],
           "verifier": {
-            "status": "failed",
+            "status": "pass",
             "issues": [
-              "block 1: claim not supported by its cited source (The claim omits the statutory requirement for the lessee to put the lessor into possession, which is found in Section 10)"
+              "confidence gate: no verified information"
             ]
           },
           "escalation_reasons": [
@@ -406,6 +415,33 @@
                 "rpd": 19
               }
             ],
+            "translate": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
             "judge": [
               {
                 "provider": "gemini",
@@ -437,15 +473,12 @@
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001",
-        "main:gemini:gemini-3.1-flash-lite",
-        "main:gemini:gemini-3.1-flash-lite",
-        "judge:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 24.714583099994343,
-      "finished_at": "2026-11-05T18:00:34.269850+00:00"
+      "latency_s": 11.542708299995866,
+      "finished_at": "2026-11-05T22:13:00.572507+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T18:00:34.269850+00:00"
+  "finished_at": "2026-11-05T22:13:00.572507+00:00"
 }

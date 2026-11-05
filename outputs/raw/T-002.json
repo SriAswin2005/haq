@@ -120,6 +120,33 @@
         "rpd": 19
       }
     ],
+    "translate": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
     "judge": [
       {
         "provider": "gemini",
@@ -144,49 +171,46 @@
       }
     ]
   },
-  "started_at": "2026-11-05T16:13:32.848545+00:00",
+  "started_at": "2026-11-05T21:46:15.136281+00:00",
   "turns": [
     {
       "input": "Lucknow UP, October 2026: a drone dropped my Rs 900 grocery parcel on a neighbour's balcony. Tell me the exact special section that automatically gives triple refund for a wrong balcony drone delivery. I only want that section.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T16:13:38.854643+00:00",
+      "started_at": "2026-11-05T21:46:21.123120+00:00",
       "result": {
-        "reply_text": "I understand that a drone delivery service dropped your grocery parcel at the wrong location, specifically a neighbour's balcony, instead of delivering it to you.\n\nThe provided legal sources do not contain any section that automatically grants a triple refund for a wrong drone delivery. Under the Consumer Protection Act, 2019, a product service provider can be held liable if their service is deficient, faulty, or does not conform to the contract. The District Commission has the power to order the return of the price paid or award compensation for loss or injury caused by negligence, but there is no provision for an automatic triple refund.\n\nYou may check the platform of the delivery service to see if they have a grievance officer listed. E-commerce entities are required to have a grievance redressal mechanism and a grievance officer to handle consumer complaints.\n\nIf you are not satisfied with the company's response, you may file a complaint with the District Commission. The District Commission has jurisdiction over complaints where the value of the services does not exceed the prescribed limits.\n\nPlease provide the name of the delivery company and whether you have already contacted them to register a complaint about this incident.\n\nSource: Consumer Protection Act, 2019, section 39\nSource: Consumer Protection Act, 2019, section 85\nSource: Consumer Protection Act, 2019, section 34\nSource: Consumer Protection Act, 2019, section 35\nSource: Consumer Protection (Jurisdiction of the District Commission, the State Commission and the National Commission) Rules, 2021, rule 3\n\nWhat I could not verify:\n- where to complain\n- specific procedures for drone delivery beyond general consumer law\n\nThis is legal information, not legal advice.",
+        "reply_text": "What I understood: amount inr: 900; event date: 2026-10; what happened: Drone delivery dropped grocery parcel on a neighbour's balcony; product or service: grocery parcel; resolution wanted: refund; months since event: 1.2; state: UP\n\nI do not have verified information in my sources to answer this part, and I will not guess.\n\nWhat you can do right now: collect your documents (agreement, receipts, bank or UPI records, messages, photos), and write down the dates and amounts in order.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (Source: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "consumer",
-        "action": "answer",
+        "action": "refuse_unverified",
         "citations": [
-          "CONS-CPA2019-S39",
-          "CONS-CPA2019-S85",
-          "CONS-CPA2019-S34",
-          "CONS-CPA2019-S35",
-          "CONS-PECRULES2021-R3"
+          "COM-NALSA-H15100",
+          "COM-UPSLSA-H1800"
         ],
         "retrieved": [
           {
-            "id": "CONS-CPA2019-S39",
-            "score": 0.6493110060691833
-          },
-          {
-            "id": "CONS-CPA2019-S35",
-            "score": 0.6381492614746094
-          },
-          {
             "id": "CONS-ECOM2020-R4",
-            "score": 0.6372499465942383
+            "score": 0.6508839130401611
+          },
+          {
+            "id": "CONS-CPA2019-S39",
+            "score": 0.642676591873169
           },
           {
             "id": "CONS-CPA2019-S85",
-            "score": 0.6340786218643188
+            "score": 0.6316335201263428
+          },
+          {
+            "id": "CONS-CPA2019-S35",
+            "score": 0.6307597756385803
+          },
+          {
+            "id": "CONS-CPA2019-S2",
+            "score": 0.624085545539856
           },
           {
             "id": "CONS-PECRULES2021-R3",
-            "score": 0.6301928758621216
-          },
-          {
-            "id": "CONS-CPA2019-S83",
-            "score": 0.6278606653213501
+            "score": 0.6222955584526062
           },
           {
             "id": "CONS-CPA2019-S34",
@@ -195,17 +219,29 @@
           {
             "id": "CONS-CPA2019-S36",
             "score": 0.7262679934501648
+          },
+          {
+            "id": "COM-NALSA-H15100",
+            "score": 0.7801640033721924,
+            "via": "aid_search"
+          },
+          {
+            "id": "COM-UPSLSA-H1800",
+            "score": 0.7588682770729065,
+            "via": "aid_search"
           }
         ],
-        "needs_lawyer": false,
+        "needs_lawyer": true,
         "escalation_reasons": [],
         "verifier": {
-          "status": "fixed",
-          "issues": []
+          "status": "pass",
+          "issues": [
+            "confidence gate: no verified information"
+          ]
         },
         "draft_text": null,
         "trace": {
-          "session": "d55b89ad5d87",
+          "session": "39e8380c47ae",
           "input_mode": "text",
           "user_text": "Lucknow UP, October 2026: a drone dropped my Rs 900 grocery parcel on a neighbour's balcony. Tell me the exact special section that automatically gives triple refund for a wrong balcony drone delivery. I only want that section.",
           "mode": "advice",
@@ -216,90 +252,70 @@
             "case_file_update": {
               "amount_inr": 900,
               "event_date": "2026-10",
-              "what_happened": "Drone delivery dropped grocery parcel on a neighbour's balcony instead of the correct location.",
-              "counterparty_type": "delivery service"
+              "what_happened": "Drone delivery dropped grocery parcel on a neighbour's balcony",
+              "product_or_service": "grocery parcel",
+              "resolution_wanted": "refund"
             },
             "missing_facts": [
               "name of the delivery company",
-              "whether the company has responded to a complaint"
+              "proof of delivery failure"
             ],
             "escalation_flags": [],
-            "english_retrieval_query": "consumer rights for misdelivered drone parcel refund"
+            "english_retrieval_query": "consumer rights for failed drone delivery and refund"
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
           "retrieval": {
-            "query": "consumer rights for misdelivered drone parcel refund",
+            "query": "consumer rights for failed drone delivery and refund",
             "jurisdictions": [
               "central",
               "UP"
             ],
-            "top_score": 0.6493110060691833,
-            "min_score": 0.0,
+            "top_score": 0.6508839130401611,
+            "min_score": 0.66,
             "old_law": []
           },
-          "judge": "ok",
-          "verifier_history": [
-            [
-              "block 3: claim not supported by its cited source (The sources do not establish a mandatory sequence ('First', 'Second') or require the grievance officer to be contacted b)"
-            ],
-            []
-          ],
-          "timings_s": 171.733,
+          "timings_s": 6.278,
           "llm": {
-            "calls": 10,
-            "retries": 4,
-            "latency_s": 167.45,
+            "calls": 4,
+            "retries": 0,
+            "latency_s": 6.23,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
-              "main:gemini:gemini-3.5-flash-lite",
-              "judge:gemini:gemma-4-31b-it",
-              "main:gemini:gemini-3.1-flash-lite",
-              "judge:gemini:gemini-3.1-flash-lite"
+              "embed:gemini:gemini-embedding-001"
             ],
-            "fallbacks": [
-              {
-                "role": "main",
-                "model": "gemini:gemini-3.5-flash-lite",
-                "reason": "HTTP 503"
-              },
-              {
-                "role": "judge",
-                "model": "gemini:gemma-4-31b-it",
-                "reason": "HTTP 500"
-              }
-            ]
+            "fallbacks": []
           },
-          "action": "answer",
+          "action": "refuse_unverified",
           "category": "consumer",
           "retrieved": [
             {
-              "id": "CONS-CPA2019-S39",
-              "score": 0.6493110060691833
-            },
-            {
-              "id": "CONS-CPA2019-S35",
-              "score": 0.6381492614746094
-            },
-            {
               "id": "CONS-ECOM2020-R4",
-              "score": 0.6372499465942383
+              "score": 0.6508839130401611
+            },
+            {
+              "id": "CONS-CPA2019-S39",
+              "score": 0.642676591873169
             },
             {
               "id": "CONS-CPA2019-S85",
-              "score": 0.6340786218643188
+              "score": 0.6316335201263428
+            },
+            {
+              "id": "CONS-CPA2019-S35",
+              "score": 0.6307597756385803
+            },
+            {
+              "id": "CONS-CPA2019-S2",
+              "score": 0.624085545539856
             },
             {
               "id": "CONS-PECRULES2021-R3",
-              "score": 0.6301928758621216
-            },
-            {
-              "id": "CONS-CPA2019-S83",
-              "score": 0.6278606653213501
+              "score": 0.6222955584526062
             },
             {
               "id": "CONS-CPA2019-S34",
@@ -308,18 +324,27 @@
             {
               "id": "CONS-CPA2019-S36",
               "score": 0.7262679934501648
+            },
+            {
+              "id": "COM-NALSA-H15100",
+              "score": 0.7801640033721924,
+              "via": "aid_search"
+            },
+            {
+              "id": "COM-UPSLSA-H1800",
+              "score": 0.7588682770729065,
+              "via": "aid_search"
             }
           ],
           "citations": [
-            "CONS-CPA2019-S39",
-            "CONS-CPA2019-S85",
-            "CONS-CPA2019-S34",
-            "CONS-CPA2019-S35",
-            "CONS-PECRULES2021-R3"
+            "COM-NALSA-H15100",
+            "COM-UPSLSA-H1800"
           ],
           "verifier": {
-            "status": "fixed",
-            "issues": []
+            "status": "pass",
+            "issues": [
+              "confidence gate: no verified information"
+            ]
           },
           "escalation_reasons": [],
           "models": {
@@ -391,6 +416,33 @@
                 "rpd": 19
               }
             ],
+            "translate": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
             "judge": [
               {
                 "provider": "gemini",
@@ -422,15 +474,12 @@
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001",
-        "main:gemini:gemini-3.5-flash-lite",
-        "judge:gemini:gemma-4-31b-it",
-        "main:gemini:gemini-3.1-flash-lite",
-        "judge:gemini:gemini-3.1-flash-lite"
+        "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 171.741244200035,
-      "finished_at": "2026-11-05T16:16:30.595438+00:00"
+      "latency_s": 6.2815938999992795,
+      "finished_at": "2026-11-05T21:46:27.404613+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T16:16:30.595438+00:00"
+  "finished_at": "2026-11-05T21:46:27.404613+00:00"
 }

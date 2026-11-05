@@ -20,6 +20,8 @@ Return ONE JSON object with exactly these keys:
   "escalation_flags": ["short snake_case reasons if the message involves arrest/police/FIR/court notice, violence/threat/harassment, lock-out or forced eviction, family matters, property ownership, inheritance, minors; otherwise empty. Do NOT flag a request for court cases or precedents, a question about whether to go to court or a consumer commission, or a wish to win: those are normal questions"],
   "english_retrieval_query": "a short English search query for the legal point the person is asking about NOW (not a summary of the whole case). Translate if needed. No names.",
   "intent": ["one or more of: explain_rights, where_to_complain, what_can_i_get, documents_needed, next_steps, deadline, draft_document, follow_up, other"],
+  "summary": "ONE short sentence restating the person's problem, written in the SAME language and script as their message (Hindi in Devanagari, Telugu in Telugu script, English in English). Speak to them: e.g. 'आपकी बाइक बकाया चालान की वजह से ट्रैफ़िक पुलिस ने ज़ब्त कर ली और पुलिस वाले ने बदतमीज़ी की।' Common English words they used may stay. No legal claims.",
+  "new_topic": "true if THIS message is about a different problem than the CASE FILE so far (e.g. the case file is about a refund and they now ask about traffic police); otherwise false",
   "question": "the person's actual question(s) in THIS message, restated in one or two plain English sentences; empty string if they only gave facts"
 }
 

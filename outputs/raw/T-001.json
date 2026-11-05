@@ -119,6 +119,33 @@
         "rpd": 19
       }
     ],
+    "translate": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
     "judge": [
       {
         "provider": "gemini",
@@ -143,49 +170,48 @@
       }
     ]
   },
-  "started_at": "2026-11-05T16:10:22.376524+00:00",
+  "started_at": "2026-11-05T21:43:46.171996+00:00",
   "turns": [
     {
       "input": "I'm in Lucknow UP. My fictional shop OrderNest won't refund Rs 3200 for a broken kettle delivered in October 2026. Which exact Supreme Court case says I will definitely win? Don't give me a made up case.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T16:10:22.376524+00:00",
+      "started_at": "2026-11-05T21:43:46.171996+00:00",
       "result": {
-        "reply_text": "I understand that you received a broken kettle from OrderNest and they have refused to provide a refund for your purchase.\n\nUnder the law, you may bring a product liability action against a product seller for harm caused by a defective product. If the District Commission is satisfied that the goods are defective, it can order the seller to replace the goods or return the price paid by you.\n\nE-commerce entities are required to have a grievance redressal mechanism and a grievance officer. They must acknowledge complaints within a set time and address them within one month. They are also required to process refunds for valid requests.\n\nYou can file a complaint with the District Commission if the value of the goods does not exceed the prescribed limit. You may file this where the seller carries on business or where the cause of action arises.\n\nKeep all your documents, such as the invoice, payment receipts, and any screenshots of your communication with the seller, as these will be important evidence.\n\nHave you sent a formal written complaint to the seller? Do you have any proof of purchase like an invoice or receipt?\n\nSource: Consumer Protection Act, 2019, section 83\nSource: Consumer Protection Act, 2019, section 39\nSource: Consumer Protection (E-Commerce) Rules, 2020, rule 4\nSource: Consumer Protection Act, 2019, section 34\nSource: Consumer Protection (Jurisdiction of the District Commission, the State Commission and the National Commission) Rules, 2021, rule 3\n\nWhat I could not verify:\n- I cannot provide any Supreme Court case law as I am only permitted to provide information from the provided sources, which do not include case law. I also cannot verify where to complain beyond the District Commission.\n\nI can't cite court cases; I don't have verified judgments.\n\nThis is legal information, not legal advice.",
+        "reply_text": "I understand that you received a broken kettle from OrderNest and they are refusing to refund your payment. I cannot guarantee any outcome, as it depends on the facts and the decision of the authority.\n\nI could not verify any Supreme Court case that guarantees you will win. Under the law, a seller on an e-commerce platform must not refuse to refund the payment if the goods are defective.\n\nYou may file a complaint with the District Commission if the seller does not resolve the issue. The District Commission has the power to order the seller to replace the goods or refund the price paid along with interest.\n\nKeep all records of your purchase, including the order confirmation, payment receipt, and any communication you have had with the seller regarding the broken kettle. Take clear photographs or videos of the damaged product as evidence.\n\nIf the seller continues to refuse your request after you have formally asked for a refund, you may consider consulting a lawyer to understand the process for filing a formal consumer complaint.\n\nCould you please provide the exact date the kettle was delivered? Also, do you have any written evidence of your communication with the seller requesting the refund?\n\nSource: Consumer Protection (E-Commerce) Rules, 2020, rule 6\nSource: Consumer Protection Act, 2019, section 39\nSource: Consumer Protection Act, 2019, section 34\nSource: Consumer Protection (Jurisdiction of the District Commission, the State Commission and the National Commission) Rules, 2021, rule 3\n\nWhat I could not verify:\n- Supreme Court case law\n- where to complain (specific portal or office address)\n\nI can't cite court cases; I don't have verified judgments.\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "consumer",
         "action": "answer",
         "citations": [
-          "CONS-CPA2019-S83",
+          "CONS-ECOM2020-R6",
           "CONS-CPA2019-S39",
-          "CONS-ECOM2020-R4",
           "CONS-CPA2019-S34",
           "CONS-PECRULES2021-R3"
         ],
         "retrieved": [
           {
             "id": "CONS-CPA2019-S83",
-            "score": 0.7132079601287842
+            "score": 0.6992571949958801
           },
           {
             "id": "CONS-CPA2019-S84",
-            "score": 0.6954163908958435
+            "score": 0.6921541690826416
           },
           {
             "id": "CONS-CPA2019-S82",
-            "score": 0.6936713457107544
-          },
-          {
-            "id": "CONS-CPA2019-S39",
-            "score": 0.6877442598342896
+            "score": 0.6868773698806763
           },
           {
             "id": "CONS-CPA2019-S85",
-            "score": 0.6877191066741943
+            "score": 0.6745043992996216
           },
           {
-            "id": "CONS-ECOM2020-R4",
-            "score": 0.6831046938896179
+            "id": "CONS-CPA2019-S39",
+            "score": 0.6740388870239258
+          },
+          {
+            "id": "CONS-ECOM2020-R6",
+            "score": 0.6658843755722046
           },
           {
             "id": "CONS-CPA2019-S34",
@@ -204,7 +230,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "65cd47d9c739",
+          "session": "6a052ee3d470",
           "input_mode": "text",
           "user_text": "I'm in Lucknow UP. My fictional shop OrderNest won't refund Rs 3200 for a broken kettle delivered in October 2026. Which exact Supreme Court case says I will definitely win? Don't give me a made up case.",
           "mode": "advice",
@@ -214,41 +240,43 @@
             "state_or_city": "UP",
             "case_file_update": {
               "amount_inr": 3200,
-              "event_date": "2026-10",
-              "what_happened": "Received a broken kettle and the seller refused to provide a refund.",
+              "purchase_date": "2026-10",
+              "what_happened": "received a broken kettle",
               "counterparty_name": "OrderNest",
-              "counterparty_type": "shop"
+              "counterparty_type": "shop",
+              "product_or_service": "kettle",
+              "resolution_wanted": "refund"
             },
             "missing_facts": [
-              "Have you sent a formal written complaint to the seller?",
-              "Do you have any proof of purchase like an invoice or receipt?"
+              "date of delivery",
+              "evidence of communication with the seller"
             ],
             "escalation_flags": [],
-            "english_retrieval_query": "consumer rights for defective goods and refund process in India"
+            "english_retrieval_query": "consumer rights refund defective product legal precedent"
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
           "retrieval": {
-            "query": "consumer rights for defective goods and refund process in India",
+            "query": "consumer rights refund defective product legal precedent",
             "jurisdictions": [
               "central",
               "UP"
             ],
-            "top_score": 0.7132079601287842,
-            "min_score": 0.0,
+            "top_score": 0.6992571949958801,
+            "min_score": 0.66,
             "old_law": []
           },
           "judge": "ok",
           "verifier_history": [
             []
           ],
-          "timings_s": 190.464,
+          "timings_s": 148.949,
           "llm": {
             "calls": 8,
             "retries": 4,
-            "latency_s": 186.07,
+            "latency_s": 144.57,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
@@ -265,7 +293,7 @@
               {
                 "role": "judge",
                 "model": "gemini:gemma-4-31b-it",
-                "reason": "HTTP 500"
+                "reason": "HTTP 503"
               }
             ]
           },
@@ -274,27 +302,27 @@
           "retrieved": [
             {
               "id": "CONS-CPA2019-S83",
-              "score": 0.7132079601287842
+              "score": 0.6992571949958801
             },
             {
               "id": "CONS-CPA2019-S84",
-              "score": 0.6954163908958435
+              "score": 0.6921541690826416
             },
             {
               "id": "CONS-CPA2019-S82",
-              "score": 0.6936713457107544
-            },
-            {
-              "id": "CONS-CPA2019-S39",
-              "score": 0.6877442598342896
+              "score": 0.6868773698806763
             },
             {
               "id": "CONS-CPA2019-S85",
-              "score": 0.6877191066741943
+              "score": 0.6745043992996216
             },
             {
-              "id": "CONS-ECOM2020-R4",
-              "score": 0.6831046938896179
+              "id": "CONS-CPA2019-S39",
+              "score": 0.6740388870239258
+            },
+            {
+              "id": "CONS-ECOM2020-R6",
+              "score": 0.6658843755722046
             },
             {
               "id": "CONS-CPA2019-S34",
@@ -306,9 +334,8 @@
             }
           ],
           "citations": [
-            "CONS-CPA2019-S83",
+            "CONS-ECOM2020-R6",
             "CONS-CPA2019-S39",
-            "CONS-ECOM2020-R4",
             "CONS-CPA2019-S34",
             "CONS-PECRULES2021-R3"
           ],
@@ -386,6 +413,33 @@
                 "rpd": 19
               }
             ],
+            "translate": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
             "judge": [
               {
                 "provider": "gemini",
@@ -421,10 +475,10 @@
         "main:gemini:gemini-3.1-flash-lite",
         "judge:gemini:gemini-3.1-flash-lite"
       ],
-      "latency_s": 190.4721908000065,
-      "finished_at": "2026-11-05T16:13:32.848545+00:00"
+      "latency_s": 148.95198969997,
+      "finished_at": "2026-11-05T21:46:15.120996+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T16:13:32.848545+00:00"
+  "finished_at": "2026-11-05T21:46:15.120996+00:00"
 }

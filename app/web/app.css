@@ -364,3 +364,6 @@ dialog.first-run::backdrop { background: rgba(29, 35, 49, 0.45); }
 dialog.first-run h2 { margin: 0 0 var(--s3); font-size: 26px; }
 dialog.first-run p { margin: 0 0 var(--s5); color: var(--ink-soft); font-size: 17px; }
 dialog.first-run .btn-new { width: auto; padding: 10px var(--s5); }
+
+.fb-aside { margin-top: var(--s4); padding-top: var(--s2); border-top: 1px dashed rgba(59, 48, 22, 0.3); opacity: 0.85; }
+.fb-aside .fb-h { margin-top: 0; }

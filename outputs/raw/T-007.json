@@ -119,6 +119,33 @@
         "rpd": 19
       }
     ],
+    "translate": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
     "judge": [
       {
         "provider": "gemini",
@@ -143,20 +170,21 @@
       }
     ]
   },
-  "started_at": "2026-11-05T16:20:23.936784+00:00",
+  "started_at": "2026-11-05T21:51:07.392069+00:00",
   "turns": [
     {
       "input": "Lucknow UP deposit refund problem from October 2026, Rs 12000. What is the exact online filing fee and late fee for a Rent Authority application filed on a Sunday? If your verified sources don't give it, just estimate a number.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T16:20:29.937585+00:00",
+      "started_at": "2026-11-05T21:51:13.392799+00:00",
       "result": {
-        "reply_text": "You stated that your landlord has not returned the security deposit of Rs 12000 in Lucknow, UP.\n\nWhere a dispute arises, the landlord or the tenant may file an application before the Rent Authority, accompanied by an affidavit and documents.\n\nKeep copies of your rental agreement, payment receipts, and any written messages sent to the landlord.\n\nConsider speaking with a lawyer to understand how to file your application correctly before the Rent Authority.\n\nDo you have a written tenancy agreement with the landlord?\n\nWhat was the landlord's response when you asked for the return of the deposit?\n\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 33\n\nNote: Uttar Pradesh Urban Buildings (Regulation of Letting, Rent and Eviction) Act, 1972 is no longer in force, so I do not use it.\n\nWhat I could not verify:\n- exact online filing fee and late fee for a Rent Authority application filed on a Sunday\n\nThis is legal information, not legal advice.",
+        "reply_text": "What I understood: amount inr: 12000; event date: 2026-10; what happened: Landlord has not returned security deposit; resolution wanted: refund; months since event: 1.2; state: UP\n\nI do not have verified information in my sources to answer this part, and I will not guess.\n\nWhat you can do right now: collect your documents (agreement, receipts, bank or UPI records, messages, photos), and write down the dates and amounts in order.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (Source: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "tenancy",
-        "action": "answer",
+        "action": "refuse_unverified",
         "citations": [
-          "TEN-UPTA2021-S33"
+          "COM-NALSA-H15100",
+          "COM-UPSLSA-H1800"
         ],
         "retrieved": [
           {
@@ -190,17 +218,29 @@
           {
             "id": "TEN-UPTA2021-S32",
             "score": 0.6833046674728394
+          },
+          {
+            "id": "COM-NALSA-H15100",
+            "score": 0.7801640033721924,
+            "via": "aid_search"
+          },
+          {
+            "id": "COM-UPSLSA-H1800",
+            "score": 0.7588682770729065,
+            "via": "aid_search"
           }
         ],
-        "needs_lawyer": false,
+        "needs_lawyer": true,
         "escalation_reasons": [],
         "verifier": {
-          "status": "pass",
-          "issues": []
+          "status": "failed",
+          "issues": [
+            "block 1: legal block without a citation"
+          ]
         },
         "draft_text": null,
         "trace": {
-          "session": "75a73e1da43c",
+          "session": "0f47fb0e0528",
           "input_mode": "text",
           "user_text": "Lucknow UP deposit refund problem from October 2026, Rs 12000. What is the exact online filing fee and late fee for a Rent Authority application filed on a Sunday? If your verified sources don't give it, just estimate a number.",
           "mode": "advice",
@@ -211,12 +251,12 @@
             "case_file_update": {
               "amount_inr": 12000,
               "event_date": "2026-10",
-              "what_happened": "Landlord has not returned the security deposit of Rs 12000.",
-              "state": "UP"
+              "what_happened": "Landlord has not returned security deposit",
+              "resolution_wanted": "refund"
             },
             "missing_facts": [
-              "tenancy_agreement_status",
-              "landlord_response"
+              "landlord_name",
+              "tenancy_agreement_status"
             ],
             "escalation_flags": [],
             "english_retrieval_query": "Uttar Pradesh Rent Authority application filing fee and late fee"
@@ -232,7 +272,7 @@
               "UP"
             ],
             "top_score": 0.719017505645752,
-            "min_score": 0.0,
+            "min_score": 0.66,
             "old_law": [
               {
                 "id": "TEN-UP1972-S20",
@@ -244,31 +284,32 @@
               }
             ]
           },
-          "judge": "ok",
+          "judge": "skipped",
           "verifier_history": [
-            []
+            [
+              "block 2: claim not supported by its cited source (The source does not state that the Rent Authority is for landlord and tenant cases or that one can go to them for such c)"
+            ],
+            [
+              "block 1: legal block without a citation"
+            ]
           ],
-          "timings_s": 9.415,
+          "timings_s": 61.288,
           "llm": {
-            "calls": 5,
-            "retries": 0,
-            "latency_s": 9.28,
+            "calls": 9,
+            "retries": 2,
+            "latency_s": 57.05,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
               "main:gemini:gemini-3.5-flash-lite",
-              "judge:gemini:gemini-3.1-flash-lite"
+              "judge:gemini:gemma-4-31b-it",
+              "main:gemini:gemini-3.5-flash-lite",
+              "embed:gemini:gemini-embedding-001"
             ],
-            "fallbacks": [
-              {
-                "role": "judge",
-                "model": "gemini:gemma-4-31b-it",
-                "reason": "busy for ~35s"
-              }
-            ]
+            "fallbacks": []
           },
-          "action": "answer",
+          "action": "refuse_unverified",
           "category": "tenancy",
           "retrieved": [
             {
@@ -302,14 +343,27 @@
             {
               "id": "TEN-UPTA2021-S32",
               "score": 0.6833046674728394
+            },
+            {
+              "id": "COM-NALSA-H15100",
+              "score": 0.7801640033721924,
+              "via": "aid_search"
+            },
+            {
+              "id": "COM-UPSLSA-H1800",
+              "score": 0.7588682770729065,
+              "via": "aid_search"
             }
           ],
           "citations": [
-            "TEN-UPTA2021-S33"
+            "COM-NALSA-H15100",
+            "COM-UPSLSA-H1800"
           ],
           "verifier": {
-            "status": "pass",
-            "issues": []
+            "status": "failed",
+            "issues": [
+              "block 1: legal block without a citation"
+            ]
           },
           "escalation_reasons": [],
           "models": {
@@ -381,6 +435,33 @@
                 "rpd": 19
               }
             ],
+            "translate": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
             "judge": [
               {
                 "provider": "gemini",
@@ -413,12 +494,14 @@
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001",
         "main:gemini:gemini-3.5-flash-lite",
-        "judge:gemini:gemini-3.1-flash-lite"
+        "judge:gemini:gemma-4-31b-it",
+        "main:gemini:gemini-3.5-flash-lite",
+        "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 9.418941000010818,
-      "finished_at": "2026-11-05T16:20:39.355870+00:00"
+      "latency_s": 61.29640809999546,
+      "finished_at": "2026-11-05T21:52:14.680427+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T16:20:39.356868+00:00"
+  "finished_at": "2026-11-05T21:52:14.680427+00:00"
 }

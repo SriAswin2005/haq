@@ -2,6 +2,7 @@
    translates the app's own buttons and labels. Languages without a set here fall back to English. */
 window.HAQ_I18N = {
   en: {
+    earlierCases: "Earlier in this chat", alsoAsked: "Also asked about (not covered)",
     brandSub: "Know where you stand", newCase: "Start a new case", replyLang: "Reply language",
     whatNeed: "What do you need?", modeAdvice: "Understand my options", modeDraft: "Draft a notice or complaint",
     readAloud: "Read answers aloud", speakVoice: "When I speak", speakAlways: "Always", speakNever: "Never",
@@ -56,6 +57,7 @@ window.HAQ_I18N = {
       purchase_date: "Bought on", resolution_wanted: "You want", proof: "Your proof", already_tried: "Already tried" },
   },
   hi: {
+    earlierCases: "इस चैट में पहले", alsoAsked: "यह भी पूछा (दायरे से बाहर)",
     brandSub: "अपना हक़ जानिए", newCase: "नया मामला शुरू करें", replyLang: "जवाब की भाषा",
     whatNeed: "आपको क्या चाहिए?", modeAdvice: "मेरे विकल्प समझाइए", modeDraft: "नोटिस या शिकायत तैयार करें",
     readAloud: "जवाब पढ़कर सुनाएँ", speakVoice: "जब मैं बोलूँ", speakAlways: "हमेशा", speakNever: "कभी नहीं",
@@ -110,6 +112,7 @@ window.HAQ_I18N = {
       purchase_date: "कब ख़रीदा", resolution_wanted: "आप क्या चाहते हैं", proof: "आपके सबूत", already_tried: "पहले क्या किया" },
   },
   te: {
+    earlierCases: "ఈ చాట్‌లో ముందు", alsoAsked: "ఇది కూడా అడిగారు (నా పరిధిలో లేదు)",
     brandSub: "మీ హక్కులు తెలుసుకోండి", newCase: "కొత్త కేసు ప్రారంభించండి", replyLang: "జవాబు భాష",
     whatNeed: "మీకు ఏం కావాలి?", modeAdvice: "నా మార్గాలు అర్థం చేసుకోవాలి", modeDraft: "నోటీసు లేదా ఫిర్యాదు తయారు చేయాలి",
     readAloud: "జవాబులు చదివి వినిపించాలి", speakVoice: "నేను మాట్లాడినప్పుడు", speakAlways: "ఎప్పుడూ", speakNever: "వద్దు",

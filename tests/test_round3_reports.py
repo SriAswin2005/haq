@@ -1,6 +1,7 @@
 """Guard the matched-cohort counts and trace-only performance accounting."""
 import unittest
 
+from tests.add_real_review import review_insertion_index
 from tests.checks import CHECKS, CheckResult
 from tests.round3_reports import percentile, performance, summarise
 
@@ -22,6 +23,11 @@ def fixture_item():
 
 
 class Round3ReportTests(unittest.TestCase):
+    def test_higher_priority_review_precedes_lower_priority_checks_when_its_heading_is_absent(self):
+        base = "# Bugs\n\n## Severity 2: automatic\nDetails\n## Infrastructure\nNone\n"
+        self.assertEqual(review_insertion_index(base, 1), base.index("\n## Severity 2:"))
+        self.assertEqual(review_insertion_index(base, 2), base.index("\n## Severity 2:"))
+
     def test_quantiles_are_linear_and_do_not_remove_outliers(self):
         self.assertEqual(percentile([1, 3], .5), 2)
         self.assertAlmostEqual(percentile([1, 3], .95), 2.9)

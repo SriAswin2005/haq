@@ -1,0 +1,2 @@
+# TestClient dependency in addition to the app's requirements.txt.
+httpx>=0.27

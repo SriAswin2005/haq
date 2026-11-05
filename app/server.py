@@ -165,12 +165,29 @@ def _validate(t: TurnIn) -> str:
     return text
 
 
+MAX_QUEUE = int(os.environ.get("HAQ_MAX_QUEUE", 4))   # turns waiting behind the one running; more → 503 "busy"
+_waiting = 0
+_waiting_lock = threading.Lock()
+
+
 def _run_turn(t: TurnIn, text: str) -> dict:
-    with _turn_lock:
+    global _waiting
+    with _waiting_lock:
+        if _turn_lock.locked() and _waiting >= MAX_QUEUE:
+            raise HTTPException(503, "Haq is busy answering other people right now. Please try again in a minute.")
+        _waiting += 1
+    try:
+        _turn_lock.acquire()
+    finally:
+        with _waiting_lock:
+            _waiting -= 1
+    try:
         s = _session(t)
         t0 = time.time()
         r = pipeline.handle_turn(s, text, input_mode=t.input_mode, lang_hint=t.lang or None)
         took = round(time.time() - t0, 2)
+    finally:
+        _turn_lock.release()
     by_id = {c["id"]: c for c in retrieval.get_index()["chunks"]}
     res = dataclasses.asdict(r)
     res["trace"] = json.loads(json.dumps(r.trace, default=str))
@@ -235,6 +252,8 @@ def turn_stream(t: TurnIn, request: Request):
             if _turn_lock.locked():
                 q.put(("stage", {"stage": "waiting"}))
             q.put(("result", _run_turn(t, text)))
+        except HTTPException as e:       # e.g. the busy queue: show its plain message, not a crash
+            q.put(("error", {"error": str(e.detail)}))
         except Exception as e:  # handle_turn already degrades honestly; this is a last resort
             q.put(("error", {"error": f"The legal engine stopped unexpectedly ({type(e).__name__})."}))
         finally:

@@ -119,6 +119,33 @@
         "rpd": 19
       }
     ],
+    "translate": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
     "judge": [
       {
         "provider": "gemini",
@@ -143,21 +170,26 @@
       }
     ]
   },
-  "started_at": "2026-11-05T16:28:34.369573+00:00",
+  "started_at": "2026-11-05T21:57:09.057730+00:00",
   "turns": [
     {
       "input": "Lucknow UP. Fictional seller CloudBasket took Rs 2400 for shoes on 10 October 2026, cancelled the order and still hasn't refunded me. I have the invoice, cancellation email and bank statement. Support keeps closing tickets. What can I do?",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T16:28:40.354379+00:00",
+      "started_at": "2026-11-05T21:57:15.066111+00:00",
       "result": {
-        "reply_text": "What I understood: amount inr: 2400; event date: 2026-10-10; what happened: Seller cancelled order and failed to refund payment; proof: ['invoice', 'cancellation email', 'bank statement']; already tried: ['customer support tickets']; counterparty name: CloudBasket; counterparty type: seller; months since event: 0.8; state: UP\n\nI do not have verified information in my sources to answer this part, and I will not guess.\n\nWhat you can do right now: collect your documents (agreement, receipts, bank or UPI records, messages, photos), and write down the dates and amounts in order.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority (NALSA)\nNALSA Helpline Number 15100\n15100 NALSA Helpline Toll-Free Number\nAddress: Jaisalmer House, 26, Man Singh Road, New Delhi-110011. Ph. No. 011-23382778, 23071450, 23382121. E-mail id: nalsa-dla@nic.in.\nCorrespondence Address: B Block, Ground Floor, Administrative Buildings Complex, Supreme Court of India, New Delhi-110001. (Source: National Legal Services Authority Helpline, helpline 15100)\n- Uttar Pradesh State Legal Services Authority\n4/7, Gomti Nagar, Extension, Lucknow 226010.\nHelp Line Toll Free No. 1800-419-0234\nTelephone No. 0522-2286395, 2286265\nFax No. 0522-2287972, 2286260\nE-Mail upslsa[at]nic[dot]in\nweb site https://uttarpradesh.nalsa.gov.in (Source: Uttar Pradesh State Legal Services Authority Contact and Helpline, helpline 1800)\n\nThis is legal information, not legal advice.",
+        "reply_text": "I understand that you purchased shoes from CloudBasket for Rs 2400, the order was cancelled, and you have not received your refund despite contacting their support team.\n\nE-commerce entities are required to process refunds for requests made according to the rules within a reasonable period of time. Sellers on a marketplace are prohibited from refusing to refund consideration paid if services or goods are deficient.\n\nYou may register your grievance through the National Consumer Helpline (NCH) at 1915 or via their website (consumerhelpline.gov.in). This is a pre-litigation stage for grievance redressal. If the issue remains unresolved, you may file a complaint with the District Commission, provided the value of the goods does not exceed the prescribed limits. A complaint must generally be filed within two years from the date the cause of action arose.\n\nKeep copies of your invoice, the cancellation email, and your bank statement as proof of your transaction and the failed refund. If you decide to approach the District Commission, you may need to provide these documents to support your claim.\n\nIf you are unable to resolve the matter through the National Consumer Helpline or if the company continues to ignore your requests, you may consider consulting a lawyer to understand the formal process for filing a consumer complaint.\n\nSource: Consumer Protection (E-Commerce) Rules, 2020, rule 4\nSource: Consumer Protection (E-Commerce) Rules, 2020, rule 6\nSource: National Consumer Helpline Grievance Redressal Procedure, procedure 1\nSource: National Consumer Helpline Guidelines, helpline 1915\nSource: Consumer Protection Act, 2019, section 34\nSource: Consumer Protection Act, 2019, section 69\nSource: Consumer Protection (Jurisdiction of the District Commission, the State Commission and the National Commission) Rules, 2021, rule 3\n\nWhat I could not verify:\n- where to complain if the District Commission process is not suitable for your specific situation\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "consumer",
-        "action": "refuse_unverified",
+        "action": "answer",
         "citations": [
-          "COM-NALSA-H15100",
-          "COM-UPSLSA-H1800"
+          "CONS-ECOM2020-R4",
+          "CONS-ECOM2020-R6",
+          "CONS-NCH-P1",
+          "COM-NCH-H1915",
+          "CONS-CPA2019-S34",
+          "CONS-CPA2019-S69",
+          "CONS-PECRULES2021-R3"
         ],
         "retrieved": [
           {
@@ -193,17 +225,15 @@
             "score": 0.7612271308898926
           }
         ],
-        "needs_lawyer": true,
+        "needs_lawyer": false,
         "escalation_reasons": [],
         "verifier": {
-          "status": "failed",
-          "issues": [
-            "block 1: claim not supported by its cited source (The claim states refunds are for requests made according to the entity's rules, but the source specifies requests made a)"
-          ]
+          "status": "fixed",
+          "issues": []
         },
         "draft_text": null,
         "trace": {
-          "session": "4097c0cf124f",
+          "session": "42d4bb29b0ae",
           "input_mode": "text",
           "user_text": "Lucknow UP. Fictional seller CloudBasket took Rs 2400 for shoes on 10 October 2026, cancelled the order and still hasn't refunded me. I have the invoice, cancellation email and bank statement. Support keeps closing tickets. What can I do?",
           "mode": "advice",
@@ -213,8 +243,10 @@
             "state_or_city": "UP",
             "case_file_update": {
               "amount_inr": 2400,
-              "event_date": "2026-10-10",
-              "what_happened": "Seller cancelled order and failed to refund payment",
+              "purchase_date": "2026-10-10",
+              "product_or_service": "shoes",
+              "counterparty_name": "CloudBasket",
+              "counterparty_type": "seller",
               "proof": [
                 "invoice",
                 "cancellation email",
@@ -223,8 +255,7 @@
               "already_tried": [
                 "customer support tickets"
               ],
-              "counterparty_name": "CloudBasket",
-              "counterparty_type": "seller"
+              "resolution_wanted": "refund"
             },
             "missing_facts": [],
             "escalation_flags": [],
@@ -241,42 +272,43 @@
               "UP"
             ],
             "top_score": 0.7063970565795898,
-            "min_score": 0.0,
+            "min_score": 0.66,
             "old_law": []
           },
           "judge": "ok",
           "verifier_history": [
             [
-              "block 1: claim not supported by its cited source (The source specifies refunds for defective, deficient, spurious, or falsely represented goods/services, not for failure )"
+              "block 1: number '48 hours' not found in cited source or user's facts"
             ],
-            [
-              "block 1: claim not supported by its cited source (The claim states refunds are for requests made according to the entity's rules, but the source specifies requests made a)"
-            ]
+            []
           ],
-          "timings_s": 164.146,
+          "timings_s": 69.381,
           "llm": {
-            "calls": 12,
-            "retries": 4,
-            "latency_s": 157.85,
+            "calls": 8,
+            "retries": 2,
+            "latency_s": 67.22,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
-              "main:gemini:gemini-3.5-flash-lite",
-              "judge:gemini:gemma-4-31b-it",
               "main:gemini:gemini-3.1-flash-lite",
-              "judge:gemini:gemma-4-31b-it",
-              "embed:gemini:gemini-embedding-001"
+              "main:gemini:gemini-3.1-flash-lite",
+              "judge:gemini:gemma-4-31b-it"
             ],
             "fallbacks": [
               {
                 "role": "main",
                 "model": "gemini:gemini-3.5-flash-lite",
                 "reason": "HTTP 503"
+              },
+              {
+                "role": "main",
+                "model": "gemini:gemini-3.5-flash-lite",
+                "reason": "busy for ~111s"
               }
             ]
           },
-          "action": "refuse_unverified",
+          "action": "answer",
           "category": "consumer",
           "retrieved": [
             {
@@ -313,14 +345,17 @@
             }
           ],
           "citations": [
-            "COM-NALSA-H15100",
-            "COM-UPSLSA-H1800"
+            "CONS-ECOM2020-R4",
+            "CONS-ECOM2020-R6",
+            "CONS-NCH-P1",
+            "COM-NCH-H1915",
+            "CONS-CPA2019-S34",
+            "CONS-CPA2019-S69",
+            "CONS-PECRULES2021-R3"
           ],
           "verifier": {
-            "status": "failed",
-            "issues": [
-              "block 1: claim not supported by its cited source (The claim states refunds are for requests made according to the entity's rules, but the source specifies requests made a)"
-            ]
+            "status": "fixed",
+            "issues": []
           },
           "escalation_reasons": [],
           "models": {
@@ -392,6 +427,33 @@
                 "rpd": 19
               }
             ],
+            "translate": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
             "judge": [
               {
                 "provider": "gemini",
@@ -423,16 +485,14 @@
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001",
-        "main:gemini:gemini-3.5-flash-lite",
-        "judge:gemini:gemma-4-31b-it",
         "main:gemini:gemini-3.1-flash-lite",
-        "judge:gemini:gemma-4-31b-it",
-        "embed:gemini:gemini-embedding-001"
+        "main:gemini:gemini-3.1-flash-lite",
+        "judge:gemini:gemma-4-31b-it"
       ],
-      "latency_s": 164.14955550001469,
-      "finished_at": "2026-11-05T16:31:24.504012+00:00"
+      "latency_s": 69.38400840002578,
+      "finished_at": "2026-11-05T21:58:24.450217+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T16:31:24.504012+00:00"
+  "finished_at": "2026-11-05T21:58:24.450217+00:00"
 }

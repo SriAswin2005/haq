@@ -118,6 +118,33 @@
         "rpd": 19
       }
     ],
+    "translate": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
     "judge": [
       {
         "provider": "gemini",
@@ -142,49 +169,48 @@
       }
     ]
   },
-  "started_at": "2026-11-05T16:31:24.508969+00:00",
+  "started_at": "2026-11-05T21:58:24.454591+00:00",
   "turns": [
     {
       "input": "जी मतलब मैं कानपुर यूपी से बोल रही हूं अक्टूबर 2026 में 3500 रुपये का मिक्सर खरीदा था चालू ही नहीं हो रहा बिल है वीडियो भी है दुकानदार बदल नहीं रहा नहीं रहा क्या करूं",
       "input_mode": "voice",
       "lang_hint": "hi-IN",
-      "started_at": "2026-11-05T16:31:30.495954+00:00",
+      "started_at": "2026-11-05T21:58:30.455519+00:00",
       "result": {
-        "reply_text": "मैंने यह समझा है कि आपने एक दुकान से एक मिक्सर खरीदा था जो चालू नहीं हो रहा है, और आपके पास इसका बिल और वीडियो दोनों है, लेकिन दुकानदार इसे बदलने से मना कर रहा है।\n\nउत्पाद में खराबी होने पर आप उत्पाद विक्रेता या निर्माता के खिलाफ उत्पाद दायित्व की कार्रवाई कर सकते हैं।\n\nजिला आयोग ऐसी शिकायतों की सुनवाई कर सकता है जहाँ भुगतान की गई राशि निर्धारित सीमा से अधिक न हो। जिला आयोग यह आदेश दे सकता है कि विक्रेता या निर्माता सामान में से खराबी को दूर करे, नए सामान से बदले, या चुकाई गई कीमत वापस करे।\n\nअपने पास मौजूद बिल और वीडियो को सुरक्षित संभाल कर रखें।\n\nकृपया बताएं कि उस दुकान का क्या नाम है?\n\nदुकानदार से आपकी आखिरी बार बातचीत कब हुई थी?\n\nस्रोत: Consumer Protection Act, 2019, section 82\nस्रोत: Consumer Protection Act, 2019, section 83\nस्रोत: Consumer Protection Act, 2019, section 34\nस्रोत: Consumer Protection Act, 2019, section 39\nस्रोत: Consumer Protection (Jurisdiction of the District Commission, the State Commission and the National Commission) Rules, 2021, rule 3\n\nजो मैं जाँच नहीं पाया:\n- where to complain\n\nयह कानूनी जानकारी है, कानूनी सलाह नहीं।",
+        "reply_text": "मैंने समझा है कि आपने अक्टूबर 2026 में 3500 रुपये का मिक्सर खरीदा था, जो अब चालू नहीं हो रहा है। आपके पास बिल और वीडियो का सबूत है, लेकिन दुकानदार इसे बदलने से मना कर रहा है।\n\nकानून के अनुसार, यदि कोई उत्पाद खराब है, तो आप उत्पाद विक्रेता (product seller) या निर्माता के खिलाफ उत्पाद दायित्व (product liability) की कार्रवाई कर सकते हैं। यदि विक्रेता ने खराब उत्पाद बेचा है, तो जिला आयोग (District Commission) उसे उत्पाद को बदलने या पैसे वापस करने का आदेश दे सकता है।\n\nआप अपनी शिकायत उस जिला आयोग (District Commission) में दर्ज कर सकते हैं जिसके अधिकार क्षेत्र में दुकानदार का व्यवसाय है या जहाँ आपने सामान खरीदा था।\n\nआप दुकानदार को एक अंतिम बार लिखित में सूचित करें कि उत्पाद खराब है और आप इसे बदलने की मांग कर रहे हैं। यदि वे फिर भी नहीं मानते हैं, तो आप जिला उपभोक्ता विवाद निवारण आयोग में शिकायत दर्ज करने पर विचार कर सकते हैं।\n\nस्रोत: Consumer Protection Act, 2019, section 83\nस्रोत: Consumer Protection Act, 2019, section 39\nस्रोत: Consumer Protection Act, 2019, section 34\nस्रोत: Consumer Protection (Jurisdiction of the District Commission, the State Commission and the National Commission) Rules, 2021, rule 3\n\nजो मैं जाँच नहीं पाया:\n- दुकानदार का नाम या ब्रांड का नाम\n- खरीद की सटीक तारीख\n\nयह कानूनी जानकारी है, कानूनी सलाह नहीं।",
         "reply_lang": "hi-IN",
         "category": "consumer",
         "action": "answer",
         "citations": [
-          "CONS-CPA2019-S82",
           "CONS-CPA2019-S83",
-          "CONS-CPA2019-S34",
           "CONS-CPA2019-S39",
+          "CONS-CPA2019-S34",
           "CONS-PECRULES2021-R3"
         ],
         "retrieved": [
           {
             "id": "CONS-CPA2019-S83",
-            "score": 0.7105280756950378
-          },
-          {
-            "id": "CONS-CPA2019-S82",
-            "score": 0.6953685879707336
+            "score": 0.6847220063209534
           },
           {
             "id": "CONS-CPA2019-S84",
-            "score": 0.6936346292495728
+            "score": 0.6773719191551208
+          },
+          {
+            "id": "CONS-CPA2019-S82",
+            "score": 0.6730544567108154
           },
           {
             "id": "CONS-CPA2019-S39",
-            "score": 0.6889522075653076
-          },
-          {
-            "id": "CONS-CPA2019-S85",
-            "score": 0.6806056499481201
+            "score": 0.6705138087272644
           },
           {
             "id": "CONS-ECOM2020-R6",
-            "score": 0.6713840961456299
+            "score": 0.6683815717697144
+          },
+          {
+            "id": "CONS-CPA2019-S86",
+            "score": 0.6664731502532959
           },
           {
             "id": "CONS-CPA2019-S34",
@@ -203,7 +229,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "6f06517992ea",
+          "session": "e00b6aeb78b8",
           "input_mode": "voice",
           "user_text": "जी मतलब मैं कानपुर यूपी से बोल रही हूं अक्टूबर 2026 में 3500 रुपये का मिक्सर खरीदा था चालू ही नहीं हो रहा बिल है वीडियो भी है दुकानदार बदल नहीं रहा नहीं रहा क्या करूं",
           "mode": "advice",
@@ -213,56 +239,60 @@
             "state_or_city": "UP",
             "case_file_update": {
               "amount_inr": 3500,
-              "event_date": "2026-10",
-              "what_happened": "Purchased a mixer that is not turning on; shopkeeper refuses to replace it.",
+              "purchase_date": "2026-10",
+              "product_or_service": "mixer",
+              "what_happened": "The mixer is not turning on and the shopkeeper is refusing to replace it.",
               "proof": [
                 "bill",
                 "video"
               ],
-              "counterparty_type": "shopkeeper"
+              "already_tried": [
+                "requested replacement from shopkeeper"
+              ],
+              "resolution_wanted": "replacement"
             },
             "missing_facts": [
-              "name of the shop",
-              "date of the last communication with the shopkeeper"
+              "exact date of purchase",
+              "name of the shop or brand"
             ],
             "escalation_flags": [],
-            "english_retrieval_query": "consumer rights for defective product replacement"
+            "english_retrieval_query": "consumer rights for defective product replacement refusal"
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
           "retrieval": {
-            "query": "consumer rights for defective product replacement",
+            "query": "consumer rights for defective product replacement refusal",
             "jurisdictions": [
               "central",
               "UP"
             ],
-            "top_score": 0.7105280756950378,
-            "min_score": 0.0,
+            "top_score": 0.6847220063209534,
+            "min_score": 0.66,
             "old_law": []
           },
           "judge": "ok",
           "verifier_history": [
             []
           ],
-          "timings_s": 32.72,
+          "timings_s": 44.3,
           "llm": {
-            "calls": 8,
-            "retries": 3,
-            "latency_s": 28.51,
+            "calls": 6,
+            "retries": 1,
+            "latency_s": 42.16,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
-              "main:gemini:gemini-3.5-flash-lite",
-              "judge:gemini:gemini-3.1-flash-lite"
+              "main:gemini:gemini-3.1-flash-lite",
+              "judge:gemini:gemma-4-31b-it"
             ],
             "fallbacks": [
               {
-                "role": "judge",
-                "model": "gemini:gemma-4-31b-it",
-                "reason": "HTTP 500"
+                "role": "main",
+                "model": "gemini:gemini-3.5-flash-lite",
+                "reason": "busy for ~54s"
               }
             ]
           },
@@ -271,27 +301,27 @@
           "retrieved": [
             {
               "id": "CONS-CPA2019-S83",
-              "score": 0.7105280756950378
-            },
-            {
-              "id": "CONS-CPA2019-S82",
-              "score": 0.6953685879707336
+              "score": 0.6847220063209534
             },
             {
               "id": "CONS-CPA2019-S84",
-              "score": 0.6936346292495728
+              "score": 0.6773719191551208
+            },
+            {
+              "id": "CONS-CPA2019-S82",
+              "score": 0.6730544567108154
             },
             {
               "id": "CONS-CPA2019-S39",
-              "score": 0.6889522075653076
-            },
-            {
-              "id": "CONS-CPA2019-S85",
-              "score": 0.6806056499481201
+              "score": 0.6705138087272644
             },
             {
               "id": "CONS-ECOM2020-R6",
-              "score": 0.6713840961456299
+              "score": 0.6683815717697144
+            },
+            {
+              "id": "CONS-CPA2019-S86",
+              "score": 0.6664731502532959
             },
             {
               "id": "CONS-CPA2019-S34",
@@ -303,10 +333,9 @@
             }
           ],
           "citations": [
-            "CONS-CPA2019-S82",
             "CONS-CPA2019-S83",
-            "CONS-CPA2019-S34",
             "CONS-CPA2019-S39",
+            "CONS-CPA2019-S34",
             "CONS-PECRULES2021-R3"
           ],
           "verifier": {
@@ -383,6 +412,33 @@
                 "rpd": 19
               }
             ],
+            "translate": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
             "judge": [
               {
                 "provider": "gemini",
@@ -414,13 +470,13 @@
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001",
-        "main:gemini:gemini-3.5-flash-lite",
-        "judge:gemini:gemini-3.1-flash-lite"
+        "main:gemini:gemini-3.1-flash-lite",
+        "judge:gemini:gemma-4-31b-it"
       ],
-      "latency_s": 32.7224189999979,
-      "finished_at": "2026-11-05T16:32:03.218463+00:00"
+      "latency_s": 44.303714200039394,
+      "finished_at": "2026-11-05T21:59:14.756298+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T16:32:03.218463+00:00"
+  "finished_at": "2026-11-05T21:59:14.756298+00:00"
 }

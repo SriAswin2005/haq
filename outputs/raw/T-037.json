@@ -1,0 +1,476 @@
+{
+  "schema_version": 1,
+  "case_id": "T-037",
+  "case": {
+    "id": "T-037",
+    "group": "I_draft_mode",
+    "tags": [
+      "round3",
+      "salary_demand_draft"
+    ],
+    "category_expected": "wages",
+    "language": "en-IN",
+    "input_mode": "text",
+    "mode": "draft",
+    "turns": [
+      "I am Mira Example, a sales assistant at fictional FableMart in Lucknow UP. I resigned after handover on 15 October 2026. Rs 14000 of salary is still unpaid. I have payslips, attendance and my resignation email. Please draft a polite salary demand notice. I have not supplied either address or the manager's name."
+    ],
+    "expected_action": "draft",
+    "expect_needs_lawyer": false,
+    "expected_topics": [
+      "salary demand notice",
+      "unpaid wages"
+    ],
+    "must_include_any": [
+      [
+        "salary",
+        "wages"
+      ],
+      [
+        "FableMart"
+      ],
+      [
+        "check every detail"
+      ]
+    ],
+    "must_not_include": [
+      "jail is guaranteed"
+    ],
+    "expected_chunk_ids": [
+      "WAGE-COW2019-S17",
+      "WAGE-COW2019-S43",
+      "WAGE-COW2019-S45"
+    ],
+    "notes": "P1 salary draft. No invented addressee, address, compensation or legal deadline.",
+    "expected_law_verified": false,
+    "calibration_label": "exclude",
+    "jurisdictions_expected": [
+      "central",
+      "UP"
+    ],
+    "retrieval_expectation_kind": "topic",
+    "missing_draft_fields": [
+      "employer_address",
+      "employee_address",
+      "manager_name"
+    ]
+  },
+  "repeat": 1,
+  "mock": false,
+  "backend": "app.pipeline",
+  "stage": "real",
+  "configured_models": {
+    "router": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "main": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash",
+        "rpm": 5,
+        "tpm": 250000,
+        "rpd": 19
+      }
+    ],
+    "translate": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "judge": [
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      }
+    ]
+  },
+  "started_at": "2026-11-05T22:20:59.355550+00:00",
+  "turns": [
+    {
+      "input": "I am Mira Example, a sales assistant at fictional FableMart in Lucknow UP. I resigned after handover on 15 October 2026. Rs 14000 of salary is still unpaid. I have payslips, attendance and my resignation email. Please draft a polite salary demand notice. I have not supplied either address or the manager's name.",
+      "input_mode": "text",
+      "lang_hint": "en-IN",
+      "started_at": "2026-11-05T22:21:05.339956+00:00",
+      "result": {
+        "reply_text": "Here is a draft demand notice for your unpaid wages. Anything I do not know is left as a [● placeholder] for you to fill in.\n\nLEGAL NOTICE: DEMAND FOR PAYMENT OF UNPAID WAGES AND DUES\n\nDate: [● date of sending]\nBy: [● registered post / speed post / email, as you choose]\n\nTo,\nFableMart\n[● employer's address]\nAttn: [● HR / manager / proprietor name, if known]\n\nFrom,\nMira Example\n[● your address and phone number]\n\nSubject: Demand for payment of unpaid wages of Rs. 14,000 for October 2026\n\nDear Sir/Madam,\n\n1. I worked with you as sales assistant from [● date you joined] to 2026-10-15. [● proof of employment, e.g. offer letter, ID card, salary slips, bank credits].\n\n2. My agreed wage was Rs. [● monthly wage] per month, paid by [● mode of payment, e.g. bank transfer / UPI / cash].\n\n3. The following amount has not been paid: Rs. 14,000 for October 2026. [● other dues, if any, e.g. leave encashment or reimbursements; or delete this line].\n\n4. [● what happened when you asked, with dates, e.g. emails or messages already sent].\n\nThis demand is made with reference to: Code on Wages, 2019, section 17; Uttar Pradesh Dookan Aur Vanijya Adhishthan Adhiniyam, 1962, section 13. [● Have a lawyer confirm that these provisions apply to your case.]\n\n5. I therefore request you to pay Rs. 14,000 within [● number of days you allow] days of receiving this notice, to [● your bank account details / UPI ID].\n\n6. If the amount is not paid within this time, I will be free to take further steps available to me under the law, without further notice.\n\nYours faithfully,\nMira Example\n[● signature]\n\nEnclosures (copies): [● offer letter / salary slips / bank statements / attendance record / messages]\n\n\nCheck every detail before sending. For high-value or complex matters, have a lawyer review it.",
+        "reply_lang": "en-IN",
+        "category": "wages",
+        "action": "draft",
+        "citations": [
+          "WAGE-COW2019-S17",
+          "WAGE-UPSHOP1962-S13"
+        ],
+        "retrieved": [
+          {
+            "id": "WAGE-COW2019-S17",
+            "score": 0.7542667984962463
+          },
+          {
+            "id": "WAGE-UPSHOP1962-S13",
+            "score": 0.7377779483795166
+          },
+          {
+            "id": "WAGE-COW2019-S43",
+            "score": 0.7237148284912109
+          },
+          {
+            "id": "WAGE-COW2019-S45",
+            "score": 0.7046326398849487
+          }
+        ],
+        "needs_lawyer": false,
+        "escalation_reasons": [],
+        "verifier": {
+          "status": "pass",
+          "issues": []
+        },
+        "draft_text": "LEGAL NOTICE: DEMAND FOR PAYMENT OF UNPAID WAGES AND DUES\n\nDate: [● date of sending]\nBy: [● registered post / speed post / email, as you choose]\n\nTo,\nFableMart\n[● employer's address]\nAttn: [● HR / manager / proprietor name, if known]\n\nFrom,\nMira Example\n[● your address and phone number]\n\nSubject: Demand for payment of unpaid wages of Rs. 14,000 for October 2026\n\nDear Sir/Madam,\n\n1. I worked with you as sales assistant from [● date you joined] to 2026-10-15. [● proof of employment, e.g. offer letter, ID card, salary slips, bank credits].\n\n2. My agreed wage was Rs. [● monthly wage] per month, paid by [● mode of payment, e.g. bank transfer / UPI / cash].\n\n3. The following amount has not been paid: Rs. 14,000 for October 2026. [● other dues, if any, e.g. leave encashment or reimbursements; or delete this line].\n\n4. [● what happened when you asked, with dates, e.g. emails or messages already sent].\n\nThis demand is made with reference to: Code on Wages, 2019, section 17; Uttar Pradesh Dookan Aur Vanijya Adhishthan Adhiniyam, 1962, section 13. [● Have a lawyer confirm that these provisions apply to your case.]\n\n5. I therefore request you to pay Rs. 14,000 within [● number of days you allow] days of receiving this notice, to [● your bank account details / UPI ID].\n\n6. If the amount is not paid within this time, I will be free to take further steps available to me under the law, without further notice.\n\nYours faithfully,\nMira Example\n[● signature]\n\nEnclosures (copies): [● offer letter / salary slips / bank statements / attendance record / messages]\n\n\nCheck every detail before sending. For high-value or complex matters, have a lawyer review it.",
+        "trace": {
+          "session": "a5e021fe847a",
+          "input_mode": "text",
+          "user_text": "I am Mira Example, a sales assistant at fictional FableMart in Lucknow UP. I resigned after handover on 15 October 2026. Rs 14000 of salary is still unpaid. I have payslips, attendance and my resignation email. Please draft a polite salary demand notice. I have not supplied either address or the manager's name.",
+          "mode": "draft",
+          "router": {
+            "category": "wages",
+            "language": "en-IN",
+            "state_or_city": "UP",
+            "case_file_update": {
+              "person_name": "Mira Example",
+              "designation": "sales assistant",
+              "counterparty_name": "FableMart",
+              "counterparty_type": "employer",
+              "last_working_date": "2026-10-15",
+              "unpaid_period": "October 2026",
+              "amount_inr": 14000,
+              "proof": [
+                "payslips",
+                "attendance records",
+                "resignation email"
+              ]
+            },
+            "missing_facts": [
+              "employer address",
+              "manager name"
+            ],
+            "escalation_flags": [],
+            "english_retrieval_query": "legal notice for unpaid salary after resignation"
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "retrieval": {
+            "query": "legal notice for unpaid salary after resignation",
+            "jurisdictions": [
+              "central",
+              "UP"
+            ],
+            "top_score": 0.6639529466629028,
+            "min_score": 0.66,
+            "old_law": [
+              {
+                "id": "WAGE-PWA1936-S15",
+                "score": 0.6757045984268188
+              },
+              {
+                "id": "WAGE-PWA1936-S5",
+                "score": 0.6713614463806152
+              }
+            ]
+          },
+          "draft": {
+            "kind": "wages",
+            "file_name": "salary_demand_notice.txt",
+            "missing": [
+              "[● HR / manager / proprietor name, if known]",
+              "[● Have a lawyer confirm that these provisions apply to your case.]",
+              "[● date of sending]",
+              "[● date you joined]",
+              "[● employer's address]",
+              "[● mode of payment, e.g. bank transfer / UPI / cash]",
+              "[● monthly wage]",
+              "[● number of days you allow]",
+              "[● offer letter / salary slips / bank statements / attendance record / messages]",
+              "[● other dues, if any, e.g. leave encashment or reimbursements; or delete this line]",
+              "[● proof of employment, e.g. offer letter, ID card, salary slips, bank credits]",
+              "[● registered post / speed post / email, as you choose]",
+              "[● signature]",
+              "[● what happened when you asked, with dates, e.g. emails or messages already sent]",
+              "[● your address and phone number]",
+              "[● your bank account details / UPI ID]"
+            ],
+            "scan_issues": []
+          },
+          "timings_s": 25.022,
+          "llm": {
+            "calls": 4,
+            "retries": 0,
+            "latency_s": 24.98,
+            "models": [
+              "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "embed:gemini:gemini-embedding-001",
+              "embed:gemini:gemini-embedding-001"
+            ],
+            "fallbacks": []
+          },
+          "action": "draft",
+          "category": "wages",
+          "retrieved": [
+            {
+              "id": "WAGE-COW2019-S17",
+              "score": 0.7542667984962463
+            },
+            {
+              "id": "WAGE-UPSHOP1962-S13",
+              "score": 0.7377779483795166
+            },
+            {
+              "id": "WAGE-COW2019-S43",
+              "score": 0.7237148284912109
+            },
+            {
+              "id": "WAGE-COW2019-S45",
+              "score": 0.7046326398849487
+            }
+          ],
+          "citations": [
+            "WAGE-COW2019-S17",
+            "WAGE-UPSHOP1962-S13"
+          ],
+          "verifier": {
+            "status": "pass",
+            "issues": []
+          },
+          "escalation_reasons": [],
+          "models": {
+            "router": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "main": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash",
+                "rpm": 5,
+                "tpm": 250000,
+                "rpd": 19
+              }
+            ],
+            "translate": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "judge": [
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              }
+            ]
+          },
+          "mock": false
+        }
+      },
+      "model_names_used": [
+        "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001"
+      ],
+      "latency_s": 25.02386050001951,
+      "finished_at": "2026-11-05T22:21:30.364086+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-05T22:21:30.364086+00:00"
+}

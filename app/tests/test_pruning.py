@@ -33,7 +33,8 @@ class Pruning(unittest.TestCase):
             bad = [i for i, b in enumerate(answer["blocks"]) if b["text"].startswith("BAD")]
             return [f"block {i}: claim not supported by its cited source (test)" for i in bad], "ok"
         r = self._run(judge)
-        self.assertEqual(r.verifier["status"], "pruned")
+        self.assertEqual(r.verifier["status"], "fixed")
+        self.assertTrue(r.verifier.get("pruned"))
         self.assertIn("GOOD CLAIM", r.reply_text)
         self.assertNotIn("BAD CLAIM", r.reply_text)
         self.assertIn("could not match it exactly", r.reply_text)

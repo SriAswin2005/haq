@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 from collections import Counter, defaultdict
+import csv
 import json
 import math
 from pathlib import Path
@@ -13,7 +14,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from tests.checks import get
-from tests.reporting import analyse, call_count
+from tests.reporting import analyse, call_count, write_reports
 from tests.run_eval import digest, latest_record, raw_dir, utc_now, write_json
 
 BEFORE = ROOT / "outputs/runs/real-20261105T161021.563148Z"
@@ -80,6 +81,7 @@ def summarise(items):
         "Hindi script match": metric(sum(c["check_language"].status == "pass" for _, _, _, c in hindi), len(hindi), "rate"),
         "Retrieval hit, agent-mapped IDs": metric(sum(bool(set(i["case"]["expected_chunk_ids"]) & {r.get("id") for r in result.get("retrieved", [])}) for i, result in hits), len(hits), "rate"),
         "Final refuse_unverified cases": metric(sum(r.get("action") == "refuse_unverified" for _, r in final)),
+        "Expected-answer cases ending refuse_unverified": metric(sum(i["case"].get("expected_action") == "answer" and r.get("action") == "refuse_unverified" for i, r in final)),
         "refuse_unverified turns": metric(sum(t["result"].get("action") == "refuse_unverified" for _, _, t, _ in observations)),
         "Cases with trace.pruned (any turn)": metric(sum(has_pruned(i) for i in complete)),
         "Mean observed turn time": metric(statistics.mean(t["latency_s"] for _, _, t, _ in observations) if observations else None, kind="seconds"),
@@ -118,7 +120,7 @@ def performance(items):
     observations = turns(items)
     role_models, reasons = Counter(), Counter()
     fallback_turns = served_change_turns = translation_without_role = 0
-    times, calls, table = [], [], []
+    times, core_times, provider_times, calls, table = [], [], [], [], []
     translation_attempts = 0
     for item, number, turn, _ in observations:
         result = turn["result"]
@@ -144,6 +146,10 @@ def performance(items):
         elapsed = turn.get("latency_s")
         if isinstance(elapsed, (int, float)):
             times.append(elapsed)
+        if isinstance(trace.get("timings_s"), (int, float)):
+            core_times.append(trace["timings_s"])
+        if isinstance(stats.get("latency_s"), (int, float)):
+            provider_times.append(stats["latency_s"])
         count = call_count(result)
         if count is not None:
             calls.append(count)
@@ -152,6 +158,8 @@ def performance(items):
                       "trace_calls": count, "fallback_or_switch": switched,
                       "models": stats.get("models", []), "translation_status": translation.get("status")})
     return {"turns": len(observations), "p50_s": percentile(times, .5), "p95_s": percentile(times, .95),
+            "p50_core_trace_s": percentile(core_times, .5), "p95_core_trace_s": percentile(core_times, .95),
+            "p50_provider_trace_s": percentile(provider_times, .5), "p95_provider_trace_s": percentile(provider_times, .95),
             "mean_s": statistics.mean(times) if times else None, "max_s": max(times) if times else None,
             "mean_trace_calls": statistics.mean(calls) if calls else None,
             "trace_calls_observed_turns": len(calls), "fallback_or_switch_turns": fallback_turns,
@@ -176,14 +184,28 @@ def generate(before_dir, after_dir):
             raise ValueError(f"Expectation/input changed for {cid}; do not present an apples-to-apples delta")
     if sum(i["status"] == "pass" for i in before.values()) != 12:
         raise ValueError("Baseline no longer reproduces the archived 12/30; inspect checker drift")
+    original_rows = {r["case_id"]: r for r in csv.DictReader((before_dir / "results.csv").open(encoding="utf-8"))}
+    if any(item["status"] != original_rows[cid]["status"] for cid, item in before.items()):
+        raise ValueError("Baseline per-case outcomes changed under current checks")
+    if digest(ROOT / "tests/checks.py") != am["fingerprints"]["checks"]:
+        raise ValueError("Current checker differs from the frozen after run")
     protected = json.loads((ROOT / "tests/round3_before_manifest.json").read_text(encoding="utf-8"))
     if any(digest(before_dir / "raw" / name) != h for name, h in protected["raw_sha256"].items()):
         raise ValueError("Before archive raw hashes changed")
+    # Rebuild derived files only. Raw captures and the before reports stay intact.
+    # The reporter now counts selected voice transcripts rather than assuming five.
+    write_reports(after_dir, am, [
+        {key: item[key] for key in ("case", "repeat", "raw", "path")} for item in after.values()
+    ], json.loads((after_dir / "corpus_snapshot.json").read_text(encoding="utf-8")))
+    shutil.copyfile(after_dir / "BUGS.md", after_dir / "BUGS_checks_only.md")
+    for name in ("summary.md", "results.csv", "calibration.md"):
+        shutil.copyfile(after_dir / name, ROOT / "outputs" / name)
     matching = [after[cid] for cid in before_ids]
     added = [item for cid, item in after.items() if cid not in before]
     old_metrics, new_metrics, all_metrics = summarise(list(before.values())), summarise(matching), summarise(list(after.values()))
     lines = ["# Before / after — round three", "", f"Before: `{before_dir.name}` (21:40 IST, 12/30). After: `{after_dir.name}`.",
              "Matched-cohort deltas use T-001..T-030 with identical case dictionaries and the same current checks. The ten additions have no before score.",
+             f"Before retrieval.min_score={bm.get('retrieval_min_score')}; after={am.get('retrieval_min_score')}. Before corpus chunks={len(json.loads((before_dir/'corpus_snapshot.json').read_text(encoding='utf-8')))}; after={len(json.loads((after_dir/'corpus_snapshot.json').read_text(encoding='utf-8')))}.",
              "A positive delta is a numeric increase, not always an improvement. pp = percentage points. Inputs/models/config/corpus may differ across revisions; this is an observed product comparison, not a causal experiment.",
              "", "| Metric | Before 30 | After same 30 | Delta | After all 40 |", "|---|---:|---:|---:|---:|"]
     lines += [f"| {label} | {show(value)} | {show(new_metrics[label])} | {delta(value,new_metrics[label])} | {show(all_metrics[label])} |" for label, value in old_metrics.items()]
@@ -209,6 +231,8 @@ def generate(before_dir, after_dir):
               "p50/p95 use linear interpolation at (n-1)*p over observed per-turn elapsed time. No outlier is removed. The six-second inter-turn gap is excluded.",
               "", "| Measure | Observed |", "|---|---:|",
               f"| p50 turn time | {perf['p50_s']:.3f} s |", f"| p95 turn time | {perf['p95_s']:.3f} s |",
+              f"| Core trace p50 / p95 | {perf['p50_core_trace_s']:.3f} / {perf['p95_core_trace_s']:.3f} s |",
+              f"| Provider trace p50 / p95 | {perf['p50_provider_trace_s']:.3f} / {perf['p95_provider_trace_s']:.3f} s |",
               f"| Mean / max turn time | {perf['mean_s']:.3f} / {perf['max_s']:.3f} s |",
               f"| Mean trace-reported calls per turn | {perf['mean_trace_calls']:.2f} ({perf['trace_calls_observed_turns']}/{perf['turns']} observed) |",
               f"| Turns with a fallback/model-switch event | {rate(perf['fallback_or_switch_turns'])} |",
@@ -216,6 +240,8 @@ def generate(before_dir, after_dir):
               "", "A switch event means trace.llm.fallbacks is non-empty, including candidates skipped because of provider failures or pacing. Served-model entries below come from trace.llm.models, not configured fallback chains.",
               "", "| Role | Actual model entry | Recorded service entries |", "|---|---|---:|"]
     plines += [f"| {r['role']} | {r['model']} | {r['entries']} |" for r in perf["served_role_models"]]
+    if perf["translated_turns_without_served_translate_model"] and not any(r["role"] == "translate" for r in perf["served_role_models"]):
+        plines += ["| translate | unavailable in trace; not inferred from config | n/a |"]
     plines += ["", f"Successful translated turns without an actual translate-model entry: {perf['translated_turns_without_served_translate_model']}. Translation attempts reported separately: {perf['translation_attempts_reported']}.",
                "If translation runs after the app snapshots its call statistics, trace-reported calls undercount that work and the actual translator cannot be inferred from config. These fields are observations, not a fabricated complete call total.",
                "", "## Per-turn observations", "", "| Case / turn | Elapsed s | Core trace s | Provider trace s | Trace calls | Switch | Translation |", "|---|---:|---:|---:|---:|---|---|"]
@@ -227,6 +253,7 @@ def generate(before_dir, after_dir):
         shutil.copyfile(after_dir / name, ROOT / "outputs" / name)
     payload = {"generated_at": utc_now(), "before_run": str(before_dir), "after_run": str(after_dir),
                "original_expectations_identical": True, "before_raw_hashes_preserved": True,
+               "analysis_sha256": {name: digest(ROOT / "tests" / name) for name in ("checks.py", "reporting.py", "round3_reports.py")},
                "before_30": old_metrics, "after_matched_30": new_metrics, "after_all": all_metrics,
                "performance": perf}
     write_json(after_dir / "round3_metrics.json", payload)

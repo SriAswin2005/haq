@@ -12,6 +12,7 @@ import collections
 import contextlib
 import copy
 from datetime import datetime, timezone
+import hashlib
 import importlib
 import json
 import os
@@ -26,6 +27,13 @@ from unittest.mock import patch
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 REAL = False
+
+
+def source_fingerprints():
+    paths = [ROOT / "config.yaml", *sorted((ROOT / "data/corpus").glob("*.jsonl"))]
+    paths += [p for p in (ROOT / "app").rglob("*") if p.is_file() and "__pycache__" not in p.parts
+              and p.suffix in {".py", ".md", ".json", ".txt"}]
+    return {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in paths}
 
 
 def parse_sse(response):
@@ -238,16 +246,23 @@ def main():
     REAL = args.real
     if REAL and not os.environ.get("GEMINI_API_KEY"):
         parser.error("--real requires GEMINI_API_KEY already set in the process environment")
+    started_at = datetime.now(timezone.utc).isoformat()
+    inputs_before = source_fingerprints()
     suite = unittest.defaultTestLoader.loadTestsFromTestCase(ServerAPITests)
     result = unittest.TextTestRunner(verbosity=2, resultclass=RecordingResult).run(suite)
+    inputs_after = source_fingerprints()
+    changed = sorted(k for k in inputs_before.keys() | inputs_after.keys() if inputs_before.get(k) != inputs_after.get(k))
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S.%fZ")
     directory = ROOT / "outputs/runs" / f"api-{'real' if REAL else 'mock'}-{stamp}"
     directory.mkdir(parents=True, exist_ok=False)
     payload = {"mock": not REAL, "backend": "FastAPI TestClient", "tests_run": result.testsRun,
                "successful": result.wasSuccessful(), "results": result.rows,
+               "started_at": started_at, "input_sha256": inputs_before,
+               "source_inputs_stable": not changed, "source_inputs_changed_during_tests": changed,
                "scope": "SSE payload order, rate-limit gate, feedback question/answer consent, browser-state restoration; not network delivery timing"}
     (directory / "results.json").write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     lines = ["# Server API test results", "", f"Mode: {'real opt-in' if REAL else 'mock/offline'}; {result.testsRun} tests; successful={result.wasSuccessful()}.",
+             f"Source input hashes stable during tests: {not changed}. Run evidence: {directory}.",
              "TestClient checks ordered SSE content, not proxy buffering or time-to-first-event over a network.",
              "Feedback privacy assertions cover question/answer text; user-entered feedback reasons remain metadata.", ""]
     lines += [f"- {r['test']}: {r['status']} ({r['seconds']:.3f} s)" for r in result.rows]

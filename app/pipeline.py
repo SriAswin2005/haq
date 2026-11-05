@@ -124,9 +124,14 @@ def _prune_unverified(answer: dict, issues: list[str], chunks: list[dict], cf: d
                        "recheck": re_issues, "judge": vinfo.get("judge")}
     if re_issues:
         return answer, issues, "failed"
-    return pruned, [], "pruned"
+    return pruned, [], "fixed"
 
 
+IN_SCOPE = {"consumer", "wages", "tenancy"}
+SESSION_KEYS = ("person_name", "state", "city", "minor_stated", "previous_cases", "side_topics")
+CHUNK_ID_BRACKETS = re.compile(r"\s*[\[(]\s*(?:[A-Z]{2,6}-[A-Z0-9]+-[A-Za-z0-9-]+\s*[,;]?\s*)+[\])]")
+DANGER = re.compile(r"arrest|\bfir\b|bail|summons|court_notice|notice_received|violen|threat|assault|harass|lock|"
+                    r"evict|minor|child|custody|domestic|jail|criminal_case|police_case|beat", re.I)
 META_Q = re.compile(r"^\s*(the\s+)?user\s+(is\s+)?(ask|asks|asking|want|wants|seeking|requests|requesting|enquir|inquir)", re.I)
 CONFLICT_KEYS = {"amount_inr", "monthly_wage_inr", "event_date", "vacated_date", "tenancy_start_date",
                  "deposit_paid_date", "job_start_date", "last_working_date", "purchase_date", "order_id"}
@@ -169,8 +174,29 @@ def _reason_text(reasons: list[str], m: dict) -> str:
     return "; ".join(out)
 
 
+def _summary_fits(summary: str, lang: str, translated: bool) -> bool:
+    """The one-line summary is shown as 'What I understood', so it must be in the reply's script."""
+    if translated:                      # the whole reply is translated at the end anyway
+        return True
+    dev = sum(1 for c in summary if "\u0900" <= c <= "\u097f")
+    lat = sum(1 for c in summary if c.isascii() and c.isalpha())
+    letters = sum(1 for c in summary if c.isalpha())
+    if lang.lower().startswith("hi"):
+        return dev >= 0.6 * max(1, dev + lat)
+    return lat >= 0.8 * max(1, letters)
+
+
 def _facts_line(case_file: dict, m: dict) -> str:
-    keys = [k for k in case_file if case_file[k] not in (None, "", [], {}) and k not in ("minor_stated", "category")]
+    if case_file.get("summary"):
+        return str(case_file["summary"])
+    hidden = ("minor_stated", "category", "previous_cases", "conflicts", "months_since_event", "summary", "side_topics")
+    keys = [k for k in case_file if case_file[k] not in (None, "", [], {}) and k not in hidden]
+    if m is _MSG["hi"]:   # no English sentences inside a Hindi reply: keep numbers, dates and names only
+        def latin_text(v):
+            v = " ".join(map(str, v)) if isinstance(v, list) else str(v)
+            words = re.findall(r"[A-Za-z]{3,}", v)
+            return len(words) >= 3
+        keys = [k for k in keys if not latin_text(case_file[k])]
     if not keys:
         return m["no_facts"]
     return "; ".join(f"{k.replace('_', ' ')}: {case_file[k]}" for k in keys)
@@ -183,11 +209,14 @@ _last_aid: dict = {}  # chunk id -> aid-search score, so citations can be listed
 def _helpline_numbers(chunk: dict) -> list[str]:
     """Phone numbers copied verbatim from a helpline chunk (years like 1987 are skipped
     unless the chunk itself is that number, e.g. NCH 1915)."""
-    out = []
-    for n in _PHONE.findall(chunk.get("text", "")):
-        n = n.strip()
+    out, text = [], chunk.get("text", "")
+    for mm in _PHONE.finditer(text):
+        n = mm.group(1).strip()
         if re.fullmatch(r"(19|20)\d{2}", n) and n != str(chunk.get("unit_number")):
-            continue
+            # 1915 or 1930 are real helplines but also look like years: keep only when the text calls it one
+            near = text[max(0, mm.start() - 40):mm.end() + 25]
+            if not re.search(r"helpline|help line|call|dial|toll|हेल्पलाइन|कॉल|डायल", near, re.I):
+                continue
         if n not in out:
             out.append(n)
     return out[:3]
@@ -216,19 +245,56 @@ def _aid_lines(lang: str, state: str | None) -> tuple[str, list[str], list[dict]
     return "\n".join(lines), [h["id"] for h in hits], [{"id": h["id"], "score": h["score"]} for h in res["hits"]]
 
 
+def _referral_lines(query: str, state: str | None, m: dict) -> tuple[str, list[str], list[dict]]:
+    """For topics I don't cover: an official portal or helpline from the corpus that matches the question."""
+    try:
+        res = retrieval.search(query, ["common"], ["central"] + ([state] if state else []), 6)
+    except Exception:
+        return "", [], []
+    # Precision over recall: a wrong referral misleads, a missing one only falls back to legal aid. So only
+    # verified official directory/procedure/helpline chunks, above a stricter bar than the answer gate.
+    bar = float(load_config()["retrieval"].get("referral_min_score", 0.70))
+    if llm.is_mock():
+        bar = float(load_config()["retrieval"].get("mock_min_score", 0.0))
+    hits = [h for h in res["hits"] if h["chunk"].get("doc_type") in ("portal_procedure", "govt_guidance", "helpline")
+            and h["chunk"].get("status") == "in_force" and h["chunk"].get("source_type", "official") == "official"
+            and h["score"] >= bar
+            and not re.search(r"legal services authority|NALSA", h["chunk"]["doc_title"], re.I)][:2]
+    if not hits:
+        return "", [], []
+    lines = [m["referral_intro"]]
+    for h in hits:
+        c = h["chunk"]
+        nums = _helpline_numbers(c)
+        what = f" ({c['heading']})" if c.get("heading") and c["heading"] not in c["doc_title"] else ""
+        lines.append(f"- {c['doc_title']}{what}{': ' + ' / '.join(nums) if nums else ''}"
+                     f" ({m['source_label']}: {c['source_url']})")
+    return "\n".join(lines), [h["id"] for h in hits], [{"id": h["id"], "score": h["score"], "via": "referral"} for h in hits]
+
+
 def safe_response(lang: str, case_file: dict, state: str | None, reasons: list[str], escalate: bool,
-                  error: bool = False) -> tuple[str, list[str], list[dict]]:
-    """SAFE RESPONSE (Section 10): understood / no verified info / what to do now / verified aid pointer."""
+                  error: bool = False, danger: bool = True, referral_query: str | None = None
+                  ) -> tuple[str, list[str], list[dict]]:
+    """SAFE RESPONSE (Section 10): understood / no verified info / what to do now / verified aid pointer.
+    escalate + danger: needs a real lawyer now. escalate without danger: a topic I don't cover yet."""
     m = _m(lang)
     aid, cites, ret = _aid_lines(lang, state)
     parts = [f"{m['understood']} {_facts_line(case_file, m)}"]
     if error:
         parts.append(m["service_error"])
-    elif escalate:
+    elif escalate and danger:
         parts.append(m["escalate_intro"])
         rt = _reason_text(reasons, m)
         if rt:
             parts.append(m["escalate_reason"] + rt)
+    elif escalate:
+        parts.append(m["oos_intro"])
+        if referral_query:
+            ref, rc, rr = _referral_lines(referral_query, state, m)
+            if ref:
+                parts.append(ref)
+                cites = rc + cites
+                ret = rr + ret
     else:
         parts.append(m["no_verified"])
     info_only = "out_of_scope_topic" in reasons and not any(k in case_file for k in ("amount_inr", "counterparty_name"))
@@ -386,7 +452,29 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
         lang = "en-IN"
     m = _m(lang)
     cf = session.case_file
+    prev_cat, new_cat = cf.get("category"), rj.get("category")
+    if prev_cat and new_cat in IN_SCOPE and (new_cat != prev_cat or rj.get("new_topic")):
+        # a different problem: put the current case aside; if this topic was discussed earlier in the chat,
+        # bring that case back instead of starting from nothing (keep who/where + safety flags)
+        keep = {k: cf[k] for k in SESSION_KEYS if k in cf}
+        prevs = list(keep.pop("previous_cases", []) or [])
+        old = {k: v for k, v in cf.items() if k not in SESSION_KEYS}
+        restored = None
+        if new_cat != prev_cat:
+            for i in range(len(prevs) - 1, -1, -1):
+                if prevs[i].get("category") == new_cat:
+                    restored = prevs.pop(i)
+                    break
+        keep["previous_cases"] = (prevs + [old])[-5:]
+        trace["topic_switch"] = {"from": prev_cat, "to": new_cat, "restored": bool(restored)}
+        cf.clear()
+        cf.update(keep)
+        if restored:
+            cf.update(restored)
+    out_of_scope_turn = new_cat == "out_of_scope"
     for k, v in (rj.get("case_file_update") or {}).items():
+        if out_of_scope_turn:      # a question outside my topics never changes the active case
+            break
         if k == "months_since_event":  # never trust LLM date arithmetic; recomputed in code below
             continue
         if k == "what_happened" and isinstance(v, str) and META_Q.search(v):
@@ -402,8 +490,20 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
                 trace.setdefault("conflicts", []).append({"field": k, "earlier": old, "now": v})
             cf[k] = v
     cf.pop("months_since_event", None)
+    summ = (rj.get("summary") or "").strip()
+    turn_summary = summ if summ and _summary_fits(summ, lang, bool(trace.get("translate_to"))) else ""
+    if summ and not turn_summary:
+        trace["summary_rejected"] = summ
+    if out_of_scope_turn:
+        side = turn_summary or (rj.get("case_file_update") or {}).get("what_happened") or rj.get("question") or ""
+        if side:
+            cf["side_topics"] = [x for x in (cf.get("side_topics") or []) if x != side][-2:] + [str(side)[:200]]
+    elif turn_summary:
+        cf["summary"] = turn_summary
+    elif summ:
+        cf.pop("summary", None)
     ed = guards.parse_event_date(cf.get("event_date")) if cf.get("event_date") else None
-    if ed is None:
+    if ed is None and not out_of_scope_turn:
         ed = guards.relative_event_date(user_text)  # "2 months ago", "3 साल पहले": also code, not LLM
     if ed:
         cf["event_date"] = ed
@@ -433,7 +533,15 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
 
     # ---- hard escalation / out of scope -> SAFE RESPONSE
     if esc["hard"]:
-        text, cites, ret = safe_response(lang, cf, state_code, reasons, escalate=True)
+        danger = any(DANGER.search(r) for r in reasons)
+        trace["escalation_level"] = "danger" if danger else "out_of_scope"
+        facts = cf if cat in IN_SCOPE else {k: v for k, v in (rj.get("case_file_update") or {}).items() if v}
+        if cat not in IN_SCOPE:
+            facts = dict(facts, summary=turn_summary) if turn_summary else facts
+        elif cf.get("summary"):
+            facts = dict(facts, summary=cf["summary"])
+        text, cites, ret = safe_response(lang, facts, state_code, reasons, escalate=True, danger=danger,
+                                         referral_query=rj.get("english_retrieval_query") or user_text)
         return TurnResult(text, lang, cat, "escalate", cites, ret, True, reasons,
                           {"status": "pass", "issues": []}, None, trace)
 
@@ -557,6 +665,7 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
     paras, cited = [], []
     cf_nums = set(re.findall(r"\d{3,}", json.dumps(cf, ensure_ascii=False).replace(",", "")))
     for b in answer["blocks"]:
+        b["text"] = CHUNK_ID_BRACKETS.sub("", b["text"])
         paras.append(b["text"].strip())
         if b["type"] == "legal":
             for cid in b.get("cites", []):
@@ -609,4 +718,5 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
     has_legal = any(b["type"] == "legal" for b in answer["blocks"])
     action = "answer" if has_legal else "clarify"
     return TurnResult(body, lang, cat, action, cited, retrieved, needs_lawyer, reasons,
-                      {"status": status, "issues": []}, None, trace)
+                      dict({"status": status, "issues": []}, **({"pruned": True} if trace.get("pruned") and not trace["pruned"].get("recheck") else {})),
+                      None, trace)

@@ -40,7 +40,9 @@
     "oos_info": "What you can do right now: a free legal aid office can explain this law to you and tell you whether it applies to your situation.",
     "pruned_note": "I left out one point because I could not match it exactly to the official text. A lawyer or legal aid office can confirm it.",
     "conflict_intro": "Please check: you gave two different values, and I used the newer one.",
-    "conflict_line": "- {field}: earlier {earlier}, now {now}"
+    "conflict_line": "- {field}: earlier {earlier}, now {now}",
+    "oos_intro": "I don't cover this topic with verified law yet, so I won't guess. This doesn't mean you are in trouble: the official channels and free legal aid below can guide you.",
+    "referral_intro": "An official service that may handle this (please check its page before relying on it):"
   },
   "hi": {
     "disclaimer": "यह कानूनी जानकारी है, कानूनी सलाह नहीं।",
@@ -83,6 +85,8 @@
     "oos_info": "आप अभी यह कर सकते हैं: मुफ़्त कानूनी सहायता कार्यालय आपको यह कानून समझा सकता है और बता सकता है कि यह आपकी स्थिति पर लागू होता है या नहीं।",
     "pruned_note": "एक बात मैंने छोड़ दी क्योंकि उसे आधिकारिक कानून के शब्दों से ठीक-ठीक मिला नहीं पाया। वकील या कानूनी सहायता कार्यालय इसकी पुष्टि कर सकते हैं।",
     "conflict_intro": "कृपया जाँच लें: आपने दो अलग जानकारी दी, मैंने नई वाली ली है।",
-    "conflict_line": "- {field}: पहले {earlier}, अब {now}"
+    "conflict_line": "- {field}: पहले {earlier}, अब {now}",
+    "oos_intro": "इस विषय पर मेरे पास अभी जाँचा हुआ कानून नहीं है, इसलिए मैं अंदाज़ा नहीं लगाऊँगा। इसका मतलब यह नहीं कि आप किसी मुसीबत में हैं: नीचे दिए गए सरकारी रास्ते और मुफ़्त कानूनी सहायता आपकी मदद कर सकते हैं।",
+    "referral_intro": "एक सरकारी सेवा जो इसमें मदद कर सकती है (भरोसा करने से पहले उसका पेज देख लें):"
   }
 }

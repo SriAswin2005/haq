@@ -40,3 +40,6 @@ Format: `date | who | assumption | why`. Append only.
 
 2026-11-06 | codex | Round-three comparison uses exactly T-001..T-030 versus the immutable 21:40 archive, and reports T-031..T-040 separately plus the full 40-case result. | The added cases cannot be folded into the old 12/30 denominator. Existing expectations are not adjusted.
 2026-11-06 | codex | The first 40-case real run omits --judge but leaves the app-configured verifier enabled; API TestClient checks run in an isolated mock process by default. | User requested a real pipeline run and separately guarded API testing.
+
+2026-11-06 | codex | Keep the frozen TurnResult verifier enum check unchanged even when the new app returns status=pruned; count trace.pruned separately. | Pruning is requested, but the frozen interface still lists pass/fixed/failed, and the user explicitly forbids adjusting old expectations to improve scores. This is an API-contract disagreement, not by itself evidence of an unsafe claim.
+2026-11-06 | codex | Feedback privacy tests cover question/answer conversation text; optional user-entered feedback reasons are metadata. | app.server documents conversation sharing specifically, and the TestClient checks verify both omitted and explicit-false share_text plus explicit consent.

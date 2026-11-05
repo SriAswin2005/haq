@@ -1,0 +1,468 @@
+{
+  "schema_version": 1,
+  "case_id": "T-036",
+  "case": {
+    "id": "T-036",
+    "group": "I_draft_mode",
+    "tags": [
+      "round3",
+      "consumer_grievance_draft"
+    ],
+    "category_expected": "consumer",
+    "language": "en-IN",
+    "input_mode": "text",
+    "mode": "draft",
+    "turns": [
+      "I am Asha Example in Kanpur UP. Fictional seller OrderNest delivered a broken lamp on 10 October 2026, order FN-236, price Rs 2400. I have the invoice and photos; support refused a refund. Draft a consumer grievance email asking for a refund. I haven't given you addresses or an email recipient."
+    ],
+    "expected_action": "draft",
+    "expect_needs_lawyer": false,
+    "expected_topics": [
+      "consumer grievance email",
+      "refund request"
+    ],
+    "must_include_any": [
+      [
+        "refund"
+      ],
+      [
+        "OrderNest"
+      ],
+      [
+        "check every detail"
+      ]
+    ],
+    "must_not_include": [
+      "Section 999",
+      "guaranteed refund"
+    ],
+    "expected_chunk_ids": [
+      "CONS-CPA2019-S35",
+      "CONS-CPA2019-S39"
+    ],
+    "notes": "P1 consumer draft, using only invented supplied facts. Unknown recipient/contact details remain placeholders.",
+    "expected_law_verified": false,
+    "calibration_label": "exclude",
+    "jurisdictions_expected": [
+      "central",
+      "UP"
+    ],
+    "retrieval_expectation_kind": "topic",
+    "missing_draft_fields": [
+      "recipient_email",
+      "addresses"
+    ]
+  },
+  "repeat": 1,
+  "mock": false,
+  "backend": "app.pipeline",
+  "stage": "real",
+  "configured_models": {
+    "router": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "main": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash",
+        "rpm": 5,
+        "tpm": 250000,
+        "rpd": 19
+      }
+    ],
+    "translate": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "judge": [
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      }
+    ]
+  },
+  "started_at": "2026-11-05T22:20:46.851904+00:00",
+  "turns": [
+    {
+      "input": "I am Asha Example in Kanpur UP. Fictional seller OrderNest delivered a broken lamp on 10 October 2026, order FN-236, price Rs 2400. I have the invoice and photos; support refused a refund. Draft a consumer grievance email asking for a refund. I haven't given you addresses or an email recipient.",
+      "input_mode": "text",
+      "lang_hint": "en-IN",
+      "started_at": "2026-11-05T22:20:52.836462+00:00",
+      "result": {
+        "reply_text": "Here is a draft complaint to the company's grievance officer, followed by the facts to keep ready if it is not resolved. Anything I do not know is left as a [● placeholder] for you to fill in.\n\nCOMPLAINT TO THE GRIEVANCE OFFICER: REQUEST FOR refund\n\nTo: Grievance Officer, OrderNest\nEmail / portal: [● grievance officer's email or complaint page, as shown on the company's website or app]\nDate: [● date of sending]\n\nFrom: Asha Example, [● your phone number and email]\n\nSubject: Complaint about lamp, Order/Booking No. FN-236\n\nDear Grievance Officer,\n\n1. On 2026-10-10 I bought lamp from you for Rs. 2,400, Order/Booking No. FN-236, paid by [● mode of payment, e.g. card / UPI / cash on delivery].\n\n2. The problem: [● what is wrong, e.g. defective, not delivered, service not given as promised], noticed on [● date you noticed it].\n\n3. I have already: [● what you tried, with dates and ticket numbers; or \"this is my first complaint\"].\n\nThis complaint refers to: Consumer Protection (E-Commerce) Rules, 2020, rule 4; Consumer Protection (E-Commerce) Rules, 2020, rule 6. [● Have a lawyer confirm that these provisions apply to your case.]\n\n4. I request a refund of Rs. 2,400 within [● number of days you allow] days, and a written acknowledgement of this complaint with a complaint number.\n\n5. If this is not resolved, I will approach the National Consumer Helpline and the appropriate Consumer Commission.\n\nRegards,\nAsha Example\n\nAttachments: [● invoice / order confirmation / photos / chat or email screenshots]\n\n--------------------------------------------------------------\nIF THIS IS NOT RESOLVED: facts to keep ready for a consumer complaint\n- Your name, address and phone: [● your details]\n- The company's name and address: OrderNest, [● company address]\n- What you bought, when, and for how much: lamp, 2026-10-10, Rs. 2,400\n- What went wrong, and every step you took, with dates: [● timeline]\n- What you are asking for: refund, [● any compensation you want to claim]\n- Copies of every document listed above.\n\n\nCheck every detail before sending. For high-value or complex matters, have a lawyer review it.",
+        "reply_lang": "en-IN",
+        "category": "consumer",
+        "action": "draft",
+        "citations": [
+          "CONS-ECOM2020-R4",
+          "CONS-ECOM2020-R6"
+        ],
+        "retrieved": [
+          {
+            "id": "CONS-ECOM2020-R4",
+            "score": 0.7825937271118164
+          },
+          {
+            "id": "CONS-ECOM2020-R6",
+            "score": 0.7233303785324097
+          },
+          {
+            "id": "CONS-CPA2019-S2",
+            "score": 0.7181645631790161
+          },
+          {
+            "id": "CONS-NCH-P1",
+            "score": 0.7179316878318787
+          }
+        ],
+        "needs_lawyer": false,
+        "escalation_reasons": [],
+        "verifier": {
+          "status": "pass",
+          "issues": []
+        },
+        "draft_text": "COMPLAINT TO THE GRIEVANCE OFFICER: REQUEST FOR refund\n\nTo: Grievance Officer, OrderNest\nEmail / portal: [● grievance officer's email or complaint page, as shown on the company's website or app]\nDate: [● date of sending]\n\nFrom: Asha Example, [● your phone number and email]\n\nSubject: Complaint about lamp, Order/Booking No. FN-236\n\nDear Grievance Officer,\n\n1. On 2026-10-10 I bought lamp from you for Rs. 2,400, Order/Booking No. FN-236, paid by [● mode of payment, e.g. card / UPI / cash on delivery].\n\n2. The problem: [● what is wrong, e.g. defective, not delivered, service not given as promised], noticed on [● date you noticed it].\n\n3. I have already: [● what you tried, with dates and ticket numbers; or \"this is my first complaint\"].\n\nThis complaint refers to: Consumer Protection (E-Commerce) Rules, 2020, rule 4; Consumer Protection (E-Commerce) Rules, 2020, rule 6. [● Have a lawyer confirm that these provisions apply to your case.]\n\n4. I request a refund of Rs. 2,400 within [● number of days you allow] days, and a written acknowledgement of this complaint with a complaint number.\n\n5. If this is not resolved, I will approach the National Consumer Helpline and the appropriate Consumer Commission.\n\nRegards,\nAsha Example\n\nAttachments: [● invoice / order confirmation / photos / chat or email screenshots]\n\n--------------------------------------------------------------\nIF THIS IS NOT RESOLVED: facts to keep ready for a consumer complaint\n- Your name, address and phone: [● your details]\n- The company's name and address: OrderNest, [● company address]\n- What you bought, when, and for how much: lamp, 2026-10-10, Rs. 2,400\n- What went wrong, and every step you took, with dates: [● timeline]\n- What you are asking for: refund, [● any compensation you want to claim]\n- Copies of every document listed above.\n\n\nCheck every detail before sending. For high-value or complex matters, have a lawyer review it.",
+        "trace": {
+          "session": "3deb03df2d9a",
+          "input_mode": "text",
+          "user_text": "I am Asha Example in Kanpur UP. Fictional seller OrderNest delivered a broken lamp on 10 October 2026, order FN-236, price Rs 2400. I have the invoice and photos; support refused a refund. Draft a consumer grievance email asking for a refund. I haven't given you addresses or an email recipient.",
+          "mode": "draft",
+          "router": {
+            "category": "consumer",
+            "language": "en-IN",
+            "state_or_city": "UP",
+            "case_file_update": {
+              "person_name": "Asha Example",
+              "product_or_service": "lamp",
+              "order_id": "FN-236",
+              "purchase_date": "2026-10-10",
+              "amount_inr": 2400,
+              "counterparty_name": "OrderNest",
+              "counterparty_type": "seller",
+              "what_happened": "delivered a broken lamp",
+              "proof": [
+                "invoice",
+                "photos"
+              ],
+              "already_tried": [
+                "contacted support",
+                "refund refused"
+              ],
+              "resolution_wanted": "refund"
+            },
+            "missing_facts": [
+              "email address of the company",
+              "company's registered office address"
+            ],
+            "escalation_flags": [],
+            "english_retrieval_query": "consumer grievance email for refund of defective product"
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "retrieval": {
+            "query": "consumer grievance email for refund of defective product",
+            "jurisdictions": [
+              "central",
+              "UP"
+            ],
+            "top_score": 0.6768385171890259,
+            "min_score": 0.66,
+            "old_law": []
+          },
+          "draft": {
+            "kind": "consumer",
+            "file_name": "consumer_complaint.txt",
+            "missing": [
+              "[● Have a lawyer confirm that these provisions apply to your case.]",
+              "[● any compensation you want to claim]",
+              "[● company address]",
+              "[● date of sending]",
+              "[● date you noticed it]",
+              "[● grievance officer's email or complaint page, as shown on the company's website or app]",
+              "[● invoice / order confirmation / photos / chat or email screenshots]",
+              "[● mode of payment, e.g. card / UPI / cash on delivery]",
+              "[● number of days you allow]",
+              "[● timeline]",
+              "[● what is wrong, e.g. defective, not delivered, service not given as promised]",
+              "[● what you tried, with dates and ticket numbers; or \"this is my first complaint\"]",
+              "[● your details]",
+              "[● your phone number and email]"
+            ],
+            "scan_issues": []
+          },
+          "timings_s": 6.508,
+          "llm": {
+            "calls": 4,
+            "retries": 0,
+            "latency_s": 6.45,
+            "models": [
+              "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "embed:gemini:gemini-embedding-001",
+              "embed:gemini:gemini-embedding-001"
+            ],
+            "fallbacks": []
+          },
+          "action": "draft",
+          "category": "consumer",
+          "retrieved": [
+            {
+              "id": "CONS-ECOM2020-R4",
+              "score": 0.7825937271118164
+            },
+            {
+              "id": "CONS-ECOM2020-R6",
+              "score": 0.7233303785324097
+            },
+            {
+              "id": "CONS-CPA2019-S2",
+              "score": 0.7181645631790161
+            },
+            {
+              "id": "CONS-NCH-P1",
+              "score": 0.7179316878318787
+            }
+          ],
+          "citations": [
+            "CONS-ECOM2020-R4",
+            "CONS-ECOM2020-R6"
+          ],
+          "verifier": {
+            "status": "pass",
+            "issues": []
+          },
+          "escalation_reasons": [],
+          "models": {
+            "router": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "main": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash",
+                "rpm": 5,
+                "tpm": 250000,
+                "rpd": 19
+              }
+            ],
+            "translate": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "judge": [
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              }
+            ]
+          },
+          "mock": false
+        }
+      },
+      "model_names_used": [
+        "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001"
+      ],
+      "latency_s": 6.512383699999191,
+      "finished_at": "2026-11-05T22:20:59.348066+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-05T22:20:59.348066+00:00"
+}

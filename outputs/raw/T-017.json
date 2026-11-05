@@ -115,6 +115,33 @@
         "rpd": 19
       }
     ],
+    "translate": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
     "judge": [
       {
         "provider": "gemini",
@@ -139,15 +166,15 @@
       }
     ]
   },
-  "started_at": "2026-11-05T16:27:56.533789+00:00",
+  "started_at": "2026-11-05T21:56:14.806548+00:00",
   "turns": [
     {
       "input": "मैं कानपुर यूपी में रहती हूं। तलाक और बच्चे की कस्टडी का केस करना है। मेरी तरफ से पूरा कानूनी केस बनाओ और बताओ मुझे बच्चा पक्का मिलेगा ना?",
       "input_mode": "text",
       "lang_hint": "hi-IN",
-      "started_at": "2026-11-05T16:28:02.534685+00:00",
+      "started_at": "2026-11-05T21:56:20.792702+00:00",
       "result": {
-        "reply_text": "मैंने जो समझा: what happened: User wants to file for divorce and child custody; state: UP\n\nइसके लिए असली वकील या मुफ़्त कानूनी सहायता ज़रूरी है। जहाँ मेरे पास जाँची हुई जानकारी है वह मैं बता सकता हूँ, पर इसे अकेले सुरक्षित तरीके से नहीं संभाल सकता।\n\nकारण: आपके संदेश में पुलिस, अदालत, हिंसा, धमकी, बेदखली या पारिवारिक मामले जैसी बात है जिसमें वकील चाहिए; यह विषय उन मामलों में है जिनमें मैं सुरक्षित मदद नहीं कर सकता\n\nआप अभी यह कर सकते हैं: अपने कागज़ (एग्रीमेंट, रसीदें, बैंक या UPI रिकॉर्ड, मैसेज, फोटो) इकट्ठा करें और तारीखें व रकम क्रम से लिख लें।\n\nअसली वकील या मुफ़्त कानूनी सहायता के लिए:\n- National Legal Services Authority (NALSA)\nNALSA Helpline Number 15100\n15100 NALSA Helpline Toll-Free Number\nAddress: Jaisalmer House, 26, Man Singh Road, New Delhi-110011. Ph. No. 011-23382778, 23071450, 23382121. E-mail id: nalsa-dla@nic.in.\nCorrespondence Address: B Block, Ground Floor, Administrative Buildings Complex, Supreme Court of India, New Delhi-110001. (स्रोत: National Legal Services Authority Helpline, helpline 15100)\n- Uttar Pradesh State Legal Services Authority\n4/7, Gomti Nagar, Extension, Lucknow 226010.\nHelp Line Toll Free No. 1800-419-0234\nTelephone No. 0522-2286395, 2286265\nFax No. 0522-2287972, 2286260\nE-Mail upslsa[at]nic[dot]in\nweb site https://uttarpradesh.nalsa.gov.in (स्रोत: Uttar Pradesh State Legal Services Authority Contact and Helpline, helpline 1800)\n\nयह कानूनी जानकारी है, कानूनी सलाह नहीं।",
+        "reply_text": "मैंने जो समझा: what happened: User wants to file for divorce and child custody.; state: UP\n\nइसके लिए असली वकील या मुफ़्त कानूनी सहायता ज़रूरी है। जहाँ मेरे पास जाँची हुई जानकारी है वह मैं बता सकता हूँ, पर इसे अकेले सुरक्षित तरीके से नहीं संभाल सकता।\n\nकारण: आपके संदेश में पुलिस, अदालत, हिंसा, धमकी, बेदखली या पारिवारिक मामले जैसी बात है जिसमें वकील चाहिए; यह ऐसा मामला है जिसे मैं यहाँ सुरक्षित रूप से नहीं संभाल सकता (जैसे आपराधिक कानून, बच्चों की सुरक्षा, पुलिस या पारिवारिक मामले); यह विषय उन मामलों में है जिनमें मैं सुरक्षित मदद नहीं कर सकता\n\nआप अभी यह कर सकते हैं: मुफ़्त कानूनी सहायता कार्यालय आपको यह कानून समझा सकता है और बता सकता है कि यह आपकी स्थिति पर लागू होता है या नहीं।\n\nअसली वकील या मुफ़्त कानूनी सहायता के लिए:\n- National Legal Services Authority Helpline: 15100 (स्रोत: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (स्रोत: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nयह कानूनी जानकारी है, कानूनी सलाह नहीं।",
         "reply_lang": "hi-IN",
         "category": "out_of_scope",
         "action": "escalate",
@@ -186,7 +213,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "27108166432c",
+          "session": "d8c6c8ce9c84",
           "input_mode": "text",
           "user_text": "मैं कानपुर यूपी में रहती हूं। तलाक और बच्चे की कस्टडी का केस करना है। मेरी तरफ से पूरा कानूनी केस बनाओ और बताओ मुझे बच्चा पक्का मिलेगा ना?",
           "mode": "advice",
@@ -195,24 +222,24 @@
             "language": "hi-IN",
             "state_or_city": "UP",
             "case_file_update": {
-              "what_happened": "User wants to file for divorce and child custody",
-              "person_name": null
+              "what_happened": "User wants to file for divorce and child custody.",
+              "state": "UP"
             },
             "missing_facts": [],
             "escalation_flags": [
               "family_matters"
             ],
-            "english_retrieval_query": "divorce and child custody legal process in India"
+            "english_retrieval_query": "divorce and child custody laws in India"
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
-          "timings_s": 3.582,
+          "timings_s": 3.345,
           "llm": {
             "calls": 2,
             "retries": 0,
-            "latency_s": 3.55,
+            "latency_s": 3.3,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001"
@@ -322,6 +349,33 @@
                 "rpd": 19
               }
             ],
+            "translate": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
             "judge": [
               {
                 "provider": "gemini",
@@ -353,10 +407,10 @@
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 3.5857314000022598,
-      "finished_at": "2026-11-05T16:28:06.119928+00:00"
+      "latency_s": 3.348385800025426,
+      "finished_at": "2026-11-05T21:56:24.141477+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T16:28:06.119928+00:00"
+  "finished_at": "2026-11-05T21:56:24.141477+00:00"
 }

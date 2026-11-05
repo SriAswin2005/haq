@@ -58,6 +58,9 @@ def _validate(d) -> dict | None:
     it = d.get("intent")
     it = [it] if isinstance(it, str) else (it if isinstance(it, list) else [])
     out["intent"] = [str(x) for x in it if str(x) in INTENTS][:4]
+    out["new_topic"] = d.get("new_topic") in (True, "true", "True", 1)
+    sm = d.get("summary")
+    out["summary"] = sm.strip()[:400] if isinstance(sm, str) else ""
     qq = d.get("question")
     out["question"] = qq.strip()[:600] if isinstance(qq, str) else ""
     return out

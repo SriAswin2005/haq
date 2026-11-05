@@ -248,13 +248,17 @@ def _retry_delay(text: str) -> float | None:
 
 
 def _send(e: dict, url: str, headers: dict, payload: dict, est_tokens: int,
-          timeout: int = 90) -> tuple[int, dict | str]:
+          timeout: int | None = None) -> tuple[int, dict | str]:
     """Send one request for model entry e. Returns (200, json) or (400, text);
     raises _Skip for anything that means 'try another model'."""
     global _last_global
     k = _mkey(e)
     gap = float(_llm_cfg().get("min_interval_s", 0) or 0)
-    for attempt in range(2):          # second attempt only for 5xx / network errors
+    if timeout is None:
+        timeout = float(e.get("timeout_s") or _llm_cfg().get("timeout_s", 45))
+    # A failing or slow model is skipped at once (with an escalating cooldown) instead of retried: the next
+    # model in the chain is usually faster than a second try at an overloaded one.
+    for attempt in range(1):
         with _lock:
             w = _last_global + gap - time.time()
             if w > 0:
@@ -267,9 +271,6 @@ def _send(e: dict, url: str, headers: dict, payload: dict, est_tokens: int,
         except requests.RequestException as ex:
             stats["latency_s"] += time.time() - t0
             stats["retries"] += 1
-            if attempt == 0:
-                time.sleep(2)
-                continue
             raise _Skip(f"network error ({type(ex).__name__})", cooldown_s=_server_cooldown(k))
         stats["latency_s"] += time.time() - t0
         stats["calls"] += 1
@@ -283,9 +284,6 @@ def _send(e: dict, url: str, headers: dict, payload: dict, est_tokens: int,
         _tok.setdefault(k, deque()).append((time.time(), est_tokens))
         if code >= 500:
             stats["retries"] += 1
-            if attempt == 0:
-                time.sleep(2)
-                continue
             raise _Skip(f"HTTP {code}", cooldown_s=_server_cooldown(k))
         if code in (401, 403, 404):
             _unavailable[k] = f"HTTP {code}"

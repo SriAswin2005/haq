@@ -6,11 +6,21 @@ Every quoted reply/source/input is validated against that run's own snapshot.
 import argparse
 import json
 from pathlib import Path
+import re
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from tests.run_eval import latest_record, utc_now, write_json
+
+
+def review_insertion_index(base, severity):
+    """Keep reviewed findings ahead of the first equal/lower-priority section."""
+    for match in re.finditer(r"\n## Severity (\d+):", base):
+        if int(match.group(1)) >= severity:
+            return match.start()
+    at = base.find("\n## Infrastructure")
+    return at if at >= 0 else len(base)
 
 
 def main():
@@ -60,15 +70,10 @@ def main():
     if not base_path.exists():
         base_path.write_text(base, encoding="utf-8")
     first_severity = min((f["severity"] for f in findings), default=2)
-    separator = f"\n## Severity {first_severity}:"
-    at = base.find(separator)
-    if at == -1:
-        at = base.find("\n## Infrastructure")
-    if at == -1:
-        at = len(base)
+    at = review_insertion_index(base, first_severity)
     combined = base[:at] + "\n" + "\n".join(lines) + "\n" + base[at:]
     frozen = run / "frozen_inputs.json"
-    if frozen.exists():
+    if frozen.exists() and "Evaluated frozen inputs" not in combined:
         revision = json.loads(frozen.read_text(encoding="utf-8"))
         notice = (f"Evaluated frozen inputs captured at {revision['frozen_at']}. "
                   "The manifest and frozen_inputs.json identify the tested revision; subsequent checkout edits are outside this report.\n")

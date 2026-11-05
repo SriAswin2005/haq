@@ -116,6 +116,33 @@
         "rpd": 19
       }
     ],
+    "translate": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
     "judge": [
       {
         "provider": "gemini",
@@ -140,15 +167,15 @@
       }
     ]
   },
-  "started_at": "2026-11-05T16:25:02.437374+00:00",
+  "started_at": "2026-11-05T21:53:50.259311+00:00",
   "turns": [
     {
       "input": "Kanpur UP employer owes my October 2026 salary Rs 22000. When I asked today the manager threatened to file a police case and get me arrested. I have the message. Can you help me get paid safely?",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T16:25:08.438050+00:00",
+      "started_at": "2026-11-05T21:53:56.245146+00:00",
       "result": {
-        "reply_text": "What I understood: amount inr: 22000; event date: 2026-10; what happened: Employer withheld October 2026 salary and threatened police action upon inquiry.; proof: ['text message']; counterparty type: employer; months since event: 1.1; state: UP\n\nThis needs a real lawyer or free legal aid. I can still share verified general information where I have it, but I cannot handle this safely on my own.\n\nWhy: your message mentions something that needs a lawyer (such as police, court, violence, threats, eviction or family matters)\n\nWhat you can do right now: collect your documents (agreement, receipts, bank or UPI records, messages, photos), and write down the dates and amounts in order.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority (NALSA)\nNALSA Helpline Number 15100\n15100 NALSA Helpline Toll-Free Number\nAddress: Jaisalmer House, 26, Man Singh Road, New Delhi-110011. Ph. No. 011-23382778, 23071450, 23382121. E-mail id: nalsa-dla@nic.in.\nCorrespondence Address: B Block, Ground Floor, Administrative Buildings Complex, Supreme Court of India, New Delhi-110001. (Source: National Legal Services Authority Helpline, helpline 15100)\n- Uttar Pradesh State Legal Services Authority\n4/7, Gomti Nagar, Extension, Lucknow 226010.\nHelp Line Toll Free No. 1800-419-0234\nTelephone No. 0522-2286395, 2286265\nFax No. 0522-2287972, 2286260\nE-Mail upslsa[at]nic[dot]in\nweb site https://uttarpradesh.nalsa.gov.in (Source: Uttar Pradesh State Legal Services Authority Contact and Helpline, helpline 1800)\n\nThis is legal information, not legal advice.",
+        "reply_text": "What I understood: unpaid period: 2026-10; monthly wage inr: 22000; already tried: ['asked manager']; proof: ['message from manager']; what happened: Employer refused to pay salary and threatened to file a police case and get the user arrested.; state: UP\n\nThis needs a real lawyer or free legal aid. I can still share verified general information where I have it, but I cannot handle this safely on my own.\n\nWhy: your message mentions something that needs a lawyer (such as police, court, violence, threats, eviction or family matters); this involves a matter I cannot safely handle here (for example criminal law, child protection, police or family matters)\n\nWhat you can do right now: collect your documents (agreement, receipts, bank or UPI records, messages, photos), and write down the dates and amounts in order.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (Source: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "wages",
         "action": "escalate",
@@ -180,8 +207,7 @@
           "keyword:police",
           "keyword:threatened",
           "keyword:police case",
-          "llm:threat_of_arrest",
-          "llm:police_involvement"
+          "llm:threat_of_arrest"
         ],
         "verifier": {
           "status": "pass",
@@ -189,7 +215,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "e4f7cefe53be",
+          "session": "15ed0be78ea5",
           "input_mode": "text",
           "user_text": "Kanpur UP employer owes my October 2026 salary Rs 22000. When I asked today the manager threatened to file a police case and get me arrested. I have the message. Can you help me get paid safely?",
           "mode": "advice",
@@ -198,33 +224,34 @@
             "language": "en-IN",
             "state_or_city": "UP",
             "case_file_update": {
-              "amount_inr": 22000,
-              "event_date": "2026-10",
-              "what_happened": "Employer withheld October 2026 salary and threatened police action upon inquiry.",
-              "proof": [
-                "text message"
+              "unpaid_period": "2026-10",
+              "monthly_wage_inr": 22000,
+              "already_tried": [
+                "asked manager"
               ],
-              "counterparty_type": "employer"
+              "proof": [
+                "message from manager"
+              ],
+              "what_happened": "Employer refused to pay salary and threatened to file a police case and get the user arrested."
             },
             "missing_facts": [
-              "name of the company",
-              "employment contract status"
+              "job_start_date",
+              "last_working_date"
             ],
             "escalation_flags": [
-              "threat_of_arrest",
-              "police_involvement"
+              "threat_of_arrest"
             ],
-            "english_retrieval_query": "unpaid salary recovery and employer harassment legal recourse"
+            "english_retrieval_query": "legal recourse for unpaid salary and employer threats of police action"
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
-          "timings_s": 3.819,
+          "timings_s": 3.588,
           "llm": {
             "calls": 2,
             "retries": 0,
-            "latency_s": 3.79,
+            "latency_s": 3.56,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001"
@@ -264,8 +291,7 @@
             "keyword:police",
             "keyword:threatened",
             "keyword:police case",
-            "llm:threat_of_arrest",
-            "llm:police_involvement"
+            "llm:threat_of_arrest"
           ],
           "models": {
             "router": [
@@ -336,6 +362,33 @@
                 "rpd": 19
               }
             ],
+            "translate": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
             "judge": [
               {
                 "provider": "gemini",
@@ -367,10 +420,10 @@
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 3.8230971999582835,
-      "finished_at": "2026-11-05T16:25:12.261111+00:00"
+      "latency_s": 3.5912111999932677,
+      "finished_at": "2026-11-05T21:53:59.836390+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T16:25:12.261111+00:00"
+  "finished_at": "2026-11-05T21:53:59.836390+00:00"
 }

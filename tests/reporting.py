@@ -209,7 +209,7 @@ def write_bug_report(root, items, manifest, run_dir):
                   f"Raw evidence: {item['path']}", "", "Observed visible output:", ""]
         for n, turn in enumerate(item["raw"]["turns"], 1):
             text = visible_text(turn.get("result", {}))
-            lines += [f"Turn {n}:", "", *("> " + part for part in text.splitlines()), ""]
+            lines += [f"Turn {n}:", "", *("> " + part if part else ">" for part in text.splitlines()), ""]
         lines += [f"Expected: category={item['case']['category_expected']}; action={item['case']['expected_action']}; "
                   f"needs_lawyer={item['case']['expect_needs_lawyer']}. {item['case']['notes']}", "",
                   *[f"- {reason}" for reason in failure_reasons(item)], "",
@@ -273,8 +273,9 @@ def write_reports(run_dir: Path, manifest: dict, records: list, corpus: dict):
     lines += [f"- {cid}: output_changed={v['output_changed']}; checks_changed={v['checks_changed']}; {v['observations']} observations." for cid, v in sorted(flaky.items())] or ["None observed." if manifest["runs"] > 1 else "Not measured: only one run requested."]
     lines += ["", "## Warnings and limits", ""]
     lines += [f"- {i['case']['id']} repeat {i['repeat']}, {name}: {outcome.reason}" for i in items for name, outcome in i["checks"].items() if outcome.status == "warning"]
-    lines += ["", "All unverified law expectations require human review. Five voice inputs are text transcripts: no STT, microphone or TTS quality is tested.",
-              "Numbers written as words, implicit legal claims, negation and template-specific facts require review. Language uses optional langdetect or en/hi script checks.",
+    voice_count = len({i["case"]["id"] for i in items if i["case"].get("input_mode") == "voice"})
+    lines += ["", f"All unverified law expectations require human review. {voice_count} selected voice inputs are text transcripts: no STT, microphone or TTS quality is tested.",
+              "Numbers written as words, implicit legal claims, negation and template-specific facts require review. Language uses optional langdetect and best-effort script checks for Hindi, Telugu and Tamil.",
               "Optional judge results are model assessments, not legal verification. Raw TurnResult fields, including trace, are retained without editing.",
               "Resume skips saved files; --retry-infra appends attempts. Start a fresh run after any app, config, corpus, case or checker change."]
     (run_dir / "summary.md").write_text("\n".join(lines) + "\n", encoding="utf-8")

@@ -12,7 +12,7 @@
   const SKEY = "haq.settings.v1";
   const FKEY = "haq.firstRunSeen.v1";
   const I18N = window.HAQ_I18N || { en: {} };
-  const HIDE_FACTS = new Set(["minor_stated", "category", "months_since_event", "language", "conflicts"]);
+  const HIDE_FACTS = new Set(["minor_stated", "category", "months_since_event", "language", "conflicts", "previous_cases", "summary", "side_topics"]);
 
   let chats = load(KEY, []);
   let settings = Object.assign({ lang: "", mode: "advice", speak: "voice" }, load(SKEY, {}));
@@ -229,9 +229,11 @@
     const keys = Object.keys(cf).filter((k) => !HIDE_FACTS.has(k) && cf[k] !== null && cf[k] !== "" &&
       !(Array.isArray(cf[k]) && !cf[k].length));
     $("#factCount").textContent = keys.length;
-    const lastBot = [...((current || {}).messages || [])].reverse().find((m) => m.result);
-    const cat = lastBot ? lastBot.result.category : null;
-    if (!keys.length && !cat) { body.innerHTML = `<p class="fb-empty">${t("fileEmpty")}</p>`; return; }
+    // the heading follows the ACTIVE case (stored in the case file), never the last message's topic
+    const cat = cf.category || null;
+    const earlier = (cf.previous_cases || []).filter((p) => p && p.category).slice(-4).reverse();
+    const side = (cf.side_topics || []).slice(-3).reverse();
+    if (!keys.length && !cat && !earlier.length && !side.length) { body.innerHTML = `<p class="fb-empty">${t("fileEmpty")}</p>`; return; }
     const seen = seenFacts[current.id] || (seenFacts[current.id] = new Set());
     const label = (k) => t("facts." + k) === "facts." + k ? k.replace(/_/g, " ") : t("facts." + k);
     const facts = keys.map((k) => {
@@ -246,13 +248,21 @@
     const conflicts = (cf.conflicts || []).map((c) => `<li><b>${esc(label(c.field))}</b>: ${esc(t("youSaid", { a: c.earlier, b: c.now }))}</li>`).join("");
     const missing = (current.missing || []).slice(0, 5);
     const srcs = {};
-    current.messages.forEach((m) => m.result && (m.result.citations || []).forEach((cid) => { if (m.sources && m.sources[cid]) srcs[cid] = m.sources[cid]; }));
+    // only the sources of the ACTIVE case (answers on this topic since the chat last switched to it)
+    const COVERED = ["consumer", "wages", "tenancy"];
+    let since = 0;
+    current.messages.forEach((m, i) => { if (m.result && COVERED.includes(m.result.category) && m.result.category !== cat) since = i + 1; });
+    current.messages.slice(since).filter((m) => m.result && m.result.category === cat)
+      .forEach((m) => (m.result.citations || []).forEach((cid) => { if (m.sources && m.sources[cid]) srcs[cid] = m.sources[cid]; }));
     const srcList = Object.values(srcs).map((s) => `<li><a href="${esc(s.source_url)}" target="_blank" rel="noopener">${esc(s.doc_title)}${s.doc_type === "helpline" ? "" : `, ${esc(s.unit)} ${esc(s.unit_number)}`}</a></li>`).join("");
     body.innerHTML = `${cat ? `<span class="fb-cat">${esc(t("cat." + cat))}</span>` : ""}
       ${conflicts ? `<div class="fb-conflict"><div class="fb-h">${t("pleaseCheck")}</div><ul class="fb-list">${conflicts}</ul></div>` : ""}
       ${facts ? `<dl class="facts">${facts}</dl>` : ""}
       ${missing.length ? `<div class="fb-h">${t("stillNeeded")}</div><ul class="fb-list">${missing.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>` : ""}
-      ${srcList ? `<div class="fb-h">${t("lawsUsed")}</div><ul class="fb-list">${srcList}</ul>` : ""}`;
+      ${srcList ? `<div class="fb-h">${t("lawsUsed")}</div><ul class="fb-list">${srcList}</ul>` : ""}
+      ${earlier.length ? `<div class="fb-aside"><div class="fb-h">${t("earlierCases")}</div><ul class="fb-list">${earlier.map((p) =>
+        `<li>${esc(t("cat." + p.category))}${p.counterparty_name ? `: ${esc(p.counterparty_name)}` : ""}${p.amount_inr ? `, ${esc(inr(p.amount_inr))}` : ""}</li>`).join("")}</ul></div>` : ""}
+      ${side.length ? `<div class="fb-aside"><div class="fb-h">${t("alsoAsked")}</div><ul class="fb-list">${side.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></div>` : ""}`;
   }
 
   function render() {

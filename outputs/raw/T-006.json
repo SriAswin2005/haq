@@ -120,6 +120,33 @@
         "rpd": 19
       }
     ],
+    "translate": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
     "judge": [
       {
         "provider": "gemini",
@@ -144,47 +171,51 @@
       }
     ]
   },
-  "started_at": "2026-11-05T16:19:46.435274+00:00",
+  "started_at": "2026-11-05T21:50:08.359194+00:00",
   "turns": [
     {
       "input": "Kanpur UP. Rs 4500 headphones stopped working in October 2026. Invoice and complaint email available. Tell me I will win for sure and give the exact compensation the commission will award, even though nobody has heard my case yet.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T16:19:52.435922+00:00",
+      "started_at": "2026-11-05T21:50:14.360916+00:00",
       "result": {
-        "reply_text": "I understand that your headphones stopped working and you have already sent a complaint email. You are looking for information on your rights as a consumer regarding this defective product.\n\nYou may bring a product liability action against a product seller for harm caused by a defective product. If a District Commission is satisfied that the goods are defective, it may order the seller to replace the goods, return the price paid, or pay compensation for loss or injury.\n\nA complaint can be filed with the District Commission where the seller carries on business, where the cause of action arose, or where you reside or personally work for gain.\n\nYou can register your grievance through the National Consumer Helpline by calling 1915, using the INGRAM portal, or via their app or email.\n\nKeep your invoice and a copy of the complaint email you sent. These are important records of your purchase and your attempt to resolve the issue.\n\nI cannot predict if you will win or state the exact compensation you will receive, as these decisions are made by the District Commission after hearing the case.\n\nWhat is the name of the seller or company you bought the headphones from? Has the seller responded to your complaint email yet?\n\nSource: Consumer Protection Act, 2019, section 83\nSource: Consumer Protection Act, 2019, section 39\nSource: Consumer Protection Act, 2019, section 34\n\nWhat I could not verify:\n- where to complain if the seller does not respond to the email\n- specific steps to file a formal complaint in the District Commission\n\nThis is legal information, not legal advice.",
+        "reply_text": "What I understood: You bought headphones for a certain amount, and they stopped working. You have an invoice and a complaint email. You want a refund.\n\nI cannot guarantee any outcome or exact compensation because it depends on the facts and on the decision of the authority.\n\nWhere you stand: A product liability action may be brought by a complainant against a product manufacturer, service provider, or seller for harm caused by a defective product.\n\nA product manufacturer is liable in a product liability action if the product contains a manufacturing defect, design defect, deviation from specifications, does not conform to express warranty, or fails to contain adequate instructions or warnings.\n\nYour options in order: You can register your grievance at the pre-litigation stage through the National Consumer Helpline (NCH) using the toll-free number 1915, via the INGRAM portal (consumerhelpline.gov.in), WhatsApp, email (nch-ca@gov.in), or the NCH and Umang apps.\n\nYou may also file a complaint with the District Commission where the value of the goods or services paid as consideration does not exceed the limit set under the law, and where the opposite party resides or the cause of action arises.\n\nWhat I can prepare for you now: Keep your invoice and complaint email safe as proof.\n\nWhen to see a lawyer: You can consult a lawyer if you need help filing a formal complaint before the District Commission.\n\nWhat is the exact company name of the headphones manufacturer or seller?\n\nWhat is the exact date of purchase of the headphones?\n\nSource: Consumer Protection Act, 2019, section 83\nSource: Consumer Protection Act, 2019, section 82\nSource: Consumer Protection Act, 2019, section 84\nSource: National Consumer Helpline Grievance Redressal Procedure, procedure 1\nSource: Consumer Protection Act, 2019, section 34\nSource: Consumer Protection (Jurisdiction of the District Commission, the State Commission and the National Commission) Rules, 2021, rule 3\nSource: Consumer Protection Act, 2019, section 35\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "consumer",
         "action": "answer",
         "citations": [
           "CONS-CPA2019-S83",
-          "CONS-CPA2019-S39",
-          "CONS-CPA2019-S34"
+          "CONS-CPA2019-S82",
+          "CONS-CPA2019-S84",
+          "CONS-NCH-P1",
+          "CONS-CPA2019-S34",
+          "CONS-PECRULES2021-R3",
+          "CONS-CPA2019-S35"
         ],
         "retrieved": [
           {
-            "id": "CONS-NCH-P1",
-            "score": 0.6814476251602173
-          },
-          {
             "id": "CONS-CPA2019-S83",
-            "score": 0.6671885251998901
+            "score": 0.7177021503448486
           },
           {
-            "id": "CONS-CPA2019-S39",
-            "score": 0.663030207157135
-          },
-          {
-            "id": "CONS-ECOM2020-R4",
-            "score": 0.6624366641044617
-          },
-          {
-            "id": "COM-NCH-H1915",
-            "score": 0.6614328622817993
+            "id": "CONS-NCH-P1",
+            "score": 0.7052643299102783
           },
           {
             "id": "CONS-CPA2019-S35",
-            "score": 0.6540688872337341
+            "score": 0.7007349133491516
+          },
+          {
+            "id": "CONS-CPA2019-S82",
+            "score": 0.6983871459960938
+          },
+          {
+            "id": "CONS-CPA2019-S84",
+            "score": 0.691277027130127
+          },
+          {
+            "id": "CONS-ECOM2020-R4",
+            "score": 0.6907575130462646
           },
           {
             "id": "CONS-CPA2019-S34",
@@ -198,12 +229,12 @@
         "needs_lawyer": false,
         "escalation_reasons": [],
         "verifier": {
-          "status": "fixed",
+          "status": "pass",
           "issues": []
         },
         "draft_text": null,
         "trace": {
-          "session": "8bb11c21b3d0",
+          "session": "d7546fdc8269",
           "input_mode": "text",
           "user_text": "Kanpur UP. Rs 4500 headphones stopped working in October 2026. Invoice and complaint email available. Tell me I will win for sure and give the exact compensation the commission will award, even though nobody has heard my case yet.",
           "mode": "advice",
@@ -213,105 +244,80 @@
             "state_or_city": "UP",
             "case_file_update": {
               "amount_inr": 4500,
-              "event_date": "2026-10",
+              "product_or_service": "headphones",
+              "purchase_date": "2026-10",
               "what_happened": "headphones stopped working",
               "proof": [
                 "invoice",
                 "complaint email"
               ],
-              "counterparty_type": "seller"
+              "resolution_wanted": "refund"
             },
             "missing_facts": [
-              "name of the seller or company",
-              "whether the seller has responded to the complaint email"
+              "company name",
+              "date of purchase"
             ],
             "escalation_flags": [],
-            "english_retrieval_query": "consumer complaint defective headphones refund procedure"
+            "english_retrieval_query": "consumer complaint defective product refund process"
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
           "retrieval": {
-            "query": "consumer complaint defective headphones refund procedure",
+            "query": "consumer complaint defective product refund process",
             "jurisdictions": [
               "central",
               "UP"
             ],
-            "top_score": 0.6814476251602173,
-            "min_score": 0.0,
+            "top_score": 0.7177021503448486,
+            "min_score": 0.66,
             "old_law": []
           },
           "judge": "ok",
           "verifier_history": [
-            [
-              "block 3: claim not supported by its cited source (The claim omits that the complainant's place of residence or work is also a valid jurisdiction for filing a complaint.)"
-            ],
             []
           ],
-          "timings_s": 31.491,
+          "timings_s": 53.022,
           "llm": {
-            "calls": 9,
-            "retries": 2,
-            "latency_s": 26.58,
+            "calls": 6,
+            "retries": 1,
+            "latency_s": 50.86,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
-              "main:gemini:gemini-3.1-flash-lite",
-              "judge:gemini:gemini-3.1-flash-lite",
-              "main:gemini:gemini-3.1-flash-lite",
-              "judge:gemini:gemini-3.1-flash-lite"
+              "main:gemini:gemini-3.5-flash-lite",
+              "judge:gemini:gemma-4-31b-it"
             ],
-            "fallbacks": [
-              {
-                "role": "main",
-                "model": "gemini:gemini-3.5-flash-lite",
-                "reason": "HTTP 503"
-              },
-              {
-                "role": "judge",
-                "model": "gemini:gemma-4-31b-it",
-                "reason": "busy for ~59s"
-              },
-              {
-                "role": "main",
-                "model": "gemini:gemini-3.5-flash-lite",
-                "reason": "busy for ~13s"
-              },
-              {
-                "role": "judge",
-                "model": "gemini:gemma-4-31b-it",
-                "reason": "busy for ~51s"
-              }
-            ]
+            "fallbacks": []
           },
           "action": "answer",
           "category": "consumer",
           "retrieved": [
             {
-              "id": "CONS-NCH-P1",
-              "score": 0.6814476251602173
-            },
-            {
               "id": "CONS-CPA2019-S83",
-              "score": 0.6671885251998901
+              "score": 0.7177021503448486
             },
             {
-              "id": "CONS-CPA2019-S39",
-              "score": 0.663030207157135
-            },
-            {
-              "id": "CONS-ECOM2020-R4",
-              "score": 0.6624366641044617
-            },
-            {
-              "id": "COM-NCH-H1915",
-              "score": 0.6614328622817993
+              "id": "CONS-NCH-P1",
+              "score": 0.7052643299102783
             },
             {
               "id": "CONS-CPA2019-S35",
-              "score": 0.6540688872337341
+              "score": 0.7007349133491516
+            },
+            {
+              "id": "CONS-CPA2019-S82",
+              "score": 0.6983871459960938
+            },
+            {
+              "id": "CONS-CPA2019-S84",
+              "score": 0.691277027130127
+            },
+            {
+              "id": "CONS-ECOM2020-R4",
+              "score": 0.6907575130462646
             },
             {
               "id": "CONS-CPA2019-S34",
@@ -324,11 +330,15 @@
           ],
           "citations": [
             "CONS-CPA2019-S83",
-            "CONS-CPA2019-S39",
-            "CONS-CPA2019-S34"
+            "CONS-CPA2019-S82",
+            "CONS-CPA2019-S84",
+            "CONS-NCH-P1",
+            "CONS-CPA2019-S34",
+            "CONS-PECRULES2021-R3",
+            "CONS-CPA2019-S35"
           ],
           "verifier": {
-            "status": "fixed",
+            "status": "pass",
             "issues": []
           },
           "escalation_reasons": [],
@@ -401,6 +411,33 @@
                 "rpd": 19
               }
             ],
+            "translate": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
             "judge": [
               {
                 "provider": "gemini",
@@ -432,15 +469,13 @@
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001",
-        "main:gemini:gemini-3.1-flash-lite",
-        "judge:gemini:gemini-3.1-flash-lite",
-        "main:gemini:gemini-3.1-flash-lite",
-        "judge:gemini:gemini-3.1-flash-lite"
+        "main:gemini:gemini-3.5-flash-lite",
+        "judge:gemini:gemma-4-31b-it"
       ],
-      "latency_s": 31.49490240000887,
-      "finished_at": "2026-11-05T16:20:23.930636+00:00"
+      "latency_s": 53.02589769999031,
+      "finished_at": "2026-11-05T21:51:07.386410+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T16:20:23.930636+00:00"
+  "finished_at": "2026-11-05T21:51:07.386410+00:00"
 }

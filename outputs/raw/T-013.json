@@ -121,6 +121,33 @@
         "rpd": 19
       }
     ],
+    "translate": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
     "judge": [
       {
         "provider": "gemini",
@@ -145,71 +172,66 @@
       }
     ]
   },
-  "started_at": "2026-11-05T16:25:12.267122+00:00",
+  "started_at": "2026-11-05T21:53:59.839432+00:00",
   "turns": [
     {
       "input": "Today is 5 November 2026. I am in Lucknow UP. A fictional repair shop took Rs 7000 on 1 January 2023 and never repaired my mixer. I have done nothing since. Can I start now?",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T16:25:18.267546+00:00",
+      "started_at": "2026-11-05T21:54:05.840314+00:00",
       "result": {
-        "reply_text": "I understand that you paid a repair shop for a service that was never provided, and you are now looking to take action after a significant delay.\n\nUnder the law, a service provider is liable if the service provided is deficient or does not conform to the terms of the contract. You may file a complaint with the District Commission if the service was not provided as agreed.\n\nThe law generally requires a complaint to be filed within two years from the date the cause of action arose. Since your event occurred on 1 January 2023, this period has passed. A commission may only entertain a complaint after this time if you can satisfy them that you had sufficient cause for the delay, and they must record their reasons for allowing it.\n\nYou can try to register your grievance through the National Consumer Helpline by calling 1915 or using their portal at consumerhelpline.gov.in. This is a pre-litigation step that may help resolve the issue without going to court.\n\nIf you decide to pursue a formal complaint, you can file it in the District Commission where the repair shop carries on business, or where you reside or work.\n\nPlease consult a lawyer to discuss if your specific situation qualifies for a delay condonation under the law, given the time that has passed since the incident.\n\nDo you have a receipt or invoice for the payment? Did you receive any written communication from the shop?\n\nSource: Consumer Protection Act, 2019, section 85\nSource: Consumer Protection Act, 2019, section 35\nSource: Consumer Protection Act, 2019, section 69\nSource: Consumer Protection Act, 2019, section 34\n\nWhat I could not verify:\n- Whether the District Commission will accept your specific reasons for the delay in filing the complaint.\n- Where to complain if the National Consumer Helpline does not resolve the matter.\n\nBecause of the points above, please talk to a real lawyer or free legal aid office. (the event may be old enough that time limits could be a problem)\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority (NALSA)\nNALSA Helpline Number 15100\n15100 NALSA Helpline Toll-Free Number\nAddress: Jaisalmer House, 26, Man Singh Road, New Delhi-110011. Ph. No. 011-23382778, 23071450, 23382121. E-mail id: nalsa-dla@nic.in.\nCorrespondence Address: B Block, Ground Floor, Administrative Buildings Complex, Supreme Court of India, New Delhi-110001. (Source: National Legal Services Authority Helpline, helpline 15100)\n- Uttar Pradesh State Legal Services Authority\n4/7, Gomti Nagar, Extension, Lucknow 226010.\nHelp Line Toll Free No. 1800-419-0234\nTelephone No. 0522-2286395, 2286265\nFax No. 0522-2287972, 2286260\nE-Mail upslsa[at]nic[dot]in\nweb site https://uttarpradesh.nalsa.gov.in (Source: Uttar Pradesh State Legal Services Authority Contact and Helpline, helpline 1800)\n\nThis is legal information, not legal advice.",
+        "reply_text": "you paid for mixer repair but the service was never provided and you have not taken any action yet.\n\na complaint to the District Commission must be filed within two years from the date on which the cause of action has arisen, unless the commission permits a delay for sufficient cause.\n\nthe District Commission has jurisdiction to entertain complaints where the value of goods or services paid as consideration does not exceed one crore rupees.\n\nyou can file a complaint with the District Commission.\n\ngather all your receipts, bills, and any messages or written records you have with the repair shop.\n\nconsult a lawyer to check if your delay can be condoned and to help file your complaint before the District Commission.\n\ndo you have any written receipt or proof of payment showing the amount paid to the shop?\n\ndo you have any chat messages, call logs, or written communication with the repair shop about the unprovided service?\n\nSource: Consumer Protection Act, 2019, section 69\nSource: Consumer Protection Act, 2019, section 34\nSource: Consumer Protection Act, 2019, section 35\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "consumer",
         "action": "answer",
         "citations": [
-          "CONS-CPA2019-S85",
-          "CONS-CPA2019-S35",
           "CONS-CPA2019-S69",
           "CONS-CPA2019-S34",
-          "COM-NALSA-H15100",
-          "COM-UPSLSA-H1800"
+          "CONS-CPA2019-S35"
         ],
         "retrieved": [
           {
-            "id": "CONS-CPA2019-S85",
-            "score": 0.6852371692657471
-          },
-          {
-            "id": "CONS-ECOM2020-R4",
-            "score": 0.6833764314651489
-          },
-          {
-            "id": "CONS-CPA2019-S35",
-            "score": 0.6793640851974487
-          },
-          {
             "id": "CONS-CPA2019-S69",
-            "score": 0.674822211265564
-          },
-          {
-            "id": "CONS-NCH-P1",
-            "score": 0.6682289838790894
-          },
-          {
-            "id": "CONS-CPA2019-S39",
-            "score": 0.6612765789031982
-          },
-          {
-            "id": "CONS-CPA2019-S34",
-            "score": 0.7613463401794434
+            "score": 0.7600002884864807
           },
           {
             "id": "CONS-PECRULES2021-R3",
-            "score": 0.7612271308898926
+            "score": 0.7003186941146851
+          },
+          {
+            "id": "CONS-CPA2019-S83",
+            "score": 0.6881812810897827
+          },
+          {
+            "id": "CONS-CPA2019-S34",
+            "score": 0.6878513097763062
+          },
+          {
+            "id": "CONS-CPA2019-S35",
+            "score": 0.687802255153656
+          },
+          {
+            "id": "CONS-CPA2019-S38",
+            "score": 0.6861906051635742
+          },
+          {
+            "id": "CONS-CPA2019-S36",
+            "score": 0.7262679934501648
+          },
+          {
+            "id": "CONS-CPA2019-S47",
+            "score": 0.7162348031997681
           }
         ],
         "needs_lawyer": true,
-        "escalation_reasons": [
-          "limitation_risk"
-        ],
+        "escalation_reasons": [],
         "verifier": {
-          "status": "fixed",
+          "status": "pass",
           "issues": []
         },
         "draft_text": null,
         "trace": {
-          "session": "048383806d15",
+          "session": "24e9ae1d3938",
           "input_mode": "text",
           "user_text": "Today is 5 November 2026. I am in Lucknow UP. A fictional repair shop took Rs 7000 on 1 January 2023 and never repaired my mixer. I have done nothing since. Can I start now?",
           "mode": "advice",
@@ -219,69 +241,55 @@
             "state_or_city": "UP",
             "case_file_update": {
               "amount_inr": 7000,
-              "event_date": "2023-01-01",
-              "what_happened": "Paid for mixer repair but service was never provided",
-              "counterparty_type": "repair shop"
+              "purchase_date": "2023-01-01",
+              "what_happened": "Paid for mixer repair but service was never provided.",
+              "counterparty_name": "fictional repair shop",
+              "counterparty_type": "repair shop",
+              "product_or_service": "mixer repair",
+              "resolution_wanted": "refund"
             },
             "missing_facts": [
-              "Do you have a receipt or invoice for the payment?",
-              "Did you receive any written communication from the shop?"
+              "proof of payment",
+              "any communication records with the shop"
             ],
             "escalation_flags": [],
-            "english_retrieval_query": "consumer complaint for non-performance of service and refund"
+            "english_retrieval_query": "consumer complaint limitation period for repair services"
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
           "retrieval": {
-            "query": "consumer complaint for non-performance of service and refund",
+            "query": "consumer complaint limitation period for repair services",
             "jurisdictions": [
               "central",
               "UP"
             ],
-            "top_score": 0.6852371692657471,
-            "min_score": 0.0,
+            "top_score": 0.7600002884864807,
+            "min_score": 0.66,
             "old_law": []
           },
           "judge": "ok",
           "verifier_history": [
-            [
-              "block 1: claim not supported by its cited source (condition dropped: the service must be required by or under any law for the time being in force)",
-              "block 4: claim not supported by its cited source (condition dropped: the claim omits that the complainant's residence or place of work is also a valid jurisdiction)"
-            ],
             []
           ],
-          "timings_s": 73.648,
+          "timings_s": 73.989,
           "llm": {
-            "calls": 13,
-            "retries": 5,
-            "latency_s": 66.56,
+            "calls": 8,
+            "retries": 3,
+            "latency_s": 69.8,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
               "main:gemini:gemini-3.5-flash-lite",
-              "judge:gemini:gemini-3.1-flash-lite",
-              "main:gemini:gemini-3.1-flash-lite",
-              "judge:gemini:gemini-3.1-flash-lite",
-              "embed:gemini:gemini-embedding-001"
+              "judge:gemini:gemini-3.1-flash-lite"
             ],
             "fallbacks": [
               {
                 "role": "judge",
                 "model": "gemini:gemma-4-31b-it",
                 "reason": "HTTP 500"
-              },
-              {
-                "role": "main",
-                "model": "gemini:gemini-3.5-flash-lite",
-                "reason": "HTTP 503"
-              },
-              {
-                "role": "judge",
-                "model": "gemini:gemma-4-31b-it",
-                "reason": "busy for ~106s"
               }
             ]
           },
@@ -289,53 +297,48 @@
           "category": "consumer",
           "retrieved": [
             {
-              "id": "CONS-CPA2019-S85",
-              "score": 0.6852371692657471
-            },
-            {
-              "id": "CONS-ECOM2020-R4",
-              "score": 0.6833764314651489
-            },
-            {
-              "id": "CONS-CPA2019-S35",
-              "score": 0.6793640851974487
-            },
-            {
               "id": "CONS-CPA2019-S69",
-              "score": 0.674822211265564
-            },
-            {
-              "id": "CONS-NCH-P1",
-              "score": 0.6682289838790894
-            },
-            {
-              "id": "CONS-CPA2019-S39",
-              "score": 0.6612765789031982
-            },
-            {
-              "id": "CONS-CPA2019-S34",
-              "score": 0.7613463401794434
+              "score": 0.7600002884864807
             },
             {
               "id": "CONS-PECRULES2021-R3",
-              "score": 0.7612271308898926
+              "score": 0.7003186941146851
+            },
+            {
+              "id": "CONS-CPA2019-S83",
+              "score": 0.6881812810897827
+            },
+            {
+              "id": "CONS-CPA2019-S34",
+              "score": 0.6878513097763062
+            },
+            {
+              "id": "CONS-CPA2019-S35",
+              "score": 0.687802255153656
+            },
+            {
+              "id": "CONS-CPA2019-S38",
+              "score": 0.6861906051635742
+            },
+            {
+              "id": "CONS-CPA2019-S36",
+              "score": 0.7262679934501648
+            },
+            {
+              "id": "CONS-CPA2019-S47",
+              "score": 0.7162348031997681
             }
           ],
           "citations": [
-            "CONS-CPA2019-S85",
-            "CONS-CPA2019-S35",
             "CONS-CPA2019-S69",
             "CONS-CPA2019-S34",
-            "COM-NALSA-H15100",
-            "COM-UPSLSA-H1800"
+            "CONS-CPA2019-S35"
           ],
           "verifier": {
-            "status": "fixed",
+            "status": "pass",
             "issues": []
           },
-          "escalation_reasons": [
-            "limitation_risk"
-          ],
+          "escalation_reasons": [],
           "models": {
             "router": [
               {
@@ -405,6 +408,33 @@
                 "rpd": 19
               }
             ],
+            "translate": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
             "judge": [
               {
                 "provider": "gemini",
@@ -437,15 +467,12 @@
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001",
         "main:gemini:gemini-3.5-flash-lite",
-        "judge:gemini:gemini-3.1-flash-lite",
-        "main:gemini:gemini-3.1-flash-lite",
-        "judge:gemini:gemini-3.1-flash-lite",
-        "embed:gemini:gemini-embedding-001"
+        "judge:gemini:gemini-3.1-flash-lite"
       ],
-      "latency_s": 73.65857560001314,
-      "finished_at": "2026-11-05T16:26:31.926037+00:00"
+      "latency_s": 73.99282260000473,
+      "finished_at": "2026-11-05T21:55:19.832489+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T16:26:31.926037+00:00"
+  "finished_at": "2026-11-05T21:55:19.832489+00:00"
 }

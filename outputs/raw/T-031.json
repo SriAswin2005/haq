@@ -1,0 +1,519 @@
+{
+  "schema_version": 1,
+  "case_id": "T-031",
+  "case": {
+    "id": "T-031",
+    "group": "K_language",
+    "tags": [
+      "round3",
+      "telugu",
+      "translation_integrity"
+    ],
+    "category_expected": "tenancy",
+    "language": "te-IN",
+    "input_mode": "text",
+    "turns": [
+      "నేను లక్నో, ఉత్తర ప్రదేశ్‌లో 2026 అక్టోబర్ 20న అద్దె ఇల్లు ఖాళీ చేశాను. ఇంటి యజమాని నా 30000 రూపాయల డిపాజిట్ తిరిగి ఇవ్వలేదు. అద్దె ఒప్పందం, రసీదు ఉన్నాయి. రసీదు లింక్ https://example.invalid/t031-receipt . దయచేసి తెలుగులో సమాధానం ఇవ్వండి; 30000 సంఖ్యను, ఈ రసీదు లింక్‌ను సమాధానంలో అలాగే ఉంచండి. నేను తరువాత ఏమి చేయాలి?"
+    ],
+    "expected_action": "answer",
+    "expect_needs_lawyer": false,
+    "expected_topics": [
+      "security deposit",
+      "translated verified reply"
+    ],
+    "must_include_any": [
+      [
+        "30000",
+        "30,000"
+      ],
+      [
+        "https://example.invalid/t031-receipt"
+      ]
+    ],
+    "must_not_include": [],
+    "expected_chunk_ids": [
+      "TEN-UPTA2021-S11",
+      "TEN-UPTA2021-S30"
+    ],
+    "notes": "Telugu user in covered UP; synthetic proof URL is user evidence, not a legal source. Require real Telugu output and independently preserve English-original numbers, source IDs and URLs during translation.",
+    "expected_law_verified": false,
+    "calibration_label": "exclude",
+    "jurisdictions_expected": [
+      "central",
+      "UP"
+    ],
+    "retrieval_expectation_kind": "topic",
+    "require_translation": true,
+    "require_visible_tokens": [
+      "30000",
+      "https://example.invalid/t031-receipt"
+    ]
+  },
+  "repeat": 1,
+  "mock": false,
+  "backend": "app.pipeline",
+  "stage": "real",
+  "configured_models": {
+    "router": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "main": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash",
+        "rpm": 5,
+        "tpm": 250000,
+        "rpd": 19
+      }
+    ],
+    "translate": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "judge": [
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      }
+    ]
+  },
+  "started_at": "2026-11-05T22:13:00.581412+00:00",
+  "turns": [
+    {
+      "input": "నేను లక్నో, ఉత్తర ప్రదేశ్‌లో 2026 అక్టోబర్ 20న అద్దె ఇల్లు ఖాళీ చేశాను. ఇంటి యజమాని నా 30000 రూపాయల డిపాజిట్ తిరిగి ఇవ్వలేదు. అద్దె ఒప్పందం, రసీదు ఉన్నాయి. రసీదు లింక్ https://example.invalid/t031-receipt . దయచేసి తెలుగులో సమాధానం ఇవ్వండి; 30000 సంఖ్యను, ఈ రసీదు లింక్‌ను సమాధానంలో అలాగే ఉంచండి. నేను తరువాత ఏమి చేయాలి?",
+      "input_mode": "text",
+      "lang_hint": "te-IN",
+      "started_at": "2026-11-05T22:13:06.582381+00:00",
+      "result": {
+        "reply_text": "మీరు అద్దె ఇల్లు ఖాళీ చేసినప్పుడు, యజమాని మీ సెక్యూరిటీ డిపాజిట్‌ను తిరిగి ఇవ్వాలి. అద్దె ఒప్పందం మరియు రసీదు (https://example.invalid/t031-receipt) మీ వద్ద ఉన్నాయని మీరు పేర్కొన్నారు. యజమాని మీ 30000 రూపాయల డిపాజిట్‌ను తిరిగి ఇవ్వకపోవడం గురించి మీరు ఆందోళన చెందుతున్నారు.\n\nఉత్తర ప్రదేశ్ చట్టం ప్రకారం, అద్దె ఒప్పందంలో నిర్ణయించిన విధంగా సెక్యూరిటీ డిపాజిట్‌ను యజమాని మీకు తిరిగి ఇవ్వాలి. మీరు ఖాళీ చేసిన తేదీన, మీ ఏవైనా బాధ్యతలు ఉంటే వాటిని మినహాయించుకుని మిగిలిన మొత్తాన్ని యజమాని మీకు చెల్లించాలి. ఒకవేళ యజమాని ఈ మొత్తాన్ని తిరిగి ఇవ్వడంలో విఫలమైతే, వారు ఆ మొత్తంపై వడ్డీని చెల్లించాల్సి ఉంటుంది.\n\nనేను మీకు డిమాండ్ నోటీసును సిద్ధం చేయగలను. దీని కోసం నాకు యజమాని పేరు మరియు ఆస్తి చిరునామా అవసరం.\n\nమీరు పైన పేర్కొన్న మార్గాల ద్వారా పరిష్కారం లభించకపోతే లేదా యజమాని స్పందించకపోతే, మీరు ఒక న్యాయవాదిని సంప్రదించడం మంచిది.\n\nమీ యజమాని పేరు ఏమిటి? మరియు ఆ ఇంటి చిరునామా ఏమిటి?\n\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 11\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 24\n\nWhat I could not verify:\n- where to complain\n- I left out one point because I could not match it exactly to the official text. A lawyer or legal aid office can confirm it.\n\nThis is legal information, not legal advice.",
+        "reply_lang": "te-IN",
+        "category": "tenancy",
+        "action": "answer",
+        "citations": [
+          "TEN-UPTA2021-S11",
+          "TEN-UPTA2021-S24"
+        ],
+        "retrieved": [
+          {
+            "id": "TEN-UPTA2021-S11",
+            "score": 0.693467915058136
+          },
+          {
+            "id": "TEN-UPTA2021-S24",
+            "score": 0.6766513586044312
+          },
+          {
+            "id": "TEN-UPTA2021-S14",
+            "score": 0.6617904305458069
+          },
+          {
+            "id": "TEN-UPTA2021-S15",
+            "score": 0.6547213196754456
+          },
+          {
+            "id": "COM-LSAA1987-S22C",
+            "score": 0.6510623693466187
+          },
+          {
+            "id": "COM-LSAA1987-S21",
+            "score": 0.6496006846427917
+          },
+          {
+            "id": "TEN-UPTA2021-S33",
+            "score": 0.7123492956161499
+          },
+          {
+            "id": "TEN-UPTA2021-S30",
+            "score": 0.7078341245651245
+          }
+        ],
+        "needs_lawyer": false,
+        "escalation_reasons": [],
+        "verifier": {
+          "status": "pruned",
+          "issues": []
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "670bf5eb480f",
+          "input_mode": "text",
+          "user_text": "నేను లక్నో, ఉత్తర ప్రదేశ్‌లో 2026 అక్టోబర్ 20న అద్దె ఇల్లు ఖాళీ చేశాను. ఇంటి యజమాని నా 30000 రూపాయల డిపాజిట్ తిరిగి ఇవ్వలేదు. అద్దె ఒప్పందం, రసీదు ఉన్నాయి. రసీదు లింక్ https://example.invalid/t031-receipt . దయచేసి తెలుగులో సమాధానం ఇవ్వండి; 30000 సంఖ్యను, ఈ రసీదు లింక్‌ను సమాధానంలో అలాగే ఉంచండి. నేను తరువాత ఏమి చేయాలి?",
+          "mode": "advice",
+          "router": {
+            "category": "tenancy",
+            "language": "te-IN",
+            "state_or_city": "UP",
+            "case_file_update": {
+              "vacated_date": "2026-10-20",
+              "amount_inr": 30000,
+              "proof": [
+                "rental agreement",
+                "receipt: https://example.invalid/t031-receipt"
+              ]
+            },
+            "missing_facts": [
+              "landlord name",
+              "property address"
+            ],
+            "escalation_flags": [],
+            "english_retrieval_query": "landlord refusing to return security deposit procedure India"
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "translate_to": "te-IN",
+          "retrieval": {
+            "query": "landlord refusing to return security deposit procedure India",
+            "jurisdictions": [
+              "central",
+              "UP"
+            ],
+            "top_score": 0.693467915058136,
+            "min_score": 0.66,
+            "old_law": [
+              {
+                "id": "TEN-UP1972-S20",
+                "score": 0.6400351524353027
+              },
+              {
+                "id": "TEN-UP1972-S21",
+                "score": 0.6335804462432861
+              }
+            ]
+          },
+          "judge": "ok",
+          "verifier_history": [
+            [
+              "block 2: claim not supported by its cited source (The specific receipt URL (https://example.invalid/t031-receipt) is not mentioned in the source.)",
+              "block 3: claim not supported by its cited source (condition dropped: not for non-compoundable offences and property value not exceeding ten lakh rupees)"
+            ],
+            [
+              "block 2: claim not supported by its cited source (Added fact: contacting landlord; 'not related to crimes' is an inaccurate paraphrase of 'offence not compoundable')"
+            ]
+          ],
+          "pruned": {
+            "removed_blocks": [
+              2
+            ],
+            "reasons": [
+              "block 2: claim not supported by its cited source (Added fact: contacting landlord; 'not related to crimes' is an inaccurate paraphrase of 'offence not compoundable')"
+            ],
+            "recheck": [],
+            "judge": "ok"
+          },
+          "timings_s": 184.32,
+          "llm": {
+            "calls": 8,
+            "retries": 0,
+            "latency_s": 184.06,
+            "models": [
+              "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "embed:gemini:gemini-embedding-001",
+              "main:gemini:gemini-3.1-flash-lite",
+              "judge:gemini:gemma-4-31b-it",
+              "main:gemini:gemini-3.1-flash-lite",
+              "judge:gemini:gemma-4-31b-it",
+              "judge:gemini:gemma-4-31b-it"
+            ],
+            "fallbacks": [
+              {
+                "role": "main",
+                "model": "gemini:gemini-3.5-flash-lite",
+                "reason": "busy for ~335s"
+              },
+              {
+                "role": "main",
+                "model": "gemini:gemini-3.5-flash-lite",
+                "reason": "busy for ~284s"
+              }
+            ]
+          },
+          "action": "answer",
+          "category": "tenancy",
+          "retrieved": [
+            {
+              "id": "TEN-UPTA2021-S11",
+              "score": 0.693467915058136
+            },
+            {
+              "id": "TEN-UPTA2021-S24",
+              "score": 0.6766513586044312
+            },
+            {
+              "id": "TEN-UPTA2021-S14",
+              "score": 0.6617904305458069
+            },
+            {
+              "id": "TEN-UPTA2021-S15",
+              "score": 0.6547213196754456
+            },
+            {
+              "id": "COM-LSAA1987-S22C",
+              "score": 0.6510623693466187
+            },
+            {
+              "id": "COM-LSAA1987-S21",
+              "score": 0.6496006846427917
+            },
+            {
+              "id": "TEN-UPTA2021-S33",
+              "score": 0.7123492956161499
+            },
+            {
+              "id": "TEN-UPTA2021-S30",
+              "score": 0.7078341245651245
+            }
+          ],
+          "citations": [
+            "TEN-UPTA2021-S11",
+            "TEN-UPTA2021-S24"
+          ],
+          "verifier": {
+            "status": "pruned",
+            "issues": []
+          },
+          "escalation_reasons": [],
+          "models": {
+            "router": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "main": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash",
+                "rpm": 5,
+                "tpm": 250000,
+                "rpd": 19
+              }
+            ],
+            "translate": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "judge": [
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              }
+            ]
+          },
+          "mock": false,
+          "translation": {
+            "to": "te-IN",
+            "status": "ok",
+            "attempts": 1,
+            "english_original": "మీరు అద్దె ఇల్లు ఖాళీ చేసినప్పుడు, యజమాని మీ సెక్యూరిటీ డిపాజిట్‌ను తిరిగి ఇవ్వాలి. అద్దె ఒప్పందం మరియు రసీదు (https://example.invalid/t031-receipt) మీ వద్ద ఉన్నాయని మీరు పేర్కొన్నారు. యజమాని మీ 30000 రూపాయల డిపాజిట్‌ను తిరిగి ఇవ్వకపోవడం గురించి మీరు ఆందోళన చెందుతున్నారు.\n\nఉత్తర ప్రదేశ్ చట్టం ప్రకారం, అద్దె ఒప్పందంలో నిర్ణయించిన విధంగా సెక్యూరిటీ డిపాజిట్‌ను యజమాని మీకు తిరిగి ఇవ్వాలి. మీరు ఖాళీ చేసిన తేదీన, మీ ఏవైనా బాధ్యతలు ఉంటే వాటిని మినహాయించుకుని మిగిలిన మొత్తాన్ని యజమాని మీకు చెల్లించాలి. ఒకవేళ యజమాని ఈ మొత్తాన్ని తిరిగి ఇవ్వడంలో విఫలమైతే, వారు ఆ మొత్తంపై వడ్డీని చెల్లించాల్సి ఉంటుంది.\n\nనేను మీకు డిమాండ్ నోటీసును సిద్ధం చేయగలను. దీని కోసం నాకు యజమాని పేరు మరియు ఆస్తి చిరునామా అవసరం.\n\nమీరు పైన పేర్కొన్న మార్గాల ద్వారా పరిష్కారం లభించకపోతే లేదా యజమాని స్పందించకపోతే, మీరు ఒక న్యాయవాదిని సంప్రదించడం మంచిది.\n\nమీ యజమాని పేరు ఏమిటి? మరియు ఆ ఇంటి చిరునామా ఏమిటి?\n\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 11\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 24\n\nWhat I could not verify:\n- where to complain\n- I left out one point because I could not match it exactly to the official text. A lawyer or legal aid office can confirm it.\n\nThis is legal information, not legal advice."
+          }
+        }
+      },
+      "model_names_used": [
+        "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001",
+        "main:gemini:gemini-3.1-flash-lite",
+        "judge:gemini:gemma-4-31b-it",
+        "main:gemini:gemini-3.1-flash-lite",
+        "judge:gemini:gemma-4-31b-it",
+        "judge:gemini:gemma-4-31b-it"
+      ],
+      "latency_s": 189.08979699999327,
+      "finished_at": "2026-11-05T22:16:15.672220+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-05T22:16:15.672220+00:00"
+}

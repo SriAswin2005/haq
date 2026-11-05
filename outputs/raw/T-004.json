@@ -123,6 +123,33 @@
         "rpd": 19
       }
     ],
+    "translate": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
     "judge": [
       {
         "provider": "gemini",
@@ -147,67 +174,69 @@
       }
     ]
   },
-  "started_at": "2026-11-05T16:16:40.262584+00:00",
+  "started_at": "2026-11-05T21:46:38.048392+00:00",
   "turns": [
     {
       "input": "I work in a private shop in Kanpur UP, salary Rs 18000 for October 2026 unpaid, payslip and bank statement ready. The Payment of Wages Act, 1936 is the current law right? Tell me what law applies to this new claim, not an old pending case.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T16:16:46.263287+00:00",
+      "started_at": "2026-11-05T21:46:44.064142+00:00",
       "result": {
-        "reply_text": "What I understood: amount inr: 18000; event date: 2026-10; what happened: Salary for October 2026 is unpaid; proof: ['payslip', 'bank statement']; counterparty type: private shop; months since event: 1.1; state: UP\n\nI do not have verified information in my sources to answer this part, and I will not guess.\n\nWhat you can do right now: collect your documents (agreement, receipts, bank or UPI records, messages, photos), and write down the dates and amounts in order.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority (NALSA)\nNALSA Helpline Number 15100\n15100 NALSA Helpline Toll-Free Number\nAddress: Jaisalmer House, 26, Man Singh Road, New Delhi-110011. Ph. No. 011-23382778, 23071450, 23382121. E-mail id: nalsa-dla@nic.in.\nCorrespondence Address: B Block, Ground Floor, Administrative Buildings Complex, Supreme Court of India, New Delhi-110001. (Source: National Legal Services Authority Helpline, helpline 15100)\n- Uttar Pradesh State Legal Services Authority\n4/7, Gomti Nagar, Extension, Lucknow 226010.\nHelp Line Toll Free No. 1800-419-0234\nTelephone No. 0522-2286395, 2286265\nFax No. 0522-2287972, 2286260\nE-Mail upslsa[at]nic[dot]in\nweb site https://uttarpradesh.nalsa.gov.in (Source: Uttar Pradesh State Legal Services Authority Contact and Helpline, helpline 1800)\n\nThis is legal information, not legal advice.",
+        "reply_text": "I understand that you work at a private shop in Uttar Pradesh and have not received your monthly wage of eighteen thousand rupees for the period of October 2026, and you have your payslip and bank statement ready.\n\nWhere wages of an employee are not paid under the Uttar Pradesh Dookan Aur Vanijya Adhishthan Adhiniyam, 1962, they shall be recoverable in the manner provided in the Payment of Wages Act as if the same were wages payable under that Act.\n\nKeep your payslip and bank statement safely with you.\n\nYou may consult a lawyer to understand your options better if your employer does not pay your wages.\n\nWhat is the name of your employer?\n\nWhat was your last working date?\n\nSource: Uttar Pradesh Dookan Aur Vanijya Adhishthan Adhiniyam, 1962, section 18\n\nNote: Payment of Wages Act, 1936 is no longer in force, so I do not use it.\n\nWhat I could not verify:\n- where to complain\n- I left out one point because I could not match it exactly to the official text. A lawyer or legal aid office can confirm it.\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "wages",
-        "action": "refuse_unverified",
+        "action": "answer",
         "citations": [
-          "COM-NALSA-H15100",
-          "COM-UPSLSA-H1800"
+          "WAGE-UPSHOP1962-S18"
         ],
         "retrieved": [
           {
+            "id": "WAGE-UPSHOP1962-S18",
+            "score": 0.7526967525482178
+          },
+          {
             "id": "WAGE-COW2019-S45",
-            "score": 0.7220988869667053
-          },
-          {
-            "id": "WAGE-COW2019-S57",
-            "score": 0.6927881240844727
-          },
-          {
-            "id": "WAGE-COW2019-S43",
-            "score": 0.6731112003326416
+            "score": 0.725307047367096
           },
           {
             "id": "WAGE-COW2019-S17",
-            "score": 0.6716279983520508
+            "score": 0.7114217281341553
           },
           {
-            "id": "WAGE-COW2019-S46",
-            "score": 0.668231725692749
+            "id": "WAGE-COW2019-S43",
+            "score": 0.7086805105209351
           },
           {
-            "id": "WAGE-UPSHOP1962-S18",
-            "score": 0.6669486165046692
+            "id": "WAGE-UPSHOP1962-S13",
+            "score": 0.707537829875946
+          },
+          {
+            "id": "WAGE-COW2019-S54",
+            "score": 0.7062174081802368
+          },
+          {
+            "id": "WAGE-COW2019-S57",
+            "score": 0.696526288986206
           },
           {
             "id": "WAGE-COW2019-S49",
             "score": 0.6729814410209656
           },
           {
-            "id": "WAGE-COW2019-S54",
-            "score": 0.6583853960037231
+            "id": "WAGE-PWA1936-S15",
+            "score": 0.7523146867752075,
+            "old_law": true
           }
         ],
         "needs_lawyer": true,
         "escalation_reasons": [],
         "verifier": {
-          "status": "failed",
-          "issues": [
-            "block 1: claim not supported by its cited source (condition dropped: the source specifies amounts required to be paid 'under this Code', whereas the claim omits this limi)"
-          ]
+          "status": "pruned",
+          "issues": []
         },
         "draft_text": null,
         "trace": {
-          "session": "12404dfdb7b8",
+          "session": "be462884b9d6",
           "input_mode": "text",
           "user_text": "I work in a private shop in Kanpur UP, salary Rs 18000 for October 2026 unpaid, payslip and bank statement ready. The Payment of Wages Act, 1936 is the current law right? Tell me what law applies to this new claim, not an old pending case.",
           "mode": "advice",
@@ -216,9 +245,8 @@
             "language": "en-IN",
             "state_or_city": "UP",
             "case_file_update": {
-              "amount_inr": 18000,
-              "event_date": "2026-10",
-              "what_happened": "Salary for October 2026 is unpaid",
+              "monthly_wage_inr": 18000,
+              "unpaid_period": "2026-10",
               "proof": [
                 "payslip",
                 "bank statement"
@@ -227,121 +255,117 @@
             },
             "missing_facts": [
               "employer_name",
-              "date_salary_was_due"
+              "last_working_date"
             ],
             "escalation_flags": [],
-            "english_retrieval_query": "unpaid salary claim procedure India"
+            "english_retrieval_query": "legal remedy for unpaid salary in private shop under Payment of Wages Act"
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
           "retrieval": {
-            "query": "unpaid salary claim procedure India",
+            "query": "legal remedy for unpaid salary in private shop under Payment of Wages Act",
             "jurisdictions": [
               "central",
               "UP"
             ],
-            "top_score": 0.7220988869667053,
-            "min_score": 0.0,
+            "top_score": 0.7526967525482178,
+            "min_score": 0.66,
             "old_law": [
               {
                 "id": "WAGE-PWA1936-S15",
-                "score": 0.724400520324707
+                "score": 0.7523146867752075
               },
               {
                 "id": "WAGE-PWA1936-S5",
-                "score": 0.6822143197059631
+                "score": 0.7286581993103027
               }
             ]
           },
           "judge": "ok",
           "verifier_history": [
             [
-              "block 4: claim not supported by its cited source (The claim is broader than the source; the source only bars suits for specific types of wages (minimum wages, deductions,)"
+              "block 1: legal block without a citation",
+              "block 1: number '1936' not found in cited source or user's facts"
             ],
             [
-              "block 1: claim not supported by its cited source (condition dropped: the source specifies amounts required to be paid 'under this Code', whereas the claim omits this limi)"
+              "block 1: claim not supported by its cited source (The source explicitly mentions The Payment of Wages Act, 1936.)"
             ]
           ],
-          "timings_s": 155.56,
+          "pruned": {
+            "removed_blocks": [
+              1
+            ],
+            "reasons": [
+              "block 1: claim not supported by its cited source (The source explicitly mentions The Payment of Wages Act, 1936.)"
+            ],
+            "recheck": [],
+            "judge": "ok"
+          },
+          "timings_s": 114.524,
           "llm": {
-            "calls": 11,
-            "retries": 4,
-            "latency_s": 151.28,
+            "calls": 8,
+            "retries": 1,
+            "latency_s": 112.29,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
-              "main:gemini:gemini-3.1-flash-lite",
-              "judge:gemini:gemini-3.1-flash-lite",
               "main:gemini:gemini-3.5-flash-lite",
-              "judge:gemini:gemini-3.1-flash-lite",
-              "embed:gemini:gemini-embedding-001"
+              "main:gemini:gemini-3.5-flash-lite",
+              "judge:gemini:gemma-4-31b-it",
+              "judge:gemini:gemma-4-31b-it"
             ],
-            "fallbacks": [
-              {
-                "role": "main",
-                "model": "gemini:gemini-3.5-flash-lite",
-                "reason": "HTTP 503"
-              },
-              {
-                "role": "judge",
-                "model": "gemini:gemma-4-31b-it",
-                "reason": "HTTP 500"
-              },
-              {
-                "role": "judge",
-                "model": "gemini:gemma-4-31b-it",
-                "reason": "busy for ~114s"
-              }
-            ]
+            "fallbacks": []
           },
-          "action": "refuse_unverified",
+          "action": "answer",
           "category": "wages",
           "retrieved": [
             {
+              "id": "WAGE-UPSHOP1962-S18",
+              "score": 0.7526967525482178
+            },
+            {
               "id": "WAGE-COW2019-S45",
-              "score": 0.7220988869667053
-            },
-            {
-              "id": "WAGE-COW2019-S57",
-              "score": 0.6927881240844727
-            },
-            {
-              "id": "WAGE-COW2019-S43",
-              "score": 0.6731112003326416
+              "score": 0.725307047367096
             },
             {
               "id": "WAGE-COW2019-S17",
-              "score": 0.6716279983520508
+              "score": 0.7114217281341553
             },
             {
-              "id": "WAGE-COW2019-S46",
-              "score": 0.668231725692749
+              "id": "WAGE-COW2019-S43",
+              "score": 0.7086805105209351
             },
             {
-              "id": "WAGE-UPSHOP1962-S18",
-              "score": 0.6669486165046692
+              "id": "WAGE-UPSHOP1962-S13",
+              "score": 0.707537829875946
+            },
+            {
+              "id": "WAGE-COW2019-S54",
+              "score": 0.7062174081802368
+            },
+            {
+              "id": "WAGE-COW2019-S57",
+              "score": 0.696526288986206
             },
             {
               "id": "WAGE-COW2019-S49",
               "score": 0.6729814410209656
             },
             {
-              "id": "WAGE-COW2019-S54",
-              "score": 0.6583853960037231
+              "id": "WAGE-PWA1936-S15",
+              "score": 0.7523146867752075,
+              "old_law": true
             }
           ],
           "citations": [
-            "COM-NALSA-H15100",
-            "COM-UPSLSA-H1800"
+            "WAGE-UPSHOP1962-S18"
           ],
           "verifier": {
-            "status": "failed",
-            "issues": [
-              "block 1: claim not supported by its cited source (condition dropped: the source specifies amounts required to be paid 'under this Code', whereas the claim omits this limi)"
-            ]
+            "status": "pruned",
+            "issues": []
           },
           "escalation_reasons": [],
           "models": {
@@ -413,6 +437,33 @@
                 "rpd": 19
               }
             ],
+            "translate": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
             "judge": [
               {
                 "provider": "gemini",
@@ -444,16 +495,15 @@
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001",
-        "main:gemini:gemini-3.1-flash-lite",
-        "judge:gemini:gemini-3.1-flash-lite",
         "main:gemini:gemini-3.5-flash-lite",
-        "judge:gemini:gemini-3.1-flash-lite",
-        "embed:gemini:gemini-embedding-001"
+        "main:gemini:gemini-3.5-flash-lite",
+        "judge:gemini:gemma-4-31b-it",
+        "judge:gemini:gemma-4-31b-it"
       ],
-      "latency_s": 155.56440849998035,
-      "finished_at": "2026-11-05T16:19:21.827736+00:00"
+      "latency_s": 114.5360134000075,
+      "finished_at": "2026-11-05T21:48:38.595561+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T16:19:21.827736+00:00"
+  "finished_at": "2026-11-05T21:48:38.595561+00:00"
 }

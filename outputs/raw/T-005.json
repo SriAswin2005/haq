@@ -124,6 +124,33 @@
         "rpd": 19
       }
     ],
+    "translate": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
     "judge": [
       {
         "provider": "gemini",
@@ -148,45 +175,46 @@
       }
     ]
   },
-  "started_at": "2026-11-05T16:19:21.836316+00:00",
+  "started_at": "2026-11-05T21:48:38.605326+00:00",
   "turns": [
     {
       "input": "Lucknow UP residential tenant, written agreement signed January 2026, left October 2026, deposit Rs 24000 unpaid. No earlier case pending. My landlord says only the UP Urban Buildings Act 1972 applies today. Is that current? Where does a new deposit dispute go?",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T16:19:27.821880+00:00",
+      "started_at": "2026-11-05T21:48:44.592221+00:00",
       "result": {
-        "reply_text": "What I understood: You vacated your residential property in Lucknow, Uttar Pradesh in October 2026 after staying under a written agreement signed in January 2026, and your landlord has not returned your security deposit of Rs 24000.\n\nWhere you stand: The security deposit must be refunded to the tenant on the date of taking over vacant possession of the premises from the tenant, after making due deduction of any liability of the tenant.\n\nKeep your written rental agreement, payment proofs of the deposit, and any messages or written communication with your landlord safely.\n\nHas a formal legal notice been sent to the landlord regarding the unpaid security deposit?\n\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 11\n\nNote: Uttar Pradesh Urban Buildings (Regulation of Letting, Rent and Eviction) Act, 1972 is no longer in force, so I do not use it.\n\nWhat I could not verify:\n- where to complain\n\nThis is legal information, not legal advice.",
+        "reply_text": "what I understood: you are a residential tenant in Lucknow, Uttar Pradesh. Your tenancy started and you vacated within the same year. Your security deposit is unpaid by your landlord.\n\nThe law provides that the older Act stands repealed, and pending cases under the old law are continued under it, while new matters are governed by the current Act.\n\nWhere you take over vacant possession of the premises from the tenant, the security deposit shall be refunded to the tenant after making due deduction of any liability of the tenant.\n\nwhere to complain: you may approach the Rent Authority for tenancy disputes.\n\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 46\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 11\n\nNote: Uttar Pradesh Urban Buildings (Regulation of Letting, Rent and Eviction) Act, 1972 is no longer in force, so I do not use it.\n\nWhat I could not verify:\n- I left out one point because I could not match it exactly to the official text. A lawyer or legal aid office can confirm it.\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "tenancy",
         "action": "answer",
         "citations": [
+          "TEN-UPTA2021-S46",
           "TEN-UPTA2021-S11"
         ],
         "retrieved": [
           {
             "id": "TEN-UPTA2021-S11",
-            "score": 0.7675791382789612
+            "score": 0.7360297441482544
           },
           {
-            "id": "TEN-UPTA2021-S24",
-            "score": 0.7440094351768494
+            "id": "TEN-UPTA2021-S38",
+            "score": 0.7344257831573486
           },
           {
-            "id": "TEN-UPTA2021-S14",
-            "score": 0.7159260511398315
+            "id": "TEN-UPTA2021-S46",
+            "score": 0.7289003133773804
           },
           {
-            "id": "TEN-UPTA2021-S15",
-            "score": 0.7156076431274414
-          },
-          {
-            "id": "TEN-UPTA2021-S28",
-            "score": 0.7102089524269104
+            "id": "TEN-UPTA2021-S32",
+            "score": 0.7162273526191711
           },
           {
             "id": "TEN-UPTA2021-S35",
-            "score": 0.7032645344734192
+            "score": 0.7153205871582031
+          },
+          {
+            "id": "TEN-UPTA2021-S14",
+            "score": 0.708337664604187
           },
           {
             "id": "TEN-UPTA2021-S33",
@@ -195,17 +223,22 @@
           {
             "id": "TEN-UPTA2021-S30",
             "score": 0.7078341245651245
+          },
+          {
+            "id": "TEN-UP1972-S20",
+            "score": 0.6991491317749023,
+            "old_law": true
           }
         ],
         "needs_lawyer": false,
         "escalation_reasons": [],
         "verifier": {
-          "status": "pass",
+          "status": "pruned",
           "issues": []
         },
         "draft_text": null,
         "trace": {
-          "session": "8d4dc4fc8292",
+          "session": "605f7befd4d1",
           "input_mode": "text",
           "user_text": "Lucknow UP residential tenant, written agreement signed January 2026, left October 2026, deposit Rs 24000 unpaid. No earlier case pending. My landlord says only the UP Urban Buildings Act 1972 applies today. Is that current? Where does a new deposit dispute go?",
           "mode": "advice",
@@ -217,60 +250,85 @@
               "amount_inr": 24000,
               "tenancy_start_date": "2026-01",
               "vacated_date": "2026-10",
-              "counterparty_type": "landlord",
-              "what_happened": "Landlord has not returned the security deposit of Rs 24000 after the tenant vacated the property."
+              "counterparty_type": "landlord"
             },
-            "missing_facts": [
-              "Is there a written rental agreement?",
-              "Has a formal legal notice been sent to the landlord?"
-            ],
+            "missing_facts": [],
             "escalation_flags": [],
-            "english_retrieval_query": "legal procedure for recovery of security deposit from landlord in Uttar Pradesh"
+            "english_retrieval_query": "rental security deposit dispute jurisdiction Uttar Pradesh Urban Buildings Act 1972"
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
           "retrieval": {
-            "query": "legal procedure for recovery of security deposit from landlord in Uttar Pradesh",
+            "query": "rental security deposit dispute jurisdiction Uttar Pradesh Urban Buildings Act 1972",
             "jurisdictions": [
               "central",
               "UP"
             ],
-            "top_score": 0.7675791382789612,
-            "min_score": 0.0,
+            "top_score": 0.7360297441482544,
+            "min_score": 0.66,
             "old_law": [
               {
                 "id": "TEN-UP1972-S20",
-                "score": 0.69524747133255
+                "score": 0.6991491317749023
               },
               {
                 "id": "TEN-UP1972-S21",
-                "score": 0.6941720247268677
+                "score": 0.6869997978210449
               }
             ]
           },
           "judge": "ok",
           "verifier_history": [
-            []
+            [
+              "block 1: cites ids not in this turn's sources: ['CHUNK id=TEN-UPTA2021-S46']",
+              "block 1: number '2021' not found in cited source or user's facts",
+              "block 1: number '1972,' not found in cited source or user's facts",
+              "block 1: number '1972' not found in cited source or user's facts",
+              "block 2: cites ids not in this turn's sources: ['CHUNK id=TEN-UPTA2021-S11']",
+              "block 2: number '2021,' not found in cited source or user's facts",
+              "block 3: cites ids not in this turn's sources: ['CHUNK id=TEN-UPTA2021-S38']",
+              "block 3: number '2021,' not found in cited source or user's facts"
+            ],
+            [
+              "block 3: claim not supported by its cited source (condition dropped: Save as otherwise provided in this Act)"
+            ]
           ],
-          "timings_s": 18.604,
+          "pruned": {
+            "removed_blocks": [
+              3
+            ],
+            "reasons": [
+              "block 3: claim not supported by its cited source (condition dropped: Save as otherwise provided in this Act)"
+            ],
+            "recheck": [],
+            "judge": "ok"
+          },
+          "timings_s": 83.759,
           "llm": {
-            "calls": 6,
-            "retries": 1,
-            "latency_s": 16.46,
+            "calls": 10,
+            "retries": 3,
+            "latency_s": 76.49,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
               "main:gemini:gemini-3.5-flash-lite",
+              "main:gemini:gemini-3.5-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite",
               "judge:gemini:gemini-3.1-flash-lite"
             ],
             "fallbacks": [
               {
                 "role": "judge",
                 "model": "gemini:gemma-4-31b-it",
-                "reason": "busy for ~88s"
+                "reason": "HTTP 500"
+              },
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~18s"
               }
             ]
           },
@@ -279,27 +337,27 @@
           "retrieved": [
             {
               "id": "TEN-UPTA2021-S11",
-              "score": 0.7675791382789612
+              "score": 0.7360297441482544
             },
             {
-              "id": "TEN-UPTA2021-S24",
-              "score": 0.7440094351768494
+              "id": "TEN-UPTA2021-S38",
+              "score": 0.7344257831573486
             },
             {
-              "id": "TEN-UPTA2021-S14",
-              "score": 0.7159260511398315
+              "id": "TEN-UPTA2021-S46",
+              "score": 0.7289003133773804
             },
             {
-              "id": "TEN-UPTA2021-S15",
-              "score": 0.7156076431274414
-            },
-            {
-              "id": "TEN-UPTA2021-S28",
-              "score": 0.7102089524269104
+              "id": "TEN-UPTA2021-S32",
+              "score": 0.7162273526191711
             },
             {
               "id": "TEN-UPTA2021-S35",
-              "score": 0.7032645344734192
+              "score": 0.7153205871582031
+            },
+            {
+              "id": "TEN-UPTA2021-S14",
+              "score": 0.708337664604187
             },
             {
               "id": "TEN-UPTA2021-S33",
@@ -308,13 +366,19 @@
             {
               "id": "TEN-UPTA2021-S30",
               "score": 0.7078341245651245
+            },
+            {
+              "id": "TEN-UP1972-S20",
+              "score": 0.6991491317749023,
+              "old_law": true
             }
           ],
           "citations": [
+            "TEN-UPTA2021-S46",
             "TEN-UPTA2021-S11"
           ],
           "verifier": {
-            "status": "pass",
+            "status": "pruned",
             "issues": []
           },
           "escalation_reasons": [],
@@ -387,6 +451,33 @@
                 "rpd": 19
               }
             ],
+            "translate": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
             "judge": [
               {
                 "provider": "gemini",
@@ -419,12 +510,14 @@
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001",
         "main:gemini:gemini-3.5-flash-lite",
+        "main:gemini:gemini-3.5-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite",
         "judge:gemini:gemini-3.1-flash-lite"
       ],
-      "latency_s": 18.60741679999046,
-      "finished_at": "2026-11-05T16:19:46.429533+00:00"
+      "latency_s": 83.76188659999752,
+      "finished_at": "2026-11-05T21:50:08.353860+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T16:19:46.429533+00:00"
+  "finished_at": "2026-11-05T21:50:08.353860+00:00"
 }

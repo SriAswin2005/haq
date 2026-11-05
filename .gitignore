@@ -6,3 +6,5 @@ __pycache__/
 outputs/live_trace.jsonl
 .venv/
 outputs/feedback.jsonl
+tests/_scratch/
+outputs/runs/

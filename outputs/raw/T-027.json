@@ -129,6 +129,33 @@
         "rpd": 19
       }
     ],
+    "translate": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
     "judge": [
       {
         "provider": "gemini",
@@ -153,13 +180,13 @@
       }
     ]
   },
-  "started_at": "2026-11-05T17:57:17.379527+00:00",
+  "started_at": "2026-11-05T22:08:16.861727+00:00",
   "turns": [
     {
       "input": "UP Lucknow rental deposit not returned after I left last month. Please draft a polite demand notice. I don't know the dates or amount offhand and I haven't given you either person's name or address.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T17:57:23.380775+00:00",
+      "started_at": "2026-11-05T22:08:22.851736+00:00",
       "result": {
         "reply_text": "Here is a draft demand notice for your security deposit. Anything I do not know is left as a [● placeholder] for you to fill in.\n\nLEGAL NOTICE: DEMAND FOR RETURN OF SECURITY DEPOSIT\n\nDate: [● date of sending]\nBy: [● registered post / speed post / email, as you choose]\n\nTo,\n[● landlord's full name]\n[● landlord's address]\n\nFrom,\n[● your full name]\n[● your address and phone number]\n\nSubject: Demand for return of security deposit of Rs. [● deposit amount] for the premises at [● property address]\n\nDear Sir/Madam,\n\n1. I was your tenant at [● property address] from [● tenancy start date] to 2026-10 under [● rent agreement / verbal arrangement].\n\n2. At the start of the tenancy I paid you a security deposit of Rs. [● deposit amount] on [● date of payment] by [● mode of payment, e.g. bank transfer / UPI / cash]. [● reference or proof, e.g. receipt, transaction ID, agreement clause].\n\n3. I vacated the premises on 2026-10 and handed over [● possession details, e.g. keys handed over on date / to whom].\n\n4. The deposit has not been returned. [● what happened when you asked, with dates, e.g. calls or messages already sent]. [● any deductions the landlord claimed, and why they are not justified, or \"No deductions were agreed.\"]\n\nThis demand is made with reference to: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 11; Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 24. [● Have a lawyer confirm that these provisions apply to your case.]\n\n5. I therefore request you to return the full security deposit of Rs. [● deposit amount] within [● number of days you allow] days of receiving this notice, by [● how you want to be paid, e.g. transfer to your bank account details].\n\n6. If the amount is not returned within this time, I will be free to take further steps available to me under the law, without further notice, at your cost and risk.\n\nYours faithfully,\n[● your name]\n[● signature]\n\nEnclosures (copies): [● agreement / receipts / transaction record / messages]\n\n\nCheck every detail before sending. For high-value or complex matters, have a lawyer review it.",
         "reply_lang": "en-IN",
@@ -195,7 +222,7 @@
         },
         "draft_text": "LEGAL NOTICE: DEMAND FOR RETURN OF SECURITY DEPOSIT\n\nDate: [● date of sending]\nBy: [● registered post / speed post / email, as you choose]\n\nTo,\n[● landlord's full name]\n[● landlord's address]\n\nFrom,\n[● your full name]\n[● your address and phone number]\n\nSubject: Demand for return of security deposit of Rs. [● deposit amount] for the premises at [● property address]\n\nDear Sir/Madam,\n\n1. I was your tenant at [● property address] from [● tenancy start date] to 2026-10 under [● rent agreement / verbal arrangement].\n\n2. At the start of the tenancy I paid you a security deposit of Rs. [● deposit amount] on [● date of payment] by [● mode of payment, e.g. bank transfer / UPI / cash]. [● reference or proof, e.g. receipt, transaction ID, agreement clause].\n\n3. I vacated the premises on 2026-10 and handed over [● possession details, e.g. keys handed over on date / to whom].\n\n4. The deposit has not been returned. [● what happened when you asked, with dates, e.g. calls or messages already sent]. [● any deductions the landlord claimed, and why they are not justified, or \"No deductions were agreed.\"]\n\nThis demand is made with reference to: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 11; Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 24. [● Have a lawyer confirm that these provisions apply to your case.]\n\n5. I therefore request you to return the full security deposit of Rs. [● deposit amount] within [● number of days you allow] days of receiving this notice, by [● how you want to be paid, e.g. transfer to your bank account details].\n\n6. If the amount is not returned within this time, I will be free to take further steps available to me under the law, without further notice, at your cost and risk.\n\nYours faithfully,\n[● your name]\n[● signature]\n\nEnclosures (copies): [● agreement / receipts / transaction record / messages]\n\n\nCheck every detail before sending. For high-value or complex matters, have a lawyer review it.",
         "trace": {
-          "session": "481c714e9a21",
+          "session": "8fe7b2bc6221",
           "input_mode": "text",
           "user_text": "UP Lucknow rental deposit not returned after I left last month. Please draft a polite demand notice. I don't know the dates or amount offhand and I haven't given you either person's name or address.",
           "mode": "draft",
@@ -204,11 +231,11 @@
             "language": "en-IN",
             "state_or_city": "UP",
             "case_file_update": {
-              "what_happened": "rental deposit not returned after vacating",
+              "what_happened": "rental security deposit not returned after vacating",
               "vacated_date": "2026-10"
             },
             "missing_facts": [
-              "amount of security deposit",
+              "deposit amount",
               "landlord name"
             ],
             "escalation_flags": [],
@@ -225,7 +252,7 @@
               "UP"
             ],
             "top_score": 0.7066757678985596,
-            "min_score": 0.0,
+            "min_score": 0.66,
             "old_law": [
               {
                 "id": "TEN-UP1972-S20",
@@ -238,6 +265,8 @@
             ]
           },
           "draft": {
+            "kind": "tenancy",
+            "file_name": "deposit_notice.txt",
             "missing": [
               "[● Have a lawyer confirm that these provisions apply to your case.]",
               "[● agreement / receipts / transaction record / messages]",
@@ -264,11 +293,11 @@
             ],
             "scan_issues": []
           },
-          "timings_s": 9.298,
+          "timings_s": 6.208,
           "llm": {
             "calls": 4,
             "retries": 0,
-            "latency_s": 9.25,
+            "latency_s": 6.15,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
@@ -375,6 +404,33 @@
                 "rpd": 19
               }
             ],
+            "translate": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
             "judge": [
               {
                 "provider": "gemini",
@@ -408,10 +464,10 @@
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 9.3015493999701,
-      "finished_at": "2026-11-05T17:57:32.682889+00:00"
+      "latency_s": 6.211937999993097,
+      "finished_at": "2026-11-05T22:08:29.063483+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T17:57:32.682889+00:00"
+  "finished_at": "2026-11-05T22:08:29.063483+00:00"
 }

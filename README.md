@@ -22,7 +22,7 @@ cp .env.example .env        # then put your GEMINI_API_KEY in .env
 Python 3.10+. Keys are read from environment variables only and never printed.
 
 ## Run
-Web UI: `streamlit run app/ui.py`
+Legacy Streamlit UI: `pip install -r requirements-ui.txt` then `streamlit run app/ui.py`
 
 CLI (also the interview demo):
 ```
