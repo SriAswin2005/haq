@@ -36,3 +36,4 @@ Format: `date | who | assumption | why`. Append only.
 
 2026-11-06 | codex | The final published eval is the frozen revision captured at 2026-11-05 16:10 UTC, with 119 corpus chunks; later checkout changes are outside its scope. | A clean source snapshot prevents concurrent prompt/config/application edits from mixing versions during a long real run.
 2026-11-06 | codex | The 0.720954 threshold is an in-sample balanced-error candidate, not an automatically chosen production setting; 0.665437 is the coverage-preserving alternative. | Seven answerable and three unsupported-subtopic labels overlap substantially; all legal expectations remain unverified by a human.
+2026-11-06 | human | retrieval.min_score = 0.66 | Floor against off-topic retrieval, chosen from the real-run calibration (answerable 0.68-0.75). Accepted cost: an uncovered-state question with weak retrieval (T-030, 0.647) gets the safe response.

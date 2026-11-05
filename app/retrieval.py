@@ -157,4 +157,8 @@ def search(query_en: str, categories: list[str], jurisdictions: list[str], k: in
 
 def passes_gate(top_score: float) -> bool:
     """Confidence gate: weak retrieval -> no answer."""
-    return top_score > 0 and top_score >= float(load_config()["retrieval"]["min_score"])
+    r = load_config()["retrieval"]
+    # The threshold is calibrated for the real embedding model. Mock (hash) embeddings give meaningless
+    # scores, so mock mode uses its own floor (default 0) and offline tests still exercise the answer path.
+    floor = float(r.get("mock_min_score", 0.0)) if llm.is_mock() else float(r["min_score"])
+    return top_score > 0 and top_score >= floor

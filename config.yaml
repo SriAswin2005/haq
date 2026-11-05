@@ -38,7 +38,10 @@ embeddings: {provider: gemini, model: "gemini-embedding-001", rpm: 100, tpm: 300
 corpus: {path: data/corpus}        # switched 2026-11-05 after validate_corpus.py passed (122 chunks); data/sample for dev
 retrieval:
   top_k: 6
-  min_score: 0.0        # calibrate from outputs/calibration.md
+  min_score: 0.66       # chosen by the human 2026-11-06 from outputs/calibration.md (real run): answerable cases scored
+                        # 0.68-0.75, refuse cases 0.65-0.72 (traps are on-topic, so the gate cannot separate them; the
+                        # verifier does that). 0.66 is a floor against clearly off-topic retrieval. Known cost: T-030
+                        # (Karnataka tenant, top score 0.647) now gets the safe response instead of central-law info.
   forum_extra: 2        # each forum query adds up to 2 chunks after the main hits (gate uses main query only)
   forum_queries:        # so every answer can say WHERE to go, not just what the law says
     tenancy: ["Rent Authority appointment, application by tenant or landlord, and appeal to Rent Tribunal"]
