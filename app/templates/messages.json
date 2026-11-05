@@ -29,7 +29,8 @@
       "state_not_covered": "your state is not one I cover in depth",
       "unclear": "I could not tell what kind of problem this is",
       "keyword": "your message mentions something that needs a lawyer (such as police, court, violence, threats, eviction or family matters)"
-    }
+    },
+    "ask_state": "Which state or city are you in? State laws differ for this kind of problem, and I need this to look up the right rules."
   },
   "hi": {
     "disclaimer": "यह कानूनी जानकारी है, कानूनी सलाह नहीं।",
@@ -61,6 +62,7 @@
       "state_not_covered": "आपका राज्य उन राज्यों में नहीं है जिन्हें मैं गहराई से कवर करता हूँ",
       "unclear": "मैं समझ नहीं पाया कि समस्या किस तरह की है",
       "keyword": "आपके संदेश में पुलिस, अदालत, हिंसा, धमकी, बेदखली या पारिवारिक मामले जैसी बात है जिसमें वकील चाहिए"
-    }
+    },
+    "ask_state": "आप किस राज्य या शहर में हैं? इस तरह की समस्या में राज्य के कानून अलग होते हैं, सही नियम खोजने के लिए मुझे यह चाहिए।"
   }
 }

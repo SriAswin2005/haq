@@ -245,6 +245,10 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
 
     # ---- confidence gate
     if not retrieval.passes_gate(sr["top_score"]):
+        if "state_unknown" in reasons:  # ask for the state instead of refusing outright
+            text = f"{m['understood']} {_facts_line(cf, m)}\n\n{m['ask_state']}\n\n{m['disclaimer']}"
+            return TurnResult(text, lang, cat, "clarify", [], retrieved, False, reasons,
+                              {"status": "pass", "issues": ["confidence gate: state unknown"]}, None, trace)
         text, cites, ret = safe_response(lang, cf, state_code, reasons, False)
         return TurnResult(text, lang, cat, "refuse_unverified", cites, retrieved, True, reasons,
                           {"status": "pass", "issues": ["confidence gate: no verified information"]}, None, trace)

@@ -34,7 +34,7 @@ def embed(texts: list[str]) -> np.ndarray:
     for i, t in enumerate(texts):
         for tok in _tok(t):
             h = int(hashlib.md5(tok.encode("utf-8")).hexdigest(), 16)
-            arr[i, h % DIM] += 1.0 if (h >> 20) & 1 else -1.0 * 0 + 1.0
+            arr[i, h % DIM] += 1.0
     n = np.linalg.norm(arr, axis=1, keepdims=True)
     return arr / np.maximum(n, 1e-9)
 
