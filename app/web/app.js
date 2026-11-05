@@ -117,6 +117,14 @@
     }).join("");
   }
 
+  // Reply text minus the draft itself (the draft is shown on its own sheet). Works for a pure draft and for
+  // an answer with a draft attached after it.
+  function replyWithoutDraft(r) {
+    const d = String(r.draft_text || ""), cut = d.lastIndexOf("\n\n");
+    const core = cut > 0 ? d.slice(0, cut) : d;
+    return String(r.reply_text).replace(core, "").replace(/\n{3,}/g, "\n\n").trim();
+  }
+
   function sourceChips(r, sources) {
     if (!r.citations || !r.citations.length) return "";
     return `<div class="sources">` + r.citations.map((cid) => {
@@ -178,7 +186,7 @@
 
     let body;
     if (r.draft_text) {
-      const intro = String(r.reply_text).split(/\n{2,}/)[0];
+      const intro = replyWithoutDraft(r);
       const file = ((r.trace || {}).draft || {}).file_name || "draft.txt";
       body = formatText(intro) + `<div class="sheet"><div class="sheet-head"><span>${t("fillBlanks")}</span>
         <span class="btns"><button type="button" class="chip-btn" data-copy="${m.id}">${t("copy")}</button>
@@ -343,7 +351,7 @@
     try {
       const r = msg.result;
       const res = await fetch("/api/tts", { method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: r.draft_text ? String(r.reply_text).split(/\n{2,}/)[0] : r.reply_text, lang: r.reply_lang }) });
+        body: JSON.stringify({ text: r.draft_text ? replyWithoutDraft(r) : r.reply_text, lang: r.reply_lang }) });
       if (!res.ok) { const d = await res.json().catch(() => ({})); throw new Error(d.error || d.detail || "Audio is not available right now."); }
       msg.ttsVia = res.headers.get("X-Voice-Provider") || "";
       audioUrls[msg.id] = URL.createObjectURL(await res.blob());

@@ -127,6 +127,7 @@ def _prune_unverified(answer: dict, issues: list[str], chunks: list[dict], cf: d
     return pruned, [], "pruned"
 
 
+META_Q = re.compile(r"^\s*(the\s+)?user\s+(is\s+)?(ask|asks|asking|want|wants|seeking|requests|requesting|enquir|inquir)", re.I)
 CONFLICT_KEYS = {"amount_inr", "monthly_wage_inr", "event_date", "vacated_date", "tenancy_start_date",
                  "deposit_paid_date", "job_start_date", "last_working_date", "purchase_date", "order_id"}
 
@@ -252,13 +253,15 @@ def _source_line(c: dict, m: dict) -> str:
     return f"{m['source_label']}: {c['doc_title']}, {c['unit']} {c['unit_number']}"
 
 
-def _answer_prompt(lang, chunks, case_file, missing, user_text, issues=None) -> list[dict]:
+def _answer_prompt(lang, chunks, case_file, missing, user_text, issues=None, question="", recent=None) -> list[dict]:
     chunk_txt = "\n".join(
         f"[CHUNK id={c['id']}]\nDOC: {c['doc_title']} | {c['unit']} {c['unit_number']} | {c.get('heading','')} | "
         f"status={c['status']} | doc_type={c['doc_type']}\nTEXT: {c['text']}" for c in chunks)
     user = (f"REPLY LANGUAGE: {lang}\nCASE FILE: {json.dumps(case_file, ensure_ascii=False)}\n"
             f"MISSING FACTS: {missing}\n=== SOURCE CHUNKS ===\n{chunk_txt}\n=== END CHUNKS ===\n"
-            f"USER MESSAGE: {user_text}\n=== END ===")
+            f"RECENT CONVERSATION (context only):\n{recent or '(none)'}\n"
+            f"USER MESSAGE: {user_text}\n"
+            f"THE QUESTION TO ANSWER FIRST: {question or '(no explicit question: explain where they stand and what to do next)'}\n=== END ===")
     if issues:
         user += ("\n\nVERIFIER ISSUES in your previous answer. Fix all of them: remove or rewrite the unsupported "
                  "statements, cite only ids shown above:\n- " + "\n- ".join(issues))
@@ -319,6 +322,15 @@ def handle_turn(session: Session, user_text: str, input_mode: str = "text",
     if trace.get("translate_to"):
         _emit("translating")
     res = _translate_reply(res, trace)
+    pend = trace.pop("_pending_draft", None)
+    if pend and res.draft_text is None and res.action != "escalate":
+        m2 = _m(res.reply_lang)
+        intro = m2.get("draft_intro_" + pend["kind"], m2["draft_intro"])
+        res.reply_text = f"{res.reply_text}\n\n{intro}\n\n{pend['text']}\n\n{m2['draft_footer']}"
+        res.draft_text = pend["text"] + "\n\n" + m2["draft_footer"]
+        res.citations = list(dict.fromkeys(list(res.citations) + pend["citations"]))
+        have = {r["id"] for r in res.retrieved}
+        res.retrieved = list(res.retrieved) + [r for r in pend["retrieved"] if r["id"] not in have]
     have = {r["id"] for r in res.retrieved}
     extra = [{"id": c, "score": _last_aid.get(c, 0.0), "via": "aid_search"} for c in res.citations if c not in have]
     if extra:  # e.g. legal-aid helplines found by the separate aid search
@@ -376,6 +388,9 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
     cf = session.case_file
     for k, v in (rj.get("case_file_update") or {}).items():
         if k == "months_since_event":  # never trust LLM date arithmetic; recomputed in code below
+            continue
+        if k == "what_happened" and isinstance(v, str) and META_Q.search(v):
+            trace["what_happened_ignored"] = v   # a description of the question, not of the dispute
             continue
         if v not in (None, "", [], {}):
             old = cf.get(k)
@@ -441,7 +456,25 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
                           "old_law": [{"id": o["id"], "score": o["score"]} for o in sr["old_law"]]}
 
     # ---- draft mode: deposit notice (tenancy), salary demand notice (wages), grievance email (consumer)
-    if session.mode == "draft":
+    intents = set(rj.get("intent") or [])
+    question = (rj.get("question") or "").strip()
+    has_question = bool(question) and bool(intents & router.QUESTION_INTENTS)
+    want_draft = session.mode == "draft" or "draft_document" in intents
+    trace["intent"] = {"intents": sorted(intents), "question": question, "want_draft": want_draft,
+                       "has_question": has_question}
+    if want_draft and has_question and cat in drafts.DRAFTS:
+        # answer the question first; the draft is attached after the verified answer (see handle_turn)
+        _emit("drafting")
+        d = drafts.make_draft(cat, cf, state_code)
+        already_sent = any(d["text"] in h.get("text", "") for h in session.history if h.get("role") == "assistant")
+        if already_sent and "draft_document" not in intents:
+            trace["draft_skipped"] = "unchanged since the last draft in this chat"
+        elif not d["scan_issues"]:
+            trace["_pending_draft"] = {"text": d["text"], "citations": d["citations"], "kind": d["kind"],
+                                       "file_name": d["file_name"], "retrieved": d["retrieved"]}
+            trace["draft"] = {"kind": d["kind"], "file_name": d["file_name"], "missing": d["missing"],
+                              "scan_issues": [], "attached_to_answer": True}
+    elif want_draft:
         if cat not in drafts.DRAFTS:
             return TurnResult(m["draft_only_deposit"] + "\n\n" + m["disclaimer"], lang, cat, "clarify", [], retrieved,
                               False, reasons, {"status": "pass", "issues": []}, None, trace)
@@ -477,7 +510,8 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
     issues_hist, answer, status, issues = [], None, "failed", []
     prior = None
     for attempt in range(max_regen + 1):
-        msgs = _answer_prompt(lang, chunks, cf, missing, user_text, prior)
+        msgs = _answer_prompt(lang, chunks, cf, missing, user_text, prior, question=rj.get("question") or "",
+                              recent="\n".join(f"{h['role']}: {router._short(h['text'], 400)}" for h in session.history[-4:]))
         _emit("writing" if attempt == 0 else "rewriting")
         answer = _generate_answer(msgs)
         if answer is not None and not _answer_script_ok(answer, lang):  # Hindi user got a non-Hindi body: retry once

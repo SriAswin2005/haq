@@ -264,7 +264,7 @@ def check_needs_lawyer(result, case, corpus=None) -> CheckResult:
     actual = get(result, "needs_lawyer")
     if actual is not expected:
         return CheckResult("fail", f"needs_lawyer={actual!r}; expected {expected}")
-    if expected and not re.search(r"lawyer|legal aid|advocate|वकील|कानूनी सहायता|अधिवक्ता", visible_text(result), re.I):
+    if expected and not re.search(r"lawyer|legal aid|advocate|वकील|कानूनी सहायता|अधिवक्ता|న్యాయవాద|న్యాయ\s*సహాయ|வழக்கறிஞ|சட்ட\s*உதவி", visible_text(result), re.I):
         return CheckResult("fail", "Lawyer flag set but no visible lawyer/legal-aid referral.")
     return CheckResult("pass", "Lawyer flag and required visible referral match.")
 
@@ -285,6 +285,15 @@ def check_language(result, case, corpus=None) -> CheckResult:
         return CheckResult("fail", "Hindi metadata but visible body lacks a predominantly Hindi-script reply (source labels excluded).")
     if expected == "en" and devanagari > latin and devanagari > 10:
         return CheckResult("fail", "English metadata but predominantly Devanagari reply.")
+    if expected in {"te", "ta"}:
+        pattern = r"[\u0c00-\u0c7f]" if expected == "te" else r"[\u0b80-\u0bff]"
+        body = re.sub(r"https?://\S+", "", language_text)
+        target_letters = len(re.findall(pattern, body))
+        latin_letters = len(re.findall(r"[A-Za-z]", body))
+        if target_letters < 4 or target_letters < latin_letters:
+            return CheckResult("fail", f"{expected} metadata but visible body is not predominantly in the expected script.")
+        return CheckResult("pass", f"Language metadata and predominant {expected} script agree (best effort).",
+                           {"method": "metadata_and_script", "target_letters": target_letters})
     try:
         from langdetect import DetectorFactory, detect, LangDetectException
     except ImportError:
@@ -361,13 +370,63 @@ def check_legal_blocks_cited(result, case, corpus=None) -> CheckResult:
     return CheckResult("fail" if invalid else "pass", f"Legal blocks without displayed citations: {invalid}" if invalid else "Final legal blocks have displayed citations.")
 
 
+def translation_tokens(text: str) -> tuple[set[str], set[str], set[str]]:
+    """Independent number/URL/source-ID scan; never trust the app's missing_tokens flag."""
+    urls = {m.rstrip(".,;:!?।)") for m in re.findall(r"https?://[^\s<>\"\]]+", text)}
+    digits = {re.sub(r"[,\s]", "", norm(m)) for m in re.findall(r"\d+(?:[,.]\d+)*", text)}
+    ids = set(re.findall(r"\b(?:CONS|WAGE|TEN|COM)-[A-Z0-9]+-[A-Za-z0-9-]+\b", text))
+    return digits, urls, ids
+
+
+def check_translation_integrity(result, case, corpus=None) -> CheckResult:
+    if not case.get("require_translation"):
+        return CheckResult("skip", "No translation requirement in this case.")
+    trace = get(result, "trace", {})
+    translation = trace.get("translation", {}) if isinstance(trace, dict) else {}
+    original = translation.get("english_original")
+    if translation.get("status") != "ok" or not isinstance(original, str) or not original.strip():
+        return CheckResult("fail", "No successful translation with a retained English original.")
+    before, after = translation_tokens(original), translation_tokens(get(result, "reply_text", ""))
+    missing = {kind: sorted(a - b) for kind, a, b in zip(("numbers", "URLs", "source IDs"), before, after) if a - b}
+    visible = get(result, "reply_text", "")
+    required_missing = []
+    for token in case.get("require_visible_tokens", []):
+        if token.isdigit():
+            if token not in after[0]:
+                required_missing.append(token)
+        elif token not in visible:
+            required_missing.append(token)
+    if missing or required_missing:
+        return CheckResult("fail", f"Translation lost tokens: {missing}; requested visible tokens missing: {required_missing}")
+    return CheckResult("pass", "Numbers, URLs and source IDs survive translation; requested visible tokens are present.")
+
+
+def check_case_guards(result, case, corpus=None) -> CheckResult:
+    if get(result, "action") in case.get("forbid_actions", []):
+        return CheckResult("fail", "Case explicitly forbids this hard-refusal/escalation action.")
+    amounts = case.get("conflicting_amounts")
+    if not amounts:
+        return CheckResult("pass" if case.get("forbid_actions") else "skip", "Case-specific action guard satisfied." if case.get("forbid_actions") else "No case-specific guard.")
+    text = visible_text(result)
+    draft = get(result, "draft_text") or ""
+    if not re.search(r"conflict|two different values|confirm.{0,40}amount|check these details", text, re.I | re.S):
+        return CheckResult("fail", "Different deposit amounts were not explicitly acknowledged.")
+    if not re.search(r"\[●[^\]]*(?:amount|deposit|रकम|राशि)[^\]]*\]", draft, re.I):
+        return CheckResult("fail", "The disputed deposit amount has no visible amount placeholder.")
+    numbers = translation_tokens(draft)[0]
+    selected = [str(n) for n in amounts if str(n) in numbers]
+    if selected:
+        return CheckResult("fail", f"Draft still contains disputed amount values: {selected}; they may appear only in the conflict explanation.")
+    return CheckResult("pass", "Amount conflict is visible and both disputed values are left out of the draft.")
+
+
 CHECKS = {f.__name__: f for f in (
     check_contract, check_routing, check_action, check_citations_valid, check_retrieval_scope, check_no_invented_law,
     check_numbers_grounded, check_must_include, check_must_not_include,
     check_needs_lawyer, check_language, check_draft_placeholders,
-    check_no_promises, check_intake_limit, check_legal_blocks_cited,
+    check_no_promises, check_intake_limit, check_legal_blocks_cited, check_translation_integrity, check_case_guards,
 )}
-EXPECTATION_CHECKS = {"check_routing", "check_action", "check_must_include", "check_must_not_include", "check_needs_lawyer", "check_draft_placeholders"}
+EXPECTATION_CHECKS = {"check_routing", "check_action", "check_must_include", "check_must_not_include", "check_needs_lawyer", "check_draft_placeholders", "check_case_guards"}
 
 
 def run_checks(result, case: dict, corpus: dict, *, final_turn: bool = True) -> dict[str, CheckResult]:

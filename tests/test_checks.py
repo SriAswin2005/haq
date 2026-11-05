@@ -118,6 +118,29 @@ class IndependentCheckTests(unittest.TestCase):
         broken["retrieved"] = [{"id": "FAKE-1", "score": float("nan")}]
         self.assertEqual(checks.check_contract(broken, self.case).status, "fail")
 
+    def test_translation_cannot_lose_a_number_or_url(self):
+        self.case.update(require_translation=True, require_visible_tokens=["30000", "https://example.invalid/proof"])
+        self.result["trace"] = {"translation": {"status": "ok", "english_original": "Rs 30,000 https://example.invalid/proof TEN-FAKE-S1"}}
+        self.result["reply_text"] = "30000 https://example.invalid/proof TEN-FAKE-S1"
+        self.assertEqual(checks.check_translation_integrity(self.result, self.case).status, "pass")
+        self.result["reply_text"] = "30000 TEN-FAKE-S1"
+        self.assertEqual(checks.check_translation_integrity(self.result, self.case).status, "fail")
+
+    def test_telugu_metadata_alone_does_not_pass_language(self):
+        self.case["language"] = self.result["reply_lang"] = "te-IN"
+        self.result["reply_text"] = "Here is an English response."
+        self.assertEqual(checks.check_language(self.result, self.case).status, "fail")
+        self.result["reply_text"] = "మీ పత్రాలను భద్రంగా ఉంచండి. న్యాయవాదిని సంప్రదించండి."
+        self.assertEqual(checks.check_language(self.result, self.case).status, "pass")
+
+    def test_amount_conflict_needs_an_amount_blank_not_an_unrelated_placeholder(self):
+        self.case["conflicting_amounts"] = [18000, 30000]
+        self.result["reply_text"] = "You gave two different values for the deposit amount."
+        self.result["draft_text"] = "Please return Rs 18000. [● name]"
+        self.assertEqual(checks.check_case_guards(self.result, self.case).status, "fail")
+        self.result["draft_text"] = "Please return Rs [● deposit amount]."
+        self.assertEqual(checks.check_case_guards(self.result, self.case).status, "pass")
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -9,6 +9,9 @@ from .config import load_config, read_prompt
 
 log = logging.getLogger("ai_lawyer.router")
 
+INTENTS = {"explain_rights", "where_to_complain", "what_can_i_get", "documents_needed", "next_steps", "deadline",
+           "draft_document", "follow_up", "other"}
+QUESTION_INTENTS = INTENTS - {"draft_document", "other"}
 VALID_CATS = {"consumer", "wages", "tenancy", "out_of_scope", "unclear"}
 
 
@@ -34,7 +37,7 @@ def keyword_flags(text: str) -> list[str]:
 
 def _fallback() -> dict:
     return {"category": "unclear", "language": "en-IN", "state_or_city": None, "case_file_update": {},
-            "missing_facts": [], "escalation_flags": [], "english_retrieval_query": ""}
+            "missing_facts": [], "escalation_flags": [], "english_retrieval_query": "", "intent": [], "question": ""}
 
 
 def _validate(d) -> dict | None:
@@ -52,13 +55,24 @@ def _validate(d) -> dict | None:
         out[k] = [str(x) for x in v][:2 if k == "missing_facts" else 10] if isinstance(v, list) else []
     q = d.get("english_retrieval_query")
     out["english_retrieval_query"] = q if isinstance(q, str) else ""
+    it = d.get("intent")
+    it = [it] if isinstance(it, str) else (it if isinstance(it, list) else [])
+    out["intent"] = [str(x) for x in it if str(x) in INTENTS][:4]
+    qq = d.get("question")
+    out["question"] = qq.strip()[:600] if isinstance(qq, str) else ""
     return out
+
+
+def _short(text: str, n: int = 500) -> str:
+    """Earlier turns for context: long replies (drafts) are cut so the current message stays the focus."""
+    t = " ".join(str(text).split())
+    return t if len(t) <= n else t[:n] + " …"
 
 
 def route(case_file: dict, history: list[dict], user_text: str) -> tuple[dict, dict]:
     """Returns (router_json, info). info = {"attempts": n, "error": str|None}."""
     system = read_prompt("router.md")
-    recent = "\n".join(f"{h['role']}: {h['text']}" for h in history[-6:]) or "(none)"
+    recent = "\n".join(f"{h['role']}: {_short(h['text'])}" for h in history[-6:]) or "(none)"
     user = (f"TODAY: {guards.today().isoformat()}\nCASE FILE SO FAR: {json.dumps(case_file, ensure_ascii=False)}\n"
             f"RECENT CONVERSATION:\n{recent}\n\nUSER MESSAGE: {user_text}\n=== END ===")
     msgs = [{"role": "system", "content": system}, {"role": "user", "content": user}]

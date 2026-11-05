@@ -12,3 +12,5 @@
 
 - 2026-11-06: Published the completed frozen 119-chunk real run real-20261105T161021.563148Z. All 30 expected-law flags remain false. Current real_findings.jsonl contains only the date-conflict finding reproduced in this run; the earlier interest-claim finding is preserved in the pre-fix run's agent_review.json and is not carried forward as a current failure.
 - 2026-11-06: Added snapshot execution/collection and source-checked review tooling. The final capture has 30 unchanged raw files / 33 turns, with no additional API calls for collection or review.
+
+- 2026-11-06 (round 3): Added T-031..T-040 as requested; original 30 case dictionaries are unchanged. All 40 expected_law_verified flags remain false. Added translation token/script and amount-conflict guards that activate only for the new requirements. T-033 expects answer per the new instruction, while the old T-001 refusal expectation is retained for baseline comparability.

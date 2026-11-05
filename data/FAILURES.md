@@ -79,3 +79,13 @@ This document logs every source URL, fetch attempt, or statutory instrument that
   2. The previous chunk synthesized generalized administrative guidance spanning Jansunwai / IGRS portal filing and District Labour Commissioner summons, which constituted an agent-authored paraphrase.
 - **Compliance Action:** 
   Per the Round 2 directive, chunk `WAGE-UPLABOUR-P1` has been permanently deleted from `data/corpus/wages.jsonl`.
+
+
+---
+
+### 8. Round 3 Audit: e-Daakhil and NCH Procedure Text Re-collection
+- **Target Subject:** Verbatim official step-by-step procedure text for e-Daakhil online consumer complaint filing and National Consumer Helpline grievance lodging.
+- **Attempted Sources:** `edaakhil.nic.in`, `consumerhelpline.gov.in`, `consumeraffairs.gov.in`, `e-jagriti.gov.in`.
+- **Findings & Actions:**
+  1. **e-Daakhil Portal Steps:** The legacy domain `edaakhil.nic.in` remains decommissioned / unresolvable following the transition to the unified **e-Jagriti** portal (`e-jagriti.gov.in`). e-Jagriti is implemented as an interactive, authenticated React application; it does not publish a static, verbatim statutory procedure code or open official PDF manual directly extractable as verbatim legal text. In compliance with the non-negotiable instruction ("Only if verbatim official text exists; otherwise log it in FAILURES.md. Never invent"), no synthetic procedural steps were fabricated.
+  2. **National Consumer Helpline Grievance Steps:** The official, authoritative verbatim text from the Department of Consumer Affairs portal (`https://consumeraffairs.gov.in/pages/nch`) is retained in `CONS-NCH-P1`. Detailed secondary portal UI walkthroughs from legal blogs were excluded to protect corpus purity and prevent paraphrasing.

@@ -25,11 +25,13 @@ def scratch_directory(prefix):
 class HarnessTests(unittest.TestCase):
     def test_priority_inventory(self):
         cases = run_eval.load_cases(run_eval.ROOT / "tests/cases.jsonl")
-        self.assertEqual(len(cases), 30)
-        self.assertEqual(sum(c["input_mode"] == "voice" for c in cases), 5)
-        self.assertEqual(sum(c["group"].startswith("D_") for c in cases), 7)
-        self.assertEqual(sum(c["group"].startswith("F_") for c in cases), 3)
-        self.assertEqual(sum(c["group"].startswith("G_") for c in cases), 5)
+        self.assertEqual(len(cases), 40)
+        baseline = cases[:30]
+        self.assertEqual(sum(c["input_mode"] == "voice" for c in baseline), 5)
+        self.assertEqual(sum(c["group"].startswith("D_") for c in baseline), 7)
+        self.assertEqual(sum(c["group"].startswith("F_") for c in baseline), 3)
+        self.assertEqual(sum(c["group"].startswith("G_") for c in baseline), 5)
+        self.assertEqual([c["id"] for c in cases[30:]], [f"T-{n:03d}" for n in range(31, 41)])
         self.assertTrue(all(c["expected_law_verified"] is False for c in cases))
         self.assertTrue(all(isinstance(c["expected_chunk_ids"], list) and c["expected_chunk_ids"] for c in cases))
 
@@ -104,7 +106,7 @@ class HarnessTests(unittest.TestCase):
                 directory = next((root / "outputs/runs").iterdir())
                 paths = list(directory.glob("repeat-*/raw/*.json"))
                 before = {p: hashlib.sha256(p.read_bytes()).hexdigest() for p in paths}
-                self.assertEqual(len(before), 6)
+                self.assertEqual(len(before), 8)
                 run_eval.main(args + ["--resume", str(directory)])
                 self.assertEqual(before, {p: hashlib.sha256(p.read_bytes()).hexdigest() for p in paths})
                 with self.assertRaisesRegex(ValueError, "Resume inputs"):

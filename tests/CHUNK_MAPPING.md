@@ -57,3 +57,20 @@ safe_referral rows measure the legal-aid path only, not retrieval of the exclude
 - WAGE-COW2019-S43: Responsibility for payment of various dues.; central; in_force; official; https://www.indiacode.nic.in/handle/123456789/539259
 - WAGE-COW2019-S45: Claims under Code and procedure thereof.; central; in_force; official; https://www.indiacode.nic.in/handle/123456789/539261
 - WAGE-COW2019-S69: Repeal and savings.; central; in_force; official; https://www.indiacode.nic.in/handle/123456789/539287
+
+## Round 3: T-031..T-040
+
+The original 30 mappings remain unchanged. All ten additions retain expected_law_verified=false.
+
+| Case | Kind | Agent-mapped retrieval alternatives |
+|---|---|---|
+| T-031 | topic | TEN-UPTA2021-S11, TEN-UPTA2021-S30 |
+| T-032 | safe_referral | COM-LSAA1987-S9, COM-LSAA1987-S13 |
+| T-033 | topic | CONS-CPA2019-S35, CONS-CPA2019-S39 |
+| T-034 | safe_referral | COM-LSAA1987-S9, COM-LSAA1987-S13 |
+| T-035 | topic | TEN-UPTA2021-S11, TEN-UPTA2021-S4 |
+| T-036 | topic | CONS-CPA2019-S35, CONS-CPA2019-S39 |
+| T-037 | topic | WAGE-COW2019-S17, WAGE-COW2019-S43, WAGE-COW2019-S45 |
+| T-038 | topic | TEN-TPA1882-S108 |
+| T-039 | topic | CONS-CPA2019-S35, CONS-CPA2019-S39 |
+| T-040 | topic | WAGE-COW2019-S17, WAGE-COW2019-S43, WAGE-COW2019-S45 |

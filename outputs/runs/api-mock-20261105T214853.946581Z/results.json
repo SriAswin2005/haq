@@ -1,0 +1,57 @@
+{
+  "mock": true,
+  "backend": "FastAPI TestClient",
+  "tests_run": 8,
+  "successful": true,
+  "results": [
+    {
+      "test": "__main__.ServerAPITests.test_browser_state_restores_after_session_cache_is_cleared",
+      "status": "pass",
+      "seconds": 0.19350649998523295,
+      "details": ""
+    },
+    {
+      "test": "__main__.ServerAPITests.test_feedback_explicit_false_also_omits_text",
+      "status": "pass",
+      "seconds": 0.035941399983130395,
+      "details": ""
+    },
+    {
+      "test": "__main__.ServerAPITests.test_feedback_omits_question_and_answer_by_default",
+      "status": "pass",
+      "seconds": 0.031013499945402145,
+      "details": ""
+    },
+    {
+      "test": "__main__.ServerAPITests.test_feedback_stores_conversation_only_with_explicit_consent",
+      "status": "pass",
+      "seconds": 0.030672900029458106,
+      "details": ""
+    },
+    {
+      "test": "__main__.ServerAPITests.test_rate_limit_is_shared_by_turn_and_stream_and_blocks_work",
+      "status": "pass",
+      "seconds": 0.0386712999898009,
+      "details": ""
+    },
+    {
+      "test": "__main__.ServerAPITests.test_real_flag_without_environment_key_is_rejected_before_app_import",
+      "status": "pass",
+      "seconds": 0.35915739997290075,
+      "details": ""
+    },
+    {
+      "test": "__main__.ServerAPITests.test_stream_error_is_terminal_and_does_not_echo_exception_text",
+      "status": "pass",
+      "seconds": 0.01084379997337237,
+      "details": ""
+    },
+    {
+      "test": "__main__.ServerAPITests.test_stream_stage_order_and_final_result",
+      "status": "pass",
+      "seconds": 0.10992160002933815,
+      "details": ""
+    }
+  ],
+  "scope": "SSE payload order, rate-limit gate, feedback question/answer consent, browser-state restoration; not network delivery timing"
+}
