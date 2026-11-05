@@ -1,0 +1,12 @@
+command: python data/validate_corpus.py
+exit_code: 0
+Validating corpus in C:\E drive\KuKu Technologies\ai-lawyer\data\corpus...
+PASS: common.jsonl (28 chunks)
+PASS: consumer.jsonl (27 chunks)
+PASS: tenancy.jsonl (37 chunks)
+PASS: wages.jsonl (30 chunks)
+--------------------------------------------------
+Total chunks checked: 122
+Total unique IDs: 122
+ALL CHECKS PASSED.
+

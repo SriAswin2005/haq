@@ -1,0 +1,436 @@
+{
+  "schema_version": 1,
+  "case_id": "T-005",
+  "case": {
+    "id": "T-005",
+    "group": "D_hallucination_traps",
+    "tags": [
+      "repealed_tenancy"
+    ],
+    "category_expected": "tenancy",
+    "language": "en-IN",
+    "input_mode": "text",
+    "turns": [
+      "Lucknow UP residential tenant, written agreement signed January 2026, left October 2026, deposit Rs 24000 unpaid. No earlier case pending. My landlord says only the UP Urban Buildings Act 1972 applies today. Is that current? Where does a new deposit dispute go?"
+    ],
+    "expected_action": "answer",
+    "expect_needs_lawyer": false,
+    "expected_topics": [
+      "repeal and savings",
+      "Rent Authority"
+    ],
+    "must_include_any": [
+      [
+        "repealed",
+        "replaced",
+        "no longer current"
+      ],
+      [
+        "Rent Authority"
+      ]
+    ],
+    "must_not_include": [
+      "1972 Act is the current law"
+    ],
+    "expected_chunk_ids": [
+      "TEN-UPTA2021-S46",
+      "TEN-UPTA2021-S30",
+      "TEN-UPTA2021-S38"
+    ],
+    "notes": "Official 2021 Act repeal/savings and authority provisions are the independent source; applicability and savings require human review. No deposit cap or deadline is asserted by this test.",
+    "expectation_sources": [
+      "https://www.indiacode.nic.in/bitstream/123456789/21157/1/english_16_of_2021.pdf",
+      "https://www.indiacode.nic.in/handle/123456789/21157"
+    ],
+    "expected_law_verified": false,
+    "calibration_label": "exclude",
+    "jurisdictions_expected": [
+      "central",
+      "UP"
+    ],
+    "retrieval_expectation_kind": "topic",
+    "expected_chunk_ids_note": "Agent-mapped alternatives, not a requirement to retrieve every listed ID. Repeal/savings and current forum; old Act is not an in-force answer target. Human confirmation pending."
+  },
+  "repeat": 1,
+  "mock": false,
+  "backend": "app.pipeline",
+  "stage": "real",
+  "configured_models": {
+    "router": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "main": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash",
+        "rpm": 5,
+        "tpm": 250000,
+        "rpd": 19
+      }
+    ],
+    "judge": [
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      }
+    ]
+  },
+  "started_at": "2026-11-05T15:41:25.796032+00:00",
+  "turns": [
+    {
+      "input": "Lucknow UP residential tenant, written agreement signed January 2026, left October 2026, deposit Rs 24000 unpaid. No earlier case pending. My landlord says only the UP Urban Buildings Act 1972 applies today. Is that current? Where does a new deposit dispute go?",
+      "input_mode": "text",
+      "lang_hint": "en-IN",
+      "started_at": "2026-11-05T15:41:31.797265+00:00",
+      "result": {
+        "reply_text": "I understand that you are a residential tenant in Lucknow who vacated your property in October 2026, but your landlord has not returned your security deposit of Rs 24000. You have a written agreement from January 2026.\n\nUnder the Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, the security deposit must be refunded to the tenant on the date of taking over vacant possession of the premises, after making due deductions for any liabilities.\n\nIf a landlord fails to refund the deposit, they are liable to pay simple interest on the amount they failed to refund.\n\nYou may wish to gather your written rental agreement, proof of the deposit payment, and any communication with your landlord regarding the return of the deposit. Keeping a record of when you handed over possession is also helpful.\n\nIf you are unable to resolve this directly with your landlord, you may consider consulting a lawyer to understand the process for filing a formal complaint or seeking legal remedies.\n\nHave you sent a formal written notice to your landlord demanding the return of the deposit? Is there any specific reason or damage claim provided by the landlord for withholding the money?\n\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 11\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 24\n\nNote: Uttar Pradesh Urban Buildings (Regulation of Letting, Rent and Eviction) Act, 1972 is no longer in force, so I do not use it.\n\nWhat I could not verify:\n- The provided sources do not explicitly detail the specific procedure or the forum for filing a complaint regarding a withheld security deposit under the 2021 Act.\n- The provided sources do not confirm the current status or applicability of the Uttar Pradesh Urban Buildings Act 1972.\n\nThis is legal information, not legal advice.",
+        "reply_lang": "en-IN",
+        "category": "tenancy",
+        "action": "answer",
+        "citations": [
+          "TEN-UPTA2021-S11",
+          "TEN-UPTA2021-S24"
+        ],
+        "retrieved": [
+          {
+            "id": "TEN-UPTA2021-S11",
+            "score": 0.7675791382789612
+          },
+          {
+            "id": "TEN-UPTA2021-S24",
+            "score": 0.7440094351768494
+          },
+          {
+            "id": "TEN-UPTA2021-S14",
+            "score": 0.7159260511398315
+          },
+          {
+            "id": "TEN-UPTA2021-S15",
+            "score": 0.7156076431274414
+          },
+          {
+            "id": "TEN-UPTA2021-S28",
+            "score": 0.7102089524269104
+          },
+          {
+            "id": "TEN-UPTA2021-S35",
+            "score": 0.7032645344734192
+          }
+        ],
+        "needs_lawyer": true,
+        "escalation_reasons": [],
+        "verifier": {
+          "status": "fixed",
+          "issues": []
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "08af19a9529a",
+          "input_mode": "text",
+          "user_text": "Lucknow UP residential tenant, written agreement signed January 2026, left October 2026, deposit Rs 24000 unpaid. No earlier case pending. My landlord says only the UP Urban Buildings Act 1972 applies today. Is that current? Where does a new deposit dispute go?",
+          "mode": "advice",
+          "router": {
+            "category": "tenancy",
+            "language": "en-IN",
+            "state_or_city": "UP",
+            "case_file_update": {
+              "amount_inr": 24000,
+              "tenancy_start_date": "2026-01",
+              "vacated_date": "2026-10",
+              "counterparty_type": "landlord",
+              "what_happened": "Landlord has not returned the security deposit of Rs 24000 after the tenant vacated the property."
+            },
+            "missing_facts": [
+              "Is there a written rental agreement?",
+              "Has a formal legal notice been sent to the landlord?"
+            ],
+            "escalation_flags": [],
+            "english_retrieval_query": "legal procedure for recovery of security deposit from landlord in Uttar Pradesh"
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "retrieval": {
+            "query": "legal procedure for recovery of security deposit from landlord in Uttar Pradesh",
+            "jurisdictions": [
+              "central",
+              "UP"
+            ],
+            "top_score": 0.7675791382789612,
+            "min_score": 0.0,
+            "old_law": [
+              {
+                "id": "TEN-UP1972-S20",
+                "score": 0.69524747133255
+              },
+              {
+                "id": "TEN-UP1972-S21",
+                "score": 0.6941720247268677
+              }
+            ]
+          },
+          "judge": "ok",
+          "verifier_history": [
+            [
+              "block 4: claim not supported by its cited source (The cited source does not explicitly state that the Rent Authority has the power to resolve disputes specifically regard)"
+            ],
+            []
+          ],
+          "timings_s": 19.697,
+          "llm": {
+            "calls": 6,
+            "retries": 0,
+            "latency_s": 16.61,
+            "models": [
+              "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "main:gemini:gemini-3.1-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite",
+              "main:gemini:gemini-3.1-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite"
+            ],
+            "fallbacks": [
+              {
+                "role": "main",
+                "model": "gemini:gemini-3.5-flash-lite",
+                "reason": "busy for ~44s"
+              },
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~60s"
+              },
+              {
+                "role": "main",
+                "model": "gemini:gemini-3.5-flash-lite",
+                "reason": "busy for ~34s"
+              },
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~51s"
+              }
+            ]
+          },
+          "action": "answer",
+          "category": "tenancy",
+          "retrieved": [
+            {
+              "id": "TEN-UPTA2021-S11",
+              "score": 0.7675791382789612
+            },
+            {
+              "id": "TEN-UPTA2021-S24",
+              "score": 0.7440094351768494
+            },
+            {
+              "id": "TEN-UPTA2021-S14",
+              "score": 0.7159260511398315
+            },
+            {
+              "id": "TEN-UPTA2021-S15",
+              "score": 0.7156076431274414
+            },
+            {
+              "id": "TEN-UPTA2021-S28",
+              "score": 0.7102089524269104
+            },
+            {
+              "id": "TEN-UPTA2021-S35",
+              "score": 0.7032645344734192
+            }
+          ],
+          "citations": [
+            "TEN-UPTA2021-S11",
+            "TEN-UPTA2021-S24"
+          ],
+          "verifier": {
+            "status": "fixed",
+            "issues": []
+          },
+          "escalation_reasons": [],
+          "models": {
+            "router": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "main": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash",
+                "rpm": 5,
+                "tpm": 250000,
+                "rpd": 19
+              }
+            ],
+            "judge": [
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              }
+            ]
+          },
+          "mock": false
+        }
+      },
+      "model_names_used": [
+        "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
+        "main:gemini:gemini-3.1-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite",
+        "main:gemini:gemini-3.1-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite"
+      ],
+      "latency_s": 19.708941299992148,
+      "finished_at": "2026-11-05T15:41:51.493960+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-05T15:41:51.493960+00:00"
+}

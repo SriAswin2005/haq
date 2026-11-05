@@ -1,0 +1,81 @@
+{
+  "mock": true,
+  "stage": "app_mock",
+  "backend": "app.pipeline",
+  "runs": 2,
+  "case_ids": [
+    "T-001",
+    "T-002",
+    "T-003",
+    "T-004",
+    "T-005",
+    "T-006",
+    "T-007",
+    "T-008",
+    "T-009",
+    "T-010",
+    "T-011",
+    "T-012",
+    "T-013",
+    "T-014",
+    "T-015",
+    "T-016",
+    "T-017",
+    "T-018",
+    "T-019",
+    "T-020",
+    "T-021",
+    "T-022",
+    "T-023",
+    "T-024",
+    "T-025",
+    "T-026",
+    "T-027",
+    "T-028",
+    "T-029",
+    "T-030"
+  ],
+  "fingerprints": {
+    "cases": "a05c79a36e6c5cbced65911ffd57be35fe1d7ee88fb5f3188f83c4dedcb2c5b4",
+    "checks": "46f6289335b2eeca997322436d9cbceb32f38f3da0b6794b6db2851e953de341",
+    "runner": "a4ef4494beca851237180fb634b368603ba5edab9419bf21028ef0526e0635b3",
+    "reporting": "0cdcbd00f5be17b4156d3e924a83e3fb99e9485bb8e2cb7451f39838b0828a08",
+    "config": "27980a71b8ceb27f8913fa965fa9ffb14b467267fa86420964b9c3bd76cb2d73",
+    "corpus": "58ed7b9ff62178ceff605fad60e141ea54f646d7dfe14a205f871f3acda843b2",
+    "app": {
+      "app\\__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "app\\cli.py": "c776aa453740a51aa045b58a7720232916e04d85472ddf4acea5d15c3cf935be",
+      "app\\config.py": "11628de4c99bf326f12e946dc45b3dbdf1389b7afbec351dea0874e9dfc7454c",
+      "app\\drafts.py": "b13ffd6a63407155be43c6af01f9ec65865f9d46aa4402d7a7836a7b4ccce5e3",
+      "app\\llm.py": "26a77064203e86ce03fde3336f2150c633ba6ef213a63472bd3f0c031fcaf183",
+      "app\\llm_mock.py": "31005ceb78b8d17a59def536695b844ded212448b64eaddad1fd38d34d9dab57",
+      "app\\pipeline.py": "24f10c60d088618e94b63fa05604511633563a1a89c7c66cbfd76f33b97b2288",
+      "app\\practice.py": "c9d9573de4c48e7257c36fe0e3b95494093ea2939a1692ecc05844a44394f5aa",
+      "app\\retrieval.py": "5f6becdf9579bc78788865f3df9f4e8e14aaaee03843d3335b0c483dc82f86e8",
+      "app\\router.py": "723dac30ed99dcf521bb12db4b8cdb78424d1d97845d20dae7bdcc6e2da0a86a",
+      "app\\ui.py": "ae4dcf9213ce16ce105cdd99f8f40fc44f82b1a939b466ba17533826804357e4",
+      "app\\verifier.py": "f628ca8dc12beb024c199f803a56b9e5eb407de631417ae84c2f3fcb5a6e079a"
+    },
+    "fixture": null
+  },
+  "judge": false,
+  "started_at": "2026-11-05T13:59:20.094138+00:00",
+  "sleep_s": 0.0,
+  "models": {
+    "router": {
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
+    },
+    "main": {
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
+    },
+    "judge": {
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
+    }
+  },
+  "corpus_path": "C:\\E drive\\KuKu Technologies\\ai-lawyer\\data\\sample",
+  "retrieval_min_score": 0.0,
+  "law_expectations_human_verified": 0
+}

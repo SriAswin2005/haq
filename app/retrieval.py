@@ -125,9 +125,13 @@ def _search(q_vec, idx, mask, k):
     return [{"id": idx["chunks"][i]["id"], "score": float(sims[i]), "chunk": idx["chunks"][i]} for i in order]
 
 
-def search(query_en: str, categories: list[str], jurisdictions: list[str], k: int | None = None) -> dict:
+def search(query_en: str, categories: list[str], jurisdictions: list[str], k: int | None = None,
+           extra_queries: list[str] | None = None, extra_k: int = 2) -> dict:
     """Returns {"hits": [...in-force/usable...], "old_law": [...repealed/superseded...], "top_score": float}.
-    hits exclude repealed/superseded; those are searched separately for old-law detection only."""
+    hits exclude repealed/superseded; those are searched separately for old-law detection only.
+    extra_queries (e.g. the category's "where to complain" query) add up to extra_k new hits each,
+    after the main hits, with the same category/jurisdiction/status filters. top_score (the
+    confidence gate) still comes from the user's own query only."""
     idx = get_index()
     k = k or load_config()["retrieval"]["top_k"]
     if not idx["chunks"]:
@@ -137,6 +141,16 @@ def search(query_en: str, categories: list[str], jurisdictions: list[str], k: in
     base = np.array([c["category"] in cats and c["jurisdiction"] in juris for c in idx["chunks"]])
     live = np.array([c["status"] not in ("repealed", "superseded") for c in idx["chunks"]])
     hits = _search(q, idx, base & live, k)
+    seen = {h["id"] for h in hits}
+    for xq in extra_queries or []:
+        xv = llm.embed([xq], task="query")[0]
+        added = 0
+        for h in _search(xv, idx, base & live, k + extra_k):
+            if h["id"] not in seen and added < extra_k:
+                h = dict(h, via="forum_query")
+                hits.append(h)
+                seen.add(h["id"])
+                added += 1
     old = _search(q, idx, base & ~live, 2)
     return {"hits": hits, "old_law": old, "top_score": hits[0]["score"] if hits else 0.0}
 

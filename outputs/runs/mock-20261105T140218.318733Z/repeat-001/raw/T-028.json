@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "case_id": "T-028",
+  "case": {
+    "id": "T-028",
+    "group": "B_messy_input",
+    "tags": [
+      "all_caps",
+      "voice_transcript"
+    ],
+    "category_expected": "consumer",
+    "language": "en-IN",
+    "input_mode": "voice",
+    "turns": [
+      "UH LOOK LUCKNOW UP OK I PAID 800 FOR THIS PHONE CHARGER OCTOBER 2026 IT'S DEAD DEAD I HAVE THE BILL AND SUPPORT JUST SAYS WAIT I'M SO FED UP HOW DO I COMPLAIN"
+    ],
+    "expected_action": "answer",
+    "expect_needs_lawyer": false,
+    "expected_topics": [
+      "defective goods",
+      "complaint"
+    ],
+    "must_include_any": [
+      [
+        "complaint",
+        "grievance"
+      ],
+      [
+        "bill",
+        "receipt",
+        "evidence"
+      ]
+    ],
+    "must_not_include": [],
+    "expected_chunk_ids": [],
+    "notes": "All-caps noisy transcript without threat. Anger alone must not become a police escalation.",
+    "expected_law_verified": false,
+    "calibration_label": "answer"
+  },
+  "repeat": 1,
+  "mock": true,
+  "backend": "app.pipeline",
+  "stage": "app_mock",
+  "configured_models": {
+    "router": {
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
+    },
+    "main": {
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
+    },
+    "judge": {
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
+    }
+  },
+  "started_at": "2026-11-05T14:02:18.981235+00:00",
+  "turns": [
+    {
+      "input": "UH LOOK LUCKNOW UP OK I PAID 800 FOR THIS PHONE CHARGER OCTOBER 2026 IT'S DEAD DEAD I HAVE THE BILL AND SUPPORT JUST SAYS WAIT I'M SO FED UP HOW DO I COMPLAIN",
+      "input_mode": "voice",
+      "lang_hint": "en-IN",
+      "started_at": "2026-11-05T14:02:18.981235+00:00",
+      "result": {
+        "reply_text": "[SAMPLE, NOT REAL LAW] A buyer of defective goods may ask the seller for a refund or replacement within 30 days of purchase.\n\n[SAMPLE, NOT REAL LAW] A consumer unhappy with a seller may file a complaint before the SAMPLE Consumer Commission.\n\nKeep your receipts, messages and a written timeline of dates.\n\nCan you tell me amount involved?\n\nSource: SAMPLE Consumer Act, section 1\nSource: SAMPLE Consumer Act, section 2\n\nThis is legal information, not legal advice.",
+        "reply_lang": "en-IN",
+        "category": "consumer",
+        "action": "answer",
+        "citations": [
+          "SAMPLE-CONS-S1",
+          "SAMPLE-CONS-S2"
+        ],
+        "retrieved": [
+          {
+            "id": "SAMPLE-CONS-S1",
+            "score": 0.2547719478607178
+          },
+          {
+            "id": "SAMPLE-CONS-S2",
+            "score": 0.15655609965324402
+          },
+          {
+            "id": "SAMPLE-COM-H1",
+            "score": 0.022140296176075935
+          }
+        ],
+        "needs_lawyer": false,
+        "escalation_reasons": [],
+        "verifier": {
+          "status": "pass",
+          "issues": []
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "3b1df98eb68c",
+          "input_mode": "voice",
+          "user_text": "UH LOOK LUCKNOW UP OK I PAID 800 FOR THIS PHONE CHARGER OCTOBER 2026 IT'S DEAD DEAD I HAVE THE BILL AND SUPPORT JUST SAYS WAIT I'M SO FED UP HOW DO I COMPLAIN",
+          "mode": "advice",
+          "router": {
+            "category": "consumer",
+            "language": "en-IN",
+            "state_or_city": "UP",
+            "case_file_update": {
+              "state": "UP"
+            },
+            "missing_facts": [
+              "amount involved"
+            ],
+            "escalation_flags": [],
+            "english_retrieval_query": "refund or replacement for defective goods or services; consumer complaint UH LOOK LUCKNOW UP OK I PAID 800 FOR THIS PHONE CHARGER OCTOBER 2026 IT'S DEAD DEAD I HAVE THE BILL AND SUPPORT JUST SAYS WAIT I'M SO FED UP HOW DO I COMPLAIN"
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "retrieval": {
+            "query": "refund or replacement for defective goods or services; consumer complaint UH LOOK LUCKNOW UP OK I PAID 800 FOR THIS PHONE CHARGER OCTOBER 2026 IT'S DEAD DEAD I HAVE THE BILL AND SUPPORT JUST SAYS WAIT I'M SO FED UP HOW DO I COMPLAIN",
+            "jurisdictions": [
+              "central",
+              "UP"
+            ],
+            "top_score": 0.2547719478607178,
+            "min_score": 0.0,
+            "old_law": []
+          },
+          "judge": "ok",
+          "verifier_history": [
+            []
+          ],
+          "timings_s": 0.003,
+          "llm": {
+            "calls": 3,
+            "retries": 0,
+            "latency_s": 0.0,
+            "models": [
+              "mock:router",
+              "mock:main",
+              "mock:judge"
+            ]
+          },
+          "action": "answer",
+          "category": "consumer",
+          "retrieved": [
+            {
+              "id": "SAMPLE-CONS-S1",
+              "score": 0.2547719478607178
+            },
+            {
+              "id": "SAMPLE-CONS-S2",
+              "score": 0.15655609965324402
+            },
+            {
+              "id": "SAMPLE-COM-H1",
+              "score": 0.022140296176075935
+            }
+          ],
+          "citations": [
+            "SAMPLE-CONS-S1",
+            "SAMPLE-CONS-S2"
+          ],
+          "verifier": {
+            "status": "pass",
+            "issues": []
+          },
+          "escalation_reasons": [],
+          "models": {
+            "router": {
+              "provider": "gemini",
+              "model": "gemini-2.5-flash"
+            },
+            "main": {
+              "provider": "gemini",
+              "model": "gemini-2.5-flash"
+            },
+            "judge": {
+              "provider": "gemini",
+              "model": "gemini-2.5-flash"
+            }
+          },
+          "mock": true
+        }
+      },
+      "model_names_used": [
+        "mock:router",
+        "mock:main",
+        "mock:judge"
+      ],
+      "latency_s": 0.0035145000438205898,
+      "finished_at": "2026-11-05T14:02:18.985300+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-05T14:02:18.985300+00:00"
+}

@@ -1,0 +1,437 @@
+{
+  "schema_version": 1,
+  "case_id": "T-023",
+  "case": {
+    "id": "T-023",
+    "group": "A_happy_path",
+    "tags": [
+      "bad_service"
+    ],
+    "category_expected": "consumer",
+    "language": "en-IN",
+    "input_mode": "text",
+    "turns": [
+      "Kanpur UP repair service charged Rs 1900 in October 2026 to fix my washing machine. It still leaks and they stopped replying. I have a service bill and videos. How do I complain without making things worse?"
+    ],
+    "expected_action": "answer",
+    "expect_needs_lawyer": false,
+    "expected_topics": [
+      "deficient service",
+      "complaint"
+    ],
+    "must_include_any": [
+      [
+        "complaint",
+        "grievance"
+      ],
+      [
+        "bill",
+        "video",
+        "evidence",
+        "record"
+      ]
+    ],
+    "must_not_include": [],
+    "expected_chunk_ids": [
+      "CONS-CPA2019-S39",
+      "CONS-CPA2019-S35"
+    ],
+    "notes": "Everyday deficient service; no legal deadline inferred from dates.",
+    "expectation_sources": [
+      "https://www.indiacode.nic.in/bitstream/123456789/15256/1/a2019-35.pdf"
+    ],
+    "expected_law_verified": false,
+    "calibration_label": "answer",
+    "jurisdictions_expected": [
+      "central",
+      "UP"
+    ],
+    "retrieval_expectation_kind": "topic",
+    "expected_chunk_ids_note": "Agent-mapped alternatives, not a requirement to retrieve every listed ID. Deficient service: remedies and complaint route. Human confirmation pending."
+  },
+  "repeat": 1,
+  "mock": false,
+  "backend": "app.pipeline",
+  "stage": "real",
+  "configured_models": {
+    "router": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "main": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash",
+        "rpm": 5,
+        "tpm": 250000,
+        "rpd": 19
+      }
+    ],
+    "judge": [
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      }
+    ]
+  },
+  "started_at": "2026-11-05T16:02:48.227130+00:00",
+  "turns": [
+    {
+      "input": "Kanpur UP repair service charged Rs 1900 in October 2026 to fix my washing machine. It still leaks and they stopped replying. I have a service bill and videos. How do I complain without making things worse?",
+      "input_mode": "text",
+      "lang_hint": "en-IN",
+      "started_at": "2026-11-05T16:02:54.212846+00:00",
+      "result": {
+        "reply_text": "I understand that you paid for a washing machine repair service in Kanpur, but the machine still leaks and the company is not responding to you. You have a service bill and videos as proof.\n\nUnder the law, a product service provider is liable if the service they provided was faulty, deficient, or did not follow the terms of your contract. You may bring a product liability action against the service provider for the harm caused by their deficient service.\n\nYou can register your grievance through the National Consumer Helpline (NCH) using their web portal, app, email, or by calling their helpline number. This is a way to seek resolution before starting formal legal proceedings.\n\nYou have the option to file a formal complaint with the District Commission. Generally, such complaints must be filed within two years from the date the cause of action arose, though the Commission may consider complaints filed after this period if there is sufficient cause.\n\nKeep your service bill and the videos of the leaking machine in a safe place as they are your evidence. Do not delete any messages or call logs showing your attempts to contact the company.\n\nIf you decide to file a formal complaint with the District Commission and need help drafting the documents or understanding the process, you should consult a lawyer.\n\nCould you please provide the name of the repair service company and the specific date in October 2026 when the repair took place?\n\nSource: Consumer Protection Act, 2019, section 83\nSource: Consumer Protection Act, 2019, section 85\nSource: Consumer Protection Act, 2019, section 82\nSource: Consumer Protection Act, 2019, section 35\nSource: Consumer Protection Act, 2019, section 69\n\nWhat I could not verify:\n- Specific procedures for filing a complaint in the District Commission of Kanpur beyond the general Act provisions.\n\nThis is legal information, not legal advice.",
+        "reply_lang": "en-IN",
+        "category": "consumer",
+        "action": "answer",
+        "citations": [
+          "CONS-CPA2019-S83",
+          "CONS-CPA2019-S85",
+          "CONS-CPA2019-S82",
+          "CONS-CPA2019-S35",
+          "CONS-CPA2019-S69"
+        ],
+        "retrieved": [
+          {
+            "id": "CONS-CPA2019-S83",
+            "score": 0.7239432334899902
+          },
+          {
+            "id": "CONS-NCH-P1",
+            "score": 0.7202824950218201
+          },
+          {
+            "id": "CONS-CPA2019-S85",
+            "score": 0.7173235416412354
+          },
+          {
+            "id": "CONS-CPA2019-S82",
+            "score": 0.7109405994415283
+          },
+          {
+            "id": "CONS-CPA2019-S35",
+            "score": 0.707926869392395
+          },
+          {
+            "id": "CONS-CPA2019-S69",
+            "score": 0.7054678797721863
+          }
+        ],
+        "needs_lawyer": false,
+        "escalation_reasons": [],
+        "verifier": {
+          "status": "fixed",
+          "issues": []
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "80dd57562c4e",
+          "input_mode": "text",
+          "user_text": "Kanpur UP repair service charged Rs 1900 in October 2026 to fix my washing machine. It still leaks and they stopped replying. I have a service bill and videos. How do I complain without making things worse?",
+          "mode": "advice",
+          "router": {
+            "category": "consumer",
+            "language": "en-IN",
+            "state_or_city": "UP",
+            "case_file_update": {
+              "amount_inr": 1900,
+              "event_date": "2026-10",
+              "what_happened": "Washing machine repair service failed to fix leak, company stopped responding",
+              "proof": [
+                "service bill",
+                "videos"
+              ],
+              "already_tried": [
+                "contacting the service provider"
+              ],
+              "counterparty_type": "repair service"
+            },
+            "missing_facts": [
+              "name of the repair service company",
+              "specific date of the repair"
+            ],
+            "escalation_flags": [],
+            "english_retrieval_query": "consumer complaint procedure for defective repair service India"
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "retrieval": {
+            "query": "consumer complaint procedure for defective repair service India",
+            "jurisdictions": [
+              "central",
+              "UP"
+            ],
+            "top_score": 0.7239432334899902,
+            "min_score": 0.0,
+            "old_law": []
+          },
+          "judge": "ok",
+          "verifier_history": [
+            [
+              "block 3: claim not supported by its cited source (The claim states the complaint must be filed within two years, but the source allows for complaints to be filed after th)"
+            ],
+            []
+          ],
+          "timings_s": 18.833,
+          "llm": {
+            "calls": 6,
+            "retries": 0,
+            "latency_s": 16.77,
+            "models": [
+              "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "main:gemini:gemini-3.1-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite",
+              "main:gemini:gemini-3.1-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite"
+            ],
+            "fallbacks": [
+              {
+                "role": "main",
+                "model": "gemini:gemini-3.5-flash-lite",
+                "reason": "busy for ~372s"
+              },
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~410s"
+              },
+              {
+                "role": "main",
+                "model": "gemini:gemini-3.5-flash-lite",
+                "reason": "busy for ~363s"
+              },
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~402s"
+              }
+            ]
+          },
+          "action": "answer",
+          "category": "consumer",
+          "retrieved": [
+            {
+              "id": "CONS-CPA2019-S83",
+              "score": 0.7239432334899902
+            },
+            {
+              "id": "CONS-NCH-P1",
+              "score": 0.7202824950218201
+            },
+            {
+              "id": "CONS-CPA2019-S85",
+              "score": 0.7173235416412354
+            },
+            {
+              "id": "CONS-CPA2019-S82",
+              "score": 0.7109405994415283
+            },
+            {
+              "id": "CONS-CPA2019-S35",
+              "score": 0.707926869392395
+            },
+            {
+              "id": "CONS-CPA2019-S69",
+              "score": 0.7054678797721863
+            }
+          ],
+          "citations": [
+            "CONS-CPA2019-S83",
+            "CONS-CPA2019-S85",
+            "CONS-CPA2019-S82",
+            "CONS-CPA2019-S35",
+            "CONS-CPA2019-S69"
+          ],
+          "verifier": {
+            "status": "fixed",
+            "issues": []
+          },
+          "escalation_reasons": [],
+          "models": {
+            "router": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "main": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash",
+                "rpm": 5,
+                "tpm": 250000,
+                "rpd": 19
+              }
+            ],
+            "judge": [
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              }
+            ]
+          },
+          "mock": false
+        }
+      },
+      "model_names_used": [
+        "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
+        "main:gemini:gemini-3.1-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite",
+        "main:gemini:gemini-3.1-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite"
+      ],
+      "latency_s": 18.83962199999951,
+      "finished_at": "2026-11-05T16:03:13.045898+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-05T16:03:13.045898+00:00"
+}

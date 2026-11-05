@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "case_id": "T-023",
+  "case": {
+    "id": "T-023",
+    "group": "A_happy_path",
+    "tags": [
+      "bad_service"
+    ],
+    "category_expected": "consumer",
+    "language": "en-IN",
+    "input_mode": "text",
+    "turns": [
+      "Kanpur UP repair service charged Rs 1900 in October 2026 to fix my washing machine. It still leaks and they stopped replying. I have a service bill and videos. How do I complain without making things worse?"
+    ],
+    "expected_action": "answer",
+    "expect_needs_lawyer": false,
+    "expected_topics": [
+      "deficient service",
+      "complaint"
+    ],
+    "must_include_any": [
+      [
+        "complaint",
+        "grievance"
+      ],
+      [
+        "bill",
+        "video",
+        "evidence",
+        "record"
+      ]
+    ],
+    "must_not_include": [],
+    "expected_chunk_ids": [],
+    "notes": "Everyday deficient service; no legal deadline inferred from dates.",
+    "expectation_sources": [
+      "https://www.indiacode.nic.in/bitstream/123456789/15256/1/a2019-35.pdf"
+    ],
+    "expected_law_verified": false,
+    "calibration_label": "answer"
+  },
+  "repeat": 2,
+  "mock": true,
+  "backend": "app.pipeline",
+  "stage": "app_mock",
+  "configured_models": {
+    "router": {
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
+    },
+    "main": {
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
+    },
+    "judge": {
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
+    }
+  },
+  "started_at": "2026-11-05T14:02:19.117418+00:00",
+  "turns": [
+    {
+      "input": "Kanpur UP repair service charged Rs 1900 in October 2026 to fix my washing machine. It still leaks and they stopped replying. I have a service bill and videos. How do I complain without making things worse?",
+      "input_mode": "text",
+      "lang_hint": "en-IN",
+      "started_at": "2026-11-05T14:02:19.118376+00:00",
+      "result": {
+        "reply_text": "What I understood: amount inr: 1900; state: UP\n\nCould you tell me a little more? Is this about (a) a refund or a defective product or service, (b) unpaid salary or dues from an employer, or (c) a rental security deposit that was not returned?\n\nThis is legal information, not legal advice.",
+        "reply_lang": "en-IN",
+        "category": "unclear",
+        "action": "clarify",
+        "citations": [],
+        "retrieved": [],
+        "needs_lawyer": false,
+        "escalation_reasons": [
+          "unclear"
+        ],
+        "verifier": {
+          "status": "pass",
+          "issues": []
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "934db31058ec",
+          "input_mode": "text",
+          "user_text": "Kanpur UP repair service charged Rs 1900 in October 2026 to fix my washing machine. It still leaks and they stopped replying. I have a service bill and videos. How do I complain without making things worse?",
+          "mode": "advice",
+          "router": {
+            "category": "unclear",
+            "language": "en-IN",
+            "state_or_city": "UP",
+            "case_file_update": {
+              "amount_inr": 1900,
+              "state": "UP"
+            },
+            "missing_facts": [],
+            "escalation_flags": [],
+            "english_retrieval_query": "legal information Kanpur UP repair service charged Rs 1900 in October 2026 to fix my washing machine. It still leaks and they stopped replying. I have a service bill and videos. How do I complain without making things worse?"
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "timings_s": 0.0,
+          "llm": {
+            "calls": 1,
+            "retries": 0,
+            "latency_s": 0.0,
+            "models": [
+              "mock:router"
+            ]
+          },
+          "action": "clarify",
+          "category": "unclear",
+          "retrieved": [],
+          "citations": [],
+          "verifier": {
+            "status": "pass",
+            "issues": []
+          },
+          "escalation_reasons": [
+            "unclear"
+          ],
+          "models": {
+            "router": {
+              "provider": "gemini",
+              "model": "gemini-2.5-flash"
+            },
+            "main": {
+              "provider": "gemini",
+              "model": "gemini-2.5-flash"
+            },
+            "judge": {
+              "provider": "gemini",
+              "model": "gemini-2.5-flash"
+            }
+          },
+          "mock": true
+        }
+      },
+      "model_names_used": [
+        "mock:router"
+      ],
+      "latency_s": 0.0014781999634578824,
+      "finished_at": "2026-11-05T14:02:19.119825+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-05T14:02:19.119825+00:00"
+}

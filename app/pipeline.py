@@ -266,7 +266,9 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
     # ---- retrieval
     juris = ["central"] + ([state_code] if state_code else [])
     query = rj.get("english_retrieval_query") or user_text
-    sr = retrieval.search(query, [cat, "common"], juris)
+    rcfg = cfg["retrieval"]
+    sr = retrieval.search(query, [cat, "common"], juris,
+                          extra_queries=(rcfg.get("forum_queries") or {}).get(cat), extra_k=int(rcfg.get("forum_extra", 2)))
     retrieved = [{"id": h["id"], "score": h["score"]} for h in sr["hits"]]
     trace["retrieval"] = {"query": query, "jurisdictions": juris, "top_score": sr["top_score"],
                           "min_score": cfg["retrieval"]["min_score"],

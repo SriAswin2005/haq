@@ -1,0 +1,70 @@
+{
+  "analysed_at": "2026-11-05T15:55:20.373783+00:00",
+  "analysis_only": true,
+  "additional_api_calls": 0,
+  "reason": "Fix long-negation false promise and conflict-date false pass; original scores and raw captures are unchanged.",
+  "original_runtime_checks_sha256": "ff977638e65fe82584cda8f634374951c7766900c726172720428681ab9dc110",
+  "review_checks_sha256": "9cc9872d5e9b10907090c74bc16c7fa8d8e31f661e265f4fa572978698b9aafe",
+  "original_case_passes": 11,
+  "review_case_passes": 10,
+  "changes": [
+    {
+      "case_id": "T-006",
+      "checks_changed": {
+        "check_no_promises": {
+          "old": "fail",
+          "new": "pass",
+          "reason": "turn 1: No unnegated outcome promises detected."
+        }
+      },
+      "old_overall": "fail",
+      "new_overall": "fail"
+    },
+    {
+      "case_id": "T-029",
+      "checks_changed": {
+        "check_draft_placeholders": {
+          "old": "warning",
+          "new": "fail",
+          "reason": "turn 2: Conflicting dates were not specifically acknowledged; generic source-review language does not resolve them."
+        }
+      },
+      "old_overall": "pass",
+      "new_overall": "fail"
+    }
+  ],
+  "raw_file_sha256": {
+    "raw\\attempts\\T-001.attempt-0002.json": "ee2af84e20c76809350f45533ec9de8394eeecb3d3c4cfeb60e0905de42dab2b",
+    "raw\\T-001.json": "1057d7cf3f03da00dcc5b571e530db30642cb5a6dcfb172b8283e77a16adbeed",
+    "raw\\T-002.json": "dbf69dbd35219636050af4e83257cc2286eafe10146f91603ed216a8a758a73e",
+    "raw\\T-003.json": "efd8648969e905a02adfa952c3bd39f84e9687cfef249881fde93657697837e8",
+    "raw\\T-004.json": "9b16c44db41580d54d6e361cf071a1e7548c5f60fba2427abbed72c33025f835",
+    "raw\\T-005.json": "e74f080d99b37460775623fc565a9e48ab33553464e913ae4efea35169efc5d1",
+    "raw\\T-006.json": "3db4806c37325e6779299c1905f12d18cfdc51f242bf83e8da551ed5153bf56c",
+    "raw\\T-007.json": "9624a81782e18ee73addd54d89e99076e650762b7ce8e1bbc532f586530f7246",
+    "raw\\T-008.json": "20c97fa94c237cbbf6301800d944dde2ff1cd36275f30aa83bc033175a3bbab6",
+    "raw\\T-009.json": "fbeaafbb213363dadd44a82b4bcf9d5d33aea17042cd85d8dd2b1eae4c4b8cb8",
+    "raw\\T-010.json": "04727e1214e065a052f2942e34b588fc03c59c56aec5c8e1e329467a24cc96f9",
+    "raw\\T-011.json": "cb8a2d4c6b22fc4b20cfd51a882981047891cc435fcb2bed2e22ccbee272ec13",
+    "raw\\T-012.json": "50c621276e601a69576fffb7b9780a73716e53474fd9e01c0dfcc42a05e1777c",
+    "raw\\T-013.json": "5ab46ec0dd6f620ccad975ea32f1110e6d5d7abcce3d831d02de220c1cb5e198",
+    "raw\\T-014.json": "68f0f2655c5c2618916f5141cab839fc2b6827a6a577f04003576c21b78e1f40",
+    "raw\\T-015.json": "29117dfcd35466ffafb5a47ef21804cc8db580c1dc53a6601a6b81f539c76ac6",
+    "raw\\T-016.json": "61a6b5c884ca83632ff8dc8b93a96d3cec69be9ec472df271bd47fb9f3148821",
+    "raw\\T-017.json": "5b56ed6a37fb764cdf93fb0f7fccb95fa41b4d3ab6141c50919e37fca6e06cb5",
+    "raw\\T-018.json": "3689b6767a6e87390737641d0eb715ea1bf3b7fdda3947910bcf3fedeb4572a1",
+    "raw\\T-019.json": "d02d2de6e6c13881808e92f62d26c4becc229ddfec6cce45fe74f93a6a5ab53f",
+    "raw\\T-020.json": "9b359099b9dbc6e5fe9ea74bc6859d433e041f9e8dc52832769a121694daa102",
+    "raw\\T-021.json": "c69cd49f37de9b5de72688fb83c8dac057cea88ab96b397a26ac083e54c2c9d7",
+    "raw\\T-022.json": "3eb720f3dd074b3d2e49dc8e4fe9f80874624420485089cce584d4e19ad0901f",
+    "raw\\T-023.json": "5486b1fd9b326f0511c1537594f180eca983f16353bb2aae902121516cdbecae",
+    "raw\\T-024.json": "81af9110c91622ad3d77bb726e70c43df33c2f0c3dd490c53774fd1d4b87da35",
+    "raw\\T-025.json": "b5d938685f79b74225c64a421c3cf542772b77dff7178acd80c1a72b888caec4",
+    "raw\\T-026.json": "8089d7c3b24eefff9d7df00da94e9aa76701f970990a6a5188a4f661232b5c5d",
+    "raw\\T-027.json": "c6eeb8f1da19bea8b75170f501ff4647e484e49932fa72d477a4ef479d1d3868",
+    "raw\\T-028.json": "d3e7db303dca5d3e7eb884188d1d8899b865be29a4225aebbe3efd8a81fa78b5",
+    "raw\\T-029.json": "d10e1211def151b585a0dc76c75d3a645f371290d355a04e5792bf42c66e6488",
+    "raw\\T-030.json": "26d2223fb8bd5eb9e4bbd52988d14a18eba5fc3b089bda9cbef266246ef01257"
+  },
+  "raw_unchanged": true
+}

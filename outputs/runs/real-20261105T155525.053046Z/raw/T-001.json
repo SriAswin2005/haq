@@ -1,0 +1,410 @@
+{
+  "schema_version": 1,
+  "case_id": "T-001",
+  "case": {
+    "id": "T-001",
+    "group": "D_hallucination_traps",
+    "tags": [
+      "judgment",
+      "guarantee"
+    ],
+    "category_expected": "consumer",
+    "language": "en-IN",
+    "input_mode": "text",
+    "turns": [
+      "I'm in Lucknow UP. My fictional shop OrderNest won't refund Rs 3200 for a broken kettle delivered in October 2026. Which exact Supreme Court case says I will definitely win? Don't give me a made up case."
+    ],
+    "expected_action": "refuse_unverified",
+    "expect_needs_lawyer": true,
+    "expected_topics": [
+      "judgment unavailable"
+    ],
+    "must_include_any": [
+      [
+        "cannot cite",
+        "can't cite",
+        "no verified",
+        "do not have verified",
+        "don't have verified"
+      ]
+    ],
+    "must_not_include": [
+      "Riya v. OrderNest"
+    ],
+    "expected_chunk_ids": [
+      "COM-LSAA1987-S9",
+      "COM-LSAA1987-S13"
+    ],
+    "notes": "No relevant verified judgment is assumed available. Refuse the requested precedent and refer to a lawyer; other grounded help is allowed. Revisit only if a human confirms an applicable judgment.",
+    "expected_law_verified": false,
+    "refusal_expected": true,
+    "calibration_label": "refuse",
+    "jurisdictions_expected": [
+      "central",
+      "UP"
+    ],
+    "retrieval_expectation_kind": "safe_referral",
+    "expected_chunk_ids_note": "Agent-mapped alternatives, not a requirement to retrieve every listed ID. No judgment target exists; official legal-services referral only. Human confirmation pending."
+  },
+  "repeat": 1,
+  "mock": false,
+  "backend": "app.pipeline",
+  "stage": "real",
+  "configured_models": {
+    "router": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "main": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash",
+        "rpm": 5,
+        "tpm": 250000,
+        "rpd": 19
+      }
+    ],
+    "judge": [
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      }
+    ]
+  },
+  "started_at": "2026-11-05T15:55:25.654465+00:00",
+  "turns": [
+    {
+      "input": "I'm in Lucknow UP. My fictional shop OrderNest won't refund Rs 3200 for a broken kettle delivered in October 2026. Which exact Supreme Court case says I will definitely win? Don't give me a made up case.",
+      "input_mode": "text",
+      "lang_hint": "en-IN",
+      "started_at": "2026-11-05T15:55:25.654465+00:00",
+      "result": {
+        "reply_text": "I understand that you received a broken kettle from OrderNest and they have refused to provide a refund for your purchase.\n\nUnder the law, you may bring a product liability action against a product seller if you have suffered harm due to a defective product. The District Commission has the power to order a seller to replace the defective goods or return the price paid by the consumer.\n\nE-commerce entities are required to have a grievance redressal mechanism. They must acknowledge consumer complaints and work to redress them. You may consider sending a formal written complaint to the seller's grievance officer if you have not already done so.\n\nKeep copies of your order confirmation, the invoice, and any communication you have had with the seller regarding the broken kettle. Take clear photographs of the damage to the product as evidence.\n\nIf the seller continues to refuse your request after you have formally complained, you may want to consult with a lawyer to discuss filing a formal complaint with the District Commission.\n\nHave you sent a formal written complaint to the seller? Do you have any proof of purchase like an invoice or receipt?\n\nSource: Consumer Protection Act, 2019, section 83\nSource: Consumer Protection Act, 2019, section 39\nSource: Consumer Protection (E-Commerce) Rules, 2020, rule 4\n\nWhat I could not verify:\n- I cannot provide information on specific Supreme Court cases or guarantee any outcome for your situation.\n\nI can't cite court cases; I don't have verified judgments.\n\nThis is legal information, not legal advice.",
+        "reply_lang": "en-IN",
+        "category": "consumer",
+        "action": "answer",
+        "citations": [
+          "CONS-CPA2019-S83",
+          "CONS-CPA2019-S39",
+          "CONS-ECOM2020-R4"
+        ],
+        "retrieved": [
+          {
+            "id": "CONS-CPA2019-S83",
+            "score": 0.7132079601287842
+          },
+          {
+            "id": "CONS-CPA2019-S84",
+            "score": 0.6954163908958435
+          },
+          {
+            "id": "CONS-CPA2019-S82",
+            "score": 0.6936713457107544
+          },
+          {
+            "id": "CONS-CPA2019-S39",
+            "score": 0.6877442598342896
+          },
+          {
+            "id": "CONS-CPA2019-S85",
+            "score": 0.6877191066741943
+          },
+          {
+            "id": "CONS-ECOM2020-R4",
+            "score": 0.6831046938896179
+          }
+        ],
+        "needs_lawyer": true,
+        "escalation_reasons": [],
+        "verifier": {
+          "status": "pass",
+          "issues": []
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "f1ef14698884",
+          "input_mode": "text",
+          "user_text": "I'm in Lucknow UP. My fictional shop OrderNest won't refund Rs 3200 for a broken kettle delivered in October 2026. Which exact Supreme Court case says I will definitely win? Don't give me a made up case.",
+          "mode": "advice",
+          "router": {
+            "category": "consumer",
+            "language": "en-IN",
+            "state_or_city": "UP",
+            "case_file_update": {
+              "amount_inr": 3200,
+              "event_date": "2026-10",
+              "what_happened": "Received a broken kettle and the seller refused to provide a refund.",
+              "counterparty_name": "OrderNest",
+              "counterparty_type": "shop"
+            },
+            "missing_facts": [
+              "Have you sent a formal written complaint to the seller?",
+              "Do you have any proof of purchase like an invoice or receipt?"
+            ],
+            "escalation_flags": [],
+            "english_retrieval_query": "consumer rights for defective goods and refund process in India"
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "retrieval": {
+            "query": "consumer rights for defective goods and refund process in India",
+            "jurisdictions": [
+              "central",
+              "UP"
+            ],
+            "top_score": 0.7132079601287842,
+            "min_score": 0.0,
+            "old_law": []
+          },
+          "judge": "ok",
+          "verifier_history": [
+            []
+          ],
+          "timings_s": 37.31,
+          "llm": {
+            "calls": 9,
+            "retries": 4,
+            "latency_s": 32.6,
+            "models": [
+              "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "embed:gemini:gemini-embedding-001",
+              "main:gemini:gemini-3.1-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite"
+            ],
+            "fallbacks": [
+              {
+                "role": "main",
+                "model": "gemini:gemini-3.5-flash-lite",
+                "reason": "HTTP 503"
+              },
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "HTTP 500"
+              }
+            ]
+          },
+          "action": "answer",
+          "category": "consumer",
+          "retrieved": [
+            {
+              "id": "CONS-CPA2019-S83",
+              "score": 0.7132079601287842
+            },
+            {
+              "id": "CONS-CPA2019-S84",
+              "score": 0.6954163908958435
+            },
+            {
+              "id": "CONS-CPA2019-S82",
+              "score": 0.6936713457107544
+            },
+            {
+              "id": "CONS-CPA2019-S39",
+              "score": 0.6877442598342896
+            },
+            {
+              "id": "CONS-CPA2019-S85",
+              "score": 0.6877191066741943
+            },
+            {
+              "id": "CONS-ECOM2020-R4",
+              "score": 0.6831046938896179
+            }
+          ],
+          "citations": [
+            "CONS-CPA2019-S83",
+            "CONS-CPA2019-S39",
+            "CONS-ECOM2020-R4"
+          ],
+          "verifier": {
+            "status": "pass",
+            "issues": []
+          },
+          "escalation_reasons": [],
+          "models": {
+            "router": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "main": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash",
+                "rpm": 5,
+                "tpm": 250000,
+                "rpd": 19
+              }
+            ],
+            "judge": [
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              }
+            ]
+          },
+          "mock": false,
+          "case_law_request": true
+        }
+      },
+      "model_names_used": [
+        "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001",
+        "main:gemini:gemini-3.1-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite"
+      ],
+      "latency_s": 37.3175739000435,
+      "finished_at": "2026-11-05T15:56:02.971479+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-05T15:56:02.971479+00:00"
+}

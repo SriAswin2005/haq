@@ -1,0 +1,209 @@
+{
+  "schema_version": 1,
+  "case_id": "T-030",
+  "case": {
+    "id": "T-030",
+    "group": "B_messy_input",
+    "tags": [
+      "E_jurisdiction",
+      "voice_transcript",
+      "emotional",
+      "hinglish"
+    ],
+    "category_expected": "tenancy",
+    "language": "en-IN",
+    "input_mode": "voice",
+    "turns": [
+      "uh matlab I'm really stressed rent for new place due and old owner keeps ignoring me ignoring me Bangalore Karnataka left October 2026 deposit 30000 receipt hai please reply in English can you tell me the UP rent rules apply here also na"
+    ],
+    "expected_action": "answer",
+    "expect_needs_lawyer": true,
+    "expected_topics": [
+      "uncovered state",
+      "central information only"
+    ],
+    "must_include_any": [
+      [
+        "lawyer",
+        "legal aid"
+      ],
+      [
+        "state law",
+        "not covered",
+        "Karnataka",
+        "not apply"
+      ]
+    ],
+    "must_not_include": [
+      "UP law applies in Karnataka",
+      "UP Rent Authority in Bangalore"
+    ],
+    "expected_chunk_ids": [],
+    "notes": "Hinglish transcript with explicit English override. Uncovered state must be acknowledged; UP law must not be exported. Architecture section 9 permits verified basic help alongside the required lawyer referral; action=answer is valid for this soft trigger.",
+    "expected_law_verified": false,
+    "calibration_label": "exclude",
+    "jurisdictions_expected": [
+      "central"
+    ]
+  },
+  "repeat": 1,
+  "mock": true,
+  "backend": "app.pipeline",
+  "stage": "app_mock",
+  "configured_models": {
+    "router": {
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
+    },
+    "main": {
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
+    },
+    "judge": {
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
+    }
+  },
+  "started_at": "2026-11-05T14:05:00.106532+00:00",
+  "turns": [
+    {
+      "input": "uh matlab I'm really stressed rent for new place due and old owner keeps ignoring me ignoring me Bangalore Karnataka left October 2026 deposit 30000 receipt hai please reply in English can you tell me the UP rent rules apply here also na",
+      "input_mode": "voice",
+      "lang_hint": "en-IN",
+      "started_at": "2026-11-05T14:05:00.106532+00:00",
+      "result": {
+        "reply_text": "[SAMPLE, NOT REAL LAW] A landlord must return the security deposit within 30 days after the tenant vacates, less lawful deductions for unpaid rent or damage.\n\n[SAMPLE, NOT REAL LAW] A tenant may apply to the SAMPLE Rent Authority if the landlord does not return the security deposit.\n\nKeep your receipts, messages and a written timeline of dates.\n\nCan you tell me amount involved?\n\nSource: SAMPLE UP Tenancy Act, section 1\nSource: SAMPLE UP Tenancy Act, section 2\n\nNote: SAMPLE Old Rent Act is no longer in force, so I do not use it.\n\nThis is legal information, not legal advice.",
+        "reply_lang": "en-IN",
+        "category": "tenancy",
+        "action": "answer",
+        "citations": [
+          "SAMPLE-TEN-S1",
+          "SAMPLE-TEN-S2"
+        ],
+        "retrieved": [
+          {
+            "id": "SAMPLE-TEN-S1",
+            "score": 0.34783244132995605
+          },
+          {
+            "id": "SAMPLE-TEN-S2",
+            "score": 0.30323895812034607
+          },
+          {
+            "id": "SAMPLE-COM-H1",
+            "score": 0.12297745048999786
+          }
+        ],
+        "needs_lawyer": false,
+        "escalation_reasons": [],
+        "verifier": {
+          "status": "pass",
+          "issues": []
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "ea1381c35da8",
+          "input_mode": "voice",
+          "user_text": "uh matlab I'm really stressed rent for new place due and old owner keeps ignoring me ignoring me Bangalore Karnataka left October 2026 deposit 30000 receipt hai please reply in English can you tell me the UP rent rules apply here also na",
+          "mode": "advice",
+          "router": {
+            "category": "tenancy",
+            "language": "en-IN",
+            "state_or_city": "UP",
+            "case_file_update": {
+              "state": "UP"
+            },
+            "missing_facts": [
+              "amount involved"
+            ],
+            "escalation_flags": [],
+            "english_retrieval_query": "landlord must return security deposit after tenant vacates; remedy if deposit not returned uh matlab I'm really stressed rent for new place due and old owner keeps ignoring me ignoring me Bangalore Karnataka left October 2026 deposit 30000 receipt hai please reply in English can you tell me the UP rent rules apply here also na"
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "retrieval": {
+            "query": "landlord must return security deposit after tenant vacates; remedy if deposit not returned uh matlab I'm really stressed rent for new place due and old owner keeps ignoring me ignoring me Bangalore Karnataka left October 2026 deposit 30000 receipt hai please reply in English can you tell me the UP rent rules apply here also na",
+            "jurisdictions": [
+              "central",
+              "UP"
+            ],
+            "top_score": 0.34783244132995605,
+            "min_score": 0.0,
+            "old_law": [
+              {
+                "id": "SAMPLE-TEN-OLD",
+                "score": 0.32850921154022217
+              }
+            ]
+          },
+          "judge": "ok",
+          "verifier_history": [
+            []
+          ],
+          "timings_s": 0.003,
+          "llm": {
+            "calls": 3,
+            "retries": 0,
+            "latency_s": 0.0,
+            "models": [
+              "mock:router",
+              "mock:main",
+              "mock:judge"
+            ]
+          },
+          "action": "answer",
+          "category": "tenancy",
+          "retrieved": [
+            {
+              "id": "SAMPLE-TEN-S1",
+              "score": 0.34783244132995605
+            },
+            {
+              "id": "SAMPLE-TEN-S2",
+              "score": 0.30323895812034607
+            },
+            {
+              "id": "SAMPLE-COM-H1",
+              "score": 0.12297745048999786
+            }
+          ],
+          "citations": [
+            "SAMPLE-TEN-S1",
+            "SAMPLE-TEN-S2"
+          ],
+          "verifier": {
+            "status": "pass",
+            "issues": []
+          },
+          "escalation_reasons": [],
+          "models": {
+            "router": {
+              "provider": "gemini",
+              "model": "gemini-2.5-flash"
+            },
+            "main": {
+              "provider": "gemini",
+              "model": "gemini-2.5-flash"
+            },
+            "judge": {
+              "provider": "gemini",
+              "model": "gemini-2.5-flash"
+            }
+          },
+          "mock": true
+        }
+      },
+      "model_names_used": [
+        "mock:router",
+        "mock:main",
+        "mock:judge"
+      ],
+      "latency_s": 0.0040822000009939075,
+      "finished_at": "2026-11-05T14:05:00.110532+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-05T14:05:00.110532+00:00"
+}

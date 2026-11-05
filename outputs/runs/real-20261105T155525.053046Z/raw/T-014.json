@@ -1,0 +1,420 @@
+{
+  "schema_version": 1,
+  "case_id": "T-014",
+  "case": {
+    "id": "T-014",
+    "group": "G_escalation",
+    "tags": [
+      "high_amount"
+    ],
+    "category_expected": "tenancy",
+    "language": "en-IN",
+    "input_mode": "text",
+    "turns": [
+      "Lucknow UP residential tenancy ended October 2026. The security deposit is Rs 9,00,00,000, yes nine crore rupees, and the landlord has returned nothing. I have the agreement. What next?"
+    ],
+    "expected_action": "answer",
+    "expect_needs_lawyer": true,
+    "expected_topics": [
+      "high amount escalation"
+    ],
+    "must_include_any": [
+      [
+        "lawyer",
+        "legal aid"
+      ]
+    ],
+    "must_not_include": [],
+    "expected_chunk_ids": [
+      "TEN-UPTA2021-S11",
+      "TEN-UPTA2021-S30"
+    ],
+    "notes": "Intentionally exceptional amount tests Indian digit grouping and high-value escalation. Harness checks that amount exceeds configured threshold; never infer a jurisdictional monetary limit. Architecture section 9 permits verified basic help alongside the required lawyer referral; action=answer is valid for this soft trigger.",
+    "amount_inr": 90000000,
+    "expected_law_verified": false,
+    "calibration_label": "exclude",
+    "jurisdictions_expected": [
+      "central",
+      "UP"
+    ],
+    "retrieval_expectation_kind": "topic",
+    "expected_chunk_ids_note": "Agent-mapped alternatives, not a requirement to retrieve every listed ID. Deposit/forum information with high-amount lawyer referral. Human confirmation pending."
+  },
+  "repeat": 1,
+  "mock": false,
+  "backend": "app.pipeline",
+  "stage": "real",
+  "configured_models": {
+    "router": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "main": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash",
+        "rpm": 5,
+        "tpm": 250000,
+        "rpd": 19
+      }
+    ],
+    "judge": [
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      }
+    ]
+  },
+  "started_at": "2026-11-05T16:00:43.060866+00:00",
+  "turns": [
+    {
+      "input": "Lucknow UP residential tenancy ended October 2026. The security deposit is Rs 9,00,00,000, yes nine crore rupees, and the landlord has returned nothing. I have the agreement. What next?",
+      "input_mode": "text",
+      "lang_hint": "en-IN",
+      "started_at": "2026-11-05T16:00:49.073142+00:00",
+      "result": {
+        "reply_text": "I understand that your residential tenancy in Lucknow has ended, and your landlord has not returned your security deposit as required.\n\nUnder the law, a landlord must refund the security deposit to the tenant on the date of taking over vacant possession of the premises, after making any necessary deductions for liabilities.\n\nIf the landlord fails to refund the deposit, they are liable to pay simple interest on the amount they failed to return.\n\nYou may consider sending a formal legal notice to your landlord requesting the return of your deposit. If the issue remains unresolved, you may need to approach the Rent Authority.\n\nPlease consult a lawyer if you are unable to resolve this matter through a formal notice, as the amount involved is significant and legal proceedings may be complex.\n\nOn what date was the security deposit originally paid to the landlord? Have you already sent a formal legal notice to the landlord regarding this unpaid deposit?\n\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 11\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 24\n\nNote: Uttar Pradesh Urban Buildings (Regulation of Letting, Rent and Eviction) Act, 1972 is no longer in force, so I do not use it.\n\nWhat I could not verify:\n- The specific procedure for filing a claim with the Rent Authority for the recovery of a security deposit.\n- The exact interest rate prescribed for delayed refunds.\n\nBecause of the points above, please talk to a real lawyer or free legal aid office. (the amount involved is high)\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority (NALSA)\nNALSA Helpline Number 15100\n15100 NALSA Helpline Toll-Free Number\nAddress: Jaisalmer House, 26, Man Singh Road, New Delhi-110011. Ph. No. 011-23382778, 23071450, 23382121. E-mail id: nalsa-dla@nic.in.\nCorrespondence Address: B Block, Ground Floor, Administrative Buildings Complex, Supreme Court of India, New Delhi-110001. (Source: National Legal Services Authority Helpline, helpline 15100)\n- Uttar Pradesh State Legal Services Authority\n4/7, Gomti Nagar, Extension, Lucknow 226010.\nHelp Line Toll Free No. 1800-419-0234\nTelephone No. 0522-2286395, 2286265\nFax No. 0522-2287972, 2286260\nE-Mail upslsa[at]nic[dot]in\nweb site https://uttarpradesh.nalsa.gov.in (Source: Uttar Pradesh State Legal Services Authority Contact and Helpline, helpline 1800)\n\nThis is legal information, not legal advice.",
+        "reply_lang": "en-IN",
+        "category": "tenancy",
+        "action": "answer",
+        "citations": [
+          "TEN-UPTA2021-S11",
+          "TEN-UPTA2021-S24",
+          "COM-NALSA-H15100",
+          "COM-UPSLSA-H1800"
+        ],
+        "retrieved": [
+          {
+            "id": "TEN-UPTA2021-S11",
+            "score": 0.7112820744514465
+          },
+          {
+            "id": "TEN-UPTA2021-S24",
+            "score": 0.6958892941474915
+          },
+          {
+            "id": "TEN-UPTA2021-S14",
+            "score": 0.6726804375648499
+          },
+          {
+            "id": "TEN-UPTA2021-S28",
+            "score": 0.672254204750061
+          },
+          {
+            "id": "TEN-UPTA2021-S23",
+            "score": 0.6706041097640991
+          },
+          {
+            "id": "TEN-UPTA2021-S35",
+            "score": 0.6681622266769409
+          }
+        ],
+        "needs_lawyer": true,
+        "escalation_reasons": [
+          "high_amount"
+        ],
+        "verifier": {
+          "status": "pass",
+          "issues": []
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "3f2021f180d9",
+          "input_mode": "text",
+          "user_text": "Lucknow UP residential tenancy ended October 2026. The security deposit is Rs 9,00,00,000, yes nine crore rupees, and the landlord has returned nothing. I have the agreement. What next?",
+          "mode": "advice",
+          "router": {
+            "category": "tenancy",
+            "language": "en-IN",
+            "state_or_city": "UP",
+            "case_file_update": {
+              "amount_inr": 90000000,
+              "vacated_date": "2026-10",
+              "what_happened": "Landlord has not returned security deposit after tenancy ended.",
+              "proof": [
+                "rental agreement"
+              ],
+              "counterparty_type": "landlord"
+            },
+            "missing_facts": [
+              "date the security deposit was originally paid",
+              "whether a formal legal notice has been sent to the landlord"
+            ],
+            "escalation_flags": [],
+            "english_retrieval_query": "legal remedies for recovery of security deposit from landlord after tenancy termination"
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "retrieval": {
+            "query": "legal remedies for recovery of security deposit from landlord after tenancy termination",
+            "jurisdictions": [
+              "central",
+              "UP"
+            ],
+            "top_score": 0.7112820744514465,
+            "min_score": 0.0,
+            "old_law": [
+              {
+                "id": "TEN-UP1972-S20",
+                "score": 0.6695560812950134
+              },
+              {
+                "id": "TEN-UP1972-S21",
+                "score": 0.6548343300819397
+              }
+            ]
+          },
+          "judge": "ok",
+          "verifier_history": [
+            []
+          ],
+          "timings_s": 12.564,
+          "llm": {
+            "calls": 5,
+            "retries": 0,
+            "latency_s": 10.78,
+            "models": [
+              "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "main:gemini:gemini-3.1-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001"
+            ],
+            "fallbacks": [
+              {
+                "role": "main",
+                "model": "gemini:gemini-3.5-flash-lite",
+                "reason": "busy for ~497s"
+              },
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~536s"
+              }
+            ]
+          },
+          "action": "answer",
+          "category": "tenancy",
+          "retrieved": [
+            {
+              "id": "TEN-UPTA2021-S11",
+              "score": 0.7112820744514465
+            },
+            {
+              "id": "TEN-UPTA2021-S24",
+              "score": 0.6958892941474915
+            },
+            {
+              "id": "TEN-UPTA2021-S14",
+              "score": 0.6726804375648499
+            },
+            {
+              "id": "TEN-UPTA2021-S28",
+              "score": 0.672254204750061
+            },
+            {
+              "id": "TEN-UPTA2021-S23",
+              "score": 0.6706041097640991
+            },
+            {
+              "id": "TEN-UPTA2021-S35",
+              "score": 0.6681622266769409
+            }
+          ],
+          "citations": [
+            "TEN-UPTA2021-S11",
+            "TEN-UPTA2021-S24",
+            "COM-NALSA-H15100",
+            "COM-UPSLSA-H1800"
+          ],
+          "verifier": {
+            "status": "pass",
+            "issues": []
+          },
+          "escalation_reasons": [
+            "high_amount"
+          ],
+          "models": {
+            "router": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "main": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash",
+                "rpm": 5,
+                "tpm": 250000,
+                "rpd": 19
+              }
+            ],
+            "judge": [
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              }
+            ]
+          },
+          "mock": false
+        }
+      },
+      "model_names_used": [
+        "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
+        "main:gemini:gemini-3.1-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001"
+      ],
+      "latency_s": 12.569243800011463,
+      "finished_at": "2026-11-05T16:01:01.642314+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-05T16:01:01.642314+00:00"
+}

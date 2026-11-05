@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "case_id": "T-018",
+  "case": {
+    "id": "T-018",
+    "group": "C_out_of_scope",
+    "tags": [
+      "title"
+    ],
+    "category_expected": "out_of_scope",
+    "language": "en-IN",
+    "input_mode": "text",
+    "turns": [
+      "Lucknow UP. My brother says our inherited house belongs to him and the sale deed is fake. This is ownership, not a rental deposit. Tell me how to get the title transferred to me."
+    ],
+    "expected_action": "escalate",
+    "expect_needs_lawyer": true,
+    "expected_topics": [
+      "ownership out of scope"
+    ],
+    "must_include_any": [
+      [
+        "lawyer",
+        "legal aid"
+      ]
+    ],
+    "must_not_include": [
+      "title automatically transfers"
+    ],
+    "expected_chunk_ids": [],
+    "notes": "Explicit ownership/inheritance must not be mistaken for tenancy.",
+    "expected_law_verified": false,
+    "refusal_expected": true,
+    "calibration_label": "exclude"
+  },
+  "repeat": 2,
+  "mock": true,
+  "backend": "app.pipeline",
+  "stage": "app_mock",
+  "configured_models": {
+    "router": {
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
+    },
+    "main": {
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
+    },
+    "judge": {
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
+    }
+  },
+  "started_at": "2026-11-05T13:59:22.748364+00:00",
+  "turns": [
+    {
+      "input": "Lucknow UP. My brother says our inherited house belongs to him and the sale deed is fake. This is ownership, not a rental deposit. Tell me how to get the title transferred to me.",
+      "input_mode": "text",
+      "lang_hint": "en-IN",
+      "started_at": "2026-11-05T13:59:22.748364+00:00",
+      "result": {
+        "reply_text": "What I understood: state: UP\n\nThis needs a real lawyer or free legal aid. I can still share verified general information where I have it, but I cannot handle this safely on my own.\n\nWhy: this topic is outside what I can safely help with\n\nWhat you can do right now: collect your documents (agreement, receipts, bank or UPI records, messages, photos), and write down the dates and amounts in order.\n\nFor free help from a real lawyer or legal aid office:\n- [SAMPLE, NOT REAL LAW] Free legal aid is available from the SAMPLE Legal Services Authority. SAMPLE helpline: 000-000. (Source: SAMPLE Legal Aid Directory, helpline 1)\n\nThis is legal information, not legal advice.",
+        "reply_lang": "en-IN",
+        "category": "out_of_scope",
+        "action": "escalate",
+        "citations": [
+          "SAMPLE-COM-H1"
+        ],
+        "retrieved": [
+          {
+            "id": "SAMPLE-COM-H1",
+            "score": 0.7315633296966553
+          }
+        ],
+        "needs_lawyer": true,
+        "escalation_reasons": [
+          "out_of_scope_topic"
+        ],
+        "verifier": {
+          "status": "pass",
+          "issues": []
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "7b9ad808deed",
+          "input_mode": "text",
+          "user_text": "Lucknow UP. My brother says our inherited house belongs to him and the sale deed is fake. This is ownership, not a rental deposit. Tell me how to get the title transferred to me.",
+          "mode": "advice",
+          "router": {
+            "category": "out_of_scope",
+            "language": "en-IN",
+            "state_or_city": "UP",
+            "case_file_update": {
+              "state": "UP"
+            },
+            "missing_facts": [],
+            "escalation_flags": [],
+            "english_retrieval_query": "legal information Lucknow UP. My brother says our inherited house belongs to him and the sale deed is fake. This is ownership, not a rental deposit. Tell me how to get the title transferred to me."
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "timings_s": 0.001,
+          "llm": {
+            "calls": 1,
+            "retries": 0,
+            "latency_s": 0.0,
+            "models": [
+              "mock:router"
+            ]
+          },
+          "action": "escalate",
+          "category": "out_of_scope",
+          "retrieved": [
+            {
+              "id": "SAMPLE-COM-H1",
+              "score": 0.7315633296966553
+            }
+          ],
+          "citations": [
+            "SAMPLE-COM-H1"
+          ],
+          "verifier": {
+            "status": "pass",
+            "issues": []
+          },
+          "escalation_reasons": [
+            "out_of_scope_topic"
+          ],
+          "models": {
+            "router": {
+              "provider": "gemini",
+              "model": "gemini-2.5-flash"
+            },
+            "main": {
+              "provider": "gemini",
+              "model": "gemini-2.5-flash"
+            },
+            "judge": {
+              "provider": "gemini",
+              "model": "gemini-2.5-flash"
+            }
+          },
+          "mock": true
+        }
+      },
+      "model_names_used": {
+        "router": {
+          "provider": "gemini",
+          "model": "gemini-2.5-flash"
+        },
+        "main": {
+          "provider": "gemini",
+          "model": "gemini-2.5-flash"
+        },
+        "judge": {
+          "provider": "gemini",
+          "model": "gemini-2.5-flash"
+        }
+      },
+      "latency_s": 0.0019321999861858785,
+      "finished_at": "2026-11-05T13:59:22.750747+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-05T13:59:22.750747+00:00"
+}

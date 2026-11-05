@@ -1,0 +1,426 @@
+{
+  "schema_version": 1,
+  "case_id": "T-022",
+  "case": {
+    "id": "T-022",
+    "group": "A_happy_path",
+    "tags": [
+      "faulty_product",
+      "voice_transcript"
+    ],
+    "category_expected": "consumer",
+    "language": "hi-IN",
+    "input_mode": "voice",
+    "turns": [
+      "जी मतलब मैं कानपुर यूपी से बोल रही हूं अक्टूबर 2026 में 3500 रुपये का मिक्सर खरीदा था चालू ही नहीं हो रहा बिल है वीडियो भी है दुकानदार बदल नहीं रहा नहीं रहा क्या करूं"
+    ],
+    "expected_action": "answer",
+    "expect_needs_lawyer": false,
+    "expected_topics": [
+      "defective goods",
+      "complaint"
+    ],
+    "must_include_any": [
+      [
+        "शिकायत",
+        "बदल",
+        "वापस"
+      ]
+    ],
+    "must_not_include": [],
+    "expected_chunk_ids": [
+      "CONS-CPA2019-S39",
+      "CONS-CPA2019-S35"
+    ],
+    "notes": "Synthetic Hindi STT transcript, not a real audio test. Grounded consumer options without a fixed award.",
+    "expectation_sources": [
+      "https://www.indiacode.nic.in/bitstream/123456789/15256/1/a2019-35.pdf"
+    ],
+    "expected_law_verified": false,
+    "calibration_label": "answer",
+    "jurisdictions_expected": [
+      "central",
+      "UP"
+    ],
+    "retrieval_expectation_kind": "topic",
+    "expected_chunk_ids_note": "Agent-mapped alternatives, not a requirement to retrieve every listed ID. Defective goods: remedies and complaint route. Human confirmation pending."
+  },
+  "repeat": 1,
+  "mock": false,
+  "backend": "app.pipeline",
+  "stage": "real",
+  "configured_models": {
+    "router": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "main": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash",
+        "rpm": 5,
+        "tpm": 250000,
+        "rpd": 19
+      }
+    ],
+    "judge": [
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      }
+    ]
+  },
+  "started_at": "2026-11-05T16:02:23.353811+00:00",
+  "turns": [
+    {
+      "input": "जी मतलब मैं कानपुर यूपी से बोल रही हूं अक्टूबर 2026 में 3500 रुपये का मिक्सर खरीदा था चालू ही नहीं हो रहा बिल है वीडियो भी है दुकानदार बदल नहीं रहा नहीं रहा क्या करूं",
+      "input_mode": "voice",
+      "lang_hint": "hi-IN",
+      "started_at": "2026-11-05T16:02:29.356016+00:00",
+      "result": {
+        "reply_text": "मैंने समझा कि आपने कानपुर, उत्तर प्रदेश में एक मिक्सर खरीदा था जो अब चालू नहीं हो रहा है। आपके पास खरीद का बिल और खराबी का वीडियो सबूत के तौर पर मौजूद है, लेकिन दुकानदार इसे बदलने से मना कर रहा है।\n\nकानून के अनुसार, यदि कोई उत्पाद खराब है, तो आप उत्पाद विक्रेता के खिलाफ 'प्रोडक्ट लायबिलिटी' (उत्पाद दायित्व) के तहत कार्रवाई कर सकते हैं। जिला आयोग यह आदेश दे सकता है कि विक्रेता खराब सामान को बदले या आपको पैसे वापस करे।\n\nआप दुकानदार को एक औपचारिक लिखित शिकायत भेजें। इसमें बिल की कॉपी लगाएं और उन्हें बताएं कि सामान खराब है। अपने पास इस शिकायत की एक प्रति और भेजने का सबूत सुरक्षित रखें।\n\nयदि दुकानदार आपकी बात नहीं मानता है, तो आप जिला उपभोक्ता आयोग में शिकायत दर्ज करने पर विचार कर सकते हैं।\n\nयदि दुकानदार के साथ बातचीत से मामला हल नहीं होता है, तो आप किसी वकील से सलाह ले सकते हैं।\n\nकृपया मुझे उस दुकान का नाम बताएं और यह भी बताएं कि दुकानदार से आपकी आखिरी बार बात कब हुई थी?\n\nस्रोत: Consumer Protection Act, 2019, section 83\nस्रोत: Consumer Protection Act, 2019, section 82\nस्रोत: Consumer Protection Act, 2019, section 39\n\nजो मैं जाँच नहीं पाया:\n- उपभोक्ता आयोग में शिकायत दर्ज करने की प्रक्रिया के चरण\n- दुकानदार को कानूनी नोटिस भेजने का प्रारूप\n\nयह कानूनी जानकारी है, कानूनी सलाह नहीं।",
+        "reply_lang": "hi-IN",
+        "category": "consumer",
+        "action": "answer",
+        "citations": [
+          "CONS-CPA2019-S83",
+          "CONS-CPA2019-S82",
+          "CONS-CPA2019-S39"
+        ],
+        "retrieved": [
+          {
+            "id": "CONS-CPA2019-S83",
+            "score": 0.7105280756950378
+          },
+          {
+            "id": "CONS-CPA2019-S82",
+            "score": 0.6953685879707336
+          },
+          {
+            "id": "CONS-CPA2019-S84",
+            "score": 0.6936346292495728
+          },
+          {
+            "id": "CONS-CPA2019-S39",
+            "score": 0.6889522075653076
+          },
+          {
+            "id": "CONS-CPA2019-S85",
+            "score": 0.6806056499481201
+          },
+          {
+            "id": "CONS-ECOM2020-R6",
+            "score": 0.6713840961456299
+          }
+        ],
+        "needs_lawyer": false,
+        "escalation_reasons": [],
+        "verifier": {
+          "status": "fixed",
+          "issues": []
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "c23ed16b9a50",
+          "input_mode": "voice",
+          "user_text": "जी मतलब मैं कानपुर यूपी से बोल रही हूं अक्टूबर 2026 में 3500 रुपये का मिक्सर खरीदा था चालू ही नहीं हो रहा बिल है वीडियो भी है दुकानदार बदल नहीं रहा नहीं रहा क्या करूं",
+          "mode": "advice",
+          "router": {
+            "category": "consumer",
+            "language": "hi-IN",
+            "state_or_city": "UP",
+            "case_file_update": {
+              "amount_inr": 3500,
+              "event_date": "2026-10",
+              "what_happened": "Purchased a mixer that is not turning on; shopkeeper refuses to replace it.",
+              "proof": [
+                "bill",
+                "video"
+              ],
+              "counterparty_type": "shopkeeper"
+            },
+            "missing_facts": [
+              "name of the shop",
+              "date of the last communication with the shopkeeper"
+            ],
+            "escalation_flags": [],
+            "english_retrieval_query": "consumer rights for defective product replacement"
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "retrieval": {
+            "query": "consumer rights for defective product replacement",
+            "jurisdictions": [
+              "central",
+              "UP"
+            ],
+            "top_score": 0.7105280756950378,
+            "min_score": 0.0,
+            "old_law": []
+          },
+          "judge": "ok",
+          "verifier_history": [
+            [
+              "block 3: claim not supported by its cited source (The cited source describes the powers of the District Commission to issue orders, but it does not explicitly state that )"
+            ],
+            []
+          ],
+          "timings_s": 18.859,
+          "llm": {
+            "calls": 6,
+            "retries": 0,
+            "latency_s": 13.99,
+            "models": [
+              "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "main:gemini:gemini-3.1-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite",
+              "main:gemini:gemini-3.1-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite"
+            ],
+            "fallbacks": [
+              {
+                "role": "main",
+                "model": "gemini:gemini-3.5-flash-lite",
+                "reason": "busy for ~397s"
+              },
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~435s"
+              },
+              {
+                "role": "main",
+                "model": "gemini:gemini-3.5-flash-lite",
+                "reason": "busy for ~390s"
+              },
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~427s"
+              }
+            ]
+          },
+          "action": "answer",
+          "category": "consumer",
+          "retrieved": [
+            {
+              "id": "CONS-CPA2019-S83",
+              "score": 0.7105280756950378
+            },
+            {
+              "id": "CONS-CPA2019-S82",
+              "score": 0.6953685879707336
+            },
+            {
+              "id": "CONS-CPA2019-S84",
+              "score": 0.6936346292495728
+            },
+            {
+              "id": "CONS-CPA2019-S39",
+              "score": 0.6889522075653076
+            },
+            {
+              "id": "CONS-CPA2019-S85",
+              "score": 0.6806056499481201
+            },
+            {
+              "id": "CONS-ECOM2020-R6",
+              "score": 0.6713840961456299
+            }
+          ],
+          "citations": [
+            "CONS-CPA2019-S83",
+            "CONS-CPA2019-S82",
+            "CONS-CPA2019-S39"
+          ],
+          "verifier": {
+            "status": "fixed",
+            "issues": []
+          },
+          "escalation_reasons": [],
+          "models": {
+            "router": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "main": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash",
+                "rpm": 5,
+                "tpm": 250000,
+                "rpd": 19
+              }
+            ],
+            "judge": [
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              }
+            ]
+          },
+          "mock": false
+        }
+      },
+      "model_names_used": [
+        "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
+        "main:gemini:gemini-3.1-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite",
+        "main:gemini:gemini-3.1-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite"
+      ],
+      "latency_s": 18.866957500053104,
+      "finished_at": "2026-11-05T16:02:48.221426+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-05T16:02:48.221426+00:00"
+}

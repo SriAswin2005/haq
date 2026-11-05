@@ -1,0 +1,415 @@
+{
+  "schema_version": 1,
+  "case_id": "T-027",
+  "case": {
+    "id": "T-027",
+    "group": "A_happy_path",
+    "tags": [
+      "I_draft_mode",
+      "sparse_facts"
+    ],
+    "category_expected": "tenancy",
+    "language": "en-IN",
+    "input_mode": "text",
+    "mode": "draft",
+    "turns": [
+      "UP Lucknow rental deposit not returned after I left last month. Please draft a polite demand notice. I don't know the dates or amount offhand and I haven't given you either person's name or address."
+    ],
+    "expected_action": "draft",
+    "expect_needs_lawyer": false,
+    "expected_topics": [
+      "deposit demand notice",
+      "missing facts"
+    ],
+    "must_include_any": [
+      [
+        "[●"
+      ],
+      [
+        "check every detail"
+      ]
+    ],
+    "must_not_include": [
+      "Ravi Sharma",
+      "1 October 2026",
+      "Rs 25000"
+    ],
+    "expected_chunk_ids": [
+      "TEN-UPTA2021-S11",
+      "TEN-UPTA2021-S4",
+      "TEN-UPTA2021-S30"
+    ],
+    "missing_draft_fields": [
+      "tenant_name",
+      "landlord_name",
+      "address",
+      "deposit_amount",
+      "vacated_date"
+    ],
+    "notes": "P0 deposit draft with explicit unknowns; placeholders and review footer, no guessed names, dates or money.",
+    "expected_law_verified": false,
+    "calibration_label": "exclude",
+    "jurisdictions_expected": [
+      "central",
+      "UP"
+    ],
+    "retrieval_expectation_kind": "topic",
+    "expected_chunk_ids_note": "Agent-mapped alternatives, not a requirement to retrieve every listed ID. Deposit demand draft sources; missing facts remain placeholders. Human confirmation pending."
+  },
+  "repeat": 1,
+  "mock": false,
+  "backend": "app.pipeline",
+  "stage": "real",
+  "configured_models": {
+    "router": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "main": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash",
+        "rpm": 5,
+        "tpm": 250000,
+        "rpd": 19
+      }
+    ],
+    "judge": [
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      }
+    ]
+  },
+  "started_at": "2026-11-05T15:49:53.468744+00:00",
+  "turns": [
+    {
+      "input": "UP Lucknow rental deposit not returned after I left last month. Please draft a polite demand notice. I don't know the dates or amount offhand and I haven't given you either person's name or address.",
+      "input_mode": "text",
+      "lang_hint": "en-IN",
+      "started_at": "2026-11-05T15:49:59.470478+00:00",
+      "result": {
+        "reply_text": "Here is a draft demand notice for your security deposit. Anything I do not know is left as a [● placeholder] for you to fill in.\n\nLEGAL NOTICE: DEMAND FOR RETURN OF SECURITY DEPOSIT\n\nDate: [● date of sending]\nBy: [● registered post / speed post / email, as you choose]\n\nTo,\n[● landlord's full name]\n[● landlord's address]\n\nFrom,\n[● your full name]\n[● your address and phone number]\n\nSubject: Demand for return of security deposit of Rs. [● deposit amount] for the premises at [● property address]\n\nDear Sir/Madam,\n\n1. I was your tenant at [● property address] from [● tenancy start date] to 2026-10 under [● rent agreement / verbal arrangement].\n\n2. At the start of the tenancy I paid you a security deposit of Rs. [● deposit amount] on [● date of payment] by [● mode of payment, e.g. bank transfer / UPI / cash]. [● reference or proof, e.g. receipt, transaction ID, agreement clause].\n\n3. I vacated the premises on 2026-10 and handed over [● possession details, e.g. keys handed over on date / to whom].\n\n4. The deposit has not been returned. [● what happened when you asked, with dates, e.g. calls or messages already sent]. [● any deductions the landlord claimed, and why they are not justified, or \"No deductions were agreed.\"]\n\nThis demand is made with reference to: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 11; Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 24. [● Have a lawyer confirm that these provisions apply to your case.]\n\n5. I therefore request you to return the full security deposit of Rs. [● deposit amount] within [● number of days you allow] days of receiving this notice, by [● how you want to be paid, e.g. transfer to your bank account details].\n\n6. If the amount is not returned within this time, I will be free to take further steps available to me under the law, without further notice, at your cost and risk.\n\nYours faithfully,\n[● your name]\n[● signature]\n\nEnclosures (copies): [● agreement / receipts / transaction record / messages]\n\n\nCheck every detail before sending. For high-value or complex matters, have a lawyer review it.",
+        "reply_lang": "en-IN",
+        "category": "tenancy",
+        "action": "draft",
+        "citations": [
+          "TEN-UPTA2021-S11",
+          "TEN-UPTA2021-S24"
+        ],
+        "retrieved": [
+          {
+            "id": "TEN-UPTA2021-S11",
+            "score": 0.6979730129241943
+          },
+          {
+            "id": "TEN-UPTA2021-S24",
+            "score": 0.6670565009117126
+          },
+          {
+            "id": "TEN-UPTA2021-S15",
+            "score": 0.6431294083595276
+          },
+          {
+            "id": "TEN-UPTA2021-S14",
+            "score": 0.6396377086639404
+          }
+        ],
+        "needs_lawyer": false,
+        "escalation_reasons": [],
+        "verifier": {
+          "status": "pass",
+          "issues": []
+        },
+        "draft_text": "LEGAL NOTICE: DEMAND FOR RETURN OF SECURITY DEPOSIT\n\nDate: [● date of sending]\nBy: [● registered post / speed post / email, as you choose]\n\nTo,\n[● landlord's full name]\n[● landlord's address]\n\nFrom,\n[● your full name]\n[● your address and phone number]\n\nSubject: Demand for return of security deposit of Rs. [● deposit amount] for the premises at [● property address]\n\nDear Sir/Madam,\n\n1. I was your tenant at [● property address] from [● tenancy start date] to 2026-10 under [● rent agreement / verbal arrangement].\n\n2. At the start of the tenancy I paid you a security deposit of Rs. [● deposit amount] on [● date of payment] by [● mode of payment, e.g. bank transfer / UPI / cash]. [● reference or proof, e.g. receipt, transaction ID, agreement clause].\n\n3. I vacated the premises on 2026-10 and handed over [● possession details, e.g. keys handed over on date / to whom].\n\n4. The deposit has not been returned. [● what happened when you asked, with dates, e.g. calls or messages already sent]. [● any deductions the landlord claimed, and why they are not justified, or \"No deductions were agreed.\"]\n\nThis demand is made with reference to: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 11; Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 24. [● Have a lawyer confirm that these provisions apply to your case.]\n\n5. I therefore request you to return the full security deposit of Rs. [● deposit amount] within [● number of days you allow] days of receiving this notice, by [● how you want to be paid, e.g. transfer to your bank account details].\n\n6. If the amount is not returned within this time, I will be free to take further steps available to me under the law, without further notice, at your cost and risk.\n\nYours faithfully,\n[● your name]\n[● signature]\n\nEnclosures (copies): [● agreement / receipts / transaction record / messages]\n\n\nCheck every detail before sending. For high-value or complex matters, have a lawyer review it.",
+        "trace": {
+          "session": "d13967708cb2",
+          "input_mode": "text",
+          "user_text": "UP Lucknow rental deposit not returned after I left last month. Please draft a polite demand notice. I don't know the dates or amount offhand and I haven't given you either person's name or address.",
+          "mode": "draft",
+          "router": {
+            "category": "tenancy",
+            "language": "en-IN",
+            "state_or_city": "UP",
+            "case_file_update": {
+              "what_happened": "rental deposit not returned after vacating",
+              "vacated_date": "2026-10"
+            },
+            "missing_facts": [
+              "amount of security deposit",
+              "landlord name"
+            ],
+            "escalation_flags": [],
+            "english_retrieval_query": "legal notice for return of rental security deposit India"
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "retrieval": {
+            "query": "legal notice for return of rental security deposit India",
+            "jurisdictions": [
+              "central",
+              "UP"
+            ],
+            "top_score": 0.7066757678985596,
+            "min_score": 0.0,
+            "old_law": [
+              {
+                "id": "TEN-UP1972-S20",
+                "score": 0.6493412256240845
+              },
+              {
+                "id": "TEN-UP1972-S21",
+                "score": 0.6360794305801392
+              }
+            ]
+          },
+          "draft": {
+            "missing": [
+              "[● Have a lawyer confirm that these provisions apply to your case.]",
+              "[● agreement / receipts / transaction record / messages]",
+              "[● any deductions the landlord claimed, and why they are not justified, or \"No deductions were agreed.\"]",
+              "[● date of payment]",
+              "[● date of sending]",
+              "[● deposit amount]",
+              "[● how you want to be paid, e.g. transfer to your bank account details]",
+              "[● landlord's address]",
+              "[● landlord's full name]",
+              "[● mode of payment, e.g. bank transfer / UPI / cash]",
+              "[● number of days you allow]",
+              "[● possession details, e.g. keys handed over on date / to whom]",
+              "[● property address]",
+              "[● reference or proof, e.g. receipt, transaction ID, agreement clause]",
+              "[● registered post / speed post / email, as you choose]",
+              "[● rent agreement / verbal arrangement]",
+              "[● signature]",
+              "[● tenancy start date]",
+              "[● what happened when you asked, with dates, e.g. calls or messages already sent]",
+              "[● your address and phone number]",
+              "[● your full name]",
+              "[● your name]"
+            ],
+            "scan_issues": []
+          },
+          "timings_s": 5.73,
+          "llm": {
+            "calls": 3,
+            "retries": 0,
+            "latency_s": 5.66,
+            "models": [
+              "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "embed:gemini:gemini-embedding-001"
+            ],
+            "fallbacks": []
+          },
+          "action": "draft",
+          "category": "tenancy",
+          "retrieved": [
+            {
+              "id": "TEN-UPTA2021-S11",
+              "score": 0.6979730129241943
+            },
+            {
+              "id": "TEN-UPTA2021-S24",
+              "score": 0.6670565009117126
+            },
+            {
+              "id": "TEN-UPTA2021-S15",
+              "score": 0.6431294083595276
+            },
+            {
+              "id": "TEN-UPTA2021-S14",
+              "score": 0.6396377086639404
+            }
+          ],
+          "citations": [
+            "TEN-UPTA2021-S11",
+            "TEN-UPTA2021-S24"
+          ],
+          "verifier": {
+            "status": "pass",
+            "issues": []
+          },
+          "escalation_reasons": [],
+          "models": {
+            "router": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "main": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash",
+                "rpm": 5,
+                "tpm": 250000,
+                "rpd": 19
+              }
+            ],
+            "judge": [
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              }
+            ]
+          },
+          "mock": false
+        }
+      },
+      "model_names_used": [
+        "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001"
+      ],
+      "latency_s": 5.7415297999978065,
+      "finished_at": "2026-11-05T15:50:05.200158+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-05T15:50:05.200158+00:00"
+}

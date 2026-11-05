@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "case_id": "T-024",
+  "case": {
+    "id": "T-024",
+    "group": "A_happy_path",
+    "tags": [
+      "salary_resignation"
+    ],
+    "category_expected": "wages",
+    "language": "en-IN",
+    "input_mode": "text",
+    "turns": [
+      "I worked in a private shop in Lucknow UP, resigned on 15 October 2026 after agreed handover. October salary Rs 12000 hasn't come. I have my appointment letter, attendance and bank statement. HR only says wait. What can I do?"
+    ],
+    "expected_action": "answer",
+    "expect_needs_lawyer": false,
+    "expected_topics": [
+      "unpaid wages",
+      "written demand"
+    ],
+    "must_include_any": [
+      [
+        "salary",
+        "wages"
+      ],
+      [
+        "written",
+        "email",
+        "demand",
+        "complaint"
+      ]
+    ],
+    "must_not_include": [],
+    "expected_chunk_ids": [],
+    "notes": "Current wages source checked, applicability still for human review. Does not assert a payment deadline.",
+    "expectation_sources": [
+      "https://labour.gov.in/sites/default/files/the_code_on_wages_2019_no._29_of_2019.pdf",
+      "https://www.labour.gov.in/static/uploads/2025/12/0fd090d29a4576739079a7b565c8ca9d.pdf"
+    ],
+    "expected_law_verified": false,
+    "calibration_label": "answer"
+  },
+  "repeat": 1,
+  "mock": true,
+  "backend": "app.pipeline",
+  "stage": "app_mock",
+  "configured_models": {
+    "router": {
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
+    },
+    "main": {
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
+    },
+    "judge": {
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
+    }
+  },
+  "started_at": "2026-11-05T13:59:22.612711+00:00",
+  "turns": [
+    {
+      "input": "I worked in a private shop in Lucknow UP, resigned on 15 October 2026 after agreed handover. October salary Rs 12000 hasn't come. I have my appointment letter, attendance and bank statement. HR only says wait. What can I do?",
+      "input_mode": "text",
+      "lang_hint": "en-IN",
+      "started_at": "2026-11-05T13:59:22.612711+00:00",
+      "result": {
+        "reply_text": "[SAMPLE, NOT REAL LAW] An employer must pay wages on or before the 7th day of the month following the wage period.\n\n[SAMPLE, NOT REAL LAW] An employee whose wages are unpaid may complain to the SAMPLE Labour Inspector.\n\nKeep your receipts, messages and a written timeline of dates.\n\nSource: SAMPLE Wages Act, section 1\nSource: SAMPLE Wages Act, section 2\n\nThis is legal information, not legal advice.",
+        "reply_lang": "en-IN",
+        "category": "wages",
+        "action": "answer",
+        "citations": [
+          "SAMPLE-WAGE-S1",
+          "SAMPLE-WAGE-S2"
+        ],
+        "retrieved": [
+          {
+            "id": "SAMPLE-WAGE-S1",
+            "score": 0.29104292392730713
+          },
+          {
+            "id": "SAMPLE-WAGE-S2",
+            "score": 0.27080124616622925
+          },
+          {
+            "id": "SAMPLE-COM-H1",
+            "score": 0.03651471063494682
+          }
+        ],
+        "needs_lawyer": false,
+        "escalation_reasons": [],
+        "verifier": {
+          "status": "pass",
+          "issues": []
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "f09124802d60",
+          "input_mode": "text",
+          "user_text": "I worked in a private shop in Lucknow UP, resigned on 15 October 2026 after agreed handover. October salary Rs 12000 hasn't come. I have my appointment letter, attendance and bank statement. HR only says wait. What can I do?",
+          "mode": "advice",
+          "router": {
+            "category": "wages",
+            "language": "en-IN",
+            "state_or_city": "UP",
+            "case_file_update": {
+              "amount_inr": 12000,
+              "state": "UP"
+            },
+            "missing_facts": [],
+            "escalation_flags": [],
+            "english_retrieval_query": "employer unpaid wages salary payment time limit; complaint for unpaid wages I worked in a private shop in Lucknow UP, resigned on 15 October 2026 after agreed handover. October salary Rs 12000 hasn't come. I have my appointment letter, attendance and bank statement. HR only says wait. What can I do?"
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "retrieval": {
+            "query": "employer unpaid wages salary payment time limit; complaint for unpaid wages I worked in a private shop in Lucknow UP, resigned on 15 October 2026 after agreed handover. October salary Rs 12000 hasn't come. I have my appointment letter, attendance and bank statement. HR only says wait. What can I do?",
+            "jurisdictions": [
+              "central",
+              "UP"
+            ],
+            "top_score": 0.29104292392730713,
+            "min_score": 0.0,
+            "old_law": []
+          },
+          "judge": "ok",
+          "verifier_history": [
+            []
+          ],
+          "timings_s": 0.003,
+          "llm": {
+            "calls": 3,
+            "retries": 0,
+            "latency_s": 0.0,
+            "models": [
+              "mock:router",
+              "mock:main",
+              "mock:judge"
+            ]
+          },
+          "action": "answer",
+          "category": "wages",
+          "retrieved": [
+            {
+              "id": "SAMPLE-WAGE-S1",
+              "score": 0.29104292392730713
+            },
+            {
+              "id": "SAMPLE-WAGE-S2",
+              "score": 0.27080124616622925
+            },
+            {
+              "id": "SAMPLE-COM-H1",
+              "score": 0.03651471063494682
+            }
+          ],
+          "citations": [
+            "SAMPLE-WAGE-S1",
+            "SAMPLE-WAGE-S2"
+          ],
+          "verifier": {
+            "status": "pass",
+            "issues": []
+          },
+          "escalation_reasons": [],
+          "models": {
+            "router": {
+              "provider": "gemini",
+              "model": "gemini-2.5-flash"
+            },
+            "main": {
+              "provider": "gemini",
+              "model": "gemini-2.5-flash"
+            },
+            "judge": {
+              "provider": "gemini",
+              "model": "gemini-2.5-flash"
+            }
+          },
+          "mock": true
+        }
+      },
+      "model_names_used": {
+        "router": {
+          "provider": "gemini",
+          "model": "gemini-2.5-flash"
+        },
+        "main": {
+          "provider": "gemini",
+          "model": "gemini-2.5-flash"
+        },
+        "judge": {
+          "provider": "gemini",
+          "model": "gemini-2.5-flash"
+        }
+      },
+      "latency_s": 0.003236799966543913,
+      "finished_at": "2026-11-05T13:59:22.616712+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-05T13:59:22.616712+00:00"
+}

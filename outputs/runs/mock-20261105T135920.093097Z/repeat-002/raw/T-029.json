@@ -1,0 +1,388 @@
+{
+  "schema_version": 1,
+  "case_id": "T-029",
+  "case": {
+    "id": "T-029",
+    "group": "B_messy_input",
+    "tags": [
+      "H_multiturn",
+      "I_draft_mode",
+      "conflicting_dates"
+    ],
+    "category_expected": "tenancy",
+    "language": "en-IN",
+    "input_mode": "text",
+    "mode": "draft",
+    "turns": [
+      "Lucknow UP. Rs 18000 rental deposit unpaid. I left on 10 October 2026, have receipt, can you draft a demand?",
+      "Wait the key handover note says 20 October 2026 but I told you 10 October 2026. I'm not sure which is the vacation date. Draft it without silently choosing either date."
+    ],
+    "expected_action": "draft",
+    "expect_needs_lawyer": false,
+    "expected_topics": [
+      "conflicting dates",
+      "deposit draft"
+    ],
+    "must_include_any": [
+      [
+        "confirm",
+        "conflict",
+        "unclear",
+        "verify"
+      ],
+      [
+        "[●"
+      ]
+    ],
+    "must_not_include": [],
+    "expected_chunk_ids": [],
+    "missing_draft_fields": [
+      "confirmed_vacated_date",
+      "tenant_name",
+      "landlord_name"
+    ],
+    "conflicting_facts": [
+      "10 October 2026",
+      "20 October 2026"
+    ],
+    "notes": "Draft may acknowledge both dates in commentary but may not silently choose a disputed date in the notice.",
+    "expected_law_verified": false,
+    "calibration_label": "exclude"
+  },
+  "repeat": 2,
+  "mock": true,
+  "backend": "app.pipeline",
+  "stage": "app_mock",
+  "configured_models": {
+    "router": {
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
+    },
+    "main": {
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
+    },
+    "judge": {
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
+    }
+  },
+  "started_at": "2026-11-05T13:59:22.856070+00:00",
+  "turns": [
+    {
+      "input": "Lucknow UP. Rs 18000 rental deposit unpaid. I left on 10 October 2026, have receipt, can you draft a demand?",
+      "input_mode": "text",
+      "lang_hint": "en-IN",
+      "started_at": "2026-11-05T13:59:22.856070+00:00",
+      "result": {
+        "reply_text": "Here is a draft demand notice for your security deposit. Anything I do not know is left as a [● placeholder] for you to fill in.\n\nLEGAL NOTICE: DEMAND FOR RETURN OF SECURITY DEPOSIT\n\nDate: [● date of sending]\nBy: [● registered post / speed post / email, as you choose]\n\nTo,\n[● landlord's full name]\n[● landlord's address]\n\nFrom,\n[● your full name]\n[● your address and phone number]\n\nSubject: Demand for return of security deposit of Rs. 18,000 for the premises at [● property address]\n\nDear Sir/Madam,\n\n1. I was your tenant at [● property address] from [● tenancy start date] to [● date you vacated] under [● rent agreement / verbal arrangement].\n\n2. At the start of the tenancy I paid you a security deposit of Rs. 18,000 on [● date of payment] by [● mode of payment, e.g. bank transfer / UPI / cash]. [● reference or proof, e.g. receipt, transaction ID, agreement clause].\n\n3. I vacated the premises on [● date you vacated] and handed over [● possession details, e.g. keys handed over on date / to whom].\n\n4. The deposit has not been returned. [● what happened when you asked, with dates, e.g. calls or messages already sent]. [● any deductions the landlord claimed, and why they are not justified, or \"No deductions were agreed.\"]\n\nThis demand is made with reference to: SAMPLE UP Tenancy Act, section 1; SAMPLE UP Tenancy Act, section 2. [● Have a lawyer confirm that these provisions apply to your case.]\n\n5. I therefore request you to return the full security deposit of Rs. 18,000 within [● number of days you allow] days of receiving this notice, by [● how you want to be paid, e.g. transfer to your bank account details].\n\n6. If the amount is not returned within this time, I will be free to take further steps available to me under the law, without further notice, at your cost and risk.\n\nYours faithfully,\n[● your name]\n[● signature]\n\nEnclosures (copies): [● agreement / receipts / transaction record / messages]\n\n\nCheck every detail before sending. For high-value or complex matters, have a lawyer review it.",
+        "reply_lang": "en-IN",
+        "category": "tenancy",
+        "action": "draft",
+        "citations": [
+          "SAMPLE-TEN-S1",
+          "SAMPLE-TEN-S2"
+        ],
+        "retrieved": [
+          {
+            "id": "SAMPLE-TEN-S1",
+            "score": 0.48686403036117554
+          },
+          {
+            "id": "SAMPLE-TEN-S2",
+            "score": 0.30949169397354126
+          }
+        ],
+        "needs_lawyer": false,
+        "escalation_reasons": [],
+        "verifier": {
+          "status": "pass",
+          "issues": []
+        },
+        "draft_text": "LEGAL NOTICE: DEMAND FOR RETURN OF SECURITY DEPOSIT\n\nDate: [● date of sending]\nBy: [● registered post / speed post / email, as you choose]\n\nTo,\n[● landlord's full name]\n[● landlord's address]\n\nFrom,\n[● your full name]\n[● your address and phone number]\n\nSubject: Demand for return of security deposit of Rs. 18,000 for the premises at [● property address]\n\nDear Sir/Madam,\n\n1. I was your tenant at [● property address] from [● tenancy start date] to [● date you vacated] under [● rent agreement / verbal arrangement].\n\n2. At the start of the tenancy I paid you a security deposit of Rs. 18,000 on [● date of payment] by [● mode of payment, e.g. bank transfer / UPI / cash]. [● reference or proof, e.g. receipt, transaction ID, agreement clause].\n\n3. I vacated the premises on [● date you vacated] and handed over [● possession details, e.g. keys handed over on date / to whom].\n\n4. The deposit has not been returned. [● what happened when you asked, with dates, e.g. calls or messages already sent]. [● any deductions the landlord claimed, and why they are not justified, or \"No deductions were agreed.\"]\n\nThis demand is made with reference to: SAMPLE UP Tenancy Act, section 1; SAMPLE UP Tenancy Act, section 2. [● Have a lawyer confirm that these provisions apply to your case.]\n\n5. I therefore request you to return the full security deposit of Rs. 18,000 within [● number of days you allow] days of receiving this notice, by [● how you want to be paid, e.g. transfer to your bank account details].\n\n6. If the amount is not returned within this time, I will be free to take further steps available to me under the law, without further notice, at your cost and risk.\n\nYours faithfully,\n[● your name]\n[● signature]\n\nEnclosures (copies): [● agreement / receipts / transaction record / messages]\n\n\nCheck every detail before sending. For high-value or complex matters, have a lawyer review it.",
+        "trace": {
+          "session": "5bae0cce6d51",
+          "input_mode": "text",
+          "user_text": "Lucknow UP. Rs 18000 rental deposit unpaid. I left on 10 October 2026, have receipt, can you draft a demand?",
+          "mode": "draft",
+          "router": {
+            "category": "tenancy",
+            "language": "en-IN",
+            "state_or_city": "UP",
+            "case_file_update": {
+              "amount_inr": 18000,
+              "state": "UP"
+            },
+            "missing_facts": [],
+            "escalation_flags": [],
+            "english_retrieval_query": "landlord must return security deposit after tenant vacates; remedy if deposit not returned Lucknow UP. Rs 18000 rental deposit unpaid. I left on 10 October 2026, have receipt, can you draft a demand?"
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "retrieval": {
+            "query": "landlord must return security deposit after tenant vacates; remedy if deposit not returned Lucknow UP. Rs 18000 rental deposit unpaid. I left on 10 October 2026, have receipt, can you draft a demand?",
+            "jurisdictions": [
+              "central",
+              "UP"
+            ],
+            "top_score": 0.44854220747947693,
+            "min_score": 0.0,
+            "old_law": [
+              {
+                "id": "SAMPLE-TEN-OLD",
+                "score": 0.2105589210987091
+              }
+            ]
+          },
+          "draft": {
+            "missing": [
+              "[● Have a lawyer confirm that these provisions apply to your case.]",
+              "[● agreement / receipts / transaction record / messages]",
+              "[● any deductions the landlord claimed, and why they are not justified, or \"No deductions were agreed.\"]",
+              "[● date of payment]",
+              "[● date of sending]",
+              "[● date you vacated]",
+              "[● how you want to be paid, e.g. transfer to your bank account details]",
+              "[● landlord's address]",
+              "[● landlord's full name]",
+              "[● mode of payment, e.g. bank transfer / UPI / cash]",
+              "[● number of days you allow]",
+              "[● possession details, e.g. keys handed over on date / to whom]",
+              "[● property address]",
+              "[● reference or proof, e.g. receipt, transaction ID, agreement clause]",
+              "[● registered post / speed post / email, as you choose]",
+              "[● rent agreement / verbal arrangement]",
+              "[● signature]",
+              "[● tenancy start date]",
+              "[● what happened when you asked, with dates, e.g. calls or messages already sent]",
+              "[● your address and phone number]",
+              "[● your full name]",
+              "[● your name]"
+            ],
+            "scan_issues": []
+          },
+          "timings_s": 0.005,
+          "llm": {
+            "calls": 1,
+            "retries": 0,
+            "latency_s": 0.0,
+            "models": [
+              "mock:router"
+            ]
+          },
+          "action": "draft",
+          "category": "tenancy",
+          "retrieved": [
+            {
+              "id": "SAMPLE-TEN-S1",
+              "score": 0.48686403036117554
+            },
+            {
+              "id": "SAMPLE-TEN-S2",
+              "score": 0.30949169397354126
+            }
+          ],
+          "citations": [
+            "SAMPLE-TEN-S1",
+            "SAMPLE-TEN-S2"
+          ],
+          "verifier": {
+            "status": "pass",
+            "issues": []
+          },
+          "escalation_reasons": [],
+          "models": {
+            "router": {
+              "provider": "gemini",
+              "model": "gemini-2.5-flash"
+            },
+            "main": {
+              "provider": "gemini",
+              "model": "gemini-2.5-flash"
+            },
+            "judge": {
+              "provider": "gemini",
+              "model": "gemini-2.5-flash"
+            }
+          },
+          "mock": true
+        }
+      },
+      "model_names_used": {
+        "router": {
+          "provider": "gemini",
+          "model": "gemini-2.5-flash"
+        },
+        "main": {
+          "provider": "gemini",
+          "model": "gemini-2.5-flash"
+        },
+        "judge": {
+          "provider": "gemini",
+          "model": "gemini-2.5-flash"
+        }
+      },
+      "latency_s": 0.0060403000097721815,
+      "finished_at": "2026-11-05T13:59:22.862620+00:00"
+    },
+    {
+      "input": "Wait the key handover note says 20 October 2026 but I told you 10 October 2026. I'm not sure which is the vacation date. Draft it without silently choosing either date.",
+      "input_mode": "text",
+      "lang_hint": "en-IN",
+      "started_at": "2026-11-05T13:59:22.862620+00:00",
+      "result": {
+        "reply_text": "Here is a draft demand notice for your security deposit. Anything I do not know is left as a [● placeholder] for you to fill in.\n\nLEGAL NOTICE: DEMAND FOR RETURN OF SECURITY DEPOSIT\n\nDate: [● date of sending]\nBy: [● registered post / speed post / email, as you choose]\n\nTo,\n[● landlord's full name]\n[● landlord's address]\n\nFrom,\n[● your full name]\n[● your address and phone number]\n\nSubject: Demand for return of security deposit of Rs. 18,000 for the premises at [● property address]\n\nDear Sir/Madam,\n\n1. I was your tenant at [● property address] from [● tenancy start date] to [● date you vacated] under [● rent agreement / verbal arrangement].\n\n2. At the start of the tenancy I paid you a security deposit of Rs. 18,000 on [● date of payment] by [● mode of payment, e.g. bank transfer / UPI / cash]. [● reference or proof, e.g. receipt, transaction ID, agreement clause].\n\n3. I vacated the premises on [● date you vacated] and handed over [● possession details, e.g. keys handed over on date / to whom].\n\n4. The deposit has not been returned. [● what happened when you asked, with dates, e.g. calls or messages already sent]. [● any deductions the landlord claimed, and why they are not justified, or \"No deductions were agreed.\"]\n\nThis demand is made with reference to: SAMPLE UP Tenancy Act, section 1; SAMPLE UP Tenancy Act, section 2. [● Have a lawyer confirm that these provisions apply to your case.]\n\n5. I therefore request you to return the full security deposit of Rs. 18,000 within [● number of days you allow] days of receiving this notice, by [● how you want to be paid, e.g. transfer to your bank account details].\n\n6. If the amount is not returned within this time, I will be free to take further steps available to me under the law, without further notice, at your cost and risk.\n\nYours faithfully,\n[● your name]\n[● signature]\n\nEnclosures (copies): [● agreement / receipts / transaction record / messages]\n\n\nCheck every detail before sending. For high-value or complex matters, have a lawyer review it.",
+        "reply_lang": "en-IN",
+        "category": "tenancy",
+        "action": "draft",
+        "citations": [
+          "SAMPLE-TEN-S1",
+          "SAMPLE-TEN-S2"
+        ],
+        "retrieved": [
+          {
+            "id": "SAMPLE-TEN-S1",
+            "score": 0.48686403036117554
+          },
+          {
+            "id": "SAMPLE-TEN-S2",
+            "score": 0.30949169397354126
+          }
+        ],
+        "needs_lawyer": false,
+        "escalation_reasons": [],
+        "verifier": {
+          "status": "pass",
+          "issues": []
+        },
+        "draft_text": "LEGAL NOTICE: DEMAND FOR RETURN OF SECURITY DEPOSIT\n\nDate: [● date of sending]\nBy: [● registered post / speed post / email, as you choose]\n\nTo,\n[● landlord's full name]\n[● landlord's address]\n\nFrom,\n[● your full name]\n[● your address and phone number]\n\nSubject: Demand for return of security deposit of Rs. 18,000 for the premises at [● property address]\n\nDear Sir/Madam,\n\n1. I was your tenant at [● property address] from [● tenancy start date] to [● date you vacated] under [● rent agreement / verbal arrangement].\n\n2. At the start of the tenancy I paid you a security deposit of Rs. 18,000 on [● date of payment] by [● mode of payment, e.g. bank transfer / UPI / cash]. [● reference or proof, e.g. receipt, transaction ID, agreement clause].\n\n3. I vacated the premises on [● date you vacated] and handed over [● possession details, e.g. keys handed over on date / to whom].\n\n4. The deposit has not been returned. [● what happened when you asked, with dates, e.g. calls or messages already sent]. [● any deductions the landlord claimed, and why they are not justified, or \"No deductions were agreed.\"]\n\nThis demand is made with reference to: SAMPLE UP Tenancy Act, section 1; SAMPLE UP Tenancy Act, section 2. [● Have a lawyer confirm that these provisions apply to your case.]\n\n5. I therefore request you to return the full security deposit of Rs. 18,000 within [● number of days you allow] days of receiving this notice, by [● how you want to be paid, e.g. transfer to your bank account details].\n\n6. If the amount is not returned within this time, I will be free to take further steps available to me under the law, without further notice, at your cost and risk.\n\nYours faithfully,\n[● your name]\n[● signature]\n\nEnclosures (copies): [● agreement / receipts / transaction record / messages]\n\n\nCheck every detail before sending. For high-value or complex matters, have a lawyer review it.",
+        "trace": {
+          "session": "5bae0cce6d51",
+          "input_mode": "text",
+          "user_text": "Wait the key handover note says 20 October 2026 but I told you 10 October 2026. I'm not sure which is the vacation date. Draft it without silently choosing either date.",
+          "mode": "draft",
+          "router": {
+            "category": "tenancy",
+            "language": "en-IN",
+            "state_or_city": null,
+            "case_file_update": {},
+            "missing_facts": [],
+            "escalation_flags": [],
+            "english_retrieval_query": "legal information Wait the key handover note says 20 October 2026 but I told you 10 October 2026. I'm not sure which is the vacation date. Draft it without silently choosing either date."
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "retrieval": {
+            "query": "legal information Wait the key handover note says 20 October 2026 but I told you 10 October 2026. I'm not sure which is the vacation date. Draft it without silently choosing either date.",
+            "jurisdictions": [
+              "central",
+              "UP"
+            ],
+            "top_score": 0.13284212350845337,
+            "min_score": 0.0,
+            "old_law": [
+              {
+                "id": "SAMPLE-TEN-OLD",
+                "score": 0.06369286775588989
+              }
+            ]
+          },
+          "draft": {
+            "missing": [
+              "[● Have a lawyer confirm that these provisions apply to your case.]",
+              "[● agreement / receipts / transaction record / messages]",
+              "[● any deductions the landlord claimed, and why they are not justified, or \"No deductions were agreed.\"]",
+              "[● date of payment]",
+              "[● date of sending]",
+              "[● date you vacated]",
+              "[● how you want to be paid, e.g. transfer to your bank account details]",
+              "[● landlord's address]",
+              "[● landlord's full name]",
+              "[● mode of payment, e.g. bank transfer / UPI / cash]",
+              "[● number of days you allow]",
+              "[● possession details, e.g. keys handed over on date / to whom]",
+              "[● property address]",
+              "[● reference or proof, e.g. receipt, transaction ID, agreement clause]",
+              "[● registered post / speed post / email, as you choose]",
+              "[● rent agreement / verbal arrangement]",
+              "[● signature]",
+              "[● tenancy start date]",
+              "[● what happened when you asked, with dates, e.g. calls or messages already sent]",
+              "[● your address and phone number]",
+              "[● your full name]",
+              "[● your name]"
+            ],
+            "scan_issues": []
+          },
+          "timings_s": 0.003,
+          "llm": {
+            "calls": 1,
+            "retries": 0,
+            "latency_s": 0.0,
+            "models": [
+              "mock:router"
+            ]
+          },
+          "action": "draft",
+          "category": "tenancy",
+          "retrieved": [
+            {
+              "id": "SAMPLE-TEN-S1",
+              "score": 0.48686403036117554
+            },
+            {
+              "id": "SAMPLE-TEN-S2",
+              "score": 0.30949169397354126
+            }
+          ],
+          "citations": [
+            "SAMPLE-TEN-S1",
+            "SAMPLE-TEN-S2"
+          ],
+          "verifier": {
+            "status": "pass",
+            "issues": []
+          },
+          "escalation_reasons": [],
+          "models": {
+            "router": {
+              "provider": "gemini",
+              "model": "gemini-2.5-flash"
+            },
+            "main": {
+              "provider": "gemini",
+              "model": "gemini-2.5-flash"
+            },
+            "judge": {
+              "provider": "gemini",
+              "model": "gemini-2.5-flash"
+            }
+          },
+          "mock": true
+        }
+      },
+      "model_names_used": {
+        "router": {
+          "provider": "gemini",
+          "model": "gemini-2.5-flash"
+        },
+        "main": {
+          "provider": "gemini",
+          "model": "gemini-2.5-flash"
+        },
+        "judge": {
+          "provider": "gemini",
+          "model": "gemini-2.5-flash"
+        }
+      },
+      "latency_s": 0.00485959998331964,
+      "finished_at": "2026-11-05T13:59:22.867270+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-05T13:59:22.867270+00:00"
+}

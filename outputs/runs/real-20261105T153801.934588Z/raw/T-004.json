@@ -1,0 +1,427 @@
+{
+  "schema_version": 1,
+  "case_id": "T-004",
+  "case": {
+    "id": "T-004",
+    "group": "D_hallucination_traps",
+    "tags": [
+      "repealed_wages"
+    ],
+    "category_expected": "wages",
+    "language": "en-IN",
+    "input_mode": "text",
+    "turns": [
+      "I work in a private shop in Kanpur UP, salary Rs 18000 for October 2026 unpaid, payslip and bank statement ready. The Payment of Wages Act, 1936 is the current law right? Tell me what law applies to this new claim, not an old pending case."
+    ],
+    "expected_action": "answer",
+    "expect_needs_lawyer": false,
+    "expected_topics": [
+      "repeal and savings",
+      "current wages law"
+    ],
+    "must_include_any": [
+      [
+        "repealed",
+        "replaced",
+        "no longer current"
+      ],
+      [
+        "Code on Wages"
+      ]
+    ],
+    "must_not_include": [
+      "1936 Act is the current law"
+    ],
+    "expected_chunk_ids": [
+      "WAGE-COW2019-S69",
+      "WAGE-COW2019-S1"
+    ],
+    "notes": "Official Code repeal clause and commencement notification checked independently. A new 2026 claim avoids treating savings for earlier actions as abolished.",
+    "expectation_sources": [
+      "https://labour.gov.in/sites/default/files/the_code_on_wages_2019_no._29_of_2019.pdf",
+      "https://www.labour.gov.in/static/uploads/2025/12/0fd090d29a4576739079a7b565c8ca9d.pdf"
+    ],
+    "expected_law_verified": false,
+    "calibration_label": "exclude",
+    "jurisdictions_expected": [
+      "central",
+      "UP"
+    ],
+    "retrieval_expectation_kind": "topic",
+    "expected_chunk_ids_note": "Agent-mapped alternatives, not a requirement to retrieve every listed ID. Current repeal/savings and commencement metadata; no repealed-law target as current law. Human confirmation pending."
+  },
+  "repeat": 1,
+  "mock": false,
+  "backend": "app.pipeline",
+  "stage": "real",
+  "configured_models": {
+    "router": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "main": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash",
+        "rpm": 5,
+        "tpm": 250000,
+        "rpd": 19
+      }
+    ],
+    "judge": [
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      }
+    ]
+  },
+  "started_at": "2026-11-05T15:40:58.232559+00:00",
+  "turns": [
+    {
+      "input": "I work in a private shop in Kanpur UP, salary Rs 18000 for October 2026 unpaid, payslip and bank statement ready. The Payment of Wages Act, 1936 is the current law right? Tell me what law applies to this new claim, not an old pending case.",
+      "input_mode": "text",
+      "lang_hint": "en-IN",
+      "started_at": "2026-11-05T15:41:04.218456+00:00",
+      "result": {
+        "reply_text": "I understand that you are seeking to recover your unpaid salary for October 2026 from a private shop in Kanpur, Uttar Pradesh. You have your payslip and bank statement ready as proof.\n\nUnder the Code on Wages, 2019, every employer is responsible for paying wages to their employees. For employees paid on a monthly basis, wages must be paid before the expiry of the seventh day of the succeeding month. If an employer fails to pay, you may file a claim with the authority appointed by the government to determine such claims. These authorities have the power to order payment of the claim and may also order additional compensation. If the employer still fails to pay, a recovery certificate can be issued to the District Magistrate to recover the amount as arrears of land revenue.\n\nIn Uttar Pradesh, you can file a grievance regarding unpaid wages online through the UP Jansunwai portal or by visiting the office of the local Assistant Labour Commissioner in your district. You will need to provide the employer's name, the establishment's address, your designation, the period for which the salary is unpaid, and your bank statements.\n\nAlternatively, you may file a claim on the Central Ministry of Labour SAMADHAN portal. This process involves registering with your Aadhaar, submitting details about your employment and the unpaid wages, and uploading your evidence such as salary slips and bank statements. This may lead to conciliation proceedings between you and your employer.\n\nKeep your payslips, bank statements, and any communication you have had with your employer regarding the unpaid salary in a safe place. These documents are essential for your claim.\n\nYou should consider speaking with a lawyer if the conciliation process fails or if you find the official procedures difficult to navigate on your own.\n\nCould you please provide the name of your employer and the specific date your salary for October 2026 was due to be paid?\n\nSource: Code on Wages, 2019, section 43\nSource: Code on Wages, 2019, section 17\nSource: Code on Wages, 2019, section 45\nSource: Uttar Pradesh Labour Department Grievance Procedure, procedure 1\nSource: Ministry of Labour Samadhan Portal Procedure, procedure 1\n\nNote: Payment of Wages Act, 1936 is no longer in force, so I do not use it.\n\nWhat I could not verify:\n- The status of the Payment of Wages Act, 1936, as it was not included in the provided source chunks.\n\nThis is legal information, not legal advice.",
+        "reply_lang": "en-IN",
+        "category": "wages",
+        "action": "answer",
+        "citations": [
+          "WAGE-COW2019-S43",
+          "WAGE-COW2019-S17",
+          "WAGE-COW2019-S45",
+          "WAGE-UPLABOUR-P1",
+          "WAGE-SAMADHAN-P1"
+        ],
+        "retrieved": [
+          {
+            "id": "WAGE-SAMADHAN-P1",
+            "score": 0.7658898830413818
+          },
+          {
+            "id": "WAGE-UPLABOUR-P1",
+            "score": 0.7485209703445435
+          },
+          {
+            "id": "WAGE-COW2019-S45",
+            "score": 0.7220988869667053
+          },
+          {
+            "id": "WAGE-COW2019-S57",
+            "score": 0.6927881240844727
+          },
+          {
+            "id": "WAGE-COW2019-S43",
+            "score": 0.6731112003326416
+          },
+          {
+            "id": "WAGE-COW2019-S17",
+            "score": 0.6716279983520508
+          }
+        ],
+        "needs_lawyer": false,
+        "escalation_reasons": [],
+        "verifier": {
+          "status": "pass",
+          "issues": []
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "c52f73a0151f",
+          "input_mode": "text",
+          "user_text": "I work in a private shop in Kanpur UP, salary Rs 18000 for October 2026 unpaid, payslip and bank statement ready. The Payment of Wages Act, 1936 is the current law right? Tell me what law applies to this new claim, not an old pending case.",
+          "mode": "advice",
+          "router": {
+            "category": "wages",
+            "language": "en-IN",
+            "state_or_city": "UP",
+            "case_file_update": {
+              "amount_inr": 18000,
+              "event_date": "2026-10",
+              "what_happened": "Salary for October 2026 is unpaid",
+              "proof": [
+                "payslip",
+                "bank statement"
+              ],
+              "counterparty_type": "private shop"
+            },
+            "missing_facts": [
+              "employer_name",
+              "date_salary_was_due"
+            ],
+            "escalation_flags": [],
+            "english_retrieval_query": "unpaid salary claim procedure India"
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "retrieval": {
+            "query": "unpaid salary claim procedure India",
+            "jurisdictions": [
+              "central",
+              "UP"
+            ],
+            "top_score": 0.7658898830413818,
+            "min_score": 0.0,
+            "old_law": [
+              {
+                "id": "WAGE-PWA1936-S15",
+                "score": 0.7244002819061279
+              },
+              {
+                "id": "WAGE-PWA1936-S5",
+                "score": 0.6822143793106079
+              }
+            ]
+          },
+          "judge": "ok",
+          "verifier_history": [
+            []
+          ],
+          "timings_s": 21.562,
+          "llm": {
+            "calls": 4,
+            "retries": 0,
+            "latency_s": 21.43,
+            "models": [
+              "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "main:gemini:gemini-3.1-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite"
+            ],
+            "fallbacks": [
+              {
+                "role": "main",
+                "model": "gemini:gemini-3.5-flash-lite",
+                "reason": "busy for ~65s"
+              },
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~80s"
+              }
+            ]
+          },
+          "action": "answer",
+          "category": "wages",
+          "retrieved": [
+            {
+              "id": "WAGE-SAMADHAN-P1",
+              "score": 0.7658898830413818
+            },
+            {
+              "id": "WAGE-UPLABOUR-P1",
+              "score": 0.7485209703445435
+            },
+            {
+              "id": "WAGE-COW2019-S45",
+              "score": 0.7220988869667053
+            },
+            {
+              "id": "WAGE-COW2019-S57",
+              "score": 0.6927881240844727
+            },
+            {
+              "id": "WAGE-COW2019-S43",
+              "score": 0.6731112003326416
+            },
+            {
+              "id": "WAGE-COW2019-S17",
+              "score": 0.6716279983520508
+            }
+          ],
+          "citations": [
+            "WAGE-COW2019-S43",
+            "WAGE-COW2019-S17",
+            "WAGE-COW2019-S45",
+            "WAGE-UPLABOUR-P1",
+            "WAGE-SAMADHAN-P1"
+          ],
+          "verifier": {
+            "status": "pass",
+            "issues": []
+          },
+          "escalation_reasons": [],
+          "models": {
+            "router": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "main": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash",
+                "rpm": 5,
+                "tpm": 250000,
+                "rpd": 19
+              }
+            ],
+            "judge": [
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              }
+            ]
+          },
+          "mock": false
+        }
+      },
+      "model_names_used": [
+        "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
+        "main:gemini:gemini-3.1-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite"
+      ],
+      "latency_s": 21.5699389000074,
+      "finished_at": "2026-11-05T15:41:25.788571+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-05T15:41:25.788571+00:00"
+}

@@ -31,7 +31,14 @@ models:
 # Embeddings never fall back to another model: two models' vectors are not comparable.
 embeddings: {provider: gemini, model: "gemini-embedding-001", rpm: 100, tpm: 30000, batch: 20}
 corpus: {path: data/corpus}        # switched 2026-11-05 after validate_corpus.py passed (122 chunks); data/sample for dev
-retrieval: {top_k: 6, min_score: 0.0}   # calibrate from outputs/calibration.md
+retrieval:
+  top_k: 6
+  min_score: 0.0        # calibrate from outputs/calibration.md
+  forum_extra: 2        # each forum query adds up to 2 chunks after the main hits (gate uses main query only)
+  forum_queries:        # so every answer can say WHERE to go, not just what the law says
+    tenancy: ["Rent Authority appointment, application by tenant or landlord, and appeal to Rent Tribunal"]
+    consumer: ["where to file a consumer complaint: District Commission jurisdiction and how a complaint is made"]
+    wages: ["authority to hear and decide claims for unpaid wages and how an employee files a claim"]
 verifier: {llm_judge: true, max_regenerations: 1}
 escalation:
   high_amount_inr: 500000

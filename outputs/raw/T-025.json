@@ -1,0 +1,856 @@
+{
+  "schema_version": 1,
+  "case_id": "T-025",
+  "case": {
+    "id": "T-025",
+    "group": "A_happy_path",
+    "tags": [
+      "unpaid_salary",
+      "H_multiturn",
+      "hinglish",
+      "voice_transcript"
+    ],
+    "category_expected": "wages",
+    "language": "en-IN",
+    "input_mode": "voice",
+    "turns": [
+      "mera paisa wapas nahi aaya. Please reply in English.",
+      "Not a shopping refund, salary hai. Kanpur UP private shop, October 2026 ka 14000 unpaid. Still working there.",
+      "I have attendance screenshots and bank statement, manager ne bas wait bola. What's the next sensible step?"
+    ],
+    "expected_action": "answer",
+    "expect_needs_lawyer": false,
+    "expected_topics": [
+      "unpaid wages",
+      "evidence"
+    ],
+    "must_include_any": [
+      [
+        "salary",
+        "wages"
+      ],
+      [
+        "attendance",
+        "bank",
+        "evidence",
+        "record"
+      ]
+    ],
+    "must_not_include": [],
+    "expected_chunk_ids": [
+      "WAGE-COW2019-S17",
+      "WAGE-COW2019-S43",
+      "WAGE-COW2019-S45"
+    ],
+    "notes": "Hinglish with explicit English override. Final routing/action expectations apply to final turn; safety checks apply to every turn. Intake accumulation across three turns. Synthetic transcript only; does not test STT.",
+    "expected_law_verified": false,
+    "calibration_label": "answer",
+    "jurisdictions_expected": [
+      "central",
+      "UP"
+    ],
+    "retrieval_expectation_kind": "topic",
+    "expected_chunk_ids_note": "Agent-mapped alternatives, not a requirement to retrieve every listed ID. Final-turn unpaid wages and claim route; initial intake need not retrieve. Human confirmation pending."
+  },
+  "repeat": 1,
+  "mock": false,
+  "backend": "app.pipeline",
+  "stage": "real",
+  "configured_models": {
+    "router": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "main": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash",
+        "rpm": 5,
+        "tpm": 250000,
+        "rpd": 19
+      }
+    ],
+    "judge": [
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      }
+    ]
+  },
+  "started_at": "2026-11-05T16:03:29.534470+00:00",
+  "turns": [
+    {
+      "input": "mera paisa wapas nahi aaya. Please reply in English.",
+      "input_mode": "voice",
+      "lang_hint": "en-IN",
+      "started_at": "2026-11-05T16:03:35.535364+00:00",
+      "result": {
+        "reply_text": "What I understood: what happened: The user is reporting that their money has not been returned.\n\nCould you tell me a little more? Is this about (a) a refund or a defective product or service, (b) unpaid salary or dues from an employer, or (c) a rental security deposit that was not returned?\n\nThis is legal information, not legal advice.",
+        "reply_lang": "en-IN",
+        "category": "unclear",
+        "action": "clarify",
+        "citations": [],
+        "retrieved": [],
+        "needs_lawyer": false,
+        "escalation_reasons": [
+          "unclear"
+        ],
+        "verifier": {
+          "status": "pass",
+          "issues": []
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "23229237af0f",
+          "input_mode": "voice",
+          "user_text": "mera paisa wapas nahi aaya. Please reply in English.",
+          "mode": "advice",
+          "router": {
+            "category": "unclear",
+            "language": "hi-IN",
+            "state_or_city": null,
+            "case_file_update": {
+              "what_happened": "The user is reporting that their money has not been returned."
+            },
+            "missing_facts": [
+              "nature of the transaction (e.g., purchase, salary, rent deposit)",
+              "counterparty details"
+            ],
+            "escalation_flags": [],
+            "english_retrieval_query": "how to recover money from a person or company"
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "timings_s": 2.167,
+          "llm": {
+            "calls": 1,
+            "retries": 0,
+            "latency_s": 2.13,
+            "models": [
+              "router:gemini:gemini-3.1-flash-lite"
+            ],
+            "fallbacks": []
+          },
+          "action": "clarify",
+          "category": "unclear",
+          "retrieved": [],
+          "citations": [],
+          "verifier": {
+            "status": "pass",
+            "issues": []
+          },
+          "escalation_reasons": [
+            "unclear"
+          ],
+          "models": {
+            "router": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "main": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash",
+                "rpm": 5,
+                "tpm": 250000,
+                "rpd": 19
+              }
+            ],
+            "judge": [
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              }
+            ]
+          },
+          "mock": false
+        }
+      },
+      "model_names_used": [
+        "router:gemini:gemini-3.1-flash-lite"
+      ],
+      "latency_s": 2.1685028999927454,
+      "finished_at": "2026-11-05T16:03:37.703942+00:00"
+    },
+    {
+      "input": "Not a shopping refund, salary hai. Kanpur UP private shop, October 2026 ka 14000 unpaid. Still working there.",
+      "input_mode": "voice",
+      "lang_hint": "en-IN",
+      "started_at": "2026-11-05T16:03:43.704382+00:00",
+      "result": {
+        "reply_text": "I understand you are working at a private shop in Kanpur and have not received your salary for October 2026.\n\nUnder the law, every employer must fix a wage period not exceeding one month and pay wages within the prescribed time. If an employer fails to pay the wages due, they are responsible for the payment. You may file a claim for unpaid wages with the authority appointed by the government.\n\nKeep a record of your attendance and any communication you have had with your employer regarding the unpaid salary. You may also want to gather any documents that prove your employment, such as an appointment letter or salary slips.\n\nIf you are unable to resolve this directly with your employer, you may consider consulting a lawyer to understand the specific steps for filing a claim in your district.\n\nHave you raised this issue with your employer yet? Do you have any proof of employment like an appointment letter or salary slip?\n\nSource: Uttar Pradesh Dookan Aur Vanijya Adhishthan Adhiniyam, 1962, section 13\nSource: Code on Wages, 2019, section 43\nSource: Code on Wages, 2019, section 45\n\nNote: Payment of Wages Act, 1936 is no longer in force, so I do not use it.\n\nWhat I could not verify:\n- Specific local rules or designated authorities in Kanpur for filing wage claims under the 1962 Act.\n\nThis is legal information, not legal advice.",
+        "reply_lang": "en-IN",
+        "category": "wages",
+        "action": "answer",
+        "citations": [
+          "WAGE-UPSHOP1962-S13",
+          "WAGE-COW2019-S43",
+          "WAGE-COW2019-S45"
+        ],
+        "retrieved": [
+          {
+            "id": "WAGE-UPSHOP1962-S18",
+            "score": 0.7219213247299194
+          },
+          {
+            "id": "WAGE-UPSHOP1962-S13",
+            "score": 0.6965184211730957
+          },
+          {
+            "id": "WAGE-COW2019-S45",
+            "score": 0.6927255392074585
+          },
+          {
+            "id": "WAGE-COW2019-S43",
+            "score": 0.6890238523483276
+          },
+          {
+            "id": "WAGE-COW2019-S17",
+            "score": 0.6821751594543457
+          },
+          {
+            "id": "WAGE-COW2019-S54",
+            "score": 0.6803602576255798
+          }
+        ],
+        "needs_lawyer": false,
+        "escalation_reasons": [],
+        "verifier": {
+          "status": "pass",
+          "issues": []
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "23229237af0f",
+          "input_mode": "voice",
+          "user_text": "Not a shopping refund, salary hai. Kanpur UP private shop, October 2026 ka 14000 unpaid. Still working there.",
+          "mode": "advice",
+          "router": {
+            "category": "wages",
+            "language": "en-IN",
+            "state_or_city": "UP",
+            "case_file_update": {
+              "amount_inr": 14000,
+              "event_date": "2026-10",
+              "what_happened": "Unpaid salary for October 2026 from a private shop in Kanpur.",
+              "counterparty_type": "private shop"
+            },
+            "missing_facts": [
+              "Have you raised this issue with your employer yet?",
+              "Do you have any proof of employment like an appointment letter or salary slip?"
+            ],
+            "escalation_flags": [],
+            "english_retrieval_query": "unpaid salary from private shop employer"
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "retrieval": {
+            "query": "unpaid salary from private shop employer",
+            "jurisdictions": [
+              "central",
+              "UP"
+            ],
+            "top_score": 0.7219213247299194,
+            "min_score": 0.0,
+            "old_law": [
+              {
+                "id": "WAGE-PWA1936-S15",
+                "score": 0.7118406891822815
+              },
+              {
+                "id": "WAGE-PWA1936-S5",
+                "score": 0.6969423890113831
+              }
+            ]
+          },
+          "judge": "ok",
+          "verifier_history": [
+            []
+          ],
+          "timings_s": 10.123,
+          "llm": {
+            "calls": 4,
+            "retries": 0,
+            "latency_s": 8.2,
+            "models": [
+              "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "main:gemini:gemini-3.1-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite"
+            ],
+            "fallbacks": [
+              {
+                "role": "main",
+                "model": "gemini:gemini-3.5-flash-lite",
+                "reason": "busy for ~323s"
+              },
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~361s"
+              }
+            ]
+          },
+          "action": "answer",
+          "category": "wages",
+          "retrieved": [
+            {
+              "id": "WAGE-UPSHOP1962-S18",
+              "score": 0.7219213247299194
+            },
+            {
+              "id": "WAGE-UPSHOP1962-S13",
+              "score": 0.6965184211730957
+            },
+            {
+              "id": "WAGE-COW2019-S45",
+              "score": 0.6927255392074585
+            },
+            {
+              "id": "WAGE-COW2019-S43",
+              "score": 0.6890238523483276
+            },
+            {
+              "id": "WAGE-COW2019-S17",
+              "score": 0.6821751594543457
+            },
+            {
+              "id": "WAGE-COW2019-S54",
+              "score": 0.6803602576255798
+            }
+          ],
+          "citations": [
+            "WAGE-UPSHOP1962-S13",
+            "WAGE-COW2019-S43",
+            "WAGE-COW2019-S45"
+          ],
+          "verifier": {
+            "status": "pass",
+            "issues": []
+          },
+          "escalation_reasons": [],
+          "models": {
+            "router": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "main": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash",
+                "rpm": 5,
+                "tpm": 250000,
+                "rpd": 19
+              }
+            ],
+            "judge": [
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              }
+            ]
+          },
+          "mock": false
+        }
+      },
+      "model_names_used": [
+        "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
+        "main:gemini:gemini-3.1-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite"
+      ],
+      "latency_s": 10.126887999998871,
+      "finished_at": "2026-11-05T16:03:53.831156+00:00"
+    },
+    {
+      "input": "I have attendance screenshots and bank statement, manager ne bas wait bola. What's the next sensible step?",
+      "input_mode": "voice",
+      "lang_hint": "en-IN",
+      "started_at": "2026-11-05T16:03:59.832049+00:00",
+      "result": {
+        "reply_text": "I understand you are trying to recover unpaid wages from a private shop in Kanpur and have already spoken to your manager without success. Please keep your attendance screenshots and bank statements in a safe place as these are important records of your employment and payment history.\n\nUnder the law, employers must fix a wage period that does not exceed one month and pay wages within the prescribed time. If wages are not paid, they can be recovered through the authority appointed by the government to hear such claims. Courts generally do not entertain separate civil suits for claims that can be recovered through this specific legal process.\n\n1. Continue to keep a record of all your communications with the manager regarding the unpaid salary. 2. You may contact the Uttar Pradesh State Legal Services Authority for guidance on how to proceed with your claim. They can be reached at their toll-free helpline number or through their office in Lucknow.\n\nYou should consider speaking with a lawyer if you are unable to resolve the matter through the relevant government authority or if you need help filing a formal claim for your unpaid wages.\n\nDo you have an appointment letter or a salary slip from your employer? These documents can be very helpful in proving your employment and the amount of wages due.\n\nSource: Uttar Pradesh Dookan Aur Vanijya Adhishthan Adhiniyam, 1962, section 13\nSource: Code on Wages, 2019, section 45\nSource: Code on Wages, 2019, section 57\n\nNote: Payment of Wages Act, 1936 is no longer in force, so I do not use it.\n\nWhat I could not verify:\n- The specific procedure for filing a claim under the Payment of Wages Act, 1936, as referenced in the UP Act.\n- The exact prescribed time limit for payment of wages in UP.\n\nThis is legal information, not legal advice.",
+        "reply_lang": "en-IN",
+        "category": "wages",
+        "action": "answer",
+        "citations": [
+          "WAGE-UPSHOP1962-S13",
+          "WAGE-COW2019-S45",
+          "WAGE-COW2019-S57"
+        ],
+        "retrieved": [
+          {
+            "id": "WAGE-UPSHOP1962-S18",
+            "score": 0.748570442199707
+          },
+          {
+            "id": "WAGE-COW2019-S45",
+            "score": 0.7342209815979004
+          },
+          {
+            "id": "WAGE-UPSHOP1962-S13",
+            "score": 0.7188612222671509
+          },
+          {
+            "id": "WAGE-COW2019-S57",
+            "score": 0.7124401330947876
+          },
+          {
+            "id": "WAGE-UPSHOP1962-S15",
+            "score": 0.708996057510376
+          },
+          {
+            "id": "COM-UPSLSA-H1800",
+            "score": 0.7075644731521606
+          }
+        ],
+        "needs_lawyer": false,
+        "escalation_reasons": [],
+        "verifier": {
+          "status": "pass",
+          "issues": []
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "23229237af0f",
+          "input_mode": "voice",
+          "user_text": "I have attendance screenshots and bank statement, manager ne bas wait bola. What's the next sensible step?",
+          "mode": "advice",
+          "router": {
+            "category": "wages",
+            "language": "en-IN",
+            "state_or_city": "UP",
+            "case_file_update": {
+              "proof": [
+                "attendance screenshots",
+                "bank statement"
+              ],
+              "already_tried": [
+                "spoke to manager",
+                "manager asked to wait"
+              ]
+            },
+            "missing_facts": [
+              "appointment letter",
+              "salary slip"
+            ],
+            "escalation_flags": [],
+            "english_retrieval_query": "how to file a wage claim for unpaid salary in Uttar Pradesh"
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "retrieval": {
+            "query": "how to file a wage claim for unpaid salary in Uttar Pradesh",
+            "jurisdictions": [
+              "central",
+              "UP"
+            ],
+            "top_score": 0.748570442199707,
+            "min_score": 0.0,
+            "old_law": [
+              {
+                "id": "WAGE-PWA1936-S15",
+                "score": 0.7360573410987854
+              },
+              {
+                "id": "WAGE-PWA1936-S5",
+                "score": 0.6894775032997131
+              }
+            ]
+          },
+          "judge": "ok",
+          "verifier_history": [
+            []
+          ],
+          "timings_s": 10.098,
+          "llm": {
+            "calls": 4,
+            "retries": 0,
+            "latency_s": 8.05,
+            "models": [
+              "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "main:gemini:gemini-3.1-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite"
+            ],
+            "fallbacks": [
+              {
+                "role": "main",
+                "model": "gemini:gemini-3.5-flash-lite",
+                "reason": "busy for ~306s"
+              },
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~345s"
+              }
+            ]
+          },
+          "action": "answer",
+          "category": "wages",
+          "retrieved": [
+            {
+              "id": "WAGE-UPSHOP1962-S18",
+              "score": 0.748570442199707
+            },
+            {
+              "id": "WAGE-COW2019-S45",
+              "score": 0.7342209815979004
+            },
+            {
+              "id": "WAGE-UPSHOP1962-S13",
+              "score": 0.7188612222671509
+            },
+            {
+              "id": "WAGE-COW2019-S57",
+              "score": 0.7124401330947876
+            },
+            {
+              "id": "WAGE-UPSHOP1962-S15",
+              "score": 0.708996057510376
+            },
+            {
+              "id": "COM-UPSLSA-H1800",
+              "score": 0.7075644731521606
+            }
+          ],
+          "citations": [
+            "WAGE-UPSHOP1962-S13",
+            "WAGE-COW2019-S45",
+            "WAGE-COW2019-S57"
+          ],
+          "verifier": {
+            "status": "pass",
+            "issues": []
+          },
+          "escalation_reasons": [],
+          "models": {
+            "router": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "main": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash",
+                "rpm": 5,
+                "tpm": 250000,
+                "rpd": 19
+              }
+            ],
+            "judge": [
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              }
+            ]
+          },
+          "mock": false
+        }
+      },
+      "model_names_used": [
+        "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
+        "main:gemini:gemini-3.1-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite"
+      ],
+      "latency_s": 10.107772900024429,
+      "finished_at": "2026-11-05T16:04:09.930355+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-05T16:04:09.930355+00:00"
+}

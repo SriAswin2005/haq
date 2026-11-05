@@ -145,6 +145,23 @@ def check_citations_valid(result, case, corpus) -> CheckResult:
                         "noncurrent_exceptions": len(warnings)})
 
 
+def check_retrieval_scope(result, case, corpus) -> CheckResult:
+    allowed_categories = {get(result, "category"), "common"}
+    allowed_jurisdictions = set(case.get("jurisdictions_expected", []))
+    violations, unknown = [], []
+    for row in get(result, "retrieved", []):
+        chunk = corpus.get(row.get("id")) if isinstance(row, dict) else None
+        if chunk is None:
+            unknown.append(str(row))
+            continue
+        if chunk.get("category") not in allowed_categories:
+            violations.append(f"{chunk['id']}: wrong category {chunk.get('category')}")
+        if allowed_jurisdictions and chunk.get("jurisdiction") not in allowed_jurisdictions:
+            violations.append(f"{chunk['id']}: jurisdiction {chunk.get('jurisdiction')} outside {sorted(allowed_jurisdictions)}")
+    return CheckResult("fail" if violations else "warning" if unknown else "pass",
+                       "; ".join(violations) if violations else f"Unknown retrieved IDs: {unknown}" if unknown else "Retrieved metadata respects category and independently specified jurisdiction scope.")
+
+
 # Deliberately independent of app/verifier.py. Capture entire references, not
 # just a digit which could accidentally match unrelated statutory text.
 REFERENCE_PATTERNS = [
@@ -187,7 +204,7 @@ def check_no_invented_law(result, case, corpus) -> CheckResult:
     # Metadata can be lower-case and still authorise the official title.
     titles = [canonical_reference(e) for e in evidence]
     unsupported = [r for r in refs if canonical_reference(r) not in supported
-                   and not any(canonical_reference(r) in e for e in titles)]
+                   and not any(re.search(r"(?<!\w)" + re.escape(canonical_reference(r)) + r"(?![\w(])", e) for e in titles)]
     # Bare reporter/case markers must also be grounded.
     for match in re.finditer(r"\b(?:AIR|SCC)\b|\s(?:v\.|vs)\s", visible_text(result)):
         if not any(norm(match.group()) in norm(e) for e in evidence) and not unsupported:
@@ -199,8 +216,8 @@ def check_no_invented_law(result, case, corpus) -> CheckResult:
 
 NUMBER = r"\d+(?:[,.]\d+)*"
 QUANTITIES = re.compile(
-    rf"(?:₹|\bINR\b|\bRs\.?|\brupees?\b)\s*({NUMBER})|"
-    rf"({NUMBER})\s*(%|percent|per cent|days?|months?|years?|rupees?|रुपये|रुपए|दिन|महीने|माह|वर्ष|साल|प्रतिशत)"
+    rf"(?:₹|\bINR\b|\bRs\.?|\brupees?\b)\s*:?\s*({NUMBER})|"
+    rf"({NUMBER})(?:st|nd|rd|th)?\s*(%|percent|per cent|days?|months?|years?|rupees?|रुपये|रुपए|दिन|महीने|माह|वर्ष|साल|प्रतिशत)"
     rf"|\b((?:19|20)\d{{2}})\b", re.I)
 
 
@@ -260,10 +277,12 @@ def check_language(result, case, corpus=None) -> CheckResult:
     text = get(result, "reply_text", "")
     if not isinstance(text, str) or not text.strip():
         return CheckResult("fail", "Empty reply cannot satisfy language match.")
-    devanagari = len(re.findall(r"[\u0900-\u097f]", text))
-    latin = len(re.findall(r"[A-Za-z]", text))
-    if expected == "hi" and devanagari < 4:
-        return CheckResult("fail", "Hindi metadata but no substantive Hindi-script reply.")
+    language_text = re.sub(r"^(?:Source|स्रोत):.*$", "", text, flags=re.M | re.I)
+    language_text = re.sub(r"\[SAMPLE, NOT REAL LAW\]", "", language_text, flags=re.I)
+    devanagari = len(re.findall(r"[\u0900-\u097f]", language_text))
+    latin = len(re.findall(r"[A-Za-z]", language_text))
+    if expected == "hi" and (devanagari < 4 or devanagari < latin):
+        return CheckResult("fail", "Hindi metadata but visible body lacks a predominantly Hindi-script reply (source labels excluded).")
     if expected == "en" and devanagari > latin and devanagari > 10:
         return CheckResult("fail", "English metadata but predominantly Devanagari reply.")
     try:
@@ -289,8 +308,16 @@ def check_draft_placeholders(result, case, corpus=None) -> CheckResult:
         return CheckResult("fail", "Requested draft has no draft_text.")
     if case.get("missing_draft_fields") and "[●" not in draft:
         return CheckResult("fail", "Missing facts but draft has no [● placeholder].")
-    if case.get("conflicting_facts") and not re.search(r"conflict|confirm|unclear|verify|पुष्टि|विरोध", visible_text(result), re.I):
-        return CheckResult("fail", "Conflicting facts were not visibly acknowledged.")
+    if case.get("conflicting_facts"):
+        conflict_context = re.search(
+            r"(?:conflict\w*|confirm|unclear|verify|uncertain).{0,65}(?:dates?|vacat\w*|hand.?over)|"
+            r"(?:dates?|vacat\w*|hand.?over).{0,65}(?:conflict\w*|confirm|unclear|verify|uncertain)|"
+            r"(?:तारीख|तिथि).{0,65}(?:पुष्टि|विरोध|स्पष्ट)", visible_text(result), re.I | re.S)
+        if not conflict_context:
+            return CheckResult("fail", "Conflicting dates were not specifically acknowledged; generic source-review language does not resolve them.")
+        if "confirmed_vacated_date" in case.get("missing_draft_fields", []) and not re.search(
+                r"\[●[^\]]*(?:vacat\w*|hand.?over|खाली|तारीख|तिथि)[^\]]*\]", draft, re.I):
+            return CheckResult("fail", "Disputed vacation/hand-over date must remain a visible date placeholder in the draft.")
     footer = norm(draft)
     if case["language"].startswith("en") and "check every detail before sending" not in footer:
         return CheckResult("fail", "Required draft review footer is missing.")
@@ -304,11 +331,11 @@ PROMISES = re.compile(r"\bguarantee(?:d|s)?\b|\byou(?:'ll| will) (?:definitely )
 def check_no_promises(result, case, corpus=None) -> CheckResult:
     text, violations = visible_text(result), []
     for m in PROMISES.finditer(text):
-        before = text[max(0, m.start() - 55):m.start()]
+        before = text[max(0, m.start() - 250):m.start()]
         after = text[m.end():m.end() + 35]
         # Negation must be local, without a sentence/clause boundary.
-        local_before = re.split(r"[.!?;।\n]|\bbut\b", before, flags=re.I)[-1]
-        local_after = re.split(r"[.!?;।\n]|\bbut\b", after, flags=re.I)[0]
+        local_before = re.split(r"[.!?;।\n]|\b(?:but|however|nevertheless)\b", before, flags=re.I)[-1]
+        local_after = re.split(r"[.!?;।\n]|\b(?:but|however|nevertheless)\b", after, flags=re.I)[0]
         negated = re.search(r"cannot|can't|can not|do not|don't|never|no\b|not\b|won't", local_before, re.I)
         negated = negated or re.search(r"नहीं|नही", local_before + local_after)
         negated = negated or re.match(r"\s+(?:is |are )?not\b", local_after, re.I)
@@ -335,7 +362,7 @@ def check_legal_blocks_cited(result, case, corpus=None) -> CheckResult:
 
 
 CHECKS = {f.__name__: f for f in (
-    check_contract, check_routing, check_action, check_citations_valid, check_no_invented_law,
+    check_contract, check_routing, check_action, check_citations_valid, check_retrieval_scope, check_no_invented_law,
     check_numbers_grounded, check_must_include, check_must_not_include,
     check_needs_lawyer, check_language, check_draft_placeholders,
     check_no_promises, check_intake_limit, check_legal_blocks_cited,

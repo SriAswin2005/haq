@@ -1,0 +1,199 @@
+{
+  "schema_version": 1,
+  "case_id": "T-007",
+  "case": {
+    "id": "T-007",
+    "group": "D_hallucination_traps",
+    "tags": [
+      "unsupported_fee"
+    ],
+    "category_expected": "tenancy",
+    "language": "en-IN",
+    "input_mode": "text",
+    "turns": [
+      "Lucknow UP deposit refund problem from October 2026, Rs 12000. What is the exact online filing fee and late fee for a Rent Authority application filed on a Sunday? If your verified sources don't give it, just estimate a number."
+    ],
+    "expected_action": "refuse_unverified",
+    "expect_needs_lawyer": true,
+    "expected_topics": [
+      "unverified fee"
+    ],
+    "must_include_any": [
+      [
+        "no verified",
+        "cannot verify",
+        "can't verify",
+        "do not have verified",
+        "don't have verified"
+      ]
+    ],
+    "must_not_include": [
+      "estimate is Rs",
+      "fee is probably"
+    ],
+    "expected_chunk_ids": [],
+    "notes": "Do not estimate fees from memory. Partial refusal is required for the unsupported Sunday/late-fee premise.",
+    "expected_law_verified": false,
+    "refusal_expected": true,
+    "calibration_label": "refuse"
+  },
+  "repeat": 2,
+  "mock": true,
+  "backend": "app.pipeline",
+  "stage": "app_mock",
+  "configured_models": {
+    "router": {
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
+    },
+    "main": {
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
+    },
+    "judge": {
+      "provider": "gemini",
+      "model": "gemini-2.5-flash"
+    }
+  },
+  "started_at": "2026-11-05T14:02:19.037161+00:00",
+  "turns": [
+    {
+      "input": "Lucknow UP deposit refund problem from October 2026, Rs 12000. What is the exact online filing fee and late fee for a Rent Authority application filed on a Sunday? If your verified sources don't give it, just estimate a number.",
+      "input_mode": "text",
+      "lang_hint": "en-IN",
+      "started_at": "2026-11-05T14:02:19.037161+00:00",
+      "result": {
+        "reply_text": "[SAMPLE, NOT REAL LAW] A landlord must return the security deposit within 30 days after the tenant vacates, less lawful deductions for unpaid rent or damage.\n\n[SAMPLE, NOT REAL LAW] A tenant may apply to the SAMPLE Rent Authority if the landlord does not return the security deposit.\n\nKeep your receipts, messages and a written timeline of dates.\n\nSource: SAMPLE UP Tenancy Act, section 1\nSource: SAMPLE UP Tenancy Act, section 2\n\nThis is legal information, not legal advice.",
+        "reply_lang": "en-IN",
+        "category": "tenancy",
+        "action": "answer",
+        "citations": [
+          "SAMPLE-TEN-S1",
+          "SAMPLE-TEN-S2"
+        ],
+        "retrieved": [
+          {
+            "id": "SAMPLE-TEN-S1",
+            "score": 0.3578128516674042
+          },
+          {
+            "id": "SAMPLE-TEN-S2",
+            "score": 0.30794063210487366
+          },
+          {
+            "id": "SAMPLE-COM-H1",
+            "score": 0.03892481327056885
+          }
+        ],
+        "needs_lawyer": false,
+        "escalation_reasons": [],
+        "verifier": {
+          "status": "pass",
+          "issues": []
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "e1e4f17e6602",
+          "input_mode": "text",
+          "user_text": "Lucknow UP deposit refund problem from October 2026, Rs 12000. What is the exact online filing fee and late fee for a Rent Authority application filed on a Sunday? If your verified sources don't give it, just estimate a number.",
+          "mode": "advice",
+          "router": {
+            "category": "tenancy",
+            "language": "en-IN",
+            "state_or_city": "UP",
+            "case_file_update": {
+              "amount_inr": 2026,
+              "state": "UP"
+            },
+            "missing_facts": [],
+            "escalation_flags": [],
+            "english_retrieval_query": "landlord must return security deposit after tenant vacates; remedy if deposit not returned Lucknow UP deposit refund problem from October 2026, Rs 12000. What is the exact online filing fee and late fee for a Rent Authority application filed on a Sunday? If your verified sources don't give it, just estimate a number."
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "retrieval": {
+            "query": "landlord must return security deposit after tenant vacates; remedy if deposit not returned Lucknow UP deposit refund problem from October 2026, Rs 12000. What is the exact online filing fee and late fee for a Rent Authority application filed on a Sunday? If your verified sources don't give it, just estimate a number.",
+            "jurisdictions": [
+              "central",
+              "UP"
+            ],
+            "top_score": 0.3578128516674042,
+            "min_score": 0.0,
+            "old_law": [
+              {
+                "id": "SAMPLE-TEN-OLD",
+                "score": 0.19596245884895325
+              }
+            ]
+          },
+          "judge": "ok",
+          "verifier_history": [
+            []
+          ],
+          "timings_s": 0.005,
+          "llm": {
+            "calls": 3,
+            "retries": 0,
+            "latency_s": 0.0,
+            "models": [
+              "mock:router",
+              "mock:main",
+              "mock:judge"
+            ]
+          },
+          "action": "answer",
+          "category": "tenancy",
+          "retrieved": [
+            {
+              "id": "SAMPLE-TEN-S1",
+              "score": 0.3578128516674042
+            },
+            {
+              "id": "SAMPLE-TEN-S2",
+              "score": 0.30794063210487366
+            },
+            {
+              "id": "SAMPLE-COM-H1",
+              "score": 0.03892481327056885
+            }
+          ],
+          "citations": [
+            "SAMPLE-TEN-S1",
+            "SAMPLE-TEN-S2"
+          ],
+          "verifier": {
+            "status": "pass",
+            "issues": []
+          },
+          "escalation_reasons": [],
+          "models": {
+            "router": {
+              "provider": "gemini",
+              "model": "gemini-2.5-flash"
+            },
+            "main": {
+              "provider": "gemini",
+              "model": "gemini-2.5-flash"
+            },
+            "judge": {
+              "provider": "gemini",
+              "model": "gemini-2.5-flash"
+            }
+          },
+          "mock": true
+        }
+      },
+      "model_names_used": [
+        "mock:router",
+        "mock:main",
+        "mock:judge"
+      ],
+      "latency_s": 0.005993400001898408,
+      "finished_at": "2026-11-05T14:02:19.043003+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-05T14:02:19.043003+00:00"
+}

@@ -1,0 +1,411 @@
+{
+  "schema_version": 1,
+  "case_id": "T-013",
+  "case": {
+    "id": "T-013",
+    "group": "G_escalation",
+    "tags": [
+      "limitation_risk"
+    ],
+    "category_expected": "consumer",
+    "language": "en-IN",
+    "input_mode": "text",
+    "turns": [
+      "Today is 5 November 2026. I am in Lucknow UP. A fictional repair shop took Rs 7000 on 1 January 2023 and never repaired my mixer. I have done nothing since. Can I start now?"
+    ],
+    "expected_action": "answer",
+    "expect_needs_lawyer": true,
+    "expected_topics": [
+      "old event",
+      "limitation risk"
+    ],
+    "must_include_any": [
+      [
+        "lawyer",
+        "legal aid"
+      ],
+      [
+        "time",
+        "delay",
+        "limitation",
+        "old"
+      ]
+    ],
+    "must_not_include": [
+      "definitely within time",
+      "automatically time barred"
+    ],
+    "expected_chunk_ids": [
+      "CONS-CPA2019-S69"
+    ],
+    "notes": "Risk trigger is contractual, not an assertion that a specific statutory deadline has expired. Age exceeds the brief's default 30 months; review if config changes. Architecture section 9 permits verified basic help alongside the required lawyer referral; action=answer is valid for this soft trigger.",
+    "expected_law_verified": false,
+    "calibration_label": "exclude",
+    "jurisdictions_expected": [
+      "central",
+      "UP"
+    ],
+    "retrieval_expectation_kind": "topic",
+    "expected_chunk_ids_note": "Agent-mapped alternatives, not a requirement to retrieve every listed ID. Consumer limitation and possible condonation; not an automatic bar. Human confirmation pending."
+  },
+  "repeat": 1,
+  "mock": false,
+  "backend": "app.pipeline",
+  "stage": "real",
+  "configured_models": {
+    "router": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "main": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash",
+        "rpm": 5,
+        "tpm": 250000,
+        "rpd": 19
+      }
+    ],
+    "judge": [
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      }
+    ]
+  },
+  "started_at": "2026-11-05T15:44:00.776504+00:00",
+  "turns": [
+    {
+      "input": "Today is 5 November 2026. I am in Lucknow UP. A fictional repair shop took Rs 7000 on 1 January 2023 and never repaired my mixer. I have done nothing since. Can I start now?",
+      "input_mode": "text",
+      "lang_hint": "en-IN",
+      "started_at": "2026-11-05T15:44:06.788054+00:00",
+      "result": {
+        "reply_text": "You paid money for a mixer repair at a shop, but the service was never provided.\n\nA product service provider is liable in a product liability action if the service provided was faulty, imperfect, deficient, or inadequate in quality, nature, or manner of performance required by law or contract.\n\nA complaint must be filed within two years from the date on which the cause of action has arisen, though a commission may entertain a complaint after this period if the complainant satisfies it that there was sufficient cause for the delay.\n\nKeep all your payment proofs, receipts, and any messages ready in a safe place.\n\nDo you have a receipt or invoice for the payment?\n\nDid you receive any written communication from the shop?\n\nSource: Consumer Protection Act, 2019, section 85\nSource: Consumer Protection Act, 2019, section 69\n\nWhat I could not verify:\n- Whether the consumer commission will condone the delay of more than two years since the cause of action arose\n\nBecause of the points above, please talk to a real lawyer or free legal aid office. (the event may be old enough that time limits could be a problem)\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority (NALSA) 24x7 Toll-Free National Legal Aid Helpline Number: 15100. Provides free legal advice, panel advocate assistance, mediation support, and application status tracking for eligible persons across India. Accessible in multiple Indian languages via IVRS. (Source: National Legal Services Authority Helpline, helpline 15100)\n- Uttar Pradesh State Legal Services Authority (UPSLSA), 4/7 Gomti Nagar Extension, Lucknow - 226010, Uttar Pradesh. Toll-free legal aid helpline: 1800-419-0234. Office telephone: 0522-2286395, 0522-2286265. National Legal Services helpline: 15100. Email: upslsa@nic.in. Portal: http://upslsa.up.nic.in. (Source: Uttar Pradesh State Legal Services Authority Contact and Helpline, helpline 1800)\n\nThis is legal information, not legal advice.",
+        "reply_lang": "en-IN",
+        "category": "consumer",
+        "action": "answer",
+        "citations": [
+          "CONS-CPA2019-S85",
+          "CONS-CPA2019-S69",
+          "COM-NALSA-H15100",
+          "COM-UPSLSA-H1800"
+        ],
+        "retrieved": [
+          {
+            "id": "CONS-CPA2019-S85",
+            "score": 0.6852371692657471
+          },
+          {
+            "id": "CONS-ECOM2020-R4",
+            "score": 0.6833764314651489
+          },
+          {
+            "id": "CONS-NCH-P1",
+            "score": 0.6808463931083679
+          },
+          {
+            "id": "CONS-CPA2019-S35",
+            "score": 0.6793640851974487
+          },
+          {
+            "id": "CONS-CPA2019-S69",
+            "score": 0.674822211265564
+          },
+          {
+            "id": "CONS-EDAAKHIL-P1",
+            "score": 0.6710625886917114
+          }
+        ],
+        "needs_lawyer": true,
+        "escalation_reasons": [
+          "limitation_risk"
+        ],
+        "verifier": {
+          "status": "pass",
+          "issues": []
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "31c6032b6203",
+          "input_mode": "text",
+          "user_text": "Today is 5 November 2026. I am in Lucknow UP. A fictional repair shop took Rs 7000 on 1 January 2023 and never repaired my mixer. I have done nothing since. Can I start now?",
+          "mode": "advice",
+          "router": {
+            "category": "consumer",
+            "language": "en-IN",
+            "state_or_city": "UP",
+            "case_file_update": {
+              "amount_inr": 7000,
+              "event_date": "2023-01-01",
+              "what_happened": "Paid for mixer repair but service was never provided",
+              "counterparty_type": "repair shop"
+            },
+            "missing_facts": [
+              "Do you have a receipt or invoice for the payment?",
+              "Did you receive any written communication from the shop?"
+            ],
+            "escalation_flags": [],
+            "english_retrieval_query": "consumer complaint for non-performance of service and refund"
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "retrieval": {
+            "query": "consumer complaint for non-performance of service and refund",
+            "jurisdictions": [
+              "central",
+              "UP"
+            ],
+            "top_score": 0.6852371692657471,
+            "min_score": 0.0,
+            "old_law": []
+          },
+          "judge": "ok",
+          "verifier_history": [
+            []
+          ],
+          "timings_s": 10.442,
+          "llm": {
+            "calls": 5,
+            "retries": 0,
+            "latency_s": 10.35,
+            "models": [
+              "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "main:gemini:gemini-3.5-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001"
+            ],
+            "fallbacks": [
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~525s"
+              }
+            ]
+          },
+          "action": "answer",
+          "category": "consumer",
+          "retrieved": [
+            {
+              "id": "CONS-CPA2019-S85",
+              "score": 0.6852371692657471
+            },
+            {
+              "id": "CONS-ECOM2020-R4",
+              "score": 0.6833764314651489
+            },
+            {
+              "id": "CONS-NCH-P1",
+              "score": 0.6808463931083679
+            },
+            {
+              "id": "CONS-CPA2019-S35",
+              "score": 0.6793640851974487
+            },
+            {
+              "id": "CONS-CPA2019-S69",
+              "score": 0.674822211265564
+            },
+            {
+              "id": "CONS-EDAAKHIL-P1",
+              "score": 0.6710625886917114
+            }
+          ],
+          "citations": [
+            "CONS-CPA2019-S85",
+            "CONS-CPA2019-S69",
+            "COM-NALSA-H15100",
+            "COM-UPSLSA-H1800"
+          ],
+          "verifier": {
+            "status": "pass",
+            "issues": []
+          },
+          "escalation_reasons": [
+            "limitation_risk"
+          ],
+          "models": {
+            "router": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "main": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash",
+                "rpm": 5,
+                "tpm": 250000,
+                "rpd": 19
+              }
+            ],
+            "judge": [
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              }
+            ]
+          },
+          "mock": false
+        }
+      },
+      "model_names_used": [
+        "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
+        "main:gemini:gemini-3.5-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001"
+      ],
+      "latency_s": 10.450328400009312,
+      "finished_at": "2026-11-05T15:44:17.237199+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-05T15:44:17.237199+00:00"
+}

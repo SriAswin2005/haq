@@ -1,0 +1,438 @@
+{
+  "schema_version": 1,
+  "case_id": "T-030",
+  "case": {
+    "id": "T-030",
+    "group": "B_messy_input",
+    "tags": [
+      "E_jurisdiction",
+      "voice_transcript",
+      "emotional",
+      "hinglish"
+    ],
+    "category_expected": "tenancy",
+    "language": "en-IN",
+    "input_mode": "voice",
+    "turns": [
+      "uh matlab I'm really stressed rent for new place due and old owner keeps ignoring me ignoring me Bangalore Karnataka left October 2026 deposit 30000 receipt hai please reply in English can you tell me the UP rent rules apply here also na"
+    ],
+    "expected_action": "answer",
+    "expect_needs_lawyer": true,
+    "expected_topics": [
+      "uncovered state",
+      "central information only"
+    ],
+    "must_include_any": [
+      [
+        "lawyer",
+        "legal aid"
+      ],
+      [
+        "state law",
+        "not covered",
+        "Karnataka",
+        "not apply"
+      ]
+    ],
+    "must_not_include": [
+      "UP law applies in Karnataka",
+      "UP Rent Authority in Bangalore"
+    ],
+    "expected_chunk_ids": [
+      "TEN-TPA1882-S108"
+    ],
+    "notes": "Hinglish transcript with explicit English override. Uncovered state must be acknowledged; UP law must not be exported. Architecture section 9 permits verified basic help alongside the required lawyer referral; action=answer is valid for this soft trigger.",
+    "expected_law_verified": false,
+    "calibration_label": "exclude",
+    "jurisdictions_expected": [
+      "central"
+    ],
+    "retrieval_expectation_kind": "topic",
+    "expected_chunk_ids_note": "Agent-mapped alternatives, not a requirement to retrieve every listed ID. Central lessor/lessee information only; no UP source target for Karnataka. Human confirmation pending."
+  },
+  "repeat": 1,
+  "mock": false,
+  "backend": "app.pipeline",
+  "stage": "real",
+  "configured_models": {
+    "router": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "main": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash",
+        "rpm": 5,
+        "tpm": 250000,
+        "rpd": 19
+      }
+    ],
+    "judge": [
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      }
+    ]
+  },
+  "started_at": "2026-11-05T15:50:44.628938+00:00",
+  "turns": [
+    {
+      "input": "uh matlab I'm really stressed rent for new place due and old owner keeps ignoring me ignoring me Bangalore Karnataka left October 2026 deposit 30000 receipt hai please reply in English can you tell me the UP rent rules apply here also na",
+      "input_mode": "voice",
+      "lang_hint": "en-IN",
+      "started_at": "2026-11-05T15:50:50.629936+00:00",
+      "result": {
+        "reply_text": "I understand you are facing difficulty getting your security deposit back after vacating your property. You have a receipt and have already tried contacting the landlord.\n\nUnder the Transfer of Property Act, 1882, the lessee is bound to restore the property to the lessor upon the determination of the lease. The law does not specify the exact process for recovering a security deposit in your situation, nor does it state that rent rules from other states apply to your case.\n\nYou may consider sending a formal written notice to your landlord requesting the return of your deposit. If the dispute remains unresolved, you may apply to a Permanent Lok Adalat for settlement, provided the value of the dispute is within their jurisdiction.\n\nKeep a copy of your rental agreement, the receipt for the deposit, and any records of your communication with the landlord. These documents may be useful if you decide to seek further legal assistance.\n\nIf you are unable to resolve this through a formal notice or the Permanent Lok Adalat, you may wish to consult a lawyer to understand your options for recovery in a civil court.\n\nIs there a written rental agreement for the property? Has a formal notice been sent to the landlord regarding the return of the deposit?\n\nSource: Transfer of Property Act, 1882, section 108\nSource: Legal Services Authorities Act, 1987, section 22C\n\nWhat I could not verify:\n- I cannot verify if specific state-level rent control laws in Karnataka apply to your situation or the exact procedure for recovering deposits under local rules.\n- I cannot confirm if the Permanent Lok Adalat in your area is currently accepting applications for this type of tenancy dispute.\n\nI only cover Uttar Pradesh in depth for this topic; other states may have different rules that I have not checked.\n\nBecause of the points above, please talk to a real lawyer or free legal aid office. (your state is not one I cover in depth)\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority (NALSA) 24x7 Toll-Free National Legal Aid Helpline Number: 15100. Provides free legal advice, panel advocate assistance, mediation support, and application status tracking for eligible persons across India. Accessible in multiple Indian languages via IVRS. (Source: National Legal Services Authority Helpline, helpline 15100)\n\nThis is legal information, not legal advice.",
+        "reply_lang": "en-IN",
+        "category": "tenancy",
+        "action": "answer",
+        "citations": [
+          "TEN-TPA1882-S108",
+          "COM-LSAA1987-S22C",
+          "COM-NALSA-H15100"
+        ],
+        "retrieved": [
+          {
+            "id": "COM-LSAA1987-S21",
+            "score": 0.6467011570930481
+          },
+          {
+            "id": "TEN-TPA1882-S108",
+            "score": 0.6388440132141113
+          },
+          {
+            "id": "COM-LSAA1987-S22C",
+            "score": 0.6381134390830994
+          },
+          {
+            "id": "TEN-TPA1882-S111",
+            "score": 0.6311589479446411
+          },
+          {
+            "id": "COM-LSAA1987-S22E",
+            "score": 0.6298689842224121
+          },
+          {
+            "id": "COM-LSAA1987-S20",
+            "score": 0.6240445375442505
+          }
+        ],
+        "needs_lawyer": true,
+        "escalation_reasons": [
+          "state_not_covered"
+        ],
+        "verifier": {
+          "status": "fixed",
+          "issues": []
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "70085bea0cb0",
+          "input_mode": "voice",
+          "user_text": "uh matlab I'm really stressed rent for new place due and old owner keeps ignoring me ignoring me Bangalore Karnataka left October 2026 deposit 30000 receipt hai please reply in English can you tell me the UP rent rules apply here also na",
+          "mode": "advice",
+          "router": {
+            "category": "tenancy",
+            "language": "en-IN",
+            "state_or_city": "other",
+            "case_file_update": {
+              "amount_inr": 30000,
+              "vacated_date": "2026-10-01",
+              "what_happened": "Landlord is ignoring requests to return security deposit after vacating the property.",
+              "proof": [
+                "receipt"
+              ],
+              "already_tried": [
+                "contacting landlord"
+              ],
+              "counterparty_type": "landlord"
+            },
+            "missing_facts": [
+              "Is there a written rental agreement?",
+              "Has a formal notice been sent to the landlord?"
+            ],
+            "escalation_flags": [],
+            "english_retrieval_query": "how to recover security deposit from landlord in Karnataka"
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "retrieval": {
+            "query": "how to recover security deposit from landlord in Karnataka",
+            "jurisdictions": [
+              "central"
+            ],
+            "top_score": 0.6467011570930481,
+            "min_score": 0.0,
+            "old_law": []
+          },
+          "judge": "ok",
+          "verifier_history": [
+            [
+              "block 1: claim not supported by its cited source (The cited source does not mention that the Transfer of Property Act applies across India or that state-level rent contro)"
+            ],
+            []
+          ],
+          "timings_s": 22.877,
+          "llm": {
+            "calls": 7,
+            "retries": 0,
+            "latency_s": 19.54,
+            "models": [
+              "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "main:gemini:gemini-3.1-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite",
+              "main:gemini:gemini-3.1-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001"
+            ],
+            "fallbacks": [
+              {
+                "role": "main",
+                "model": "gemini:gemini-3.5-flash-lite",
+                "reason": "busy for ~533s"
+              },
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~121s"
+              },
+              {
+                "role": "main",
+                "model": "gemini:gemini-3.5-flash-lite",
+                "reason": "busy for ~525s"
+              },
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~110s"
+              }
+            ]
+          },
+          "action": "answer",
+          "category": "tenancy",
+          "retrieved": [
+            {
+              "id": "COM-LSAA1987-S21",
+              "score": 0.6467011570930481
+            },
+            {
+              "id": "TEN-TPA1882-S108",
+              "score": 0.6388440132141113
+            },
+            {
+              "id": "COM-LSAA1987-S22C",
+              "score": 0.6381134390830994
+            },
+            {
+              "id": "TEN-TPA1882-S111",
+              "score": 0.6311589479446411
+            },
+            {
+              "id": "COM-LSAA1987-S22E",
+              "score": 0.6298689842224121
+            },
+            {
+              "id": "COM-LSAA1987-S20",
+              "score": 0.6240445375442505
+            }
+          ],
+          "citations": [
+            "TEN-TPA1882-S108",
+            "COM-LSAA1987-S22C",
+            "COM-NALSA-H15100"
+          ],
+          "verifier": {
+            "status": "fixed",
+            "issues": []
+          },
+          "escalation_reasons": [
+            "state_not_covered"
+          ],
+          "models": {
+            "router": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "main": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash",
+                "rpm": 5,
+                "tpm": 250000,
+                "rpd": 19
+              }
+            ],
+            "judge": [
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              }
+            ]
+          },
+          "mock": false
+        }
+      },
+      "model_names_used": [
+        "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
+        "main:gemini:gemini-3.1-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite",
+        "main:gemini:gemini-3.1-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001"
+      ],
+      "latency_s": 22.887971899996046,
+      "finished_at": "2026-11-05T15:51:13.517401+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-05T15:51:13.517401+00:00"
+}
