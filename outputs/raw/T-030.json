@@ -147,13 +147,13 @@
       }
     ]
   },
-  "started_at": "2026-11-05T16:05:15.514386+00:00",
+  "started_at": "2026-11-05T18:00:03.571334+00:00",
   "turns": [
     {
       "input": "uh matlab I'm really stressed rent for new place due and old owner keeps ignoring me ignoring me Bangalore Karnataka left October 2026 deposit 30000 receipt hai please reply in English can you tell me the UP rent rules apply here also na",
       "input_mode": "voice",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T16:05:21.515104+00:00",
+      "started_at": "2026-11-05T18:00:09.555931+00:00",
       "result": {
         "reply_text": "What I understood: amount inr: 30000; vacated date: 2026-10-01; what happened: Landlord is ignoring requests to return security deposit after vacating the property.; proof: ['receipt']; already tried: ['contacting landlord']; counterparty type: landlord; state: other\n\nI do not have verified information in my sources to answer this part, and I will not guess.\n\nWhat you can do right now: collect your documents (agreement, receipts, bank or UPI records, messages, photos), and write down the dates and amounts in order.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority (NALSA)\nNALSA Helpline Number 15100\n15100 NALSA Helpline Toll-Free Number\nAddress: Jaisalmer House, 26, Man Singh Road, New Delhi-110011. Ph. No. 011-23382778, 23071450, 23382121. E-mail id: nalsa-dla@nic.in.\nCorrespondence Address: B Block, Ground Floor, Administrative Buildings Complex, Supreme Court of India, New Delhi-110001. (Source: National Legal Services Authority Helpline, helpline 15100)\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
@@ -186,6 +186,14 @@
           {
             "id": "COM-LSAA1987-S20",
             "score": 0.6240445375442505
+          },
+          {
+            "id": "COM-LSAA1987-S22B",
+            "score": 0.623308539390564
+          },
+          {
+            "id": "TEN-TPA1882-S105",
+            "score": 0.6149600744247437
           }
         ],
         "needs_lawyer": true,
@@ -195,12 +203,12 @@
         "verifier": {
           "status": "failed",
           "issues": [
-            "block 1: legal block without a citation"
+            "block 1: claim not supported by its cited source (The claim omits the statutory requirement for the lessee to put the lessor into possession, which is found in Section 10)"
           ]
         },
         "draft_text": null,
         "trace": {
-          "session": "1e2a8b11850f",
+          "session": "b72a73198345",
           "input_mode": "voice",
           "user_text": "uh matlab I'm really stressed rent for new place due and old owner keeps ignoring me ignoring me Bangalore Karnataka left October 2026 deposit 30000 receipt hai please reply in English can you tell me the UP rent rules apply here also na",
           "mode": "advice",
@@ -240,43 +248,44 @@
             "min_score": 0.0,
             "old_law": []
           },
-          "judge": "skipped",
+          "judge": "ok",
           "verifier_history": [
             [
-              "block 2: claim not supported by its cited source (condition dropped: the Permanent Lok Adalat does not have jurisdiction if the value of the property in dispute exceeds t)"
+              "block 2: legal block without a citation"
             ],
             [
-              "block 1: legal block without a citation"
+              "block 1: claim not supported by its cited source (The claim omits the statutory requirement for the lessee to put the lessor into possession, which is found in Section 10)"
             ]
           ],
-          "timings_s": 17.959,
+          "timings_s": 24.708,
           "llm": {
-            "calls": 6,
-            "retries": 0,
-            "latency_s": 14.45,
+            "calls": 9,
+            "retries": 2,
+            "latency_s": 22.26,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
+              "embed:gemini:gemini-embedding-001",
+              "main:gemini:gemini-3.1-flash-lite",
               "main:gemini:gemini-3.1-flash-lite",
               "judge:gemini:gemini-3.1-flash-lite",
-              "main:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001"
             ],
             "fallbacks": [
               {
                 "role": "main",
                 "model": "gemini:gemini-3.5-flash-lite",
-                "reason": "busy for ~225s"
-              },
-              {
-                "role": "judge",
-                "model": "gemini:gemma-4-31b-it",
-                "reason": "busy for ~263s"
+                "reason": "busy for ~344s"
               },
               {
                 "role": "main",
                 "model": "gemini:gemini-3.5-flash-lite",
-                "reason": "busy for ~217s"
+                "reason": "busy for ~340s"
+              },
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "HTTP 500"
               }
             ]
           },
@@ -306,6 +315,14 @@
             {
               "id": "COM-LSAA1987-S20",
               "score": 0.6240445375442505
+            },
+            {
+              "id": "COM-LSAA1987-S22B",
+              "score": 0.623308539390564
+            },
+            {
+              "id": "TEN-TPA1882-S105",
+              "score": 0.6149600744247437
             }
           ],
           "citations": [
@@ -314,7 +331,7 @@
           "verifier": {
             "status": "failed",
             "issues": [
-              "block 1: legal block without a citation"
+              "block 1: claim not supported by its cited source (The claim omits the statutory requirement for the lessee to put the lessor into possession, which is found in Section 10)"
             ]
           },
           "escalation_reasons": [
@@ -419,15 +436,16 @@
       "model_names_used": [
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001",
+        "main:gemini:gemini-3.1-flash-lite",
         "main:gemini:gemini-3.1-flash-lite",
         "judge:gemini:gemini-3.1-flash-lite",
-        "main:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 17.970941799983848,
-      "finished_at": "2026-11-05T16:05:39.484515+00:00"
+      "latency_s": 24.714583099994343,
+      "finished_at": "2026-11-05T18:00:34.269850+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T16:05:39.484515+00:00"
+  "finished_at": "2026-11-05T18:00:34.269850+00:00"
 }

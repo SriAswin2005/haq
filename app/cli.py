@@ -20,11 +20,13 @@ def main(argv=None) -> int:
     ap.add_argument("--json", action="store_true", help="also print the full TurnResult as JSON")
     ap.add_argument("--interactive", action="store_true", help="multi-turn chat in one session")
     ap.add_argument("--corpus", help="corpus path override (e.g. data/corpus)")
+    ap.add_argument("--audio", help="voice input: transcribe this audio file (WAV/MP3/...) and use it as the message")
+    ap.add_argument("--speak", metavar="OUT.wav", help="voice output: save the reply as speech to this WAV file")
     a = ap.parse_args(argv)
     if a.mock:
         os.environ["AI_LAWYER_MOCK"] = "1"
-    if not a.message and not a.interactive:
-        ap.error("give a message or use --interactive")
+    if not a.message and not a.interactive and not a.audio:
+        ap.error("give a message, --audio FILE, or --interactive")
 
     from . import pipeline
     from .config import load_config
@@ -37,14 +39,30 @@ def main(argv=None) -> int:
     session = pipeline.new_session(a.lang)
     session.mode = a.mode
 
-    def one(text: str) -> None:
-        r = pipeline.handle_turn(session, text, lang_hint=a.lang)
+    def one(text: str, input_mode: str = "text", lang: str | None = None) -> None:
+        r = pipeline.handle_turn(session, text, input_mode=input_mode, lang_hint=lang or a.lang)
         print(r.reply_text)
         print(f"\n[action={r.action} category={r.category} citations={r.citations} "
               f"needs_lawyer={r.needs_lawyer} verifier={r.verifier['status']}]")
+        if a.speak:
+            from . import voice
+            try:
+                out = voice.tts(r.reply_text, r.reply_lang)
+                with open(a.speak, "wb") as f:
+                    f.write(out["audio"])
+                print(f"[speech saved to {a.speak}: {out['model']}, {out['chars']} chars"
+                      f"{', truncated' if out['truncated'] else ''}]")
+            except voice.VoiceError as ex:
+                print(f"[speech failed: {ex}]")
         if a.json:
             print(json.dumps(dataclasses.asdict(r), ensure_ascii=False, indent=2, default=str))
 
+    if a.audio:
+        from . import voice
+        with open(a.audio, "rb") as f:
+            heard = voice.stt(f.read(), a.lang)
+        print(f"[heard via {heard['provider']}:{heard['model']} ({heard.get('language')}): {heard['text']}]\n")
+        one(heard["text"], "voice", a.lang or heard.get("language"))
     if a.message:
         one(a.message)
     if a.interactive:

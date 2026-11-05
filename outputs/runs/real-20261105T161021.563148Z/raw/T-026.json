@@ -1,0 +1,448 @@
+{
+  "schema_version": 1,
+  "case_id": "T-026",
+  "case": {
+    "id": "T-026",
+    "group": "A_happy_path",
+    "tags": [
+      "deposit",
+      "painting"
+    ],
+    "category_expected": "tenancy",
+    "language": "en-IN",
+    "input_mode": "text",
+    "turns": [
+      "Lucknow UP residential flat, agreement signed January 2026, vacated 20 October 2026. Landlord kept Rs 20000 deposit for painting though I have move-in and move-out photos and paid all rent. No threats. How can I ask for an explanation and refund?"
+    ],
+    "expected_action": "answer",
+    "expect_needs_lawyer": false,
+    "expected_topics": [
+      "security deposit",
+      "deduction evidence"
+    ],
+    "must_include_any": [
+      [
+        "deposit",
+        "refund"
+      ],
+      [
+        "photos",
+        "deduction",
+        "agreement",
+        "evidence"
+      ]
+    ],
+    "must_not_include": [
+      "all painting deductions are illegal"
+    ],
+    "expected_chunk_ids": [
+      "TEN-UPTA2021-S11",
+      "TEN-UPTA2021-S15"
+    ],
+    "notes": "Do not assume every painting deduction unlawful. Official tenancy text is the independent legal lead; human confirms applicability.",
+    "expectation_sources": [
+      "https://www.indiacode.nic.in/bitstream/123456789/21157/1/english_16_of_2021.pdf"
+    ],
+    "expected_law_verified": false,
+    "calibration_label": "answer",
+    "jurisdictions_expected": [
+      "central",
+      "UP"
+    ],
+    "retrieval_expectation_kind": "topic",
+    "expected_chunk_ids_note": "Agent-mapped alternatives, not a requirement to retrieve every listed ID. Deposit deductions and repair/wear-and-tear; not all painting deductions are declared unlawful. Human confirmation pending."
+  },
+  "repeat": 1,
+  "mock": false,
+  "backend": "app.pipeline",
+  "stage": "real",
+  "configured_models": {
+    "router": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "main": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash",
+        "rpm": 5,
+        "tpm": 250000,
+        "rpd": 19
+      }
+    ],
+    "judge": [
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      }
+    ]
+  },
+  "started_at": "2026-11-05T16:38:18.814361+00:00",
+  "turns": [
+    {
+      "input": "Lucknow UP residential flat, agreement signed January 2026, vacated 20 October 2026. Landlord kept Rs 20000 deposit for painting though I have move-in and move-out photos and paid all rent. No threats. How can I ask for an explanation and refund?",
+      "input_mode": "text",
+      "lang_hint": "en-IN",
+      "started_at": "2026-11-05T16:38:24.814850+00:00",
+      "result": {
+        "reply_text": "I understand that you have vacated your residential flat in Lucknow and the landlord has withheld your security deposit for painting charges, despite you having move-in and move-out photos as proof of the property's condition.\n\nUnder the law, the security deposit must be refunded to the tenant on the date of taking over vacant possession of the premises, after making due deduction of any liability of the tenant.\n\nThe landlord and tenant are required to keep the premises in as good a condition as at the start of the tenancy, except for normal wear and tear. If a tenant fails to carry out repairs they are responsible for, the landlord may deduct the cost from the security deposit.\n\nYou may consider writing a formal letter or email to your landlord. In this communication, you can politely request a detailed explanation for the deduction and ask for the refund of your security deposit. You can attach copies of your move-in and move-out photos to support your claim that the property was returned in good condition.\n\nIf you are unable to resolve this directly with the landlord, you may seek guidance from a local lawyer to understand your specific legal options for recovery.\n\nIs there a written rental agreement for this tenancy? Does your rental agreement specifically mention painting charges as a tenant's responsibility?\n\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 11\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 15\n\nNote: Uttar Pradesh Urban Buildings (Regulation of Letting, Rent and Eviction) Act, 1972 is no longer in force, so I do not use it.\n\nWhat I could not verify:\n- where to complain\n- specific procedure for recovering withheld security deposits through the Rent Authority\n\nThis is legal information, not legal advice.",
+        "reply_lang": "en-IN",
+        "category": "tenancy",
+        "action": "answer",
+        "citations": [
+          "TEN-UPTA2021-S11",
+          "TEN-UPTA2021-S15"
+        ],
+        "retrieved": [
+          {
+            "id": "TEN-UPTA2021-S11",
+            "score": 0.6826791167259216
+          },
+          {
+            "id": "TEN-UPTA2021-S15",
+            "score": 0.6786243915557861
+          },
+          {
+            "id": "TEN-UPTA2021-S24",
+            "score": 0.66935133934021
+          },
+          {
+            "id": "TEN-TPA1882-S108",
+            "score": 0.6524136066436768
+          },
+          {
+            "id": "TEN-UPTA2021-S14",
+            "score": 0.6503021717071533
+          },
+          {
+            "id": "TEN-UPTA2021-S20",
+            "score": 0.6474007368087769
+          },
+          {
+            "id": "TEN-UPTA2021-S33",
+            "score": 0.7123492956161499
+          },
+          {
+            "id": "TEN-UPTA2021-S30",
+            "score": 0.7078341245651245
+          }
+        ],
+        "needs_lawyer": false,
+        "escalation_reasons": [],
+        "verifier": {
+          "status": "fixed",
+          "issues": []
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "75756559fc63",
+          "input_mode": "text",
+          "user_text": "Lucknow UP residential flat, agreement signed January 2026, vacated 20 October 2026. Landlord kept Rs 20000 deposit for painting though I have move-in and move-out photos and paid all rent. No threats. How can I ask for an explanation and refund?",
+          "mode": "advice",
+          "router": {
+            "category": "tenancy",
+            "language": "en-IN",
+            "state_or_city": "UP",
+            "case_file_update": {
+              "amount_inr": 20000,
+              "tenancy_start_date": "2026-01",
+              "vacated_date": "2026-10-20",
+              "what_happened": "Landlord withheld security deposit for painting charges despite rent being paid and move-in/move-out photos available.",
+              "proof": [
+                "move-in photos",
+                "move-out photos"
+              ]
+            },
+            "missing_facts": [
+              "Is there a written rental agreement?",
+              "Does the agreement mention painting charges?"
+            ],
+            "escalation_flags": [],
+            "english_retrieval_query": "landlord withholding security deposit for painting charges India"
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "retrieval": {
+            "query": "landlord withholding security deposit for painting charges India",
+            "jurisdictions": [
+              "central",
+              "UP"
+            ],
+            "top_score": 0.6826791167259216,
+            "min_score": 0.0,
+            "old_law": [
+              {
+                "id": "TEN-UP1972-S20",
+                "score": 0.6357409358024597
+              },
+              {
+                "id": "TEN-UP1972-S21",
+                "score": 0.6146570444107056
+              }
+            ]
+          },
+          "judge": "ok",
+          "verifier_history": [
+            [
+              "block 1: claim not supported by its cited source (The cited sources do not state that the Rent Authority can be approached for resolution if the landlord refuses to refun)"
+            ],
+            []
+          ],
+          "timings_s": 4732.555,
+          "llm": {
+            "calls": 9,
+            "retries": 5,
+            "latency_s": 101.4,
+            "models": [
+              "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "embed:gemini:gemini-embedding-001",
+              "main:gemini:gemini-3.1-flash-lite",
+              "judge:gemini:gemma-4-31b-it",
+              "main:gemini:gemini-3.1-flash-lite",
+              "judge:gemini:gemma-4-31b-it"
+            ],
+            "fallbacks": [
+              {
+                "role": "main",
+                "model": "gemini:gemini-3.5-flash-lite",
+                "reason": "HTTP 503"
+              },
+              {
+                "role": "main",
+                "model": "gemini:gemini-3.5-flash-lite",
+                "reason": "busy for ~559s"
+              }
+            ]
+          },
+          "action": "answer",
+          "category": "tenancy",
+          "retrieved": [
+            {
+              "id": "TEN-UPTA2021-S11",
+              "score": 0.6826791167259216
+            },
+            {
+              "id": "TEN-UPTA2021-S15",
+              "score": 0.6786243915557861
+            },
+            {
+              "id": "TEN-UPTA2021-S24",
+              "score": 0.66935133934021
+            },
+            {
+              "id": "TEN-TPA1882-S108",
+              "score": 0.6524136066436768
+            },
+            {
+              "id": "TEN-UPTA2021-S14",
+              "score": 0.6503021717071533
+            },
+            {
+              "id": "TEN-UPTA2021-S20",
+              "score": 0.6474007368087769
+            },
+            {
+              "id": "TEN-UPTA2021-S33",
+              "score": 0.7123492956161499
+            },
+            {
+              "id": "TEN-UPTA2021-S30",
+              "score": 0.7078341245651245
+            }
+          ],
+          "citations": [
+            "TEN-UPTA2021-S11",
+            "TEN-UPTA2021-S15"
+          ],
+          "verifier": {
+            "status": "fixed",
+            "issues": []
+          },
+          "escalation_reasons": [],
+          "models": {
+            "router": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "main": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash",
+                "rpm": 5,
+                "tpm": 250000,
+                "rpd": 19
+              }
+            ],
+            "judge": [
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              }
+            ]
+          },
+          "mock": false
+        }
+      },
+      "model_names_used": [
+        "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001",
+        "main:gemini:gemini-3.1-flash-lite",
+        "judge:gemini:gemma-4-31b-it",
+        "main:gemini:gemini-3.1-flash-lite",
+        "judge:gemini:gemma-4-31b-it"
+      ],
+      "latency_s": 4732.557250200014,
+      "finished_at": "2026-11-05T17:57:17.371520+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-05T17:57:17.371520+00:00"
+}

@@ -148,15 +148,15 @@
       }
     ]
   },
-  "started_at": "2026-11-05T16:03:13.058957+00:00",
+  "started_at": "2026-11-05T16:33:12.725853+00:00",
   "turns": [
     {
       "input": "I worked in a private shop in Lucknow UP, resigned on 15 October 2026 after agreed handover. October salary Rs 12000 hasn't come. I have my appointment letter, attendance and bank statement. HR only says wait. What can I do?",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T16:03:19.045595+00:00",
+      "started_at": "2026-11-05T16:33:18.711047+00:00",
       "result": {
-        "reply_text": "I understand that you resigned from your job at a private shop in Lucknow after completing your handover, but you have not received your salary for October. You have your appointment letter, attendance records, and bank statements as proof.\n\nUnder the law, when an employee resigns, the employer must pay all wages due within two working days of the resignation.\n\nThe proprietor of the establishment is responsible for paying the wages owed to you.\n\nYou may file a claim for your unpaid wages with the authority appointed by the government. This application can be filed by you, a registered trade union, or an Inspector-cum-Facilitator. The authority has the power to order the payment of your wages and may also order additional compensation.\n\nKeep copies of your appointment letter, attendance records, and bank statements in a safe place. Continue to keep a record of any communication you have with the shop owner or HR regarding your unpaid salary.\n\nIf the employer continues to refuse payment after you have formally requested it, you may want to consult a lawyer to help you file a claim with the appropriate authority.\n\nSource: Code on Wages, 2019, section 17\nSource: Code on Wages, 2019, section 43\nSource: Code on Wages, 2019, section 45\n\nNote: Payment of Wages Act, 1936 is no longer in force, so I do not use it.\n\nWhat I could not verify:\n- The specific contact details or office location of the authority appointed to hear wage claims in Lucknow.\n\nThis is legal information, not legal advice.",
+        "reply_text": "You resigned from your job at a private shop and your monthly wages have not been paid.\n\nWhere an employee has resigned from service, the wages payable must be paid within two working days of the resignation.\n\nEvery employer must pay all amounts required to be paid under the law. Where an employer fails to make such payment, the proprietor of the establishment is responsible for the payment.\n\nKeep your appointment letter, attendance records, and bank statements safe as proof of your employment and unpaid wages.\n\nYou may consider sending a formal written reminder to the employer or HR about your pending wages.\n\nIf the employer still does not pay, you can file a claim application before the appointed authority.\n\nSource: Code on Wages, 2019, section 17\nSource: Code on Wages, 2019, section 43\nSource: Code on Wages, 2019, section 45\n\nNote: Payment of Wages Act, 1936 is no longer in force, so I do not use it.\n\nWhat I could not verify:\n- where to complain\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "wages",
         "action": "answer",
@@ -189,6 +189,14 @@
           {
             "id": "WAGE-COW2019-S5",
             "score": 0.6443299055099487
+          },
+          {
+            "id": "WAGE-COW2019-S49",
+            "score": 0.6729814410209656
+          },
+          {
+            "id": "WAGE-UPSHOP1962-S18",
+            "score": 0.6729273796081543
           }
         ],
         "needs_lawyer": false,
@@ -199,7 +207,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "f493a4bc3eba",
+          "session": "ec2f4497fd17",
           "input_mode": "text",
           "user_text": "I worked in a private shop in Lucknow UP, resigned on 15 October 2026 after agreed handover. October salary Rs 12000 hasn't come. I have my appointment letter, attendance and bank statement. HR only says wait. What can I do?",
           "mode": "advice",
@@ -252,27 +260,23 @@
           "verifier_history": [
             []
           ],
-          "timings_s": 10.48,
+          "timings_s": 128.609,
           "llm": {
-            "calls": 4,
-            "retries": 0,
-            "latency_s": 9.0,
+            "calls": 6,
+            "retries": 2,
+            "latency_s": 126.43,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
-              "main:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "main:gemini:gemini-3.5-flash-lite",
               "judge:gemini:gemini-3.1-flash-lite"
             ],
             "fallbacks": [
               {
-                "role": "main",
-                "model": "gemini:gemini-3.5-flash-lite",
-                "reason": "busy for ~347s"
-              },
-              {
                 "role": "judge",
                 "model": "gemini:gemma-4-31b-it",
-                "reason": "busy for ~385s"
+                "reason": "HTTP 500"
               }
             ]
           },
@@ -302,6 +306,14 @@
             {
               "id": "WAGE-COW2019-S5",
               "score": 0.6443299055099487
+            },
+            {
+              "id": "WAGE-COW2019-S49",
+              "score": 0.6729814410209656
+            },
+            {
+              "id": "WAGE-UPSHOP1962-S18",
+              "score": 0.6729273796081543
             }
           ],
           "citations": [
@@ -413,13 +425,14 @@
       "model_names_used": [
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001",
-        "main:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
+        "main:gemini:gemini-3.5-flash-lite",
         "judge:gemini:gemini-3.1-flash-lite"
       ],
-      "latency_s": 10.483425999991596,
-      "finished_at": "2026-11-05T16:03:29.528653+00:00"
+      "latency_s": 128.61327309999615,
+      "finished_at": "2026-11-05T16:35:27.324136+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T16:03:29.528653+00:00"
+  "finished_at": "2026-11-05T16:35:27.324136+00:00"
 }

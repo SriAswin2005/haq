@@ -155,13 +155,13 @@
       }
     ]
   },
-  "started_at": "2026-11-05T16:04:53.657989+00:00",
+  "started_at": "2026-11-05T17:59:38.198856+00:00",
   "turns": [
     {
       "input": "Lucknow UP. Rs 18000 rental deposit unpaid. I left on 10 October 2026, have receipt, can you draft a demand?",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T16:04:59.668200+00:00",
+      "started_at": "2026-11-05T17:59:44.201244+00:00",
       "result": {
         "reply_text": "Here is a draft demand notice for your security deposit. Anything I do not know is left as a [● placeholder] for you to fill in.\n\nLEGAL NOTICE: DEMAND FOR RETURN OF SECURITY DEPOSIT\n\nDate: [● date of sending]\nBy: [● registered post / speed post / email, as you choose]\n\nTo,\n[● landlord's full name]\n[● landlord's address]\n\nFrom,\n[● your full name]\n[● your address and phone number]\n\nSubject: Demand for return of security deposit of Rs. 18,000 for the premises at [● property address]\n\nDear Sir/Madam,\n\n1. I was your tenant at [● property address] from [● tenancy start date] to 2026-10-10 under [● rent agreement / verbal arrangement].\n\n2. At the start of the tenancy I paid you a security deposit of Rs. 18,000 on [● date of payment] by [● mode of payment, e.g. bank transfer / UPI / cash]. [● reference or proof, e.g. receipt, transaction ID, agreement clause].\n\n3. I vacated the premises on 2026-10-10 and handed over [● possession details, e.g. keys handed over on date / to whom].\n\n4. The deposit has not been returned. [● what happened when you asked, with dates, e.g. calls or messages already sent]. [● any deductions the landlord claimed, and why they are not justified, or \"No deductions were agreed.\"]\n\nThis demand is made with reference to: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 11; Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 24. [● Have a lawyer confirm that these provisions apply to your case.]\n\n5. I therefore request you to return the full security deposit of Rs. 18,000 within [● number of days you allow] days of receiving this notice, by [● how you want to be paid, e.g. transfer to your bank account details].\n\n6. If the amount is not returned within this time, I will be free to take further steps available to me under the law, without further notice, at your cost and risk.\n\nYours faithfully,\n[● your name]\n[● signature]\n\nEnclosures (copies): [● agreement / receipts / transaction record / messages]\n\n\nCheck every detail before sending. For high-value or complex matters, have a lawyer review it.",
         "reply_lang": "en-IN",
@@ -197,7 +197,7 @@
         },
         "draft_text": "LEGAL NOTICE: DEMAND FOR RETURN OF SECURITY DEPOSIT\n\nDate: [● date of sending]\nBy: [● registered post / speed post / email, as you choose]\n\nTo,\n[● landlord's full name]\n[● landlord's address]\n\nFrom,\n[● your full name]\n[● your address and phone number]\n\nSubject: Demand for return of security deposit of Rs. 18,000 for the premises at [● property address]\n\nDear Sir/Madam,\n\n1. I was your tenant at [● property address] from [● tenancy start date] to 2026-10-10 under [● rent agreement / verbal arrangement].\n\n2. At the start of the tenancy I paid you a security deposit of Rs. 18,000 on [● date of payment] by [● mode of payment, e.g. bank transfer / UPI / cash]. [● reference or proof, e.g. receipt, transaction ID, agreement clause].\n\n3. I vacated the premises on 2026-10-10 and handed over [● possession details, e.g. keys handed over on date / to whom].\n\n4. The deposit has not been returned. [● what happened when you asked, with dates, e.g. calls or messages already sent]. [● any deductions the landlord claimed, and why they are not justified, or \"No deductions were agreed.\"]\n\nThis demand is made with reference to: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 11; Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 24. [● Have a lawyer confirm that these provisions apply to your case.]\n\n5. I therefore request you to return the full security deposit of Rs. 18,000 within [● number of days you allow] days of receiving this notice, by [● how you want to be paid, e.g. transfer to your bank account details].\n\n6. If the amount is not returned within this time, I will be free to take further steps available to me under the law, without further notice, at your cost and risk.\n\nYours faithfully,\n[● your name]\n[● signature]\n\nEnclosures (copies): [● agreement / receipts / transaction record / messages]\n\n\nCheck every detail before sending. For high-value or complex matters, have a lawyer review it.",
         "trace": {
-          "session": "cec6e59ca0bc",
+          "session": "829c1be75e10",
           "input_mode": "text",
           "user_text": "Lucknow UP. Rs 18000 rental deposit unpaid. I left on 10 October 2026, have receipt, can you draft a demand?",
           "mode": "draft",
@@ -269,13 +269,14 @@
             ],
             "scan_issues": []
           },
-          "timings_s": 3.704,
+          "timings_s": 6.967,
           "llm": {
-            "calls": 3,
+            "calls": 4,
             "retries": 0,
-            "latency_s": 3.65,
+            "latency_s": 6.91,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001"
             ],
@@ -409,16 +410,17 @@
       "model_names_used": [
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 3.7082888000295497,
-      "finished_at": "2026-11-05T16:05:03.375942+00:00"
+      "latency_s": 6.970411800022703,
+      "finished_at": "2026-11-05T17:59:51.170105+00:00"
     },
     {
       "input": "Wait the key handover note says 20 October 2026 but I told you 10 October 2026. I'm not sure which is the vacation date. Draft it without silently choosing either date.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T16:05:09.377096+00:00",
+      "started_at": "2026-11-05T17:59:57.174250+00:00",
       "result": {
         "reply_text": "Here is a draft demand notice for your security deposit. Anything I do not know is left as a [● placeholder] for you to fill in.\n\nLEGAL NOTICE: DEMAND FOR RETURN OF SECURITY DEPOSIT\n\nDate: [● date of sending]\nBy: [● registered post / speed post / email, as you choose]\n\nTo,\n[● landlord's full name]\n[● landlord's address]\n\nFrom,\n[● your full name]\n[● your address and phone number]\n\nSubject: Demand for return of security deposit of Rs. 18,000 for the premises at [● property address]\n\nDear Sir/Madam,\n\n1. I was your tenant at [● property address] from [● tenancy start date] to 2026-10-10 under [● rent agreement / verbal arrangement].\n\n2. At the start of the tenancy I paid you a security deposit of Rs. 18,000 on [● date of payment] by [● mode of payment, e.g. bank transfer / UPI / cash]. [● reference or proof, e.g. receipt, transaction ID, agreement clause].\n\n3. I vacated the premises on 2026-10-10 and handed over [● possession details, e.g. keys handed over on date / to whom].\n\n4. The deposit has not been returned. [● what happened when you asked, with dates, e.g. calls or messages already sent]. [● any deductions the landlord claimed, and why they are not justified, or \"No deductions were agreed.\"]\n\nThis demand is made with reference to: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 11; Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 24. [● Have a lawyer confirm that these provisions apply to your case.]\n\n5. I therefore request you to return the full security deposit of Rs. 18,000 within [● number of days you allow] days of receiving this notice, by [● how you want to be paid, e.g. transfer to your bank account details].\n\n6. If the amount is not returned within this time, I will be free to take further steps available to me under the law, without further notice, at your cost and risk.\n\nYours faithfully,\n[● your name]\n[● signature]\n\nEnclosures (copies): [● agreement / receipts / transaction record / messages]\n\n\nCheck every detail before sending. For high-value or complex matters, have a lawyer review it.",
         "reply_lang": "en-IN",
@@ -454,7 +456,7 @@
         },
         "draft_text": "LEGAL NOTICE: DEMAND FOR RETURN OF SECURITY DEPOSIT\n\nDate: [● date of sending]\nBy: [● registered post / speed post / email, as you choose]\n\nTo,\n[● landlord's full name]\n[● landlord's address]\n\nFrom,\n[● your full name]\n[● your address and phone number]\n\nSubject: Demand for return of security deposit of Rs. 18,000 for the premises at [● property address]\n\nDear Sir/Madam,\n\n1. I was your tenant at [● property address] from [● tenancy start date] to 2026-10-10 under [● rent agreement / verbal arrangement].\n\n2. At the start of the tenancy I paid you a security deposit of Rs. 18,000 on [● date of payment] by [● mode of payment, e.g. bank transfer / UPI / cash]. [● reference or proof, e.g. receipt, transaction ID, agreement clause].\n\n3. I vacated the premises on 2026-10-10 and handed over [● possession details, e.g. keys handed over on date / to whom].\n\n4. The deposit has not been returned. [● what happened when you asked, with dates, e.g. calls or messages already sent]. [● any deductions the landlord claimed, and why they are not justified, or \"No deductions were agreed.\"]\n\nThis demand is made with reference to: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 11; Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 24. [● Have a lawyer confirm that these provisions apply to your case.]\n\n5. I therefore request you to return the full security deposit of Rs. 18,000 within [● number of days you allow] days of receiving this notice, by [● how you want to be paid, e.g. transfer to your bank account details].\n\n6. If the amount is not returned within this time, I will be free to take further steps available to me under the law, without further notice, at your cost and risk.\n\nYours faithfully,\n[● your name]\n[● signature]\n\nEnclosures (copies): [● agreement / receipts / transaction record / messages]\n\n\nCheck every detail before sending. For high-value or complex matters, have a lawyer review it.",
         "trace": {
-          "session": "cec6e59ca0bc",
+          "session": "829c1be75e10",
           "input_mode": "text",
           "user_text": "Wait the key handover note says 20 October 2026 but I told you 10 October 2026. I'm not sure which is the vacation date. Draft it without silently choosing either date.",
           "mode": "draft",
@@ -522,13 +524,14 @@
             ],
             "scan_issues": []
           },
-          "timings_s": 6.125,
+          "timings_s": 6.383,
           "llm": {
-            "calls": 3,
+            "calls": 4,
             "retries": 0,
-            "latency_s": 6.08,
+            "latency_s": 6.34,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001"
             ],
@@ -662,12 +665,13 @@
       "model_names_used": [
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 6.129136399948038,
-      "finished_at": "2026-11-05T16:05:15.506387+00:00"
+      "latency_s": 6.3915761999669485,
+      "finished_at": "2026-11-05T18:00:03.564070+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T16:05:15.506387+00:00"
+  "finished_at": "2026-11-05T18:00:03.564070+00:00"
 }

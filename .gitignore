@@ -1,5 +1,6 @@
 .env
-data/index/
+data/index/*
+!data/index/embeddings_gemini-embedding-001.json
 __pycache__/
 *.pyc
 outputs/live_trace.jsonl

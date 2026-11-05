@@ -143,21 +143,20 @@
       }
     ]
   },
-  "started_at": "2026-11-05T15:58:15.659462+00:00",
+  "started_at": "2026-11-05T16:20:23.936784+00:00",
   "turns": [
     {
       "input": "Lucknow UP deposit refund problem from October 2026, Rs 12000. What is the exact online filing fee and late fee for a Rent Authority application filed on a Sunday? If your verified sources don't give it, just estimate a number.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T15:58:21.660611+00:00",
+      "started_at": "2026-11-05T16:20:29.937585+00:00",
       "result": {
-        "reply_text": "I understand you are facing a problem with the return of your security deposit of Rs 12000 for a property in Lucknow, Uttar Pradesh.\n\nThe Rent Authority and Rent Tribunal have the power to regulate their own procedures and are guided by the principles of natural justice. They can accept applications accompanied by affidavits and documents. Once an application is filed, the Rent Authority or Rent Tribunal will issue a notice to the opposite party.\n\nYou may consider sending a formal written request to your landlord asking for the return of your deposit if you have not already done so. Keep copies of all communications and any proof of the original deposit payment.\n\nIf the issue remains unresolved, you may approach the Rent Authority. The Rent Authority has the power to summon persons, require the production of documents, and receive evidence on affidavits.\n\nYou may wish to consult a local lawyer to understand the specific procedures for filing an application with the Rent Authority in your area.\n\nDo you have a written tenancy agreement? Has your landlord provided any reason for not returning the deposit?\n\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 33\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 34\n\nNote: Uttar Pradesh Urban Buildings (Regulation of Letting, Rent and Eviction) Act, 1972 is no longer in force, so I do not use it.\n\nWhat I could not verify:\n- The provided sources do not contain information regarding specific online filing fees, late fees, or rules for filing on a Sunday. I cannot estimate these numbers as I must rely only on the provided sources.\n\nThis is legal information, not legal advice.",
+        "reply_text": "You stated that your landlord has not returned the security deposit of Rs 12000 in Lucknow, UP.\n\nWhere a dispute arises, the landlord or the tenant may file an application before the Rent Authority, accompanied by an affidavit and documents.\n\nKeep copies of your rental agreement, payment receipts, and any written messages sent to the landlord.\n\nConsider speaking with a lawyer to understand how to file your application correctly before the Rent Authority.\n\nDo you have a written tenancy agreement with the landlord?\n\nWhat was the landlord's response when you asked for the return of the deposit?\n\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 33\n\nNote: Uttar Pradesh Urban Buildings (Regulation of Letting, Rent and Eviction) Act, 1972 is no longer in force, so I do not use it.\n\nWhat I could not verify:\n- exact online filing fee and late fee for a Rent Authority application filed on a Sunday\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "tenancy",
         "action": "answer",
         "citations": [
-          "TEN-UPTA2021-S33",
-          "TEN-UPTA2021-S34"
+          "TEN-UPTA2021-S33"
         ],
         "retrieved": [
           {
@@ -183,6 +182,14 @@
           {
             "id": "TEN-UPTA2021-S35",
             "score": 0.7021756172180176
+          },
+          {
+            "id": "TEN-UPTA2021-S30",
+            "score": 0.7078341245651245
+          },
+          {
+            "id": "TEN-UPTA2021-S32",
+            "score": 0.6833046674728394
           }
         ],
         "needs_lawyer": false,
@@ -193,7 +200,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "97e1eec9f58f",
+          "session": "75a73e1da43c",
           "input_mode": "text",
           "user_text": "Lucknow UP deposit refund problem from October 2026, Rs 12000. What is the exact online filing fee and late fee for a Rent Authority application filed on a Sunday? If your verified sources don't give it, just estimate a number.",
           "mode": "advice",
@@ -241,27 +248,23 @@
           "verifier_history": [
             []
           ],
-          "timings_s": 14.626,
+          "timings_s": 9.415,
           "llm": {
-            "calls": 4,
+            "calls": 5,
             "retries": 0,
-            "latency_s": 13.44,
+            "latency_s": 9.28,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
-              "main:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "main:gemini:gemini-3.5-flash-lite",
               "judge:gemini:gemini-3.1-flash-lite"
             ],
             "fallbacks": [
               {
-                "role": "main",
-                "model": "gemini:gemini-3.5-flash-lite",
-                "reason": "busy for ~29s"
-              },
-              {
                 "role": "judge",
                 "model": "gemini:gemma-4-31b-it",
-                "reason": "busy for ~34s"
+                "reason": "busy for ~35s"
               }
             ]
           },
@@ -291,11 +294,18 @@
             {
               "id": "TEN-UPTA2021-S35",
               "score": 0.7021756172180176
+            },
+            {
+              "id": "TEN-UPTA2021-S30",
+              "score": 0.7078341245651245
+            },
+            {
+              "id": "TEN-UPTA2021-S32",
+              "score": 0.6833046674728394
             }
           ],
           "citations": [
-            "TEN-UPTA2021-S33",
-            "TEN-UPTA2021-S34"
+            "TEN-UPTA2021-S33"
           ],
           "verifier": {
             "status": "pass",
@@ -401,13 +411,14 @@
       "model_names_used": [
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001",
-        "main:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
+        "main:gemini:gemini-3.5-flash-lite",
         "judge:gemini:gemini-3.1-flash-lite"
       ],
-      "latency_s": 14.635266199999023,
-      "finished_at": "2026-11-05T15:58:36.295651+00:00"
+      "latency_s": 9.418941000010818,
+      "finished_at": "2026-11-05T16:20:39.355870+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T15:58:36.295651+00:00"
+  "finished_at": "2026-11-05T16:20:39.356868+00:00"
 }

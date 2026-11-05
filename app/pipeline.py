@@ -50,7 +50,10 @@ def _m(lang: str) -> dict:
 def _reason_text(reasons: list[str], m: dict) -> str:
     labels, out = m["reason_labels"], []
     for r in reasons:
-        key = "keyword" if r.startswith(("keyword:", "llm:")) else r
+        if r.startswith("llm:") and not router.HARD_LLM.search(r):
+            key = "llm_soft"
+        else:
+            key = "keyword" if r.startswith(("keyword:", "llm:")) else r
         t = labels.get(key)
         if t and t not in out:
             out.append(t)
@@ -62,6 +65,23 @@ def _facts_line(case_file: dict, m: dict) -> str:
     if not keys:
         return m["no_facts"]
     return "; ".join(f"{k.replace('_', ' ')}: {case_file[k]}" for k in keys)
+
+
+_PHONE = re.compile(r"(?<![\d-])(1800[-\s]?\d{2,3}[-\s]?\d{4}|0\d{3}[-\s]?\d{6,7}|1\d{2,4})(?![\d-])")
+_last_aid: dict = {}  # chunk id -> aid-search score, so citations can be listed in `retrieved`
+
+
+def _helpline_numbers(chunk: dict) -> list[str]:
+    """Phone numbers copied verbatim from a helpline chunk (years like 1987 are skipped
+    unless the chunk itself is that number, e.g. NCH 1915)."""
+    out = []
+    for n in _PHONE.findall(chunk.get("text", "")):
+        n = n.strip()
+        if re.fullmatch(r"(19|20)\d{2}", n) and n != str(chunk.get("unit_number")):
+            continue
+        if n not in out:
+            out.append(n)
+    return out[:3]
 
 
 def _aid_lines(lang: str, state: str | None) -> tuple[str, list[str], list[dict]]:
@@ -77,8 +97,13 @@ def _aid_lines(lang: str, state: str | None) -> tuple[str, list[str], list[dict]
             and h["chunk"].get("status") == "in_force"][:2]
     if not hits or not retrieval.passes_gate(res["top_score"]):
         return m["aid_missing"], [], [{"id": h["id"], "score": h["score"]} for h in res["hits"]]
-    lines = [m["aid_pointer"]] + [f"- {h['chunk']['text']} ({m['source_label']}: {h['chunk']['doc_title']}, "
-                                  f"{h['chunk']['unit']} {h['chunk']['unit_number']})" for h in hits]
+    lines = [m["aid_pointer"]]
+    for h in hits:
+        c = h["chunk"]
+        nums = _helpline_numbers(c)
+        body = " / ".join(nums) if nums else c["text"][:240]
+        lines.append(f"- {c['doc_title']}: {body} ({m['source_label']}: {c['source_url']})")
+        _last_aid[h["id"]] = h["score"]
     return "\n".join(lines), [h["id"] for h in hits], [{"id": h["id"], "score": h["score"]} for h in res["hits"]]
 
 
@@ -100,6 +125,18 @@ def safe_response(lang: str, case_file: dict, state: str | None, reasons: list[s
     parts += [m["can_do_now"], aid]
     parts.append(m["disclaimer"])
     return "\n\n".join(parts), cites, ret
+
+
+def _mentions_law(chunk: dict, texts: list[str]) -> bool:
+    """Did the user refer to this (old) law? By its year, or by its first two distinctive title words."""
+    t = " ".join(texts).lower()
+    title = chunk.get("doc_title", "").lower()
+    if any(y in t for y in re.findall(r"\b(?:18|19|20)\d{2}\b", title)):
+        return True
+    core = re.sub(r"\(.*?\)|\b(?:18|19|20)\d{2}\b", " ", title)
+    stop = {"the", "of", "and", "act", "uttar", "pradesh", "up", "india", "indian", "regulation", "a"}
+    words = [w for w in re.findall(r"[a-z]+", core) if w not in stop]
+    return len(words) >= 2 and all(w in t for w in words[:2])
 
 
 def _source_line(c: dict, m: dict) -> str:
@@ -170,6 +207,11 @@ def handle_turn(session: Session, user_text: str, input_mode: str = "text",
                   "escalation_reasons": res.escalation_reasons,
                   "models": cfg.get("models"), "mock": llm.is_mock()})
     res = _case_law_line(res, user_text, trace)
+    have = {r["id"] for r in res.retrieved}
+    extra = [{"id": c, "score": _last_aid.get(c, 0.0), "via": "aid_search"} for c in res.citations if c not in have]
+    if extra:  # e.g. legal-aid helplines found by the separate aid search
+        res.retrieved = list(res.retrieved) + extra
+        trace["retrieved"] = res.retrieved
     res.trace = trace
     session.history.append({"role": "user", "text": user_text})
     session.history.append({"role": "assistant", "text": res.reply_text})
@@ -274,18 +316,19 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
                           "min_score": cfg["retrieval"]["min_score"],
                           "old_law": [{"id": o["id"], "score": o["score"]} for o in sr["old_law"]]}
 
-    # ---- draft mode (P0: deposit notice only)
+    # ---- draft mode: deposit notice (tenancy), salary demand notice (wages), grievance email (consumer)
     if session.mode == "draft":
-        if cat != "tenancy":
+        if cat not in drafts.DRAFTS:
             return TurnResult(m["draft_only_deposit"] + "\n\n" + m["disclaimer"], lang, cat, "clarify", [], retrieved,
                               False, reasons, {"status": "pass", "issues": []}, None, trace)
-        d = drafts.deposit_notice(cf, state_code)
-        trace["draft"] = {"missing": d["missing"], "scan_issues": d["scan_issues"]}
+        d = drafts.make_draft(cat, cf, state_code)
+        trace["draft"] = {"kind": d["kind"], "file_name": d["file_name"], "missing": d["missing"],
+                          "scan_issues": d["scan_issues"]}
         if d["scan_issues"]:
             text, cites, ret = safe_response(lang, cf, state_code, reasons, False)
             return TurnResult(text, lang, cat, "refuse_unverified", cites, retrieved, True, reasons,
                               {"status": "failed", "issues": d["scan_issues"]}, None, trace)
-        reply = f"{m['draft_intro']}\n\n{d['text']}\n\n{m['draft_footer']}"
+        reply = f"{m.get('draft_intro_' + cat, m['draft_intro'])}\n\n{d['text']}\n\n{m['draft_footer']}"
         return TurnResult(reply, lang, cat, "draft", d["citations"], d["retrieved"] or retrieved, bool(reasons),
                           reasons, {"status": "pass", "issues": []}, d["text"] + "\n\n" + m["draft_footer"], trace)
 
@@ -346,20 +389,32 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
     # ---- render
     by_id = {c["id"]: c for c in chunks}
     paras, cited = [], []
+    cf_nums = set(re.findall(r"\d{3,}", json.dumps(cf, ensure_ascii=False).replace(",", "")))
     for b in answer["blocks"]:
         paras.append(b["text"].strip())
         if b["type"] == "legal":
             for cid in b.get("cites", []):
                 if cid not in cited:
                     cited.append(cid)
+        # numbers (helplines, amounts, days) in ANY block: show the chunk they came from as a source
+        for num in re.findall(r"\d[\d\-]{2,}\d", b["text"]):
+            plain = num.replace("-", "")
+            if plain in cf_nums:
+                continue
+            src = next((c for c in chunks if plain in c.get("text", "").replace("-", "").replace(" ", "")), None)
+            if src and src["id"] not in cited:
+                cited.append(src["id"])
     body = "\n\n".join(paras)
     if cited:
         body += "\n\n" + "\n".join(_source_line(by_id[c], m) for c in cited)
     old_note_chunks = []  # chunks behind our own "no longer in force" note; the final scan must see them
-    for o in sr["old_law"][:1]:
-        if sr["top_score"] and o["score"] >= 0.8 * sr["top_score"] and o["chunk"]["status"] in ("repealed", "superseded"):
+    said = [user_text] + [h["text"] for h in session.history if h.get("role") == "user"]
+    for o in sr["old_law"][:2]:
+        if o["chunk"]["status"] in ("repealed", "superseded") and _mentions_law(o["chunk"], said) \
+                and o["chunk"]["doc_title"] not in [c["doc_title"] for c in old_note_chunks]:
             body += "\n\n" + m["old_law"].format(title=o["chunk"]["doc_title"])
             old_note_chunks.append(o["chunk"])
+            retrieved.append({"id": o["id"], "score": o["score"], "old_law": True})
     if answer.get("gaps"):
         body += "\n\n" + m["gaps"] + "\n- " + "\n- ".join(str(g) for g in answer["gaps"][:4])
     needs_lawyer = bool(answer.get("needs_lawyer")) or bool(reasons)

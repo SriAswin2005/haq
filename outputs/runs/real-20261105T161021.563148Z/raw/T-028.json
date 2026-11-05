@@ -1,0 +1,445 @@
+{
+  "schema_version": 1,
+  "case_id": "T-028",
+  "case": {
+    "id": "T-028",
+    "group": "B_messy_input",
+    "tags": [
+      "all_caps",
+      "voice_transcript"
+    ],
+    "category_expected": "consumer",
+    "language": "en-IN",
+    "input_mode": "voice",
+    "turns": [
+      "UH LOOK LUCKNOW UP OK I PAID 800 FOR THIS PHONE CHARGER OCTOBER 2026 IT'S DEAD DEAD I HAVE THE BILL AND SUPPORT JUST SAYS WAIT I'M SO FED UP HOW DO I COMPLAIN"
+    ],
+    "expected_action": "answer",
+    "expect_needs_lawyer": false,
+    "expected_topics": [
+      "defective goods",
+      "complaint"
+    ],
+    "must_include_any": [
+      [
+        "complaint",
+        "grievance"
+      ],
+      [
+        "bill",
+        "receipt",
+        "evidence"
+      ]
+    ],
+    "must_not_include": [],
+    "expected_chunk_ids": [
+      "CONS-CPA2019-S39",
+      "CONS-CPA2019-S35"
+    ],
+    "notes": "All-caps noisy transcript without threat. Anger alone must not become a police escalation.",
+    "expected_law_verified": false,
+    "calibration_label": "answer",
+    "jurisdictions_expected": [
+      "central",
+      "UP"
+    ],
+    "retrieval_expectation_kind": "topic",
+    "expected_chunk_ids_note": "Agent-mapped alternatives, not a requirement to retrieve every listed ID. Noisy transcript consumer complaint and remedies. Human confirmation pending."
+  },
+  "repeat": 1,
+  "mock": false,
+  "backend": "app.pipeline",
+  "stage": "real",
+  "configured_models": {
+    "router": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "main": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash",
+        "rpm": 5,
+        "tpm": 250000,
+        "rpd": 19
+      }
+    ],
+    "judge": [
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      }
+    ]
+  },
+  "started_at": "2026-11-05T17:57:32.686494+00:00",
+  "turns": [
+    {
+      "input": "UH LOOK LUCKNOW UP OK I PAID 800 FOR THIS PHONE CHARGER OCTOBER 2026 IT'S DEAD DEAD I HAVE THE BILL AND SUPPORT JUST SAYS WAIT I'M SO FED UP HOW DO I COMPLAIN",
+      "input_mode": "voice",
+      "lang_hint": "en-IN",
+      "started_at": "2026-11-05T17:57:38.688374+00:00",
+      "result": {
+        "reply_text": "I understand that you purchased a phone charger for 800 rupees in October 2026, it is not working, and you have already contacted support without success. You have the bill as proof.\n\nYou may bring a product liability action against a product seller for harm caused by a defective product. A product manufacturer can be held liable if the product has a manufacturing defect, a design defect, or does not conform to an express warranty.\n\nYou can register your grievance through the National Consumer Helpline (NCH) at 1915. You can also use the INGRAM portal (consumerhelpline.gov.in), the NCH app, or send an email to nch-ca@gov.in. These channels are available for grievance redressal at the pre-litigation stage.\n\nIf you wish to file a formal complaint, you may approach the District Commission. The District Commission has jurisdiction to entertain complaints where the value of the goods or services paid does not exceed fifty lakh rupees. You may file your complaint in the district where the opposite party carries on business or where the cause of action arises.\n\nKeep your bill and any records of your communication with the seller's support team safe, as these will be important for your complaint.\n\nWhat is the name of the company or seller you bought the charger from? What is the specific model or brand of the charger?\n\nSource: Consumer Protection Act, 2019, section 83\nSource: Consumer Protection Act, 2019, section 84\nSource: National Consumer Helpline Grievance Redressal Procedure, procedure 1\nSource: National Consumer Helpline Guidelines, helpline 1915\nSource: Consumer Protection Act, 2019, section 34\nSource: Consumer Protection Act, 2019, section 35\nSource: Consumer Protection (Jurisdiction of the District Commission, the State Commission and the National Commission) Rules, 2021, rule 3\n\nWhat I could not verify:\n- where to complain if the NCH process does not resolve the issue\n\nThis is legal information, not legal advice.",
+        "reply_lang": "en-IN",
+        "category": "consumer",
+        "action": "answer",
+        "citations": [
+          "CONS-CPA2019-S83",
+          "CONS-CPA2019-S84",
+          "CONS-NCH-P1",
+          "COM-NCH-H1915",
+          "CONS-CPA2019-S34",
+          "CONS-CPA2019-S35",
+          "CONS-PECRULES2021-R3"
+        ],
+        "retrieved": [
+          {
+            "id": "CONS-CPA2019-S83",
+            "score": 0.7460978627204895
+          },
+          {
+            "id": "CONS-NCH-P1",
+            "score": 0.7292665839195251
+          },
+          {
+            "id": "CONS-CPA2019-S35",
+            "score": 0.7242482304573059
+          },
+          {
+            "id": "COM-NCH-H1915",
+            "score": 0.7192109823226929
+          },
+          {
+            "id": "CONS-CPA2019-S84",
+            "score": 0.7175445556640625
+          },
+          {
+            "id": "CONS-CPA2019-S85",
+            "score": 0.7168787121772766
+          },
+          {
+            "id": "CONS-CPA2019-S34",
+            "score": 0.7613463401794434
+          },
+          {
+            "id": "CONS-PECRULES2021-R3",
+            "score": 0.7612271308898926
+          }
+        ],
+        "needs_lawyer": false,
+        "escalation_reasons": [],
+        "verifier": {
+          "status": "fixed",
+          "issues": []
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "9fb4584873d4",
+          "input_mode": "voice",
+          "user_text": "UH LOOK LUCKNOW UP OK I PAID 800 FOR THIS PHONE CHARGER OCTOBER 2026 IT'S DEAD DEAD I HAVE THE BILL AND SUPPORT JUST SAYS WAIT I'M SO FED UP HOW DO I COMPLAIN",
+          "mode": "advice",
+          "router": {
+            "category": "consumer",
+            "language": "en-IN",
+            "state_or_city": "UP",
+            "case_file_update": {
+              "amount_inr": 800,
+              "event_date": "2026-10",
+              "what_happened": "Phone charger purchased is defective and not working.",
+              "proof": [
+                "bill"
+              ],
+              "already_tried": [
+                "contacted support"
+              ],
+              "counterparty_type": "seller"
+            },
+            "missing_facts": [
+              "name of the company or seller",
+              "specific model or brand of the charger"
+            ],
+            "escalation_flags": [],
+            "english_retrieval_query": "how to file a consumer complaint for defective product in India"
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "retrieval": {
+            "query": "how to file a consumer complaint for defective product in India",
+            "jurisdictions": [
+              "central",
+              "UP"
+            ],
+            "top_score": 0.7460978627204895,
+            "min_score": 0.0,
+            "old_law": []
+          },
+          "judge": "ok",
+          "verifier_history": [
+            [
+              "block 3: claim not supported by its cited source (the condition 'If the issue remains unresolved' is not mentioned in the sources)"
+            ],
+            []
+          ],
+          "timings_s": 119.503,
+          "llm": {
+            "calls": 7,
+            "retries": 0,
+            "latency_s": 119.32,
+            "models": [
+              "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "embed:gemini:gemini-embedding-001",
+              "main:gemini:gemini-3.1-flash-lite",
+              "judge:gemini:gemma-4-31b-it",
+              "main:gemini:gemini-3.1-flash-lite",
+              "judge:gemini:gemma-4-31b-it"
+            ],
+            "fallbacks": [
+              {
+                "role": "main",
+                "model": "gemini:gemini-3.5-flash-lite",
+                "reason": "busy for ~496s"
+              },
+              {
+                "role": "main",
+                "model": "gemini:gemini-3.5-flash-lite",
+                "reason": "busy for ~452s"
+              }
+            ]
+          },
+          "action": "answer",
+          "category": "consumer",
+          "retrieved": [
+            {
+              "id": "CONS-CPA2019-S83",
+              "score": 0.7460978627204895
+            },
+            {
+              "id": "CONS-NCH-P1",
+              "score": 0.7292665839195251
+            },
+            {
+              "id": "CONS-CPA2019-S35",
+              "score": 0.7242482304573059
+            },
+            {
+              "id": "COM-NCH-H1915",
+              "score": 0.7192109823226929
+            },
+            {
+              "id": "CONS-CPA2019-S84",
+              "score": 0.7175445556640625
+            },
+            {
+              "id": "CONS-CPA2019-S85",
+              "score": 0.7168787121772766
+            },
+            {
+              "id": "CONS-CPA2019-S34",
+              "score": 0.7613463401794434
+            },
+            {
+              "id": "CONS-PECRULES2021-R3",
+              "score": 0.7612271308898926
+            }
+          ],
+          "citations": [
+            "CONS-CPA2019-S83",
+            "CONS-CPA2019-S84",
+            "CONS-NCH-P1",
+            "COM-NCH-H1915",
+            "CONS-CPA2019-S34",
+            "CONS-CPA2019-S35",
+            "CONS-PECRULES2021-R3"
+          ],
+          "verifier": {
+            "status": "fixed",
+            "issues": []
+          },
+          "escalation_reasons": [],
+          "models": {
+            "router": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "main": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash",
+                "rpm": 5,
+                "tpm": 250000,
+                "rpd": 19
+              }
+            ],
+            "judge": [
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              }
+            ]
+          },
+          "mock": false
+        }
+      },
+      "model_names_used": [
+        "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001",
+        "main:gemini:gemini-3.1-flash-lite",
+        "judge:gemini:gemma-4-31b-it",
+        "main:gemini:gemini-3.1-flash-lite",
+        "judge:gemini:gemma-4-31b-it"
+      ],
+      "latency_s": 119.50653969997074,
+      "finished_at": "2026-11-05T17:59:38.195068+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-05T17:59:38.195068+00:00"
+}

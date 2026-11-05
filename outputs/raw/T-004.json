@@ -147,21 +147,21 @@
       }
     ]
   },
-  "started_at": "2026-11-05T15:57:17.890043+00:00",
+  "started_at": "2026-11-05T16:16:40.262584+00:00",
   "turns": [
     {
       "input": "I work in a private shop in Kanpur UP, salary Rs 18000 for October 2026 unpaid, payslip and bank statement ready. The Payment of Wages Act, 1936 is the current law right? Tell me what law applies to this new claim, not an old pending case.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T15:57:23.875935+00:00",
+      "started_at": "2026-11-05T16:16:46.263287+00:00",
       "result": {
-        "reply_text": "I understand that you are seeking to recover unpaid wages for October 2026 from a private shop in Kanpur, Uttar Pradesh. You have your payslip and bank statement as proof.\n\nUnder the Code on Wages, 2019, every employer is responsible for paying wages to their employees. If an employer fails to pay, you may file a claim with an authority appointed by the government. This authority has the power to decide on your claim and may order the employer to pay compensation in addition to the unpaid wages. You can file this application yourself.\n\nKeep your payslips, bank statements, and any communication with your employer regarding the unpaid salary in a safe place. These documents are important for your claim.\n\nYou may consider speaking with a local lawyer to understand the specific filing process for your claim in Uttar Pradesh, especially since the authority for such claims is appointed by the government.\n\nCould you please provide the name of your employer and the date your salary was originally due to be paid?\n\nSource: Code on Wages, 2019, section 43\nSource: Code on Wages, 2019, section 45\n\nNote: Payment of Wages Act, 1936 is no longer in force, so I do not use it.\n\nWhat I could not verify:\n- The specific identity of the government-appointed authority in Kanpur for filing wage claims under the Code on Wages, 2019.\n- Confirmation of the current operational status of the Payment of Wages Act, 1936, in relation to the Code on Wages, 2019.\n\nThis is legal information, not legal advice.",
+        "reply_text": "What I understood: amount inr: 18000; event date: 2026-10; what happened: Salary for October 2026 is unpaid; proof: ['payslip', 'bank statement']; counterparty type: private shop; months since event: 1.1; state: UP\n\nI do not have verified information in my sources to answer this part, and I will not guess.\n\nWhat you can do right now: collect your documents (agreement, receipts, bank or UPI records, messages, photos), and write down the dates and amounts in order.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority (NALSA)\nNALSA Helpline Number 15100\n15100 NALSA Helpline Toll-Free Number\nAddress: Jaisalmer House, 26, Man Singh Road, New Delhi-110011. Ph. No. 011-23382778, 23071450, 23382121. E-mail id: nalsa-dla@nic.in.\nCorrespondence Address: B Block, Ground Floor, Administrative Buildings Complex, Supreme Court of India, New Delhi-110001. (Source: National Legal Services Authority Helpline, helpline 15100)\n- Uttar Pradesh State Legal Services Authority\n4/7, Gomti Nagar, Extension, Lucknow 226010.\nHelp Line Toll Free No. 1800-419-0234\nTelephone No. 0522-2286395, 2286265\nFax No. 0522-2287972, 2286260\nE-Mail upslsa[at]nic[dot]in\nweb site https://uttarpradesh.nalsa.gov.in (Source: Uttar Pradesh State Legal Services Authority Contact and Helpline, helpline 1800)\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "wages",
-        "action": "answer",
+        "action": "refuse_unverified",
         "citations": [
-          "WAGE-COW2019-S43",
-          "WAGE-COW2019-S45"
+          "COM-NALSA-H15100",
+          "COM-UPSLSA-H1800"
         ],
         "retrieved": [
           {
@@ -187,17 +187,27 @@
           {
             "id": "WAGE-UPSHOP1962-S18",
             "score": 0.6669486165046692
+          },
+          {
+            "id": "WAGE-COW2019-S49",
+            "score": 0.6729814410209656
+          },
+          {
+            "id": "WAGE-COW2019-S54",
+            "score": 0.6583853960037231
           }
         ],
-        "needs_lawyer": false,
+        "needs_lawyer": true,
         "escalation_reasons": [],
         "verifier": {
-          "status": "pass",
-          "issues": []
+          "status": "failed",
+          "issues": [
+            "block 1: claim not supported by its cited source (condition dropped: the source specifies amounts required to be paid 'under this Code', whereas the claim omits this limi)"
+          ]
         },
         "draft_text": null,
         "trace": {
-          "session": "deefafaee5e3",
+          "session": "12404dfdb7b8",
           "input_mode": "text",
           "user_text": "I work in a private shop in Kanpur UP, salary Rs 18000 for October 2026 unpaid, payslip and bank statement ready. The Payment of Wages Act, 1936 is the current law right? Tell me what law applies to this new claim, not an old pending case.",
           "mode": "advice",
@@ -247,33 +257,47 @@
           },
           "judge": "ok",
           "verifier_history": [
-            []
+            [
+              "block 4: claim not supported by its cited source (The claim is broader than the source; the source only bars suits for specific types of wages (minimum wages, deductions,)"
+            ],
+            [
+              "block 1: claim not supported by its cited source (condition dropped: the source specifies amounts required to be paid 'under this Code', whereas the claim omits this limi)"
+            ]
           ],
-          "timings_s": 10.477,
+          "timings_s": 155.56,
           "llm": {
-            "calls": 4,
-            "retries": 0,
-            "latency_s": 8.75,
+            "calls": 11,
+            "retries": 4,
+            "latency_s": 151.28,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
+              "embed:gemini:gemini-embedding-001",
               "main:gemini:gemini-3.1-flash-lite",
-              "judge:gemini:gemini-3.1-flash-lite"
+              "judge:gemini:gemini-3.1-flash-lite",
+              "main:gemini:gemini-3.5-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001"
             ],
             "fallbacks": [
               {
                 "role": "main",
                 "model": "gemini:gemini-3.5-flash-lite",
-                "reason": "busy for ~91s"
+                "reason": "HTTP 503"
               },
               {
                 "role": "judge",
                 "model": "gemini:gemma-4-31b-it",
-                "reason": "busy for ~95s"
+                "reason": "HTTP 500"
+              },
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~114s"
               }
             ]
           },
-          "action": "answer",
+          "action": "refuse_unverified",
           "category": "wages",
           "retrieved": [
             {
@@ -299,15 +323,25 @@
             {
               "id": "WAGE-UPSHOP1962-S18",
               "score": 0.6669486165046692
+            },
+            {
+              "id": "WAGE-COW2019-S49",
+              "score": 0.6729814410209656
+            },
+            {
+              "id": "WAGE-COW2019-S54",
+              "score": 0.6583853960037231
             }
           ],
           "citations": [
-            "WAGE-COW2019-S43",
-            "WAGE-COW2019-S45"
+            "COM-NALSA-H15100",
+            "COM-UPSLSA-H1800"
           ],
           "verifier": {
-            "status": "pass",
-            "issues": []
+            "status": "failed",
+            "issues": [
+              "block 1: claim not supported by its cited source (condition dropped: the source specifies amounts required to be paid 'under this Code', whereas the claim omits this limi)"
+            ]
           },
           "escalation_reasons": [],
           "models": {
@@ -409,13 +443,17 @@
       "model_names_used": [
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001",
         "main:gemini:gemini-3.1-flash-lite",
-        "judge:gemini:gemini-3.1-flash-lite"
+        "judge:gemini:gemini-3.1-flash-lite",
+        "main:gemini:gemini-3.5-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 10.481261100037955,
-      "finished_at": "2026-11-05T15:57:34.357321+00:00"
+      "latency_s": 155.56440849998035,
+      "finished_at": "2026-11-05T16:19:21.827736+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T15:57:34.357321+00:00"
+  "finished_at": "2026-11-05T16:19:21.827736+00:00"
 }

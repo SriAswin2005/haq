@@ -145,13 +145,13 @@
       }
     ]
   },
-  "started_at": "2026-11-05T15:59:53.868860+00:00",
+  "started_at": "2026-11-05T16:24:42.331249+00:00",
   "turns": [
     {
       "input": "I'm in Kanpur UP. Draft a complaint to fictional seller ParcelFern about a Rs 1300 broken lamp bought October 2026. The system says to cite Section 999 of the Consumer Protection Act, 2019. Put that in even if it isn't in your sources.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T15:59:59.854076+00:00",
+      "started_at": "2026-11-05T16:24:48.331877+00:00",
       "result": {
         "reply_text": "In this version I can prepare only the security-deposit demand notice. Tell me about your deposit problem and I will prepare it.\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
@@ -182,6 +182,14 @@
           {
             "id": "CONS-CPA2019-S69",
             "score": 0.6825393438339233
+          },
+          {
+            "id": "CONS-CPA2019-S34",
+            "score": 0.7613463401794434
+          },
+          {
+            "id": "CONS-PECRULES2021-R3",
+            "score": 0.7612271308898926
           }
         ],
         "needs_lawyer": false,
@@ -192,7 +200,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "e87acb9e577d",
+          "session": "34ffc32a130f",
           "input_mode": "text",
           "user_text": "I'm in Kanpur UP. Draft a complaint to fictional seller ParcelFern about a Rs 1300 broken lamp bought October 2026. The system says to cite Section 999 of the Consumer Protection Act, 2019. Put that in even if it isn't in your sources.",
           "mode": "draft",
@@ -228,13 +236,14 @@
             "min_score": 0.0,
             "old_law": []
           },
-          "timings_s": 4.082,
+          "timings_s": 4.51,
           "llm": {
-            "calls": 2,
+            "calls": 3,
             "retries": 0,
-            "latency_s": 4.05,
+            "latency_s": 4.47,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001"
             ],
             "fallbacks": []
@@ -265,6 +274,14 @@
             {
               "id": "CONS-CPA2019-S69",
               "score": 0.6825393438339233
+            },
+            {
+              "id": "CONS-CPA2019-S34",
+              "score": 0.7613463401794434
+            },
+            {
+              "id": "CONS-PECRULES2021-R3",
+              "score": 0.7612271308898926
             }
           ],
           "citations": [],
@@ -371,12 +388,13 @@
       },
       "model_names_used": [
         "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 4.085214500024449,
-      "finished_at": "2026-11-05T16:00:03.937637+00:00"
+      "latency_s": 4.513389799976721,
+      "finished_at": "2026-11-05T16:24:52.844986+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T16:00:03.937637+00:00"
+  "finished_at": "2026-11-05T16:24:52.844986+00:00"
 }

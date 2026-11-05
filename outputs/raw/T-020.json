@@ -139,13 +139,13 @@
       }
     ]
   },
-  "started_at": "2026-11-05T16:01:49.599229+00:00",
+  "started_at": "2026-11-05T16:28:24.898807+00:00",
   "turns": [
     {
       "input": "I live in Kanpur UP. A friend repaid my personal loan by cheque, it bounced last week. This isn't salary or a purchase. Draft the cheque bounce prosecution notice and calculate the filing deadline.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T16:01:55.584759+00:00",
+      "started_at": "2026-11-05T16:28:30.885081+00:00",
       "result": {
         "reply_text": "What I understood: what happened: Personal loan repayment cheque bounced; event date: 2026-10-29; counterparty type: friend; months since event: 0.2; state: UP\n\nThis needs a real lawyer or free legal aid. I can still share verified general information where I have it, but I cannot handle this safely on my own.\n\nWhy: your message mentions something that needs a lawyer (such as police, court, violence, threats, eviction or family matters); this topic is outside what I can safely help with\n\nWhat you can do right now: collect your documents (agreement, receipts, bank or UPI records, messages, photos), and write down the dates and amounts in order.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority (NALSA)\nNALSA Helpline Number 15100\n15100 NALSA Helpline Toll-Free Number\nAddress: Jaisalmer House, 26, Man Singh Road, New Delhi-110011. Ph. No. 011-23382778, 23071450, 23382121. E-mail id: nalsa-dla@nic.in.\nCorrespondence Address: B Block, Ground Floor, Administrative Buildings Complex, Supreme Court of India, New Delhi-110001. (Source: National Legal Services Authority Helpline, helpline 15100)\n- Uttar Pradesh State Legal Services Authority\n4/7, Gomti Nagar, Extension, Lucknow 226010.\nHelp Line Toll Free No. 1800-419-0234\nTelephone No. 0522-2286395, 2286265\nFax No. 0522-2287972, 2286260\nE-Mail upslsa[at]nic[dot]in\nweb site https://uttarpradesh.nalsa.gov.in (Source: Uttar Pradesh State Legal Services Authority Contact and Helpline, helpline 1800)\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
@@ -185,7 +185,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "6534aff5f0c4",
+          "session": "b053f869810a",
           "input_mode": "text",
           "user_text": "I live in Kanpur UP. A friend repaid my personal loan by cheque, it bounced last week. This isn't salary or a purchase. Draft the cheque bounce prosecution notice and calculate the filing deadline.",
           "mode": "advice",
@@ -208,11 +208,11 @@
             "attempts": 1,
             "error": null
           },
-          "timings_s": 3.051,
+          "timings_s": 3.472,
           "llm": {
             "calls": 2,
             "retries": 0,
-            "latency_s": 3.02,
+            "latency_s": 3.44,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001"
@@ -352,10 +352,10 @@
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 3.0630884999991395,
-      "finished_at": "2026-11-05T16:01:58.644645+00:00"
+      "latency_s": 3.4759604000137188,
+      "finished_at": "2026-11-05T16:28:34.360681+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T16:01:58.644645+00:00"
+  "finished_at": "2026-11-05T16:28:34.360681+00:00"
 }

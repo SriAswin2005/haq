@@ -149,15 +149,15 @@
       }
     ]
   },
-  "started_at": "2026-11-05T16:04:09.946662+00:00",
+  "started_at": "2026-11-05T16:38:18.814361+00:00",
   "turns": [
     {
       "input": "Lucknow UP residential flat, agreement signed January 2026, vacated 20 October 2026. Landlord kept Rs 20000 deposit for painting though I have move-in and move-out photos and paid all rent. No threats. How can I ask for an explanation and refund?",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T16:04:15.931007+00:00",
+      "started_at": "2026-11-05T16:38:24.814850+00:00",
       "result": {
-        "reply_text": "I understand that you have vacated your residential flat in Lucknow and your landlord is withholding your security deposit for painting charges, despite you having move-in and move-out photos to show the condition of the property.\n\nUnder the law, a landlord must refund the security deposit to the tenant when taking over vacant possession of the premises, after deducting any liabilities of the tenant. Both the landlord and the tenant are required to keep the premises in as good a condition as at the start of the tenancy, except for normal wear and tear. The specific responsibilities for repairs and maintenance are generally determined by what was agreed upon in the tenancy agreement.\n\n1. Check your rental agreement to see what it says about painting charges and maintenance responsibilities.\n2. Send a formal written request to your landlord asking for the refund of your security deposit. Attach copies of your move-in and move-out photos to demonstrate that the property was returned in good condition, accounting for normal wear and tear.\n3. Keep a copy of this written request and any response you receive for your records.\n\nIf the landlord continues to refuse the refund, you may need to consult with a local lawyer to understand your options for recovering the amount through the Rent Authority or other legal channels.\n\nIs there a written rental agreement? Does the agreement mention painting charges?\n\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 11\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 15\n\nNote: Uttar Pradesh Urban Buildings (Regulation of Letting, Rent and Eviction) Act, 1972 is no longer in force, so I do not use it.\n\nWhat I could not verify:\n- Whether the painting charges were explicitly agreed upon in your contract.\n- The specific terms of your rental agreement regarding maintenance.\n\nThis is legal information, not legal advice.",
+        "reply_text": "I understand that you have vacated your residential flat in Lucknow and the landlord has withheld your security deposit for painting charges, despite you having move-in and move-out photos as proof of the property's condition.\n\nUnder the law, the security deposit must be refunded to the tenant on the date of taking over vacant possession of the premises, after making due deduction of any liability of the tenant.\n\nThe landlord and tenant are required to keep the premises in as good a condition as at the start of the tenancy, except for normal wear and tear. If a tenant fails to carry out repairs they are responsible for, the landlord may deduct the cost from the security deposit.\n\nYou may consider writing a formal letter or email to your landlord. In this communication, you can politely request a detailed explanation for the deduction and ask for the refund of your security deposit. You can attach copies of your move-in and move-out photos to support your claim that the property was returned in good condition.\n\nIf you are unable to resolve this directly with the landlord, you may seek guidance from a local lawyer to understand your specific legal options for recovery.\n\nIs there a written rental agreement for this tenancy? Does your rental agreement specifically mention painting charges as a tenant's responsibility?\n\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 11\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 15\n\nNote: Uttar Pradesh Urban Buildings (Regulation of Letting, Rent and Eviction) Act, 1972 is no longer in force, so I do not use it.\n\nWhat I could not verify:\n- where to complain\n- specific procedure for recovering withheld security deposits through the Rent Authority\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "tenancy",
         "action": "answer",
@@ -189,17 +189,25 @@
           {
             "id": "TEN-UPTA2021-S20",
             "score": 0.6474007368087769
+          },
+          {
+            "id": "TEN-UPTA2021-S33",
+            "score": 0.7123492956161499
+          },
+          {
+            "id": "TEN-UPTA2021-S30",
+            "score": 0.7078341245651245
           }
         ],
         "needs_lawyer": false,
         "escalation_reasons": [],
         "verifier": {
-          "status": "pass",
+          "status": "fixed",
           "issues": []
         },
         "draft_text": null,
         "trace": {
-          "session": "941ff54564eb",
+          "session": "75756559fc63",
           "input_mode": "text",
           "user_text": "Lucknow UP residential flat, agreement signed January 2026, vacated 20 October 2026. Landlord kept Rs 20000 deposit for painting though I have move-in and move-out photos and paid all rent. No threats. How can I ask for an explanation and refund?",
           "mode": "advice",
@@ -249,29 +257,35 @@
           },
           "judge": "ok",
           "verifier_history": [
+            [
+              "block 1: claim not supported by its cited source (The cited sources do not state that the Rent Authority can be approached for resolution if the landlord refuses to refun)"
+            ],
             []
           ],
-          "timings_s": 10.418,
+          "timings_s": 4732.555,
           "llm": {
-            "calls": 4,
-            "retries": 0,
-            "latency_s": 8.82,
+            "calls": 9,
+            "retries": 5,
+            "latency_s": 101.4,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
+              "embed:gemini:gemini-embedding-001",
               "main:gemini:gemini-3.1-flash-lite",
-              "judge:gemini:gemini-3.1-flash-lite"
+              "judge:gemini:gemma-4-31b-it",
+              "main:gemini:gemini-3.1-flash-lite",
+              "judge:gemini:gemma-4-31b-it"
             ],
             "fallbacks": [
               {
                 "role": "main",
                 "model": "gemini:gemini-3.5-flash-lite",
-                "reason": "busy for ~290s"
+                "reason": "HTTP 503"
               },
               {
-                "role": "judge",
-                "model": "gemini:gemma-4-31b-it",
-                "reason": "busy for ~329s"
+                "role": "main",
+                "model": "gemini:gemini-3.5-flash-lite",
+                "reason": "busy for ~559s"
               }
             ]
           },
@@ -301,6 +315,14 @@
             {
               "id": "TEN-UPTA2021-S20",
               "score": 0.6474007368087769
+            },
+            {
+              "id": "TEN-UPTA2021-S33",
+              "score": 0.7123492956161499
+            },
+            {
+              "id": "TEN-UPTA2021-S30",
+              "score": 0.7078341245651245
             }
           ],
           "citations": [
@@ -308,7 +330,7 @@
             "TEN-UPTA2021-S15"
           ],
           "verifier": {
-            "status": "pass",
+            "status": "fixed",
             "issues": []
           },
           "escalation_reasons": [],
@@ -411,13 +433,16 @@
       "model_names_used": [
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001",
         "main:gemini:gemini-3.1-flash-lite",
-        "judge:gemini:gemini-3.1-flash-lite"
+        "judge:gemini:gemma-4-31b-it",
+        "main:gemini:gemini-3.1-flash-lite",
+        "judge:gemini:gemma-4-31b-it"
       ],
-      "latency_s": 10.420866700005718,
-      "finished_at": "2026-11-05T16:04:26.351288+00:00"
+      "latency_s": 4732.557250200014,
+      "finished_at": "2026-11-05T17:57:17.371520+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T16:04:26.351288+00:00"
+  "finished_at": "2026-11-05T17:57:17.371520+00:00"
 }

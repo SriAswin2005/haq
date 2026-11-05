@@ -149,13 +149,13 @@
       }
     ]
   },
-  "started_at": "2026-11-05T16:03:29.534470+00:00",
+  "started_at": "2026-11-05T16:35:27.332139+00:00",
   "turns": [
     {
       "input": "mera paisa wapas nahi aaya. Please reply in English.",
       "input_mode": "voice",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T16:03:35.535364+00:00",
+      "started_at": "2026-11-05T16:35:33.395794+00:00",
       "result": {
         "reply_text": "What I understood: what happened: The user is reporting that their money has not been returned.\n\nCould you tell me a little more? Is this about (a) a refund or a defective product or service, (b) unpaid salary or dues from an employer, or (c) a rental security deposit that was not returned?\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
@@ -173,7 +173,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "23229237af0f",
+          "session": "a67a7b0bddea",
           "input_mode": "voice",
           "user_text": "mera paisa wapas nahi aaya. Please reply in English.",
           "mode": "advice",
@@ -195,11 +195,11 @@
             "attempts": 1,
             "error": null
           },
-          "timings_s": 2.167,
+          "timings_s": 2.179,
           "llm": {
             "calls": 1,
             "retries": 0,
-            "latency_s": 2.13,
+            "latency_s": 2.08,
             "models": [
               "router:gemini:gemini-3.1-flash-lite"
             ],
@@ -315,22 +315,22 @@
       "model_names_used": [
         "router:gemini:gemini-3.1-flash-lite"
       ],
-      "latency_s": 2.1685028999927454,
-      "finished_at": "2026-11-05T16:03:37.703942+00:00"
+      "latency_s": 2.181234100018628,
+      "finished_at": "2026-11-05T16:35:35.576742+00:00"
     },
     {
       "input": "Not a shopping refund, salary hai. Kanpur UP private shop, October 2026 ka 14000 unpaid. Still working there.",
       "input_mode": "voice",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T16:03:43.704382+00:00",
+      "started_at": "2026-11-05T16:35:41.577836+00:00",
       "result": {
-        "reply_text": "I understand you are working at a private shop in Kanpur and have not received your salary for October 2026.\n\nUnder the law, every employer must fix a wage period not exceeding one month and pay wages within the prescribed time. If an employer fails to pay the wages due, they are responsible for the payment. You may file a claim for unpaid wages with the authority appointed by the government.\n\nKeep a record of your attendance and any communication you have had with your employer regarding the unpaid salary. You may also want to gather any documents that prove your employment, such as an appointment letter or salary slips.\n\nIf you are unable to resolve this directly with your employer, you may consider consulting a lawyer to understand the specific steps for filing a claim in your district.\n\nHave you raised this issue with your employer yet? Do you have any proof of employment like an appointment letter or salary slip?\n\nSource: Uttar Pradesh Dookan Aur Vanijya Adhishthan Adhiniyam, 1962, section 13\nSource: Code on Wages, 2019, section 43\nSource: Code on Wages, 2019, section 45\n\nNote: Payment of Wages Act, 1936 is no longer in force, so I do not use it.\n\nWhat I could not verify:\n- Specific local rules or designated authorities in Kanpur for filing wage claims under the 1962 Act.\n\nThis is legal information, not legal advice.",
+        "reply_text": "I understand that you are working at a private shop in Kanpur and have not received your salary of 14,000 rupees for October 2026. You are still employed at the same shop.\n\nEvery employer is responsible for paying the wages due to their employees. If an employer fails to pay wages, the proprietor of the establishment is responsible for the payment.\n\nFor employees paid on a monthly basis, the employer must pay wages before the expiry of the seventh day of the following month.\n\nIf your wages are not paid, you may file a claim with the authority appointed by the government to hear such cases. This authority has the power to order the payment of your claim and may also order additional compensation. If the employer fails to pay the amount ordered, the authority can issue a recovery certificate to the District Magistrate to recover the money as arrears of land revenue.\n\nYou should keep a record of your employment, such as your appointment letter, salary slips, or any communication with your employer regarding the unpaid salary. It is also helpful to keep a copy of your attendance records if you have them.\n\nYou may first try to speak with your employer to resolve the issue. If that does not work, you can approach the local labour office in Kanpur to inquire about the specific authority appointed to handle wage claims in your area.\n\nHave you raised this issue with your employer yet? Do you have any proof of employment like an appointment letter or salary slip?\n\nSource: Code on Wages, 2019, section 43\nSource: Code on Wages, 2019, section 17\nSource: Code on Wages, 2019, section 45\n\nNote: Payment of Wages Act, 1936 is no longer in force, so I do not use it.\n\nWhat I could not verify:\n- The specific contact details or office address for the labour authority in Kanpur.\n- The exact procedure for filing a claim in your specific district.\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "wages",
         "action": "answer",
         "citations": [
-          "WAGE-UPSHOP1962-S13",
           "WAGE-COW2019-S43",
+          "WAGE-COW2019-S17",
           "WAGE-COW2019-S45"
         ],
         "retrieved": [
@@ -357,6 +357,14 @@
           {
             "id": "WAGE-COW2019-S54",
             "score": 0.6803602576255798
+          },
+          {
+            "id": "WAGE-COW2019-S57",
+            "score": 0.696526288986206
+          },
+          {
+            "id": "WAGE-COW2019-S49",
+            "score": 0.6729814410209656
           }
         ],
         "needs_lawyer": false,
@@ -367,7 +375,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "23229237af0f",
+          "session": "a67a7b0bddea",
           "input_mode": "voice",
           "user_text": "Not a shopping refund, salary hai. Kanpur UP private shop, October 2026 ka 14000 unpaid. Still working there.",
           "mode": "advice",
@@ -415,27 +423,23 @@
           "verifier_history": [
             []
           ],
-          "timings_s": 10.123,
+          "timings_s": 57.396,
           "llm": {
-            "calls": 4,
-            "retries": 0,
-            "latency_s": 8.2,
+            "calls": 7,
+            "retries": 2,
+            "latency_s": 55.2,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
+              "embed:gemini:gemini-embedding-001",
               "main:gemini:gemini-3.1-flash-lite",
-              "judge:gemini:gemini-3.1-flash-lite"
+              "judge:gemini:gemma-4-31b-it"
             ],
             "fallbacks": [
               {
                 "role": "main",
                 "model": "gemini:gemini-3.5-flash-lite",
-                "reason": "busy for ~323s"
-              },
-              {
-                "role": "judge",
-                "model": "gemini:gemma-4-31b-it",
-                "reason": "busy for ~361s"
+                "reason": "HTTP 503"
               }
             ]
           },
@@ -465,11 +469,19 @@
             {
               "id": "WAGE-COW2019-S54",
               "score": 0.6803602576255798
+            },
+            {
+              "id": "WAGE-COW2019-S57",
+              "score": 0.696526288986206
+            },
+            {
+              "id": "WAGE-COW2019-S49",
+              "score": 0.6729814410209656
             }
           ],
           "citations": [
-            "WAGE-UPSHOP1962-S13",
             "WAGE-COW2019-S43",
+            "WAGE-COW2019-S17",
             "WAGE-COW2019-S45"
           ],
           "verifier": {
@@ -576,51 +588,60 @@
       "model_names_used": [
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001",
         "main:gemini:gemini-3.1-flash-lite",
-        "judge:gemini:gemini-3.1-flash-lite"
+        "judge:gemini:gemma-4-31b-it"
       ],
-      "latency_s": 10.126887999998871,
-      "finished_at": "2026-11-05T16:03:53.831156+00:00"
+      "latency_s": 57.401417800050694,
+      "finished_at": "2026-11-05T16:36:38.973700+00:00"
     },
     {
       "input": "I have attendance screenshots and bank statement, manager ne bas wait bola. What's the next sensible step?",
       "input_mode": "voice",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T16:03:59.832049+00:00",
+      "started_at": "2026-11-05T16:36:44.985792+00:00",
       "result": {
-        "reply_text": "I understand you are trying to recover unpaid wages from a private shop in Kanpur and have already spoken to your manager without success. Please keep your attendance screenshots and bank statements in a safe place as these are important records of your employment and payment history.\n\nUnder the law, employers must fix a wage period that does not exceed one month and pay wages within the prescribed time. If wages are not paid, they can be recovered through the authority appointed by the government to hear such claims. Courts generally do not entertain separate civil suits for claims that can be recovered through this specific legal process.\n\n1. Continue to keep a record of all your communications with the manager regarding the unpaid salary. 2. You may contact the Uttar Pradesh State Legal Services Authority for guidance on how to proceed with your claim. They can be reached at their toll-free helpline number or through their office in Lucknow.\n\nYou should consider speaking with a lawyer if you are unable to resolve the matter through the relevant government authority or if you need help filing a formal claim for your unpaid wages.\n\nDo you have an appointment letter or a salary slip from your employer? These documents can be very helpful in proving your employment and the amount of wages due.\n\nSource: Uttar Pradesh Dookan Aur Vanijya Adhishthan Adhiniyam, 1962, section 13\nSource: Code on Wages, 2019, section 45\nSource: Code on Wages, 2019, section 57\n\nNote: Payment of Wages Act, 1936 is no longer in force, so I do not use it.\n\nWhat I could not verify:\n- The specific procedure for filing a claim under the Payment of Wages Act, 1936, as referenced in the UP Act.\n- The exact prescribed time limit for payment of wages in UP.\n\nThis is legal information, not legal advice.",
+        "reply_text": "You have already spoken to your manager about your unpaid wages. Since you have attendance screenshots and bank statements, you have evidence to support your claim.\n\nUnder the law, employers must pay wages within a set period. If wages are not paid, they can be recovered. The government appoints specific authorities to hear and decide on wage claims. You can file an application for your claim with the authority appointed for this purpose. If the authority decides in your favour, they may also order the employer to pay compensation in addition to your unpaid wages.\n\n1. Keep your attendance screenshots and bank statements safe as they are important proof of your employment and unpaid wages.\n2. You may contact the Uttar Pradesh State Legal Services Authority for guidance on how to proceed with your claim. You can reach them at 1800-419-0234 or visit their website at https://uttarpradesh.nalsa.gov.in.\n\nSource: Code on Wages, 2019, section 45\nSource: Uttar Pradesh Dookan Aur Vanijya Adhishthan Adhiniyam, 1962, section 13\nSource: Uttar Pradesh Dookan Aur Vanijya Adhishthan Adhiniyam, 1962, section 18\n\nNote: Payment of Wages Act, 1936 is no longer in force, so I do not use it.\n\nWhat I could not verify:\n- The specific name and location of the authority appointed under the Code on Wages in Kanpur to file your claim.\n- The exact procedure for filing the application in your specific district.\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "wages",
         "action": "answer",
         "citations": [
-          "WAGE-UPSHOP1962-S13",
           "WAGE-COW2019-S45",
-          "WAGE-COW2019-S57"
+          "WAGE-UPSHOP1962-S13",
+          "WAGE-UPSHOP1962-S18"
         ],
         "retrieved": [
           {
-            "id": "WAGE-UPSHOP1962-S18",
-            "score": 0.748570442199707
+            "id": "WAGE-COW2019-S45",
+            "score": 0.7228909730911255
           },
           {
-            "id": "WAGE-COW2019-S45",
-            "score": 0.7342209815979004
+            "id": "WAGE-UPSHOP1962-S18",
+            "score": 0.7067285180091858
           },
           {
             "id": "WAGE-UPSHOP1962-S13",
-            "score": 0.7188612222671509
-          },
-          {
-            "id": "WAGE-COW2019-S57",
-            "score": 0.7124401330947876
+            "score": 0.699847936630249
           },
           {
             "id": "WAGE-UPSHOP1962-S15",
-            "score": 0.708996057510376
+            "score": 0.682453453540802
           },
           {
             "id": "COM-UPSLSA-H1800",
-            "score": 0.7075644731521606
+            "score": 0.6800662279129028
+          },
+          {
+            "id": "WAGE-COW2019-S57",
+            "score": 0.6776795387268066
+          },
+          {
+            "id": "WAGE-COW2019-S49",
+            "score": 0.6729814410209656
+          },
+          {
+            "id": "WAGE-COW2019-S46",
+            "score": 0.6659461259841919
           }
         ],
         "needs_lawyer": false,
@@ -631,7 +652,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "23229237af0f",
+          "session": "a67a7b0bddea",
           "input_mode": "voice",
           "user_text": "I have attendance screenshots and bank statement, manager ne bas wait bola. What's the next sensible step?",
           "mode": "advice",
@@ -649,33 +670,30 @@
                 "manager asked to wait"
               ]
             },
-            "missing_facts": [
-              "appointment letter",
-              "salary slip"
-            ],
+            "missing_facts": [],
             "escalation_flags": [],
-            "english_retrieval_query": "how to file a wage claim for unpaid salary in Uttar Pradesh"
+            "english_retrieval_query": "how to file a wage claim with labour commissioner in Uttar Pradesh"
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
           "retrieval": {
-            "query": "how to file a wage claim for unpaid salary in Uttar Pradesh",
+            "query": "how to file a wage claim with labour commissioner in Uttar Pradesh",
             "jurisdictions": [
               "central",
               "UP"
             ],
-            "top_score": 0.748570442199707,
+            "top_score": 0.7228909730911255,
             "min_score": 0.0,
             "old_law": [
               {
                 "id": "WAGE-PWA1936-S15",
-                "score": 0.7360573410987854
+                "score": 0.7332450151443481
               },
               {
                 "id": "WAGE-PWA1936-S5",
-                "score": 0.6894775032997131
+                "score": 0.6689805388450623
               }
             ]
           },
@@ -683,27 +701,23 @@
           "verifier_history": [
             []
           ],
-          "timings_s": 10.098,
+          "timings_s": 93.826,
           "llm": {
-            "calls": 4,
-            "retries": 0,
-            "latency_s": 8.05,
+            "calls": 8,
+            "retries": 3,
+            "latency_s": 89.65,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
+              "embed:gemini:gemini-embedding-001",
               "main:gemini:gemini-3.1-flash-lite",
-              "judge:gemini:gemini-3.1-flash-lite"
+              "judge:gemini:gemma-4-31b-it"
             ],
             "fallbacks": [
               {
                 "role": "main",
                 "model": "gemini:gemini-3.5-flash-lite",
-                "reason": "busy for ~306s"
-              },
-              {
-                "role": "judge",
-                "model": "gemini:gemma-4-31b-it",
-                "reason": "busy for ~345s"
+                "reason": "HTTP 503"
               }
             ]
           },
@@ -711,34 +725,42 @@
           "category": "wages",
           "retrieved": [
             {
-              "id": "WAGE-UPSHOP1962-S18",
-              "score": 0.748570442199707
+              "id": "WAGE-COW2019-S45",
+              "score": 0.7228909730911255
             },
             {
-              "id": "WAGE-COW2019-S45",
-              "score": 0.7342209815979004
+              "id": "WAGE-UPSHOP1962-S18",
+              "score": 0.7067285180091858
             },
             {
               "id": "WAGE-UPSHOP1962-S13",
-              "score": 0.7188612222671509
-            },
-            {
-              "id": "WAGE-COW2019-S57",
-              "score": 0.7124401330947876
+              "score": 0.699847936630249
             },
             {
               "id": "WAGE-UPSHOP1962-S15",
-              "score": 0.708996057510376
+              "score": 0.682453453540802
             },
             {
               "id": "COM-UPSLSA-H1800",
-              "score": 0.7075644731521606
+              "score": 0.6800662279129028
+            },
+            {
+              "id": "WAGE-COW2019-S57",
+              "score": 0.6776795387268066
+            },
+            {
+              "id": "WAGE-COW2019-S49",
+              "score": 0.6729814410209656
+            },
+            {
+              "id": "WAGE-COW2019-S46",
+              "score": 0.6659461259841919
             }
           ],
           "citations": [
-            "WAGE-UPSHOP1962-S13",
             "WAGE-COW2019-S45",
-            "WAGE-COW2019-S57"
+            "WAGE-UPSHOP1962-S13",
+            "WAGE-UPSHOP1962-S18"
           ],
           "verifier": {
             "status": "pass",
@@ -844,13 +866,14 @@
       "model_names_used": [
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001",
         "main:gemini:gemini-3.1-flash-lite",
-        "judge:gemini:gemini-3.1-flash-lite"
+        "judge:gemini:gemma-4-31b-it"
       ],
-      "latency_s": 10.107772900024429,
-      "finished_at": "2026-11-05T16:04:09.930355+00:00"
+      "latency_s": 93.82666100002825,
+      "finished_at": "2026-11-05T16:38:18.812359+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T16:04:09.930355+00:00"
+  "finished_at": "2026-11-05T16:38:18.812359+00:00"
 }

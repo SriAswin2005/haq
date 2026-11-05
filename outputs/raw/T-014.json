@@ -137,21 +137,20 @@
       }
     ]
   },
-  "started_at": "2026-11-05T16:00:43.060866+00:00",
+  "started_at": "2026-11-05T16:26:31.939593+00:00",
   "turns": [
     {
       "input": "Lucknow UP residential tenancy ended October 2026. The security deposit is Rs 9,00,00,000, yes nine crore rupees, and the landlord has returned nothing. I have the agreement. What next?",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T16:00:49.073142+00:00",
+      "started_at": "2026-11-05T16:26:37.925831+00:00",
       "result": {
-        "reply_text": "I understand that your residential tenancy in Lucknow has ended, and your landlord has not returned your security deposit as required.\n\nUnder the law, a landlord must refund the security deposit to the tenant on the date of taking over vacant possession of the premises, after making any necessary deductions for liabilities.\n\nIf the landlord fails to refund the deposit, they are liable to pay simple interest on the amount they failed to return.\n\nYou may consider sending a formal legal notice to your landlord requesting the return of your deposit. If the issue remains unresolved, you may need to approach the Rent Authority.\n\nPlease consult a lawyer if you are unable to resolve this matter through a formal notice, as the amount involved is significant and legal proceedings may be complex.\n\nOn what date was the security deposit originally paid to the landlord? Have you already sent a formal legal notice to the landlord regarding this unpaid deposit?\n\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 11\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 24\n\nNote: Uttar Pradesh Urban Buildings (Regulation of Letting, Rent and Eviction) Act, 1972 is no longer in force, so I do not use it.\n\nWhat I could not verify:\n- The specific procedure for filing a claim with the Rent Authority for the recovery of a security deposit.\n- The exact interest rate prescribed for delayed refunds.\n\nBecause of the points above, please talk to a real lawyer or free legal aid office. (the amount involved is high)\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority (NALSA)\nNALSA Helpline Number 15100\n15100 NALSA Helpline Toll-Free Number\nAddress: Jaisalmer House, 26, Man Singh Road, New Delhi-110011. Ph. No. 011-23382778, 23071450, 23382121. E-mail id: nalsa-dla@nic.in.\nCorrespondence Address: B Block, Ground Floor, Administrative Buildings Complex, Supreme Court of India, New Delhi-110001. (Source: National Legal Services Authority Helpline, helpline 15100)\n- Uttar Pradesh State Legal Services Authority\n4/7, Gomti Nagar, Extension, Lucknow 226010.\nHelp Line Toll Free No. 1800-419-0234\nTelephone No. 0522-2286395, 2286265\nFax No. 0522-2287972, 2286260\nE-Mail upslsa[at]nic[dot]in\nweb site https://uttarpradesh.nalsa.gov.in (Source: Uttar Pradesh State Legal Services Authority Contact and Helpline, helpline 1800)\n\nThis is legal information, not legal advice.",
+        "reply_text": "Your tenancy ended, and your landlord has not returned your security deposit. You have your rental agreement.\n\nThe security deposit must be refunded to you on the date of taking over vacant possession of the premises, after making due deduction of any liability of the tenant.\n\nKeep your rental agreement and any proof of paying the deposit safe.\n\nOn what date was the security deposit originally paid?\n\nHave you sent a formal legal notice to the landlord yet?\n\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 11\n\nNote: Uttar Pradesh Urban Buildings (Regulation of Letting, Rent and Eviction) Act, 1972 is no longer in force, so I do not use it.\n\nWhat I could not verify:\n- where to complain\n\nBecause of the points above, please talk to a real lawyer or free legal aid office. (the amount involved is high)\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority (NALSA)\nNALSA Helpline Number 15100\n15100 NALSA Helpline Toll-Free Number\nAddress: Jaisalmer House, 26, Man Singh Road, New Delhi-110011. Ph. No. 011-23382778, 23071450, 23382121. E-mail id: nalsa-dla@nic.in.\nCorrespondence Address: B Block, Ground Floor, Administrative Buildings Complex, Supreme Court of India, New Delhi-110001. (Source: National Legal Services Authority Helpline, helpline 15100)\n- Uttar Pradesh State Legal Services Authority\n4/7, Gomti Nagar, Extension, Lucknow 226010.\nHelp Line Toll Free No. 1800-419-0234\nTelephone No. 0522-2286395, 2286265\nFax No. 0522-2287972, 2286260\nE-Mail upslsa[at]nic[dot]in\nweb site https://uttarpradesh.nalsa.gov.in (Source: Uttar Pradesh State Legal Services Authority Contact and Helpline, helpline 1800)\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "tenancy",
         "action": "answer",
         "citations": [
           "TEN-UPTA2021-S11",
-          "TEN-UPTA2021-S24",
           "COM-NALSA-H15100",
           "COM-UPSLSA-H1800"
         ],
@@ -179,6 +178,14 @@
           {
             "id": "TEN-UPTA2021-S35",
             "score": 0.6681622266769409
+          },
+          {
+            "id": "TEN-UPTA2021-S33",
+            "score": 0.7123492956161499
+          },
+          {
+            "id": "TEN-UPTA2021-S30",
+            "score": 0.7078341245651245
           }
         ],
         "needs_lawyer": true,
@@ -186,12 +193,12 @@
           "high_amount"
         ],
         "verifier": {
-          "status": "pass",
+          "status": "fixed",
           "issues": []
         },
         "draft_text": null,
         "trace": {
-          "session": "3f2021f180d9",
+          "session": "5054eb9af6e8",
           "input_mode": "text",
           "user_text": "Lucknow UP residential tenancy ended October 2026. The security deposit is Rs 9,00,00,000, yes nine crore rupees, and the landlord has returned nothing. I have the agreement. What next?",
           "mode": "advice",
@@ -240,30 +247,36 @@
           },
           "judge": "ok",
           "verifier_history": [
+            [
+              "block 2: claim not supported by its cited source (condition dropped: the interest liability applies specifically to refunds under section 24(1), which relates to recovery)"
+            ],
             []
           ],
-          "timings_s": 12.564,
+          "timings_s": 23.888,
           "llm": {
-            "calls": 5,
-            "retries": 0,
-            "latency_s": 10.78,
+            "calls": 9,
+            "retries": 1,
+            "latency_s": 20.98,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
-              "main:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "main:gemini:gemini-3.5-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite",
+              "main:gemini:gemini-3.5-flash-lite",
               "judge:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001"
             ],
             "fallbacks": [
               {
-                "role": "main",
-                "model": "gemini:gemini-3.5-flash-lite",
-                "reason": "busy for ~497s"
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~86s"
               },
               {
                 "role": "judge",
                 "model": "gemini:gemma-4-31b-it",
-                "reason": "busy for ~536s"
+                "reason": "busy for ~75s"
               }
             ]
           },
@@ -293,16 +306,23 @@
             {
               "id": "TEN-UPTA2021-S35",
               "score": 0.6681622266769409
+            },
+            {
+              "id": "TEN-UPTA2021-S33",
+              "score": 0.7123492956161499
+            },
+            {
+              "id": "TEN-UPTA2021-S30",
+              "score": 0.7078341245651245
             }
           ],
           "citations": [
             "TEN-UPTA2021-S11",
-            "TEN-UPTA2021-S24",
             "COM-NALSA-H15100",
             "COM-UPSLSA-H1800"
           ],
           "verifier": {
-            "status": "pass",
+            "status": "fixed",
             "issues": []
           },
           "escalation_reasons": [
@@ -407,14 +427,17 @@
       "model_names_used": [
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001",
-        "main:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
+        "main:gemini:gemini-3.5-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite",
+        "main:gemini:gemini-3.5-flash-lite",
         "judge:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 12.569243800011463,
-      "finished_at": "2026-11-05T16:01:01.642314+00:00"
+      "latency_s": 23.891615999978967,
+      "finished_at": "2026-11-05T16:27:01.817299+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T16:01:01.642314+00:00"
+  "finished_at": "2026-11-05T16:27:01.817299+00:00"
 }

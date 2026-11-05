@@ -18,7 +18,7 @@
     "clarify_category": "Could you tell me a little more? Is this about (a) a refund or a defective product or service, (b) unpaid salary or dues from an employer, or (c) a rental security deposit that was not returned?",
     "service_error": "I could not complete this answer safely just now (a technical problem). Please try again in a minute, or use the legal-aid pointers below.",
     "draft_intro": "Here is a draft demand notice for your security deposit. Anything I do not know is left as a [● placeholder] for you to fill in.",
-    "draft_only_deposit": "In this version I can prepare only the security-deposit demand notice. Tell me about your deposit problem and I will prepare it.",
+    "draft_only_deposit": "I can prepare a deposit demand notice, a salary demand notice, or a complaint to a company. Tell me which problem you have and I will prepare it.",
     "draft_footer": "Check every detail before sending. For high-value or complex matters, have a lawyer review it.",
     "practice_unavailable": "Practice mode is not available in this version.",
     "reason_labels": {
@@ -29,10 +29,13 @@
       "state_not_covered": "your state is not one I cover in depth",
       "unclear": "I could not tell what kind of problem this is",
       "keyword": "your message mentions something that needs a lawyer (such as police, court, violence, threats, eviction or family matters)",
-      "minor_age": "you mentioned an age under 18, and matters involving minors need a real lawyer or legal aid"
+      "minor_age": "you mentioned an age under 18, and matters involving minors need a real lawyer or legal aid",
+      "llm_soft": "this is a question a lawyer should look at with you (for example court cases or the chances of winning)"
     },
     "ask_state": "Which state or city are you in? State laws differ for this kind of problem, and I need this to look up the right rules.",
-    "no_case_law": "I can't cite court cases; I don't have verified judgments."
+    "no_case_law": "I can't cite court cases; I don't have verified judgments.",
+    "draft_intro_wages": "Here is a draft demand notice for your unpaid wages. Anything I do not know is left as a [● placeholder] for you to fill in.",
+    "draft_intro_consumer": "Here is a draft complaint to the company's grievance officer, followed by the facts to keep ready if it is not resolved. Anything I do not know is left as a [● placeholder] for you to fill in."
   },
   "hi": {
     "disclaimer": "यह कानूनी जानकारी है, कानूनी सलाह नहीं।",
@@ -53,7 +56,7 @@
     "clarify_category": "क्या आप थोड़ा और बता सकते हैं? यह (क) रिफंड या खराब सामान/सेवा, (ख) नियोक्ता से बकाया वेतन, या (ग) किराए की सिक्योरिटी डिपॉज़िट वापस न मिलने के बारे में है?",
     "service_error": "तकनीकी समस्या के कारण मैं अभी सुरक्षित उत्तर पूरा नहीं कर पाया। कृपया एक मिनट बाद फिर कोशिश करें, या नीचे दिए कानूनी-सहायता संपर्क देखें।",
     "draft_intro": "यह आपकी सिक्योरिटी डिपॉज़िट के लिए नोटिस का मसौदा है (नोटिस अंग्रेज़ी में है)। जो जानकारी मेरे पास नहीं है वह [● खाली जगह] में छोड़ी गई है।",
-    "draft_only_deposit": "इस संस्करण में मैं केवल सिक्योरिटी डिपॉज़िट का डिमांड नोटिस बना सकता हूँ। अपनी डिपॉज़िट की समस्या बताइए।",
+    "draft_only_deposit": "मैं डिपॉज़िट का डिमांड नोटिस, तनख़्वाह का डिमांड नोटिस, या कंपनी को शिकायत बना सकता हूँ। बताइए आपकी समस्या क्या है।",
     "draft_footer": "Check every detail before sending. For high-value or complex matters, have a lawyer review it. (भेजने से पहले हर जानकारी जाँच लें; ज़्यादा रकम या जटिल मामले में वकील से जँचवाएँ।)",
     "practice_unavailable": "इस संस्करण में प्रैक्टिस मोड उपलब्ध नहीं है।",
     "reason_labels": {
@@ -64,9 +67,12 @@
       "state_not_covered": "आपका राज्य उन राज्यों में नहीं है जिन्हें मैं गहराई से कवर करता हूँ",
       "unclear": "मैं समझ नहीं पाया कि समस्या किस तरह की है",
       "keyword": "आपके संदेश में पुलिस, अदालत, हिंसा, धमकी, बेदखली या पारिवारिक मामले जैसी बात है जिसमें वकील चाहिए",
-      "minor_age": "आपने 18 से कम उम्र बताई है, और नाबालिग से जुड़े मामलों में असली वकील या कानूनी सहायता ज़रूरी है"
+      "minor_age": "आपने 18 से कम उम्र बताई है, और नाबालिग से जुड़े मामलों में असली वकील या कानूनी सहायता ज़रूरी है",
+      "llm_soft": "यह ऐसा सवाल है जिसे वकील के साथ देखना चाहिए (जैसे अदालती फैसले या केस जीतने की संभावना)"
     },
     "ask_state": "आप किस राज्य या शहर में हैं? इस तरह की समस्या में राज्य के कानून अलग होते हैं, सही नियम खोजने के लिए मुझे यह चाहिए।",
-    "no_case_law": "मैं अदालती केस या फैसलों का हवाला नहीं दे सकता; मेरे पास जाँचे हुए फैसले नहीं हैं।"
+    "no_case_law": "मैं अदालती केस या फैसलों का हवाला नहीं दे सकता; मेरे पास जाँचे हुए फैसले नहीं हैं।",
+    "draft_intro_wages": "यह आपकी बकाया तनख़्वाह के लिए डिमांड नोटिस का मसौदा है (नोटिस अंग्रेज़ी में है)। जो जानकारी मेरे पास नहीं है वह [● खाली जगह] में छोड़ी गई है।",
+    "draft_intro_consumer": "यह कंपनी के शिकायत अधिकारी (Grievance Officer) को भेजने के लिए शिकायत का मसौदा है (अंग्रेज़ी में), साथ में वे बातें जो हल न होने पर उपभोक्ता शिकायत के लिए तैयार रखनी हैं। जो जानकारी मेरे पास नहीं है वह [● खाली जगह] में छोड़ी गई है।"
   }
 }

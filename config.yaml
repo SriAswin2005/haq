@@ -49,4 +49,21 @@ llm: {min_interval_s: 0, max_wait_s: 8, max_total_wait_s: 75}   # per-model paci
 mock: false
 languages: [en-IN, hi-IN]
 covered_states: [UP]
-voice: {stt: sarvam, tts: sarvam, stt_fallback: gemini}
+voice:
+  # Ordered chains: free Google models first, paid Sarvam credits only if every Google model fails.
+  stt_chain:
+    - {provider: gemini, model: "gemini-3.5-transcribe"}                       # dedicated transcription model
+    - {provider: gemini, model: "gemini-3.1-flash-lite", rpm: 15, rpd: 495}    # audio input (shares router budget)
+    - {provider: gemini, model: "gemini-2.5-flash-lite"}
+    - {provider: sarvam, model: "saaras:v3"}                                   # paid backup
+    - {provider: sarvam, model: "saaras:v4"}
+  tts_chain:
+    - {provider: gemini, model: "gemini-2.5-flash-preview-tts", voice: "Kore"}
+    - {provider: gemini, model: "gemini-3.1-flash-tts-preview", voice: "Kore"}
+    - {provider: gemini, model: "gemini-3.8-flash-tts", voice: "Kore"}
+    - {provider: sarvam, model: "bulbul:v3"}                                   # paid backup
+    - {provider: sarvam, model: "bulbul:v2"}
+  sarvam_speaker: null    # null = the model's default voice
+  tts_chunk_chars: 1400   # per TTS request
+  tts_max_chars: 1800     # speak at most this much of a reply; full text stays on screen
+  max_piece_s: 28         # Sarvam REST STT handles ~30 s; longer recordings are split (Gemini takes them whole)

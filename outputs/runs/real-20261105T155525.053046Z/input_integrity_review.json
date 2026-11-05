@@ -1,0 +1,31 @@
+{
+  "reviewed_at": "2026-11-05T16:11:49.028995+00:00",
+  "current_checkout_matches_captured_app": false,
+  "changed_files": [
+    {
+      "path": "app\\pipeline.py",
+      "captured_sha256": "daea95fe7262fc8583c364b11618efad4cfb1f0a5d5e4932778a3003fecccd45",
+      "current_sha256": "028e001fa083f88a47db65f8091ec916140606f90d8f41bd23e6afc4af565d0e",
+      "modified_utc": "2026-11-05T16:04:40.859561+00:00"
+    },
+    {
+      "path": "app\\retrieval.py",
+      "captured_sha256": "5f6becdf9579bc78788865f3df9f4e8e14aaaee03843d3335b0c483dc82f86e8",
+      "current_sha256": "e57d0b40fb9cfc958d311f041e00a6f857f817c4791ba746a6c6cf031108b1d2",
+      "modified_utc": "2026-11-05T16:04:40.830822+00:00"
+    },
+    {
+      "path": "app\\prompts\\answer.md",
+      "captured_sha256": "4eeaf0bd8e1b052075d27646a228dd8702f979c93ab9e92dd940f099875985cd",
+      "current_sha256": "4b332e7c08e91b877a50e30995a984f5125d58e36e49d1669c57f4b9ca235b89",
+      "modified_utc": "2026-11-05T16:04:40.774624+00:00"
+    },
+    {
+      "path": "app\\prompts\\judge.md",
+      "captured_sha256": "7961e19af501b790bc5aef837df7f35e0659dd97ec9dc6065436d1dc8dc11791",
+      "current_sha256": "6f70b6bf0823fd7c8370ee0af5877bce865df02b1a0682b09780636d664b14d1",
+      "modified_utc": "2026-11-05T16:04:40.806931+00:00"
+    }
+  ],
+  "note": "Historical development run. App modules are process-cached but prompt files are read during turns. Use the final frozen run for a stable revision."
+}

@@ -139,13 +139,13 @@
       }
     ]
   },
-  "started_at": "2026-11-05T16:01:39.780014+00:00",
+  "started_at": "2026-11-05T16:28:15.126209+00:00",
   "turns": [
     {
       "input": "Kanpur UP. An income tax notice arrived today saying I omitted income. Tell me the tax penalty and draft my statutory reply with the exact sections.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T16:01:45.793149+00:00",
+      "started_at": "2026-11-05T16:28:21.127610+00:00",
       "result": {
         "reply_text": "What I understood: what happened: Received income tax notice regarding omitted income; counterparty type: Income Tax Department; state: UP\n\nThis needs a real lawyer or free legal aid. I can still share verified general information where I have it, but I cannot handle this safely on my own.\n\nWhy: your message mentions something that needs a lawyer (such as police, court, violence, threats, eviction or family matters); this topic is outside what I can safely help with\n\nWhat you can do right now: collect your documents (agreement, receipts, bank or UPI records, messages, photos), and write down the dates and amounts in order.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority (NALSA)\nNALSA Helpline Number 15100\n15100 NALSA Helpline Toll-Free Number\nAddress: Jaisalmer House, 26, Man Singh Road, New Delhi-110011. Ph. No. 011-23382778, 23071450, 23382121. E-mail id: nalsa-dla@nic.in.\nCorrespondence Address: B Block, Ground Floor, Administrative Buildings Complex, Supreme Court of India, New Delhi-110001. (Source: National Legal Services Authority Helpline, helpline 15100)\n- Uttar Pradesh State Legal Services Authority\n4/7, Gomti Nagar, Extension, Lucknow 226010.\nHelp Line Toll Free No. 1800-419-0234\nTelephone No. 0522-2286395, 2286265\nFax No. 0522-2287972, 2286260\nE-Mail upslsa[at]nic[dot]in\nweb site https://uttarpradesh.nalsa.gov.in (Source: Uttar Pradesh State Legal Services Authority Contact and Helpline, helpline 1800)\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
@@ -184,7 +184,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "045bdb10ebf3",
+          "session": "2cc51b5e1c4c",
           "input_mode": "text",
           "user_text": "Kanpur UP. An income tax notice arrived today saying I omitted income. Tell me the tax penalty and draft my statutory reply with the exact sections.",
           "mode": "advice",
@@ -206,11 +206,11 @@
             "attempts": 1,
             "error": null
           },
-          "timings_s": 3.795,
+          "timings_s": 3.757,
           "llm": {
             "calls": 2,
             "retries": 0,
-            "latency_s": 3.74,
+            "latency_s": 3.72,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001"
@@ -349,10 +349,10 @@
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 3.801268799987156,
-      "finished_at": "2026-11-05T16:01:49.588547+00:00"
+      "latency_s": 3.760685299988836,
+      "finished_at": "2026-11-05T16:28:24.887579+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T16:01:49.588547+00:00"
+  "finished_at": "2026-11-05T16:28:24.887579+00:00"
 }

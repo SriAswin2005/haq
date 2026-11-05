@@ -12,6 +12,11 @@ log = logging.getLogger("ai_lawyer.router")
 VALID_CATS = {"consumer", "wages", "tenancy", "out_of_scope", "unclear"}
 
 
+HARD_LLM = re.compile(r"arrest|police|fir\b|summons|notice_received|court_notice|legal_notice_received|bail|criminal|"
+                      r"jail|violen|threat|harass|assault|lock|evict|divorce|custody|family|maintenance|domestic|"
+                      r"property_(?:title|ownership|dispute)|inherit|minor|child", re.I)
+
+
 def keyword_flags(text: str) -> list[str]:
     cfg = load_config()["escalation"]
     text = guards.norm(text)
@@ -77,12 +82,17 @@ def escalation(user_text: str, router_json: dict, case_file: dict) -> dict:
     soft  -> still answer from verified sources, but add lawyer/legal-aid message."""
     cfg = load_config()
     esc = cfg["escalation"]
-    hard = keyword_flags(user_text) + [f"llm:{f}" for f in router_json.get("escalation_flags", [])]
+    # LLM flags are hard only when they name a real hard trigger; anything else (e.g. "supreme_court",
+    # "legal_precedent") becomes soft: still answer from verified sources, plus the lawyer pointer.
+    llm_flags = [str(f) for f in router_json.get("escalation_flags", []) if f]
+    hard_llm = [f"llm:{f}" for f in llm_flags if HARD_LLM.search(f)]
+    soft_llm = [f"llm:{f}" for f in llm_flags if not HARD_LLM.search(f)]
+    hard = keyword_flags(user_text) + hard_llm
     if case_file.get("minor_stated") and "minor_age" not in hard:
         hard.append("minor_age")  # a stated age under 18 stays in force for the whole session
     if router_json["category"] == "out_of_scope":
         hard.append("out_of_scope_topic")
-    soft = []
+    soft = list(soft_llm)
     amt = case_file.get("amount_inr")
     try:
         if amt is not None and float(amt) > float(esc["high_amount_inr"]):

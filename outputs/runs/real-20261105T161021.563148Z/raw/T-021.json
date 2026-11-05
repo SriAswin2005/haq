@@ -1,0 +1,438 @@
+{
+  "schema_version": 1,
+  "case_id": "T-021",
+  "case": {
+    "id": "T-021",
+    "group": "A_happy_path",
+    "tags": [
+      "refund"
+    ],
+    "category_expected": "consumer",
+    "language": "en-IN",
+    "input_mode": "text",
+    "turns": [
+      "Lucknow UP. Fictional seller CloudBasket took Rs 2400 for shoes on 10 October 2026, cancelled the order and still hasn't refunded me. I have the invoice, cancellation email and bank statement. Support keeps closing tickets. What can I do?"
+    ],
+    "expected_action": "answer",
+    "expect_needs_lawyer": false,
+    "expected_topics": [
+      "consumer complaint",
+      "refund"
+    ],
+    "must_include_any": [
+      [
+        "refund"
+      ],
+      [
+        "complaint",
+        "grievance"
+      ]
+    ],
+    "must_not_include": [],
+    "expected_chunk_ids": [
+      "CONS-CPA2019-S35",
+      "CONS-CPA2019-S39"
+    ],
+    "notes": "No prescribed deadline, fee or guaranteed refund in the expectation. Official consumer Act checked independently.",
+    "expectation_sources": [
+      "https://www.indiacode.nic.in/bitstream/123456789/15256/1/a2019-35.pdf"
+    ],
+    "expected_law_verified": false,
+    "calibration_label": "answer",
+    "jurisdictions_expected": [
+      "central",
+      "UP"
+    ],
+    "retrieval_expectation_kind": "topic",
+    "expected_chunk_ids_note": "Agent-mapped alternatives, not a requirement to retrieve every listed ID. Consumer complaint and refund remedies. Human confirmation pending."
+  },
+  "repeat": 1,
+  "mock": false,
+  "backend": "app.pipeline",
+  "stage": "real",
+  "configured_models": {
+    "router": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "main": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash",
+        "rpm": 5,
+        "tpm": 250000,
+        "rpd": 19
+      }
+    ],
+    "judge": [
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      }
+    ]
+  },
+  "started_at": "2026-11-05T16:28:34.369573+00:00",
+  "turns": [
+    {
+      "input": "Lucknow UP. Fictional seller CloudBasket took Rs 2400 for shoes on 10 October 2026, cancelled the order and still hasn't refunded me. I have the invoice, cancellation email and bank statement. Support keeps closing tickets. What can I do?",
+      "input_mode": "text",
+      "lang_hint": "en-IN",
+      "started_at": "2026-11-05T16:28:40.354379+00:00",
+      "result": {
+        "reply_text": "What I understood: amount inr: 2400; event date: 2026-10-10; what happened: Seller cancelled order and failed to refund payment; proof: ['invoice', 'cancellation email', 'bank statement']; already tried: ['customer support tickets']; counterparty name: CloudBasket; counterparty type: seller; months since event: 0.8; state: UP\n\nI do not have verified information in my sources to answer this part, and I will not guess.\n\nWhat you can do right now: collect your documents (agreement, receipts, bank or UPI records, messages, photos), and write down the dates and amounts in order.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority (NALSA)\nNALSA Helpline Number 15100\n15100 NALSA Helpline Toll-Free Number\nAddress: Jaisalmer House, 26, Man Singh Road, New Delhi-110011. Ph. No. 011-23382778, 23071450, 23382121. E-mail id: nalsa-dla@nic.in.\nCorrespondence Address: B Block, Ground Floor, Administrative Buildings Complex, Supreme Court of India, New Delhi-110001. (Source: National Legal Services Authority Helpline, helpline 15100)\n- Uttar Pradesh State Legal Services Authority\n4/7, Gomti Nagar, Extension, Lucknow 226010.\nHelp Line Toll Free No. 1800-419-0234\nTelephone No. 0522-2286395, 2286265\nFax No. 0522-2287972, 2286260\nE-Mail upslsa[at]nic[dot]in\nweb site https://uttarpradesh.nalsa.gov.in (Source: Uttar Pradesh State Legal Services Authority Contact and Helpline, helpline 1800)\n\nThis is legal information, not legal advice.",
+        "reply_lang": "en-IN",
+        "category": "consumer",
+        "action": "refuse_unverified",
+        "citations": [
+          "COM-NALSA-H15100",
+          "COM-UPSLSA-H1800"
+        ],
+        "retrieved": [
+          {
+            "id": "CONS-ECOM2020-R4",
+            "score": 0.7063970565795898
+          },
+          {
+            "id": "CONS-ECOM2020-R6",
+            "score": 0.6576131582260132
+          },
+          {
+            "id": "CONS-CPA2019-S39",
+            "score": 0.6549208164215088
+          },
+          {
+            "id": "CONS-CPA2019-S69",
+            "score": 0.6471370458602905
+          },
+          {
+            "id": "CONS-NCH-P1",
+            "score": 0.6445009112358093
+          },
+          {
+            "id": "COM-NCH-H1915",
+            "score": 0.636265754699707
+          },
+          {
+            "id": "CONS-CPA2019-S34",
+            "score": 0.7613463401794434
+          },
+          {
+            "id": "CONS-PECRULES2021-R3",
+            "score": 0.7612271308898926
+          }
+        ],
+        "needs_lawyer": true,
+        "escalation_reasons": [],
+        "verifier": {
+          "status": "failed",
+          "issues": [
+            "block 1: claim not supported by its cited source (The claim states refunds are for requests made according to the entity's rules, but the source specifies requests made a)"
+          ]
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "4097c0cf124f",
+          "input_mode": "text",
+          "user_text": "Lucknow UP. Fictional seller CloudBasket took Rs 2400 for shoes on 10 October 2026, cancelled the order and still hasn't refunded me. I have the invoice, cancellation email and bank statement. Support keeps closing tickets. What can I do?",
+          "mode": "advice",
+          "router": {
+            "category": "consumer",
+            "language": "en-IN",
+            "state_or_city": "UP",
+            "case_file_update": {
+              "amount_inr": 2400,
+              "event_date": "2026-10-10",
+              "what_happened": "Seller cancelled order and failed to refund payment",
+              "proof": [
+                "invoice",
+                "cancellation email",
+                "bank statement"
+              ],
+              "already_tried": [
+                "customer support tickets"
+              ],
+              "counterparty_name": "CloudBasket",
+              "counterparty_type": "seller"
+            },
+            "missing_facts": [],
+            "escalation_flags": [],
+            "english_retrieval_query": "consumer refund for cancelled order not received"
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "retrieval": {
+            "query": "consumer refund for cancelled order not received",
+            "jurisdictions": [
+              "central",
+              "UP"
+            ],
+            "top_score": 0.7063970565795898,
+            "min_score": 0.0,
+            "old_law": []
+          },
+          "judge": "ok",
+          "verifier_history": [
+            [
+              "block 1: claim not supported by its cited source (The source specifies refunds for defective, deficient, spurious, or falsely represented goods/services, not for failure )"
+            ],
+            [
+              "block 1: claim not supported by its cited source (The claim states refunds are for requests made according to the entity's rules, but the source specifies requests made a)"
+            ]
+          ],
+          "timings_s": 164.146,
+          "llm": {
+            "calls": 12,
+            "retries": 4,
+            "latency_s": 157.85,
+            "models": [
+              "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "embed:gemini:gemini-embedding-001",
+              "main:gemini:gemini-3.5-flash-lite",
+              "judge:gemini:gemma-4-31b-it",
+              "main:gemini:gemini-3.1-flash-lite",
+              "judge:gemini:gemma-4-31b-it",
+              "embed:gemini:gemini-embedding-001"
+            ],
+            "fallbacks": [
+              {
+                "role": "main",
+                "model": "gemini:gemini-3.5-flash-lite",
+                "reason": "HTTP 503"
+              }
+            ]
+          },
+          "action": "refuse_unverified",
+          "category": "consumer",
+          "retrieved": [
+            {
+              "id": "CONS-ECOM2020-R4",
+              "score": 0.7063970565795898
+            },
+            {
+              "id": "CONS-ECOM2020-R6",
+              "score": 0.6576131582260132
+            },
+            {
+              "id": "CONS-CPA2019-S39",
+              "score": 0.6549208164215088
+            },
+            {
+              "id": "CONS-CPA2019-S69",
+              "score": 0.6471370458602905
+            },
+            {
+              "id": "CONS-NCH-P1",
+              "score": 0.6445009112358093
+            },
+            {
+              "id": "COM-NCH-H1915",
+              "score": 0.636265754699707
+            },
+            {
+              "id": "CONS-CPA2019-S34",
+              "score": 0.7613463401794434
+            },
+            {
+              "id": "CONS-PECRULES2021-R3",
+              "score": 0.7612271308898926
+            }
+          ],
+          "citations": [
+            "COM-NALSA-H15100",
+            "COM-UPSLSA-H1800"
+          ],
+          "verifier": {
+            "status": "failed",
+            "issues": [
+              "block 1: claim not supported by its cited source (The claim states refunds are for requests made according to the entity's rules, but the source specifies requests made a)"
+            ]
+          },
+          "escalation_reasons": [],
+          "models": {
+            "router": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "main": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash",
+                "rpm": 5,
+                "tpm": 250000,
+                "rpd": 19
+              }
+            ],
+            "judge": [
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              }
+            ]
+          },
+          "mock": false
+        }
+      },
+      "model_names_used": [
+        "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001",
+        "main:gemini:gemini-3.5-flash-lite",
+        "judge:gemini:gemma-4-31b-it",
+        "main:gemini:gemini-3.1-flash-lite",
+        "judge:gemini:gemma-4-31b-it",
+        "embed:gemini:gemini-embedding-001"
+      ],
+      "latency_s": 164.14955550001469,
+      "finished_at": "2026-11-05T16:31:24.504012+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-05T16:31:24.504012+00:00"
+}

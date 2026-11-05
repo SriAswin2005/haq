@@ -1,0 +1,35 @@
+LEGAL NOTICE: DEMAND FOR PAYMENT OF UNPAID WAGES AND DUES
+
+Date: [● date of sending]
+By: [● registered post / speed post / email, as you choose]
+
+To,
+[● employer's name (company or owner)]
+[● employer's address]
+Attn: [● HR / manager / proprietor name, if known]
+
+From,
+[● your full name]
+[● your address and phone number]
+
+Subject: Demand for payment of unpaid wages of Rs. [● amount due] for [● period unpaid, e.g. which months]
+
+Dear Sir/Madam,
+
+1. I worked with you as [● your designation] from [● date you joined] to [● last working day, or "till date"]. [● proof of employment, e.g. offer letter, ID card, salary slips, bank credits].
+
+2. My agreed wage was Rs. [● monthly wage] per month, paid by [● mode of payment, e.g. bank transfer / UPI / cash].
+
+3. The following amount has not been paid: Rs. [● amount due] for [● period unpaid, e.g. which months]. [● other dues, if any, e.g. leave encashment or reimbursements; or delete this line].
+
+4. [● what happened when you asked, with dates, e.g. emails or messages already sent].
+{LEGAL_BASIS}
+5. I therefore request you to pay Rs. [● amount due] within [● number of days you allow] days of receiving this notice, to [● your bank account details / UPI ID].
+
+6. If the amount is not paid within this time, I will be free to take further steps available to me under the law, without further notice.
+
+Yours faithfully,
+[● your name]
+[● signature]
+
+Enclosures (copies): [● offer letter / salary slips / bank statements / attendance record / messages]

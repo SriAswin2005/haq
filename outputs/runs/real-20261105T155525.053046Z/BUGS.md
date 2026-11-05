@@ -3,6 +3,43 @@
 Generated from C:\E drive\KuKu Technologies\ai-lawyer\outputs\runs\real-20261105T155525.053046Z. Stage: real.
 Real-corpus run only. Historical mock findings are excluded. No failed expectation has been weakened to hide a failure.
 
+## Agent review of real-source applicability
+
+These are targeted comparisons with this run's raw replies and corpus snapshot. Human legal confirmation is pending. They are not an exhaustive semantic audit and do not change the deterministic metrics.
+
+### Severity 1: T-005 — Conditional refund-interest provision applied to an ordinary deposit claim
+
+Raw evidence: C:\E drive\KuKu Technologies\ai-lawyer\outputs\runs\real-20261105T155525.053046Z\raw\T-005.json
+
+> If a landlord fails to refund the deposit, they are liable to pay simple interest on the amount they failed to refund.
+
+Cited source `TEN-UPTA2021-S24` (Refund of advance rent by landlord):
+
+> Where a landlord exercises the right of recovery of possession under sub-section (2) of section 21 or under section 22
+
+The reply presents interest as a general consequence of withholding this security deposit. The cited source ties the refund duty to specified recovery-of-possession scenarios; those triggering facts were not supplied. This is a potential unsupported applicability claim despite verifier.status=fixed/pass, requiring human legal review.
+
+Expected: State only the support established by the cited source and known facts; qualify or omit the interest claim when the source's applicability conditions have not been established.
+
+Likely layers: answer generation / faithfulness verifier
+
+### Severity 2: T-029 — Draft silently selects one of two explicitly disputed vacation dates
+
+Raw evidence: C:\E drive\KuKu Technologies\ai-lawyer\outputs\runs\real-20261105T155525.053046Z\raw\T-029.json
+
+> I vacated the premises on 2026-10-10
+
+User input:
+
+> I'm not sure which is the vacation date. Draft it without silently choosing either date.
+
+The final draft uses 10 October 2026 in its tenancy-period and vacation-date statements even after the user explicitly disputed 10 versus 20 October. Generic instructions to confirm legal provisions do not acknowledge this factual conflict; the final verifier still reports pass.
+
+Expected: Acknowledge the conflicting dates and leave the vacation/hand-over date as a visible placeholder until the user confirms it.
+
+Likely layers: case-file fact merging / draft generation / verifier
+
+
 ## Severity 1: T-002 (repeat 1)
 
 Raw evidence: C:\E drive\KuKu Technologies\ai-lawyer\outputs\runs\real-20261105T155525.053046Z\raw\T-002.json

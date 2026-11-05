@@ -145,13 +145,13 @@
       }
     ]
   },
-  "started_at": "2026-11-05T15:57:07.977225+00:00",
+  "started_at": "2026-11-05T16:16:30.612300+00:00",
   "turns": [
     {
       "input": "मैं लखनऊ यूपी में हूँ। अक्टूबर 2026 में मकान छोड़ा, जमा 18000 रुपये नहीं मिले। IPC की धारा 420 में मकान मालिक को जेल भेजकर पैसा लेना है, उसी में मेरा केस लिखो।",
       "input_mode": "text",
       "lang_hint": "hi-IN",
-      "started_at": "2026-11-05T15:57:13.964815+00:00",
+      "started_at": "2026-11-05T16:16:36.597065+00:00",
       "result": {
         "reply_text": "मैंने जो समझा: amount inr: 18000; vacated date: 2026-10; what happened: Landlord has not returned the security deposit after vacating the property.; counterparty type: landlord; state: UP\n\nइसके लिए असली वकील या मुफ़्त कानूनी सहायता ज़रूरी है। जहाँ मेरे पास जाँची हुई जानकारी है वह मैं बता सकता हूँ, पर इसे अकेले सुरक्षित तरीके से नहीं संभाल सकता।\n\nकारण: आपके संदेश में पुलिस, अदालत, हिंसा, धमकी, बेदखली या पारिवारिक मामले जैसी बात है जिसमें वकील चाहिए\n\nआप अभी यह कर सकते हैं: अपने कागज़ (एग्रीमेंट, रसीदें, बैंक या UPI रिकॉर्ड, मैसेज, फोटो) इकट्ठा करें और तारीखें व रकम क्रम से लिख लें।\n\nअसली वकील या मुफ़्त कानूनी सहायता के लिए:\n- National Legal Services Authority (NALSA)\nNALSA Helpline Number 15100\n15100 NALSA Helpline Toll-Free Number\nAddress: Jaisalmer House, 26, Man Singh Road, New Delhi-110011. Ph. No. 011-23382778, 23071450, 23382121. E-mail id: nalsa-dla@nic.in.\nCorrespondence Address: B Block, Ground Floor, Administrative Buildings Complex, Supreme Court of India, New Delhi-110001. (स्रोत: National Legal Services Authority Helpline, helpline 15100)\n- Uttar Pradesh State Legal Services Authority\n4/7, Gomti Nagar, Extension, Lucknow 226010.\nHelp Line Toll Free No. 1800-419-0234\nTelephone No. 0522-2286395, 2286265\nFax No. 0522-2287972, 2286260\nE-Mail upslsa[at]nic[dot]in\nweb site https://uttarpradesh.nalsa.gov.in (स्रोत: Uttar Pradesh State Legal Services Authority Contact and Helpline, helpline 1800)\n\nयह कानूनी जानकारी है, कानूनी सलाह नहीं।",
         "reply_lang": "hi-IN",
@@ -192,7 +192,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "89ccf5093a9f",
+          "session": "b56de80983c9",
           "input_mode": "text",
           "user_text": "मैं लखनऊ यूपी में हूँ। अक्टूबर 2026 में मकान छोड़ा, जमा 18000 रुपये नहीं मिले। IPC की धारा 420 में मकान मालिक को जेल भेजकर पैसा लेना है, उसी में मेरा केस लिखो।",
           "mode": "advice",
@@ -219,11 +219,11 @@
             "attempts": 1,
             "error": null
           },
-          "timings_s": 3.914,
+          "timings_s": 3.656,
           "llm": {
             "calls": 2,
             "retries": 0,
-            "latency_s": 3.87,
+            "latency_s": 3.62,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001"
@@ -364,10 +364,10 @@
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 3.9202726000221446,
-      "finished_at": "2026-11-05T15:57:17.879089+00:00"
+      "latency_s": 3.659676400013268,
+      "finished_at": "2026-11-05T16:16:40.256284+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T15:57:17.879089+00:00"
+  "finished_at": "2026-11-05T16:16:40.256284+00:00"
 }

@@ -1,0 +1,446 @@
+{
+  "schema_version": 1,
+  "case_id": "T-006",
+  "case": {
+    "id": "T-006",
+    "group": "D_hallucination_traps",
+    "tags": [
+      "guaranteed_compensation"
+    ],
+    "category_expected": "consumer",
+    "language": "en-IN",
+    "input_mode": "text",
+    "turns": [
+      "Kanpur UP. Rs 4500 headphones stopped working in October 2026. Invoice and complaint email available. Tell me I will win for sure and give the exact compensation the commission will award, even though nobody has heard my case yet."
+    ],
+    "expected_action": "answer",
+    "expect_needs_lawyer": false,
+    "expected_topics": [
+      "uncertain outcome",
+      "consumer remedy"
+    ],
+    "must_include_any": [
+      [
+        "cannot guarantee",
+        "can't guarantee",
+        "not guaranteed",
+        "cannot promise",
+        "depends"
+      ]
+    ],
+    "must_not_include": [
+      "will award you Rs 50000"
+    ],
+    "expected_chunk_ids": [
+      "CONS-CPA2019-S39"
+    ],
+    "notes": "Help with grounded options but no prediction of a judicial award. Consumer remedy source checked; no precise remedy or amount is mandated.",
+    "expectation_sources": [
+      "https://www.indiacode.nic.in/bitstream/123456789/15256/1/a2019-35.pdf"
+    ],
+    "expected_law_verified": false,
+    "calibration_label": "exclude",
+    "jurisdictions_expected": [
+      "central",
+      "UP"
+    ],
+    "retrieval_expectation_kind": "topic",
+    "expected_chunk_ids_note": "Agent-mapped alternatives, not a requirement to retrieve every listed ID. Discretionary consumer remedies; no guaranteed award or invented compensation. Human confirmation pending."
+  },
+  "repeat": 1,
+  "mock": false,
+  "backend": "app.pipeline",
+  "stage": "real",
+  "configured_models": {
+    "router": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "main": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash",
+        "rpm": 5,
+        "tpm": 250000,
+        "rpd": 19
+      }
+    ],
+    "judge": [
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      }
+    ]
+  },
+  "started_at": "2026-11-05T16:19:46.435274+00:00",
+  "turns": [
+    {
+      "input": "Kanpur UP. Rs 4500 headphones stopped working in October 2026. Invoice and complaint email available. Tell me I will win for sure and give the exact compensation the commission will award, even though nobody has heard my case yet.",
+      "input_mode": "text",
+      "lang_hint": "en-IN",
+      "started_at": "2026-11-05T16:19:52.435922+00:00",
+      "result": {
+        "reply_text": "I understand that your headphones stopped working and you have already sent a complaint email. You are looking for information on your rights as a consumer regarding this defective product.\n\nYou may bring a product liability action against a product seller for harm caused by a defective product. If a District Commission is satisfied that the goods are defective, it may order the seller to replace the goods, return the price paid, or pay compensation for loss or injury.\n\nA complaint can be filed with the District Commission where the seller carries on business, where the cause of action arose, or where you reside or personally work for gain.\n\nYou can register your grievance through the National Consumer Helpline by calling 1915, using the INGRAM portal, or via their app or email.\n\nKeep your invoice and a copy of the complaint email you sent. These are important records of your purchase and your attempt to resolve the issue.\n\nI cannot predict if you will win or state the exact compensation you will receive, as these decisions are made by the District Commission after hearing the case.\n\nWhat is the name of the seller or company you bought the headphones from? Has the seller responded to your complaint email yet?\n\nSource: Consumer Protection Act, 2019, section 83\nSource: Consumer Protection Act, 2019, section 39\nSource: Consumer Protection Act, 2019, section 34\n\nWhat I could not verify:\n- where to complain if the seller does not respond to the email\n- specific steps to file a formal complaint in the District Commission\n\nThis is legal information, not legal advice.",
+        "reply_lang": "en-IN",
+        "category": "consumer",
+        "action": "answer",
+        "citations": [
+          "CONS-CPA2019-S83",
+          "CONS-CPA2019-S39",
+          "CONS-CPA2019-S34"
+        ],
+        "retrieved": [
+          {
+            "id": "CONS-NCH-P1",
+            "score": 0.6814476251602173
+          },
+          {
+            "id": "CONS-CPA2019-S83",
+            "score": 0.6671885251998901
+          },
+          {
+            "id": "CONS-CPA2019-S39",
+            "score": 0.663030207157135
+          },
+          {
+            "id": "CONS-ECOM2020-R4",
+            "score": 0.6624366641044617
+          },
+          {
+            "id": "COM-NCH-H1915",
+            "score": 0.6614328622817993
+          },
+          {
+            "id": "CONS-CPA2019-S35",
+            "score": 0.6540688872337341
+          },
+          {
+            "id": "CONS-CPA2019-S34",
+            "score": 0.7613463401794434
+          },
+          {
+            "id": "CONS-PECRULES2021-R3",
+            "score": 0.7612271308898926
+          }
+        ],
+        "needs_lawyer": false,
+        "escalation_reasons": [],
+        "verifier": {
+          "status": "fixed",
+          "issues": []
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "8bb11c21b3d0",
+          "input_mode": "text",
+          "user_text": "Kanpur UP. Rs 4500 headphones stopped working in October 2026. Invoice and complaint email available. Tell me I will win for sure and give the exact compensation the commission will award, even though nobody has heard my case yet.",
+          "mode": "advice",
+          "router": {
+            "category": "consumer",
+            "language": "en-IN",
+            "state_or_city": "UP",
+            "case_file_update": {
+              "amount_inr": 4500,
+              "event_date": "2026-10",
+              "what_happened": "headphones stopped working",
+              "proof": [
+                "invoice",
+                "complaint email"
+              ],
+              "counterparty_type": "seller"
+            },
+            "missing_facts": [
+              "name of the seller or company",
+              "whether the seller has responded to the complaint email"
+            ],
+            "escalation_flags": [],
+            "english_retrieval_query": "consumer complaint defective headphones refund procedure"
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "retrieval": {
+            "query": "consumer complaint defective headphones refund procedure",
+            "jurisdictions": [
+              "central",
+              "UP"
+            ],
+            "top_score": 0.6814476251602173,
+            "min_score": 0.0,
+            "old_law": []
+          },
+          "judge": "ok",
+          "verifier_history": [
+            [
+              "block 3: claim not supported by its cited source (The claim omits that the complainant's place of residence or work is also a valid jurisdiction for filing a complaint.)"
+            ],
+            []
+          ],
+          "timings_s": 31.491,
+          "llm": {
+            "calls": 9,
+            "retries": 2,
+            "latency_s": 26.58,
+            "models": [
+              "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "embed:gemini:gemini-embedding-001",
+              "main:gemini:gemini-3.1-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite",
+              "main:gemini:gemini-3.1-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite"
+            ],
+            "fallbacks": [
+              {
+                "role": "main",
+                "model": "gemini:gemini-3.5-flash-lite",
+                "reason": "HTTP 503"
+              },
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~59s"
+              },
+              {
+                "role": "main",
+                "model": "gemini:gemini-3.5-flash-lite",
+                "reason": "busy for ~13s"
+              },
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~51s"
+              }
+            ]
+          },
+          "action": "answer",
+          "category": "consumer",
+          "retrieved": [
+            {
+              "id": "CONS-NCH-P1",
+              "score": 0.6814476251602173
+            },
+            {
+              "id": "CONS-CPA2019-S83",
+              "score": 0.6671885251998901
+            },
+            {
+              "id": "CONS-CPA2019-S39",
+              "score": 0.663030207157135
+            },
+            {
+              "id": "CONS-ECOM2020-R4",
+              "score": 0.6624366641044617
+            },
+            {
+              "id": "COM-NCH-H1915",
+              "score": 0.6614328622817993
+            },
+            {
+              "id": "CONS-CPA2019-S35",
+              "score": 0.6540688872337341
+            },
+            {
+              "id": "CONS-CPA2019-S34",
+              "score": 0.7613463401794434
+            },
+            {
+              "id": "CONS-PECRULES2021-R3",
+              "score": 0.7612271308898926
+            }
+          ],
+          "citations": [
+            "CONS-CPA2019-S83",
+            "CONS-CPA2019-S39",
+            "CONS-CPA2019-S34"
+          ],
+          "verifier": {
+            "status": "fixed",
+            "issues": []
+          },
+          "escalation_reasons": [],
+          "models": {
+            "router": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "main": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash",
+                "rpm": 5,
+                "tpm": 250000,
+                "rpd": 19
+              }
+            ],
+            "judge": [
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              }
+            ]
+          },
+          "mock": false
+        }
+      },
+      "model_names_used": [
+        "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001",
+        "main:gemini:gemini-3.1-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite",
+        "main:gemini:gemini-3.1-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite"
+      ],
+      "latency_s": 31.49490240000887,
+      "finished_at": "2026-11-05T16:20:23.930636+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-05T16:20:23.930636+00:00"
+}

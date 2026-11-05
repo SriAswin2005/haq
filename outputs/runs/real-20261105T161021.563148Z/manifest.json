@@ -1,0 +1,174 @@
+{
+  "mock": false,
+  "stage": "real",
+  "backend": "app.pipeline",
+  "runs": 1,
+  "case_ids": [
+    "T-001",
+    "T-002",
+    "T-003",
+    "T-004",
+    "T-005",
+    "T-006",
+    "T-007",
+    "T-008",
+    "T-009",
+    "T-010",
+    "T-011",
+    "T-012",
+    "T-013",
+    "T-014",
+    "T-015",
+    "T-016",
+    "T-017",
+    "T-018",
+    "T-019",
+    "T-020",
+    "T-021",
+    "T-022",
+    "T-023",
+    "T-024",
+    "T-025",
+    "T-026",
+    "T-027",
+    "T-028",
+    "T-029",
+    "T-030"
+  ],
+  "fingerprints": {
+    "cases": "11a1dda8d2d57b9c193a3ffa2665ee9dfa27a901c87da09a177ba323afb5125b",
+    "checks": "9cc9872d5e9b10907090c74bc16c7fa8d8e31f661e265f4fa572978698b9aafe",
+    "runner": "71f328a3cb1c3ae18b7cde5eb07fd910a4aa14a4b388109de4ada2e7fccd6649",
+    "reporting": "7aa5a5458331b08ad7c34d7d10dc076ae28f351ee23169196bd684c403ad1de7",
+    "config": "a7a4a1f720441f9b2e5b5d60f7a1abdeca79ba1486cc72a0de05983afdd1becc",
+    "corpus": "b4f2032eb4b31b99f9655bb1f92d80c6dd7b68d67f1d912af23eb816d2a8ee92",
+    "app": {
+      "app\\__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "app\\cli.py": "c776aa453740a51aa045b58a7720232916e04d85472ddf4acea5d15c3cf935be",
+      "app\\config.py": "11628de4c99bf326f12e946dc45b3dbdf1389b7afbec351dea0874e9dfc7454c",
+      "app\\drafts.py": "b13ffd6a63407155be43c6af01f9ec65865f9d46aa4402d7a7836a7b4ccce5e3",
+      "app\\guards.py": "a8e55ae4c8fc74d9b3f0b7cc87be2a18a8acbbb014b8d065f6e026ef00b9cdca",
+      "app\\llm.py": "3ed1808db0c2f3d3d7f117d9dd3ae7f61ce94608ca23573164404dfba052d285",
+      "app\\llm_mock.py": "86b8972c372c74d2a52f3bfe7d8f941e876c1ae03f25b3fae59b633cd3f1d614",
+      "app\\models.py": "bab3b0203b78db729d9ab99985c25b41260915436b4e81111509ef9298552439",
+      "app\\pipeline.py": "028e001fa083f88a47db65f8091ec916140606f90d8f41bd23e6afc4af565d0e",
+      "app\\practice.py": "c9d9573de4c48e7257c36fe0e3b95494093ea2939a1692ecc05844a44394f5aa",
+      "app\\retrieval.py": "e57d0b40fb9cfc958d311f041e00a6f857f817c4791ba746a6c6cf031108b1d2",
+      "app\\router.py": "0857d8cf5dcbd425781844d41add204908647232ce5bfe305a11eee2b5e1d1ee",
+      "app\\selfcheck_fallback.py": "670c45fd983b007ee4525054ad22cdac0a1e93d8a81852ec4d50a1b7dafb93d8",
+      "app\\tests\\__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "app\\tests\\test_round2.py": "ca8c614d34c653e9a2ee15b71c556408ff04715b671a222f4e447c3346f307d6",
+      "app\\ui.py": "70fff5efd1e5df598bad5a95be54347295f5dc1e3e6a5dcea645ba689c50d17c",
+      "app\\verifier.py": "f628ca8dc12beb024c199f803a56b9e5eb407de631417ae84c2f3fcb5a6e079a"
+    },
+    "app_resources": {
+      "app\\prompts\\answer.md": "4b332e7c08e91b877a50e30995a984f5125d58e36e49d1669c57f4b9ca235b89",
+      "app\\prompts\\judge.md": "6f70b6bf0823fd7c8370ee0af5877bce865df02b1a0682b09780636d664b14d1",
+      "app\\prompts\\language_retry.md": "87e3c0ee14e70f2df29e59f0741234dc6c8a0d2ed756d15281aa5176b6410b8f",
+      "app\\prompts\\router.md": "6a80a11579eb56105ca49970a390e8ddf06c8d9092e6af63f275593fa3e7d568",
+      "app\\templates\\deposit_notice_en.txt": "fb51cadae2649dc02519cd0c5e649757d33e01137a326a80c8e90d08c989d4f8",
+      "app\\templates\\messages.json": "92f9b43ba2d7241b8e9fa9bd823300f5892005e01611da8b51bdc333565309d0"
+    },
+    "judge_prompt": "318265e918b99792678c1538de7ca8abc450ec232e15b3cc931757ee936a4e91",
+    "fixture": null
+  },
+  "judge": false,
+  "started_at": "2026-11-05T16:10:21.563148+00:00",
+  "sleep_s": 6.0,
+  "models": {
+    "router": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "main": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash",
+        "rpm": 5,
+        "tpm": 250000,
+        "rpd": 19
+      }
+    ],
+    "judge": [
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      }
+    ]
+  },
+  "corpus_path": "C:\\E drive\\KuKu Technologies\\ai-lawyer\\tests\\_scratch\\frozen-eval-20261105T161020.615512Z\\data\\corpus",
+  "retrieval_min_score": 0.0,
+  "law_expectations_human_verified": 0
+}

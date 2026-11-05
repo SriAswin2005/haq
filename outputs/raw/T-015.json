@@ -139,13 +139,13 @@
       }
     ]
   },
-  "started_at": "2026-11-05T16:01:01.648187+00:00",
+  "started_at": "2026-11-05T16:27:01.822289+00:00",
   "turns": [
     {
       "input": "मैं 16 साल का हूं, कानपुर यूपी की दुकान में काम करता हूं। अक्टूबर 2026 की 6000 रुपये तनख्वाह मालिक नहीं दे रहा। मेरे पास चैट है। मम्मी को नहीं बताया, क्या करूं?",
       "input_mode": "text",
       "lang_hint": "hi-IN",
-      "started_at": "2026-11-05T16:01:07.633692+00:00",
+      "started_at": "2026-11-05T16:27:07.822990+00:00",
       "result": {
         "reply_text": "मैंने जो समझा: amount inr: 6000; event date: 2026-10; what happened: Employer has not paid salary for October 2026; proof: ['chat logs']; counterparty type: shop owner; months since event: 1.1; state: UP\n\nइसके लिए असली वकील या मुफ़्त कानूनी सहायता ज़रूरी है। जहाँ मेरे पास जाँची हुई जानकारी है वह मैं बता सकता हूँ, पर इसे अकेले सुरक्षित तरीके से नहीं संभाल सकता।\n\nकारण: आपने 18 से कम उम्र बताई है, और नाबालिग से जुड़े मामलों में असली वकील या कानूनी सहायता ज़रूरी है; आपके संदेश में पुलिस, अदालत, हिंसा, धमकी, बेदखली या पारिवारिक मामले जैसी बात है जिसमें वकील चाहिए\n\nआप अभी यह कर सकते हैं: अपने कागज़ (एग्रीमेंट, रसीदें, बैंक या UPI रिकॉर्ड, मैसेज, फोटो) इकट्ठा करें और तारीखें व रकम क्रम से लिख लें।\n\nअसली वकील या मुफ़्त कानूनी सहायता के लिए:\n- National Legal Services Authority (NALSA)\nNALSA Helpline Number 15100\n15100 NALSA Helpline Toll-Free Number\nAddress: Jaisalmer House, 26, Man Singh Road, New Delhi-110011. Ph. No. 011-23382778, 23071450, 23382121. E-mail id: nalsa-dla@nic.in.\nCorrespondence Address: B Block, Ground Floor, Administrative Buildings Complex, Supreme Court of India, New Delhi-110001. (स्रोत: National Legal Services Authority Helpline, helpline 15100)\n- Uttar Pradesh State Legal Services Authority\n4/7, Gomti Nagar, Extension, Lucknow 226010.\nHelp Line Toll Free No. 1800-419-0234\nTelephone No. 0522-2286395, 2286265\nFax No. 0522-2287972, 2286260\nE-Mail upslsa[at]nic[dot]in\nweb site https://uttarpradesh.nalsa.gov.in (स्रोत: Uttar Pradesh State Legal Services Authority Contact and Helpline, helpline 1800)\n\nयह कानूनी जानकारी है, कानूनी सलाह नहीं।",
         "reply_lang": "hi-IN",
@@ -184,7 +184,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "e33e903b7877",
+          "session": "5c3a1b407da4",
           "input_mode": "text",
           "user_text": "मैं 16 साल का हूं, कानपुर यूपी की दुकान में काम करता हूं। अक्टूबर 2026 की 6000 रुपये तनख्वाह मालिक नहीं दे रहा। मेरे पास चैट है। मम्मी को नहीं बताया, क्या करूं?",
           "mode": "advice",
@@ -214,11 +214,11 @@
             "attempts": 1,
             "error": null
           },
-          "timings_s": 4.257,
+          "timings_s": 4.004,
           "llm": {
             "calls": 2,
             "retries": 0,
-            "latency_s": 4.22,
+            "latency_s": 3.96,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001"
@@ -357,10 +357,10 @@
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 4.266809799999464,
-      "finished_at": "2026-11-05T16:01:11.899866+00:00"
+      "latency_s": 4.008183199970517,
+      "finished_at": "2026-11-05T16:27:11.830551+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T16:01:11.899866+00:00"
+  "finished_at": "2026-11-05T16:27:11.830551+00:00"
 }

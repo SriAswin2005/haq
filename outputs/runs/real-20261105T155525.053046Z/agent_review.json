@@ -1,0 +1,29 @@
+{
+  "reviewed_at": "2026-11-05T16:11:48.431347+00:00",
+  "source": "tests\\real_findings.jsonl",
+  "human_verified": false,
+  "additional_api_calls": 0,
+  "findings": [
+    {
+      "case_id": "T-005",
+      "severity": 1,
+      "title": "Conditional refund-interest provision applied to an ordinary deposit claim",
+      "layer": "answer generation / faithfulness verifier",
+      "reply_excerpt": "If a landlord fails to refund the deposit, they are liable to pay simple interest on the amount they failed to refund.",
+      "source_chunk_id": "TEN-UPTA2021-S24",
+      "source_excerpt": "Where a landlord exercises the right of recovery of possession under sub-section (2) of section 21 or under section 22",
+      "finding": "The reply presents interest as a general consequence of withholding this security deposit. The cited source ties the refund duty to specified recovery-of-possession scenarios; those triggering facts were not supplied. This is a potential unsupported applicability claim despite verifier.status=fixed/pass, requiring human legal review.",
+      "expected": "State only the support established by the cited source and known facts; qualify or omit the interest claim when the source's applicability conditions have not been established."
+    },
+    {
+      "case_id": "T-029",
+      "severity": 2,
+      "title": "Draft silently selects one of two explicitly disputed vacation dates",
+      "layer": "case-file fact merging / draft generation / verifier",
+      "reply_excerpt": "I vacated the premises on 2026-10-10",
+      "input_excerpt": "I'm not sure which is the vacation date. Draft it without silently choosing either date.",
+      "finding": "The final draft uses 10 October 2026 in its tenancy-period and vacation-date statements even after the user explicitly disputed 10 versus 20 October. Generic instructions to confirm legal provisions do not acknowledge this factual conflict; the final verifier still reports pass.",
+      "expected": "Acknowledge the conflicting dates and leave the vacation/hand-over date as a visible placeholder until the user confirms it."
+    }
+  ]
+}
