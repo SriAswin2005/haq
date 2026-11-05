@@ -1,0 +1,34 @@
+LEGAL NOTICE: DEMAND FOR RETURN OF SECURITY DEPOSIT
+
+Date: [● date of sending]
+By: [● registered post / speed post / email, as you choose]
+
+To,
+[● landlord's full name]
+[● landlord's address]
+
+From,
+[● your full name]
+[● your address and phone number]
+
+Subject: Demand for return of security deposit of Rs. [● deposit amount] for the premises at [● property address]
+
+Dear Sir/Madam,
+
+1. I was your tenant at [● property address] from [● tenancy start date] to [● date you vacated] under [● rent agreement / verbal arrangement].
+
+2. At the start of the tenancy I paid you a security deposit of Rs. [● deposit amount] on [● date of payment] by [● mode of payment, e.g. bank transfer / UPI / cash]. [● reference or proof, e.g. receipt, transaction ID, agreement clause].
+
+3. I vacated the premises on [● date you vacated] and handed over [● possession details, e.g. keys handed over on date / to whom].
+
+4. The deposit has not been returned. [● what happened when you asked, with dates, e.g. calls or messages already sent]. [● any deductions the landlord claimed, and why they are not justified, or "No deductions were agreed."]
+{LEGAL_BASIS}
+5. I therefore request you to return the full security deposit of Rs. [● deposit amount] within [● number of days you allow] days of receiving this notice, by [● how you want to be paid, e.g. transfer to your bank account details].
+
+6. If the amount is not returned within this time, I will be free to take further steps available to me under the law, without further notice, at your cost and risk.
+
+Yours faithfully,
+[● your name]
+[● signature]
+
+Enclosures (copies): [● agreement / receipts / transaction record / messages]
