@@ -1,0 +1,5 @@
+.env
+data/index/
+__pycache__/
+*.pyc
+outputs/live_trace.jsonl
