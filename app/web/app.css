@@ -144,7 +144,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .log > * { max-width: 760px; margin-left: auto; margin-right: auto; }
 
 /* empty state */
-.empty { padding-top: 6vh; }
+.empty { padding-top: 3vh; }
 .empty h2 { font-size: 40px; line-height: 1.1; margin: 0 0 var(--s3); font-weight: 700; letter-spacing: -0.02em; }
 .empty p { max-width: 58ch; color: var(--ink-soft); margin: 0 0 var(--s5); font-size: 18px; }
 .examples { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s3); }
@@ -367,3 +367,65 @@ dialog.first-run .btn-new { width: auto; padding: 10px var(--s5); }
 
 .fb-aside { margin-top: var(--s4); padding-top: var(--s2); border-top: 1px dashed rgba(59, 48, 22, 0.3); opacity: 0.85; }
 .fb-aside .fb-h { margin-top: 0; }
+
+/* ---------- what Haq can and can't do ---------- */
+.guide-btn { display: inline-flex; align-items: center; gap: 6px; border-color: var(--indigo); color: var(--indigo); font-weight: 600; }
+.guide-btn .q {
+  display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 50%;
+  background: var(--indigo); color: var(--white); font-size: 12px; font-weight: 700;
+}
+.guide-btn:hover { background: var(--indigo-wash); }
+.guide-btn .lbl-short { display: none; }
+
+/* tier colours: indigo = full help, khaki = pointer to an office, red tape = not covered */
+.tier-full { --tier: var(--indigo); }
+.tier-ref { --tier: var(--khaki-deep); }
+.tier-no { --tier: var(--tape); }
+
+.cover-mini { list-style: none; margin: 0 0 var(--s2); padding: 0; display: grid; gap: var(--s2); max-width: 680px; }
+.cover-mini li {
+  display: grid; grid-template-columns: 150px 1fr; gap: var(--s3); align-items: baseline;
+  background: var(--white); border: 1px solid var(--line); border-left: 4px solid var(--tier);
+  border-radius: 8px; padding: var(--s2) var(--s3); font-size: 15px; line-height: 1.45;
+}
+.cover-mini b { color: var(--tier); font-weight: 700; }
+.tier-ref b { color: var(--khaki-ink); }
+.cover-mini span { color: var(--ink-soft); }
+.see-all { display: inline-block; margin: 0 0 var(--s5); font-size: 15px; font-weight: 600; color: var(--indigo); }
+.empty .try { font-size: 14px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-faint); margin: 0 0 var(--s2); font-weight: 600; }
+
+dialog.guide {
+  border: 0; border-radius: 14px; padding: 0; max-width: 760px; width: calc(100% - 24px); max-height: calc(100dvh - 32px);
+  color: var(--ink); background: var(--paper); box-shadow: 0 30px 80px -30px rgba(29, 35, 49, 0.55);
+  border-top: 8px solid var(--indigo); display: none; flex-direction: column;
+}
+dialog.guide[open] { display: flex; }
+dialog.guide::backdrop { background: rgba(29, 35, 49, 0.5); }
+.guide-scroll { overflow-y: auto; padding: var(--s6) var(--s6) var(--s4); }
+.guide-scroll h2 { margin: 0 0 var(--s3); font-size: 26px; line-height: 1.2; }
+.guide-intro { margin: 0 0 var(--s5); font-size: 17px; color: var(--ink-soft); }
+.tiers { display: grid; gap: var(--s3); margin-bottom: var(--s5); }
+.tier { border: 1px solid var(--line); border-left: 5px solid var(--tier); border-radius: 10px; background: var(--white); padding: var(--s3) var(--s4); }
+.tier h3 { margin: 0 0 var(--s2); font-size: 17px; color: var(--tier); }
+.tier-ref h3 { color: var(--khaki-ink); }
+.tier ul { margin: 0 0 var(--s2); padding-left: 1.2em; font-size: 15.5px; }
+.tier li { margin-bottom: 2px; }
+.tier p { margin: 0; font-size: 14.5px; color: var(--ink-soft); }
+.guide-sec { margin-bottom: var(--s4); }
+.guide-sec h3 { margin: 0 0 var(--s2); font-size: 17px; }
+.guide-sec ol, .guide-sec ul { margin: 0; padding-left: 1.3em; font-size: 15.5px; }
+.guide-sec li { margin-bottom: 4px; }
+.guide-sec p { margin: 0; font-size: 15.5px; }
+.guide-sec.emerg { background: var(--tape-wash); border-radius: 10px; padding: var(--s3) var(--s4); }
+.guide-sec.emerg h3 { color: var(--tape); }
+.guide-foot { padding: var(--s3) var(--s6) var(--s5); border-top: 1px solid var(--line); background: var(--paper); border-radius: 0 0 14px 14px; }
+.guide-foot .btn-new { width: auto; padding: 10px var(--s5); margin: 0; }
+
+@media (max-width: 760px) {
+  .guide-btn .lbl-long { display: none; }
+  .guide-btn .lbl-short { display: inline; }
+  .cover-mini li { grid-template-columns: 1fr; gap: 2px; }
+  .guide-scroll { padding: var(--s5) var(--s4) var(--s3); }
+  .guide-foot { padding: var(--s3) var(--s4) var(--s4); }
+  .guide-foot .btn-new { width: 100%; }
+}

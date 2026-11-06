@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Haq: free legal help for everyday problems</title>
-<meta name="description" content="Describe a rental deposit, unpaid salary or refund problem in your own language. Get answers grounded in Indian law, with sources, and a ready-to-send notice.">
+<meta name="description" content="Free help for everyday money problems in India: rental deposits, unpaid salary and refunds explained with the law, a notice you can send, and the right official office for other problems. Legal information, not legal advice.">
 <meta name="theme-color" content="#2E3A8C">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="/static/icons/icon-192.png">
@@ -70,6 +70,7 @@
         <p class="scope" data-i18n="scope">Rental deposits, unpaid salary and refunds. Uttar Pradesh in depth, central law elsewhere.</p>
       </div>
       <div class="head-actions">
+        <button class="icon-btn guide-btn" id="btnGuide" type="button" aria-haspopup="dialog"><span class="q" aria-hidden="true">?</span><span class="lbl-long" data-i18n="guideBtn">What I can help with</span><span class="lbl-short" data-i18n="guideBtnShort">Help</span></button>
         <button class="icon-btn" id="btnTxt" type="button" data-i18n="saveText">Save as text</button>
         <button class="icon-btn quiet" id="btnDelChat" type="button" data-i18n="deleteChat">Delete this chat</button>
         <button class="icon-btn only-narrow" id="btnFile" type="button" aria-controls="casefile" aria-expanded="false"><span data-i18n="caseFile">Case file</span> <span class="count" id="factCount">0</span></button>
@@ -104,20 +105,24 @@
   <div class="scrim" id="scrim" hidden></div>
 </div>
 
-<dialog class="first-run" id="firstRun" aria-labelledby="frTitle">
-  <h2 id="frTitle" data-i18n="firstRunTitle">Before you start</h2>
-  <p data-i18n="firstRunBody"></p>
-  <form method="dialog"><button class="btn-new" value="ok" data-i18n="firstRunOk">I understand</button></form>
+<dialog class="guide" id="guide" aria-labelledby="guideTitle">
+  <div class="guide-scroll" id="guideBody"></div>
+  <form method="dialog" class="guide-foot"><button class="btn-new" value="ok" id="guideOk">I understand</button></form>
 </dialog>
 
 <template id="tplEmpty">
   <div class="empty">
     <h2 data-i18n="emptyH">What happened?</h2>
     <p data-i18n="emptyP"></p>
+    <ul class="cover-mini" id="coverMini"></ul>
+    <button type="button" class="link see-all" id="btnSeeAll" data-i18n="seeAll">See everything Haq can and can't do</button>
+    <h3 class="try" data-i18n="tryExample">Try an example</h3>
     <div class="examples">
       <button type="button" class="example" data-text="I left my flat in Lucknow two months ago and the landlord won't return my ₹30,000 deposit.">I left my flat in Lucknow two months ago and the landlord won't return my ₹30,000 deposit.</button>
       <button type="button" class="example" data-text="मालिक ने दो महीने की तनख्वाह नहीं दी, मैंने नौकरी छोड़ दी है। कानपुर, 40000 रुपये।">मालिक ने दो महीने की तनख्वाह नहीं दी, मैंने नौकरी छोड़ दी है। कानपुर, 40000 रुपये।</button>
       <button type="button" class="example" data-text="An online store delivered a broken phone and refuses to refund my ₹15,000.">An online store delivered a broken phone and refuses to refund my ₹15,000.</button>
+      <button type="button" class="example" data-text="Someone tricked me on a UPI call and ₹4,800 left my account today. Where do I report it?">Someone tricked me on a UPI call and ₹4,800 left my account today. Where do I report it?</button>
+      <button type="button" class="example" data-text="मेरी ट्रेन कैंसिल हुई और टिकट का रिफ़ंड अब तक नहीं मिला। शिकायत कहाँ करूँ?">मेरी ट्रेन कैंसिल हुई और टिकट का रिफ़ंड अब तक नहीं मिला। शिकायत कहाँ करूँ?</button>
       <button type="button" class="example" data-text="నా ఇంటి యజమాని నా డిపాజిట్ తిరిగి ఇవ్వడం లేదు. నేను ఏం చేయాలి?">నా ఇంటి యజమాని నా డిపాజిట్ తిరిగి ఇవ్వడం లేదు. నేను ఏం చేయాలి?</button>
     </div>
   </div>

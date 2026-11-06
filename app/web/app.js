@@ -10,7 +10,7 @@
   const $ = (s, el = document) => el.querySelector(s);
   const KEY = "haq.chats.v1";
   const SKEY = "haq.settings.v1";
-  const FKEY = "haq.firstRunSeen.v1";
+  const FKEY = "haq.guideSeen.v2";   // v2: the full "what Haq can and can't do" guide
   const I18N = window.HAQ_I18N || { en: {} };
   const HIDE_FACTS = new Set(["minor_stated", "category", "months_since_event", "language", "conflicts", "previous_cases", "summary", "side_topics"]);
 
@@ -213,7 +213,11 @@
       log.innerHTML = "";
       const tpl = $("#tplEmpty").content.cloneNode(true);
       applyI18n(tpl);
+      const cm = tpl.querySelector("#coverMini");
+      cm.innerHTML = (t("coverMini") || []).map((c) =>
+        `<li class="tier-${esc(c.k)}"><b>${esc(c.h)}</b><span>${esc(c.p)}</span></li>`).join("");
       log.appendChild(tpl);
+      $("#btnSeeAll").addEventListener("click", () => openGuide(false));
       return;
     }
     log.innerHTML = current.messages.map((m) => m.role === "user"
@@ -289,6 +293,37 @@
     if (!warn) return;
     showNotice.tm = setTimeout(() => { delete mn.dataset.sticky; render(); }, 9000);
   }
+
+  // ---------------------------------------------------------------- guide: what Haq can and can't do
+  function renderGuide() {
+    const g = t("guide");
+    const list = (a, tag = "ul") => `<${tag}>${(a || []).map((x) => `<li>${esc(x)}</li>`).join("")}</${tag}>`;
+    $("#guideBody").innerHTML = `
+      <h2 id="guideTitle">${esc(g.title)}</h2>
+      <p class="guide-intro">${esc(g.intro)}</p>
+      <div class="tiers">${(g.tiers || []).map((x) => `
+        <section class="tier tier-${esc(x.k)}"><h3>${esc(x.h)}</h3>${list(x.items)}<p>${esc(x.note)}</p></section>`).join("")}
+      </div>
+      <section class="guide-sec"><h3>${esc(g.useH)}</h3>${list(g.use, "ol")}</section>
+      <section class="guide-sec"><h3>${esc(g.notH)}</h3>${list(g.not)}</section>
+      <section class="guide-sec emerg"><h3>${esc(g.emergH)}</h3><p>${esc(g.emerg)}</p></section>
+      <section class="guide-sec"><h3>${esc(g.privH)}</h3><p>${esc(g.priv)}</p></section>`;
+  }
+  function openGuide(firstRun) {
+    const d = $("#guide");
+    if (!d || !d.showModal) return;
+    closeDrawers();
+    renderGuide();
+    $("#guideOk").textContent = t(firstRun ? "guide.ok" : "guide.close");
+    d.dataset.firstRun = firstRun ? "1" : "";
+    d.showModal();
+    $("#guideBody").scrollTop = 0;
+  }
+  $("#guide").addEventListener("close", () => {
+    if ($("#guide").dataset.firstRun) { try { localStorage.setItem(FKEY, "1"); } catch { /* ignore */ } }
+    $("#txt").focus();
+  });
+  $("#btnGuide").addEventListener("click", () => openGuide(false));
 
   // ---------------------------------------------------------------- talking to the server
   function setStage(s) { stage = s; const el = $("#step"); if (el) el.textContent = t("steps." + s) + "…"; }
@@ -537,10 +572,6 @@
     chats = chats.filter((c) => c.messages.length);
     current = chats.length ? chats[0] : null;
     if (!current) newChat(); else { seenFacts[current.id] = new Set(Object.keys((current.state || {}).case_file || {})); render(); }
-    const fr = $("#firstRun");
-    if (!localStorage.getItem(FKEY) && fr && fr.showModal) {
-      applyI18n(fr); fr.showModal();
-      fr.addEventListener("close", () => { try { localStorage.setItem(FKEY, "1"); } catch { /* ignore */ } $("#txt").focus(); });
-    }
+    if (!localStorage.getItem(FKEY)) openGuide(true);
   })();
 })();

@@ -1,7 +1,7 @@
 /* Haq service worker: makes the app installable and opens instantly on repeat visits.
    It caches ONLY the app shell (page, styles, script, icons). Legal answers, voice and every
    /api call always go to the network, so nobody is shown a stale or cached legal answer. */
-const SHELL = "haq-shell-v3";
+const SHELL = "haq-shell-v4";
 const FILES = ["/", "/static/app.css", "/static/app.js", "/static/i18n.js", "/manifest.webmanifest",
   "/static/icons/icon-192.png", "/static/icons/icon-512.png"];
 
