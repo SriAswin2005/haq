@@ -93,9 +93,15 @@ def referral_metrics(items):
             "wrong_bodies": sum(len(o.get("wrong", [])) for o in observations),
             "shown_cases": sum(bool(o.get("shown")) for o in observations),
             "correct_cases": sum(bool(o.get("correct")) for o in observations),
-            "safe_correct_cases": sum(bool(o.get("correct")) and not o.get("wrong") and not o.get("statute_patterns") for o in observations),
+            "safe_correct_cases": sum(bool(o.get("correct")) and i["checks"]["check_referral"].status == "pass" for i, o in zip(eligible, observations)),
+            "cited_correct_bodies": sum(len(o.get("cited_correct", [])) for o in observations),
+            "cited_correct_cases": sum(bool(o.get("cited_correct")) for o in observations),
+            "answer_missing_cited_referral_cases": sum(o.get("answer_requires_cited_referral", False) and not o.get("cited_correct") for o in observations),
             "wrong_body_cases": sum(bool(o.get("wrong")) for o in observations),
             "statute_cases": sum(bool(o.get("statute_patterns")) for o in observations),
+            "forbidden_statute_cases": sum(o.get("statutes_forbidden", False) and bool(o.get("statute_patterns")) for o in observations),
+            "ungrounded_statute_cases": sum(bool(o.get("ungrounded_statutes")) for o in observations),
+            "grounded_answer_statute_cases": sum(o.get("answer_requires_cited_referral", False) and bool(o.get("statute_patterns")) and not o.get("ungrounded_statutes") and not o.get("statutes_forbidden") for o in observations),
             "fallback_cases": sum(not o.get("shown") for o in observations),
             "referral_check_passes": sum(i["checks"]["check_referral"].status == "pass" for i in eligible)}
 
@@ -140,7 +146,8 @@ def metrics(items):
         values += [
             ("Referral precision (correct bodies / shown bodies)", rate(referrals["correct_bodies"], referrals["shown_bodies"])),
             ("Referral recall (cases with correct / expected cases)", rate(referrals["correct_cases"], referrals["expected_cases"])),
-            ("Safe correct-referral coverage (no wrong body or statute)", rate(referrals["safe_correct_cases"], referrals["expected_cases"])),
+            ("Cited referral recall (cases naming and citing expected body)", rate(referrals["cited_correct_cases"], referrals["expected_cases"])),
+            ("Safe correct-referral coverage (scope-aware grounding)", rate(referrals["safe_correct_cases"], referrals["expected_cases"])),
             ("Referral check pass (fallback allowed)", rate(referrals["referral_check_passes"], referrals["expected_cases"])),
         ]
     return values

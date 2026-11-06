@@ -148,7 +148,8 @@
         "model": "gemma-4-31b-it",
         "rpm": 30,
         "tpm": 16000,
-        "rpd": 14000
+        "rpd": 14000,
+        "timeout_s": 25
       },
       {
         "provider": "gemini",
@@ -166,15 +167,15 @@
       }
     ]
   },
-  "started_at": "2026-11-05T21:56:33.536068+00:00",
+  "started_at": "2026-11-06T15:11:59.387305+00:00",
   "turns": [
     {
       "input": "Kanpur UP. An income tax notice arrived today saying I omitted income. Tell me the tax penalty and draft my statutory reply with the exact sections.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T21:56:39.520778+00:00",
+      "started_at": "2026-11-06T15:12:05.388522+00:00",
       "result": {
-        "reply_text": "What I understood: what happened: Received an income tax notice regarding omitted income.; state: UP\n\nThis needs a real lawyer or free legal aid. I can still share verified general information where I have it, but I cannot handle this safely on my own.\n\nWhy: this topic is outside what I can safely help with\n\nWhat you can do right now: a free legal aid office can explain this law to you and tell you whether it applies to your situation.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (Source: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
+        "reply_text": "What I understood: what happened: Received an income tax notice regarding omitted income.; counterparty type: Income Tax Department\n\nI don't cover this topic with verified law yet, so I won't guess. This doesn't mean you are in trouble: the official channels and free legal aid below can guide you.\n\nWhat you can do right now: a free legal aid office can explain this law to you and tell you whether it applies to your situation.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (Source: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "out_of_scope",
         "action": "escalate",
@@ -202,7 +203,8 @@
         ],
         "needs_lawyer": true,
         "escalation_reasons": [
-          "out_of_scope_topic"
+          "out_of_scope_topic",
+          "llm:tax_matter"
         ],
         "verifier": {
           "status": "pass",
@@ -210,7 +212,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "a13614f86495",
+          "session": "31a21ca24ca5",
           "input_mode": "text",
           "user_text": "Kanpur UP. An income tax notice arrived today saying I omitted income. Tell me the tax penalty and draft my statutory reply with the exact sections.",
           "mode": "advice",
@@ -220,23 +222,35 @@
             "state_or_city": "UP",
             "case_file_update": {
               "what_happened": "Received an income tax notice regarding omitted income.",
-              "state": "UP"
+              "counterparty_type": "Income Tax Department"
             },
             "missing_facts": [],
-            "escalation_flags": [],
-            "english_retrieval_query": "income tax notice response procedure"
+            "escalation_flags": [
+              "tax_matter"
+            ],
+            "english_retrieval_query": "income tax notice for omitted income penalty and reply procedure",
+            "intent": [
+              "explain_rights",
+              "draft_document"
+            ],
+            "question": "What is the penalty for omitted income under tax law, and how should I draft a statutory reply to this notice?",
+            "new_topic": true,
+            "summary": "आपको आयकर विभाग से एक नोटिस मिला है जिसमें आय छिपाने का आरोप लगाया गया है और आप इसका जवाब देना चाहते हैं।"
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
-          "timings_s": 9.3,
+          "summary_rejected": "आपको आयकर विभाग से एक नोटिस मिला है जिसमें आय छिपाने का आरोप लगाया गया है और आप इसका जवाब देना चाहते हैं।",
+          "escalation_level": "out_of_scope",
+          "timings_s": 5.478,
           "llm": {
-            "calls": 2,
+            "calls": 3,
             "retries": 0,
-            "latency_s": 9.26,
+            "latency_s": 5.44,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001"
             ],
             "fallbacks": []
@@ -270,7 +284,8 @@
             "issues": []
           },
           "escalation_reasons": [
-            "out_of_scope_topic"
+            "out_of_scope_topic",
+            "llm:tax_matter"
           ],
           "models": {
             "router": [
@@ -374,7 +389,8 @@
                 "model": "gemma-4-31b-it",
                 "rpm": 30,
                 "tpm": 16000,
-                "rpd": 14000
+                "rpd": 14000,
+                "timeout_s": 25
               },
               {
                 "provider": "gemini",
@@ -397,12 +413,13 @@
       },
       "model_names_used": [
         "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 9.30451649997849,
-      "finished_at": "2026-11-05T21:56:48.820431+00:00"
+      "latency_s": 5.480652600002941,
+      "finished_at": "2026-11-06T15:12:10.868753+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T21:56:48.820431+00:00"
+  "finished_at": "2026-11-06T15:12:10.868753+00:00"
 }

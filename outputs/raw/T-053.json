@@ -1,0 +1,425 @@
+{
+  "schema_version": 1,
+  "case_id": "T-053",
+  "case": {
+    "id": "T-053",
+    "group": "L_referrals",
+    "tags": [
+      "round4",
+      "directory",
+      "loan recovery harassment"
+    ],
+    "category_expected": "out_of_scope",
+    "language": "en-IN",
+    "input_mode": "text",
+    "turns": [
+      "I live in Lucknow. A loan recovery agent from an NBFC repeatedly calls and sends abusive messages to my family. There is no immediate physical danger. Which official complaint body may handle this harassment?"
+    ],
+    "expected_action": "escalate",
+    "expect_needs_lawyer": true,
+    "expected_topics": [
+      "loan recovery harassment",
+      "official referral"
+    ],
+    "must_include_any": [],
+    "must_not_include": [],
+    "expected_chunk_ids": [
+      "COM-DIR-RBI",
+      "COM-DIR-UPPOLICE"
+    ],
+    "expected_referral_any": [
+      "COM-DIR-RBI",
+      "COM-DIR-UPPOLICE"
+    ],
+    "notes": "An answer must name and cite an expected body. Wrong bodies always hard fail. Statute/section patterns hard fail in escalate/out_of_scope replies; in an answer they must be grounded in cited chunks. Legal-aid-only escalation is a safe fallback and a recall miss. Targets remain agent-mapped, pending human confirmation.",
+    "expected_law_verified": false,
+    "calibration_label": "exclude",
+    "jurisdictions_expected": [
+      "central",
+      "UP"
+    ],
+    "retrieval_expectation_kind": "safe_referral"
+  },
+  "repeat": 1,
+  "mock": false,
+  "backend": "app.pipeline",
+  "stage": "real",
+  "configured_models": {
+    "router": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "main": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash",
+        "rpm": 5,
+        "tpm": 250000,
+        "rpd": 19
+      }
+    ],
+    "translate": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "judge": [
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000,
+        "timeout_s": 25
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      }
+    ]
+  },
+  "started_at": "2026-11-06T15:23:45.474035+00:00",
+  "turns": [
+    {
+      "input": "I live in Lucknow. A loan recovery agent from an NBFC repeatedly calls and sends abusive messages to my family. There is no immediate physical danger. Which official complaint body may handle this harassment?",
+      "input_mode": "text",
+      "lang_hint": "en-IN",
+      "started_at": "2026-11-06T15:23:51.460463+00:00",
+      "result": {
+        "reply_text": "What I understood: Lucknow mein ek NBFC ka recovery agent aapke parivar ko baar-baar call karke aur abusive messages bhej kar pareshan kar raha hai.\n\nThis needs a real lawyer or free legal aid. I can still share verified general information where I have it, but I cannot handle this safely on my own.\n\nWhy: your message mentions something that needs a lawyer (such as police, court, violence, threats, eviction or family matters); this involves a matter I cannot safely handle here (for example criminal law, child protection, police or family matters); this topic is outside what I can safely help with\n\nWhat you can do right now: a free legal aid office can explain this law to you and tell you whether it applies to your situation.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (Source: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
+        "reply_lang": "en-IN",
+        "category": "out_of_scope",
+        "action": "escalate",
+        "citations": [
+          "COM-NALSA-H15100",
+          "COM-UPSLSA-H1800"
+        ],
+        "retrieved": [
+          {
+            "id": "COM-NALSA-H15100",
+            "score": 0.7801640033721924
+          },
+          {
+            "id": "COM-UPSLSA-H1800",
+            "score": 0.7588682770729065
+          },
+          {
+            "id": "COM-LSAA1987-S13",
+            "score": 0.7287323474884033
+          },
+          {
+            "id": "COM-LSAA1987-S12",
+            "score": 0.7265352010726929
+          }
+        ],
+        "needs_lawyer": true,
+        "escalation_reasons": [
+          "keyword:harassment",
+          "llm:harassment",
+          "out_of_scope_topic"
+        ],
+        "verifier": {
+          "status": "pass",
+          "issues": []
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "fd68b540a63c",
+          "input_mode": "text",
+          "user_text": "I live in Lucknow. A loan recovery agent from an NBFC repeatedly calls and sends abusive messages to my family. There is no immediate physical danger. Which official complaint body may handle this harassment?",
+          "mode": "advice",
+          "router": {
+            "category": "out_of_scope",
+            "language": "en-IN",
+            "state_or_city": "UP",
+            "case_file_update": {
+              "what_happened": "A loan recovery agent from an NBFC is making repeated calls and sending abusive messages to the user's family.",
+              "counterparty_type": "NBFC",
+              "state": "UP"
+            },
+            "missing_facts": [
+              "name of the NBFC",
+              "loan account number"
+            ],
+            "escalation_flags": [
+              "harassment"
+            ],
+            "english_retrieval_query": "complaint against NBFC recovery agent harassment",
+            "intent": [
+              "where_to_complain"
+            ],
+            "question": "Which official body can I complain to regarding harassment by an NBFC loan recovery agent?",
+            "new_topic": true,
+            "summary": "Lucknow mein ek NBFC ka recovery agent aapke parivar ko baar-baar call karke aur abusive messages bhej kar pareshan kar raha hai."
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "escalation_level": "danger",
+          "timings_s": 3.816,
+          "llm": {
+            "calls": 2,
+            "retries": 0,
+            "latency_s": 3.79,
+            "models": [
+              "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001"
+            ],
+            "fallbacks": []
+          },
+          "action": "escalate",
+          "category": "out_of_scope",
+          "retrieved": [
+            {
+              "id": "COM-NALSA-H15100",
+              "score": 0.7801640033721924
+            },
+            {
+              "id": "COM-UPSLSA-H1800",
+              "score": 0.7588682770729065
+            },
+            {
+              "id": "COM-LSAA1987-S13",
+              "score": 0.7287323474884033
+            },
+            {
+              "id": "COM-LSAA1987-S12",
+              "score": 0.7265352010726929
+            }
+          ],
+          "citations": [
+            "COM-NALSA-H15100",
+            "COM-UPSLSA-H1800"
+          ],
+          "verifier": {
+            "status": "pass",
+            "issues": []
+          },
+          "escalation_reasons": [
+            "keyword:harassment",
+            "llm:harassment",
+            "out_of_scope_topic"
+          ],
+          "models": {
+            "router": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "main": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash",
+                "rpm": 5,
+                "tpm": 250000,
+                "rpd": 19
+              }
+            ],
+            "translate": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "judge": [
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000,
+                "timeout_s": 25
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              }
+            ]
+          },
+          "mock": false
+        }
+      },
+      "model_names_used": [
+        "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001"
+      ],
+      "latency_s": 3.8195871000061743,
+      "finished_at": "2026-11-06T15:23:55.280059+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-06T15:23:55.280059+00:00"
+}

@@ -142,3 +142,23 @@ python -m unittest tests.test_checks tests.test_harness tests.test_round3_report
 ```
 
 The report generator replaces only its marked round-four section in BEFORE_AFTER.md, preserving old tables and any unrelated surrounding content. It checks frozen input hashes, before-archive hashes, rescore provenance, captured raw identity and credential absence. Evidence is in referrals.md, referrals.csv, referral_metrics.json and checks_revision.json. Mock findings are not used for these real metrics.
+
+## Revised full 55-case evaluation
+
+The user's service-referral correction is recorded in round4_expectations_revision.json. Seven consumer-service cases accept consumer/answer/false or out_of_scope/escalate/true as coherent tuples. All original 40 case dictionaries, referral allowlists and input messages are unchanged. Answers require a visible expected body plus a citation for it; retrieved-but-uncited evidence is insufficient. Wrong bodies always hard fail. Statutes are forbidden in escalation/out-of-scope output, but are allowed in answers when grounded in cited chunks.
+
+```powershell
+python tests/run_frozen_eval.py --sleep 6
+python tests/full55_reports.py --run outputs/runs/<new-full-real-run>
+```
+
+The full run publishes all 55 raw cases, summary and CSV. full55_reports.py compares unchanged T-001..T-040 against the round-three 21/40 archive, reports referral name and citation coverage for T-041..T-055, and writes all-55 plus matched-40 p50/p95 latency to BEFORE_AFTER.md. It verifies the baseline's original per-case outcomes, frozen hashes and raw publication identity. Earlier focused referral reports remain historical evidence for their older expectations; they are not blended into the new full run.
+
+Current full archive: outputs/runs/real-20261106T150609.600967Z (37/55 strict; matched 40: 26/40 versus 21/40). The original scoring (36/55) and checker are preserved because the exact full English IRDAI alias needed one correction. To reproduce the zero-API-call rescore and reports:
+
+```powershell
+python tests/rescore_full55.py --run outputs/runs/real-20261106T150609.600967Z
+python tests/full55_reports.py --run outputs/runs/real-20261106T150609.600967Z
+```
+
+The alias revision changes only T-043. No input, body allowlist or first-40 outcome changes. checks_revision.json records every referral observation before/after; audit.json records frozen/raw/report identity and credential-value absence. Earlier focused referral numbers use older expectations and should not be compared as if only the app changed.

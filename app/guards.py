@@ -143,14 +143,16 @@ def case_law_request(text: str) -> bool:
 
 # ------------------------------------------------------------------ 5. reply script
 def script_ok(text: str, lang: str, min_share: float = 0.5) -> bool:
-    """For Hindi replies, the body must be mostly Devanagari (not English / Roman Hindi)."""
-    if not lang.lower().startswith("hi"):
-        return True
+    """Hindi replies must be mostly Devanagari (not English / Roman Hindi); English replies mostly Latin."""
     dev = sum(1 for c in text if "ऀ" <= c <= "ॿ")
     lat = sum(1 for c in text if c.isascii() and c.isalpha())
     if dev + lat < 20:
         return True
-    return dev / (dev + lat) >= min_share
+    if lang.lower().startswith("hi"):
+        return dev / (dev + lat) >= min_share
+    if lang.lower().startswith("en"):
+        return lat / (dev + lat) >= min_share
+    return True
 
 
 # ------------------------------------------------------------------ 6. source caution (UI panel)

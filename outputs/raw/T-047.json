@@ -1,0 +1,494 @@
+{
+  "schema_version": 1,
+  "case_id": "T-047",
+  "case": {
+    "id": "T-047",
+    "group": "L_referrals",
+    "tags": [
+      "round4",
+      "directory",
+      "flight refund"
+    ],
+    "category_expected": "consumer",
+    "language": "en-IN",
+    "input_mode": "text",
+    "turns": [
+      "My airline cancelled my flight and has not returned the ticket payment despite repeated requests. Which official aviation grievance service may handle the refund complaint?"
+    ],
+    "expected_action": "answer",
+    "expect_needs_lawyer": false,
+    "expected_topics": [
+      "flight refund",
+      "official referral"
+    ],
+    "must_include_any": [],
+    "must_not_include": [],
+    "expected_chunk_ids": [
+      "COM-DIR-AIRSEWA"
+    ],
+    "expected_referral_any": [
+      "COM-DIR-AIRSEWA"
+    ],
+    "notes": "An answer must name and cite an expected body. Wrong bodies always hard fail. Statute/section patterns hard fail in escalate/out_of_scope replies; in an answer they must be grounded in cited chunks. Legal-aid-only escalation is a safe fallback and a recall miss. Targets remain agent-mapped, pending human confirmation.",
+    "expected_law_verified": false,
+    "calibration_label": "exclude",
+    "jurisdictions_expected": [
+      "central",
+      "UP"
+    ],
+    "retrieval_expectation_kind": "safe_referral",
+    "expected_outcomes": [
+      {
+        "category": "consumer",
+        "action": "answer",
+        "needs_lawyer": false
+      },
+      {
+        "category": "out_of_scope",
+        "action": "escalate",
+        "needs_lawyer": true
+      }
+    ]
+  },
+  "repeat": 1,
+  "mock": false,
+  "backend": "app.pipeline",
+  "stage": "real",
+  "configured_models": {
+    "router": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "main": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash",
+        "rpm": 5,
+        "tpm": 250000,
+        "rpd": 19
+      }
+    ],
+    "translate": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "judge": [
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000,
+        "timeout_s": 25
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      }
+    ]
+  },
+  "started_at": "2026-11-06T15:22:27.356430+00:00",
+  "turns": [
+    {
+      "input": "My airline cancelled my flight and has not returned the ticket payment despite repeated requests. Which official aviation grievance service may handle the refund complaint?",
+      "input_mode": "text",
+      "lang_hint": "en-IN",
+      "started_at": "2026-11-06T15:22:33.357245+00:00",
+      "result": {
+        "reply_text": "आप अपनी शिकायत एयर सेवा पोर्टल (https://airseva.gov.in/) या एयर सेवा मोबाइल ऐप के माध्यम से दर्ज और ट्रैक कर सकते हैं।\n\nअपनी बुकिंग की रसीद और एयरलाइन के साथ हुई बातचीत के स्क्रीनशॉट तैयार रखें।\n\nपहले अपनी शिकायत एयर सेवा पोर्टल पर दर्ज करें। यदि वहां समाधान नहीं होता है, तो आप राष्ट्रीय उपभोक्ता हेल्पलाइन (NCH) से संपर्क कर सकते हैं या उपभोक्ता आयोग जा सकते हैं।\n\nएयर सेवा पोर्टल नागरिक उड्डयन मंत्रालय, भारत सरकार की एक पहल है, जो विमान यात्रियों को एयरलाइंस से जुड़ी शिकायतों के लिए एक मंच प्रदान करता है।\n\nआप चाहें तो राष्ट्रीय उपभोक्ता हेल्पलाइन (NCH) के टोल-फ्री नंबर 1915 पर कॉल करके भी मदद ले सकते हैं।\n\nक्या आप अपने टिकट का कुल मूल्य (रुपये में) बता सकते हैं?\n\nSource: Ministry of Civil Aviation - AirSewa Portal, P AIRSEWA\nSource: Department of Consumer Affairs - National Consumer Helpline (NCH), H NCH\nSource: National Consumer Helpline Grievance Redressal Procedure, procedure 1\n\nWhat I could not verify:\n- amount_inr\n- purchase_date\n\nThis is legal information, not legal advice.",
+        "reply_lang": "en-IN",
+        "category": "consumer",
+        "action": "answer",
+        "citations": [
+          "COM-DIR-AIRSEWA",
+          "COM-DIR-NCH",
+          "CONS-NCH-P1"
+        ],
+        "retrieved": [
+          {
+            "id": "COM-DIR-AIRSEWA",
+            "score": 0.7576828002929688
+          },
+          {
+            "id": "CONS-NCH-P1",
+            "score": 0.6997783780097961
+          },
+          {
+            "id": "COM-DIR-NCH",
+            "score": 0.6946263313293457
+          },
+          {
+            "id": "COM-NCH-H1915",
+            "score": 0.691876232624054
+          },
+          {
+            "id": "CONS-ECOM2020-R4",
+            "score": 0.686820924282074
+          },
+          {
+            "id": "COM-DIR-RBI",
+            "score": 0.6844492554664612
+          },
+          {
+            "id": "CONS-CPA2019-S34",
+            "score": 0.7613462805747986
+          },
+          {
+            "id": "CONS-PECRULES2021-R3",
+            "score": 0.7612271308898926
+          }
+        ],
+        "needs_lawyer": false,
+        "escalation_reasons": [],
+        "verifier": {
+          "status": "pass",
+          "issues": []
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "cc7de0bd7ddd",
+          "input_mode": "text",
+          "user_text": "My airline cancelled my flight and has not returned the ticket payment despite repeated requests. Which official aviation grievance service may handle the refund complaint?",
+          "mode": "advice",
+          "router": {
+            "category": "consumer",
+            "language": "en-IN",
+            "state_or_city": null,
+            "case_file_update": {
+              "product_or_service": "flight ticket",
+              "already_tried": [
+                "repeated requests"
+              ],
+              "resolution_wanted": "refund",
+              "counterparty_type": "airline"
+            },
+            "missing_facts": [
+              "amount_inr",
+              "purchase_date"
+            ],
+            "escalation_flags": [],
+            "english_retrieval_query": "how to file a complaint against airline for flight cancellation refund in India",
+            "intent": [
+              "where_to_complain"
+            ],
+            "question": "Which official aviation grievance service should I contact to get a refund for my cancelled flight?",
+            "new_topic": true,
+            "summary": "Your flight was cancelled by the airline and they have not refunded your ticket payment despite your requests."
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "retrieval": {
+            "query": "how to file a complaint against airline for flight cancellation refund in India",
+            "jurisdictions": [
+              "central"
+            ],
+            "top_score": 0.7576828002929688,
+            "min_score": 0.66,
+            "old_law": []
+          },
+          "intent": {
+            "intents": [
+              "where_to_complain"
+            ],
+            "question": "Which official aviation grievance service should I contact to get a refund for my cancelled flight?",
+            "want_draft": false,
+            "has_question": true
+          },
+          "judge": "ok",
+          "verifier_history": [
+            []
+          ],
+          "timings_s": 8.301,
+          "llm": {
+            "calls": 5,
+            "retries": 0,
+            "latency_s": 8.21,
+            "models": [
+              "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "embed:gemini:gemini-embedding-001",
+              "main:gemini:gemini-3.5-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite"
+            ],
+            "fallbacks": [
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~517s"
+              }
+            ]
+          },
+          "action": "answer",
+          "category": "consumer",
+          "retrieved": [
+            {
+              "id": "COM-DIR-AIRSEWA",
+              "score": 0.7576828002929688
+            },
+            {
+              "id": "CONS-NCH-P1",
+              "score": 0.6997783780097961
+            },
+            {
+              "id": "COM-DIR-NCH",
+              "score": 0.6946263313293457
+            },
+            {
+              "id": "COM-NCH-H1915",
+              "score": 0.691876232624054
+            },
+            {
+              "id": "CONS-ECOM2020-R4",
+              "score": 0.686820924282074
+            },
+            {
+              "id": "COM-DIR-RBI",
+              "score": 0.6844492554664612
+            },
+            {
+              "id": "CONS-CPA2019-S34",
+              "score": 0.7613462805747986
+            },
+            {
+              "id": "CONS-PECRULES2021-R3",
+              "score": 0.7612271308898926
+            }
+          ],
+          "citations": [
+            "COM-DIR-AIRSEWA",
+            "COM-DIR-NCH",
+            "CONS-NCH-P1"
+          ],
+          "verifier": {
+            "status": "pass",
+            "issues": []
+          },
+          "escalation_reasons": [],
+          "models": {
+            "router": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "main": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash",
+                "rpm": 5,
+                "tpm": 250000,
+                "rpd": 19
+              }
+            ],
+            "translate": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "judge": [
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000,
+                "timeout_s": 25
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              }
+            ]
+          },
+          "mock": false
+        }
+      },
+      "model_names_used": [
+        "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001",
+        "main:gemini:gemini-3.5-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite"
+      ],
+      "latency_s": 8.301990900014061,
+      "finished_at": "2026-11-06T15:22:41.658845+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-06T15:22:41.658845+00:00"
+}

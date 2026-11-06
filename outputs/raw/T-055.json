@@ -1,0 +1,490 @@
+{
+  "schema_version": 1,
+  "case_id": "T-055",
+  "case": {
+    "id": "T-055",
+    "group": "L_referrals",
+    "tags": [
+      "round4",
+      "directory",
+      "food adulteration complaint"
+    ],
+    "category_expected": "consumer",
+    "language": "en-IN",
+    "input_mode": "text",
+    "turns": [
+      "Packaged milk mein milawat ka shak hai aur batch details mere paas hain. Refund nahi, food safety complaint register karni hai. Kaunsa official food-safety complaint service dekhun?"
+    ],
+    "expected_action": "answer",
+    "expect_needs_lawyer": false,
+    "expected_topics": [
+      "food adulteration complaint",
+      "official referral"
+    ],
+    "must_include_any": [],
+    "must_not_include": [],
+    "expected_chunk_ids": [
+      "COM-DIR-FSSAI"
+    ],
+    "expected_referral_any": [
+      "COM-DIR-FSSAI"
+    ],
+    "notes": "An answer must name and cite an expected body. Wrong bodies always hard fail. Statute/section patterns hard fail in escalate/out_of_scope replies; in an answer they must be grounded in cited chunks. Legal-aid-only escalation is a safe fallback and a recall miss. Targets remain agent-mapped, pending human confirmation.",
+    "expected_law_verified": false,
+    "calibration_label": "exclude",
+    "jurisdictions_expected": [
+      "central",
+      "UP"
+    ],
+    "retrieval_expectation_kind": "safe_referral",
+    "expected_outcomes": [
+      {
+        "category": "consumer",
+        "action": "answer",
+        "needs_lawyer": false
+      },
+      {
+        "category": "out_of_scope",
+        "action": "escalate",
+        "needs_lawyer": true
+      }
+    ]
+  },
+  "repeat": 1,
+  "mock": false,
+  "backend": "app.pipeline",
+  "stage": "real",
+  "configured_models": {
+    "router": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "main": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash",
+        "rpm": 5,
+        "tpm": 250000,
+        "rpd": 19
+      }
+    ],
+    "translate": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "judge": [
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000,
+        "timeout_s": 25
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      }
+    ]
+  },
+  "started_at": "2026-11-06T15:24:07.393749+00:00",
+  "turns": [
+    {
+      "input": "Packaged milk mein milawat ka shak hai aur batch details mere paas hain. Refund nahi, food safety complaint register karni hai. Kaunsa official food-safety complaint service dekhun?",
+      "input_mode": "text",
+      "lang_hint": "en-IN",
+      "started_at": "2026-11-06T15:24:13.394703+00:00",
+      "result": {
+        "reply_text": "For complaints regarding adulterated food, you can use the Food Safety Connect portal and mobile application of the Food Safety and Standards Authority of India (FSSAI) at https://foodsafetyconnect.fssai.gov.in/ or call the FSSAI Toll-Free Helpline at 1800-11-2100.\n\nKeep the packaged milk, purchase receipt, and a clear note of the batch details ready as proof.\n\nYou may also seek guidance and grievance redressal through the National Consumer Helpline (NCH) by calling the toll-free numbers 1915 or 1800-11-4000, or via their web portal at https://consumerhelpline.gov.in/.\n\nCould you please tell me the brand name of the milk and the location where you purchased it?\n\nSource: Food Safety and Standards Authority of India - Food Safety Connect, P FSSAI\nSource: Department of Consumer Affairs - National Consumer Helpline (NCH), H NCH\n\nThis is legal information, not legal advice.",
+        "reply_lang": "en-IN",
+        "category": "consumer",
+        "action": "answer",
+        "citations": [
+          "COM-DIR-FSSAI",
+          "COM-DIR-NCH"
+        ],
+        "retrieved": [
+          {
+            "id": "COM-DIR-FSSAI",
+            "score": 0.7819115519523621
+          },
+          {
+            "id": "COM-DIR-NCH",
+            "score": 0.7179852724075317
+          },
+          {
+            "id": "CONS-NCH-P1",
+            "score": 0.7110849618911743
+          },
+          {
+            "id": "COM-NCH-H1915",
+            "score": 0.6994023323059082
+          },
+          {
+            "id": "CONS-CPA2019-S35",
+            "score": 0.6836665272712708
+          },
+          {
+            "id": "COM-DIR-RBI",
+            "score": 0.6725725531578064
+          },
+          {
+            "id": "CONS-CPA2019-S34",
+            "score": 0.7613462805747986
+          },
+          {
+            "id": "CONS-PECRULES2021-R3",
+            "score": 0.7612271308898926
+          }
+        ],
+        "needs_lawyer": false,
+        "escalation_reasons": [],
+        "verifier": {
+          "status": "pass",
+          "issues": []
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "ee01f6b5f27a",
+          "input_mode": "text",
+          "user_text": "Packaged milk mein milawat ka shak hai aur batch details mere paas hain. Refund nahi, food safety complaint register karni hai. Kaunsa official food-safety complaint service dekhun?",
+          "mode": "advice",
+          "router": {
+            "category": "consumer",
+            "language": "hi-IN",
+            "state_or_city": null,
+            "case_file_update": {
+              "product_or_service": "packaged milk",
+              "what_happened": "user suspects adulteration in packaged milk and has batch details",
+              "resolution_wanted": "food safety complaint"
+            },
+            "missing_facts": [
+              "brand name of the milk",
+              "location of purchase"
+            ],
+            "escalation_flags": [],
+            "english_retrieval_query": "how to file food safety complaint for adulterated milk in India",
+            "intent": [
+              "where_to_complain"
+            ],
+            "question": "Which official service should I use to register a food safety complaint regarding adulterated milk?",
+            "new_topic": true,
+            "summary": "आपको पैकेट वाले दूध में मिलावट का शक है और आप इसकी शिकायत फूड सेफ्टी विभाग में करना चाहते हैं।"
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "summary_rejected": "आपको पैकेट वाले दूध में मिलावट का शक है और आप इसकी शिकायत फूड सेफ्टी विभाग में करना चाहते हैं।",
+          "retrieval": {
+            "query": "how to file food safety complaint for adulterated milk in India",
+            "jurisdictions": [
+              "central"
+            ],
+            "top_score": 0.7819115519523621,
+            "min_score": 0.66,
+            "old_law": []
+          },
+          "intent": {
+            "intents": [
+              "where_to_complain"
+            ],
+            "question": "Which official service should I use to register a food safety complaint regarding adulterated milk?",
+            "want_draft": false,
+            "has_question": true
+          },
+          "judge": "ok",
+          "verifier_history": [
+            []
+          ],
+          "timings_s": 9.904,
+          "llm": {
+            "calls": 5,
+            "retries": 0,
+            "latency_s": 9.79,
+            "models": [
+              "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "embed:gemini:gemini-embedding-001",
+              "main:gemini:gemini-3.5-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite"
+            ],
+            "fallbacks": [
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~417s"
+              }
+            ]
+          },
+          "action": "answer",
+          "category": "consumer",
+          "retrieved": [
+            {
+              "id": "COM-DIR-FSSAI",
+              "score": 0.7819115519523621
+            },
+            {
+              "id": "COM-DIR-NCH",
+              "score": 0.7179852724075317
+            },
+            {
+              "id": "CONS-NCH-P1",
+              "score": 0.7110849618911743
+            },
+            {
+              "id": "COM-NCH-H1915",
+              "score": 0.6994023323059082
+            },
+            {
+              "id": "CONS-CPA2019-S35",
+              "score": 0.6836665272712708
+            },
+            {
+              "id": "COM-DIR-RBI",
+              "score": 0.6725725531578064
+            },
+            {
+              "id": "CONS-CPA2019-S34",
+              "score": 0.7613462805747986
+            },
+            {
+              "id": "CONS-PECRULES2021-R3",
+              "score": 0.7612271308898926
+            }
+          ],
+          "citations": [
+            "COM-DIR-FSSAI",
+            "COM-DIR-NCH"
+          ],
+          "verifier": {
+            "status": "pass",
+            "issues": []
+          },
+          "escalation_reasons": [],
+          "models": {
+            "router": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "main": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash",
+                "rpm": 5,
+                "tpm": 250000,
+                "rpd": 19
+              }
+            ],
+            "translate": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "judge": [
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000,
+                "timeout_s": 25
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              }
+            ]
+          },
+          "mock": false
+        }
+      },
+      "model_names_used": [
+        "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001",
+        "main:gemini:gemini-3.5-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite"
+      ],
+      "latency_s": 9.905756700027268,
+      "finished_at": "2026-11-06T15:24:23.300036+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-06T15:24:23.300036+00:00"
+}

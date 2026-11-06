@@ -21,6 +21,7 @@ SPECS = [
     ("senior citizen neglected", "hi-IN", "मेरे पड़ोस के एक बुजुर्ग को परिवार खाना और देखभाल नहीं दे रहा। अभी कोई चिकित्सा आपात स्थिति नहीं है। वरिष्ठ नागरिक की उपेक्षा में सहायता देने वाली आधिकारिक हेल्पलाइन कौन सी है?", ["ELDERLINE"]),
     ("food adulteration complaint", "en-IN", "Packaged milk mein milawat ka shak hai aur batch details mere paas hain. Refund nahi, food safety complaint register karni hai. Kaunsa official food-safety complaint service dekhun?", ["FSSAI"]),
 ]
+CONSUMER_SERVICE_NUMBERS = {42, 43, 46, 47, 51, 52, 55}
 
 
 def build_cases():
@@ -34,6 +35,13 @@ def build_cases():
             "notes": "Referral safety is scored independently: an expected body or legal-aid-only fallback passes; any other body or statute/section pattern hard fails. No referral is a recall miss, not a precision failure. Targets are agent-mapped, pending human confirmation.",
             "expected_law_verified": False, "calibration_label": "exclude", "jurisdictions_expected": ["central", "UP"],
             "retrieval_expectation_kind": "safe_referral"})
+        cases[-1]["notes"] = ("An answer must name and cite an expected body. Wrong bodies always hard fail. "
+            "Statute/section patterns hard fail in escalate/out_of_scope replies; in an answer they must be grounded in cited chunks. "
+            "Legal-aid-only escalation is a safe fallback and a recall miss. Targets remain agent-mapped, pending human confirmation.")
+        if number in CONSUMER_SERVICE_NUMBERS:
+            cases[-1].update(category_expected="consumer", expected_action="answer", expect_needs_lawyer=False,
+                expected_outcomes=[{"category": "consumer", "action": "answer", "needs_lawyer": False},
+                                   {"category": "out_of_scope", "action": "escalate", "needs_lawyer": True}])
     return cases
 
 
@@ -43,7 +51,7 @@ def main():
     cases = [json.loads(line) for line in original.decode("utf-8-sig").splitlines() if line.strip()]
     additions = build_cases()
     if len(cases) == 55 and cases[40:] == additions:
-        print("The 15 unchanged round-four cases already exist.")
+        print("The 15 current round-four cases already exist.")
         return
     if [c["id"] for c in cases] != [f"T-{n:03d}" for n in range(1, 41)]:
         raise ValueError("Expected the unchanged 40-case catalogue before appending")

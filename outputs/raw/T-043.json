@@ -1,0 +1,490 @@
+{
+  "schema_version": 1,
+  "case_id": "T-043",
+  "case": {
+    "id": "T-043",
+    "group": "L_referrals",
+    "tags": [
+      "round4",
+      "directory",
+      "insurance claim rejected"
+    ],
+    "category_expected": "consumer",
+    "language": "en-IN",
+    "input_mode": "text",
+    "turns": [
+      "Mera health insurance claim reject ho gaya. Insurance company ki grievance team bhi jawab nahi de rahi. Policyholder complaint ke liye kaunsa official insurance grievance portal dekhun?"
+    ],
+    "expected_action": "answer",
+    "expect_needs_lawyer": false,
+    "expected_topics": [
+      "insurance claim rejected",
+      "official referral"
+    ],
+    "must_include_any": [],
+    "must_not_include": [],
+    "expected_chunk_ids": [
+      "COM-DIR-IRDAI"
+    ],
+    "expected_referral_any": [
+      "COM-DIR-IRDAI"
+    ],
+    "notes": "An answer must name and cite an expected body. Wrong bodies always hard fail. Statute/section patterns hard fail in escalate/out_of_scope replies; in an answer they must be grounded in cited chunks. Legal-aid-only escalation is a safe fallback and a recall miss. Targets remain agent-mapped, pending human confirmation.",
+    "expected_law_verified": false,
+    "calibration_label": "exclude",
+    "jurisdictions_expected": [
+      "central",
+      "UP"
+    ],
+    "retrieval_expectation_kind": "safe_referral",
+    "expected_outcomes": [
+      {
+        "category": "consumer",
+        "action": "answer",
+        "needs_lawyer": false
+      },
+      {
+        "category": "out_of_scope",
+        "action": "escalate",
+        "needs_lawyer": true
+      }
+    ]
+  },
+  "repeat": 1,
+  "mock": false,
+  "backend": "app.pipeline",
+  "stage": "real",
+  "configured_models": {
+    "router": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "main": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash",
+        "rpm": 5,
+        "tpm": 250000,
+        "rpd": 19
+      }
+    ],
+    "translate": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "judge": [
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000,
+        "timeout_s": 25
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      }
+    ]
+  },
+  "started_at": "2026-11-06T15:21:23.218453+00:00",
+  "turns": [
+    {
+      "input": "Mera health insurance claim reject ho gaya. Insurance company ki grievance team bhi jawab nahi de rahi. Policyholder complaint ke liye kaunsa official insurance grievance portal dekhun?",
+      "input_mode": "text",
+      "lang_hint": "en-IN",
+      "started_at": "2026-11-06T15:21:29.219620+00:00",
+      "result": {
+        "reply_text": "Bima Bharosa is an online portal launched by the Insurance Regulatory and Development Authority of India (IRDAI) to monitor and manage policyholder grievances against insurance companies. Policyholders facing claim rejection, delay, or service deficiency can register and track complaints online at https://bimabharosa.irdai.gov.in/.\n\nWhat I understood: Your health insurance claim was rejected, and the insurance company's grievance team is not responding.\n\nDocuments needed: Keep your policy papers, claim rejection letter, and any communication with the grievance team ready.\n\nNext steps: You can register and track your complaint online on the Bima Bharosa portal, call the IRDAI Grievance Call Centre Toll-Free Helpline Numbers, or send an email or post your complaint to IRDAI.\n\nSource: Insurance Regulatory and Development Authority of India - Bima Bharosa, P IRDAI\n\nWhat I could not verify:\n- name of the insurance company\n- date of claim rejection\n\nThis is legal information, not legal advice.",
+        "reply_lang": "en-IN",
+        "category": "consumer",
+        "action": "answer",
+        "citations": [
+          "COM-DIR-IRDAI"
+        ],
+        "retrieved": [
+          {
+            "id": "COM-DIR-IRDAI",
+            "score": 0.7833123207092285
+          },
+          {
+            "id": "COM-DIR-ESIC",
+            "score": 0.7229828834533691
+          },
+          {
+            "id": "COM-DIR-EPFO",
+            "score": 0.7134786248207092
+          },
+          {
+            "id": "COM-DIR-INDIAPOST",
+            "score": 0.7128509283065796
+          },
+          {
+            "id": "CONS-NCH-P1",
+            "score": 0.7091430425643921
+          },
+          {
+            "id": "COM-DIR-SEBI",
+            "score": 0.7087342143058777
+          },
+          {
+            "id": "CONS-CPA2019-S34",
+            "score": 0.7613462805747986
+          },
+          {
+            "id": "CONS-PECRULES2021-R3",
+            "score": 0.7612271308898926
+          }
+        ],
+        "needs_lawyer": false,
+        "escalation_reasons": [],
+        "verifier": {
+          "status": "pass",
+          "issues": []
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "eb66b10b6edd",
+          "input_mode": "text",
+          "user_text": "Mera health insurance claim reject ho gaya. Insurance company ki grievance team bhi jawab nahi de rahi. Policyholder complaint ke liye kaunsa official insurance grievance portal dekhun?",
+          "mode": "advice",
+          "router": {
+            "category": "consumer",
+            "language": "hi-IN",
+            "state_or_city": null,
+            "case_file_update": {
+              "product_or_service": "health insurance",
+              "what_happened": "Health insurance claim was rejected and the insurance company's grievance team is not responding.",
+              "already_tried": [
+                "contacted insurance company grievance team"
+              ]
+            },
+            "missing_facts": [
+              "name of the insurance company",
+              "date of claim rejection"
+            ],
+            "escalation_flags": [],
+            "english_retrieval_query": "official insurance grievance portal India",
+            "intent": [
+              "where_to_complain"
+            ],
+            "question": "Which official insurance grievance portal should I use to file a complaint against my insurance company?",
+            "new_topic": true,
+            "summary": "आपका हेल्थ इंश्योरेंस क्लेम रिजेक्ट हो गया है और इंश्योरेंस कंपनी की ग्रीवेंस टीम कोई जवाब नहीं दे रही है।"
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "summary_rejected": "आपका हेल्थ इंश्योरेंस क्लेम रिजेक्ट हो गया है और इंश्योरेंस कंपनी की ग्रीवेंस टीम कोई जवाब नहीं दे रही है।",
+          "retrieval": {
+            "query": "official insurance grievance portal India",
+            "jurisdictions": [
+              "central"
+            ],
+            "top_score": 0.7833123207092285,
+            "min_score": 0.66,
+            "old_law": []
+          },
+          "intent": {
+            "intents": [
+              "where_to_complain"
+            ],
+            "question": "Which official insurance grievance portal should I use to file a complaint against my insurance company?",
+            "want_draft": false,
+            "has_question": true
+          },
+          "judge": "ok",
+          "verifier_history": [
+            []
+          ],
+          "timings_s": 12.857,
+          "llm": {
+            "calls": 5,
+            "retries": 0,
+            "latency_s": 12.76,
+            "models": [
+              "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "embed:gemini:gemini-embedding-001",
+              "main:gemini:gemini-3.5-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite"
+            ],
+            "fallbacks": [
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~577s"
+              }
+            ]
+          },
+          "action": "answer",
+          "category": "consumer",
+          "retrieved": [
+            {
+              "id": "COM-DIR-IRDAI",
+              "score": 0.7833123207092285
+            },
+            {
+              "id": "COM-DIR-ESIC",
+              "score": 0.7229828834533691
+            },
+            {
+              "id": "COM-DIR-EPFO",
+              "score": 0.7134786248207092
+            },
+            {
+              "id": "COM-DIR-INDIAPOST",
+              "score": 0.7128509283065796
+            },
+            {
+              "id": "CONS-NCH-P1",
+              "score": 0.7091430425643921
+            },
+            {
+              "id": "COM-DIR-SEBI",
+              "score": 0.7087342143058777
+            },
+            {
+              "id": "CONS-CPA2019-S34",
+              "score": 0.7613462805747986
+            },
+            {
+              "id": "CONS-PECRULES2021-R3",
+              "score": 0.7612271308898926
+            }
+          ],
+          "citations": [
+            "COM-DIR-IRDAI"
+          ],
+          "verifier": {
+            "status": "pass",
+            "issues": []
+          },
+          "escalation_reasons": [],
+          "models": {
+            "router": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "main": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash",
+                "rpm": 5,
+                "tpm": 250000,
+                "rpd": 19
+              }
+            ],
+            "translate": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "judge": [
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000,
+                "timeout_s": 25
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              }
+            ]
+          },
+          "mock": false
+        }
+      },
+      "model_names_used": [
+        "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001",
+        "main:gemini:gemini-3.5-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite"
+      ],
+      "latency_s": 12.859816599986516,
+      "finished_at": "2026-11-06T15:21:42.077038+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-06T15:21:42.077038+00:00"
+}

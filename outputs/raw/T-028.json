@@ -152,7 +152,8 @@
         "model": "gemma-4-31b-it",
         "rpm": 30,
         "tpm": 16000,
-        "rpd": 14000
+        "rpd": 14000,
+        "timeout_s": 25
       },
       {
         "provider": "gemini",
@@ -170,25 +171,23 @@
       }
     ]
   },
-  "started_at": "2026-11-05T22:08:29.069796+00:00",
+  "started_at": "2026-11-06T15:15:12.626532+00:00",
   "turns": [
     {
       "input": "UH LOOK LUCKNOW UP OK I PAID 800 FOR THIS PHONE CHARGER OCTOBER 2026 IT'S DEAD DEAD I HAVE THE BILL AND SUPPORT JUST SAYS WAIT I'M SO FED UP HOW DO I COMPLAIN",
       "input_mode": "voice",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T22:08:35.054995+00:00",
+      "started_at": "2026-11-06T15:15:18.626926+00:00",
       "result": {
-        "reply_text": "I understand that you bought a phone charger for 800 rupees in October 2026, it is not working, and you have already contacted support without success.\n\nUnder the law, you may bring a product liability action against a manufacturer or seller if a product is defective. A manufacturer is liable if the product has a manufacturing defect or does not conform to an express warranty.\n\nYou can register your grievance at the pre-litigation stage through the National Consumer Helpline (NCH). You can call the toll-free number 1915, use the NCH app, or visit the website consumerhelpline.gov.in. You can also reach out via WhatsApp at 8800001915 or email at nch-ca@gov.in.\n\nIf the issue is not resolved, you may file a formal complaint with the District Commission. The District Commission has jurisdiction to handle complaints where the value of goods or services does not exceed fifty lakh rupees. You can file this complaint where you reside or where the opposite party carries on business.\n\nPlease keep your bill and any records of your communication with the company support team as proof for your complaint.\n\nCould you please provide the name of the company that manufactured or sold the charger and the order ID for your purchase?\n\nSource: Consumer Protection Act, 2019, section 83\nSource: Consumer Protection Act, 2019, section 84\nSource: National Consumer Helpline Grievance Redressal Procedure, procedure 1\nSource: Consumer Protection Act, 2019, section 34\nSource: Consumer Protection (Jurisdiction of the District Commission, the State Commission and the National Commission) Rules, 2021, rule 3\nSource: Consumer Protection Act, 2019, section 35\n\nWhat I could not verify:\n- where to complain (if NCH and District Commission are not suitable)\n\nThis is legal information, not legal advice.",
+        "reply_text": "You can lodge a grievance through the National Consumer Helpline by visiting their web portal or calling their toll-free numbers, or you can file a complaint with the District Commission. The remedies and options depend on the facts and the authority's decision.\n\nKeep the bill and screenshots of your chats with company support ready as proof.\n\nWhat I understood: You bought a phone charger for a certain amount, it is defective, and company support is unresponsive.\n\nA product liability action may be brought by a complainant against a product manufacturer, service provider, or seller for any harm caused by a defective product.\n\nA product manufacturer is liable in a product liability action if the product contains a manufacturing defect, design defect, deviates from specifications, fails to conform to an express warranty, or lacks adequate instructions or warnings.\n\nYou can approach the National Consumer Helpline online at their web portal or by calling their toll-free numbers.\n\nYou may also file a complaint with the District Commission.\n\nPlease tell me the name of the company that made or sold the phone charger.\n\nSource: Department of Consumer Affairs - National Consumer Helpline (NCH), H NCH\nSource: Consumer Protection Act, 2019, section 35\nSource: Consumer Protection Act, 2019, section 83\nSource: Consumer Protection Act, 2019, section 84\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "consumer",
         "action": "answer",
         "citations": [
+          "COM-DIR-NCH",
+          "CONS-CPA2019-S35",
           "CONS-CPA2019-S83",
-          "CONS-CPA2019-S84",
-          "CONS-NCH-P1",
-          "CONS-CPA2019-S34",
-          "CONS-PECRULES2021-R3",
-          "CONS-CPA2019-S35"
+          "CONS-CPA2019-S84"
         ],
         "retrieved": [
           {
@@ -196,12 +195,16 @@
             "score": 0.7460978627204895
           },
           {
+            "id": "COM-DIR-NCH",
+            "score": 0.7445632219314575
+          },
+          {
             "id": "CONS-NCH-P1",
             "score": 0.7292665839195251
           },
           {
             "id": "CONS-CPA2019-S35",
-            "score": 0.7242482304573059
+            "score": 0.7242484092712402
           },
           {
             "id": "COM-NCH-H1915",
@@ -212,12 +215,8 @@
             "score": 0.7175445556640625
           },
           {
-            "id": "CONS-CPA2019-S85",
-            "score": 0.7168787121772766
-          },
-          {
             "id": "CONS-CPA2019-S34",
-            "score": 0.7613463401794434
+            "score": 0.7613462805747986
           },
           {
             "id": "CONS-PECRULES2021-R3",
@@ -232,7 +231,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "bd37ee545e7c",
+          "session": "d42ccec66044",
           "input_mode": "voice",
           "user_text": "UH LOOK LUCKNOW UP OK I PAID 800 FOR THIS PHONE CHARGER OCTOBER 2026 IT'S DEAD DEAD I HAVE THE BILL AND SUPPORT JUST SAYS WAIT I'M SO FED UP HOW DO I COMPLAIN",
           "mode": "advice",
@@ -244,7 +243,7 @@
               "amount_inr": 800,
               "purchase_date": "2026-10",
               "product_or_service": "phone charger",
-              "what_happened": "charger is defective/not working",
+              "what_happened": "The phone charger purchased for 800 INR in October 2026 is defective and the company support is unresponsive.",
               "proof": [
                 "bill"
               ],
@@ -255,15 +254,23 @@
             },
             "missing_facts": [
               "company name",
-              "order id"
+              "date of purchase"
             ],
             "escalation_flags": [],
-            "english_retrieval_query": "how to file a consumer complaint for defective product in India"
+            "english_retrieval_query": "how to file a consumer complaint for defective product in India",
+            "intent": [
+              "where_to_complain",
+              "next_steps"
+            ],
+            "question": "How do I file a complaint against the company for a defective product?",
+            "new_topic": true,
+            "summary": "आपने अक्टूबर 2026 में 800 रुपये का फोन चार्जर खरीदा था जो अब खराब हो गया है और कंपनी कोई समाधान नहीं दे रही है।"
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
+          "summary_rejected": "आपने अक्टूबर 2026 में 800 रुपये का फोन चार्जर खरीदा था जो अब खराब हो गया है और कंपनी कोई समाधान नहीं दे रही है।",
           "retrieval": {
             "query": "how to file a consumer complaint for defective product in India",
             "jurisdictions": [
@@ -274,32 +281,36 @@
             "min_score": 0.66,
             "old_law": []
           },
+          "intent": {
+            "intents": [
+              "next_steps",
+              "where_to_complain"
+            ],
+            "question": "How do I file a complaint against the company for a defective product?",
+            "want_draft": false,
+            "has_question": true
+          },
           "judge": "ok",
           "verifier_history": [
             []
           ],
-          "timings_s": 217.078,
+          "timings_s": 11.881,
           "llm": {
-            "calls": 7,
-            "retries": 4,
-            "latency_s": 212.92,
+            "calls": 5,
+            "retries": 0,
+            "latency_s": 11.76,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
-              "main:gemini:gemini-3.1-flash-lite",
+              "main:gemini:gemini-3.5-flash-lite",
               "judge:gemini:gemini-3.1-flash-lite"
             ],
             "fallbacks": [
               {
-                "role": "main",
-                "model": "gemini:gemini-3.5-flash-lite",
-                "reason": "HTTP 503"
-              },
-              {
                 "role": "judge",
                 "model": "gemini:gemma-4-31b-it",
-                "reason": "network error (ReadTimeout)"
+                "reason": "busy for ~300s"
               }
             ]
           },
@@ -311,12 +322,16 @@
               "score": 0.7460978627204895
             },
             {
+              "id": "COM-DIR-NCH",
+              "score": 0.7445632219314575
+            },
+            {
               "id": "CONS-NCH-P1",
               "score": 0.7292665839195251
             },
             {
               "id": "CONS-CPA2019-S35",
-              "score": 0.7242482304573059
+              "score": 0.7242484092712402
             },
             {
               "id": "COM-NCH-H1915",
@@ -327,12 +342,8 @@
               "score": 0.7175445556640625
             },
             {
-              "id": "CONS-CPA2019-S85",
-              "score": 0.7168787121772766
-            },
-            {
               "id": "CONS-CPA2019-S34",
-              "score": 0.7613463401794434
+              "score": 0.7613462805747986
             },
             {
               "id": "CONS-PECRULES2021-R3",
@@ -340,12 +351,10 @@
             }
           ],
           "citations": [
+            "COM-DIR-NCH",
+            "CONS-CPA2019-S35",
             "CONS-CPA2019-S83",
-            "CONS-CPA2019-S84",
-            "CONS-NCH-P1",
-            "CONS-CPA2019-S34",
-            "CONS-PECRULES2021-R3",
-            "CONS-CPA2019-S35"
+            "CONS-CPA2019-S84"
           ],
           "verifier": {
             "status": "pass",
@@ -454,7 +463,8 @@
                 "model": "gemma-4-31b-it",
                 "rpm": 30,
                 "tpm": 16000,
-                "rpd": 14000
+                "rpd": 14000,
+                "timeout_s": 25
               },
               {
                 "provider": "gemini",
@@ -479,13 +489,13 @@
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001",
-        "main:gemini:gemini-3.1-flash-lite",
+        "main:gemini:gemini-3.5-flash-lite",
         "judge:gemini:gemini-3.1-flash-lite"
       ],
-      "latency_s": 217.0823314000154,
-      "finished_at": "2026-11-05T22:12:12.136915+00:00"
+      "latency_s": 11.88337459997274,
+      "finished_at": "2026-11-06T15:15:30.509886+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T22:12:12.136915+00:00"
+  "finished_at": "2026-11-06T15:15:30.509886+00:00"
 }

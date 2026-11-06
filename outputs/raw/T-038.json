@@ -153,7 +153,8 @@
         "model": "gemma-4-31b-it",
         "rpm": 30,
         "tpm": 16000,
-        "rpd": 14000
+        "rpd": 14000,
+        "timeout_s": 25
       },
       {
         "provider": "gemini",
@@ -171,15 +172,15 @@
       }
     ]
   },
-  "started_at": "2026-11-05T22:21:30.366814+00:00",
+  "started_at": "2026-11-06T15:18:47.996750+00:00",
   "turns": [
     {
       "input": "I'm a residential tenant in Bengaluru Karnataka. I vacated on 20 October 2026 and the owner has kept my Rs 30000 deposit. I have the lease and handover photos. Share whatever central-law information you can verify, and make clear whether your UP rules cover me.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T22:21:36.367846+00:00",
+      "started_at": "2026-11-06T15:18:53.997208+00:00",
       "result": {
-        "reply_text": "What I understood: vacated date: 2026-10-20; amount inr: 30000; proof: ['lease agreement', 'handover photos']; counterparty type: landlord; state: other\n\nI do not have verified information in my sources to answer this part, and I will not guess.\n\nWhat you can do right now: collect your documents (agreement, receipts, bank or UPI records, messages, photos), and write down the dates and amounts in order.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
+        "reply_text": "What I understood: You vacated your rental property in Bengaluru on 20 October 2026, but your landlord has not returned your security deposit of Rs 30,000.\n\nI do not have verified information in my sources to answer this part, and I will not guess.\n\nWhat you can do right now: collect your documents (agreement, receipts, bank or UPI records, messages, photos), and write down the dates and amounts in order.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "tenancy",
         "action": "refuse_unverified",
@@ -189,27 +190,27 @@
         "retrieved": [
           {
             "id": "TEN-TPA1882-S108",
-            "score": 0.6726747751235962
+            "score": 0.6639929413795471
           },
           {
             "id": "TEN-TPA1882-S111",
-            "score": 0.6555199027061462
-          },
-          {
-            "id": "TEN-TPA1882-S105",
-            "score": 0.6414217352867126
+            "score": 0.6403559446334839
           },
           {
             "id": "TEN-TPA1882-S106",
-            "score": 0.6358615159988403
+            "score": 0.6307829022407532
+          },
+          {
+            "id": "TEN-TPA1882-S105",
+            "score": 0.629284679889679
           },
           {
             "id": "TEN-TPA1882-S116",
-            "score": 0.6349879503250122
+            "score": 0.6261744499206543
           },
           {
             "id": "COM-LSAA1987-S21",
-            "score": 0.6324535608291626
+            "score": 0.6242771744728088
           },
           {
             "id": "COM-LSAA1987-S22B",
@@ -232,12 +233,12 @@
         "verifier": {
           "status": "failed",
           "issues": [
-            "block 3: legal block without a citation"
+            "block 0: claim not supported by its cited source (The source text does not mention Uttar Pradesh rules or their applicability to Bengaluru.)"
           ]
         },
         "draft_text": null,
         "trace": {
-          "session": "58bc942a77be",
+          "session": "7fc5e07a503a",
           "input_mode": "text",
           "user_text": "I'm a residential tenant in Bengaluru Karnataka. I vacated on 20 October 2026 and the owner has kept my Rs 30000 deposit. I have the lease and handover photos. Share whatever central-law information you can verify, and make clear whether your UP rules cover me.",
           "mode": "advice",
@@ -246,8 +247,8 @@
             "language": "en-IN",
             "state_or_city": "other",
             "case_file_update": {
-              "vacated_date": "2026-10-20",
               "amount_inr": 30000,
+              "vacated_date": "2026-10-20",
               "proof": [
                 "lease agreement",
                 "handover photos"
@@ -255,71 +256,70 @@
               "counterparty_type": "landlord"
             },
             "missing_facts": [
-              "location of the property",
-              "reason given by landlord for withholding deposit"
+              "landlord's response to the request for refund",
+              "whether the lease agreement has a specific clause regarding deposit refund"
             ],
             "escalation_flags": [],
-            "english_retrieval_query": "tenant security deposit refund laws India"
+            "english_retrieval_query": "tenant security deposit refund laws Karnataka",
+            "intent": [
+              "explain_rights",
+              "where_to_complain"
+            ],
+            "question": "What are my rights regarding the return of my security deposit under Karnataka law, and do Uttar Pradesh tenancy rules apply to my situation in Bengaluru?",
+            "new_topic": false,
+            "summary": "You vacated your rental property in Bengaluru on 20 October 2026, but your landlord has not returned your security deposit of Rs 30,000."
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
           "retrieval": {
-            "query": "tenant security deposit refund laws India",
+            "query": "tenant security deposit refund laws Karnataka",
             "jurisdictions": [
               "central"
             ],
-            "top_score": 0.6726747751235962,
+            "top_score": 0.6639929413795471,
             "min_score": 0.66,
             "old_law": []
           },
-          "judge": "skipped",
+          "intent": {
+            "intents": [
+              "explain_rights",
+              "where_to_complain"
+            ],
+            "question": "What are my rights regarding the return of my security deposit under Karnataka law, and do Uttar Pradesh tenancy rules apply to my situation in Bengaluru?",
+            "want_draft": false,
+            "has_question": true
+          },
+          "judge": "ok",
           "verifier_history": [
             [
-              "block 3: legal block without a citation",
-              "block 4: legal block without a citation"
+              "block 0: legal block without a citation",
+              "block 0: number '1882,' not found in cited source or user's facts"
             ],
             [
-              "block 3: legal block without a citation"
+              "block 0: claim not supported by its cited source (The source text does not mention Uttar Pradesh rules or their applicability to Bengaluru.)"
             ]
           ],
-          "pruned": {
-            "removed_blocks": [
-              3
-            ],
-            "reasons": [
-              "block 3: legal block without a citation"
-            ],
-            "recheck": [
-              "block 1: claim not supported by its cited source (The source does not mention damages or withholding the deposit.)"
-            ],
-            "judge": "ok"
-          },
-          "timings_s": 95.392,
+          "timings_s": 24.007,
           "llm": {
-            "calls": 9,
-            "retries": 2,
-            "latency_s": 92.6,
+            "calls": 7,
+            "retries": 0,
+            "latency_s": 22.09,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
-              "main:gemini:gemini-3.1-flash-lite",
-              "main:gemini:gemini-3.1-flash-lite",
-              "judge:gemini:gemma-4-31b-it",
+              "main:gemini:gemini-3.5-flash-lite",
+              "main:gemini:gemini-3.5-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001"
             ],
             "fallbacks": [
               {
-                "role": "main",
-                "model": "gemini:gemini-3.5-flash-lite",
-                "reason": "HTTP 503"
-              },
-              {
-                "role": "main",
-                "model": "gemini:gemini-3.5-flash-lite",
-                "reason": "busy for ~596s"
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~73s"
               }
             ]
           },
@@ -328,27 +328,27 @@
           "retrieved": [
             {
               "id": "TEN-TPA1882-S108",
-              "score": 0.6726747751235962
+              "score": 0.6639929413795471
             },
             {
               "id": "TEN-TPA1882-S111",
-              "score": 0.6555199027061462
-            },
-            {
-              "id": "TEN-TPA1882-S105",
-              "score": 0.6414217352867126
+              "score": 0.6403559446334839
             },
             {
               "id": "TEN-TPA1882-S106",
-              "score": 0.6358615159988403
+              "score": 0.6307829022407532
+            },
+            {
+              "id": "TEN-TPA1882-S105",
+              "score": 0.629284679889679
             },
             {
               "id": "TEN-TPA1882-S116",
-              "score": 0.6349879503250122
+              "score": 0.6261744499206543
             },
             {
               "id": "COM-LSAA1987-S21",
-              "score": 0.6324535608291626
+              "score": 0.6242771744728088
             },
             {
               "id": "COM-LSAA1987-S22B",
@@ -370,7 +370,7 @@
           "verifier": {
             "status": "failed",
             "issues": [
-              "block 3: legal block without a citation"
+              "block 0: claim not supported by its cited source (The source text does not mention Uttar Pradesh rules or their applicability to Bengaluru.)"
             ]
           },
           "escalation_reasons": [
@@ -478,7 +478,8 @@
                 "model": "gemma-4-31b-it",
                 "rpm": 30,
                 "tpm": 16000,
-                "rpd": 14000
+                "rpd": 14000,
+                "timeout_s": 25
               },
               {
                 "provider": "gemini",
@@ -503,15 +504,15 @@
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001",
-        "main:gemini:gemini-3.1-flash-lite",
-        "main:gemini:gemini-3.1-flash-lite",
-        "judge:gemini:gemma-4-31b-it",
+        "main:gemini:gemini-3.5-flash-lite",
+        "main:gemini:gemini-3.5-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 95.39683590002824,
-      "finished_at": "2026-11-05T22:23:11.764524+00:00"
+      "latency_s": 24.015540399996098,
+      "finished_at": "2026-11-06T15:19:18.012516+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T22:23:11.764524+00:00"
+  "finished_at": "2026-11-06T15:19:18.012516+00:00"
 }

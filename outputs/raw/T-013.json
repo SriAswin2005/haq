@@ -154,7 +154,8 @@
         "model": "gemma-4-31b-it",
         "rpm": 30,
         "tpm": 16000,
-        "rpd": 14000
+        "rpd": 14000,
+        "timeout_s": 25
       },
       {
         "provider": "gemini",
@@ -172,58 +173,58 @@
       }
     ]
   },
-  "started_at": "2026-11-05T21:53:59.839432+00:00",
+  "started_at": "2026-11-06T15:10:10.331509+00:00",
   "turns": [
     {
       "input": "Today is 5 November 2026. I am in Lucknow UP. A fictional repair shop took Rs 7000 on 1 January 2023 and never repaired my mixer. I have done nothing since. Can I start now?",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T21:54:05.840314+00:00",
+      "started_at": "2026-11-06T15:10:16.333079+00:00",
       "result": {
-        "reply_text": "you paid for mixer repair but the service was never provided and you have not taken any action yet.\n\na complaint to the District Commission must be filed within two years from the date on which the cause of action has arisen, unless the commission permits a delay for sufficient cause.\n\nthe District Commission has jurisdiction to entertain complaints where the value of goods or services paid as consideration does not exceed one crore rupees.\n\nyou can file a complaint with the District Commission.\n\ngather all your receipts, bills, and any messages or written records you have with the repair shop.\n\nconsult a lawyer to check if your delay can be condoned and to help file your complaint before the District Commission.\n\ndo you have any written receipt or proof of payment showing the amount paid to the shop?\n\ndo you have any chat messages, call logs, or written communication with the repair shop about the unprovided service?\n\nSource: Consumer Protection Act, 2019, section 69\nSource: Consumer Protection Act, 2019, section 34\nSource: Consumer Protection Act, 2019, section 35\n\nThis is legal information, not legal advice.",
+        "reply_text": "A complaint must be filed within two years from the date on which the cause of action has arisen, though a commission may entertain a complaint after this period if the complainant satisfies it that there was sufficient cause for the delay.\n\nKeep your receipts, payment proofs, and any written messages or communication ready.\n\nYou can approach the National Consumer Helpline for guidance and grievance redressal online at https://consumerhelpline.gov.in/ or by calling their toll-free numbers, and you can also file a complaint electronically before the District Commission using the e-Daakhil or e-Jagriti portal at https://e-jagriti.gov.in/.\n\nDo you have any receipts or proof of payment?\n\nHave you contacted the shop since the payment?\n\nSource: Consumer Protection Act, 2019, section 69\nSource: Department of Consumer Affairs - National Consumer Helpline (NCH), H NCH\nSource: National Consumer Disputes Redressal Commission - e-Daakhil / e-Jagriti Portal, P EDAAKHIL\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "consumer",
         "action": "answer",
         "citations": [
           "CONS-CPA2019-S69",
-          "CONS-CPA2019-S34",
-          "CONS-CPA2019-S35"
+          "COM-DIR-NCH",
+          "COM-DIR-EDAAKHIL"
         ],
         "retrieved": [
           {
             "id": "CONS-CPA2019-S69",
-            "score": 0.7600002884864807
-          },
-          {
-            "id": "CONS-PECRULES2021-R3",
-            "score": 0.7003186941146851
-          },
-          {
-            "id": "CONS-CPA2019-S83",
-            "score": 0.6881812810897827
-          },
-          {
-            "id": "CONS-CPA2019-S34",
-            "score": 0.6878513097763062
+            "score": 0.7738679647445679
           },
           {
             "id": "CONS-CPA2019-S35",
-            "score": 0.687802255153656
+            "score": 0.7024595141410828
           },
           {
-            "id": "CONS-CPA2019-S38",
-            "score": 0.6861906051635742
+            "id": "CONS-CPA2019-S85",
+            "score": 0.6982607841491699
+          },
+          {
+            "id": "COM-DIR-NCH",
+            "score": 0.6957159638404846
+          },
+          {
+            "id": "CONS-CPA2019-S34",
+            "score": 0.6950263977050781
+          },
+          {
+            "id": "CONS-PECRULES2021-R3",
+            "score": 0.6930116415023804
           },
           {
             "id": "CONS-CPA2019-S36",
             "score": 0.7262679934501648
           },
           {
-            "id": "CONS-CPA2019-S47",
-            "score": 0.7162348031997681
+            "id": "COM-DIR-EDAAKHIL",
+            "score": 0.7234513759613037
           }
         ],
-        "needs_lawyer": true,
+        "needs_lawyer": false,
         "escalation_reasons": [],
         "verifier": {
           "status": "pass",
@@ -231,7 +232,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "24e9ae1d3938",
+          "session": "567ed05a2c95",
           "input_mode": "text",
           "user_text": "Today is 5 November 2026. I am in Lucknow UP. A fictional repair shop took Rs 7000 on 1 January 2023 and never repaired my mixer. I have done nothing since. Can I start now?",
           "mode": "advice",
@@ -242,42 +243,58 @@
             "case_file_update": {
               "amount_inr": 7000,
               "purchase_date": "2023-01-01",
-              "what_happened": "Paid for mixer repair but service was never provided.",
+              "what_happened": "A repair shop took Rs 7000 for a mixer repair but failed to perform the service.",
               "counterparty_name": "fictional repair shop",
               "counterparty_type": "repair shop",
               "product_or_service": "mixer repair",
               "resolution_wanted": "refund"
             },
             "missing_facts": [
-              "proof of payment",
-              "any communication records with the shop"
+              "Do you have any receipts or proof of payment?",
+              "Have you contacted the shop since the payment?"
             ],
             "escalation_flags": [],
-            "english_retrieval_query": "consumer complaint limitation period for repair services"
+            "english_retrieval_query": "limitation period for consumer complaint for service deficiency",
+            "intent": [
+              "explain_rights",
+              "next_steps"
+            ],
+            "question": "Can I still file a consumer complaint for a service deficiency that occurred in January 2023?",
+            "new_topic": false,
+            "summary": "You paid Rs 7000 to a repair shop on 1 January 2023 for a mixer repair, but the work was never done."
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
           "retrieval": {
-            "query": "consumer complaint limitation period for repair services",
+            "query": "limitation period for consumer complaint for service deficiency",
             "jurisdictions": [
               "central",
               "UP"
             ],
-            "top_score": 0.7600002884864807,
+            "top_score": 0.7738679647445679,
             "min_score": 0.66,
             "old_law": []
+          },
+          "intent": {
+            "intents": [
+              "explain_rights",
+              "next_steps"
+            ],
+            "question": "Can I still file a consumer complaint for a service deficiency that occurred in January 2023?",
+            "want_draft": false,
+            "has_question": true
           },
           "judge": "ok",
           "verifier_history": [
             []
           ],
-          "timings_s": 73.989,
+          "timings_s": 12.617,
           "llm": {
-            "calls": 8,
-            "retries": 3,
-            "latency_s": 69.8,
+            "calls": 6,
+            "retries": 1,
+            "latency_s": 12.5,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
@@ -298,41 +315,41 @@
           "retrieved": [
             {
               "id": "CONS-CPA2019-S69",
-              "score": 0.7600002884864807
-            },
-            {
-              "id": "CONS-PECRULES2021-R3",
-              "score": 0.7003186941146851
-            },
-            {
-              "id": "CONS-CPA2019-S83",
-              "score": 0.6881812810897827
-            },
-            {
-              "id": "CONS-CPA2019-S34",
-              "score": 0.6878513097763062
+              "score": 0.7738679647445679
             },
             {
               "id": "CONS-CPA2019-S35",
-              "score": 0.687802255153656
+              "score": 0.7024595141410828
             },
             {
-              "id": "CONS-CPA2019-S38",
-              "score": 0.6861906051635742
+              "id": "CONS-CPA2019-S85",
+              "score": 0.6982607841491699
+            },
+            {
+              "id": "COM-DIR-NCH",
+              "score": 0.6957159638404846
+            },
+            {
+              "id": "CONS-CPA2019-S34",
+              "score": 0.6950263977050781
+            },
+            {
+              "id": "CONS-PECRULES2021-R3",
+              "score": 0.6930116415023804
             },
             {
               "id": "CONS-CPA2019-S36",
               "score": 0.7262679934501648
             },
             {
-              "id": "CONS-CPA2019-S47",
-              "score": 0.7162348031997681
+              "id": "COM-DIR-EDAAKHIL",
+              "score": 0.7234513759613037
             }
           ],
           "citations": [
             "CONS-CPA2019-S69",
-            "CONS-CPA2019-S34",
-            "CONS-CPA2019-S35"
+            "COM-DIR-NCH",
+            "COM-DIR-EDAAKHIL"
           ],
           "verifier": {
             "status": "pass",
@@ -441,7 +458,8 @@
                 "model": "gemma-4-31b-it",
                 "rpm": 30,
                 "tpm": 16000,
-                "rpd": 14000
+                "rpd": 14000,
+                "timeout_s": 25
               },
               {
                 "provider": "gemini",
@@ -469,10 +487,10 @@
         "main:gemini:gemini-3.5-flash-lite",
         "judge:gemini:gemini-3.1-flash-lite"
       ],
-      "latency_s": 73.99282260000473,
-      "finished_at": "2026-11-05T21:55:19.832489+00:00"
+      "latency_s": 12.620068599993829,
+      "finished_at": "2026-11-06T15:10:28.949938+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T21:55:19.832489+00:00"
+  "finished_at": "2026-11-06T15:10:28.949938+00:00"
 }

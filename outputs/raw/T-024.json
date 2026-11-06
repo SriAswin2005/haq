@@ -157,7 +157,8 @@
         "model": "gemma-4-31b-it",
         "rpm": 30,
         "tpm": 16000,
-        "rpd": 14000
+        "rpd": 14000,
+        "timeout_s": 25
       },
       {
         "provider": "gemini",
@@ -175,66 +176,66 @@
       }
     ]
   },
-  "started_at": "2026-11-05T22:02:04.664101+00:00",
+  "started_at": "2026-11-06T15:13:39.987216+00:00",
   "turns": [
     {
       "input": "I worked in a private shop in Lucknow UP, resigned on 15 October 2026 after agreed handover. October salary Rs 12000 hasn't come. I have my appointment letter, attendance and bank statement. HR only says wait. What can I do?",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T22:02:10.648529+00:00",
+      "started_at": "2026-11-06T15:13:45.989430+00:00",
       "result": {
-        "reply_text": "मैंने समझा कि आप लखनऊ, उत्तर प्रदेश में एक निजी दुकान में काम करते थे। आपने उचित हैंडओवर के बाद पंद्रह अक्टूबर दो हजार छब्बीस को इस्तीफा दे दिया। आपका अक्टूबर का बारह हजार रुपये वेतन अभी तक नहीं मिला है। आपने अपने पास नियुक्ति पत्र, उपस्थिति और बैंक स्टेटमेंट होने की बात कही है।\n\nयदि कर्मचारी ने सेवा से इस्तीफा दे दिया है, तो उस कर्मचारी को देय मजदूरी उसके इस्तीफे के दो कार्य दिवस के भीतर भुगतान की जानी चाहिए।\n\nजहाँ रोजगार की समाप्ति कर्मचारी द्वारा होती है, वहाँ कर्मचारी का अर्जित वेतन अगले वेतन दिवस पर या उससे पहले भुगतान किया जाएगा।\n\nप्रत्येक नियोक्ता को अपने प्रत्येक कर्मचारी को इस कोड के तहत भुगतान करने की सभी राशि का भुगतान करना आवश्यक है। यदि ऐसा नियोक्ता इस कोड के अनुसार भुगतान करने में विफल रहता है, तो कंपनी या फर्म या एसोसिएशन या कोई अन्य व्यक्ति जो उस प्रतिष्ठान का मालिक है, ऐसे भुगतान के लिए जिम्मेदार होगा।\n\nअपने नियोक्ता या मानव संसाधन विभाग से संपर्क करना जारी रखें और अपने वेतन के भुगतान के लिए लिखित अनुरोध भेजें।\n\nअपने सभी दस्तावेज जैसे नियुक्ति पत्र, उपस्थिति प्रमाण और बैंक स्टेटमेंट सुरक्षित रखें।\n\nSource: Code on Wages, 2019, section 17\nSource: Uttar Pradesh Dookan Aur Vanijya Adhishthan Adhiniyam, 1962, section 13\nSource: Code on Wages, 2019, section 43\n\nWhat I could not verify:\n- where to complain\n- I left out one point because I could not match it exactly to the official text. A lawyer or legal aid office can confirm it.\n\nThis is legal information, not legal advice.",
+        "reply_text": "To recover your unpaid salary, you can file a claim application before the authority appointed by the appropriate Government. If the authority determines your claim, it may also order the payment of compensation in addition to the claim, and endeavour to decide the claim within a specified period.\n\nKeep your appointment letter, attendance records, and bank statements ready as supporting documents.\n\nWhat I understood: You resigned from a private shop in Lucknow after handing over, but your October salary of Rs 12,000 remains unpaid while HR asks you to wait.\n\nWhere you stand: When an employee has resigned from service, the wages payable to them shall be paid within two working days of the resignation. Every employer is required to pay all amounts required to be paid under the Code, and if the employer fails, the proprietor of the establishment is responsible for the payment.\n\nYour options in order: First, you may approach the employer to clear the dues. If they still fail to pay, you can file an application for claims before the authority appointed under the law.\n\nWhen to see a lawyer: You may consult a lawyer if you need help filing your claim application before the authority or if you face difficulties during the recovery proceedings.\n\nSource: Code on Wages, 2019, section 45\nSource: Code on Wages, 2019, section 17\nSource: Code on Wages, 2019, section 43\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "wages",
         "action": "answer",
         "citations": [
+          "WAGE-COW2019-S45",
           "WAGE-COW2019-S17",
-          "WAGE-UPSHOP1962-S13",
           "WAGE-COW2019-S43"
         ],
         "retrieved": [
           {
-            "id": "WAGE-COW2019-S17",
-            "score": 0.6791051030158997
-          },
-          {
-            "id": "WAGE-COW2019-S43",
-            "score": 0.6586199402809143
-          },
-          {
-            "id": "WAGE-COSS2020-S53",
-            "score": 0.6530250906944275
-          },
-          {
-            "id": "WAGE-COW2019-S5",
-            "score": 0.6434996128082275
-          },
-          {
-            "id": "WAGE-UPSHOP1962-S13",
-            "score": 0.6430404186248779
-          },
-          {
-            "id": "WAGE-COW2019-S20",
-            "score": 0.6397666931152344
-          },
-          {
             "id": "WAGE-COW2019-S45",
-            "score": 0.7474292516708374
+            "score": 0.7195278406143188
           },
           {
             "id": "WAGE-COW2019-S57",
-            "score": 0.696526288986206
+            "score": 0.6979914903640747
+          },
+          {
+            "id": "WAGE-COW2019-S43",
+            "score": 0.6961815357208252
+          },
+          {
+            "id": "WAGE-UPSHOP1962-S18",
+            "score": 0.6927111148834229
+          },
+          {
+            "id": "WAGE-COW2019-S17",
+            "score": 0.687429666519165
+          },
+          {
+            "id": "WAGE-COWRULES2026-R46",
+            "score": 0.6846946477890015
+          },
+          {
+            "id": "WAGE-COW2019-S49",
+            "score": 0.6729814410209656
+          },
+          {
+            "id": "WAGE-COW2019-S46",
+            "score": 0.6659461259841919
           }
         ],
         "needs_lawyer": false,
         "escalation_reasons": [],
         "verifier": {
-          "status": "pruned",
+          "status": "pass",
           "issues": []
         },
         "draft_text": null,
         "trace": {
-          "session": "5a916549517b",
+          "session": "e7cca1369935",
           "input_mode": "text",
           "user_text": "I worked in a private shop in Lucknow UP, resigned on 15 October 2026 after agreed handover. October salary Rs 12000 hasn't come. I have my appointment letter, attendance and bank statement. HR only says wait. What can I do?",
           "mode": "advice",
@@ -251,117 +252,119 @@
                 "attendance",
                 "bank statement"
               ],
-              "already_tried": [
-                "contacted HR"
-              ],
-              "counterparty_type": "employer"
+              "counterparty_type": "private shop",
+              "what_happened": "User resigned from a private shop in Lucknow after handover, but the October salary of Rs 12,000 remains unpaid."
             },
             "missing_facts": [],
             "escalation_flags": [],
-            "english_retrieval_query": "unpaid salary after resignation procedure India"
+            "english_retrieval_query": "how to recover unpaid salary from private employer in India",
+            "intent": [
+              "next_steps",
+              "where_to_complain"
+            ],
+            "question": "What steps can I take to recover my unpaid salary from my former employer?",
+            "new_topic": false,
+            "summary": "You resigned from your job in Lucknow on 15 October 2026, but your salary of Rs 12,000 for October has not been paid."
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
           "retrieval": {
-            "query": "unpaid salary after resignation procedure India",
+            "query": "how to recover unpaid salary from private employer in India",
             "jurisdictions": [
               "central",
               "UP"
             ],
-            "top_score": 0.6791051030158997,
+            "top_score": 0.7195278406143188,
             "min_score": 0.66,
             "old_law": [
               {
-                "id": "WAGE-PWA1936-S5",
-                "score": 0.6825517416000366
+                "id": "WAGE-PWA1936-S15",
+                "score": 0.711521565914154
               },
               {
-                "id": "WAGE-PWA1936-S15",
-                "score": 0.6614677309989929
+                "id": "WAGE-PWA1936-S5",
+                "score": 0.6970491409301758
               }
             ]
           },
+          "intent": {
+            "intents": [
+              "next_steps",
+              "where_to_complain"
+            ],
+            "question": "What steps can I take to recover my unpaid salary from my former employer?",
+            "want_draft": false,
+            "has_question": true
+          },
           "judge": "ok",
           "verifier_history": [
-            [
-              "block 1: claim not supported by its cited source (The source states wages shall be paid 'within two working days', whereas the claim states 'before the second working day)"
-            ],
-            [
-              "block 5: claim not supported by its cited source (The source states authorities must be 'not below the rank of a Gazetted Officer', whereas the claim states they can be ')"
-            ]
+            []
           ],
-          "pruned": {
-            "removed_blocks": [
-              5
-            ],
-            "reasons": [
-              "block 5: claim not supported by its cited source (The source states authorities must be 'not below the rank of a Gazetted Officer', whereas the claim states they can be ')"
-            ],
-            "recheck": [],
-            "judge": "ok"
-          },
-          "timings_s": 154.154,
+          "timings_s": 10.722,
           "llm": {
-            "calls": 11,
-            "retries": 3,
-            "latency_s": 147.82,
+            "calls": 5,
+            "retries": 0,
+            "latency_s": 10.6,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
               "main:gemini:gemini-3.5-flash-lite",
-              "judge:gemini:gemma-4-31b-it",
-              "main:gemini:gemini-3.5-flash-lite",
-              "judge:gemini:gemma-4-31b-it",
-              "judge:gemini:gemma-4-31b-it"
+              "judge:gemini:gemini-3.1-flash-lite"
             ],
-            "fallbacks": []
+            "fallbacks": [
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~392s"
+              }
+            ]
           },
           "action": "answer",
           "category": "wages",
           "retrieved": [
             {
-              "id": "WAGE-COW2019-S17",
-              "score": 0.6791051030158997
-            },
-            {
-              "id": "WAGE-COW2019-S43",
-              "score": 0.6586199402809143
-            },
-            {
-              "id": "WAGE-COSS2020-S53",
-              "score": 0.6530250906944275
-            },
-            {
-              "id": "WAGE-COW2019-S5",
-              "score": 0.6434996128082275
-            },
-            {
-              "id": "WAGE-UPSHOP1962-S13",
-              "score": 0.6430404186248779
-            },
-            {
-              "id": "WAGE-COW2019-S20",
-              "score": 0.6397666931152344
-            },
-            {
               "id": "WAGE-COW2019-S45",
-              "score": 0.7474292516708374
+              "score": 0.7195278406143188
             },
             {
               "id": "WAGE-COW2019-S57",
-              "score": 0.696526288986206
+              "score": 0.6979914903640747
+            },
+            {
+              "id": "WAGE-COW2019-S43",
+              "score": 0.6961815357208252
+            },
+            {
+              "id": "WAGE-UPSHOP1962-S18",
+              "score": 0.6927111148834229
+            },
+            {
+              "id": "WAGE-COW2019-S17",
+              "score": 0.687429666519165
+            },
+            {
+              "id": "WAGE-COWRULES2026-R46",
+              "score": 0.6846946477890015
+            },
+            {
+              "id": "WAGE-COW2019-S49",
+              "score": 0.6729814410209656
+            },
+            {
+              "id": "WAGE-COW2019-S46",
+              "score": 0.6659461259841919
             }
           ],
           "citations": [
+            "WAGE-COW2019-S45",
             "WAGE-COW2019-S17",
-            "WAGE-UPSHOP1962-S13",
             "WAGE-COW2019-S43"
           ],
           "verifier": {
-            "status": "pruned",
+            "status": "pass",
             "issues": []
           },
           "escalation_reasons": [],
@@ -467,7 +470,8 @@
                 "model": "gemma-4-31b-it",
                 "rpm": 30,
                 "tpm": 16000,
-                "rpd": 14000
+                "rpd": 14000,
+                "timeout_s": 25
               },
               {
                 "provider": "gemini",
@@ -493,15 +497,12 @@
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001",
         "main:gemini:gemini-3.5-flash-lite",
-        "judge:gemini:gemma-4-31b-it",
-        "main:gemini:gemini-3.5-flash-lite",
-        "judge:gemini:gemma-4-31b-it",
-        "judge:gemini:gemma-4-31b-it"
+        "judge:gemini:gemini-3.1-flash-lite"
       ],
-      "latency_s": 154.15791709994664,
-      "finished_at": "2026-11-05T22:04:44.802620+00:00"
+      "latency_s": 10.72430289996555,
+      "finished_at": "2026-11-06T15:13:56.713291+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T22:04:44.802620+00:00"
+  "finished_at": "2026-11-06T15:13:56.713291+00:00"
 }

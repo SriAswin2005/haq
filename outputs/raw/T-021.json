@@ -152,7 +152,8 @@
         "model": "gemma-4-31b-it",
         "rpm": 30,
         "tpm": 16000,
-        "rpd": 14000
+        "rpd": 14000,
+        "timeout_s": 25
       },
       {
         "provider": "gemini",
@@ -170,55 +171,56 @@
       }
     ]
   },
-  "started_at": "2026-11-05T21:57:09.057730+00:00",
+  "started_at": "2026-11-06T15:12:22.115636+00:00",
   "turns": [
     {
       "input": "Lucknow UP. Fictional seller CloudBasket took Rs 2400 for shoes on 10 October 2026, cancelled the order and still hasn't refunded me. I have the invoice, cancellation email and bank statement. Support keeps closing tickets. What can I do?",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T21:57:15.066111+00:00",
+      "started_at": "2026-11-06T15:12:28.100729+00:00",
       "result": {
-        "reply_text": "I understand that you purchased shoes from CloudBasket for Rs 2400, the order was cancelled, and you have not received your refund despite contacting their support team.\n\nE-commerce entities are required to process refunds for requests made according to the rules within a reasonable period of time. Sellers on a marketplace are prohibited from refusing to refund consideration paid if services or goods are deficient.\n\nYou may register your grievance through the National Consumer Helpline (NCH) at 1915 or via their website (consumerhelpline.gov.in). This is a pre-litigation stage for grievance redressal. If the issue remains unresolved, you may file a complaint with the District Commission, provided the value of the goods does not exceed the prescribed limits. A complaint must generally be filed within two years from the date the cause of action arose.\n\nKeep copies of your invoice, the cancellation email, and your bank statement as proof of your transaction and the failed refund. If you decide to approach the District Commission, you may need to provide these documents to support your claim.\n\nIf you are unable to resolve the matter through the National Consumer Helpline or if the company continues to ignore your requests, you may consider consulting a lawyer to understand the formal process for filing a consumer complaint.\n\nSource: Consumer Protection (E-Commerce) Rules, 2020, rule 4\nSource: Consumer Protection (E-Commerce) Rules, 2020, rule 6\nSource: National Consumer Helpline Grievance Redressal Procedure, procedure 1\nSource: National Consumer Helpline Guidelines, helpline 1915\nSource: Consumer Protection Act, 2019, section 34\nSource: Consumer Protection Act, 2019, section 69\nSource: Consumer Protection (Jurisdiction of the District Commission, the State Commission and the National Commission) Rules, 2021, rule 3\n\nWhat I could not verify:\n- where to complain if the District Commission process is not suitable for your specific situation\n\nThis is legal information, not legal advice.",
+        "reply_text": "You can complain to the National Consumer Helpline by visiting their web portal, using their app, emailing, messaging on WhatsApp, or calling their toll-free numbers. You can also file a complaint before a District Commission.\n\nKeep your invoice, cancellation email, and bank statement ready as proof.\n\nYour next steps are to register your grievance with the National Consumer Helpline, and if needed, you can file a complaint with the District Commission.\n\nWhat I understood: CloudBasket cancelled your order for shoes and did not refund your money, and support tickets were closed without resolution.\n\nEvery e-commerce entity must appoint a grievance officer who must acknowledge a consumer complaint within forty-eight hours and redress it within one month from receipt. Also, e-commerce entities must effect refunds for requests made according to the rules within a reasonable period of time.\n\nThe District Commission can entertain complaints where the value of the goods or services paid as consideration does not exceed up to fifty lakh rupees or one crore rupees.\n\nA complaint to the District Commission must be filed within two years from the date on which the cause of action has arisen, unless the commission permits a delay for sufficient cause.\n\nSource: Department of Consumer Affairs - National Consumer Helpline (NCH), H NCH\nSource: National Consumer Helpline Grievance Redressal Procedure, procedure 1\nSource: National Consumer Helpline Guidelines, helpline 1915\nSource: Consumer Protection Act, 2019, section 35\nSource: Consumer Protection (E-Commerce) Rules, 2020, rule 4\nSource: Consumer Protection Act, 2019, section 34\nSource: Consumer Protection (Jurisdiction of the District Commission, the State Commission and the National Commission) Rules, 2021, rule 3\nSource: Consumer Protection Act, 2019, section 69\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "consumer",
         "action": "answer",
         "citations": [
-          "CONS-ECOM2020-R4",
-          "CONS-ECOM2020-R6",
+          "COM-DIR-NCH",
           "CONS-NCH-P1",
           "COM-NCH-H1915",
+          "CONS-CPA2019-S35",
+          "CONS-ECOM2020-R4",
           "CONS-CPA2019-S34",
-          "CONS-CPA2019-S69",
-          "CONS-PECRULES2021-R3"
+          "CONS-PECRULES2021-R3",
+          "CONS-CPA2019-S69"
         ],
         "retrieved": [
           {
             "id": "CONS-ECOM2020-R4",
-            "score": 0.7063970565795898
+            "score": 0.7376871705055237
           },
           {
-            "id": "CONS-ECOM2020-R6",
-            "score": 0.6576131582260132
-          },
-          {
-            "id": "CONS-CPA2019-S39",
-            "score": 0.6549208164215088
-          },
-          {
-            "id": "CONS-CPA2019-S69",
-            "score": 0.6471370458602905
+            "id": "COM-DIR-NCH",
+            "score": 0.7117920517921448
           },
           {
             "id": "CONS-NCH-P1",
-            "score": 0.6445009112358093
+            "score": 0.7084656953811646
+          },
+          {
+            "id": "CONS-CPA2019-S35",
+            "score": 0.7041119337081909
           },
           {
             "id": "COM-NCH-H1915",
-            "score": 0.636265754699707
+            "score": 0.6981467604637146
+          },
+          {
+            "id": "CONS-CPA2019-S69",
+            "score": 0.6901510953903198
           },
           {
             "id": "CONS-CPA2019-S34",
-            "score": 0.7613463401794434
+            "score": 0.7613462805747986
           },
           {
             "id": "CONS-PECRULES2021-R3",
@@ -228,12 +230,12 @@
         "needs_lawyer": false,
         "escalation_reasons": [],
         "verifier": {
-          "status": "fixed",
+          "status": "pass",
           "issues": []
         },
         "draft_text": null,
         "trace": {
-          "session": "42d4bb29b0ae",
+          "session": "1bd7b022444a",
           "input_mode": "text",
           "user_text": "Lucknow UP. Fictional seller CloudBasket took Rs 2400 for shoes on 10 October 2026, cancelled the order and still hasn't refunded me. I have the invoice, cancellation email and bank statement. Support keeps closing tickets. What can I do?",
           "mode": "advice",
@@ -243,8 +245,8 @@
             "state_or_city": "UP",
             "case_file_update": {
               "amount_inr": 2400,
-              "purchase_date": "2026-10-10",
               "product_or_service": "shoes",
+              "purchase_date": "2026-10-10",
               "counterparty_name": "CloudBasket",
               "counterparty_type": "seller",
               "proof": [
@@ -253,58 +255,65 @@
                 "bank statement"
               ],
               "already_tried": [
-                "customer support tickets"
+                "support tickets"
               ],
               "resolution_wanted": "refund"
             },
             "missing_facts": [],
             "escalation_flags": [],
-            "english_retrieval_query": "consumer refund for cancelled order not received"
+            "english_retrieval_query": "how to file consumer complaint for non-refund of cancelled order",
+            "intent": [
+              "where_to_complain",
+              "next_steps"
+            ],
+            "question": "What steps can I take to get a refund from the seller after they cancelled my order and failed to return my money?",
+            "new_topic": false,
+            "summary": "CloudBasket cancelled your order for shoes worth Rs 2400 on 10 October 2026 and has not provided a refund despite your attempts to contact support."
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
           "retrieval": {
-            "query": "consumer refund for cancelled order not received",
+            "query": "how to file consumer complaint for non-refund of cancelled order",
             "jurisdictions": [
               "central",
               "UP"
             ],
-            "top_score": 0.7063970565795898,
+            "top_score": 0.7376871705055237,
             "min_score": 0.66,
             "old_law": []
           },
+          "intent": {
+            "intents": [
+              "next_steps",
+              "where_to_complain"
+            ],
+            "question": "What steps can I take to get a refund from the seller after they cancelled my order and failed to return my money?",
+            "want_draft": false,
+            "has_question": true
+          },
           "judge": "ok",
           "verifier_history": [
-            [
-              "block 1: number '48 hours' not found in cited source or user's facts"
-            ],
             []
           ],
-          "timings_s": 69.381,
+          "timings_s": 10.268,
           "llm": {
-            "calls": 8,
-            "retries": 2,
-            "latency_s": 67.22,
+            "calls": 5,
+            "retries": 0,
+            "latency_s": 10.16,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
-              "main:gemini:gemini-3.1-flash-lite",
-              "main:gemini:gemini-3.1-flash-lite",
-              "judge:gemini:gemma-4-31b-it"
+              "main:gemini:gemini-3.5-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite"
             ],
             "fallbacks": [
               {
-                "role": "main",
-                "model": "gemini:gemini-3.5-flash-lite",
-                "reason": "HTTP 503"
-              },
-              {
-                "role": "main",
-                "model": "gemini:gemini-3.5-flash-lite",
-                "reason": "busy for ~111s"
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~471s"
               }
             ]
           },
@@ -313,31 +322,31 @@
           "retrieved": [
             {
               "id": "CONS-ECOM2020-R4",
-              "score": 0.7063970565795898
+              "score": 0.7376871705055237
             },
             {
-              "id": "CONS-ECOM2020-R6",
-              "score": 0.6576131582260132
-            },
-            {
-              "id": "CONS-CPA2019-S39",
-              "score": 0.6549208164215088
-            },
-            {
-              "id": "CONS-CPA2019-S69",
-              "score": 0.6471370458602905
+              "id": "COM-DIR-NCH",
+              "score": 0.7117920517921448
             },
             {
               "id": "CONS-NCH-P1",
-              "score": 0.6445009112358093
+              "score": 0.7084656953811646
+            },
+            {
+              "id": "CONS-CPA2019-S35",
+              "score": 0.7041119337081909
             },
             {
               "id": "COM-NCH-H1915",
-              "score": 0.636265754699707
+              "score": 0.6981467604637146
+            },
+            {
+              "id": "CONS-CPA2019-S69",
+              "score": 0.6901510953903198
             },
             {
               "id": "CONS-CPA2019-S34",
-              "score": 0.7613463401794434
+              "score": 0.7613462805747986
             },
             {
               "id": "CONS-PECRULES2021-R3",
@@ -345,16 +354,17 @@
             }
           ],
           "citations": [
-            "CONS-ECOM2020-R4",
-            "CONS-ECOM2020-R6",
+            "COM-DIR-NCH",
             "CONS-NCH-P1",
             "COM-NCH-H1915",
+            "CONS-CPA2019-S35",
+            "CONS-ECOM2020-R4",
             "CONS-CPA2019-S34",
-            "CONS-CPA2019-S69",
-            "CONS-PECRULES2021-R3"
+            "CONS-PECRULES2021-R3",
+            "CONS-CPA2019-S69"
           ],
           "verifier": {
-            "status": "fixed",
+            "status": "pass",
             "issues": []
           },
           "escalation_reasons": [],
@@ -460,7 +470,8 @@
                 "model": "gemma-4-31b-it",
                 "rpm": 30,
                 "tpm": 16000,
-                "rpd": 14000
+                "rpd": 14000,
+                "timeout_s": 25
               },
               {
                 "provider": "gemini",
@@ -485,14 +496,13 @@
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001",
-        "main:gemini:gemini-3.1-flash-lite",
-        "main:gemini:gemini-3.1-flash-lite",
-        "judge:gemini:gemma-4-31b-it"
+        "main:gemini:gemini-3.5-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite"
       ],
-      "latency_s": 69.38400840002578,
-      "finished_at": "2026-11-05T21:58:24.450217+00:00"
+      "latency_s": 10.27502950001508,
+      "finished_at": "2026-11-06T15:12:38.369174+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T21:58:24.450217+00:00"
+  "finished_at": "2026-11-06T15:12:38.369174+00:00"
 }

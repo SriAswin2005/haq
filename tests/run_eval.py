@@ -97,6 +97,10 @@ def load_cases(path, groups=None):
         if "expected_referral_any" in case and (not isinstance(case["expected_referral_any"], list) or not case["expected_referral_any"]
                 or any(not isinstance(cid, str) or not cid.startswith("COM-DIR-") for cid in case["expected_referral_any"])):
             raise ValueError(f"{case['id']}: expected_referral_any must name actual directory IDs")
+        if "expected_outcomes" in case and (not isinstance(case["expected_outcomes"], list) or not case["expected_outcomes"]
+                or any(not isinstance(o, dict) or set(o) != {"category", "action", "needs_lawyer"}
+                       or type(o["needs_lawyer"]) is not bool for o in case["expected_outcomes"])):
+            raise ValueError(f"{case['id']}: expected_outcomes must contain complete category/action/lawyer tuples")
         ids.add(case["id"])
         labels = [case["group"], case["group"].split("_")[0], *case.get("tags", [])]
         if not groups or any(g == label or label.startswith(g + "_") for g in groups for label in labels):

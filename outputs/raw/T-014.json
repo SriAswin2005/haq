@@ -146,7 +146,8 @@
         "model": "gemma-4-31b-it",
         "rpm": 30,
         "tpm": 16000,
-        "rpd": 14000
+        "rpd": 14000,
+        "timeout_s": 25
       },
       {
         "provider": "gemini",
@@ -164,15 +165,15 @@
       }
     ]
   },
-  "started_at": "2026-11-05T21:55:19.838461+00:00",
+  "started_at": "2026-11-06T15:10:28.956988+00:00",
   "turns": [
     {
       "input": "Lucknow UP residential tenancy ended October 2026. The security deposit is Rs 9,00,00,000, yes nine crore rupees, and the landlord has returned nothing. I have the agreement. What next?",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T21:55:25.823723+00:00",
+      "started_at": "2026-11-06T15:10:34.957824+00:00",
       "result": {
-        "reply_text": "I understand that your residential tenancy in Lucknow has ended and your landlord has not returned your security deposit. You have a copy of your rental agreement.\n\nUnder the law, the security deposit must be refunded to the tenant on the date of taking over vacant possession of the premises, after making any due deductions for the tenant's liabilities.\n\nYou may approach the Rent Authority to resolve this dispute. The District Collector appoints an officer, not below the rank of Additional District Collector, to act as the Rent Authority in your jurisdiction.\n\nTo proceed, you can file an application before the Rent Authority. This application should be accompanied by an affidavit and relevant documents, such as your rental agreement. The Rent Authority will then issue a notice to the landlord.\n\nKeep a copy of your rental agreement and any communication you have had with your landlord regarding the return of the deposit. If you have sent any written requests for the refund, keep copies of those as well.\n\nSince the amount involved is significant and legal procedures can be complex, you may want to consult a lawyer to help you draft your application and represent your interests before the Rent Authority.\n\nDo you have the contact details of your landlord? Also, has the landlord provided any specific reason for withholding the deposit, such as claims for repairs or unpaid dues?\n\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 11\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 30\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 33\n\nWhat I could not verify:\n- I could not verify the specific interest rate applicable for the refund as it is prescribed from time to time.\n- The Permanent Lok Adalat does not have jurisdiction in this matter because the value of the property in dispute exceeds ten lakh rupees.\n- I left out one point because I could not match it exactly to the official text. A lawyer or legal aid office can confirm it.\n\nBecause of the points above, please talk to a real lawyer or free legal aid office. (the amount involved is high)\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (Source: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
+        "reply_text": "Your security deposit must be refunded to you on the date of taking over vacant possession of the premises, after making due deduction of any liability of the tenant, as provided under the law.\n\nWhat I understood: Your residential tenancy in Lucknow ended in October 2026, and your landlord has not returned your security deposit of nine crore rupees after you gave back the premises.\n\nWhere you stand: The law states that the security deposit shall be refunded to the tenant on the date of taking over vacant possession of the premises from the tenant, after making due deduction of any liability of the tenant.\n\nYour options in order: You can approach the Rent Authority appointed by the District Collector to file an application accompanied by an affidavit and documents, such as your tenancy agreement.\n\nKeep your tenancy agreement and any proof of handing over vacant possession ready.\n\nWhen to see a lawyer: You may consult a lawyer to help you file your application before the Rent Authority if you need assistance with the procedure.\n\nDo you have the landlord's contact details?\n\nOn what exact date was the tenancy agreement signed?\n\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 11\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 30\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 33\n\nBecause of the points above, please talk to a real lawyer or free legal aid office. (the amount involved is high)\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (Source: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "tenancy",
         "action": "answer",
@@ -186,31 +187,31 @@
         "retrieved": [
           {
             "id": "TEN-UPTA2021-S11",
-            "score": 0.7119414806365967
+            "score": 0.6999545693397522
           },
           {
             "id": "TEN-UPTA2021-S24",
-            "score": 0.6848083734512329
+            "score": 0.6796570420265198
+          },
+          {
+            "id": "TEN-UPTA2021-S28",
+            "score": 0.6554534435272217
           },
           {
             "id": "TEN-UPTA2021-S15",
-            "score": 0.664892315864563
+            "score": 0.654457151889801
           },
           {
-            "id": "COM-LSAA1987-S21",
-            "score": 0.6578323841094971
+            "id": "TEN-TPA1882-S111",
+            "score": 0.6509883403778076
           },
           {
             "id": "TEN-UPTA2021-S14",
-            "score": 0.6537264585494995
-          },
-          {
-            "id": "COM-LSAA1987-S22C",
-            "score": 0.6521522998809814
+            "score": 0.6508650779724121
           },
           {
             "id": "TEN-UPTA2021-S33",
-            "score": 0.7123492956161499
+            "score": 0.712349534034729
           },
           {
             "id": "TEN-UPTA2021-S30",
@@ -232,12 +233,12 @@
           "high_amount"
         ],
         "verifier": {
-          "status": "pruned",
+          "status": "fixed",
           "issues": []
         },
         "draft_text": null,
         "trace": {
-          "session": "018dbe55cbae",
+          "session": "0165873f7ce3",
           "input_mode": "text",
           "user_text": "Lucknow UP residential tenancy ended October 2026. The security deposit is Rs 9,00,00,000, yes nine crore rupees, and the landlord has returned nothing. I have the agreement. What next?",
           "mode": "advice",
@@ -248,95 +249,90 @@
             "case_file_update": {
               "amount_inr": 90000000,
               "vacated_date": "2026-10",
+              "what_happened": "The landlord has not returned the security deposit of nine crore rupees after the tenancy ended in October 2026.",
               "proof": [
-                "rental agreement"
+                "tenancy agreement"
               ],
-              "counterparty_type": "landlord"
+              "state": "UP"
             },
             "missing_facts": [
-              "landlord contact details",
-              "reason given by landlord for withholding deposit"
+              "landlord's contact details",
+              "date the tenancy agreement was signed"
             ],
             "escalation_flags": [],
-            "english_retrieval_query": "legal recourse for non-refund of residential security deposit in India"
+            "english_retrieval_query": "legal procedure to recover security deposit from landlord in India",
+            "intent": [
+              "next_steps",
+              "where_to_complain"
+            ],
+            "question": "What are the next steps to recover my security deposit from the landlord?",
+            "new_topic": true,
+            "summary": "Your residential tenancy in Lucknow ended in October 2026, but the landlord has not returned your security deposit of nine crore rupees."
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
           "retrieval": {
-            "query": "legal recourse for non-refund of residential security deposit in India",
+            "query": "legal procedure to recover security deposit from landlord in India",
             "jurisdictions": [
               "central",
               "UP"
             ],
-            "top_score": 0.7119414806365967,
+            "top_score": 0.6999545693397522,
             "min_score": 0.66,
             "old_law": [
               {
                 "id": "TEN-UP1972-S20",
-                "score": 0.6373753547668457
+                "score": 0.6414324641227722
               },
               {
                 "id": "TEN-UP1972-S21",
-                "score": 0.6215080618858337
+                "score": 0.6384209394454956
               }
             ]
+          },
+          "intent": {
+            "intents": [
+              "next_steps",
+              "where_to_complain"
+            ],
+            "question": "What are the next steps to recover my security deposit from the landlord?",
+            "want_draft": false,
+            "has_question": true
           },
           "judge": "ok",
           "verifier_history": [
             [
-              "block 0: number 'nine crore' not found in cited source or user's facts"
+              "block 1: claim not supported by its cited source (condition dropped: The interest liability applies only where the landlord exercises the right of recovery of possession )"
             ],
-            [
-              "block 2: claim not supported by its cited source (condition dropped: the interest liability only applies where the landlord exercises the right of recovery of possession )"
-            ]
+            []
           ],
-          "pruned": {
-            "removed_blocks": [
-              2
-            ],
-            "reasons": [
-              "block 2: claim not supported by its cited source (condition dropped: the interest liability only applies where the landlord exercises the right of recovery of possession )"
-            ],
-            "recheck": [],
-            "judge": "ok"
-          },
-          "timings_s": 29.999,
+          "timings_s": 19.518,
           "llm": {
-            "calls": 10,
-            "retries": 2,
-            "latency_s": 24.78,
+            "calls": 8,
+            "retries": 0,
+            "latency_s": 19.35,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
-              "main:gemini:gemini-3.1-flash-lite",
-              "main:gemini:gemini-3.1-flash-lite",
+              "main:gemini:gemini-3.5-flash-lite",
               "judge:gemini:gemini-3.1-flash-lite",
+              "main:gemini:gemini-3.5-flash-lite",
               "judge:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001"
             ],
             "fallbacks": [
               {
-                "role": "main",
-                "model": "gemini:gemini-3.5-flash-lite",
-                "reason": "HTTP 503"
-              },
-              {
-                "role": "main",
-                "model": "gemini:gemini-3.5-flash-lite",
-                "reason": "busy for ~17s"
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~582s"
               },
               {
                 "role": "judge",
                 "model": "gemini:gemma-4-31b-it",
-                "reason": "busy for ~90s"
-              },
-              {
-                "role": "judge",
-                "model": "gemini:gemma-4-31b-it",
-                "reason": "busy for ~87s"
+                "reason": "busy for ~576s"
               }
             ]
           },
@@ -345,31 +341,31 @@
           "retrieved": [
             {
               "id": "TEN-UPTA2021-S11",
-              "score": 0.7119414806365967
+              "score": 0.6999545693397522
             },
             {
               "id": "TEN-UPTA2021-S24",
-              "score": 0.6848083734512329
+              "score": 0.6796570420265198
+            },
+            {
+              "id": "TEN-UPTA2021-S28",
+              "score": 0.6554534435272217
             },
             {
               "id": "TEN-UPTA2021-S15",
-              "score": 0.664892315864563
+              "score": 0.654457151889801
             },
             {
-              "id": "COM-LSAA1987-S21",
-              "score": 0.6578323841094971
+              "id": "TEN-TPA1882-S111",
+              "score": 0.6509883403778076
             },
             {
               "id": "TEN-UPTA2021-S14",
-              "score": 0.6537264585494995
-            },
-            {
-              "id": "COM-LSAA1987-S22C",
-              "score": 0.6521522998809814
+              "score": 0.6508650779724121
             },
             {
               "id": "TEN-UPTA2021-S33",
-              "score": 0.7123492956161499
+              "score": 0.712349534034729
             },
             {
               "id": "TEN-UPTA2021-S30",
@@ -394,7 +390,7 @@
             "COM-UPSLSA-H1800"
           ],
           "verifier": {
-            "status": "pruned",
+            "status": "fixed",
             "issues": []
           },
           "escalation_reasons": [
@@ -502,7 +498,8 @@
                 "model": "gemma-4-31b-it",
                 "rpm": 30,
                 "tpm": 16000,
-                "rpd": 14000
+                "rpd": 14000,
+                "timeout_s": 25
               },
               {
                 "provider": "gemini",
@@ -527,16 +524,16 @@
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001",
-        "main:gemini:gemini-3.1-flash-lite",
-        "main:gemini:gemini-3.1-flash-lite",
+        "main:gemini:gemini-3.5-flash-lite",
         "judge:gemini:gemini-3.1-flash-lite",
+        "main:gemini:gemini-3.5-flash-lite",
         "judge:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 30.00249400001485,
-      "finished_at": "2026-11-05T21:55:55.825959+00:00"
+      "latency_s": 19.524726899981033,
+      "finished_at": "2026-11-06T15:10:54.475870+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T21:55:55.825959+00:00"
+  "finished_at": "2026-11-06T15:10:54.475870+00:00"
 }

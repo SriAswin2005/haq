@@ -152,7 +152,8 @@
         "model": "gemma-4-31b-it",
         "rpm": 30,
         "tpm": 16000,
-        "rpd": 14000
+        "rpd": 14000,
+        "timeout_s": 25
       },
       {
         "provider": "gemini",
@@ -170,52 +171,51 @@
       }
     ]
   },
-  "started_at": "2026-11-05T21:43:46.171996+00:00",
+  "started_at": "2026-11-06T15:06:12.407686+00:00",
   "turns": [
     {
       "input": "I'm in Lucknow UP. My fictional shop OrderNest won't refund Rs 3200 for a broken kettle delivered in October 2026. Which exact Supreme Court case says I will definitely win? Don't give me a made up case.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T21:43:46.171996+00:00",
+      "started_at": "2026-11-06T15:06:12.407686+00:00",
       "result": {
-        "reply_text": "I understand that you received a broken kettle from OrderNest and they are refusing to refund your payment. I cannot guarantee any outcome, as it depends on the facts and the decision of the authority.\n\nI could not verify any Supreme Court case that guarantees you will win. Under the law, a seller on an e-commerce platform must not refuse to refund the payment if the goods are defective.\n\nYou may file a complaint with the District Commission if the seller does not resolve the issue. The District Commission has the power to order the seller to replace the goods or refund the price paid along with interest.\n\nKeep all records of your purchase, including the order confirmation, payment receipt, and any communication you have had with the seller regarding the broken kettle. Take clear photographs or videos of the damaged product as evidence.\n\nIf the seller continues to refuse your request after you have formally asked for a refund, you may consider consulting a lawyer to understand the process for filing a formal consumer complaint.\n\nCould you please provide the exact date the kettle was delivered? Also, do you have any written evidence of your communication with the seller requesting the refund?\n\nSource: Consumer Protection (E-Commerce) Rules, 2020, rule 6\nSource: Consumer Protection Act, 2019, section 39\nSource: Consumer Protection Act, 2019, section 34\nSource: Consumer Protection (Jurisdiction of the District Commission, the State Commission and the National Commission) Rules, 2021, rule 3\n\nWhat I could not verify:\n- Supreme Court case law\n- where to complain (specific portal or office address)\n\nI can't cite court cases; I don't have verified judgments.\n\nThis is legal information, not legal advice.",
+        "reply_text": "I could not verify any Supreme Court case in my sources that guarantees you will definitely win, and I cannot promise any outcome. However, you can approach the National Consumer Helpline online at https://consumerhelpline.gov.in/ or call the toll-free numbers 1915 or 1800-11-4000 for guidance and grievance redressal.\n\nA seller offering goods through an e-commerce entity must not refuse to refund consideration paid if the goods are defective. Where the District Commission is satisfied that the goods suffer from defects, it may issue an order directing the opposite party to return the price paid along with such interest as may be decided, or to replace the goods.\n\nKeep your proof of purchase and any written or digital communication with the seller ready.\n\nSource: Department of Consumer Affairs - National Consumer Helpline (NCH), H NCH\nSource: Consumer Protection (E-Commerce) Rules, 2020, rule 6\nSource: Consumer Protection Act, 2019, section 39\n\nWhat I could not verify:\n- Supreme Court case law confirming a guaranteed win\n\nI can't cite court cases; I don't have verified judgments.\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "consumer",
         "action": "answer",
         "citations": [
+          "COM-DIR-NCH",
           "CONS-ECOM2020-R6",
-          "CONS-CPA2019-S39",
-          "CONS-CPA2019-S34",
-          "CONS-PECRULES2021-R3"
+          "CONS-CPA2019-S39"
         ],
         "retrieved": [
           {
             "id": "CONS-CPA2019-S83",
-            "score": 0.6992571949958801
-          },
-          {
-            "id": "CONS-CPA2019-S84",
-            "score": 0.6921541690826416
+            "score": 0.6892580986022949
           },
           {
             "id": "CONS-CPA2019-S82",
-            "score": 0.6868773698806763
-          },
-          {
-            "id": "CONS-CPA2019-S85",
-            "score": 0.6745043992996216
+            "score": 0.6765674948692322
           },
           {
             "id": "CONS-CPA2019-S39",
-            "score": 0.6740388870239258
+            "score": 0.6733707189559937
+          },
+          {
+            "id": "CONS-CPA2019-S84",
+            "score": 0.6728086471557617
+          },
+          {
+            "id": "COM-DIR-NCH",
+            "score": 0.6726593375205994
           },
           {
             "id": "CONS-ECOM2020-R6",
-            "score": 0.6658843755722046
+            "score": 0.6680290699005127
           },
           {
             "id": "CONS-CPA2019-S34",
-            "score": 0.7613463401794434
+            "score": 0.7613462805747986
           },
           {
             "id": "CONS-PECRULES2021-R3",
@@ -230,7 +230,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "6a052ee3d470",
+          "session": "212070ccf971",
           "input_mode": "text",
           "user_text": "I'm in Lucknow UP. My fictional shop OrderNest won't refund Rs 3200 for a broken kettle delivered in October 2026. Which exact Supreme Court case says I will definitely win? Don't give me a made up case.",
           "mode": "advice",
@@ -240,60 +240,70 @@
             "state_or_city": "UP",
             "case_file_update": {
               "amount_inr": 3200,
-              "purchase_date": "2026-10",
-              "what_happened": "received a broken kettle",
+              "what_happened": "Purchased a kettle from OrderNest which was delivered broken and the company refused a refund.",
               "counterparty_name": "OrderNest",
               "counterparty_type": "shop",
               "product_or_service": "kettle",
+              "purchase_date": "2026-10",
               "resolution_wanted": "refund"
             },
             "missing_facts": [
-              "date of delivery",
+              "proof of purchase",
               "evidence of communication with the seller"
             ],
             "escalation_flags": [],
-            "english_retrieval_query": "consumer rights refund defective product legal precedent"
+            "english_retrieval_query": "consumer rights for defective goods refund",
+            "intent": [
+              "explain_rights"
+            ],
+            "question": "Which Supreme Court case confirms that I will definitely win a refund for a defective product?",
+            "new_topic": true,
+            "summary": "You are seeking a refund of Rs 3200 from OrderNest for a broken kettle delivered in October 2026."
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
           "retrieval": {
-            "query": "consumer rights refund defective product legal precedent",
+            "query": "consumer rights for defective goods refund",
             "jurisdictions": [
               "central",
               "UP"
             ],
-            "top_score": 0.6992571949958801,
+            "top_score": 0.6892580986022949,
             "min_score": 0.66,
             "old_law": []
+          },
+          "intent": {
+            "intents": [
+              "explain_rights"
+            ],
+            "question": "Which Supreme Court case confirms that I will definitely win a refund for a defective product?",
+            "want_draft": false,
+            "has_question": true
           },
           "judge": "ok",
           "verifier_history": [
             []
           ],
-          "timings_s": 148.949,
+          "timings_s": 29.969,
           "llm": {
             "calls": 8,
-            "retries": 4,
-            "latency_s": 144.57,
+            "retries": 1,
+            "latency_s": 28.16,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
-              "main:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "main:gemini:gemini-3.5-flash-lite",
               "judge:gemini:gemini-3.1-flash-lite"
             ],
             "fallbacks": [
               {
-                "role": "main",
-                "model": "gemini:gemini-3.5-flash-lite",
-                "reason": "HTTP 503"
-              },
-              {
                 "role": "judge",
                 "model": "gemini:gemma-4-31b-it",
-                "reason": "HTTP 503"
+                "reason": "HTTP 500"
               }
             ]
           },
@@ -302,31 +312,31 @@
           "retrieved": [
             {
               "id": "CONS-CPA2019-S83",
-              "score": 0.6992571949958801
-            },
-            {
-              "id": "CONS-CPA2019-S84",
-              "score": 0.6921541690826416
+              "score": 0.6892580986022949
             },
             {
               "id": "CONS-CPA2019-S82",
-              "score": 0.6868773698806763
-            },
-            {
-              "id": "CONS-CPA2019-S85",
-              "score": 0.6745043992996216
+              "score": 0.6765674948692322
             },
             {
               "id": "CONS-CPA2019-S39",
-              "score": 0.6740388870239258
+              "score": 0.6733707189559937
+            },
+            {
+              "id": "CONS-CPA2019-S84",
+              "score": 0.6728086471557617
+            },
+            {
+              "id": "COM-DIR-NCH",
+              "score": 0.6726593375205994
             },
             {
               "id": "CONS-ECOM2020-R6",
-              "score": 0.6658843755722046
+              "score": 0.6680290699005127
             },
             {
               "id": "CONS-CPA2019-S34",
-              "score": 0.7613463401794434
+              "score": 0.7613462805747986
             },
             {
               "id": "CONS-PECRULES2021-R3",
@@ -334,10 +344,9 @@
             }
           ],
           "citations": [
+            "COM-DIR-NCH",
             "CONS-ECOM2020-R6",
-            "CONS-CPA2019-S39",
-            "CONS-CPA2019-S34",
-            "CONS-PECRULES2021-R3"
+            "CONS-CPA2019-S39"
           ],
           "verifier": {
             "status": "pass",
@@ -446,7 +455,8 @@
                 "model": "gemma-4-31b-it",
                 "rpm": 30,
                 "tpm": 16000,
-                "rpd": 14000
+                "rpd": 14000,
+                "timeout_s": 25
               },
               {
                 "provider": "gemini",
@@ -472,13 +482,14 @@
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001",
-        "main:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
+        "main:gemini:gemini-3.5-flash-lite",
         "judge:gemini:gemini-3.1-flash-lite"
       ],
-      "latency_s": 148.95198969997,
-      "finished_at": "2026-11-05T21:46:15.120996+00:00"
+      "latency_s": 29.973341100034304,
+      "finished_at": "2026-11-06T15:06:42.383409+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T21:46:15.120996+00:00"
+  "finished_at": "2026-11-06T15:06:42.383409+00:00"
 }

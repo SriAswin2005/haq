@@ -1,0 +1,488 @@
+{
+  "schema_version": 1,
+  "case_id": "T-046",
+  "case": {
+    "id": "T-046",
+    "group": "L_referrals",
+    "tags": [
+      "round4",
+      "directory",
+      "train refund"
+    ],
+    "category_expected": "consumer",
+    "language": "en-IN",
+    "input_mode": "text",
+    "turns": [
+      "Meri train cancel hui thi, ticket ka refund ab tak nahi mila. Railway ki official passenger grievance service mein complaint kahan karun? Bas sahi service bata do."
+    ],
+    "expected_action": "answer",
+    "expect_needs_lawyer": false,
+    "expected_topics": [
+      "train refund",
+      "official referral"
+    ],
+    "must_include_any": [],
+    "must_not_include": [],
+    "expected_chunk_ids": [
+      "COM-DIR-RAIL"
+    ],
+    "expected_referral_any": [
+      "COM-DIR-RAIL"
+    ],
+    "notes": "An answer must name and cite an expected body. Wrong bodies always hard fail. Statute/section patterns hard fail in escalate/out_of_scope replies; in an answer they must be grounded in cited chunks. Legal-aid-only escalation is a safe fallback and a recall miss. Targets remain agent-mapped, pending human confirmation.",
+    "expected_law_verified": false,
+    "calibration_label": "exclude",
+    "jurisdictions_expected": [
+      "central",
+      "UP"
+    ],
+    "retrieval_expectation_kind": "safe_referral",
+    "expected_outcomes": [
+      {
+        "category": "consumer",
+        "action": "answer",
+        "needs_lawyer": false
+      },
+      {
+        "category": "out_of_scope",
+        "action": "escalate",
+        "needs_lawyer": true
+      }
+    ]
+  },
+  "repeat": 1,
+  "mock": false,
+  "backend": "app.pipeline",
+  "stage": "real",
+  "configured_models": {
+    "router": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "main": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash",
+        "rpm": 5,
+        "tpm": 250000,
+        "rpd": 19
+      }
+    ],
+    "translate": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "judge": [
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000,
+        "timeout_s": 25
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      }
+    ]
+  },
+  "started_at": "2026-11-06T15:22:08.405027+00:00",
+  "turns": [
+    {
+      "input": "Meri train cancel hui thi, ticket ka refund ab tak nahi mila. Railway ki official passenger grievance service mein complaint kahan karun? Bas sahi service bata do.",
+      "input_mode": "text",
+      "lang_hint": "en-IN",
+      "started_at": "2026-11-06T15:22:14.405905+00:00",
+      "result": {
+        "reply_text": "आप अपनी शिकायत रेलमदद पोर्टल (RailMadad) पर ऑनलाइन दर्ज कर सकते हैं या चौबीसों घंटे चलने वाली रेलवे हेल्पलाइन 139 पर कॉल कर सकते हैं।\n\nशिकायत दर्ज करने के लिए अपने पास ट्रेन का टिकट, पीएनआर नंबर (PNR number) और यात्रा की तारीख (date of journey) तैयार रखें।\n\nक्या आप अपना पीएनआर नंबर (PNR number) और यात्रा की तारीख (date of journey) बता सकते हैं?\n\nSource: Indian Railways - RailMadad Portal, P RAIL\n\nThis is legal information, not legal advice.",
+        "reply_lang": "en-IN",
+        "category": "consumer",
+        "action": "answer",
+        "citations": [
+          "COM-DIR-RAIL"
+        ],
+        "retrieved": [
+          {
+            "id": "COM-DIR-RAIL",
+            "score": 0.7469433546066284
+          },
+          {
+            "id": "COM-DIR-AIRSEWA",
+            "score": 0.6824368834495544
+          },
+          {
+            "id": "CONS-NCH-P1",
+            "score": 0.6795969009399414
+          },
+          {
+            "id": "COM-DIR-RBI",
+            "score": 0.6639117002487183
+          },
+          {
+            "id": "COM-NCH-H1915",
+            "score": 0.6634182929992676
+          },
+          {
+            "id": "COM-DIR-NCH",
+            "score": 0.6631274223327637
+          },
+          {
+            "id": "CONS-CPA2019-S34",
+            "score": 0.7613462805747986
+          },
+          {
+            "id": "CONS-PECRULES2021-R3",
+            "score": 0.7612271308898926
+          }
+        ],
+        "needs_lawyer": false,
+        "escalation_reasons": [],
+        "verifier": {
+          "status": "pass",
+          "issues": []
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "1a70a9bcacaf",
+          "input_mode": "text",
+          "user_text": "Meri train cancel hui thi, ticket ka refund ab tak nahi mila. Railway ki official passenger grievance service mein complaint kahan karun? Bas sahi service bata do.",
+          "mode": "advice",
+          "router": {
+            "category": "consumer",
+            "language": "hi-IN",
+            "state_or_city": null,
+            "case_file_update": {
+              "product_or_service": "train ticket",
+              "what_happened": "Train was cancelled and refund for the ticket has not been received yet.",
+              "resolution_wanted": "refund"
+            },
+            "missing_facts": [
+              "PNR number",
+              "date of journey"
+            ],
+            "escalation_flags": [],
+            "english_retrieval_query": "how to file complaint for train ticket refund",
+            "intent": [
+              "where_to_complain"
+            ],
+            "question": "Where can I file a complaint with the official railway passenger grievance service regarding my ticket refund?",
+            "new_topic": false,
+            "summary": "आपकी ट्रेन रद्द हो गई थी और आपको अभी तक टिकट का रिफंड नहीं मिला है।"
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "summary_rejected": "आपकी ट्रेन रद्द हो गई थी और आपको अभी तक टिकट का रिफंड नहीं मिला है।",
+          "retrieval": {
+            "query": "how to file complaint for train ticket refund",
+            "jurisdictions": [
+              "central"
+            ],
+            "top_score": 0.7469433546066284,
+            "min_score": 0.66,
+            "old_law": []
+          },
+          "intent": {
+            "intents": [
+              "where_to_complain"
+            ],
+            "question": "Where can I file a complaint with the official railway passenger grievance service regarding my ticket refund?",
+            "want_draft": false,
+            "has_question": true
+          },
+          "judge": "ok",
+          "verifier_history": [
+            []
+          ],
+          "timings_s": 12.945,
+          "llm": {
+            "calls": 5,
+            "retries": 0,
+            "latency_s": 12.85,
+            "models": [
+              "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "embed:gemini:gemini-embedding-001",
+              "main:gemini:gemini-3.5-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite"
+            ],
+            "fallbacks": [
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~532s"
+              }
+            ]
+          },
+          "action": "answer",
+          "category": "consumer",
+          "retrieved": [
+            {
+              "id": "COM-DIR-RAIL",
+              "score": 0.7469433546066284
+            },
+            {
+              "id": "COM-DIR-AIRSEWA",
+              "score": 0.6824368834495544
+            },
+            {
+              "id": "CONS-NCH-P1",
+              "score": 0.6795969009399414
+            },
+            {
+              "id": "COM-DIR-RBI",
+              "score": 0.6639117002487183
+            },
+            {
+              "id": "COM-NCH-H1915",
+              "score": 0.6634182929992676
+            },
+            {
+              "id": "COM-DIR-NCH",
+              "score": 0.6631274223327637
+            },
+            {
+              "id": "CONS-CPA2019-S34",
+              "score": 0.7613462805747986
+            },
+            {
+              "id": "CONS-PECRULES2021-R3",
+              "score": 0.7612271308898926
+            }
+          ],
+          "citations": [
+            "COM-DIR-RAIL"
+          ],
+          "verifier": {
+            "status": "pass",
+            "issues": []
+          },
+          "escalation_reasons": [],
+          "models": {
+            "router": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "main": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash",
+                "rpm": 5,
+                "tpm": 250000,
+                "rpd": 19
+              }
+            ],
+            "translate": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "judge": [
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000,
+                "timeout_s": 25
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              }
+            ]
+          },
+          "mock": false
+        }
+      },
+      "model_names_used": [
+        "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001",
+        "main:gemini:gemini-3.5-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite"
+      ],
+      "latency_s": 12.946713900018949,
+      "finished_at": "2026-11-06T15:22:27.350413+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-06T15:22:27.350413+00:00"
+}

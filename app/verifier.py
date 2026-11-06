@@ -103,6 +103,19 @@ def _must_verify(text: str):
 STRAY_SCRIPT = re.compile(r"[\u0370-\u03FF\u0400-\u04FF\u0E00-\u0E7F\u3040-\u30FF\u3400-\u9FFF\uAC00-\uD7AF]")
 
 
+# Websites and email domains must be copied exactly from a source: round 4 showed "airseva.gov.in" for the
+# source's "airsewa.gov.in", which sends a user to a wrong (possibly fake) site.
+DOMAIN = re.compile(r"\b((?:[a-z0-9-]+\.)+(?:gov\.in|nic\.in|org\.in|co\.in|ac\.in|in|com|org|net|gov))\b")
+
+
+def _domains(text: str) -> set[str]:
+    return {d[4:] if d.startswith("www.") else d for d in DOMAIN.findall((text or "").lower())}
+
+
+def _domain_ok(d: str, known: set[str]) -> bool:
+    return any(d == k or k.endswith("." + d) or d.endswith("." + k) for k in known)
+
+
 def check(answer: dict, retrieved: list[dict], case_file: dict) -> list[str]:
     """Deterministic checks. Returns a list of issue strings (empty = pass).
     answer: {"blocks":[{"text","type","cites"}], ...}; retrieved: chunk dicts for this turn."""
@@ -112,6 +125,9 @@ def check(answer: dict, retrieved: list[dict], case_file: dict) -> list[str]:
     if not isinstance(blocks, list) or not blocks:
         return ["answer has no blocks"]
     cf_nums = _case_nums(case_file)
+    known_domains = _domains(json.dumps(case_file, ensure_ascii=False))
+    for c in retrieved:
+        known_domains |= _domains(c.get("text", "")) | _domains(c.get("source_url", ""))
     all_text_nums = set()
     for c in retrieved:
         all_text_nums |= _nums_in(c.get("text", "")) | _nums_in(_meta_text(c))
@@ -122,6 +138,9 @@ def check(answer: dict, retrieved: list[dict], case_file: dict) -> list[str]:
         typ, text, cites = b.get("type"), b["text"], b.get("cites") or []
         if STRAY_SCRIPT.search(text):
             issues.append(f"block {i}: garbled text (characters from an unrelated script)")
+        bad_sites = sorted(d for d in _domains(text) if not _domain_ok(d, known_domains))
+        if bad_sites:
+            issues.append(f"block {i}: website or email {bad_sites} not found in the sources")
         if typ not in ("legal", "practical", "question"):
             issues.append(f"block {i}: bad type {typ!r}")
             continue

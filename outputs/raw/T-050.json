@@ -1,0 +1,425 @@
+{
+  "schema_version": 1,
+  "case_id": "T-050",
+  "case": {
+    "id": "T-050",
+    "group": "L_referrals",
+    "tags": [
+      "round4",
+      "directory",
+      "Aadhaar update problem"
+    ],
+    "category_expected": "out_of_scope",
+    "language": "en-IN",
+    "input_mode": "text",
+    "turns": [
+      "My Aadhaar address update has been stuck for weeks and the enrolment centre cannot explain it. Where is the official Aadhaar grievance channel?"
+    ],
+    "expected_action": "escalate",
+    "expect_needs_lawyer": true,
+    "expected_topics": [
+      "Aadhaar update problem",
+      "official referral"
+    ],
+    "must_include_any": [],
+    "must_not_include": [],
+    "expected_chunk_ids": [
+      "COM-DIR-UIDAI"
+    ],
+    "expected_referral_any": [
+      "COM-DIR-UIDAI"
+    ],
+    "notes": "An answer must name and cite an expected body. Wrong bodies always hard fail. Statute/section patterns hard fail in escalate/out_of_scope replies; in an answer they must be grounded in cited chunks. Legal-aid-only escalation is a safe fallback and a recall miss. Targets remain agent-mapped, pending human confirmation.",
+    "expected_law_verified": false,
+    "calibration_label": "exclude",
+    "jurisdictions_expected": [
+      "central",
+      "UP"
+    ],
+    "retrieval_expectation_kind": "safe_referral"
+  },
+  "repeat": 1,
+  "mock": false,
+  "backend": "app.pipeline",
+  "stage": "real",
+  "configured_models": {
+    "router": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "main": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash",
+        "rpm": 5,
+        "tpm": 250000,
+        "rpd": 19
+      }
+    ],
+    "translate": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "judge": [
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000,
+        "timeout_s": 25
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      }
+    ]
+  },
+  "started_at": "2026-11-06T15:23:02.195748+00:00",
+  "turns": [
+    {
+      "input": "My Aadhaar address update has been stuck for weeks and the enrolment centre cannot explain it. Where is the official Aadhaar grievance channel?",
+      "input_mode": "text",
+      "lang_hint": "en-IN",
+      "started_at": "2026-11-06T15:23:08.197144+00:00",
+      "result": {
+        "reply_text": "What I understood: Your Aadhaar address update request has been pending for weeks and the enrolment centre is unable to provide an explanation.\n\nI don't cover this topic with verified law yet, so I won't guess. This doesn't mean you are in trouble: the official channels and free legal aid below can guide you.\n\nAn official service that may handle this (please check its page before relying on it):\n- Unique Identification Authority of India - Aadhaar Grievance Redressal (Aadhaar enrolment, update issues, PVC card delivery, and operator grievances): 1947 (Source: https://uidai.gov.in/)\n\nWhat you can do right now: a free legal aid office can explain this law to you and tell you whether it applies to your situation.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
+        "reply_lang": "en-IN",
+        "category": "out_of_scope",
+        "action": "escalate",
+        "citations": [
+          "COM-DIR-UIDAI",
+          "COM-NALSA-H15100"
+        ],
+        "retrieved": [
+          {
+            "id": "COM-DIR-UIDAI",
+            "score": 0.7832663059234619,
+            "via": "referral"
+          },
+          {
+            "id": "COM-NALSA-H15100",
+            "score": 0.7801640033721924
+          },
+          {
+            "id": "COM-LSAA1987-S13",
+            "score": 0.7287323474884033
+          },
+          {
+            "id": "COM-LSAA1987-S12",
+            "score": 0.7265352010726929
+          },
+          {
+            "id": "COM-DIR-LOKADALAT",
+            "score": 0.7208567261695862
+          }
+        ],
+        "needs_lawyer": true,
+        "escalation_reasons": [
+          "out_of_scope_topic"
+        ],
+        "verifier": {
+          "status": "pass",
+          "issues": []
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "f7caa4988de7",
+          "input_mode": "text",
+          "user_text": "My Aadhaar address update has been stuck for weeks and the enrolment centre cannot explain it. Where is the official Aadhaar grievance channel?",
+          "mode": "advice",
+          "router": {
+            "category": "out_of_scope",
+            "language": "en-IN",
+            "state_or_city": null,
+            "case_file_update": {
+              "what_happened": "Aadhaar address update request is pending for weeks without explanation from the enrolment centre.",
+              "counterparty_type": "government_authority"
+            },
+            "missing_facts": [],
+            "escalation_flags": [],
+            "english_retrieval_query": "how to file grievance for Aadhaar update delay",
+            "intent": [
+              "where_to_complain"
+            ],
+            "question": "Where can I find the official grievance channel to report a delay in my Aadhaar address update?",
+            "new_topic": false,
+            "summary": "Your Aadhaar address update request has been pending for weeks and the enrolment centre is unable to provide an explanation."
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "escalation_level": "out_of_scope",
+          "timings_s": 5.549,
+          "llm": {
+            "calls": 3,
+            "retries": 0,
+            "latency_s": 5.52,
+            "models": [
+              "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "embed:gemini:gemini-embedding-001"
+            ],
+            "fallbacks": []
+          },
+          "action": "escalate",
+          "category": "out_of_scope",
+          "retrieved": [
+            {
+              "id": "COM-DIR-UIDAI",
+              "score": 0.7832663059234619,
+              "via": "referral"
+            },
+            {
+              "id": "COM-NALSA-H15100",
+              "score": 0.7801640033721924
+            },
+            {
+              "id": "COM-LSAA1987-S13",
+              "score": 0.7287323474884033
+            },
+            {
+              "id": "COM-LSAA1987-S12",
+              "score": 0.7265352010726929
+            },
+            {
+              "id": "COM-DIR-LOKADALAT",
+              "score": 0.7208567261695862
+            }
+          ],
+          "citations": [
+            "COM-DIR-UIDAI",
+            "COM-NALSA-H15100"
+          ],
+          "verifier": {
+            "status": "pass",
+            "issues": []
+          },
+          "escalation_reasons": [
+            "out_of_scope_topic"
+          ],
+          "models": {
+            "router": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "main": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash",
+                "rpm": 5,
+                "tpm": 250000,
+                "rpd": 19
+              }
+            ],
+            "translate": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "judge": [
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000,
+                "timeout_s": 25
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              }
+            ]
+          },
+          "mock": false
+        }
+      },
+      "model_names_used": [
+        "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001"
+      ],
+      "latency_s": 5.5559270000085235,
+      "finished_at": "2026-11-06T15:23:13.746338+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-06T15:23:13.746338+00:00"
+}

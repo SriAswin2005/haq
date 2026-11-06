@@ -155,7 +155,8 @@
         "model": "gemma-4-31b-it",
         "rpm": 30,
         "tpm": 16000,
-        "rpd": 14000
+        "rpd": 14000,
+        "timeout_s": 25
       },
       {
         "provider": "gemini",
@@ -173,49 +174,51 @@
       }
     ]
   },
-  "started_at": "2026-11-05T21:59:14.756298+00:00",
+  "started_at": "2026-11-06T15:13:13.518861+00:00",
   "turns": [
     {
       "input": "Kanpur UP repair service charged Rs 1900 in October 2026 to fix my washing machine. It still leaks and they stopped replying. I have a service bill and videos. How do I complain without making things worse?",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T21:59:20.766508+00:00",
+      "started_at": "2026-11-06T15:13:19.521008+00:00",
       "result": {
-        "reply_text": "You hired a repair service for your washing machine, they charged you money, but the machine still leaks and they have stopped replying to you. You have a service bill and videos as proof.\n\nA product service provider can be held liable in a product liability action if the service provided was faulty, imperfect, deficient, or inadequate in quality, nature, or manner of performance.\n\nKeep your service bill and videos safe as evidence.\n\nWhat is the name of the repair service company?\n\nWhat is the date of your last communication with them?\n\nSource: Consumer Protection Act, 2019, section 85\n\nWhat I could not verify:\n- I left out one point because I could not match it exactly to the official text. A lawyer or legal aid office can confirm it.\n\nThis is legal information, not legal advice.",
+        "reply_text": "आप नेशनल कंज्यूमर हेल्पलाइन (NCH) में शिकायत दर्ज करा सकते हैं। इसके लिए आप टोल-फ्री नंबर 1915 पर कॉल कर सकते हैं या इनकी वेबसाइट consumerhelpline.gov.in पर जा सकते हैं।\n\nअपने पास सेवा का बिल (service bill) और रिपेयर के बाद मशीन के लीक होने के वीडियो सुरक्षित रखें।\n\nआप नेशनल कंज्यूमर हेल्पलाइन पर ऑनलाइन पोर्टल, व्हाट्सएप, ईमेल या टोल-फ्री नंबर के जरिए अपनी शिकायत दर्ज करा सकते हैं। यदि वहाँ समाधान नहीं होता है, तो आप जिला आयोग (District Commission) में भी शिकायत दर्ज करा सकते हैं।\n\nक्या आप बता सकते हैं कि रिपेयर कंपनी का नाम क्या है और उनकी तरफ से आखिरी बार कब बात हुई थी?\n\nSource: Department of Consumer Affairs - National Consumer Helpline (NCH), H NCH\nSource: Consumer Protection Act, 2019, section 35\nSource: National Consumer Helpline Guidelines, helpline 1915\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "consumer",
         "action": "answer",
         "citations": [
-          "CONS-CPA2019-S85"
+          "COM-DIR-NCH",
+          "CONS-CPA2019-S35",
+          "COM-NCH-H1915"
         ],
         "retrieved": [
           {
-            "id": "CONS-CPA2019-S85",
-            "score": 0.6932213306427002
-          },
-          {
-            "id": "CONS-CPA2019-S83",
-            "score": 0.6809840202331543
-          },
-          {
             "id": "CONS-CPA2019-S35",
-            "score": 0.6691858768463135
+            "score": 0.702664852142334
           },
           {
-            "id": "CONS-CPA2019-S82",
-            "score": 0.6658427119255066
+            "id": "COM-DIR-NCH",
+            "score": 0.6961240768432617
+          },
+          {
+            "id": "CONS-NCH-P1",
+            "score": 0.6952698230743408
           },
           {
             "id": "CONS-CPA2019-S69",
-            "score": 0.6654113531112671
+            "score": 0.687166690826416
           },
           {
-            "id": "CONS-CPA2019-S84",
-            "score": 0.6610127687454224
+            "id": "COM-NCH-H1915",
+            "score": 0.6867707967758179
+          },
+          {
+            "id": "CONS-CPA2019-S83",
+            "score": 0.6792112588882446
           },
           {
             "id": "CONS-CPA2019-S34",
-            "score": 0.7613463401794434
+            "score": 0.7613462805747986
           },
           {
             "id": "CONS-PECRULES2021-R3",
@@ -225,12 +228,12 @@
         "needs_lawyer": false,
         "escalation_reasons": [],
         "verifier": {
-          "status": "pruned",
+          "status": "fixed",
           "issues": []
         },
         "draft_text": null,
         "trace": {
-          "session": "b85166388438",
+          "session": "bc70abb5d153",
           "input_mode": "text",
           "user_text": "Kanpur UP repair service charged Rs 1900 in October 2026 to fix my washing machine. It still leaks and they stopped replying. I have a service bill and videos. How do I complain without making things worse?",
           "mode": "advice",
@@ -241,109 +244,115 @@
             "case_file_update": {
               "amount_inr": 1900,
               "event_date": "2026-10",
-              "what_happened": "Washing machine repair service failed to fix leak and stopped responding.",
+              "what_happened": "Repair service charged 1900 for washing machine repair, but it still leaks and the company is unresponsive.",
               "proof": [
                 "service bill",
                 "videos"
               ],
-              "already_tried": [
-                "contacting the service provider"
-              ],
-              "counterparty_type": "repair service",
               "product_or_service": "washing machine repair",
-              "resolution_wanted": "repair",
-              "state": "UP"
+              "resolution_wanted": "repair"
             },
             "missing_facts": [
-              "name of the repair service company",
+              "name of the repair company",
               "date of the last communication"
             ],
             "escalation_flags": [],
-            "english_retrieval_query": "consumer complaint against repair service for defective work"
+            "english_retrieval_query": "how to file consumer complaint against repair service",
+            "intent": [
+              "where_to_complain",
+              "next_steps"
+            ],
+            "question": "How can I file a complaint against the repair service for the faulty work and lack of response?",
+            "new_topic": false,
+            "summary": "Kanpur mein washing machine repair ke liye 1900 rupaye diye the, lekin machine abhi bhi leak kar rahi hai aur company jawab nahi de rahi hai."
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
           "retrieval": {
-            "query": "consumer complaint against repair service for defective work",
+            "query": "how to file consumer complaint against repair service",
             "jurisdictions": [
               "central",
               "UP"
             ],
-            "top_score": 0.6932213306427002,
+            "top_score": 0.702664852142334,
             "min_score": 0.66,
             "old_law": []
+          },
+          "intent": {
+            "intents": [
+              "next_steps",
+              "where_to_complain"
+            ],
+            "question": "How can I file a complaint against the repair service for the faulty work and lack of response?",
+            "want_draft": false,
+            "has_question": true
           },
           "judge": "ok",
           "verifier_history": [
             [
-              "block 1: claim not supported by its cited source (condition dropped: which is required to be provided by or under any law for the time being in force, or pursuant to any )"
+              "block 3: claim not supported by its cited source (The source specifies product liability action is for harm caused by a 'defective product', whereas the claim refers to ')"
             ],
-            [
-              "block 2: claim not supported by its cited source (source specifies harm caused by a 'defective product', whereas claim specifies 'defective service')",
-              "block 3: claim not supported by its cited source (condition dropped: value of the goods or services paid as consideration does not exceed one crore rupees)"
-            ]
+            []
           ],
-          "pruned": {
-            "removed_blocks": [
-              2,
-              3
-            ],
-            "reasons": [
-              "block 2: claim not supported by its cited source (source specifies harm caused by a 'defective product', whereas claim specifies 'defective service')",
-              "block 3: claim not supported by its cited source (condition dropped: value of the goods or services paid as consideration does not exceed one crore rupees)"
-            ],
-            "recheck": [],
-            "judge": "ok"
-          },
-          "timings_s": 163.886,
+          "timings_s": 20.461,
           "llm": {
-            "calls": 12,
-            "retries": 4,
-            "latency_s": 152.89,
+            "calls": 7,
+            "retries": 0,
+            "latency_s": 20.3,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
               "main:gemini:gemini-3.5-flash-lite",
-              "judge:gemini:gemma-4-31b-it",
+              "judge:gemini:gemini-3.1-flash-lite",
               "main:gemini:gemini-3.5-flash-lite",
-              "judge:gemini:gemma-4-31b-it",
-              "judge:gemini:gemma-4-31b-it"
+              "judge:gemini:gemini-3.1-flash-lite"
             ],
-            "fallbacks": []
+            "fallbacks": [
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~419s"
+              },
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~412s"
+              }
+            ]
           },
           "action": "answer",
           "category": "consumer",
           "retrieved": [
             {
-              "id": "CONS-CPA2019-S85",
-              "score": 0.6932213306427002
-            },
-            {
-              "id": "CONS-CPA2019-S83",
-              "score": 0.6809840202331543
-            },
-            {
               "id": "CONS-CPA2019-S35",
-              "score": 0.6691858768463135
+              "score": 0.702664852142334
             },
             {
-              "id": "CONS-CPA2019-S82",
-              "score": 0.6658427119255066
+              "id": "COM-DIR-NCH",
+              "score": 0.6961240768432617
+            },
+            {
+              "id": "CONS-NCH-P1",
+              "score": 0.6952698230743408
             },
             {
               "id": "CONS-CPA2019-S69",
-              "score": 0.6654113531112671
+              "score": 0.687166690826416
             },
             {
-              "id": "CONS-CPA2019-S84",
-              "score": 0.6610127687454224
+              "id": "COM-NCH-H1915",
+              "score": 0.6867707967758179
+            },
+            {
+              "id": "CONS-CPA2019-S83",
+              "score": 0.6792112588882446
             },
             {
               "id": "CONS-CPA2019-S34",
-              "score": 0.7613463401794434
+              "score": 0.7613462805747986
             },
             {
               "id": "CONS-PECRULES2021-R3",
@@ -351,10 +360,12 @@
             }
           ],
           "citations": [
-            "CONS-CPA2019-S85"
+            "COM-DIR-NCH",
+            "CONS-CPA2019-S35",
+            "COM-NCH-H1915"
           ],
           "verifier": {
-            "status": "pruned",
+            "status": "fixed",
             "issues": []
           },
           "escalation_reasons": [],
@@ -460,7 +471,8 @@
                 "model": "gemma-4-31b-it",
                 "rpm": 30,
                 "tpm": 16000,
-                "rpd": 14000
+                "rpd": 14000,
+                "timeout_s": 25
               },
               {
                 "provider": "gemini",
@@ -486,15 +498,14 @@
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001",
         "main:gemini:gemini-3.5-flash-lite",
-        "judge:gemini:gemma-4-31b-it",
+        "judge:gemini:gemini-3.1-flash-lite",
         "main:gemini:gemini-3.5-flash-lite",
-        "judge:gemini:gemma-4-31b-it",
-        "judge:gemini:gemma-4-31b-it"
+        "judge:gemini:gemini-3.1-flash-lite"
       ],
-      "latency_s": 163.89356290001888,
-      "finished_at": "2026-11-05T22:02:04.660077+00:00"
+      "latency_s": 20.4640835999744,
+      "finished_at": "2026-11-06T15:13:39.985200+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T22:02:04.660077+00:00"
+  "finished_at": "2026-11-06T15:13:39.985200+00:00"
 }

@@ -69,11 +69,17 @@ def load_corpus(path: str | Path) -> dict[str, dict]:
 
 def check_routing(result, case, corpus=None) -> CheckResult:
     actual, expected = get(result, "category"), case["category_expected"]
+    if case.get("expected_outcomes"):
+        allowed = sorted({o["category"] for o in case["expected_outcomes"]})
+        return CheckResult("pass" if actual in allowed else "fail", f"category={actual!r}; permitted categories={allowed}")
     return CheckResult("pass" if actual == expected else "fail", f"category={actual!r}; expected {expected!r}")
 
 
 def check_action(result, case, corpus=None) -> CheckResult:
     actual, expected = get(result, "action"), case["expected_action"]
+    if case.get("expected_outcomes"):
+        allowed = sorted({o["action"] for o in case["expected_outcomes"] if o["category"] == get(result, "category")})
+        return CheckResult("pass" if actual in allowed else "fail", f"action={actual!r}; permitted for this category={allowed}")
     return CheckResult("pass" if actual == expected else "fail", f"action={actual!r}; expected {expected!r}")
 
 
@@ -199,8 +205,11 @@ def law_references(text: str) -> list[str]:
 
 def check_no_invented_law(result, case, corpus) -> CheckResult:
     refs = law_references(visible_text(result))
-    evidence = [chunk_evidence(corpus[r["id"]]) for r in get(result, "retrieved", [])
-                if isinstance(r, dict) and r.get("id") in corpus]
+    if "expected_referral_any" in case:
+        evidence = [chunk_evidence(corpus[cid]) for cid in get(result, "citations", []) if cid in corpus]
+    else:
+        evidence = [chunk_evidence(corpus[r["id"]]) for r in get(result, "retrieved", [])
+                    if isinstance(r, dict) and r.get("id") in corpus]
     supported = {canonical_reference(r) for e in evidence for r in law_references(e)}
     # Metadata can be lower-case and still authorise the official title.
     titles = [canonical_reference(e) for e in evidence]
@@ -263,6 +272,12 @@ def check_must_not_include(result, case, corpus=None) -> CheckResult:
 def check_needs_lawyer(result, case, corpus=None) -> CheckResult:
     expected = case["expect_needs_lawyer"]
     actual = get(result, "needs_lawyer")
+    if case.get("expected_outcomes"):
+        allowed = [o["needs_lawyer"] for o in case["expected_outcomes"]
+                   if o["category"] == get(result, "category") and o["action"] == get(result, "action")]
+        if not any(actual is value for value in allowed):
+            return CheckResult("fail", f"needs_lawyer={actual!r}; permitted for this category/action={allowed}")
+        expected = actual
     if actual is not expected:
         return CheckResult("fail", f"needs_lawyer={actual!r}; expected {expected}")
     if expected and not re.search(r"lawyer|legal aid|advocate|वकील|कानूनी सहायता|अधिवक्ता|న్యాయవాద|న్యాయ\s*సహాయ|வழக்கறிஞ|சட்ட\s*உதவி", visible_text(result), re.I):
@@ -427,7 +442,7 @@ def check_case_guards(result, case, corpus=None) -> CheckResult:
 REFERRAL_ALIASES = {
     "RBI": ["RBI", "Reserve Bank of India", "banking ombudsman", "Integrated Ombudsman", "आरबीआई", "भारतीय रिजर्व बैंक", "बैंकिंग लोकपाल"],
     "SEBI": ["SEBI", "SCORES", "सेबी"],
-    "IRDAI": ["IRDAI", "Bima Bharosa", "बीमा भरोसा", "आईआरडीएआई", "बीमा विनियामक और विकास प्राधिकरण"],
+    "IRDAI": ["IRDAI", "Insurance Regulatory and Development Authority of India", "Bima Bharosa", "बीमा भरोसा", "आईआरडीएआई", "बीमा विनियामक और विकास प्राधिकरण"],
     "EPFO": ["EPFO", "EPFiGMS", "Employees' Provident Fund Organisation", "ईपीएफओ", "कर्मचारी भविष्य निधि संगठन"],
     "ESIC": ["ESIC", "कर्मचारी राज्य बीमा निगम", "ईएसआईसी"],
     "CYBER": ["National Cyber Crime Reporting Portal", "National Cybercrime Helpline", "Cyber Crime Portal", "साइबर क्राइम पोर्टल", "राष्ट्रीय साइबर अपराध रिपोर्टिंग पोर्टल", "साइबर अपराध हेल्पलाइन"],
@@ -491,7 +506,7 @@ def referral_observation(result, case, corpus):
     """
     expected = set(case.get("expected_referral_any", []))
     text = norm(visible_text(result))
-    profiles, aid_aliases, aid_hosts = {}, ["NALSA", "UPSLSA", "DLSA", "legal aid", "legal-aid", "legal aid office", "Tele-Law", "Tele Law"], set()
+    profiles, source_bodies, aid_aliases, aid_hosts = {}, {}, ["NALSA", "UPSLSA", "DLSA", "legal aid", "legal-aid", "legal aid office", "Tele-Law", "Tele Law"], set()
     for cid, chunk in (corpus or {}).items():
         title = chunk.get("doc_title", "")
         if chunk.get("doc_type") not in {"portal_procedure", "govt_guidance", "helpline"}:
@@ -505,6 +520,7 @@ def referral_observation(result, case, corpus):
         if cid.startswith("COM-DIR-"):
             aliases = [title, *REFERRAL_ALIASES.get(cid.removeprefix("COM-DIR-"), [])]
             profiles[cid] = {"aliases": aliases, "hosts": hosts}
+            source_bodies[cid] = cid
     # Recognise old procedure/helpline chunks too, canonicalising duplicate bodies.
     for cid, chunk in (corpus or {}).items():
         if cid.startswith("COM-DIR-") or chunk.get("doc_type") not in {"portal_procedure", "govt_guidance", "helpline"}:
@@ -515,9 +531,11 @@ def referral_observation(result, case, corpus):
         same = next((key for key, p in profiles.items() if any(_referral_alias_pattern(a).search(norm(title)) for a in p["aliases"] if a)), None)
         if same:
             profiles[same]["aliases"].append(title)
+            source_bodies[cid] = same
         elif title:
             host = urlsplit(chunk.get("source_url", "")).hostname
             profiles["OTHER:" + cid] = {"aliases": [title], "hosts": {host.removeprefix("www.")} if host else set()}
+            source_bodies[cid] = "OTHER:" + cid
     shown, evidence, spans = set(), {}, []
     # Longer full titles take precedence over overlapping agency aliases. Thus a
     # Sanchar Saathi title does not also count as the separate DoT complaint body.
@@ -533,7 +551,11 @@ def referral_observation(result, case, corpus):
         if alias:
             spans.extend(m.span() for m in _referral_alias_pattern(alias).finditer(text))
     spans.extend(m.span() for m in LEGAL_AID_NAME.finditer(text))
+    cited_law_urls = {norm(corpus[cid].get("source_url", "")).rstrip("/.") for cid in get(result, "citations", [])
+                      if cid in corpus and corpus[cid].get("doc_type") in {"statute", "rules", "regulation", "notification"}}
     for url in _referral_urls(text):
+        if get(result, "action") == "answer" and url.rstrip("/.") in cited_law_urls:
+            continue  # A cited statute's source link is not a second referral body.
         host = (urlsplit(url).hostname or "").removeprefix("www.")
         if any(host == h or host.endswith("." + h) for h in aid_hosts):
             continue
@@ -574,16 +596,32 @@ def referral_observation(result, case, corpus):
         r"(?<!\w)(?:[Ss][Ee][Cc][Tt][Ii][Oo][Nn][Ss]?|[Ss][Ee][Cc]\.?|[Ss]\.|[Aa]rticles?|[Rr]ules?|dhara|धारा|अनुच्छेद|नियम)\s*[:#-]?\s*\d+|"
         r"\b(?:[Aa][Cc][Tt]|[Cc][Oo][Dd][Ee]|[Ss]anhita)\s*,?\s*\d{4}\b",
         original)]
-    return {"expected": sorted(expected), "shown": sorted(shown), "correct": sorted(shown & expected),
-            "wrong": sorted(shown - expected), "statute_patterns": sorted(set(statutes)), "evidence": evidence}
+    correct = shown & expected
+    cited_bodies = {source_bodies[cid] for cid in get(result, "citations", []) if cid in source_bodies}
+    cited_evidence = [chunk_evidence(corpus[cid]) for cid in get(result, "citations", []) if cid in corpus]
+    def grounded(reference):
+        translated = re.sub("अधिनियम|संहिता|संविधान", lambda m: {"अधिनियम": "Act", "संहिता": "Code", "संविधान": "Constitution"}[m.group()], reference)
+        value = canonical_reference(translated)
+        return any(re.search(r"(?<!\w)" + re.escape(value) + r"(?![\w(])", canonical_reference(chunk)) for chunk in cited_evidence)
+    statute_refs = sorted(set(statutes))
+    forbidden = get(result, "action") == "escalate" or get(result, "category") == "out_of_scope"
+    ungrounded = [ref for ref in statute_refs if not grounded(ref)]
+    return {"expected": sorted(expected), "shown": sorted(shown), "correct": sorted(correct),
+            "wrong": sorted(shown - expected), "cited_correct": sorted(correct & cited_bodies),
+            "statute_patterns": statute_refs, "statutes_forbidden": forbidden,
+            "ungrounded_statutes": ungrounded, "answer_requires_cited_referral": get(result, "action") == "answer",
+            "evidence": evidence}
 
 
 def check_referral(result, case, corpus=None) -> CheckResult:
     if "expected_referral_any" not in case:
         return CheckResult("skip", "No directory-referral expectation in this case.")
     observation = referral_observation(result, case, corpus or {})
-    if observation["wrong"] or observation["statute_patterns"]:
-        return CheckResult("fail", f"HARD FAIL: wrong bodies={observation['wrong']}; statute/section patterns={observation['statute_patterns']}", observation)
+    forbidden_statutes = observation["statute_patterns"] if observation["statutes_forbidden"] else []
+    if observation["wrong"] or forbidden_statutes or observation["ungrounded_statutes"]:
+        return CheckResult("fail", f"HARD FAIL: wrong bodies={observation['wrong']}; forbidden statute/section patterns={forbidden_statutes}; ungrounded statutes={observation['ungrounded_statutes']}", observation)
+    if observation["answer_requires_cited_referral"] and not observation["cited_correct"]:
+        return CheckResult("fail", "Answer must name an expected body and cite a chunk for that body.", observation)
     if observation["correct"]:
         return CheckResult("pass", "Only acceptable referral bodies are named.", observation)
     return CheckResult("pass", "No non-legal-aid referral shown; safe fallback, but a recall miss.", observation)

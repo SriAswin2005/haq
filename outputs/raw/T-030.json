@@ -156,7 +156,8 @@
         "model": "gemma-4-31b-it",
         "rpm": 30,
         "tpm": 16000,
-        "rpd": 14000
+        "rpd": 14000,
+        "timeout_s": 25
       },
       {
         "provider": "gemini",
@@ -174,15 +175,15 @@
       }
     ]
   },
-  "started_at": "2026-11-05T22:12:43.028760+00:00",
+  "started_at": "2026-11-06T15:15:58.307815+00:00",
   "turns": [
     {
       "input": "uh matlab I'm really stressed rent for new place due and old owner keeps ignoring me ignoring me Bangalore Karnataka left October 2026 deposit 30000 receipt hai please reply in English can you tell me the UP rent rules apply here also na",
       "input_mode": "voice",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T22:12:49.029792+00:00",
+      "started_at": "2026-11-06T15:16:04.294553+00:00",
       "result": {
-        "reply_text": "What I understood: vacated date: 2026-10-01; what happened: Landlord is ignoring requests to return security deposit after vacating the property.; proof: ['receipt']; already tried: ['contacting landlord']; counterparty type: landlord; state: other\n\nI do not have verified information in my sources to answer this part, and I will not guess.\n\nWhat you can do right now: collect your documents (agreement, receipts, bank or UPI records, messages, photos), and write down the dates and amounts in order.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
+        "reply_text": "What I understood: You vacated your rental property in Bangalore in October 2026, but your landlord is ignoring your requests to return your 30,000 INR security deposit.\n\nI do not have verified information in my sources to answer this part, and I will not guess.\n\nWhat you can do right now: collect your documents (agreement, receipts, bank or UPI records, messages, photos), and write down the dates and amounts in order.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "tenancy",
         "action": "refuse_unverified",
@@ -191,28 +192,28 @@
         ],
         "retrieved": [
           {
+            "id": "COM-LSAA1987-S21",
+            "score": 0.6467012166976929
+          },
+          {
             "id": "TEN-TPA1882-S108",
-            "score": 0.6516831517219543
+            "score": 0.6388440132141113
           },
           {
             "id": "COM-LSAA1987-S22C",
-            "score": 0.6426147818565369
+            "score": 0.6381134390830994
+          },
+          {
+            "id": "COM-DIR-LOKADALAT",
+            "score": 0.6327481269836426
           },
           {
             "id": "TEN-TPA1882-S111",
-            "score": 0.6407327055931091
+            "score": 0.631158709526062
           },
           {
-            "id": "COM-LSAA1987-S21",
-            "score": 0.6393455266952515
-          },
-          {
-            "id": "TEN-TPA1882-S106",
-            "score": 0.6284528970718384
-          },
-          {
-            "id": "TEN-TPA1882-S116",
-            "score": 0.624580979347229
+            "id": "COM-LSAA1987-S22E",
+            "score": 0.6298689842224121
           },
           {
             "id": "COM-LSAA1987-S22B",
@@ -240,7 +241,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "146dd68eef0e",
+          "session": "d42b48af5120",
           "input_mode": "voice",
           "user_text": "uh matlab I'm really stressed rent for new place due and old owner keeps ignoring me ignoring me Bangalore Karnataka left October 2026 deposit 30000 receipt hai please reply in English can you tell me the UP rent rules apply here also na",
           "mode": "advice",
@@ -249,42 +250,55 @@
             "language": "en-IN",
             "state_or_city": "other",
             "case_file_update": {
-              "vacated_date": "2026-10-01",
+              "vacated_date": "2026-10",
               "deposit_paid_date": null,
-              "what_happened": "Landlord is ignoring requests to return security deposit after vacating the property.",
+              "what_happened": "Landlord is ignoring requests to return the security deposit of 30000 INR after the tenant vacated the property in October 2026.",
               "proof": [
                 "receipt"
-              ],
-              "already_tried": [
-                "contacting landlord"
               ],
               "counterparty_type": "landlord"
             },
             "missing_facts": [
-              "Is there a written rental agreement?",
-              "Have you sent a formal notice to the landlord?"
+              "rental agreement existence",
+              "landlord contact details"
             ],
             "escalation_flags": [],
-            "english_retrieval_query": "landlord not returning security deposit after vacating property Karnataka"
+            "english_retrieval_query": "how to recover security deposit from landlord in Karnataka",
+            "intent": [
+              "explain_rights",
+              "where_to_complain"
+            ],
+            "question": "Can I use Uttar Pradesh rent rules for my tenancy dispute in Bangalore, and what are my rights regarding the return of my security deposit?",
+            "new_topic": false,
+            "summary": "You vacated your rental property in Bangalore in October 2026, but your landlord is ignoring your requests to return your 30,000 INR security deposit."
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
           "retrieval": {
-            "query": "landlord not returning security deposit after vacating property Karnataka",
+            "query": "how to recover security deposit from landlord in Karnataka",
             "jurisdictions": [
               "central"
             ],
-            "top_score": 0.6516831517219543,
+            "top_score": 0.6467012166976929,
             "min_score": 0.66,
             "old_law": []
           },
-          "timings_s": 11.538,
+          "intent": {
+            "intents": [
+              "explain_rights",
+              "where_to_complain"
+            ],
+            "question": "Can I use Uttar Pradesh rent rules for my tenancy dispute in Bangalore, and what are my rights regarding the return of my security deposit?",
+            "want_draft": false,
+            "has_question": true
+          },
+          "timings_s": 6.488,
           "llm": {
             "calls": 4,
             "retries": 0,
-            "latency_s": 11.49,
+            "latency_s": 6.44,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
@@ -297,28 +311,28 @@
           "category": "tenancy",
           "retrieved": [
             {
+              "id": "COM-LSAA1987-S21",
+              "score": 0.6467012166976929
+            },
+            {
               "id": "TEN-TPA1882-S108",
-              "score": 0.6516831517219543
+              "score": 0.6388440132141113
             },
             {
               "id": "COM-LSAA1987-S22C",
-              "score": 0.6426147818565369
+              "score": 0.6381134390830994
+            },
+            {
+              "id": "COM-DIR-LOKADALAT",
+              "score": 0.6327481269836426
             },
             {
               "id": "TEN-TPA1882-S111",
-              "score": 0.6407327055931091
+              "score": 0.631158709526062
             },
             {
-              "id": "COM-LSAA1987-S21",
-              "score": 0.6393455266952515
-            },
-            {
-              "id": "TEN-TPA1882-S106",
-              "score": 0.6284528970718384
-            },
-            {
-              "id": "TEN-TPA1882-S116",
-              "score": 0.624580979347229
+              "id": "COM-LSAA1987-S22E",
+              "score": 0.6298689842224121
             },
             {
               "id": "COM-LSAA1987-S22B",
@@ -448,7 +462,8 @@
                 "model": "gemma-4-31b-it",
                 "rpm": 30,
                 "tpm": 16000,
-                "rpd": 14000
+                "rpd": 14000,
+                "timeout_s": 25
               },
               {
                 "provider": "gemini",
@@ -475,10 +490,10 @@
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 11.542708299995866,
-      "finished_at": "2026-11-05T22:13:00.572507+00:00"
+      "latency_s": 6.49308630003361,
+      "finished_at": "2026-11-06T15:16:10.786165+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T22:13:00.572507+00:00"
+  "finished_at": "2026-11-06T15:16:10.786165+00:00"
 }

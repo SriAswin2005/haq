@@ -1,0 +1,501 @@
+{
+  "schema_version": 1,
+  "case_id": "T-044",
+  "case": {
+    "id": "T-044",
+    "group": "L_referrals",
+    "tags": [
+      "round4",
+      "directory",
+      "PF withdrawal stuck"
+    ],
+    "category_expected": "out_of_scope",
+    "language": "en-IN",
+    "input_mode": "text",
+    "turns": [
+      "My provident fund withdrawal has been pending for two months and the status never changes. Where can a PF member register an official service grievance? I only need the right office or portal."
+    ],
+    "expected_action": "escalate",
+    "expect_needs_lawyer": true,
+    "expected_topics": [
+      "PF withdrawal stuck",
+      "official referral"
+    ],
+    "must_include_any": [],
+    "must_not_include": [],
+    "expected_chunk_ids": [
+      "COM-DIR-EPFO"
+    ],
+    "expected_referral_any": [
+      "COM-DIR-EPFO"
+    ],
+    "notes": "An answer must name and cite an expected body. Wrong bodies always hard fail. Statute/section patterns hard fail in escalate/out_of_scope replies; in an answer they must be grounded in cited chunks. Legal-aid-only escalation is a safe fallback and a recall miss. Targets remain agent-mapped, pending human confirmation.",
+    "expected_law_verified": false,
+    "calibration_label": "exclude",
+    "jurisdictions_expected": [
+      "central",
+      "UP"
+    ],
+    "retrieval_expectation_kind": "safe_referral"
+  },
+  "repeat": 1,
+  "mock": false,
+  "backend": "app.pipeline",
+  "stage": "real",
+  "configured_models": {
+    "router": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "main": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash",
+        "rpm": 5,
+        "tpm": 250000,
+        "rpd": 19
+      }
+    ],
+    "translate": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "judge": [
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000,
+        "timeout_s": 25
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      }
+    ]
+  },
+  "started_at": "2026-11-06T15:21:42.082487+00:00",
+  "turns": [
+    {
+      "input": "My provident fund withdrawal has been pending for two months and the status never changes. Where can a PF member register an official service grievance? I only need the right office or portal.",
+      "input_mode": "text",
+      "lang_hint": "en-IN",
+      "started_at": "2026-11-06T15:21:48.068842+00:00",
+      "result": {
+        "reply_text": "A PF member can register and track grievances for settlement of PF claims online at the EPFiGMS portal, or by calling the EPFO Multilingual Helpline or the Toll-Free Help Desk for UAN and member services.\n\nKeep your PF account number, UAN, and details of your withdrawal request ready before registering your grievance.\n\nVisit the official EPFiGMS website or call the helpline numbers to lodge your complaint regarding the pending withdrawal.\n\nSource: Employees' Provident Fund Organisation - EPFiGMS Portal, P EPFO\n\nI do not know your state yet; state law can differ, and I only cover Uttar Pradesh in depth.\n\nBecause of the points above, please talk to a real lawyer or free legal aid office. (your state is not known)\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
+        "reply_lang": "en-IN",
+        "category": "wages",
+        "action": "answer",
+        "citations": [
+          "COM-DIR-EPFO",
+          "COM-NALSA-H15100"
+        ],
+        "retrieved": [
+          {
+            "id": "COM-DIR-EPFO",
+            "score": 0.7207474112510681
+          },
+          {
+            "id": "COM-DIR-INCOMETAX",
+            "score": 0.6821005940437317
+          },
+          {
+            "id": "COM-DIR-MCA",
+            "score": 0.6784855723381042
+          },
+          {
+            "id": "COM-DIR-ESIC",
+            "score": 0.6742138862609863
+          },
+          {
+            "id": "COM-DIR-ESHRAM",
+            "score": 0.6651057600975037
+          },
+          {
+            "id": "COM-DIR-UIDAI",
+            "score": 0.6567888259887695
+          },
+          {
+            "id": "WAGE-COW2019-S45",
+            "score": 0.7474292516708374
+          },
+          {
+            "id": "WAGE-COWRULES2026-R46",
+            "score": 0.7178704738616943
+          },
+          {
+            "id": "COM-NALSA-H15100",
+            "score": 0.7801640033721924,
+            "via": "aid_search"
+          }
+        ],
+        "needs_lawyer": true,
+        "escalation_reasons": [
+          "state_unknown"
+        ],
+        "verifier": {
+          "status": "pass",
+          "issues": []
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "41a49f189396",
+          "input_mode": "text",
+          "user_text": "My provident fund withdrawal has been pending for two months and the status never changes. Where can a PF member register an official service grievance? I only need the right office or portal.",
+          "mode": "advice",
+          "router": {
+            "category": "wages",
+            "language": "en-IN",
+            "state_or_city": null,
+            "case_file_update": {
+              "what_happened": "Provident fund withdrawal request has been pending for two months with no status change.",
+              "unpaid_period": "2 months"
+            },
+            "missing_facts": [
+              "PF account number",
+              "Name of the regional PF office"
+            ],
+            "escalation_flags": [],
+            "english_retrieval_query": "how to file grievance for pending PF withdrawal",
+            "intent": [
+              "where_to_complain"
+            ],
+            "question": "Where can a PF member register an official service grievance for a pending withdrawal?",
+            "new_topic": false,
+            "summary": "Your provident fund withdrawal request has been pending for two months without any status update."
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "retrieval": {
+            "query": "how to file grievance for pending PF withdrawal",
+            "jurisdictions": [
+              "central"
+            ],
+            "top_score": 0.7207474112510681,
+            "min_score": 0.66,
+            "old_law": [
+              {
+                "id": "WAGE-PWA1936-S15",
+                "score": 0.6489467620849609
+              },
+              {
+                "id": "WAGE-PWA1936-S5",
+                "score": 0.5962337851524353
+              }
+            ]
+          },
+          "intent": {
+            "intents": [
+              "where_to_complain"
+            ],
+            "question": "Where can a PF member register an official service grievance for a pending withdrawal?",
+            "want_draft": false,
+            "has_question": true
+          },
+          "judge": "ok",
+          "verifier_history": [
+            []
+          ],
+          "timings_s": 9.165,
+          "llm": {
+            "calls": 6,
+            "retries": 0,
+            "latency_s": 9.08,
+            "models": [
+              "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "embed:gemini:gemini-embedding-001",
+              "main:gemini:gemini-3.5-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001"
+            ],
+            "fallbacks": [
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~563s"
+              }
+            ]
+          },
+          "action": "answer",
+          "category": "wages",
+          "retrieved": [
+            {
+              "id": "COM-DIR-EPFO",
+              "score": 0.7207474112510681
+            },
+            {
+              "id": "COM-DIR-INCOMETAX",
+              "score": 0.6821005940437317
+            },
+            {
+              "id": "COM-DIR-MCA",
+              "score": 0.6784855723381042
+            },
+            {
+              "id": "COM-DIR-ESIC",
+              "score": 0.6742138862609863
+            },
+            {
+              "id": "COM-DIR-ESHRAM",
+              "score": 0.6651057600975037
+            },
+            {
+              "id": "COM-DIR-UIDAI",
+              "score": 0.6567888259887695
+            },
+            {
+              "id": "WAGE-COW2019-S45",
+              "score": 0.7474292516708374
+            },
+            {
+              "id": "WAGE-COWRULES2026-R46",
+              "score": 0.7178704738616943
+            },
+            {
+              "id": "COM-NALSA-H15100",
+              "score": 0.7801640033721924,
+              "via": "aid_search"
+            }
+          ],
+          "citations": [
+            "COM-DIR-EPFO",
+            "COM-NALSA-H15100"
+          ],
+          "verifier": {
+            "status": "pass",
+            "issues": []
+          },
+          "escalation_reasons": [
+            "state_unknown"
+          ],
+          "models": {
+            "router": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "main": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash",
+                "rpm": 5,
+                "tpm": 250000,
+                "rpd": 19
+              }
+            ],
+            "translate": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "judge": [
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000,
+                "timeout_s": 25
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              }
+            ]
+          },
+          "mock": false
+        }
+      },
+      "model_names_used": [
+        "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001",
+        "main:gemini:gemini-3.5-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001"
+      ],
+      "latency_s": 9.167093000025488,
+      "finished_at": "2026-11-06T15:21:57.235199+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-06T15:21:57.235199+00:00"
+}

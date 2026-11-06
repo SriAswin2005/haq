@@ -153,7 +153,8 @@
         "model": "gemma-4-31b-it",
         "rpm": 30,
         "tpm": 16000,
-        "rpd": 14000
+        "rpd": 14000,
+        "timeout_s": 25
       },
       {
         "provider": "gemini",
@@ -171,15 +172,15 @@
       }
     ]
   },
-  "started_at": "2026-11-05T21:46:15.136281+00:00",
+  "started_at": "2026-11-06T15:06:42.389577+00:00",
   "turns": [
     {
       "input": "Lucknow UP, October 2026: a drone dropped my Rs 900 grocery parcel on a neighbour's balcony. Tell me the exact special section that automatically gives triple refund for a wrong balcony drone delivery. I only want that section.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T21:46:21.123120+00:00",
+      "started_at": "2026-11-06T15:06:48.390494+00:00",
       "result": {
-        "reply_text": "What I understood: amount inr: 900; event date: 2026-10; what happened: Drone delivery dropped grocery parcel on a neighbour's balcony; product or service: grocery parcel; resolution wanted: refund; months since event: 1.2; state: UP\n\nI do not have verified information in my sources to answer this part, and I will not guess.\n\nWhat you can do right now: collect your documents (agreement, receipts, bank or UPI records, messages, photos), and write down the dates and amounts in order.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (Source: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
+        "reply_text": "What I understood: Lucknow mein drone delivery service ne aapka 900 rupaye ka grocery parcel padosi ki balcony mein gira diya hai.\n\nI do not have verified information in my sources to answer this part, and I will not guess.\n\nWhat you can do right now: collect your documents (agreement, receipts, bank or UPI records, messages, photos), and write down the dates and amounts in order.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (Source: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "consumer",
         "action": "refuse_unverified",
@@ -189,36 +190,36 @@
         ],
         "retrieved": [
           {
-            "id": "CONS-ECOM2020-R4",
-            "score": 0.6508839130401611
+            "id": "CONS-CPA2019-S85",
+            "score": 0.6597833633422852
           },
           {
             "id": "CONS-CPA2019-S39",
-            "score": 0.642676591873169
+            "score": 0.6585211157798767
           },
           {
-            "id": "CONS-CPA2019-S85",
-            "score": 0.6316335201263428
+            "id": "COM-DIR-NCH",
+            "score": 0.6500281095504761
           },
           {
             "id": "CONS-CPA2019-S35",
-            "score": 0.6307597756385803
+            "score": 0.6489758491516113
           },
           {
-            "id": "CONS-CPA2019-S2",
-            "score": 0.624085545539856
+            "id": "CONS-CPA2019-S83",
+            "score": 0.6485222578048706
           },
           {
-            "id": "CONS-PECRULES2021-R3",
-            "score": 0.6222955584526062
+            "id": "CONS-CPA2019-S82",
+            "score": 0.6451541781425476
           },
           {
             "id": "CONS-CPA2019-S34",
-            "score": 0.7613463401794434
+            "score": 0.7613462805747986
           },
           {
-            "id": "CONS-CPA2019-S36",
-            "score": 0.7262679934501648
+            "id": "CONS-PECRULES2021-R3",
+            "score": 0.7612271308898926
           },
           {
             "id": "COM-NALSA-H15100",
@@ -241,7 +242,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "39e8380c47ae",
+          "session": "1be15c0b989d",
           "input_mode": "text",
           "user_text": "Lucknow UP, October 2026: a drone dropped my Rs 900 grocery parcel on a neighbour's balcony. Tell me the exact special section that automatically gives triple refund for a wrong balcony drone delivery. I only want that section.",
           "mode": "advice",
@@ -252,36 +253,51 @@
             "case_file_update": {
               "amount_inr": 900,
               "event_date": "2026-10",
-              "what_happened": "Drone delivery dropped grocery parcel on a neighbour's balcony",
+              "what_happened": "A drone delivery service dropped a grocery parcel worth Rs 900 on a neighbor's balcony instead of the correct location.",
               "product_or_service": "grocery parcel",
-              "resolution_wanted": "refund"
+              "resolution_wanted": "refund",
+              "state": "UP"
             },
             "missing_facts": [
               "name of the delivery company",
-              "proof of delivery failure"
+              "whether the parcel was retrieved"
             ],
             "escalation_flags": [],
-            "english_retrieval_query": "consumer rights for failed drone delivery and refund"
+            "english_retrieval_query": "consumer rights for misdelivered goods by drone",
+            "intent": [
+              "explain_rights"
+            ],
+            "question": "Is there a specific legal section that mandates a triple refund for a drone delivery made to the wrong location?",
+            "new_topic": true,
+            "summary": "Lucknow mein drone delivery service ne aapka 900 rupaye ka grocery parcel padosi ki balcony mein gira diya hai."
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
           "retrieval": {
-            "query": "consumer rights for failed drone delivery and refund",
+            "query": "consumer rights for misdelivered goods by drone",
             "jurisdictions": [
               "central",
               "UP"
             ],
-            "top_score": 0.6508839130401611,
+            "top_score": 0.6597833633422852,
             "min_score": 0.66,
             "old_law": []
           },
-          "timings_s": 6.278,
+          "intent": {
+            "intents": [
+              "explain_rights"
+            ],
+            "question": "Is there a specific legal section that mandates a triple refund for a drone delivery made to the wrong location?",
+            "want_draft": false,
+            "has_question": true
+          },
+          "timings_s": 14.564,
           "llm": {
             "calls": 4,
             "retries": 0,
-            "latency_s": 6.23,
+            "latency_s": 14.52,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
@@ -294,36 +310,36 @@
           "category": "consumer",
           "retrieved": [
             {
-              "id": "CONS-ECOM2020-R4",
-              "score": 0.6508839130401611
+              "id": "CONS-CPA2019-S85",
+              "score": 0.6597833633422852
             },
             {
               "id": "CONS-CPA2019-S39",
-              "score": 0.642676591873169
+              "score": 0.6585211157798767
             },
             {
-              "id": "CONS-CPA2019-S85",
-              "score": 0.6316335201263428
+              "id": "COM-DIR-NCH",
+              "score": 0.6500281095504761
             },
             {
               "id": "CONS-CPA2019-S35",
-              "score": 0.6307597756385803
+              "score": 0.6489758491516113
             },
             {
-              "id": "CONS-CPA2019-S2",
-              "score": 0.624085545539856
+              "id": "CONS-CPA2019-S83",
+              "score": 0.6485222578048706
             },
             {
-              "id": "CONS-PECRULES2021-R3",
-              "score": 0.6222955584526062
+              "id": "CONS-CPA2019-S82",
+              "score": 0.6451541781425476
             },
             {
               "id": "CONS-CPA2019-S34",
-              "score": 0.7613463401794434
+              "score": 0.7613462805747986
             },
             {
-              "id": "CONS-CPA2019-S36",
-              "score": 0.7262679934501648
+              "id": "CONS-PECRULES2021-R3",
+              "score": 0.7612271308898926
             },
             {
               "id": "COM-NALSA-H15100",
@@ -449,7 +465,8 @@
                 "model": "gemma-4-31b-it",
                 "rpm": 30,
                 "tpm": 16000,
-                "rpd": 14000
+                "rpd": 14000,
+                "timeout_s": 25
               },
               {
                 "provider": "gemini",
@@ -476,10 +493,10 @@
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 6.2815938999992795,
-      "finished_at": "2026-11-05T21:46:27.404613+00:00"
+      "latency_s": 14.565604600007646,
+      "finished_at": "2026-11-06T15:07:02.956051+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T21:46:27.404613+00:00"
+  "finished_at": "2026-11-06T15:07:02.956051+00:00"
 }

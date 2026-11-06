@@ -1,0 +1,488 @@
+{
+  "schema_version": 1,
+  "case_id": "T-051",
+  "case": {
+    "id": "T-051",
+    "group": "L_referrals",
+    "tags": [
+      "round4",
+      "directory",
+      "electricity bill dispute"
+    ],
+    "category_expected": "consumer",
+    "language": "hi-IN",
+    "input_mode": "text",
+    "turns": [
+      "मैं उत्तर प्रदेश में बिजली उपभोक्ता हूं। इस महीने बिल अचानक बहुत अधिक आया है और मीटर रीडिंग गलत दिख रही है। बिजली कंपनी के आधिकारिक बिल शिकायत चैनल में कहां संपर्क करूं?"
+    ],
+    "expected_action": "answer",
+    "expect_needs_lawyer": false,
+    "expected_topics": [
+      "electricity bill dispute",
+      "official referral"
+    ],
+    "must_include_any": [],
+    "must_not_include": [],
+    "expected_chunk_ids": [
+      "COM-DIR-UPPCL"
+    ],
+    "expected_referral_any": [
+      "COM-DIR-UPPCL"
+    ],
+    "notes": "An answer must name and cite an expected body. Wrong bodies always hard fail. Statute/section patterns hard fail in escalate/out_of_scope replies; in an answer they must be grounded in cited chunks. Legal-aid-only escalation is a safe fallback and a recall miss. Targets remain agent-mapped, pending human confirmation.",
+    "expected_law_verified": false,
+    "calibration_label": "exclude",
+    "jurisdictions_expected": [
+      "central",
+      "UP"
+    ],
+    "retrieval_expectation_kind": "safe_referral",
+    "expected_outcomes": [
+      {
+        "category": "consumer",
+        "action": "answer",
+        "needs_lawyer": false
+      },
+      {
+        "category": "out_of_scope",
+        "action": "escalate",
+        "needs_lawyer": true
+      }
+    ]
+  },
+  "repeat": 1,
+  "mock": false,
+  "backend": "app.pipeline",
+  "stage": "real",
+  "configured_models": {
+    "router": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "main": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash",
+        "rpm": 5,
+        "tpm": 250000,
+        "rpd": 19
+      }
+    ],
+    "translate": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "judge": [
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000,
+        "timeout_s": 25
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      }
+    ]
+  },
+  "started_at": "2026-11-06T15:23:13.746338+00:00",
+  "turns": [
+    {
+      "input": "मैं उत्तर प्रदेश में बिजली उपभोक्ता हूं। इस महीने बिल अचानक बहुत अधिक आया है और मीटर रीडिंग गलत दिख रही है। बिजली कंपनी के आधिकारिक बिल शिकायत चैनल में कहां संपर्क करूं?",
+      "input_mode": "text",
+      "lang_hint": "hi-IN",
+      "started_at": "2026-11-06T15:23:19.760258+00:00",
+      "result": {
+        "reply_text": "उत्तर प्रदेश में बिजली के बिल और गलत मीटर रीडिंग की शिकायत के लिए आप उत्तर प्रदेश पावर कॉरपोरेशन लिमिटेड (UPPCL) की वेबसाइट https://1912.uppcl.org/ या https://upenergy.in/ पर ऑनलाइन शिकायत दर्ज कर सकते हैं या 24 घंटे चलने वाले टोल-फ्री हेल्पलाइन नंबर 1912 पर कॉल कर सकते हैं।\n\nअपने पास पिछला बिजली बिल, इस महीने का अधिक आया हुआ बिल, और मीटर की तस्वीर का सबूत तैयार रखें।\n\nअगले कदम के रूप में, आप 1912 पर कॉल करें या उनकी वेबसाइट पर अपनी शिकायत दर्ज करें और शिकायत संख्या (डॅकेट नंबर) नोट कर लें।\n\nआप उत्तर प्रदेश में बिजली उपभोक्ता हैं और गलत मीटर रीडिंग व अधिक बिल से परेशान हैं।\n\nअसमाधानित शिकायतों के लिए, आप UPERC नियमों के तहत उपभोक्ता शिकायत निवारण मंच (CGRF) के पास जा सकते हैं।\n\nकृपया अपनी बिजली वितरण कंपनी का नाम और उपभोक्ता संख्या (कंज्यूमर नंबर) बताएं।\n\nस्रोत: Uttar Pradesh Power Corporation Limited - 1912 Electricity Helpline & CGRF, P UPPCL\n\nयह कानूनी जानकारी है, कानूनी सलाह नहीं।",
+        "reply_lang": "hi-IN",
+        "category": "consumer",
+        "action": "answer",
+        "citations": [
+          "COM-DIR-UPPCL"
+        ],
+        "retrieved": [
+          {
+            "id": "COM-DIR-UPPCL",
+            "score": 0.7775541543960571
+          },
+          {
+            "id": "COM-DIR-UPIGRS",
+            "score": 0.7123012542724609
+          },
+          {
+            "id": "COM-DIR-UPRERA",
+            "score": 0.7079364061355591
+          },
+          {
+            "id": "COM-DIR-UPLABOUR",
+            "score": 0.7033243179321289
+          },
+          {
+            "id": "COM-DIR-UPPOLICE",
+            "score": 0.6840295791625977
+          },
+          {
+            "id": "CONS-NCH-P1",
+            "score": 0.6817249059677124
+          },
+          {
+            "id": "CONS-CPA2019-S34",
+            "score": 0.7613462805747986
+          },
+          {
+            "id": "CONS-PECRULES2021-R3",
+            "score": 0.7612271308898926
+          }
+        ],
+        "needs_lawyer": false,
+        "escalation_reasons": [],
+        "verifier": {
+          "status": "pass",
+          "issues": []
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "15947f8898d6",
+          "input_mode": "text",
+          "user_text": "मैं उत्तर प्रदेश में बिजली उपभोक्ता हूं। इस महीने बिल अचानक बहुत अधिक आया है और मीटर रीडिंग गलत दिख रही है। बिजली कंपनी के आधिकारिक बिल शिकायत चैनल में कहां संपर्क करूं?",
+          "mode": "advice",
+          "router": {
+            "category": "consumer",
+            "language": "hi-IN",
+            "state_or_city": "UP",
+            "case_file_update": {
+              "product_or_service": "electricity bill",
+              "what_happened": "The user received an unexpectedly high electricity bill and suspects incorrect meter reading.",
+              "state": "UP"
+            },
+            "missing_facts": [
+              "name of the electricity distribution company",
+              "consumer number"
+            ],
+            "escalation_flags": [],
+            "english_retrieval_query": "how to file a complaint against incorrect electricity bill in Uttar Pradesh",
+            "intent": [
+              "where_to_complain"
+            ],
+            "question": "Where can I contact the official complaint channel for my electricity bill in Uttar Pradesh?",
+            "new_topic": true,
+            "summary": "आप उत्तर प्रदेश में बिजली उपभोक्ता हैं और इस महीने का बिल बहुत अधिक आने और मीटर रीडिंग गलत होने से परेशान हैं।"
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "retrieval": {
+            "query": "how to file a complaint against incorrect electricity bill in Uttar Pradesh",
+            "jurisdictions": [
+              "central",
+              "UP"
+            ],
+            "top_score": 0.7775541543960571,
+            "min_score": 0.66,
+            "old_law": []
+          },
+          "intent": {
+            "intents": [
+              "where_to_complain"
+            ],
+            "question": "Where can I contact the official complaint channel for my electricity bill in Uttar Pradesh?",
+            "want_draft": false,
+            "has_question": true
+          },
+          "judge": "ok",
+          "verifier_history": [
+            []
+          ],
+          "timings_s": 10.347,
+          "llm": {
+            "calls": 5,
+            "retries": 0,
+            "latency_s": 10.24,
+            "models": [
+              "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "embed:gemini:gemini-embedding-001",
+              "main:gemini:gemini-3.5-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite"
+            ],
+            "fallbacks": [
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~469s"
+              }
+            ]
+          },
+          "action": "answer",
+          "category": "consumer",
+          "retrieved": [
+            {
+              "id": "COM-DIR-UPPCL",
+              "score": 0.7775541543960571
+            },
+            {
+              "id": "COM-DIR-UPIGRS",
+              "score": 0.7123012542724609
+            },
+            {
+              "id": "COM-DIR-UPRERA",
+              "score": 0.7079364061355591
+            },
+            {
+              "id": "COM-DIR-UPLABOUR",
+              "score": 0.7033243179321289
+            },
+            {
+              "id": "COM-DIR-UPPOLICE",
+              "score": 0.6840295791625977
+            },
+            {
+              "id": "CONS-NCH-P1",
+              "score": 0.6817249059677124
+            },
+            {
+              "id": "CONS-CPA2019-S34",
+              "score": 0.7613462805747986
+            },
+            {
+              "id": "CONS-PECRULES2021-R3",
+              "score": 0.7612271308898926
+            }
+          ],
+          "citations": [
+            "COM-DIR-UPPCL"
+          ],
+          "verifier": {
+            "status": "pass",
+            "issues": []
+          },
+          "escalation_reasons": [],
+          "models": {
+            "router": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "main": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash",
+                "rpm": 5,
+                "tpm": 250000,
+                "rpd": 19
+              }
+            ],
+            "translate": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "judge": [
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000,
+                "timeout_s": 25
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              }
+            ]
+          },
+          "mock": false
+        }
+      },
+      "model_names_used": [
+        "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001",
+        "main:gemini:gemini-3.5-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite"
+      ],
+      "latency_s": 10.3492394000059,
+      "finished_at": "2026-11-06T15:23:30.109631+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-06T15:23:30.109631+00:00"
+}

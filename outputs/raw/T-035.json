@@ -163,7 +163,8 @@
         "model": "gemma-4-31b-it",
         "rpm": 30,
         "tpm": 16000,
-        "rpd": 14000
+        "rpd": 14000,
+        "timeout_s": 25
       },
       {
         "provider": "gemini",
@@ -181,13 +182,13 @@
       }
     ]
   },
-  "started_at": "2026-11-05T22:20:21.582264+00:00",
+  "started_at": "2026-11-06T15:17:21.713960+00:00",
   "turns": [
     {
       "input": "Lucknow UP residential tenancy. I vacated on 20 October 2026 and my landlord has not returned my Rs 18000 deposit. I have the agreement. Please draft a demand notice.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T22:20:27.584358+00:00",
+      "started_at": "2026-11-06T15:17:27.700140+00:00",
       "result": {
         "reply_text": "Here is a draft demand notice for your security deposit. Anything I do not know is left as a [● placeholder] for you to fill in.\n\nLEGAL NOTICE: DEMAND FOR RETURN OF SECURITY DEPOSIT\n\nDate: [● date of sending]\nBy: [● registered post / speed post / email, as you choose]\n\nTo,\n[● landlord's full name]\n[● landlord's address]\n\nFrom,\n[● your full name]\n[● your address and phone number]\n\nSubject: Demand for return of security deposit of Rs. 18,000 for the premises at [● property address]\n\nDear Sir/Madam,\n\n1. I was your tenant at [● property address] from [● tenancy start date] to 2026-10-20 under [● rent agreement / verbal arrangement].\n\n2. At the start of the tenancy I paid you a security deposit of Rs. 18,000 on [● date of payment] by [● mode of payment, e.g. bank transfer / UPI / cash]. [● reference or proof, e.g. receipt, transaction ID, agreement clause].\n\n3. I vacated the premises on 2026-10-20 and handed over [● possession details, e.g. keys handed over on date / to whom].\n\n4. The deposit has not been returned. [● what happened when you asked, with dates, e.g. calls or messages already sent]. [● any deductions the landlord claimed, and why they are not justified, or \"No deductions were agreed.\"]\n\nThis demand is made with reference to: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 11; Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 24. [● Have a lawyer confirm that these provisions apply to your case.]\n\n5. I therefore request you to return the full security deposit of Rs. 18,000 within [● number of days you allow] days of receiving this notice, by [● how you want to be paid, e.g. transfer to your bank account details].\n\n6. If the amount is not returned within this time, I will be free to take further steps available to me under the law, without further notice, at your cost and risk.\n\nYours faithfully,\n[● your name]\n[● signature]\n\nEnclosures (copies): [● agreement / receipts / transaction record / messages]\n\n\nCheck every detail before sending. For high-value or complex matters, have a lawyer review it.",
         "reply_lang": "en-IN",
@@ -208,7 +209,7 @@
           },
           {
             "id": "TEN-UPTA2021-S15",
-            "score": 0.6431294083595276
+            "score": 0.6431294679641724
           },
           {
             "id": "TEN-UPTA2021-S14",
@@ -223,7 +224,7 @@
         },
         "draft_text": "LEGAL NOTICE: DEMAND FOR RETURN OF SECURITY DEPOSIT\n\nDate: [● date of sending]\nBy: [● registered post / speed post / email, as you choose]\n\nTo,\n[● landlord's full name]\n[● landlord's address]\n\nFrom,\n[● your full name]\n[● your address and phone number]\n\nSubject: Demand for return of security deposit of Rs. 18,000 for the premises at [● property address]\n\nDear Sir/Madam,\n\n1. I was your tenant at [● property address] from [● tenancy start date] to 2026-10-20 under [● rent agreement / verbal arrangement].\n\n2. At the start of the tenancy I paid you a security deposit of Rs. 18,000 on [● date of payment] by [● mode of payment, e.g. bank transfer / UPI / cash]. [● reference or proof, e.g. receipt, transaction ID, agreement clause].\n\n3. I vacated the premises on 2026-10-20 and handed over [● possession details, e.g. keys handed over on date / to whom].\n\n4. The deposit has not been returned. [● what happened when you asked, with dates, e.g. calls or messages already sent]. [● any deductions the landlord claimed, and why they are not justified, or \"No deductions were agreed.\"]\n\nThis demand is made with reference to: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 11; Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 24. [● Have a lawyer confirm that these provisions apply to your case.]\n\n5. I therefore request you to return the full security deposit of Rs. 18,000 within [● number of days you allow] days of receiving this notice, by [● how you want to be paid, e.g. transfer to your bank account details].\n\n6. If the amount is not returned within this time, I will be free to take further steps available to me under the law, without further notice, at your cost and risk.\n\nYours faithfully,\n[● your name]\n[● signature]\n\nEnclosures (copies): [● agreement / receipts / transaction record / messages]\n\n\nCheck every detail before sending. For high-value or complex matters, have a lawyer review it.",
         "trace": {
-          "session": "20b6d0c06543",
+          "session": "fa36fe17fbca",
           "input_mode": "text",
           "user_text": "Lucknow UP residential tenancy. I vacated on 20 October 2026 and my landlord has not returned my Rs 18000 deposit. I have the agreement. Please draft a demand notice.",
           "mode": "draft",
@@ -234,10 +235,10 @@
             "case_file_update": {
               "vacated_date": "2026-10-20",
               "amount_inr": 18000,
+              "counterparty_type": "landlord",
               "proof": [
                 "rental agreement"
               ],
-              "counterparty_type": "landlord",
               "resolution_wanted": "refund"
             },
             "missing_facts": [
@@ -245,30 +246,44 @@
               "property_address"
             ],
             "escalation_flags": [],
-            "english_retrieval_query": "legal notice for return of security deposit after vacating rental property"
+            "english_retrieval_query": "how to draft a legal notice for return of security deposit",
+            "intent": [
+              "draft_document"
+            ],
+            "question": "Can you help me draft a demand notice to my landlord for the return of my security deposit?",
+            "new_topic": false,
+            "summary": "You vacated your rented property in Lucknow on 20 October 2026 and your landlord has not returned your security deposit of Rs 18,000."
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
           "retrieval": {
-            "query": "legal notice for return of security deposit after vacating rental property",
+            "query": "how to draft a legal notice for return of security deposit",
             "jurisdictions": [
               "central",
               "UP"
             ],
-            "top_score": 0.6975626945495605,
+            "top_score": 0.6957820057868958,
             "min_score": 0.66,
             "old_law": [
               {
                 "id": "TEN-UP1972-S20",
-                "score": 0.6455565094947815
+                "score": 0.6413412094116211
               },
               {
                 "id": "TEN-UP1972-S21",
-                "score": 0.6392568945884705
+                "score": 0.6275126934051514
               }
             ]
+          },
+          "intent": {
+            "intents": [
+              "draft_document"
+            ],
+            "question": "Can you help me draft a demand notice to my landlord for the return of my security deposit?",
+            "want_draft": true,
+            "has_question": false
           },
           "draft": {
             "kind": "tenancy",
@@ -298,11 +313,11 @@
             ],
             "scan_issues": []
           },
-          "timings_s": 6.58,
+          "timings_s": 10.732,
           "llm": {
             "calls": 4,
             "retries": 0,
-            "latency_s": 6.54,
+            "latency_s": 10.67,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
@@ -324,7 +339,7 @@
             },
             {
               "id": "TEN-UPTA2021-S15",
-              "score": 0.6431294083595276
+              "score": 0.6431294679641724
             },
             {
               "id": "TEN-UPTA2021-S14",
@@ -442,7 +457,8 @@
                 "model": "gemma-4-31b-it",
                 "rpm": 30,
                 "tpm": 16000,
-                "rpd": 14000
+                "rpd": 14000,
+                "timeout_s": 25
               },
               {
                 "provider": "gemini",
@@ -469,14 +485,14 @@
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 6.584296399960294,
-      "finished_at": "2026-11-05T22:20:34.167854+00:00"
+      "latency_s": 10.735486800025683,
+      "finished_at": "2026-11-06T15:17:38.435800+00:00"
     },
     {
       "input": "Wait, the bank transfer record says Rs 30000, but I earlier said Rs 18000. I'm not sure which deposit amount is correct. Show the conflict and leave the deposit amount blank in the draft until I confirm it.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T22:20:40.169128+00:00",
+      "started_at": "2026-11-06T15:17:44.436359+00:00",
       "result": {
         "reply_text": "Here is a draft demand notice for your security deposit. Anything I do not know is left as a [● placeholder] for you to fill in.\n\nLEGAL NOTICE: DEMAND FOR RETURN OF SECURITY DEPOSIT\n\nDate: [● date of sending]\nBy: [● registered post / speed post / email, as you choose]\n\nTo,\n[● landlord's full name]\n[● landlord's address]\n\nFrom,\n[● your full name]\n[● your address and phone number]\n\nSubject: Demand for return of security deposit of Rs. 18,000 for the premises at [● property address]\n\nDear Sir/Madam,\n\n1. I was your tenant at [● property address] from [● tenancy start date] to 2026-10-20 under [● rent agreement / verbal arrangement].\n\n2. At the start of the tenancy I paid you a security deposit of Rs. 18,000 on [● date of payment] by [● mode of payment, e.g. bank transfer / UPI / cash]. [● reference or proof, e.g. receipt, transaction ID, agreement clause].\n\n3. I vacated the premises on 2026-10-20 and handed over [● possession details, e.g. keys handed over on date / to whom].\n\n4. The deposit has not been returned. [● what happened when you asked, with dates, e.g. calls or messages already sent]. [● any deductions the landlord claimed, and why they are not justified, or \"No deductions were agreed.\"]\n\nThis demand is made with reference to: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 11; Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 24. [● Have a lawyer confirm that these provisions apply to your case.]\n\n5. I therefore request you to return the full security deposit of Rs. 18,000 within [● number of days you allow] days of receiving this notice, by [● how you want to be paid, e.g. transfer to your bank account details].\n\n6. If the amount is not returned within this time, I will be free to take further steps available to me under the law, without further notice, at your cost and risk.\n\nYours faithfully,\n[● your name]\n[● signature]\n\nEnclosures (copies): [● agreement / receipts / transaction record / messages]\n\n\nCheck every detail before sending. For high-value or complex matters, have a lawyer review it.",
         "reply_lang": "en-IN",
@@ -497,7 +513,7 @@
           },
           {
             "id": "TEN-UPTA2021-S15",
-            "score": 0.6431294083595276
+            "score": 0.6431294679641724
           },
           {
             "id": "TEN-UPTA2021-S14",
@@ -512,7 +528,7 @@
         },
         "draft_text": "LEGAL NOTICE: DEMAND FOR RETURN OF SECURITY DEPOSIT\n\nDate: [● date of sending]\nBy: [● registered post / speed post / email, as you choose]\n\nTo,\n[● landlord's full name]\n[● landlord's address]\n\nFrom,\n[● your full name]\n[● your address and phone number]\n\nSubject: Demand for return of security deposit of Rs. 18,000 for the premises at [● property address]\n\nDear Sir/Madam,\n\n1. I was your tenant at [● property address] from [● tenancy start date] to 2026-10-20 under [● rent agreement / verbal arrangement].\n\n2. At the start of the tenancy I paid you a security deposit of Rs. 18,000 on [● date of payment] by [● mode of payment, e.g. bank transfer / UPI / cash]. [● reference or proof, e.g. receipt, transaction ID, agreement clause].\n\n3. I vacated the premises on 2026-10-20 and handed over [● possession details, e.g. keys handed over on date / to whom].\n\n4. The deposit has not been returned. [● what happened when you asked, with dates, e.g. calls or messages already sent]. [● any deductions the landlord claimed, and why they are not justified, or \"No deductions were agreed.\"]\n\nThis demand is made with reference to: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 11; Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 24. [● Have a lawyer confirm that these provisions apply to your case.]\n\n5. I therefore request you to return the full security deposit of Rs. 18,000 within [● number of days you allow] days of receiving this notice, by [● how you want to be paid, e.g. transfer to your bank account details].\n\n6. If the amount is not returned within this time, I will be free to take further steps available to me under the law, without further notice, at your cost and risk.\n\nYours faithfully,\n[● your name]\n[● signature]\n\nEnclosures (copies): [● agreement / receipts / transaction record / messages]\n\n\nCheck every detail before sending. For high-value or complex matters, have a lawyer review it.",
         "trace": {
-          "session": "20b6d0c06543",
+          "session": "fa36fe17fbca",
           "input_mode": "text",
           "user_text": "Wait, the bank transfer record says Rs 30000, but I earlier said Rs 18000. I'm not sure which deposit amount is correct. Show the conflict and leave the deposit amount blank in the draft until I confirm it.",
           "mode": "draft",
@@ -524,34 +540,47 @@
               "amount_inr": null
             },
             "missing_facts": [
-              "actual security deposit amount paid",
-              "date of deposit payment"
+              "correct security deposit amount"
             ],
             "escalation_flags": [],
-            "english_retrieval_query": "how to resolve discrepancy in security deposit amount for rental refund"
+            "english_retrieval_query": "how to resolve discrepancy in security deposit amount for legal notice",
+            "intent": [
+              "draft_document"
+            ],
+            "question": "How should I handle the conflicting information about the security deposit amount in the legal notice?",
+            "new_topic": false,
+            "summary": "You are unsure whether your security deposit was Rs 18,000 or Rs 30,000 as per your bank records."
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
           "retrieval": {
-            "query": "how to resolve discrepancy in security deposit amount for rental refund",
+            "query": "how to resolve discrepancy in security deposit amount for legal notice",
             "jurisdictions": [
               "central",
               "UP"
             ],
-            "top_score": 0.6632668375968933,
+            "top_score": 0.7044246196746826,
             "min_score": 0.66,
             "old_law": [
               {
                 "id": "TEN-UP1972-S20",
-                "score": 0.5602898597717285
+                "score": 0.6216166019439697
               },
               {
                 "id": "TEN-UP1972-S21",
-                "score": 0.5570658445358276
+                "score": 0.6121132373809814
               }
             ]
+          },
+          "intent": {
+            "intents": [
+              "draft_document"
+            ],
+            "question": "How should I handle the conflicting information about the security deposit amount in the legal notice?",
+            "want_draft": true,
+            "has_question": false
           },
           "draft": {
             "kind": "tenancy",
@@ -581,11 +610,11 @@
             ],
             "scan_issues": []
           },
-          "timings_s": 6.675,
+          "timings_s": 5.236,
           "llm": {
             "calls": 4,
             "retries": 0,
-            "latency_s": 6.63,
+            "latency_s": 5.19,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
@@ -607,7 +636,7 @@
             },
             {
               "id": "TEN-UPTA2021-S15",
-              "score": 0.6431294083595276
+              "score": 0.6431294679641724
             },
             {
               "id": "TEN-UPTA2021-S14",
@@ -725,7 +754,8 @@
                 "model": "gemma-4-31b-it",
                 "rpm": 30,
                 "tpm": 16000,
-                "rpd": 14000
+                "rpd": 14000,
+                "timeout_s": 25
               },
               {
                 "provider": "gemini",
@@ -752,10 +782,10 @@
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 6.677812299982179,
-      "finished_at": "2026-11-05T22:20:46.846317+00:00"
+      "latency_s": 5.238622500037309,
+      "finished_at": "2026-11-06T15:17:49.674822+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T22:20:46.846317+00:00"
+  "finished_at": "2026-11-06T15:17:49.674822+00:00"
 }

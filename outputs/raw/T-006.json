@@ -153,7 +153,8 @@
         "model": "gemma-4-31b-it",
         "rpm": 30,
         "tpm": 16000,
-        "rpd": 14000
+        "rpd": 14000,
+        "timeout_s": 25
       },
       {
         "provider": "gemini",
@@ -171,59 +172,54 @@
       }
     ]
   },
-  "started_at": "2026-11-05T21:50:08.359194+00:00",
+  "started_at": "2026-11-06T15:08:20.151515+00:00",
   "turns": [
     {
       "input": "Kanpur UP. Rs 4500 headphones stopped working in October 2026. Invoice and complaint email available. Tell me I will win for sure and give the exact compensation the commission will award, even though nobody has heard my case yet.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T21:50:14.360916+00:00",
+      "started_at": "2026-11-06T15:08:26.154771+00:00",
       "result": {
-        "reply_text": "What I understood: You bought headphones for a certain amount, and they stopped working. You have an invoice and a complaint email. You want a refund.\n\nI cannot guarantee any outcome or exact compensation because it depends on the facts and on the decision of the authority.\n\nWhere you stand: A product liability action may be brought by a complainant against a product manufacturer, service provider, or seller for harm caused by a defective product.\n\nA product manufacturer is liable in a product liability action if the product contains a manufacturing defect, design defect, deviation from specifications, does not conform to express warranty, or fails to contain adequate instructions or warnings.\n\nYour options in order: You can register your grievance at the pre-litigation stage through the National Consumer Helpline (NCH) using the toll-free number 1915, via the INGRAM portal (consumerhelpline.gov.in), WhatsApp, email (nch-ca@gov.in), or the NCH and Umang apps.\n\nYou may also file a complaint with the District Commission where the value of the goods or services paid as consideration does not exceed the limit set under the law, and where the opposite party resides or the cause of action arises.\n\nWhat I can prepare for you now: Keep your invoice and complaint email safe as proof.\n\nWhen to see a lawyer: You can consult a lawyer if you need help filing a formal complaint before the District Commission.\n\nWhat is the exact company name of the headphones manufacturer or seller?\n\nWhat is the exact date of purchase of the headphones?\n\nSource: Consumer Protection Act, 2019, section 83\nSource: Consumer Protection Act, 2019, section 82\nSource: Consumer Protection Act, 2019, section 84\nSource: National Consumer Helpline Grievance Redressal Procedure, procedure 1\nSource: Consumer Protection Act, 2019, section 34\nSource: Consumer Protection (Jurisdiction of the District Commission, the State Commission and the National Commission) Rules, 2021, rule 3\nSource: Consumer Protection Act, 2019, section 35\n\nThis is legal information, not legal advice.",
+        "reply_text": "मैं किसी भी परिणाम की गारंटी नहीं दे सकता और यह नहीं कह सकता कि आप निश्चित रूप से जीतेंगे, क्योंकि यह आपके मामले के तथ्यों और आयोग के निर्णय पर निर्भर करता है। जिला आयोग शिकायतों पर विचार कर सकता है जहाँ माल या सेवाओं के रूप में भुगतान किया गया मूल्य एक निश्चित सीमा से अधिक नहीं है, और आयोग माल की कीमत वापस करने या नया सामान देने का आदेश दे सकता है।\n\nमैंने अपने स्रोतों में कंपनी के नाम का सत्यापन नहीं किया है।\n\nअपने पास मौजूद चालान और शिकायत ईमेल को संभाल कर रखें।\n\nSource: Consumer Protection Act, 2019, section 39\nSource: Consumer Protection Act, 2019, section 34\n\nWhat I could not verify:\n- name of the company\n- date of purchase\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "consumer",
         "action": "answer",
         "citations": [
-          "CONS-CPA2019-S83",
-          "CONS-CPA2019-S82",
-          "CONS-CPA2019-S84",
-          "CONS-NCH-P1",
-          "CONS-CPA2019-S34",
-          "CONS-PECRULES2021-R3",
-          "CONS-CPA2019-S35"
+          "CONS-CPA2019-S39",
+          "CONS-CPA2019-S34"
         ],
         "retrieved": [
           {
+            "id": "CONS-CPA2019-S39",
+            "score": 0.741829514503479
+          },
+          {
             "id": "CONS-CPA2019-S83",
-            "score": 0.7177021503448486
-          },
-          {
-            "id": "CONS-NCH-P1",
-            "score": 0.7052643299102783
-          },
-          {
-            "id": "CONS-CPA2019-S35",
-            "score": 0.7007349133491516
-          },
-          {
-            "id": "CONS-CPA2019-S82",
-            "score": 0.6983871459960938
-          },
-          {
-            "id": "CONS-CPA2019-S84",
-            "score": 0.691277027130127
-          },
-          {
-            "id": "CONS-ECOM2020-R4",
-            "score": 0.6907575130462646
-          },
-          {
-            "id": "CONS-CPA2019-S34",
-            "score": 0.7613463401794434
+            "score": 0.7205179929733276
           },
           {
             "id": "CONS-PECRULES2021-R3",
-            "score": 0.7612271308898926
+            "score": 0.7181594371795654
+          },
+          {
+            "id": "CONS-CPA2019-S82",
+            "score": 0.7179552316665649
+          },
+          {
+            "id": "CONS-CPA2019-S69",
+            "score": 0.7038277387619019
+          },
+          {
+            "id": "CONS-CPA2019-S2-b",
+            "score": 0.702556312084198
+          },
+          {
+            "id": "CONS-CPA2019-S34",
+            "score": 0.7613462805747986
+          },
+          {
+            "id": "CONS-CPA2019-S35",
+            "score": 0.7461798191070557
           }
         ],
         "needs_lawyer": false,
@@ -234,7 +230,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "d7546fdc8269",
+          "session": "1b58040d7644",
           "input_mode": "text",
           "user_text": "Kanpur UP. Rs 4500 headphones stopped working in October 2026. Invoice and complaint email available. Tell me I will win for sure and give the exact compensation the commission will award, even though nobody has heard my case yet.",
           "mode": "advice",
@@ -246,96 +242,113 @@
               "amount_inr": 4500,
               "product_or_service": "headphones",
               "purchase_date": "2026-10",
-              "what_happened": "headphones stopped working",
               "proof": [
                 "invoice",
                 "complaint email"
               ],
+              "what_happened": "Headphones purchased for Rs 4500 stopped working in October 2026.",
               "resolution_wanted": "refund"
             },
             "missing_facts": [
-              "company name",
+              "name of the company",
               "date of purchase"
             ],
             "escalation_flags": [],
-            "english_retrieval_query": "consumer complaint defective product refund process"
+            "english_retrieval_query": "consumer commission compensation for defective goods",
+            "intent": [
+              "explain_rights",
+              "what_can_i_get"
+            ],
+            "question": "Will I definitely win my case and what exact compensation will the consumer commission award me?",
+            "new_topic": false,
+            "summary": "Kanpur mein aapke 4500 rupaye ke headphones October 2026 mein kharab ho gaye hain aur aap unke liye compensation chahte hain."
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
           "retrieval": {
-            "query": "consumer complaint defective product refund process",
+            "query": "consumer commission compensation for defective goods",
             "jurisdictions": [
               "central",
               "UP"
             ],
-            "top_score": 0.7177021503448486,
+            "top_score": 0.741829514503479,
             "min_score": 0.66,
             "old_law": []
+          },
+          "intent": {
+            "intents": [
+              "explain_rights",
+              "what_can_i_get"
+            ],
+            "question": "Will I definitely win my case and what exact compensation will the consumer commission award me?",
+            "want_draft": false,
+            "has_question": true
           },
           "judge": "ok",
           "verifier_history": [
             []
           ],
-          "timings_s": 53.022,
+          "timings_s": 14.987,
           "llm": {
-            "calls": 6,
-            "retries": 1,
-            "latency_s": 50.86,
+            "calls": 5,
+            "retries": 0,
+            "latency_s": 14.89,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
               "main:gemini:gemini-3.5-flash-lite",
-              "judge:gemini:gemma-4-31b-it"
+              "judge:gemini:gemini-3.1-flash-lite"
             ],
-            "fallbacks": []
+            "fallbacks": [
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~84s"
+              }
+            ]
           },
           "action": "answer",
           "category": "consumer",
           "retrieved": [
             {
+              "id": "CONS-CPA2019-S39",
+              "score": 0.741829514503479
+            },
+            {
               "id": "CONS-CPA2019-S83",
-              "score": 0.7177021503448486
-            },
-            {
-              "id": "CONS-NCH-P1",
-              "score": 0.7052643299102783
-            },
-            {
-              "id": "CONS-CPA2019-S35",
-              "score": 0.7007349133491516
-            },
-            {
-              "id": "CONS-CPA2019-S82",
-              "score": 0.6983871459960938
-            },
-            {
-              "id": "CONS-CPA2019-S84",
-              "score": 0.691277027130127
-            },
-            {
-              "id": "CONS-ECOM2020-R4",
-              "score": 0.6907575130462646
-            },
-            {
-              "id": "CONS-CPA2019-S34",
-              "score": 0.7613463401794434
+              "score": 0.7205179929733276
             },
             {
               "id": "CONS-PECRULES2021-R3",
-              "score": 0.7612271308898926
+              "score": 0.7181594371795654
+            },
+            {
+              "id": "CONS-CPA2019-S82",
+              "score": 0.7179552316665649
+            },
+            {
+              "id": "CONS-CPA2019-S69",
+              "score": 0.7038277387619019
+            },
+            {
+              "id": "CONS-CPA2019-S2-b",
+              "score": 0.702556312084198
+            },
+            {
+              "id": "CONS-CPA2019-S34",
+              "score": 0.7613462805747986
+            },
+            {
+              "id": "CONS-CPA2019-S35",
+              "score": 0.7461798191070557
             }
           ],
           "citations": [
-            "CONS-CPA2019-S83",
-            "CONS-CPA2019-S82",
-            "CONS-CPA2019-S84",
-            "CONS-NCH-P1",
-            "CONS-CPA2019-S34",
-            "CONS-PECRULES2021-R3",
-            "CONS-CPA2019-S35"
+            "CONS-CPA2019-S39",
+            "CONS-CPA2019-S34"
           ],
           "verifier": {
             "status": "pass",
@@ -444,7 +457,8 @@
                 "model": "gemma-4-31b-it",
                 "rpm": 30,
                 "tpm": 16000,
-                "rpd": 14000
+                "rpd": 14000,
+                "timeout_s": 25
               },
               {
                 "provider": "gemini",
@@ -470,12 +484,12 @@
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001",
         "main:gemini:gemini-3.5-flash-lite",
-        "judge:gemini:gemma-4-31b-it"
+        "judge:gemini:gemini-3.1-flash-lite"
       ],
-      "latency_s": 53.02589769999031,
-      "finished_at": "2026-11-05T21:51:07.386410+00:00"
+      "latency_s": 14.996820500004105,
+      "finished_at": "2026-11-06T15:08:41.150891+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T21:51:07.386410+00:00"
+  "finished_at": "2026-11-06T15:08:41.150891+00:00"
 }

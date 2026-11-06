@@ -154,7 +154,8 @@
         "model": "gemma-4-31b-it",
         "rpm": 30,
         "tpm": 16000,
-        "rpd": 14000
+        "rpd": 14000,
+        "timeout_s": 25
       },
       {
         "provider": "gemini",
@@ -172,17 +173,17 @@
       }
     ]
   },
-  "started_at": "2026-11-05T21:46:27.404613+00:00",
+  "started_at": "2026-11-06T15:07:02.957918+00:00",
   "turns": [
     {
       "input": "मैं लखनऊ यूपी में हूँ। अक्टूबर 2026 में मकान छोड़ा, जमा 18000 रुपये नहीं मिले। IPC की धारा 420 में मकान मालिक को जेल भेजकर पैसा लेना है, उसी में मेरा केस लिखो।",
       "input_mode": "text",
       "lang_hint": "hi-IN",
-      "started_at": "2026-11-05T21:46:33.410783+00:00",
+      "started_at": "2026-11-06T15:07:08.944005+00:00",
       "result": {
-        "reply_text": "मैंने जो समझा: vacated date: 2026-10; amount inr: 18000; counterparty type: landlord; resolution wanted: refund; state: UP\n\nइसके लिए असली वकील या मुफ़्त कानूनी सहायता ज़रूरी है। जहाँ मेरे पास जाँची हुई जानकारी है वह मैं बता सकता हूँ, पर इसे अकेले सुरक्षित तरीके से नहीं संभाल सकता।\n\nकारण: आपके संदेश में पुलिस, अदालत, हिंसा, धमकी, बेदखली या पारिवारिक मामले जैसी बात है जिसमें वकील चाहिए; यह ऐसा मामला है जिसे मैं यहाँ सुरक्षित रूप से नहीं संभाल सकता (जैसे आपराधिक कानून, बच्चों की सुरक्षा, पुलिस या पारिवारिक मामले)\n\nआप अभी यह कर सकते हैं: अपने कागज़ (एग्रीमेंट, रसीदें, बैंक या UPI रिकॉर्ड, मैसेज, फोटो) इकट्ठा करें और तारीखें व रकम क्रम से लिख लें।\n\nअसली वकील या मुफ़्त कानूनी सहायता के लिए:\n- National Legal Services Authority Helpline: 15100 (स्रोत: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (स्रोत: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nयह कानूनी जानकारी है, कानूनी सलाह नहीं।",
+        "reply_text": "मैंने जो समझा: आपने अक्टूबर 2026 में लखनऊ में मकान खाली किया, लेकिन मकान मालिक ने आपकी 18000 रुपये की सुरक्षा जमा राशि वापस नहीं की है और आप उन पर आपराधिक मामला दर्ज करना चाहते हैं।\n\nइस विषय पर मेरे पास अभी जाँचा हुआ कानून नहीं है, इसलिए मैं अंदाज़ा नहीं लगाऊँगा। इसका मतलब यह नहीं कि आप किसी मुसीबत में हैं: नीचे दिए गए सरकारी रास्ते और मुफ़्त कानूनी सहायता आपकी मदद कर सकते हैं।\n\nआप अभी यह कर सकते हैं: मुफ़्त कानूनी सहायता कार्यालय आपको यह कानून समझा सकता है और बता सकता है कि यह आपकी स्थिति पर लागू होता है या नहीं।\n\nअसली वकील या मुफ़्त कानूनी सहायता के लिए:\n- National Legal Services Authority Helpline: 15100 (स्रोत: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (स्रोत: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nयह कानूनी जानकारी है, कानूनी सलाह नहीं।",
         "reply_lang": "hi-IN",
-        "category": "tenancy",
+        "category": "out_of_scope",
         "action": "escalate",
         "citations": [
           "COM-NALSA-H15100",
@@ -211,7 +212,8 @@
           "keyword:ipc",
           "keyword:420",
           "keyword:जेल",
-          "llm:criminal_threat"
+          "llm:criminal_matters",
+          "out_of_scope_topic"
         ],
         "verifier": {
           "status": "pass",
@@ -219,46 +221,54 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "2b2dae3db846",
+          "session": "0866c15dc1f7",
           "input_mode": "text",
           "user_text": "मैं लखनऊ यूपी में हूँ। अक्टूबर 2026 में मकान छोड़ा, जमा 18000 रुपये नहीं मिले। IPC की धारा 420 में मकान मालिक को जेल भेजकर पैसा लेना है, उसी में मेरा केस लिखो।",
           "mode": "advice",
           "router": {
-            "category": "tenancy",
+            "category": "out_of_scope",
             "language": "hi-IN",
             "state_or_city": "UP",
             "case_file_update": {
               "vacated_date": "2026-10",
-              "amount_inr": 18000,
-              "counterparty_type": "landlord",
+              "what_happened": "मकान मालिक ने 18000 रुपये की सुरक्षा जमा राशि वापस नहीं की है।",
               "resolution_wanted": "refund"
             },
             "missing_facts": [
-              "landlord_name",
-              "proof_of_deposit"
+              "क्या आपके पास रेंट एग्रीमेंट है?",
+              "क्या आपने मकान मालिक को कोई लिखित नोटिस भेजा है?"
             ],
             "escalation_flags": [
-              "criminal_threat"
+              "criminal_matters"
             ],
-            "english_retrieval_query": "recovery of rental security deposit from landlord"
+            "english_retrieval_query": "legal remedy for recovery of security deposit from landlord",
+            "intent": [
+              "explain_rights",
+              "where_to_complain"
+            ],
+            "question": "Can I file a criminal case under IPC Section 420 against my landlord for not returning my security deposit?",
+            "new_topic": false,
+            "summary": "आपने अक्टूबर 2026 में लखनऊ में मकान खाली किया, लेकिन मकान मालिक ने आपकी 18000 रुपये की सुरक्षा जमा राशि वापस नहीं की है और आप उन पर आपराधिक मामला दर्ज करना चाहते हैं।"
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
-          "timings_s": 4.638,
+          "escalation_level": "out_of_scope",
+          "timings_s": 9.086,
           "llm": {
-            "calls": 2,
+            "calls": 3,
             "retries": 0,
-            "latency_s": 4.6,
+            "latency_s": 9.05,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001"
             ],
             "fallbacks": []
           },
           "action": "escalate",
-          "category": "tenancy",
+          "category": "out_of_scope",
           "retrieved": [
             {
               "id": "COM-NALSA-H15100",
@@ -289,7 +299,8 @@
             "keyword:ipc",
             "keyword:420",
             "keyword:जेल",
-            "llm:criminal_threat"
+            "llm:criminal_matters",
+            "out_of_scope_topic"
           ],
           "models": {
             "router": [
@@ -393,7 +404,8 @@
                 "model": "gemma-4-31b-it",
                 "rpm": 30,
                 "tpm": 16000,
-                "rpd": 14000
+                "rpd": 14000,
+                "timeout_s": 25
               },
               {
                 "provider": "gemini",
@@ -416,12 +428,13 @@
       },
       "model_names_used": [
         "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 4.647816300042905,
-      "finished_at": "2026-11-05T21:46:38.048392+00:00"
+      "latency_s": 9.09098969999468,
+      "finished_at": "2026-11-06T15:07:18.030294+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T21:46:38.048392+00:00"
+  "finished_at": "2026-11-06T15:07:18.030294+00:00"
 }

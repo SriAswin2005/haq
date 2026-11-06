@@ -1,7 +1,7 @@
 """Independent referral safety, display detection and metric-denominator tests."""
 import unittest
 
-from tests.checks import CheckResult, check_referral, referral_observation
+from tests.checks import CheckResult, check_referral, referral_observation, check_routing, check_action, check_needs_lawyer, check_no_invented_law
 from tests.reporting import referral_metrics
 from tests.round4_reports import append_section, START, END
 
@@ -71,6 +71,59 @@ class ReferralChecks(unittest.TestCase):
                 self.assertEqual(result.status, "fail")
                 self.assertTrue(result.details["statute_patterns"])
 
+    def test_answer_requires_expected_body_to_be_visible_and_cited(self):
+        for text, citations, expected in [
+            ("National Cyber Crime Reporting Portal.", ["COM-DIR-CYBER"], "pass"),
+            ("National Cyber Crime Reporting Portal.", [], "fail"),
+            ("Please ask a lawyer or legal aid office.", ["COM-DIR-CYBER"], "fail"),
+            ("National Cyber Crime Reporting Portal.", ["COM-DIR-RBI"], "fail")]:
+            with self.subTest(text=text, citations=citations):
+                result = self.check(text, category="consumer", action="answer", citations=citations)
+                self.assertEqual(result.status, expected)
+
+    def test_grounded_answer_statute_is_allowed_but_out_of_scope_or_escalation_still_fails(self):
+        self.corpus["COM-DIR-CYBER"]["text"] = "Fixture Remedy Act, 2024. Section 35 describes the fixture."
+        text = "National Cyber Crime Reporting Portal. Fixture Remedy Act, 2024; Section 35."
+        for category, action, expected in [("consumer", "answer", "pass"), ("out_of_scope", "answer", "fail"),
+                                           ("consumer", "escalate", "fail"), ("out_of_scope", "escalate", "fail")]:
+            with self.subTest(category=category, action=action):
+                result = self.check(text, category=category, action=action, citations=["COM-DIR-CYBER"])
+                self.assertEqual(result.status, expected)
+                self.assertEqual(result.details["ungrounded_statutes"], [])
+
+    def test_retrieved_but_uncited_law_does_not_ground_an_answer(self):
+        self.corpus["COM-DIR-RBI"]["text"] = "Fixture Remedy Act, 2024. Section 35."
+        result = {"reply_text": "National Cyber Crime Reporting Portal. Section 35.", "action": "answer", "category": "consumer",
+                  "citations": ["COM-DIR-CYBER"], "retrieved": [{"id": "COM-DIR-RBI"}]}
+        self.assertEqual(check_referral(result, self.case, self.corpus).status, "fail")
+        self.assertEqual(check_no_invented_law(result, self.case, self.corpus).status, "fail")
+
+    def test_grounded_law_cannot_hide_a_wrong_body(self):
+        self.corpus["COM-DIR-CYBER"]["text"] = "Fixture Remedy Act, 2024."
+        result = self.check("National Cyber Crime Reporting Portal; RBI. Fixture Remedy Act, 2024.",
+                            category="consumer", action="answer", citations=["COM-DIR-CYBER"])
+        self.assertEqual(result.status, "fail")
+        self.assertEqual(result.details["wrong"], ["COM-DIR-RBI"])
+
+    def test_cited_statute_url_in_answer_is_a_source_not_an_extra_body(self):
+        self.corpus["LAW"] = {"id": "LAW", "doc_type": "statute", "source_url": "https://legislation.example/act1",
+                              "text": "Fixture Remedy Act, 2024."}
+        result = self.check("National Cyber Crime Reporting Portal. Fixture Remedy Act, 2024 (https://legislation.example/act1).",
+            category="consumer", action="answer", citations=["COM-DIR-CYBER", "LAW"])
+        self.assertEqual(result.status, "pass")
+        self.assertEqual(result.details["shown"], ["COM-DIR-CYBER"])
+
+    def test_allowed_routes_require_coherent_category_action_and_lawyer_tuples(self):
+        self.case.update(category_expected="consumer", expected_action="answer", expect_needs_lawyer=False,
+            expected_outcomes=[{"category": "consumer", "action": "answer", "needs_lawyer": False},
+                               {"category": "out_of_scope", "action": "escalate", "needs_lawyer": True}])
+        for category, action, lawyer, expected in [("consumer", "answer", False, True), ("out_of_scope", "escalate", True, True),
+            ("consumer", "escalate", False, False), ("consumer", "answer", True, False), ("out_of_scope", "answer", False, False)]:
+            with self.subTest(category=category, action=action, lawyer=lawyer):
+                result = {"category": category, "action": action, "needs_lawyer": lawyer, "reply_text": "A lawyer or legal aid office can help."}
+                passed = all(f(result, self.case).status == "pass" for f in [check_routing, check_action, check_needs_lawyer])
+                self.assertEqual(passed, expected)
+
     def test_generic_legal_disclaimer_and_phone_numbers_are_not_statutes(self):
         result = self.check("National Cyber Crime Reporting Portal: 1930. This is legal information, not legal advice.")
         self.assertEqual(result.status, "pass")
@@ -121,6 +174,14 @@ class ReferralChecks(unittest.TestCase):
     def test_partial_proper_name_inside_known_full_title_is_not_an_extra_body(self):
         self.case["expected_referral_any"] = ["COM-DIR-IRDAI"]
         result = self.check("Insurance Regulatory and Development Authority of India - Bima Bharosa (https://bimabharosa.irdai.gov.in/)")
+        self.assertEqual(result.status, "pass")
+        self.assertEqual(result.details["shown"], ["COM-DIR-IRDAI"])
+
+    def test_regulator_name_without_portal_suffix_and_full_footer_are_one_body(self):
+        self.case["expected_referral_any"] = ["COM-DIR-IRDAI"]
+        result = self.check("The Insurance Regulatory and Development Authority of India (IRDAI) operates Bima Bharosa.\n"
+            "Source: Insurance Regulatory and Development Authority of India - Bima Bharosa.",
+            category="consumer", action="answer", citations=["COM-DIR-IRDAI"])
         self.assertEqual(result.status, "pass")
         self.assertEqual(result.details["shown"], ["COM-DIR-IRDAI"])
 

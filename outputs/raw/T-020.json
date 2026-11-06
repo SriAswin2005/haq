@@ -148,7 +148,8 @@
         "model": "gemma-4-31b-it",
         "rpm": 30,
         "tpm": 16000,
-        "rpd": 14000
+        "rpd": 14000,
+        "timeout_s": 25
       },
       {
         "provider": "gemini",
@@ -166,15 +167,15 @@
       }
     ]
   },
-  "started_at": "2026-11-05T21:56:48.820431+00:00",
+  "started_at": "2026-11-06T15:12:10.868753+00:00",
   "turns": [
     {
       "input": "I live in Kanpur UP. A friend repaid my personal loan by cheque, it bounced last week. This isn't salary or a purchase. Draft the cheque bounce prosecution notice and calculate the filing deadline.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T21:56:54.830960+00:00",
+      "started_at": "2026-11-06T15:12:16.873358+00:00",
       "result": {
-        "reply_text": "What I understood: what happened: Personal loan repayment cheque bounced; event date: 2026-10-30; months since event: 0.2; state: UP\n\nThis needs a real lawyer or free legal aid. I can still share verified general information where I have it, but I cannot handle this safely on my own.\n\nWhy: your message mentions something that needs a lawyer (such as police, court, violence, threats, eviction or family matters); this topic is outside what I can safely help with; this is a question a lawyer should look at with you (for example court cases or the chances of winning)\n\nWhat you can do right now: a free legal aid office can explain this law to you and tell you whether it applies to your situation.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (Source: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
+        "reply_text": "What I understood: what happened: A personal loan repayment cheque bounced last week.; counterparty type: friend\n\nI don't cover this topic with verified law yet, so I won't guess. This doesn't mean you are in trouble: the official channels and free legal aid below can guide you.\n\nWhat you can do right now: a free legal aid office can explain this law to you and tell you whether it applies to your situation.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (Source: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "out_of_scope",
         "action": "escalate",
@@ -212,7 +213,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "a27f304409fa",
+          "session": "4eb2a2540656",
           "input_mode": "text",
           "user_text": "I live in Kanpur UP. A friend repaid my personal loan by cheque, it bounced last week. This isn't salary or a purchase. Draft the cheque bounce prosecution notice and calculate the filing deadline.",
           "mode": "advice",
@@ -221,26 +222,36 @@
             "language": "en-IN",
             "state_or_city": "UP",
             "case_file_update": {
-              "what_happened": "Personal loan repayment cheque bounced",
-              "event_date": "2026-10-30"
+              "what_happened": "A personal loan repayment cheque bounced last week.",
+              "counterparty_type": "friend"
             },
             "missing_facts": [],
             "escalation_flags": [
               "cheque_bounce"
             ],
-            "english_retrieval_query": "legal procedure for cheque bounce notice under Negotiable Instruments Act"
+            "english_retrieval_query": "cheque bounce notice procedure and limitation period",
+            "intent": [
+              "draft_document",
+              "deadline"
+            ],
+            "question": "How do I draft a cheque bounce notice and what is the legal deadline for filing a complaint?",
+            "new_topic": true,
+            "summary": "आपके दोस्त द्वारा दिए गए पर्सनल लोन के भुगतान का चेक पिछले हफ्ते बाउंस हो गया है।"
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
-          "timings_s": 14.221,
+          "summary_rejected": "आपके दोस्त द्वारा दिए गए पर्सनल लोन के भुगतान का चेक पिछले हफ्ते बाउंस हो गया है।",
+          "escalation_level": "out_of_scope",
+          "timings_s": 5.232,
           "llm": {
-            "calls": 2,
+            "calls": 3,
             "retries": 0,
-            "latency_s": 14.18,
+            "latency_s": 5.2,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001"
             ],
             "fallbacks": []
@@ -380,7 +391,8 @@
                 "model": "gemma-4-31b-it",
                 "rpm": 30,
                 "tpm": 16000,
-                "rpd": 14000
+                "rpd": 14000,
+                "timeout_s": 25
               },
               {
                 "provider": "gemini",
@@ -403,12 +415,13 @@
       },
       "model_names_used": [
         "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 14.226583700045012,
-      "finished_at": "2026-11-05T21:57:09.057386+00:00"
+      "latency_s": 5.235924300039187,
+      "finished_at": "2026-11-06T15:12:22.108782+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T21:57:09.057386+00:00"
+  "finished_at": "2026-11-06T15:12:22.108782+00:00"
 }

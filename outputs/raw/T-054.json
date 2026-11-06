@@ -1,0 +1,428 @@
+{
+  "schema_version": 1,
+  "case_id": "T-054",
+  "case": {
+    "id": "T-054",
+    "group": "L_referrals",
+    "tags": [
+      "round4",
+      "directory",
+      "senior citizen neglected"
+    ],
+    "category_expected": "out_of_scope",
+    "language": "hi-IN",
+    "input_mode": "text",
+    "turns": [
+      "मेरे पड़ोस के एक बुजुर्ग को परिवार खाना और देखभाल नहीं दे रहा। अभी कोई चिकित्सा आपात स्थिति नहीं है। वरिष्ठ नागरिक की उपेक्षा में सहायता देने वाली आधिकारिक हेल्पलाइन कौन सी है?"
+    ],
+    "expected_action": "escalate",
+    "expect_needs_lawyer": true,
+    "expected_topics": [
+      "senior citizen neglected",
+      "official referral"
+    ],
+    "must_include_any": [],
+    "must_not_include": [],
+    "expected_chunk_ids": [
+      "COM-DIR-ELDERLINE"
+    ],
+    "expected_referral_any": [
+      "COM-DIR-ELDERLINE"
+    ],
+    "notes": "An answer must name and cite an expected body. Wrong bodies always hard fail. Statute/section patterns hard fail in escalate/out_of_scope replies; in an answer they must be grounded in cited chunks. Legal-aid-only escalation is a safe fallback and a recall miss. Targets remain agent-mapped, pending human confirmation.",
+    "expected_law_verified": false,
+    "calibration_label": "exclude",
+    "jurisdictions_expected": [
+      "central",
+      "UP"
+    ],
+    "retrieval_expectation_kind": "safe_referral"
+  },
+  "repeat": 1,
+  "mock": false,
+  "backend": "app.pipeline",
+  "stage": "real",
+  "configured_models": {
+    "router": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "main": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash",
+        "rpm": 5,
+        "tpm": 250000,
+        "rpd": 19
+      }
+    ],
+    "translate": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "judge": [
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000,
+        "timeout_s": 25
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      }
+    ]
+  },
+  "started_at": "2026-11-06T15:23:55.282196+00:00",
+  "turns": [
+    {
+      "input": "मेरे पड़ोस के एक बुजुर्ग को परिवार खाना और देखभाल नहीं दे रहा। अभी कोई चिकित्सा आपात स्थिति नहीं है। वरिष्ठ नागरिक की उपेक्षा में सहायता देने वाली आधिकारिक हेल्पलाइन कौन सी है?",
+      "input_mode": "text",
+      "lang_hint": "hi-IN",
+      "started_at": "2026-11-06T15:24:01.284445+00:00",
+      "result": {
+        "reply_text": "मैंने जो समझा: आपके पड़ोस के बुजुर्ग को उनका परिवार खाना और देखभाल नहीं दे रहा है और आप उनके लिए हेल्पलाइन जानना चाहते हैं।\n\nइस विषय पर मेरे पास अभी जाँचा हुआ कानून नहीं है, इसलिए मैं अंदाज़ा नहीं लगाऊँगा। इसका मतलब यह नहीं कि आप किसी मुसीबत में हैं: नीचे दिए गए सरकारी रास्ते और मुफ़्त कानूनी सहायता आपकी मदद कर सकते हैं।\n\nएक सरकारी सेवा जो इसमें मदद कर सकती है (भरोसा करने से पहले उसका पेज देख लें):\n- Ministry of Social Justice and Empowerment - Elderline 14567 (national helpline for senior citizens, elder abuse intervention, and welfare guidance): 14567 (स्रोत: https://socialjustice.gov.in/)\n\nआप अभी यह कर सकते हैं: मुफ़्त कानूनी सहायता कार्यालय आपको यह कानून समझा सकता है और बता सकता है कि यह आपकी स्थिति पर लागू होता है या नहीं।\n\nअसली वकील या मुफ़्त कानूनी सहायता के लिए:\n- National Legal Services Authority Helpline: 15100 (स्रोत: https://nalsa.gov.in/contact-us/)\n\nयह कानूनी जानकारी है, कानूनी सलाह नहीं।",
+        "reply_lang": "hi-IN",
+        "category": "out_of_scope",
+        "action": "escalate",
+        "citations": [
+          "COM-DIR-ELDERLINE",
+          "COM-NALSA-H15100"
+        ],
+        "retrieved": [
+          {
+            "id": "COM-DIR-ELDERLINE",
+            "score": 0.7939212322235107,
+            "via": "referral"
+          },
+          {
+            "id": "COM-NALSA-H15100",
+            "score": 0.7801640033721924
+          },
+          {
+            "id": "COM-LSAA1987-S13",
+            "score": 0.7287323474884033
+          },
+          {
+            "id": "COM-LSAA1987-S12",
+            "score": 0.7265352010726929
+          },
+          {
+            "id": "COM-DIR-LOKADALAT",
+            "score": 0.7208567261695862
+          }
+        ],
+        "needs_lawyer": true,
+        "escalation_reasons": [
+          "llm:family_matters",
+          "out_of_scope_topic"
+        ],
+        "verifier": {
+          "status": "pass",
+          "issues": []
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "5046188fdb33",
+          "input_mode": "text",
+          "user_text": "मेरे पड़ोस के एक बुजुर्ग को परिवार खाना और देखभाल नहीं दे रहा। अभी कोई चिकित्सा आपात स्थिति नहीं है। वरिष्ठ नागरिक की उपेक्षा में सहायता देने वाली आधिकारिक हेल्पलाइन कौन सी है?",
+          "mode": "advice",
+          "router": {
+            "category": "out_of_scope",
+            "language": "hi-IN",
+            "state_or_city": null,
+            "case_file_update": {
+              "what_happened": "एक बुजुर्ग व्यक्ति को उनके परिवार द्वारा भोजन और देखभाल प्रदान नहीं की जा रही है।"
+            },
+            "missing_facts": [],
+            "escalation_flags": [
+              "family_matters"
+            ],
+            "english_retrieval_query": "helpline for senior citizen neglect in India",
+            "intent": [
+              "where_to_complain"
+            ],
+            "question": "Which official helpline is available to assist with the neglect of senior citizens?",
+            "new_topic": true,
+            "summary": "आपके पड़ोस के बुजुर्ग को उनका परिवार खाना और देखभाल नहीं दे रहा है और आप उनके लिए हेल्पलाइन जानना चाहते हैं।"
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "escalation_level": "out_of_scope",
+          "timings_s": 6.103,
+          "llm": {
+            "calls": 3,
+            "retries": 0,
+            "latency_s": 6.06,
+            "models": [
+              "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "embed:gemini:gemini-embedding-001"
+            ],
+            "fallbacks": []
+          },
+          "action": "escalate",
+          "category": "out_of_scope",
+          "retrieved": [
+            {
+              "id": "COM-DIR-ELDERLINE",
+              "score": 0.7939212322235107,
+              "via": "referral"
+            },
+            {
+              "id": "COM-NALSA-H15100",
+              "score": 0.7801640033721924
+            },
+            {
+              "id": "COM-LSAA1987-S13",
+              "score": 0.7287323474884033
+            },
+            {
+              "id": "COM-LSAA1987-S12",
+              "score": 0.7265352010726929
+            },
+            {
+              "id": "COM-DIR-LOKADALAT",
+              "score": 0.7208567261695862
+            }
+          ],
+          "citations": [
+            "COM-DIR-ELDERLINE",
+            "COM-NALSA-H15100"
+          ],
+          "verifier": {
+            "status": "pass",
+            "issues": []
+          },
+          "escalation_reasons": [
+            "llm:family_matters",
+            "out_of_scope_topic"
+          ],
+          "models": {
+            "router": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "main": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash",
+                "rpm": 5,
+                "tpm": 250000,
+                "rpd": 19
+              }
+            ],
+            "translate": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "judge": [
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000,
+                "timeout_s": 25
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              }
+            ]
+          },
+          "mock": false
+        }
+      },
+      "model_names_used": [
+        "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001"
+      ],
+      "latency_s": 6.105993800039869,
+      "finished_at": "2026-11-06T15:24:07.389717+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-06T15:24:07.389717+00:00"
+}

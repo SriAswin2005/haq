@@ -327,7 +327,9 @@ def _answer_prompt(lang, chunks, case_file, missing, user_text, issues=None, que
     chunk_txt = "\n".join(
         f"[CHUNK id={c['id']}]\nDOC: {c['doc_title']} | {c['unit']} {c['unit_number']} | {c.get('heading','')} | "
         f"status={c['status']} | doc_type={c['doc_type']}\nTEXT: {c['text']}" for c in chunks)
-    user = (f"REPLY LANGUAGE: {lang}\nCASE FILE: {json.dumps(case_file, ensure_ascii=False)}\n"
+    lang_name = "Hindi, in Devanagari script" if lang.lower().startswith("hi") else "English" if lang.lower().startswith("en") else lang
+    user = (f"REPLY LANGUAGE: {lang} ({lang_name}). Write every block in this language, even if the sources or the "
+            f"case file use another.\nCASE FILE: {json.dumps(case_file, ensure_ascii=False)}\n"
             f"MISSING FACTS: {missing}\n=== SOURCE CHUNKS ===\n{chunk_txt}\n=== END CHUNKS ===\n"
             f"RECENT CONVERSATION (context only):\n{recent or '(none)'}\n"
             f"USER MESSAGE: {user_text}\n"
@@ -514,6 +516,12 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
         cf["months_since_event"] = guards.months_since(ed)
     elif cf.get("event_date"):
         trace["event_date_unparsed"] = cf.pop("event_date")
+    if "months_since_event" not in cf:   # no event date: the limitation clock still runs from the purchase/service
+        for k in ("purchase_date", "vacated_date"):   # (round 4, T-013: a Jan 2023 repair was not flagged)
+            pd = guards.parse_event_date(cf.get(k)) if cf.get(k) else None
+            if pd:
+                cf["months_since_event"] = guards.months_since(pd)
+                break
     if rj.get("state_or_city"):
         cf["state"] = rj["state_or_city"]
     cat = rj["category"]
@@ -605,7 +613,16 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
         return TurnResult(reply, lang, cat, "draft", d["citations"], d["retrieved"] or retrieved, bool(reasons),
                           reasons, {"status": "pass", "issues": []}, d["text"] + "\n\n" + m["draft_footer"], trace)
 
-    # ---- confidence gate
+    # ---- confidence gate. If the retrieval query (sometimes over-focused on a detail, e.g. "painting deduction")
+    # falls short, try the user's question as a second phrasing of the same need before refusing.
+    q2 = (rj.get("question") or "").strip()
+    if not retrieval.passes_gate(sr["top_score"]) and q2 and q2.lower() != query.lower():
+        sr2 = retrieval.search(q2, [cat, "common"], juris,
+                               extra_queries=(rcfg.get("forum_queries") or {}).get(cat), extra_k=int(rcfg.get("forum_extra", 2)))
+        trace["retrieval"]["second_query"] = {"query": q2, "top_score": sr2["top_score"]}
+        if retrieval.passes_gate(sr2["top_score"]):
+            sr = sr2
+            retrieved = [{"id": h["id"], "score": h["score"]} for h in sr["hits"]]
     if not retrieval.passes_gate(sr["top_score"]):
         if "state_unknown" in reasons:  # ask for the state instead of refusing outright
             text = f"{m['understood']} {_facts_line(cf, m)}\n\n{m['ask_state']}\n\n{m['disclaimer']}"
@@ -620,15 +637,17 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
     # ---- generate -> verify -> regenerate once -> SAFE RESPONSE
     max_regen = int(cfg["verifier"].get("max_regenerations", 1))
     issues_hist, answer, status, issues = [], None, "failed", []
+    attempts: list[tuple[dict, list[str]]] = []   # failed drafts, for claim-level pruning
     prior = None
     for attempt in range(max_regen + 1):
         msgs = _answer_prompt(lang, chunks, cf, missing, user_text, prior, question=rj.get("question") or "",
                               recent="\n".join(f"{h['role']}: {router._short(h['text'], 400)}" for h in session.history[-4:]))
         _emit("writing" if attempt == 0 else "rewriting")
         answer = _generate_answer(msgs)
-        if answer is not None and not _answer_script_ok(answer, lang):  # Hindi user got a non-Hindi body: retry once
+        if answer is not None and not _answer_script_ok(answer, lang):  # body in the wrong script: retry once
             retry = msgs[:-1] + [{"role": "user", "content": msgs[-1]["content"] + "\n\n" + read_prompt(
-                "language_retry.md").format(lang=lang, language_name="Hindi" if lang.lower().startswith("hi") else lang)}]
+                "language_retry.md").format(lang=lang, language_name="Hindi" if lang.lower().startswith("hi") else
+                                            "English" if lang.lower().startswith("en") else lang)}]
             a2 = _generate_answer(retry)
             trace["language_retry"] = True
             if a2 is not None and _answer_script_ok(a2, lang):
@@ -652,13 +671,21 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
             issues, vinfo = verifier.verify(answer, chunks, cf)
             trace["judge"] = vinfo.get("judge")
         issues_hist.append(list(issues))
+        if answer is not None and issues:
+            attempts.append((answer, list(issues)))
         if not issues:
             status = "pass" if attempt == 0 else "fixed"
             break
         prior = issues
     trace["verifier_history"] = issues_hist
-    if status == "failed" and answer is not None:
-        answer, issues, status = _prune_unverified(answer, issues, chunks, cf, m, trace)
+    if status == "failed" and attempts:
+        for a, iss in reversed(attempts):            # the latest draft first, then the earlier one
+            pa, pi, ps = _prune_unverified(a, iss, chunks, cf, m, trace)
+            if ps != "failed":
+                answer, issues, status = pa, pi, ps
+                break
+        else:
+            issues = attempts[-1][1]
     if status == "failed":
         text, cites, ret = safe_response(lang, cf, state_code, reasons, False)
         return TurnResult(text, lang, cat, "refuse_unverified", cites, retrieved, True, reasons,
@@ -688,7 +715,10 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
         body += "\n\n" + "\n".join(_source_line(by_id[c], m) for c in cited)
     old_note_chunks = []  # chunks behind our own "no longer in force" note; the final scan must see them
     said = [user_text] + [h["text"] for h in session.history if h.get("role") == "user"]
-    for o in sr["old_law"][:2]:
+    named_old = [{"id": c["id"], "score": 0.0, "chunk": c} for c in retrieval.get_index()["chunks"]
+                 if c.get("category") in (cat, "common") and c.get("status") in ("repealed", "superseded")
+                 and _mentions_law(c, said)]
+    for o in (sr["old_law"][:2] + named_old):
         if o["chunk"]["status"] in ("repealed", "superseded") and _mentions_law(o["chunk"], said) \
                 and o["chunk"]["doc_title"] not in [c["doc_title"] for c in old_note_chunks]:
             body += "\n\n" + m["old_law"].format(title=o["chunk"]["doc_title"])

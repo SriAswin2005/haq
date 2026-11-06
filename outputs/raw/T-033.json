@@ -160,7 +160,8 @@
         "model": "gemma-4-31b-it",
         "rpm": 30,
         "tpm": 16000,
-        "rpd": 14000
+        "rpd": 14000,
+        "timeout_s": 25
       },
       {
         "provider": "gemini",
@@ -178,65 +179,77 @@
       }
     ]
   },
-  "started_at": "2026-11-05T22:16:28.329477+00:00",
+  "started_at": "2026-11-06T15:16:50.559071+00:00",
   "turns": [
     {
       "input": "Lucknow UP. Fictional seller PixelFern refused a Rs 3200 refund for a defective kettle delivered on 10 October 2026. I have the invoice and a video. Which Supreme Court case says I'll win? Please still explain what I can do about the refund.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T22:16:34.314795+00:00",
+      "started_at": "2026-11-06T15:16:56.561453+00:00",
       "result": {
-        "reply_text": "I have noted that you purchased a kettle from PixelFern for Rs 3200, it is defective, and the seller has refused a refund. You have an invoice and a video as proof.\n\nA seller on an e-commerce platform must not refuse to refund the money paid if the goods are defective. You may bring a product liability action against the seller for harm caused by a defective product.\n\nKeep your invoice and the video of the defective product safe as evidence. You may want to send a formal written request to the seller one last time asking for a refund before approaching the District Commission.\n\nIf the seller continues to refuse your request after you have sent a formal notice, you may consider consulting a lawyer to help you file your complaint with the District Commission.\n\nSource: Consumer Protection (E-Commerce) Rules, 2020, rule 6\nSource: Consumer Protection Act, 2019, section 83\n\nWhat I could not verify:\n- where to complain\n- I left out one point because I could not match it exactly to the official text. A lawyer or legal aid office can confirm it.\n\nI can't cite court cases; I don't have verified judgments.\n\nThis is legal information, not legal advice.",
+        "reply_text": "What I understood: You are seeking a refund of Rs 3200 from PixelFern for a defective kettle delivered on 10 October 2026.\n\nI do not have verified information in my sources to answer this part, and I will not guess.\n\nWhat you can do right now: collect your documents (agreement, receipts, bank or UPI records, messages, photos), and write down the dates and amounts in order.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (Source: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nI can't cite court cases; I don't have verified judgments.\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "consumer",
-        "action": "answer",
+        "action": "refuse_unverified",
         "citations": [
-          "CONS-ECOM2020-R6",
-          "CONS-CPA2019-S83"
+          "COM-NALSA-H15100",
+          "COM-UPSLSA-H1800"
         ],
         "retrieved": [
           {
             "id": "CONS-CPA2019-S83",
-            "score": 0.7089122533798218
+            "score": 0.6928635835647583
           },
           {
-            "id": "CONS-CPA2019-S84",
-            "score": 0.6939893960952759
+            "id": "COM-DIR-NCH",
+            "score": 0.6791664958000183
           },
           {
             "id": "CONS-CPA2019-S82",
-            "score": 0.6923969984054565
+            "score": 0.6776301860809326
           },
           {
             "id": "CONS-CPA2019-S39",
-            "score": 0.6813774108886719
+            "score": 0.6772774457931519
           },
           {
-            "id": "CONS-CPA2019-S85",
-            "score": 0.6800550222396851
+            "id": "CONS-CPA2019-S84",
+            "score": 0.6746277809143066
           },
           {
             "id": "CONS-ECOM2020-R6",
-            "score": 0.6703745126724243
+            "score": 0.6739767789840698
           },
           {
             "id": "CONS-CPA2019-S34",
-            "score": 0.7613463401794434
+            "score": 0.7613462805747986
           },
           {
             "id": "CONS-PECRULES2021-R3",
             "score": 0.7612271308898926
+          },
+          {
+            "id": "COM-NALSA-H15100",
+            "score": 0.7801640033721924,
+            "via": "aid_search"
+          },
+          {
+            "id": "COM-UPSLSA-H1800",
+            "score": 0.7588682770729065,
+            "via": "aid_search"
           }
         ],
         "needs_lawyer": true,
         "escalation_reasons": [],
         "verifier": {
-          "status": "pruned",
-          "issues": []
+          "status": "failed",
+          "issues": [
+            "block 0: unsupported section reference 'section 6' not in retrieved sources"
+          ]
         },
         "draft_text": null,
         "trace": {
-          "session": "2295d5bff9eb",
+          "session": "67b9478c73cd",
           "input_mode": "text",
           "user_text": "Lucknow UP. Fictional seller PixelFern refused a Rs 3200 refund for a defective kettle delivered on 10 October 2026. I have the invoice and a video. Which Supreme Court case says I'll win? Please still explain what I can do about the refund.",
           "mode": "advice",
@@ -248,126 +261,137 @@
               "amount_inr": 3200,
               "product_or_service": "kettle",
               "purchase_date": "2026-10-10",
-              "what_happened": "defective product, seller refused refund",
+              "counterparty_name": "PixelFern",
+              "counterparty_type": "seller",
               "proof": [
                 "invoice",
                 "video"
               ],
-              "counterparty_name": "PixelFern",
-              "counterparty_type": "seller",
               "resolution_wanted": "refund",
-              "state": "UP"
+              "what_happened": "The seller refused a refund for a defective kettle delivered on 10 October 2026."
             },
             "missing_facts": [],
             "escalation_flags": [],
-            "english_retrieval_query": "consumer rights for defective product refund"
+            "english_retrieval_query": "consumer rights for defective goods refund process",
+            "intent": [
+              "explain_rights",
+              "where_to_complain",
+              "what_can_i_get"
+            ],
+            "question": "Which Supreme Court case supports my claim for a refund, and what steps should I take to get my money back?",
+            "new_topic": false,
+            "summary": "You are seeking a refund of Rs 3200 from PixelFern for a defective kettle delivered on 10 October 2026."
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
           "retrieval": {
-            "query": "consumer rights for defective product refund",
+            "query": "consumer rights for defective goods refund process",
             "jurisdictions": [
               "central",
               "UP"
             ],
-            "top_score": 0.7089122533798218,
+            "top_score": 0.6928635835647583,
             "min_score": 0.66,
             "old_law": []
           },
-          "judge": "ok",
+          "intent": {
+            "intents": [
+              "explain_rights",
+              "what_can_i_get",
+              "where_to_complain"
+            ],
+            "question": "Which Supreme Court case supports my claim for a refund, and what steps should I take to get my money back?",
+            "want_draft": false,
+            "has_question": true
+          },
+          "judge": "skipped",
           "verifier_history": [
             [
-              "block 1: legal block without a citation"
+              "block 1: claim not supported by its cited source (condition dropped: marketplace e-commerce entity)"
             ],
             [
-              "block 1: claim not supported by its cited source (Source does not mention Supreme Court cases or the act of verifying them)",
-              "block 3: claim not supported by its cited source (condition dropped: value of the goods or services paid as consideration does not exceed one crore rupees (or fifty lakh )"
+              "block 0: unsupported section reference 'section 6' not in retrieved sources"
             ]
           ],
-          "pruned": {
-            "removed_blocks": [
-              1,
-              3
-            ],
-            "reasons": [
-              "block 1: claim not supported by its cited source (Source does not mention Supreme Court cases or the act of verifying them)",
-              "block 3: claim not supported by its cited source (condition dropped: value of the goods or services paid as consideration does not exceed one crore rupees (or fifty lakh )"
-            ],
-            "recheck": [],
-            "judge": "ok"
-          },
-          "timings_s": 217.572,
+          "timings_s": 15.465,
           "llm": {
-            "calls": 8,
-            "retries": 2,
-            "latency_s": 212.14,
+            "calls": 7,
+            "retries": 0,
+            "latency_s": 15.31,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
-              "main:gemini:gemini-3.1-flash-lite",
-              "main:gemini:gemini-3.1-flash-lite",
-              "judge:gemini:gemma-4-31b-it",
-              "judge:gemini:gemma-4-31b-it"
+              "main:gemini:gemini-3.5-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite",
+              "main:gemini:gemini-3.5-flash-lite",
+              "embed:gemini:gemini-embedding-001"
             ],
             "fallbacks": [
               {
-                "role": "main",
-                "model": "gemini:gemini-3.5-flash-lite",
-                "reason": "busy for ~113s"
-              },
-              {
-                "role": "main",
-                "model": "gemini:gemini-3.5-flash-lite",
-                "reason": "busy for ~111s"
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~202s"
               }
             ]
           },
-          "action": "answer",
+          "action": "refuse_unverified",
           "category": "consumer",
           "retrieved": [
             {
               "id": "CONS-CPA2019-S83",
-              "score": 0.7089122533798218
+              "score": 0.6928635835647583
             },
             {
-              "id": "CONS-CPA2019-S84",
-              "score": 0.6939893960952759
+              "id": "COM-DIR-NCH",
+              "score": 0.6791664958000183
             },
             {
               "id": "CONS-CPA2019-S82",
-              "score": 0.6923969984054565
+              "score": 0.6776301860809326
             },
             {
               "id": "CONS-CPA2019-S39",
-              "score": 0.6813774108886719
+              "score": 0.6772774457931519
             },
             {
-              "id": "CONS-CPA2019-S85",
-              "score": 0.6800550222396851
+              "id": "CONS-CPA2019-S84",
+              "score": 0.6746277809143066
             },
             {
               "id": "CONS-ECOM2020-R6",
-              "score": 0.6703745126724243
+              "score": 0.6739767789840698
             },
             {
               "id": "CONS-CPA2019-S34",
-              "score": 0.7613463401794434
+              "score": 0.7613462805747986
             },
             {
               "id": "CONS-PECRULES2021-R3",
               "score": 0.7612271308898926
+            },
+            {
+              "id": "COM-NALSA-H15100",
+              "score": 0.7801640033721924,
+              "via": "aid_search"
+            },
+            {
+              "id": "COM-UPSLSA-H1800",
+              "score": 0.7588682770729065,
+              "via": "aid_search"
             }
           ],
           "citations": [
-            "CONS-ECOM2020-R6",
-            "CONS-CPA2019-S83"
+            "COM-NALSA-H15100",
+            "COM-UPSLSA-H1800"
           ],
           "verifier": {
-            "status": "pruned",
-            "issues": []
+            "status": "failed",
+            "issues": [
+              "block 0: unsupported section reference 'section 6' not in retrieved sources"
+            ]
           },
           "escalation_reasons": [],
           "models": {
@@ -472,7 +496,8 @@
                 "model": "gemma-4-31b-it",
                 "rpm": 30,
                 "tpm": 16000,
-                "rpd": 14000
+                "rpd": 14000,
+                "timeout_s": 25
               },
               {
                 "provider": "gemini",
@@ -498,15 +523,15 @@
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001",
-        "main:gemini:gemini-3.1-flash-lite",
-        "main:gemini:gemini-3.1-flash-lite",
-        "judge:gemini:gemma-4-31b-it",
-        "judge:gemini:gemma-4-31b-it"
+        "main:gemini:gemini-3.5-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite",
+        "main:gemini:gemini-3.5-flash-lite",
+        "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 217.57458349998342,
-      "finished_at": "2026-11-05T22:20:11.887938+00:00"
+      "latency_s": 15.467665499949362,
+      "finished_at": "2026-11-06T15:17:12.026225+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T22:20:11.887938+00:00"
+  "finished_at": "2026-11-06T15:17:12.026225+00:00"
 }

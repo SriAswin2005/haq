@@ -156,7 +156,8 @@
         "model": "gemma-4-31b-it",
         "rpm": 30,
         "tpm": 16000,
-        "rpd": 14000
+        "rpd": 14000,
+        "timeout_s": 25
       },
       {
         "provider": "gemini",
@@ -174,15 +175,15 @@
       }
     ]
   },
-  "started_at": "2026-11-05T21:46:38.048392+00:00",
+  "started_at": "2026-11-06T15:07:18.030294+00:00",
   "turns": [
     {
       "input": "I work in a private shop in Kanpur UP, salary Rs 18000 for October 2026 unpaid, payslip and bank statement ready. The Payment of Wages Act, 1936 is the current law right? Tell me what law applies to this new claim, not an old pending case.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T21:46:44.064142+00:00",
+      "started_at": "2026-11-06T15:07:24.038040+00:00",
       "result": {
-        "reply_text": "I understand that you work at a private shop in Uttar Pradesh and have not received your monthly wage of eighteen thousand rupees for the period of October 2026, and you have your payslip and bank statement ready.\n\nWhere wages of an employee are not paid under the Uttar Pradesh Dookan Aur Vanijya Adhishthan Adhiniyam, 1962, they shall be recoverable in the manner provided in the Payment of Wages Act as if the same were wages payable under that Act.\n\nKeep your payslip and bank statement safely with you.\n\nYou may consult a lawyer to understand your options better if your employer does not pay your wages.\n\nWhat is the name of your employer?\n\nWhat was your last working date?\n\nSource: Uttar Pradesh Dookan Aur Vanijya Adhishthan Adhiniyam, 1962, section 18\n\nNote: Payment of Wages Act, 1936 is no longer in force, so I do not use it.\n\nWhat I could not verify:\n- where to complain\n- I left out one point because I could not match it exactly to the official text. A lawyer or legal aid office can confirm it.\n\nThis is legal information, not legal advice.",
+        "reply_text": "Your unpaid wages from a private shop can be recovered in the manner provided in the Payment of Wages Act, 1936, as made applicable under the Uttar Pradesh Dookan Aur Vanijya Adhishthan Adhiniyam, 1962.\n\nI could not verify if the Payment of Wages Act, 1936 independently applies as the primary governing code without the cited state shop act provisions in your specific case.\n\nKeep your payslip and bank statement ready as proof of non-payment.\n\nWhat is the name of your employer and your last working date?\n\nSource: Uttar Pradesh Dookan Aur Vanijya Adhishthan Adhiniyam, 1962, section 18\n\nNote: Payment of Wages Act, 1936 is no longer in force, so I do not use it.\n\nWhat I could not verify:\n- employer name\n- last working date\n- exact authority designated under the state recovery mechanism\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "wages",
         "action": "answer",
@@ -192,51 +193,51 @@
         "retrieved": [
           {
             "id": "WAGE-UPSHOP1962-S18",
-            "score": 0.7526967525482178
-          },
-          {
-            "id": "WAGE-COW2019-S45",
-            "score": 0.725307047367096
-          },
-          {
-            "id": "WAGE-COW2019-S17",
-            "score": 0.7114217281341553
-          },
-          {
-            "id": "WAGE-COW2019-S43",
-            "score": 0.7086805105209351
+            "score": 0.7483687400817871
           },
           {
             "id": "WAGE-UPSHOP1962-S13",
-            "score": 0.707537829875946
+            "score": 0.7238487005233765
+          },
+          {
+            "id": "WAGE-COW2019-S45",
+            "score": 0.7143282294273376
+          },
+          {
+            "id": "WAGE-COW2019-S43",
+            "score": 0.7139765024185181
           },
           {
             "id": "WAGE-COW2019-S54",
-            "score": 0.7062174081802368
+            "score": 0.7096595764160156
+          },
+          {
+            "id": "WAGE-UPSHOP1962-S15",
+            "score": 0.7078116536140442
+          },
+          {
+            "id": "WAGE-COWRULES2026-R46",
+            "score": 0.7178704738616943
           },
           {
             "id": "WAGE-COW2019-S57",
             "score": 0.696526288986206
           },
           {
-            "id": "WAGE-COW2019-S49",
-            "score": 0.6729814410209656
-          },
-          {
             "id": "WAGE-PWA1936-S15",
-            "score": 0.7523146867752075,
+            "score": 0.727698802947998,
             "old_law": true
           }
         ],
         "needs_lawyer": true,
         "escalation_reasons": [],
         "verifier": {
-          "status": "pruned",
+          "status": "pass",
           "issues": []
         },
         "draft_text": null,
         "trace": {
-          "session": "be462884b9d6",
+          "session": "e5b53ed901a8",
           "input_mode": "text",
           "user_text": "I work in a private shop in Kanpur UP, salary Rs 18000 for October 2026 unpaid, payslip and bank statement ready. The Payment of Wages Act, 1936 is the current law right? Tell me what law applies to this new claim, not an old pending case.",
           "mode": "advice",
@@ -246,7 +247,7 @@
             "state_or_city": "UP",
             "case_file_update": {
               "monthly_wage_inr": 18000,
-              "unpaid_period": "2026-10",
+              "unpaid_period": "October 2026",
               "proof": [
                 "payslip",
                 "bank statement"
@@ -254,109 +255,111 @@
               "counterparty_type": "private shop"
             },
             "missing_facts": [
-              "employer_name",
-              "last_working_date"
+              "employer name",
+              "last working date"
             ],
             "escalation_flags": [],
-            "english_retrieval_query": "legal remedy for unpaid salary in private shop under Payment of Wages Act"
+            "english_retrieval_query": "legal provisions for unpaid salary in private shop",
+            "intent": [
+              "explain_rights"
+            ],
+            "question": "Which law applies to my claim for unpaid salary from a private shop?",
+            "new_topic": false,
+            "summary": "You are working in a private shop in Kanpur and have not received your salary of Rs 18,000 for October 2026."
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
           "retrieval": {
-            "query": "legal remedy for unpaid salary in private shop under Payment of Wages Act",
+            "query": "legal provisions for unpaid salary in private shop",
             "jurisdictions": [
               "central",
               "UP"
             ],
-            "top_score": 0.7526967525482178,
+            "top_score": 0.7483687400817871,
             "min_score": 0.66,
             "old_law": [
               {
                 "id": "WAGE-PWA1936-S15",
-                "score": 0.7523146867752075
+                "score": 0.727698802947998
               },
               {
                 "id": "WAGE-PWA1936-S5",
-                "score": 0.7286581993103027
+                "score": 0.7103044390678406
               }
             ]
           },
+          "intent": {
+            "intents": [
+              "explain_rights"
+            ],
+            "question": "Which law applies to my claim for unpaid salary from a private shop?",
+            "want_draft": false,
+            "has_question": true
+          },
           "judge": "ok",
           "verifier_history": [
-            [
-              "block 1: legal block without a citation",
-              "block 1: number '1936' not found in cited source or user's facts"
-            ],
-            [
-              "block 1: claim not supported by its cited source (The source explicitly mentions The Payment of Wages Act, 1936.)"
-            ]
+            []
           ],
-          "pruned": {
-            "removed_blocks": [
-              1
-            ],
-            "reasons": [
-              "block 1: claim not supported by its cited source (The source explicitly mentions The Payment of Wages Act, 1936.)"
-            ],
-            "recheck": [],
-            "judge": "ok"
-          },
-          "timings_s": 114.524,
+          "timings_s": 39.754,
           "llm": {
-            "calls": 8,
+            "calls": 5,
             "retries": 1,
-            "latency_s": 112.29,
+            "latency_s": 39.66,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
               "main:gemini:gemini-3.5-flash-lite",
-              "main:gemini:gemini-3.5-flash-lite",
-              "judge:gemini:gemma-4-31b-it",
-              "judge:gemini:gemma-4-31b-it"
+              "judge:gemini:gemini-3.1-flash-lite"
             ],
-            "fallbacks": []
+            "fallbacks": [
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "network error (ReadTimeout)"
+              }
+            ]
           },
           "action": "answer",
           "category": "wages",
           "retrieved": [
             {
               "id": "WAGE-UPSHOP1962-S18",
-              "score": 0.7526967525482178
-            },
-            {
-              "id": "WAGE-COW2019-S45",
-              "score": 0.725307047367096
-            },
-            {
-              "id": "WAGE-COW2019-S17",
-              "score": 0.7114217281341553
-            },
-            {
-              "id": "WAGE-COW2019-S43",
-              "score": 0.7086805105209351
+              "score": 0.7483687400817871
             },
             {
               "id": "WAGE-UPSHOP1962-S13",
-              "score": 0.707537829875946
+              "score": 0.7238487005233765
+            },
+            {
+              "id": "WAGE-COW2019-S45",
+              "score": 0.7143282294273376
+            },
+            {
+              "id": "WAGE-COW2019-S43",
+              "score": 0.7139765024185181
             },
             {
               "id": "WAGE-COW2019-S54",
-              "score": 0.7062174081802368
+              "score": 0.7096595764160156
+            },
+            {
+              "id": "WAGE-UPSHOP1962-S15",
+              "score": 0.7078116536140442
+            },
+            {
+              "id": "WAGE-COWRULES2026-R46",
+              "score": 0.7178704738616943
             },
             {
               "id": "WAGE-COW2019-S57",
               "score": 0.696526288986206
             },
             {
-              "id": "WAGE-COW2019-S49",
-              "score": 0.6729814410209656
-            },
-            {
               "id": "WAGE-PWA1936-S15",
-              "score": 0.7523146867752075,
+              "score": 0.727698802947998,
               "old_law": true
             }
           ],
@@ -364,7 +367,7 @@
             "WAGE-UPSHOP1962-S18"
           ],
           "verifier": {
-            "status": "pruned",
+            "status": "pass",
             "issues": []
           },
           "escalation_reasons": [],
@@ -470,7 +473,8 @@
                 "model": "gemma-4-31b-it",
                 "rpm": 30,
                 "tpm": 16000,
-                "rpd": 14000
+                "rpd": 14000,
+                "timeout_s": 25
               },
               {
                 "provider": "gemini",
@@ -496,14 +500,12 @@
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001",
         "main:gemini:gemini-3.5-flash-lite",
-        "main:gemini:gemini-3.5-flash-lite",
-        "judge:gemini:gemma-4-31b-it",
-        "judge:gemini:gemma-4-31b-it"
+        "judge:gemini:gemini-3.1-flash-lite"
       ],
-      "latency_s": 114.5360134000075,
-      "finished_at": "2026-11-05T21:48:38.595561+00:00"
+      "latency_s": 39.75743150000926,
+      "finished_at": "2026-11-06T15:08:03.795733+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T21:48:38.595561+00:00"
+  "finished_at": "2026-11-06T15:08:03.795733+00:00"
 }

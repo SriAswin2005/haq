@@ -158,7 +158,8 @@
         "model": "gemma-4-31b-it",
         "rpm": 30,
         "tpm": 16000,
-        "rpd": 14000
+        "rpd": 14000,
+        "timeout_s": 25
       },
       {
         "provider": "gemini",
@@ -176,50 +177,52 @@
       }
     ]
   },
-  "started_at": "2026-11-05T22:08:04.271510+00:00",
+  "started_at": "2026-11-06T15:14:45.653287+00:00",
   "turns": [
     {
       "input": "Lucknow UP residential flat, agreement signed January 2026, vacated 20 October 2026. Landlord kept Rs 20000 deposit for painting though I have move-in and move-out photos and paid all rent. No threats. How can I ask for an explanation and refund?",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T22:08:10.280726+00:00",
+      "started_at": "2026-11-06T15:14:51.654744+00:00",
       "result": {
-        "reply_text": "What I understood: property address: Lucknow, UP; tenancy start date: 2026-01; vacated date: 2026-10-20; amount inr: 20000; proof: ['move-in photos', 'move-out photos', 'rent payment records']; resolution wanted: refund; state: UP\n\nI do not have verified information in my sources to answer this part, and I will not guess.\n\nWhat you can do right now: collect your documents (agreement, receipts, bank or UPI records, messages, photos), and write down the dates and amounts in order.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (Source: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
+        "reply_text": "What I understood: Lucknow mein aapke landlord ne painting ke naam par aapka 20,000 rupaye ka security deposit wapas nahi kiya hai, jabki aapne saara kiraya chuka diya hai aur aapke paas photos ka saboot bhi hai.\n\nI do not have verified information in my sources to answer this part, and I will not guess.\n\nWhat you can do right now: collect your documents (agreement, receipts, bank or UPI records, messages, photos), and write down the dates and amounts in order.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (Source: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.\n\nHere is a draft demand notice for your security deposit. Anything I do not know is left as a [● placeholder] for you to fill in.\n\nLEGAL NOTICE: DEMAND FOR RETURN OF SECURITY DEPOSIT\n\nDate: [● date of sending]\nBy: [● registered post / speed post / email, as you choose]\n\nTo,\n[● landlord's full name]\n[● landlord's address]\n\nFrom,\n[● your full name]\n[● your address and phone number]\n\nSubject: Demand for return of security deposit of Rs. [● deposit amount] for the premises at [● property address]\n\nDear Sir/Madam,\n\n1. I was your tenant at [● property address] from 2026-01 to 2026-10-20 under [● rent agreement / verbal arrangement].\n\n2. At the start of the tenancy I paid you a security deposit of Rs. [● deposit amount] on [● date of payment] by [● mode of payment, e.g. bank transfer / UPI / cash]. [● reference or proof, e.g. receipt, transaction ID, agreement clause].\n\n3. I vacated the premises on 2026-10-20 and handed over [● possession details, e.g. keys handed over on date / to whom].\n\n4. The deposit has not been returned. [● what happened when you asked, with dates, e.g. calls or messages already sent]. [● any deductions the landlord claimed, and why they are not justified, or \"No deductions were agreed.\"]\n\nThis demand is made with reference to: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 11; Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 24. [● Have a lawyer confirm that these provisions apply to your case.]\n\n5. I therefore request you to return the full security deposit of Rs. [● deposit amount] within [● number of days you allow] days of receiving this notice, by [● how you want to be paid, e.g. transfer to your bank account details].\n\n6. If the amount is not returned within this time, I will be free to take further steps available to me under the law, without further notice, at your cost and risk.\n\nYours faithfully,\n[● your name]\n[● signature]\n\nEnclosures (copies): [● agreement / receipts / transaction record / messages]\n\n\nCheck every detail before sending. For high-value or complex matters, have a lawyer review it.",
         "reply_lang": "en-IN",
         "category": "tenancy",
         "action": "refuse_unverified",
         "citations": [
           "COM-NALSA-H15100",
-          "COM-UPSLSA-H1800"
+          "COM-UPSLSA-H1800",
+          "TEN-UPTA2021-S11",
+          "TEN-UPTA2021-S24"
         ],
         "retrieved": [
           {
             "id": "TEN-UPTA2021-S11",
-            "score": 0.6597137451171875
-          },
-          {
-            "id": "TEN-UPTA2021-S24",
-            "score": 0.6460386514663696
+            "score": 0.6419495344161987
           },
           {
             "id": "TEN-UPTA2021-S15",
-            "score": 0.6428349614143372
+            "score": 0.6302611827850342
+          },
+          {
+            "id": "TEN-UPTA2021-S24",
+            "score": 0.6276434659957886
           },
           {
             "id": "TEN-UPTA2021-S14",
-            "score": 0.6279336810112
+            "score": 0.6013495922088623
           },
           {
-            "id": "TEN-UPTA2021-S13",
-            "score": 0.6167595386505127
+            "id": "TEN-TPA1882-S108",
+            "score": 0.5935097932815552
           },
           {
-            "id": "TEN-UPTA2021-S23",
-            "score": 0.6130560636520386
+            "id": "TEN-UPTA2021-S35",
+            "score": 0.5883337259292603
           },
           {
             "id": "TEN-UPTA2021-S33",
-            "score": 0.7123492956161499
+            "score": 0.712349534034729
           },
           {
             "id": "TEN-UPTA2021-S30",
@@ -244,9 +247,9 @@
             "confidence gate: no verified information"
           ]
         },
-        "draft_text": null,
+        "draft_text": "LEGAL NOTICE: DEMAND FOR RETURN OF SECURITY DEPOSIT\n\nDate: [● date of sending]\nBy: [● registered post / speed post / email, as you choose]\n\nTo,\n[● landlord's full name]\n[● landlord's address]\n\nFrom,\n[● your full name]\n[● your address and phone number]\n\nSubject: Demand for return of security deposit of Rs. [● deposit amount] for the premises at [● property address]\n\nDear Sir/Madam,\n\n1. I was your tenant at [● property address] from 2026-01 to 2026-10-20 under [● rent agreement / verbal arrangement].\n\n2. At the start of the tenancy I paid you a security deposit of Rs. [● deposit amount] on [● date of payment] by [● mode of payment, e.g. bank transfer / UPI / cash]. [● reference or proof, e.g. receipt, transaction ID, agreement clause].\n\n3. I vacated the premises on 2026-10-20 and handed over [● possession details, e.g. keys handed over on date / to whom].\n\n4. The deposit has not been returned. [● what happened when you asked, with dates, e.g. calls or messages already sent]. [● any deductions the landlord claimed, and why they are not justified, or \"No deductions were agreed.\"]\n\nThis demand is made with reference to: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 11; Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 24. [● Have a lawyer confirm that these provisions apply to your case.]\n\n5. I therefore request you to return the full security deposit of Rs. [● deposit amount] within [● number of days you allow] days of receiving this notice, by [● how you want to be paid, e.g. transfer to your bank account details].\n\n6. If the amount is not returned within this time, I will be free to take further steps available to me under the law, without further notice, at your cost and risk.\n\nYours faithfully,\n[● your name]\n[● signature]\n\nEnclosures (copies): [● agreement / receipts / transaction record / messages]\n\n\nCheck every detail before sending. For high-value or complex matters, have a lawyer review it.",
         "trace": {
-          "session": "d4aabc62da28",
+          "session": "2824e3e32aea",
           "input_mode": "text",
           "user_text": "Lucknow UP residential flat, agreement signed January 2026, vacated 20 October 2026. Landlord kept Rs 20000 deposit for painting though I have move-in and move-out photos and paid all rent. No threats. How can I ask for an explanation and refund?",
           "mode": "advice",
@@ -255,54 +258,100 @@
             "language": "en-IN",
             "state_or_city": "UP",
             "case_file_update": {
-              "property_address": "Lucknow, UP",
-              "tenancy_start_date": "2026-01",
-              "vacated_date": "2026-10-20",
-              "amount_inr": 20000,
+              "what_happened": "Landlord withheld Rs 20000 security deposit for painting despite tenant having move-in and move-out photos and no outstanding rent.",
               "proof": [
                 "move-in photos",
-                "move-out photos",
-                "rent payment records"
+                "move-out photos"
               ],
+              "tenancy_start_date": "2026-01",
+              "vacated_date": "2026-10-20",
               "resolution_wanted": "refund"
             },
             "missing_facts": [
-              "landlord name",
-              "copy of rental agreement"
+              "landlord_contact_details",
+              "rental_agreement_terms_regarding_painting"
             ],
             "escalation_flags": [],
-            "english_retrieval_query": "landlord refusing to return security deposit for painting charges"
+            "english_retrieval_query": "how to recover security deposit from landlord for unfair painting deduction",
+            "intent": [
+              "explain_rights",
+              "next_steps",
+              "draft_document"
+            ],
+            "question": "How can I formally request an explanation and the refund of my security deposit from my landlord?",
+            "new_topic": false,
+            "summary": "Lucknow mein aapke landlord ne painting ke naam par aapka 20,000 rupaye ka security deposit wapas nahi kiya hai, jabki aapne saara kiraya chuka diya hai aur aapke paas photos ka saboot bhi hai."
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
           "retrieval": {
-            "query": "landlord refusing to return security deposit for painting charges",
+            "query": "how to recover security deposit from landlord for unfair painting deduction",
             "jurisdictions": [
               "central",
               "UP"
             ],
-            "top_score": 0.6597137451171875,
+            "top_score": 0.6419495344161987,
             "min_score": 0.66,
             "old_law": [
               {
                 "id": "TEN-UP1972-S20",
-                "score": 0.6129965782165527
+                "score": 0.5890920162200928
               },
               {
                 "id": "TEN-UP1972-S21",
-                "score": 0.5919545292854309
+                "score": 0.5763630867004395
               }
             ]
           },
-          "timings_s": 6.565,
+          "intent": {
+            "intents": [
+              "draft_document",
+              "explain_rights",
+              "next_steps"
+            ],
+            "question": "How can I formally request an explanation and the refund of my security deposit from my landlord?",
+            "want_draft": true,
+            "has_question": true
+          },
+          "draft": {
+            "kind": "tenancy",
+            "file_name": "deposit_notice.txt",
+            "missing": [
+              "[● Have a lawyer confirm that these provisions apply to your case.]",
+              "[● agreement / receipts / transaction record / messages]",
+              "[● any deductions the landlord claimed, and why they are not justified, or \"No deductions were agreed.\"]",
+              "[● date of payment]",
+              "[● date of sending]",
+              "[● deposit amount]",
+              "[● how you want to be paid, e.g. transfer to your bank account details]",
+              "[● landlord's address]",
+              "[● landlord's full name]",
+              "[● mode of payment, e.g. bank transfer / UPI / cash]",
+              "[● number of days you allow]",
+              "[● possession details, e.g. keys handed over on date / to whom]",
+              "[● property address]",
+              "[● reference or proof, e.g. receipt, transaction ID, agreement clause]",
+              "[● registered post / speed post / email, as you choose]",
+              "[● rent agreement / verbal arrangement]",
+              "[● signature]",
+              "[● what happened when you asked, with dates, e.g. calls or messages already sent]",
+              "[● your address and phone number]",
+              "[● your full name]",
+              "[● your name]"
+            ],
+            "scan_issues": [],
+            "attached_to_answer": true
+          },
+          "timings_s": 8.453,
           "llm": {
-            "calls": 4,
+            "calls": 5,
             "retries": 0,
-            "latency_s": 6.54,
+            "latency_s": 8.42,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001"
@@ -314,31 +363,31 @@
           "retrieved": [
             {
               "id": "TEN-UPTA2021-S11",
-              "score": 0.6597137451171875
-            },
-            {
-              "id": "TEN-UPTA2021-S24",
-              "score": 0.6460386514663696
+              "score": 0.6419495344161987
             },
             {
               "id": "TEN-UPTA2021-S15",
-              "score": 0.6428349614143372
+              "score": 0.6302611827850342
+            },
+            {
+              "id": "TEN-UPTA2021-S24",
+              "score": 0.6276434659957886
             },
             {
               "id": "TEN-UPTA2021-S14",
-              "score": 0.6279336810112
+              "score": 0.6013495922088623
             },
             {
-              "id": "TEN-UPTA2021-S13",
-              "score": 0.6167595386505127
+              "id": "TEN-TPA1882-S108",
+              "score": 0.5935097932815552
             },
             {
-              "id": "TEN-UPTA2021-S23",
-              "score": 0.6130560636520386
+              "id": "TEN-UPTA2021-S35",
+              "score": 0.5883337259292603
             },
             {
               "id": "TEN-UPTA2021-S33",
-              "score": 0.7123492956161499
+              "score": 0.712349534034729
             },
             {
               "id": "TEN-UPTA2021-S30",
@@ -468,7 +517,8 @@
                 "model": "gemma-4-31b-it",
                 "rpm": 30,
                 "tpm": 16000,
-                "rpd": 14000
+                "rpd": 14000,
+                "timeout_s": 25
               },
               {
                 "provider": "gemini",
@@ -493,12 +543,13 @@
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 6.580577499989886,
-      "finished_at": "2026-11-05T22:08:16.845716+00:00"
+      "latency_s": 8.45650830003433,
+      "finished_at": "2026-11-06T15:15:00.108043+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T22:08:16.845716+00:00"
+  "finished_at": "2026-11-06T15:15:00.108043+00:00"
 }

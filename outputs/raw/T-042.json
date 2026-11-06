@@ -1,0 +1,501 @@
+{
+  "schema_version": 1,
+  "case_id": "T-042",
+  "case": {
+    "id": "T-042",
+    "group": "L_referrals",
+    "tags": [
+      "round4",
+      "directory",
+      "bank card charge"
+    ],
+    "category_expected": "consumer",
+    "language": "hi-IN",
+    "input_mode": "text",
+    "turns": [
+      "मेरे बैंक के कार्ड पर एक ही भुगतान दो बार कट गया। बैंक की शिकायत टीम को लिखने के बाद भी समाधान नहीं मिला। दुकानदार से रिफंड नहीं, बैंक की सेवा की शिकायत के लिए कौन सा आधिकारिक बाहरी मंच है?"
+    ],
+    "expected_action": "answer",
+    "expect_needs_lawyer": false,
+    "expected_topics": [
+      "bank card charge",
+      "official referral"
+    ],
+    "must_include_any": [],
+    "must_not_include": [],
+    "expected_chunk_ids": [
+      "COM-DIR-RBI"
+    ],
+    "expected_referral_any": [
+      "COM-DIR-RBI"
+    ],
+    "notes": "An answer must name and cite an expected body. Wrong bodies always hard fail. Statute/section patterns hard fail in escalate/out_of_scope replies; in an answer they must be grounded in cited chunks. Legal-aid-only escalation is a safe fallback and a recall miss. Targets remain agent-mapped, pending human confirmation.",
+    "expected_law_verified": false,
+    "calibration_label": "exclude",
+    "jurisdictions_expected": [
+      "central",
+      "UP"
+    ],
+    "retrieval_expectation_kind": "safe_referral",
+    "expected_outcomes": [
+      {
+        "category": "consumer",
+        "action": "answer",
+        "needs_lawyer": false
+      },
+      {
+        "category": "out_of_scope",
+        "action": "escalate",
+        "needs_lawyer": true
+      }
+    ]
+  },
+  "repeat": 1,
+  "mock": false,
+  "backend": "app.pipeline",
+  "stage": "real",
+  "configured_models": {
+    "router": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "main": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash",
+        "rpm": 5,
+        "tpm": 250000,
+        "rpd": 19
+      }
+    ],
+    "translate": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "judge": [
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000,
+        "timeout_s": 25
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      }
+    ]
+  },
+  "started_at": "2026-11-06T15:20:35.836467+00:00",
+  "turns": [
+    {
+      "input": "मेरे बैंक के कार्ड पर एक ही भुगतान दो बार कट गया। बैंक की शिकायत टीम को लिखने के बाद भी समाधान नहीं मिला। दुकानदार से रिफंड नहीं, बैंक की सेवा की शिकायत के लिए कौन सा आधिकारिक बाहरी मंच है?",
+      "input_mode": "text",
+      "lang_hint": "hi-IN",
+      "started_at": "2026-11-06T15:20:41.838463+00:00",
+      "result": {
+        "reply_text": "बैंक की सेवा में कमी के लिए आप भारतीय रिजर्व बैंक के कम्प्लेंट मैनेजमेंट सिस्टम (CMS) पोर्टल पर जा सकते हैं। इसके अलावा रिजर्व बैंक - इंटीग्रेटेड ओम्बुड्समैन स्कीम के तहत वैकल्पिक शिकायत निवारण तंत्र की सुविधा मिलती है।\n\nअपने बैंक खाते के स्टेटमेंट और दो बार पैसे कटने के सबूत संभाल कर रखें।\n\nआप https://cms.rbi.org.in पर ऑनलाइन शिकायत दर्ज कर सकते हैं या टोल-फ्री हेल्पलाइन 14448 पर संपर्क कर सकते हैं।\n\nस्रोत: Reserve Bank of India - Complaint Management System, P RBI\n\nयह कानूनी जानकारी है, कानूनी सलाह नहीं।",
+        "reply_lang": "hi-IN",
+        "category": "consumer",
+        "action": "answer",
+        "citations": [
+          "COM-DIR-RBI"
+        ],
+        "retrieved": [
+          {
+            "id": "COM-DIR-RBI",
+            "score": 0.6740044355392456
+          },
+          {
+            "id": "CONS-NCH-P1",
+            "score": 0.649267315864563
+          },
+          {
+            "id": "COM-NCH-H1915",
+            "score": 0.6234967708587646
+          },
+          {
+            "id": "COM-DIR-CYBER",
+            "score": 0.6209989786148071
+          },
+          {
+            "id": "COM-DIR-INDIAPOST",
+            "score": 0.6208183765411377
+          },
+          {
+            "id": "COM-DIR-NCH",
+            "score": 0.6205478310585022
+          },
+          {
+            "id": "CONS-CPA2019-S34",
+            "score": 0.7613462805747986
+          },
+          {
+            "id": "CONS-PECRULES2021-R3",
+            "score": 0.7612271308898926
+          }
+        ],
+        "needs_lawyer": false,
+        "escalation_reasons": [],
+        "verifier": {
+          "status": "fixed",
+          "issues": []
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "2957eebe6d41",
+          "input_mode": "text",
+          "user_text": "मेरे बैंक के कार्ड पर एक ही भुगतान दो बार कट गया। बैंक की शिकायत टीम को लिखने के बाद भी समाधान नहीं मिला। दुकानदार से रिफंड नहीं, बैंक की सेवा की शिकायत के लिए कौन सा आधिकारिक बाहरी मंच है?",
+          "mode": "advice",
+          "router": {
+            "category": "consumer",
+            "language": "hi-IN",
+            "state_or_city": null,
+            "case_file_update": {
+              "what_happened": "बैंक कार्ड से एक ही भुगतान दो बार कट गया है और बैंक की शिकायत टीम से समाधान नहीं मिला है।",
+              "already_tried": [
+                "complaint to bank grievance team"
+              ],
+              "resolution_wanted": "refund"
+            },
+            "missing_facts": [
+              "amount of the double charge",
+              "date of the transaction"
+            ],
+            "escalation_flags": [],
+            "english_retrieval_query": "how to file complaint against bank for double debit transaction",
+            "intent": [
+              "where_to_complain"
+            ],
+            "question": "Which official external forum can I approach to complain about the bank's service regarding a double debit transaction?",
+            "new_topic": false,
+            "summary": "आपके बैंक कार्ड से एक ही भुगतान दो बार कट गया है और बैंक की शिकायत टीम से कोई समाधान नहीं मिला है।"
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "retrieval": {
+            "query": "how to file complaint against bank for double debit transaction",
+            "jurisdictions": [
+              "central"
+            ],
+            "top_score": 0.6740044355392456,
+            "min_score": 0.66,
+            "old_law": []
+          },
+          "intent": {
+            "intents": [
+              "where_to_complain"
+            ],
+            "question": "Which official external forum can I approach to complain about the bank's service regarding a double debit transaction?",
+            "want_draft": false,
+            "has_question": true
+          },
+          "judge": "ok",
+          "verifier_history": [
+            [
+              "block 2: claim not supported by its cited source (The claim incorrectly states the scheme is for 'commercial banks' service deficiency against 'RBI regulated entities', w)"
+            ],
+            []
+          ],
+          "timings_s": 41.373,
+          "llm": {
+            "calls": 7,
+            "retries": 1,
+            "latency_s": 41.13,
+            "models": [
+              "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "embed:gemini:gemini-embedding-001",
+              "main:gemini:gemini-3.5-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite",
+              "main:gemini:gemini-3.5-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite"
+            ],
+            "fallbacks": [
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "network error (ReadTimeout)"
+              },
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~596s"
+              }
+            ]
+          },
+          "action": "answer",
+          "category": "consumer",
+          "retrieved": [
+            {
+              "id": "COM-DIR-RBI",
+              "score": 0.6740044355392456
+            },
+            {
+              "id": "CONS-NCH-P1",
+              "score": 0.649267315864563
+            },
+            {
+              "id": "COM-NCH-H1915",
+              "score": 0.6234967708587646
+            },
+            {
+              "id": "COM-DIR-CYBER",
+              "score": 0.6209989786148071
+            },
+            {
+              "id": "COM-DIR-INDIAPOST",
+              "score": 0.6208183765411377
+            },
+            {
+              "id": "COM-DIR-NCH",
+              "score": 0.6205478310585022
+            },
+            {
+              "id": "CONS-CPA2019-S34",
+              "score": 0.7613462805747986
+            },
+            {
+              "id": "CONS-PECRULES2021-R3",
+              "score": 0.7612271308898926
+            }
+          ],
+          "citations": [
+            "COM-DIR-RBI"
+          ],
+          "verifier": {
+            "status": "fixed",
+            "issues": []
+          },
+          "escalation_reasons": [],
+          "models": {
+            "router": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "main": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash",
+                "rpm": 5,
+                "tpm": 250000,
+                "rpd": 19
+              }
+            ],
+            "translate": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "judge": [
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000,
+                "timeout_s": 25
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              }
+            ]
+          },
+          "mock": false
+        }
+      },
+      "model_names_used": [
+        "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001",
+        "main:gemini:gemini-3.5-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite",
+        "main:gemini:gemini-3.5-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite"
+      ],
+      "latency_s": 41.37685999996029,
+      "finished_at": "2026-11-06T15:21:23.214423+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-06T15:21:23.214423+00:00"
+}

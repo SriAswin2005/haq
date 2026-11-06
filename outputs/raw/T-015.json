@@ -148,7 +148,8 @@
         "model": "gemma-4-31b-it",
         "rpm": 30,
         "tpm": 16000,
-        "rpd": 14000
+        "rpd": 14000,
+        "timeout_s": 25
       },
       {
         "provider": "gemini",
@@ -166,15 +167,15 @@
       }
     ]
   },
-  "started_at": "2026-11-05T21:55:55.828958+00:00",
+  "started_at": "2026-11-06T15:10:54.475870+00:00",
   "turns": [
     {
       "input": "मैं 16 साल का हूं, कानपुर यूपी की दुकान में काम करता हूं। अक्टूबर 2026 की 6000 रुपये तनख्वाह मालिक नहीं दे रहा। मेरे पास चैट है। मम्मी को नहीं बताया, क्या करूं?",
       "input_mode": "text",
       "lang_hint": "hi-IN",
-      "started_at": "2026-11-05T21:56:01.830342+00:00",
+      "started_at": "2026-11-06T15:11:00.487385+00:00",
       "result": {
-        "reply_text": "मैंने जो समझा: unpaid period: 2026-10; monthly wage inr: 6000; proof: ['chat']; counterparty type: employer; state: UP\n\nइसके लिए असली वकील या मुफ़्त कानूनी सहायता ज़रूरी है। जहाँ मेरे पास जाँची हुई जानकारी है वह मैं बता सकता हूँ, पर इसे अकेले सुरक्षित तरीके से नहीं संभाल सकता।\n\nकारण: आपने 18 से कम उम्र बताई है, और नाबालिग से जुड़े मामलों में असली वकील या कानूनी सहायता ज़रूरी है; यह ऐसा मामला है जिसे मैं यहाँ सुरक्षित रूप से नहीं संभाल सकता (जैसे आपराधिक कानून, बच्चों की सुरक्षा, पुलिस या पारिवारिक मामले)\n\nआप अभी यह कर सकते हैं: अपने कागज़ (एग्रीमेंट, रसीदें, बैंक या UPI रिकॉर्ड, मैसेज, फोटो) इकट्ठा करें और तारीखें व रकम क्रम से लिख लें।\n\nअसली वकील या मुफ़्त कानूनी सहायता के लिए:\n- National Legal Services Authority Helpline: 15100 (स्रोत: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (स्रोत: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nयह कानूनी जानकारी है, कानूनी सलाह नहीं।",
+        "reply_text": "मैंने जो समझा: आप कानपुर की एक दुकान में काम करते हैं और मालिक आपको अक्टूबर 2026 की 6000 रुपये की तनख्वाह नहीं दे रहा है।\n\nइसके लिए असली वकील या मुफ़्त कानूनी सहायता ज़रूरी है। जहाँ मेरे पास जाँची हुई जानकारी है वह मैं बता सकता हूँ, पर इसे अकेले सुरक्षित तरीके से नहीं संभाल सकता।\n\nकारण: आपने 18 से कम उम्र बताई है, और नाबालिग से जुड़े मामलों में असली वकील या कानूनी सहायता ज़रूरी है; यह ऐसा मामला है जिसे मैं यहाँ सुरक्षित रूप से नहीं संभाल सकता (जैसे आपराधिक कानून, बच्चों की सुरक्षा, पुलिस या पारिवारिक मामले)\n\nआप अभी यह कर सकते हैं: अपने कागज़ (एग्रीमेंट, रसीदें, बैंक या UPI रिकॉर्ड, मैसेज, फोटो) इकट्ठा करें और तारीखें व रकम क्रम से लिख लें।\n\nअसली वकील या मुफ़्त कानूनी सहायता के लिए:\n- National Legal Services Authority Helpline: 15100 (स्रोत: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (स्रोत: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nयह कानूनी जानकारी है, कानूनी सलाह नहीं।",
         "reply_lang": "hi-IN",
         "category": "wages",
         "action": "escalate",
@@ -211,7 +212,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "bba14a5a944c",
+          "session": "225067180052",
           "input_mode": "text",
           "user_text": "मैं 16 साल का हूं, कानपुर यूपी की दुकान में काम करता हूं। अक्टूबर 2026 की 6000 रुपये तनख्वाह मालिक नहीं दे रहा। मेरे पास चैट है। मम्मी को नहीं बताया, क्या करूं?",
           "mode": "advice",
@@ -220,31 +221,40 @@
             "language": "hi-IN",
             "state_or_city": "UP",
             "case_file_update": {
+              "amount_inr": 6000,
               "unpaid_period": "2026-10",
-              "monthly_wage_inr": 6000,
               "proof": [
                 "chat"
               ],
-              "counterparty_type": "employer"
+              "counterparty_type": "employer",
+              "what_happened": "16-year-old employee working in a shop in Kanpur has not received salary of 6000 INR for October 2026."
             },
             "missing_facts": [
-              "employer_name",
-              "last_working_date"
+              "name of the shop",
+              "nature of work"
             ],
             "escalation_flags": [
               "minors"
             ],
-            "english_retrieval_query": "unpaid wages for minor employee in India"
+            "english_retrieval_query": "legal rights of minor employees in India regarding unpaid wages",
+            "intent": [
+              "explain_rights",
+              "next_steps"
+            ],
+            "question": "What should I do to get my unpaid salary, and what are my rights as a minor working in a shop?",
+            "new_topic": true,
+            "summary": "आप कानपुर की एक दुकान में काम करते हैं और मालिक आपको अक्टूबर 2026 की 6000 रुपये की तनख्वाह नहीं दे रहा है।"
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
-          "timings_s": 3.692,
+          "escalation_level": "danger",
+          "timings_s": 13.413,
           "llm": {
             "calls": 2,
             "retries": 0,
-            "latency_s": 3.67,
+            "latency_s": 13.39,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001"
@@ -385,7 +395,8 @@
                 "model": "gemma-4-31b-it",
                 "rpm": 30,
                 "tpm": 16000,
-                "rpd": 14000
+                "rpd": 14000,
+                "timeout_s": 25
               },
               {
                 "provider": "gemini",
@@ -410,10 +421,10 @@
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 3.695430399966426,
-      "finished_at": "2026-11-05T21:56:05.525754+00:00"
+      "latency_s": 13.419639999978244,
+      "finished_at": "2026-11-06T15:11:13.900234+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T21:56:05.525754+00:00"
+  "finished_at": "2026-11-06T15:11:13.900234+00:00"
 }

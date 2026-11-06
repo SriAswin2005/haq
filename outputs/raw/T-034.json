@@ -154,7 +154,8 @@
         "model": "gemma-4-31b-it",
         "rpm": 30,
         "tpm": 16000,
-        "rpd": 14000
+        "rpd": 14000,
+        "timeout_s": 25
       },
       {
         "provider": "gemini",
@@ -172,15 +173,15 @@
       }
     ]
   },
-  "started_at": "2026-11-05T22:20:11.891098+00:00",
+  "started_at": "2026-11-06T15:17:12.035048+00:00",
   "turns": [
     {
       "input": "I am in Lucknow UP. What is the POCSO Act? I am asking what this law is, not reporting a purchase, salary or rental problem.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T22:20:17.893593+00:00",
+      "started_at": "2026-11-06T15:17:18.035357+00:00",
       "result": {
-        "reply_text": "What I understood: what happened: User is asking for information regarding the POCSO Act.; state: UP\n\nThis needs a real lawyer or free legal aid. I can still share verified general information where I have it, but I cannot handle this safely on my own.\n\nWhy: this involves a matter I cannot safely handle here (for example criminal law, child protection, police or family matters); this topic is outside what I can safely help with\n\nWhat you can do right now: a free legal aid office can explain this law to you and tell you whether it applies to your situation.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (Source: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
+        "reply_text": "What I understood: You are asking for information about the POCSO Act.\n\nThis needs a real lawyer or free legal aid. I can still share verified general information where I have it, but I cannot handle this safely on my own.\n\nWhy: this involves a matter I cannot safely handle here (for example criminal law, child protection, police or family matters); this topic is outside what I can safely help with\n\nWhat you can do right now: a free legal aid office can explain this law to you and tell you whether it applies to your situation.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (Source: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "out_of_scope",
         "action": "escalate",
@@ -217,7 +218,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "ba1c3d380a89",
+          "session": "4a7851dd439e",
           "input_mode": "text",
           "user_text": "I am in Lucknow UP. What is the POCSO Act? I am asking what this law is, not reporting a purchase, salary or rental problem.",
           "mode": "advice",
@@ -226,23 +227,30 @@
             "language": "en-IN",
             "state_or_city": "UP",
             "case_file_update": {
-              "what_happened": "User is asking for information regarding the POCSO Act."
+              "state": "UP"
             },
             "missing_facts": [],
             "escalation_flags": [
               "minors"
             ],
-            "english_retrieval_query": "what is the POCSO Act in India"
+            "english_retrieval_query": "what is the POCSO Act",
+            "intent": [
+              "explain_rights"
+            ],
+            "question": "What is the POCSO Act?",
+            "new_topic": true,
+            "summary": "You are asking for information about the POCSO Act."
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
-          "timings_s": 3.682,
+          "escalation_level": "danger",
+          "timings_s": 3.666,
           "llm": {
             "calls": 2,
             "retries": 0,
-            "latency_s": 3.67,
+            "latency_s": 3.64,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001"
@@ -383,7 +391,8 @@
                 "model": "gemma-4-31b-it",
                 "rpm": 30,
                 "tpm": 16000,
-                "rpd": 14000
+                "rpd": 14000,
+                "timeout_s": 25
               },
               {
                 "provider": "gemini",
@@ -408,10 +417,10 @@
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 3.6853972999961115,
-      "finished_at": "2026-11-05T22:20:21.575763+00:00"
+      "latency_s": 3.675083399983123,
+      "finished_at": "2026-11-06T15:17:21.700879+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T22:20:21.575763+00:00"
+  "finished_at": "2026-11-06T15:17:21.700879+00:00"
 }

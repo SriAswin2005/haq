@@ -159,7 +159,8 @@
         "model": "gemma-4-31b-it",
         "rpm": 30,
         "tpm": 16000,
-        "rpd": 14000
+        "rpd": 14000,
+        "timeout_s": 25
       },
       {
         "provider": "gemini",
@@ -177,13 +178,13 @@
       }
     ]
   },
-  "started_at": "2026-11-05T22:20:46.851904+00:00",
+  "started_at": "2026-11-06T15:17:49.678851+00:00",
   "turns": [
     {
       "input": "I am Asha Example in Kanpur UP. Fictional seller OrderNest delivered a broken lamp on 10 October 2026, order FN-236, price Rs 2400. I have the invoice and photos; support refused a refund. Draft a consumer grievance email asking for a refund. I haven't given you addresses or an email recipient.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T22:20:52.836462+00:00",
+      "started_at": "2026-11-06T15:17:55.666034+00:00",
       "result": {
         "reply_text": "Here is a draft complaint to the company's grievance officer, followed by the facts to keep ready if it is not resolved. Anything I do not know is left as a [● placeholder] for you to fill in.\n\nCOMPLAINT TO THE GRIEVANCE OFFICER: REQUEST FOR refund\n\nTo: Grievance Officer, OrderNest\nEmail / portal: [● grievance officer's email or complaint page, as shown on the company's website or app]\nDate: [● date of sending]\n\nFrom: Asha Example, [● your phone number and email]\n\nSubject: Complaint about lamp, Order/Booking No. FN-236\n\nDear Grievance Officer,\n\n1. On 2026-10-10 I bought lamp from you for Rs. 2,400, Order/Booking No. FN-236, paid by [● mode of payment, e.g. card / UPI / cash on delivery].\n\n2. The problem: [● what is wrong, e.g. defective, not delivered, service not given as promised], noticed on [● date you noticed it].\n\n3. I have already: [● what you tried, with dates and ticket numbers; or \"this is my first complaint\"].\n\nThis complaint refers to: Consumer Protection (E-Commerce) Rules, 2020, rule 4; Consumer Protection (E-Commerce) Rules, 2020, rule 6. [● Have a lawyer confirm that these provisions apply to your case.]\n\n4. I request a refund of Rs. 2,400 within [● number of days you allow] days, and a written acknowledgement of this complaint with a complaint number.\n\n5. If this is not resolved, I will approach the National Consumer Helpline and the appropriate Consumer Commission.\n\nRegards,\nAsha Example\n\nAttachments: [● invoice / order confirmation / photos / chat or email screenshots]\n\n--------------------------------------------------------------\nIF THIS IS NOT RESOLVED: facts to keep ready for a consumer complaint\n- Your name, address and phone: [● your details]\n- The company's name and address: OrderNest, [● company address]\n- What you bought, when, and for how much: lamp, 2026-10-10, Rs. 2,400\n- What went wrong, and every step you took, with dates: [● timeline]\n- What you are asking for: refund, [● any compensation you want to claim]\n- Copies of every document listed above.\n\n\nCheck every detail before sending. For high-value or complex matters, have a lawyer review it.",
         "reply_lang": "en-IN",
@@ -196,19 +197,19 @@
         "retrieved": [
           {
             "id": "CONS-ECOM2020-R4",
-            "score": 0.7825937271118164
+            "score": 0.7825939059257507
           },
           {
             "id": "CONS-ECOM2020-R6",
-            "score": 0.7233303785324097
-          },
-          {
-            "id": "CONS-CPA2019-S2",
-            "score": 0.7181645631790161
+            "score": 0.7233304381370544
           },
           {
             "id": "CONS-NCH-P1",
             "score": 0.7179316878318787
+          },
+          {
+            "id": "CONS-CPA2019-S2-a",
+            "score": 0.7167891263961792
           }
         ],
         "needs_lawyer": false,
@@ -219,7 +220,7 @@
         },
         "draft_text": "COMPLAINT TO THE GRIEVANCE OFFICER: REQUEST FOR refund\n\nTo: Grievance Officer, OrderNest\nEmail / portal: [● grievance officer's email or complaint page, as shown on the company's website or app]\nDate: [● date of sending]\n\nFrom: Asha Example, [● your phone number and email]\n\nSubject: Complaint about lamp, Order/Booking No. FN-236\n\nDear Grievance Officer,\n\n1. On 2026-10-10 I bought lamp from you for Rs. 2,400, Order/Booking No. FN-236, paid by [● mode of payment, e.g. card / UPI / cash on delivery].\n\n2. The problem: [● what is wrong, e.g. defective, not delivered, service not given as promised], noticed on [● date you noticed it].\n\n3. I have already: [● what you tried, with dates and ticket numbers; or \"this is my first complaint\"].\n\nThis complaint refers to: Consumer Protection (E-Commerce) Rules, 2020, rule 4; Consumer Protection (E-Commerce) Rules, 2020, rule 6. [● Have a lawyer confirm that these provisions apply to your case.]\n\n4. I request a refund of Rs. 2,400 within [● number of days you allow] days, and a written acknowledgement of this complaint with a complaint number.\n\n5. If this is not resolved, I will approach the National Consumer Helpline and the appropriate Consumer Commission.\n\nRegards,\nAsha Example\n\nAttachments: [● invoice / order confirmation / photos / chat or email screenshots]\n\n--------------------------------------------------------------\nIF THIS IS NOT RESOLVED: facts to keep ready for a consumer complaint\n- Your name, address and phone: [● your details]\n- The company's name and address: OrderNest, [● company address]\n- What you bought, when, and for how much: lamp, 2026-10-10, Rs. 2,400\n- What went wrong, and every step you took, with dates: [● timeline]\n- What you are asking for: refund, [● any compensation you want to claim]\n- Copies of every document listed above.\n\n\nCheck every detail before sending. For high-value or complex matters, have a lawyer review it.",
         "trace": {
-          "session": "3deb03df2d9a",
+          "session": "9f760e251591",
           "input_mode": "text",
           "user_text": "I am Asha Example in Kanpur UP. Fictional seller OrderNest delivered a broken lamp on 10 October 2026, order FN-236, price Rs 2400. I have the invoice and photos; support refused a refund. Draft a consumer grievance email asking for a refund. I haven't given you addresses or an email recipient.",
           "mode": "draft",
@@ -229,20 +230,19 @@
             "state_or_city": "UP",
             "case_file_update": {
               "person_name": "Asha Example",
+              "counterparty_name": "OrderNest",
+              "counterparty_type": "seller",
               "product_or_service": "lamp",
               "order_id": "FN-236",
               "purchase_date": "2026-10-10",
               "amount_inr": 2400,
-              "counterparty_name": "OrderNest",
-              "counterparty_type": "seller",
-              "what_happened": "delivered a broken lamp",
+              "what_happened": "Delivered a broken lamp and refused a refund.",
               "proof": [
                 "invoice",
                 "photos"
               ],
               "already_tried": [
-                "contacted support",
-                "refund refused"
+                "contacted support"
               ],
               "resolution_wanted": "refund"
             },
@@ -251,21 +251,35 @@
               "company's registered office address"
             ],
             "escalation_flags": [],
-            "english_retrieval_query": "consumer grievance email for refund of defective product"
+            "english_retrieval_query": "how to write a consumer grievance email for a defective product",
+            "intent": [
+              "draft_document"
+            ],
+            "question": "Can you draft a consumer grievance email to the seller requesting a refund for the broken lamp?",
+            "new_topic": false,
+            "summary": "You received a broken lamp from OrderNest on 10 October 2026 for Rs 2400, and they have refused your request for a refund."
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
           "retrieval": {
-            "query": "consumer grievance email for refund of defective product",
+            "query": "how to write a consumer grievance email for a defective product",
             "jurisdictions": [
               "central",
               "UP"
             ],
-            "top_score": 0.6768385171890259,
+            "top_score": 0.6749861836433411,
             "min_score": 0.66,
             "old_law": []
+          },
+          "intent": {
+            "intents": [
+              "draft_document"
+            ],
+            "question": "Can you draft a consumer grievance email to the seller requesting a refund for the broken lamp?",
+            "want_draft": true,
+            "has_question": false
           },
           "draft": {
             "kind": "consumer",
@@ -288,11 +302,11 @@
             ],
             "scan_issues": []
           },
-          "timings_s": 6.508,
+          "timings_s": 6.275,
           "llm": {
             "calls": 4,
             "retries": 0,
-            "latency_s": 6.45,
+            "latency_s": 6.23,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
@@ -306,19 +320,19 @@
           "retrieved": [
             {
               "id": "CONS-ECOM2020-R4",
-              "score": 0.7825937271118164
+              "score": 0.7825939059257507
             },
             {
               "id": "CONS-ECOM2020-R6",
-              "score": 0.7233303785324097
-            },
-            {
-              "id": "CONS-CPA2019-S2",
-              "score": 0.7181645631790161
+              "score": 0.7233304381370544
             },
             {
               "id": "CONS-NCH-P1",
               "score": 0.7179316878318787
+            },
+            {
+              "id": "CONS-CPA2019-S2-a",
+              "score": 0.7167891263961792
             }
           ],
           "citations": [
@@ -432,7 +446,8 @@
                 "model": "gemma-4-31b-it",
                 "rpm": 30,
                 "tpm": 16000,
-                "rpd": 14000
+                "rpd": 14000,
+                "timeout_s": 25
               },
               {
                 "provider": "gemini",
@@ -459,10 +474,10 @@
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 6.512383699999191,
-      "finished_at": "2026-11-05T22:20:59.348066+00:00"
+      "latency_s": 6.277976999990642,
+      "finished_at": "2026-11-06T15:18:01.942104+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T22:20:59.348066+00:00"
+  "finished_at": "2026-11-06T15:18:01.942104+00:00"
 }

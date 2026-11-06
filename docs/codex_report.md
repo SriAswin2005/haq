@@ -1,6 +1,92 @@
-# Codex report — rounds 3 and 4, 6 November 2026
+# Codex report — current full 55-case evaluation, 6 November 2026
 
-Latest extension: **T-041..T-055 completed in a separate real run**, with referral
+The current full real run completed **55 cases / 59 turns: 37 strict passes,
+18 failures, zero infrastructure errors and zero pending cases**. The unchanged
+T-001..T-040 cohort improves from **21/40 in round three to 26/40**. Inputs were
+frozen at **20:36 IST** and the real calls finished at **20:54 IST on 6 November**.
+Later parallel edits are outside this capture. Codex made no root `app/` or
+`data/` source edits.
+
+| Current measure | Result |
+|---|---:|
+| Matched original 40 strict pass | 26/40, previously 21/40 |
+| Full 55 strict pass | 37/55 |
+| Referral body precision, T-041..T-055 | 14/18 (77.8%) |
+| Referral body recall | 14/15 (93.3%) |
+| Cited-body precision / recall | 14/18 / 14/15 |
+| Referral check pass, fallback allowed | 13/15 |
+| Referral cohort, all strict checks | 11/15 |
+| Full-run p50 / p95 | 9.906 s / 30.952 s |
+| Matched-40 p50 / p95 | 10.730 s / 29.848 s |
+| Round-three p50 / p95, same 40 cases | 12.885 s / 185.310 s |
+
+Primary evidence: [BEFORE_AFTER.md](../outputs/BEFORE_AFTER.md),
+[real summary](../outputs/summary.md), [results](../outputs/results.csv),
+[referrals](../outputs/referrals.md), [performance](../outputs/perf.md),
+[current real bugs](../tests/BUGS.md),
+[full archive](../outputs/runs/real-20261106T150609.600967Z/),
+[integrity audit](../outputs/runs/real-20261106T150609.600967Z/audit.json),
+[machine-readable metrics](../outputs/runs/real-20261106T150609.600967Z/full55_metrics.json).
+
+Executed `python tests/run_frozen_eval.py --sleep 6`, without `--judge`. All 55
+cases were captured in one frozen app/config/corpus revision, containing 169
+chunks. All law-verification flags remain false. The round-three baseline
+reproduces every original per-case outcome under the current checks; its raw
+hashes and all current raw publication bytes are preserved. No repeat stability
+or independent semantic-claim rate is inferred from this single run.
+
+The user's correction is recorded in
+[round4_expectations_revision.json](../tests/round4_expectations_revision.json).
+Bank, insurance, rail, airline, electricity, builder and food cases accept
+consumer/answer/false or out_of_scope/escalate/true as coherent alternatives.
+Answers require a visible expected body and a citation for it. Wrong bodies
+always hard fail. Blanket statute rejection applies to escalation/out-of-scope
+replies; an answer's references must occur in cited chunks. Inputs and acceptable
+body IDs are unchanged. The earlier T-052 capture now passes the revised rules;
+the new T-052 answer passes without mentioning an Act. No statute mentions
+occurred in the new referral cohort, so that grounding path is covered by the
+offline regressions and old-capture replay, rather than a new positive example.
+
+The initial frozen checker split IRDAI's full official name, without its portal
+suffix, into a spurious second body. Adding that canonical alias changes only
+T-043 from fail to pass. **61 offline tests pass**. The original 36/55 scoring
+and checker are preserved in
+[scoring-original](../outputs/runs/real-20261106T150609.600967Z/scoring-original/);
+[checks_revision.json](../outputs/runs/real-20261106T150609.600967Z/checks_revision.json)
+records the zero-API-call rescore. Every first-40 score, case expectation and raw
+hash is unchanged by this alias correction.
+
+Remaining referral failures are T-047 (extra NCH/consumer-commission pointers and
+the unmapped `airseva.gov.in` destination, unlike the directory's `airsewa.gov.in`)
+and T-055 (extra NCH). Wrong/unmapped referrals still fail even alongside the
+correct cited body. T-053 is a legal-aid-only fallback: safety passes and recall
+misses. T-044 names/cites EPFO but routes to wages, outside its unchanged allowed
+outcome; T-046 passes referral checking but fails the retained language check.
+Precision counts distinct bodies/destinations, so multiple wrong destinations
+in one reply affect its denominator. Legal aid earns no directory-recall credit.
+
+T-029 now records the date conflict and leaves both disputed dates out of its
+draft, despite its retained lexical conflict-note check failing. T-035 still
+silently chooses Rs 18,000 after the unresolved 18,000/30,000 conflict. T-001's
+no-promises flag also needs review because the reply explicitly negates an
+outcome promise. Strict scores retain these flags; they are not all confirmed
+unsafe-claim findings. Telugu deposit T-031 and precedent T-033 end in safe
+refusals, so useful coverage remains incomplete. Final refusal count stays 7/40.
+
+All 138 displayed citation IDs belong to returned retrieval sets. This does not
+prove legal applicability. Hindi script matching remains 5/5 for the original
+40 and 10/10 overall. The current traces contain no `trace.pruned` cases, versus
+11 previously, so this capture does not independently exercise every pruning
+path. Translation-model provenance remains missing for two translated turns;
+reported calls average 4.44/turn and may omit that work. Actual served roles are
+router/judge `gemini-3.1-flash-lite`, main `gemini-3.5-flash-lite`, and embedding
+`gemini-embedding-001`; no translator is inferred from config. The latency
+comparison includes every turn and outlier, excludes inter-turn sleeps, and is
+an observed revision comparison with provider/model/corpus differences.
+
+## Archived round-three and focused round-four results
+
+Earlier extension: **T-041..T-055 completed in a separate real run**, with referral
 precision **14/19 (73.7%)** and recall **14/15 (93.3%)**. Referral safety passes
 **9/15**, including one legal-aid-only fallback. See
 [the updated comparison](../outputs/BEFORE_AFTER.md) and

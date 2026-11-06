@@ -1,0 +1,429 @@
+{
+  "schema_version": 1,
+  "case_id": "T-045",
+  "case": {
+    "id": "T-045",
+    "group": "L_referrals",
+    "tags": [
+      "round4",
+      "directory",
+      "traffic challan"
+    ],
+    "category_expected": "out_of_scope",
+    "language": "hi-IN",
+    "input_mode": "text",
+    "turns": [
+      "लखनऊ में मेरी गाड़ी के नाम ट्रैफिक चालान आया है। मैं उसका विवरण और भुगतान की स्थिति आधिकारिक जगह पर देखना चाहता हूं। किस पोर्टल पर जाऊं?"
+    ],
+    "expected_action": "escalate",
+    "expect_needs_lawyer": true,
+    "expected_topics": [
+      "traffic challan",
+      "official referral"
+    ],
+    "must_include_any": [],
+    "must_not_include": [],
+    "expected_chunk_ids": [
+      "COM-DIR-ECHALLAN",
+      "COM-DIR-VCOURT"
+    ],
+    "expected_referral_any": [
+      "COM-DIR-ECHALLAN",
+      "COM-DIR-VCOURT"
+    ],
+    "notes": "An answer must name and cite an expected body. Wrong bodies always hard fail. Statute/section patterns hard fail in escalate/out_of_scope replies; in an answer they must be grounded in cited chunks. Legal-aid-only escalation is a safe fallback and a recall miss. Targets remain agent-mapped, pending human confirmation.",
+    "expected_law_verified": false,
+    "calibration_label": "exclude",
+    "jurisdictions_expected": [
+      "central",
+      "UP"
+    ],
+    "retrieval_expectation_kind": "safe_referral"
+  },
+  "repeat": 1,
+  "mock": false,
+  "backend": "app.pipeline",
+  "stage": "real",
+  "configured_models": {
+    "router": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "main": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash",
+        "rpm": 5,
+        "tpm": 250000,
+        "rpd": 19
+      }
+    ],
+    "translate": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "judge": [
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000,
+        "timeout_s": 25
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      }
+    ]
+  },
+  "started_at": "2026-11-06T15:21:57.239222+00:00",
+  "turns": [
+    {
+      "input": "लखनऊ में मेरी गाड़ी के नाम ट्रैफिक चालान आया है। मैं उसका विवरण और भुगतान की स्थिति आधिकारिक जगह पर देखना चाहता हूं। किस पोर्टल पर जाऊं?",
+      "input_mode": "text",
+      "lang_hint": "hi-IN",
+      "started_at": "2026-11-06T15:22:03.223633+00:00",
+      "result": {
+        "reply_text": "मैंने जो समझा: लखनऊ में आपकी गाड़ी का ट्रैफिक चालान आया है और आप उसका विवरण और भुगतान की स्थिति देखना चाहते हैं।\n\nइस विषय पर मेरे पास अभी जाँचा हुआ कानून नहीं है, इसलिए मैं अंदाज़ा नहीं लगाऊँगा। इसका मतलब यह नहीं कि आप किसी मुसीबत में हैं: नीचे दिए गए सरकारी रास्ते और मुफ़्त कानूनी सहायता आपकी मदद कर सकते हैं।\n\nएक सरकारी सेवा जो इसमें मदद कर सकती है (भरोसा करने से पहले उसका पेज देख लें):\n- Ministry of Road Transport and Highways - NextGen eChallan Portal (check and pay traffic violation challans online) (स्रोत: https://echallan.parivahan.gov.in/)\n\nआप अभी यह कर सकते हैं: मुफ़्त कानूनी सहायता कार्यालय आपको यह कानून समझा सकता है और बता सकता है कि यह आपकी स्थिति पर लागू होता है या नहीं।\n\nअसली वकील या मुफ़्त कानूनी सहायता के लिए:\n- National Legal Services Authority Helpline: 15100 (स्रोत: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (स्रोत: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nयह कानूनी जानकारी है, कानूनी सलाह नहीं।",
+        "reply_lang": "hi-IN",
+        "category": "out_of_scope",
+        "action": "escalate",
+        "citations": [
+          "COM-DIR-ECHALLAN",
+          "COM-NALSA-H15100",
+          "COM-UPSLSA-H1800"
+        ],
+        "retrieved": [
+          {
+            "id": "COM-DIR-ECHALLAN",
+            "score": 0.742193341255188,
+            "via": "referral"
+          },
+          {
+            "id": "COM-NALSA-H15100",
+            "score": 0.7801640033721924
+          },
+          {
+            "id": "COM-UPSLSA-H1800",
+            "score": 0.7588682770729065
+          },
+          {
+            "id": "COM-LSAA1987-S13",
+            "score": 0.7287323474884033
+          },
+          {
+            "id": "COM-LSAA1987-S12",
+            "score": 0.7265352010726929
+          }
+        ],
+        "needs_lawyer": true,
+        "escalation_reasons": [
+          "out_of_scope_topic"
+        ],
+        "verifier": {
+          "status": "pass",
+          "issues": []
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "635aebd8d4e3",
+          "input_mode": "text",
+          "user_text": "लखनऊ में मेरी गाड़ी के नाम ट्रैफिक चालान आया है। मैं उसका विवरण और भुगतान की स्थिति आधिकारिक जगह पर देखना चाहता हूं। किस पोर्टल पर जाऊं?",
+          "mode": "advice",
+          "router": {
+            "category": "out_of_scope",
+            "language": "hi-IN",
+            "state_or_city": "UP",
+            "case_file_update": {
+              "what_happened": "User received a traffic challan for their vehicle in Lucknow.",
+              "state": "UP"
+            },
+            "missing_facts": [],
+            "escalation_flags": [],
+            "english_retrieval_query": "how to check traffic challan status online UP",
+            "intent": [
+              "where_to_complain"
+            ],
+            "question": "Which official portal can I use to check the details and payment status of my traffic challan?",
+            "new_topic": true,
+            "summary": "लखनऊ में आपकी गाड़ी का ट्रैफिक चालान आया है और आप उसका विवरण और भुगतान की स्थिति देखना चाहते हैं।"
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "escalation_level": "out_of_scope",
+          "timings_s": 5.175,
+          "llm": {
+            "calls": 3,
+            "retries": 0,
+            "latency_s": 5.14,
+            "models": [
+              "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "embed:gemini:gemini-embedding-001"
+            ],
+            "fallbacks": []
+          },
+          "action": "escalate",
+          "category": "out_of_scope",
+          "retrieved": [
+            {
+              "id": "COM-DIR-ECHALLAN",
+              "score": 0.742193341255188,
+              "via": "referral"
+            },
+            {
+              "id": "COM-NALSA-H15100",
+              "score": 0.7801640033721924
+            },
+            {
+              "id": "COM-UPSLSA-H1800",
+              "score": 0.7588682770729065
+            },
+            {
+              "id": "COM-LSAA1987-S13",
+              "score": 0.7287323474884033
+            },
+            {
+              "id": "COM-LSAA1987-S12",
+              "score": 0.7265352010726929
+            }
+          ],
+          "citations": [
+            "COM-DIR-ECHALLAN",
+            "COM-NALSA-H15100",
+            "COM-UPSLSA-H1800"
+          ],
+          "verifier": {
+            "status": "pass",
+            "issues": []
+          },
+          "escalation_reasons": [
+            "out_of_scope_topic"
+          ],
+          "models": {
+            "router": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "main": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash",
+                "rpm": 5,
+                "tpm": 250000,
+                "rpd": 19
+              }
+            ],
+            "translate": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "judge": [
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000,
+                "timeout_s": 25
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              }
+            ]
+          },
+          "mock": false
+        }
+      },
+      "model_names_used": [
+        "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001"
+      ],
+      "latency_s": 5.178231000027154,
+      "finished_at": "2026-11-06T15:22:08.400998+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-06T15:22:08.400998+00:00"
+}

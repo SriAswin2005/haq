@@ -153,7 +153,8 @@
         "model": "gemma-4-31b-it",
         "rpm": 30,
         "tpm": 16000,
-        "rpd": 14000
+        "rpd": 14000,
+        "timeout_s": 25
       },
       {
         "provider": "gemini",
@@ -171,15 +172,15 @@
       }
     ]
   },
-  "started_at": "2026-11-05T22:16:15.675176+00:00",
+  "started_at": "2026-11-06T15:16:37.628891+00:00",
   "turns": [
     {
       "input": "நான் கான்பூர், உத்தரப் பிரதேசத்தில் இருக்கிறேன். போலீசார் என்மீது FIR இருப்பதாகச் சொல்லி நாளை வரச் சொல்கிறார்கள். எனக்கு ஜாமீன் மனு எழுதித் தர முடியுமா? தமிழில் பதில் சொல்லுங்கள்.",
       "input_mode": "text",
       "lang_hint": "ta-IN",
-      "started_at": "2026-11-05T22:16:21.677723+00:00",
+      "started_at": "2026-11-06T15:16:43.629682+00:00",
       "result": {
-        "reply_text": "நான் புரிந்துகொண்டது: என்ன நடந்தது: பயனர் ஒரு FIR தொடர்பாக காவல் துறை சம்மனைப் பெற்றுள்ளார் மற்றும் ஜாமீன் மனு தாக்கல் செய்ய உதவி கோருகிறார்.; மாநிலம்: UP\n\nஇதற்கு ஒரு உண்மையான வழக்கறிஞர் அல்லது இலவச சட்ட உதவி தேவை. என்னிடம் உள்ள சரிபார்க்கப்பட்ட பொதுவான தகவல்களை என்னால் பகிர முடியும், ஆனால் இதை என்னால் பாதுகாப்பாக கையாள முடியாது.\n\nஏன்: உங்கள் செய்தியில் வழக்கறிஞர் தேவைப்படும் விஷயம் குறிப்பிடப்பட்டுள்ளது (காவல் துறை, நீதிமன்றம், வன்முறை, மிரட்டல், வெளியேற்றம் அல்லது குடும்ப விவகாரங்கள் போன்றவை); இது என்னால் பாதுகாப்பாக கையாள முடியாத விஷயம் (உதாரணமாக குற்றவியல் சட்டம், குழந்தைகள் பாதுகாப்பு, காவல் துறை அல்லது குடும்ப விவகாரங்கள்); இந்த தலைப்பு நான் பாதுகாப்பாக உதவக்கூடிய எல்லைக்கு அப்பாற்பட்டது; இது ஒரு வழக்கறிஞர் உங்களுடன் சேர்ந்து பார்க்க வேண்டிய கேள்வி (உதாரணமாக நீதிமன்ற வழக்குகள் அல்லது வெற்றி பெறுவதற்கான வாய்ப்புகள்)\n\nநீங்கள் இப்போது என்ன செய்யலாம்: ஒரு இலவச சட்ட உதவி அலுவலகம் இந்த சட்டத்தை உங்களுக்கு விளக்கி, அது உங்கள் சூழ்நிலைக்குப் பொருந்துமா என்று சொல்லும்.\n\nஉண்மையான வழக்கறிஞர் அல்லது சட்ட உதவி அலுவலகத்திடமிருந்து இலவச உதவி பெற:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (Source: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nஇது சட்டத் தகவல், சட்ட ஆலோசனை அல்ல.",
+        "reply_text": "நான் புரிந்துகொண்டது: கான்பூரில் போலீசார் உங்கள் மீது FIR இருப்பதாகக் கூறி நாளை வரச் சொல்லியிருக்கிறார்கள், அதற்கு நீங்கள் ஜாமீன் மனு கேட்கிறீர்கள்.\n\nஇதற்கு ஒரு உண்மையான வழக்கறிஞர் அல்லது இலவச சட்ட உதவி தேவை. என்னிடம் உள்ள சரிபார்க்கப்பட்ட பொதுவான தகவல்களை என்னால் பகிர முடியும், ஆனால் இதை என்னால் தனியாக பாதுகாப்பாக கையாள முடியாது.\n\nஏன்: உங்கள் செய்தியில் வழக்கறிஞர் தேவைப்படும் விஷயம் உள்ளது (உதாரணமாக போலீஸ், நீதிமன்றம், வன்முறை, மிரட்டல், வெளியேற்றம் அல்லது குடும்ப விஷயங்கள்); இது என்னால் பாதுகாப்பாக கையாள முடியாத விஷயம் (உதாரணமாக குற்றவியல் சட்டம், குழந்தைகள் பாதுகாப்பு, போலீஸ் அல்லது குடும்ப விஷயங்கள்); இந்த தலைப்பு நான் பாதுகாப்பாக உதவக்கூடிய எல்லைக்கு அப்பாற்பட்டது.\n\nநீங்கள் இப்போது என்ன செய்யலாம்: ஒரு இலவச சட்ட உதவி அலுவலகம் இந்த சட்டத்தை உங்களுக்கு விளக்கி, அது உங்கள் சூழ்நிலைக்கு பொருந்துமா என்று சொல்லும்.\n\nஒரு உண்மையான வழக்கறிஞர் அல்லது சட்ட உதவி அலுவலகத்திடமிருந்து இலவச உதவி பெற:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (Source: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nஇது சட்டத் தகவல், சட்ட ஆலோசனை அல்ல.",
         "reply_lang": "ta-IN",
         "category": "out_of_scope",
         "action": "escalate",
@@ -209,8 +210,8 @@
         "escalation_reasons": [
           "keyword:fir",
           "llm:police_involvement",
-          "out_of_scope_topic",
-          "llm:fir_filed"
+          "llm:fir_or_arrest",
+          "out_of_scope_topic"
         ],
         "verifier": {
           "status": "pass",
@@ -218,7 +219,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "e5b5c09eaaf7",
+          "session": "940b5dad1623",
           "input_mode": "text",
           "user_text": "நான் கான்பூர், உத்தரப் பிரதேசத்தில் இருக்கிறேன். போலீசார் என்மீது FIR இருப்பதாகச் சொல்லி நாளை வரச் சொல்கிறார்கள். எனக்கு ஜாமீன் மனு எழுதித் தர முடியுமா? தமிழில் பதில் சொல்லுங்கள்.",
           "mode": "advice",
@@ -227,26 +228,34 @@
             "language": "ta-IN",
             "state_or_city": "UP",
             "case_file_update": {
-              "what_happened": "User received a police summons regarding an FIR and is seeking assistance with a bail application.",
-              "state": "Uttar Pradesh"
+              "what_happened": "The user has been summoned by the police in Kanpur, Uttar Pradesh, regarding an alleged FIR against them.",
+              "state": "UP"
             },
             "missing_facts": [],
             "escalation_flags": [
               "police_involvement",
-              "fir_filed"
+              "fir_or_arrest"
             ],
-            "english_retrieval_query": "legal procedure for anticipatory bail in India"
+            "english_retrieval_query": "legal procedure for anticipatory bail in India",
+            "intent": [
+              "draft_document",
+              "next_steps"
+            ],
+            "question": "Can you draft a bail application for me because the police have summoned me regarding an FIR?",
+            "new_topic": true,
+            "summary": "கான்பூரில் போலீசார் உங்கள் மீது FIR இருப்பதாகக் கூறி நாளை வரச் சொல்லியிருக்கிறார்கள், அதற்கு நீங்கள் ஜாமீன் மனு கேட்கிறீர்கள்."
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
           "translate_to": "ta-IN",
-          "timings_s": 3.48,
+          "escalation_level": "danger",
+          "timings_s": 3.702,
           "llm": {
             "calls": 2,
             "retries": 0,
-            "latency_s": 3.46,
+            "latency_s": 3.67,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001"
@@ -284,8 +293,8 @@
           "escalation_reasons": [
             "keyword:fir",
             "llm:police_involvement",
-            "out_of_scope_topic",
-            "llm:fir_filed"
+            "llm:fir_or_arrest",
+            "out_of_scope_topic"
           ],
           "models": {
             "router": [
@@ -389,7 +398,8 @@
                 "model": "gemma-4-31b-it",
                 "rpm": 30,
                 "tpm": 16000,
-                "rpd": 14000
+                "rpd": 14000,
+                "timeout_s": 25
               },
               {
                 "provider": "gemini",
@@ -412,7 +422,7 @@
             "to": "ta-IN",
             "status": "ok",
             "attempts": 1,
-            "english_original": "What I understood: what happened: User received a police summons regarding an FIR and is seeking assistance with a bail application.; state: UP\n\nThis needs a real lawyer or free legal aid. I can still share verified general information where I have it, but I cannot handle this safely on my own.\n\nWhy: your message mentions something that needs a lawyer (such as police, court, violence, threats, eviction or family matters); this involves a matter I cannot safely handle here (for example criminal law, child protection, police or family matters); this topic is outside what I can safely help with; this is a question a lawyer should look at with you (for example court cases or the chances of winning)\n\nWhat you can do right now: a free legal aid office can explain this law to you and tell you whether it applies to your situation.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (Source: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice."
+            "english_original": "What I understood: கான்பூரில் போலீசார் உங்கள் மீது FIR இருப்பதாகக் கூறி நாளை வரச் சொல்லியிருக்கிறார்கள், அதற்கு நீங்கள் ஜாமீன் மனு கேட்கிறீர்கள்.\n\nThis needs a real lawyer or free legal aid. I can still share verified general information where I have it, but I cannot handle this safely on my own.\n\nWhy: your message mentions something that needs a lawyer (such as police, court, violence, threats, eviction or family matters); this involves a matter I cannot safely handle here (for example criminal law, child protection, police or family matters); this topic is outside what I can safely help with\n\nWhat you can do right now: a free legal aid office can explain this law to you and tell you whether it applies to your situation.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (Source: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice."
           }
         }
       },
@@ -420,10 +430,10 @@
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 6.643809300032444,
-      "finished_at": "2026-11-05T22:16:28.315277+00:00"
+      "latency_s": 6.925903999945149,
+      "finished_at": "2026-11-06T15:16:50.554439+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T22:16:28.315277+00:00"
+  "finished_at": "2026-11-06T15:16:50.554439+00:00"
 }

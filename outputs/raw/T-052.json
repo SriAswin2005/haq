@@ -1,0 +1,489 @@
+{
+  "schema_version": 1,
+  "case_id": "T-052",
+  "case": {
+    "id": "T-052",
+    "group": "L_referrals",
+    "tags": [
+      "round4",
+      "directory",
+      "builder delay"
+    ],
+    "category_expected": "consumer",
+    "language": "en-IN",
+    "input_mode": "text",
+    "turns": [
+      "Noida UP mein builder promised possession se do saal late hai. Home buyers ke liye property regulator ka official complaint portal kaunsa hai? Mujhe abhi compensation ke legal rules nahi chahiye."
+    ],
+    "expected_action": "answer",
+    "expect_needs_lawyer": false,
+    "expected_topics": [
+      "builder delay",
+      "official referral"
+    ],
+    "must_include_any": [],
+    "must_not_include": [],
+    "expected_chunk_ids": [
+      "COM-DIR-UPRERA"
+    ],
+    "expected_referral_any": [
+      "COM-DIR-UPRERA"
+    ],
+    "notes": "An answer must name and cite an expected body. Wrong bodies always hard fail. Statute/section patterns hard fail in escalate/out_of_scope replies; in an answer they must be grounded in cited chunks. Legal-aid-only escalation is a safe fallback and a recall miss. Targets remain agent-mapped, pending human confirmation.",
+    "expected_law_verified": false,
+    "calibration_label": "exclude",
+    "jurisdictions_expected": [
+      "central",
+      "UP"
+    ],
+    "retrieval_expectation_kind": "safe_referral",
+    "expected_outcomes": [
+      {
+        "category": "consumer",
+        "action": "answer",
+        "needs_lawyer": false
+      },
+      {
+        "category": "out_of_scope",
+        "action": "escalate",
+        "needs_lawyer": true
+      }
+    ]
+  },
+  "repeat": 1,
+  "mock": false,
+  "backend": "app.pipeline",
+  "stage": "real",
+  "configured_models": {
+    "router": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "main": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash",
+        "rpm": 5,
+        "tpm": 250000,
+        "rpd": 19
+      }
+    ],
+    "translate": [
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.5-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash-lite"
+      }
+    ],
+    "judge": [
+      {
+        "provider": "gemini",
+        "model": "gemma-4-31b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000,
+        "timeout_s": 25
+      },
+      {
+        "provider": "gemini",
+        "model": "gemini-3.1-flash-lite",
+        "rpm": 15,
+        "tpm": 250000,
+        "rpd": 495
+      },
+      {
+        "provider": "gemini",
+        "model": "gemma-4-26b-a4b-it",
+        "rpm": 30,
+        "tpm": 16000,
+        "rpd": 14000
+      }
+    ]
+  },
+  "started_at": "2026-11-06T15:23:30.112915+00:00",
+  "turns": [
+    {
+      "input": "Noida UP mein builder promised possession se do saal late hai. Home buyers ke liye property regulator ka official complaint portal kaunsa hai? Mujhe abhi compensation ke legal rules nahi chahiye.",
+      "input_mode": "text",
+      "lang_hint": "en-IN",
+      "started_at": "2026-11-06T15:23:36.099199+00:00",
+      "result": {
+        "reply_text": "The official portal for home buyers to file complaints against promoters or agents regarding project delay, possession, or agreement violations with the property regulator in Uttar Pradesh is the UP RERA eCourts module available at https://www.up-rera.in/.\n\nWhat I understood: Your builder in Noida, Uttar Pradesh, is two years late in providing possession of your property.\n\nWhere you stand: Allottees can lodge complaints electronically through the UP RERA eCourts module using Form M for complaints against promoters or agents regarding project delay, possession, or agreement violations, and Form N for claiming compensation before the Adjudicating Officer.\n\nWhat I can prepare for you now: I cannot prepare documents like a demand notice or legal filings because my sources do not contain templates for them.\n\nTo help me give you better information, could you please tell me the name of the builder?\n\nCould you please share the project name?\n\nSource: Uttar Pradesh Real Estate Regulatory Authority - UP RERA eCourts, P UPRERA\n\nWhat I could not verify:\n- name of the builder\n- project name\n\nThis is legal information, not legal advice.",
+        "reply_lang": "en-IN",
+        "category": "consumer",
+        "action": "answer",
+        "citations": [
+          "COM-DIR-UPRERA"
+        ],
+        "retrieved": [
+          {
+            "id": "COM-DIR-UPRERA",
+            "score": 0.8006197214126587
+          },
+          {
+            "id": "COM-DIR-UPIGRS",
+            "score": 0.7123533487319946
+          },
+          {
+            "id": "COM-DIR-UPLABOUR",
+            "score": 0.6952501535415649
+          },
+          {
+            "id": "COM-DIR-UPPCL",
+            "score": 0.6924222111701965
+          },
+          {
+            "id": "CONS-NCH-P1",
+            "score": 0.6819852590560913
+          },
+          {
+            "id": "COM-DIR-UPPOLICE",
+            "score": 0.680475652217865
+          },
+          {
+            "id": "CONS-CPA2019-S34",
+            "score": 0.7613462805747986
+          },
+          {
+            "id": "CONS-PECRULES2021-R3",
+            "score": 0.7612271308898926
+          }
+        ],
+        "needs_lawyer": false,
+        "escalation_reasons": [],
+        "verifier": {
+          "status": "pass",
+          "issues": []
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "9f518575c587",
+          "input_mode": "text",
+          "user_text": "Noida UP mein builder promised possession se do saal late hai. Home buyers ke liye property regulator ka official complaint portal kaunsa hai? Mujhe abhi compensation ke legal rules nahi chahiye.",
+          "mode": "advice",
+          "router": {
+            "category": "consumer",
+            "language": "hi-IN",
+            "state_or_city": "UP",
+            "case_file_update": {
+              "what_happened": "Builder is two years late in providing possession of the property.",
+              "counterparty_type": "builder",
+              "state": "UP"
+            },
+            "missing_facts": [
+              "name of the builder",
+              "project name"
+            ],
+            "escalation_flags": [],
+            "english_retrieval_query": "official RERA complaint portal for home buyers in Uttar Pradesh",
+            "intent": [
+              "where_to_complain"
+            ],
+            "question": "Which is the official portal for home buyers to file a complaint against a builder with the property regulator?",
+            "new_topic": true,
+            "summary": "नोएडा में बिल्डर द्वारा पजेशन देने में दो साल की देरी हो रही है और आप शिकायत करने के लिए पोर्टल के बारे में जानना चाहते हैं।"
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "summary_rejected": "नोएडा में बिल्डर द्वारा पजेशन देने में दो साल की देरी हो रही है और आप शिकायत करने के लिए पोर्टल के बारे में जानना चाहते हैं।",
+          "retrieval": {
+            "query": "official RERA complaint portal for home buyers in Uttar Pradesh",
+            "jurisdictions": [
+              "central",
+              "UP"
+            ],
+            "top_score": 0.8006197214126587,
+            "min_score": 0.66,
+            "old_law": []
+          },
+          "intent": {
+            "intents": [
+              "where_to_complain"
+            ],
+            "question": "Which is the official portal for home buyers to file a complaint against a builder with the property regulator?",
+            "want_draft": false,
+            "has_question": true
+          },
+          "judge": "ok",
+          "verifier_history": [
+            []
+          ],
+          "timings_s": 9.371,
+          "llm": {
+            "calls": 5,
+            "retries": 0,
+            "latency_s": 9.26,
+            "models": [
+              "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "embed:gemini:gemini-embedding-001",
+              "main:gemini:gemini-3.5-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite"
+            ],
+            "fallbacks": [
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~454s"
+              }
+            ]
+          },
+          "action": "answer",
+          "category": "consumer",
+          "retrieved": [
+            {
+              "id": "COM-DIR-UPRERA",
+              "score": 0.8006197214126587
+            },
+            {
+              "id": "COM-DIR-UPIGRS",
+              "score": 0.7123533487319946
+            },
+            {
+              "id": "COM-DIR-UPLABOUR",
+              "score": 0.6952501535415649
+            },
+            {
+              "id": "COM-DIR-UPPCL",
+              "score": 0.6924222111701965
+            },
+            {
+              "id": "CONS-NCH-P1",
+              "score": 0.6819852590560913
+            },
+            {
+              "id": "COM-DIR-UPPOLICE",
+              "score": 0.680475652217865
+            },
+            {
+              "id": "CONS-CPA2019-S34",
+              "score": 0.7613462805747986
+            },
+            {
+              "id": "CONS-PECRULES2021-R3",
+              "score": 0.7612271308898926
+            }
+          ],
+          "citations": [
+            "COM-DIR-UPRERA"
+          ],
+          "verifier": {
+            "status": "pass",
+            "issues": []
+          },
+          "escalation_reasons": [],
+          "models": {
+            "router": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "main": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash",
+                "rpm": 5,
+                "tpm": 250000,
+                "rpd": 19
+              }
+            ],
+            "translate": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "judge": [
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000,
+                "timeout_s": 25
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              }
+            ]
+          },
+          "mock": false
+        }
+      },
+      "model_names_used": [
+        "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001",
+        "main:gemini:gemini-3.5-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite"
+      ],
+      "latency_s": 9.372877500019968,
+      "finished_at": "2026-11-06T15:23:45.471004+00:00"
+    }
+  ],
+  "error": null,
+  "finished_at": "2026-11-06T15:23:45.471004+00:00"
+}

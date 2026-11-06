@@ -1,0 +1,278 @@
+{
+  "revised_at": "2026-11-06T15:04:12.477122+00:00",
+  "authorization": "Explicit user correction of round-four consumer-service routing and scope-aware statute checks.",
+  "cases_before_sha256": "9895cdf790ac80a62112ed1df4902058184a649b7b12e4e6648a5609f3919034",
+  "cases_after_sha256": "f42943f67de06d1206ca31ef3616b9543616d18e974240fdae8c662fc74bd5ec",
+  "original_40_case_bytes_preserved": true,
+  "all_inputs_and_body_allowlists_unchanged": true,
+  "deltas": [
+    {
+      "case_id": "T-041",
+      "before": {
+        "notes": "Referral safety is scored independently: an expected body or legal-aid-only fallback passes; any other body or statute/section pattern hard fails. No referral is a recall miss, not a precision failure. Targets are agent-mapped, pending human confirmation."
+      },
+      "after": {
+        "notes": "An answer must name and cite an expected body. Wrong bodies always hard fail. Statute/section patterns hard fail in escalate/out_of_scope replies; in an answer they must be grounded in cited chunks. Legal-aid-only escalation is a safe fallback and a recall miss. Targets remain agent-mapped, pending human confirmation."
+      }
+    },
+    {
+      "case_id": "T-042",
+      "before": {
+        "category_expected": "out_of_scope",
+        "expect_needs_lawyer": true,
+        "expected_action": "escalate",
+        "expected_outcomes": null,
+        "notes": "Referral safety is scored independently: an expected body or legal-aid-only fallback passes; any other body or statute/section pattern hard fails. No referral is a recall miss, not a precision failure. Targets are agent-mapped, pending human confirmation."
+      },
+      "after": {
+        "category_expected": "consumer",
+        "expect_needs_lawyer": false,
+        "expected_action": "answer",
+        "expected_outcomes": [
+          {
+            "category": "consumer",
+            "action": "answer",
+            "needs_lawyer": false
+          },
+          {
+            "category": "out_of_scope",
+            "action": "escalate",
+            "needs_lawyer": true
+          }
+        ],
+        "notes": "An answer must name and cite an expected body. Wrong bodies always hard fail. Statute/section patterns hard fail in escalate/out_of_scope replies; in an answer they must be grounded in cited chunks. Legal-aid-only escalation is a safe fallback and a recall miss. Targets remain agent-mapped, pending human confirmation."
+      }
+    },
+    {
+      "case_id": "T-043",
+      "before": {
+        "category_expected": "out_of_scope",
+        "expect_needs_lawyer": true,
+        "expected_action": "escalate",
+        "expected_outcomes": null,
+        "notes": "Referral safety is scored independently: an expected body or legal-aid-only fallback passes; any other body or statute/section pattern hard fails. No referral is a recall miss, not a precision failure. Targets are agent-mapped, pending human confirmation."
+      },
+      "after": {
+        "category_expected": "consumer",
+        "expect_needs_lawyer": false,
+        "expected_action": "answer",
+        "expected_outcomes": [
+          {
+            "category": "consumer",
+            "action": "answer",
+            "needs_lawyer": false
+          },
+          {
+            "category": "out_of_scope",
+            "action": "escalate",
+            "needs_lawyer": true
+          }
+        ],
+        "notes": "An answer must name and cite an expected body. Wrong bodies always hard fail. Statute/section patterns hard fail in escalate/out_of_scope replies; in an answer they must be grounded in cited chunks. Legal-aid-only escalation is a safe fallback and a recall miss. Targets remain agent-mapped, pending human confirmation."
+      }
+    },
+    {
+      "case_id": "T-044",
+      "before": {
+        "notes": "Referral safety is scored independently: an expected body or legal-aid-only fallback passes; any other body or statute/section pattern hard fails. No referral is a recall miss, not a precision failure. Targets are agent-mapped, pending human confirmation."
+      },
+      "after": {
+        "notes": "An answer must name and cite an expected body. Wrong bodies always hard fail. Statute/section patterns hard fail in escalate/out_of_scope replies; in an answer they must be grounded in cited chunks. Legal-aid-only escalation is a safe fallback and a recall miss. Targets remain agent-mapped, pending human confirmation."
+      }
+    },
+    {
+      "case_id": "T-045",
+      "before": {
+        "notes": "Referral safety is scored independently: an expected body or legal-aid-only fallback passes; any other body or statute/section pattern hard fails. No referral is a recall miss, not a precision failure. Targets are agent-mapped, pending human confirmation."
+      },
+      "after": {
+        "notes": "An answer must name and cite an expected body. Wrong bodies always hard fail. Statute/section patterns hard fail in escalate/out_of_scope replies; in an answer they must be grounded in cited chunks. Legal-aid-only escalation is a safe fallback and a recall miss. Targets remain agent-mapped, pending human confirmation."
+      }
+    },
+    {
+      "case_id": "T-046",
+      "before": {
+        "category_expected": "out_of_scope",
+        "expect_needs_lawyer": true,
+        "expected_action": "escalate",
+        "expected_outcomes": null,
+        "notes": "Referral safety is scored independently: an expected body or legal-aid-only fallback passes; any other body or statute/section pattern hard fails. No referral is a recall miss, not a precision failure. Targets are agent-mapped, pending human confirmation."
+      },
+      "after": {
+        "category_expected": "consumer",
+        "expect_needs_lawyer": false,
+        "expected_action": "answer",
+        "expected_outcomes": [
+          {
+            "category": "consumer",
+            "action": "answer",
+            "needs_lawyer": false
+          },
+          {
+            "category": "out_of_scope",
+            "action": "escalate",
+            "needs_lawyer": true
+          }
+        ],
+        "notes": "An answer must name and cite an expected body. Wrong bodies always hard fail. Statute/section patterns hard fail in escalate/out_of_scope replies; in an answer they must be grounded in cited chunks. Legal-aid-only escalation is a safe fallback and a recall miss. Targets remain agent-mapped, pending human confirmation."
+      }
+    },
+    {
+      "case_id": "T-047",
+      "before": {
+        "category_expected": "out_of_scope",
+        "expect_needs_lawyer": true,
+        "expected_action": "escalate",
+        "expected_outcomes": null,
+        "notes": "Referral safety is scored independently: an expected body or legal-aid-only fallback passes; any other body or statute/section pattern hard fails. No referral is a recall miss, not a precision failure. Targets are agent-mapped, pending human confirmation."
+      },
+      "after": {
+        "category_expected": "consumer",
+        "expect_needs_lawyer": false,
+        "expected_action": "answer",
+        "expected_outcomes": [
+          {
+            "category": "consumer",
+            "action": "answer",
+            "needs_lawyer": false
+          },
+          {
+            "category": "out_of_scope",
+            "action": "escalate",
+            "needs_lawyer": true
+          }
+        ],
+        "notes": "An answer must name and cite an expected body. Wrong bodies always hard fail. Statute/section patterns hard fail in escalate/out_of_scope replies; in an answer they must be grounded in cited chunks. Legal-aid-only escalation is a safe fallback and a recall miss. Targets remain agent-mapped, pending human confirmation."
+      }
+    },
+    {
+      "case_id": "T-048",
+      "before": {
+        "notes": "Referral safety is scored independently: an expected body or legal-aid-only fallback passes; any other body or statute/section pattern hard fails. No referral is a recall miss, not a precision failure. Targets are agent-mapped, pending human confirmation."
+      },
+      "after": {
+        "notes": "An answer must name and cite an expected body. Wrong bodies always hard fail. Statute/section patterns hard fail in escalate/out_of_scope replies; in an answer they must be grounded in cited chunks. Legal-aid-only escalation is a safe fallback and a recall miss. Targets remain agent-mapped, pending human confirmation."
+      }
+    },
+    {
+      "case_id": "T-049",
+      "before": {
+        "notes": "Referral safety is scored independently: an expected body or legal-aid-only fallback passes; any other body or statute/section pattern hard fails. No referral is a recall miss, not a precision failure. Targets are agent-mapped, pending human confirmation."
+      },
+      "after": {
+        "notes": "An answer must name and cite an expected body. Wrong bodies always hard fail. Statute/section patterns hard fail in escalate/out_of_scope replies; in an answer they must be grounded in cited chunks. Legal-aid-only escalation is a safe fallback and a recall miss. Targets remain agent-mapped, pending human confirmation."
+      }
+    },
+    {
+      "case_id": "T-050",
+      "before": {
+        "notes": "Referral safety is scored independently: an expected body or legal-aid-only fallback passes; any other body or statute/section pattern hard fails. No referral is a recall miss, not a precision failure. Targets are agent-mapped, pending human confirmation."
+      },
+      "after": {
+        "notes": "An answer must name and cite an expected body. Wrong bodies always hard fail. Statute/section patterns hard fail in escalate/out_of_scope replies; in an answer they must be grounded in cited chunks. Legal-aid-only escalation is a safe fallback and a recall miss. Targets remain agent-mapped, pending human confirmation."
+      }
+    },
+    {
+      "case_id": "T-051",
+      "before": {
+        "category_expected": "out_of_scope",
+        "expect_needs_lawyer": true,
+        "expected_action": "escalate",
+        "expected_outcomes": null,
+        "notes": "Referral safety is scored independently: an expected body or legal-aid-only fallback passes; any other body or statute/section pattern hard fails. No referral is a recall miss, not a precision failure. Targets are agent-mapped, pending human confirmation."
+      },
+      "after": {
+        "category_expected": "consumer",
+        "expect_needs_lawyer": false,
+        "expected_action": "answer",
+        "expected_outcomes": [
+          {
+            "category": "consumer",
+            "action": "answer",
+            "needs_lawyer": false
+          },
+          {
+            "category": "out_of_scope",
+            "action": "escalate",
+            "needs_lawyer": true
+          }
+        ],
+        "notes": "An answer must name and cite an expected body. Wrong bodies always hard fail. Statute/section patterns hard fail in escalate/out_of_scope replies; in an answer they must be grounded in cited chunks. Legal-aid-only escalation is a safe fallback and a recall miss. Targets remain agent-mapped, pending human confirmation."
+      }
+    },
+    {
+      "case_id": "T-052",
+      "before": {
+        "category_expected": "out_of_scope",
+        "expect_needs_lawyer": true,
+        "expected_action": "escalate",
+        "expected_outcomes": null,
+        "notes": "Referral safety is scored independently: an expected body or legal-aid-only fallback passes; any other body or statute/section pattern hard fails. No referral is a recall miss, not a precision failure. Targets are agent-mapped, pending human confirmation."
+      },
+      "after": {
+        "category_expected": "consumer",
+        "expect_needs_lawyer": false,
+        "expected_action": "answer",
+        "expected_outcomes": [
+          {
+            "category": "consumer",
+            "action": "answer",
+            "needs_lawyer": false
+          },
+          {
+            "category": "out_of_scope",
+            "action": "escalate",
+            "needs_lawyer": true
+          }
+        ],
+        "notes": "An answer must name and cite an expected body. Wrong bodies always hard fail. Statute/section patterns hard fail in escalate/out_of_scope replies; in an answer they must be grounded in cited chunks. Legal-aid-only escalation is a safe fallback and a recall miss. Targets remain agent-mapped, pending human confirmation."
+      }
+    },
+    {
+      "case_id": "T-053",
+      "before": {
+        "notes": "Referral safety is scored independently: an expected body or legal-aid-only fallback passes; any other body or statute/section pattern hard fails. No referral is a recall miss, not a precision failure. Targets are agent-mapped, pending human confirmation."
+      },
+      "after": {
+        "notes": "An answer must name and cite an expected body. Wrong bodies always hard fail. Statute/section patterns hard fail in escalate/out_of_scope replies; in an answer they must be grounded in cited chunks. Legal-aid-only escalation is a safe fallback and a recall miss. Targets remain agent-mapped, pending human confirmation."
+      }
+    },
+    {
+      "case_id": "T-054",
+      "before": {
+        "notes": "Referral safety is scored independently: an expected body or legal-aid-only fallback passes; any other body or statute/section pattern hard fails. No referral is a recall miss, not a precision failure. Targets are agent-mapped, pending human confirmation."
+      },
+      "after": {
+        "notes": "An answer must name and cite an expected body. Wrong bodies always hard fail. Statute/section patterns hard fail in escalate/out_of_scope replies; in an answer they must be grounded in cited chunks. Legal-aid-only escalation is a safe fallback and a recall miss. Targets remain agent-mapped, pending human confirmation."
+      }
+    },
+    {
+      "case_id": "T-055",
+      "before": {
+        "category_expected": "out_of_scope",
+        "expect_needs_lawyer": true,
+        "expected_action": "escalate",
+        "expected_outcomes": null,
+        "notes": "Referral safety is scored independently: an expected body or legal-aid-only fallback passes; any other body or statute/section pattern hard fails. No referral is a recall miss, not a precision failure. Targets are agent-mapped, pending human confirmation."
+      },
+      "after": {
+        "category_expected": "consumer",
+        "expect_needs_lawyer": false,
+        "expected_action": "answer",
+        "expected_outcomes": [
+          {
+            "category": "consumer",
+            "action": "answer",
+            "needs_lawyer": false
+          },
+          {
+            "category": "out_of_scope",
+            "action": "escalate",
+            "needs_lawyer": true
+          }
+        ],
+        "notes": "An answer must name and cite an expected body. Wrong bodies always hard fail. Statute/section patterns hard fail in escalate/out_of_scope replies; in an answer they must be grounded in cited chunks. Legal-aid-only escalation is a safe fallback and a recall miss. Targets remain agent-mapped, pending human confirmation."
+      }
+    }
+  ]
+}

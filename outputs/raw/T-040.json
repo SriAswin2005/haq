@@ -155,7 +155,8 @@
         "model": "gemma-4-31b-it",
         "rpm": 30,
         "tpm": 16000,
-        "rpd": 14000
+        "rpd": 14000,
+        "timeout_s": 25
       },
       {
         "provider": "gemini",
@@ -173,55 +174,54 @@
       }
     ]
   },
-  "started_at": "2026-11-05T22:25:52.378835+00:00",
+  "started_at": "2026-11-06T15:19:49.931520+00:00",
   "turns": [
     {
       "input": "uh matlab main Kanpur UP private shop mein kaam karta hoon September 2026 ki salary salary 15000 abhi tak nahi aayi attendance screenshot aur bank statement hai boss bas wait bolo wait bolo karta hai please English mein samjhao kya next step hai",
       "input_mode": "voice",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-05T22:25:58.363956+00:00",
+      "started_at": "2026-11-06T15:19:55.932847+00:00",
       "result": {
-        "reply_text": "I understand that you are working in a private shop in Kanpur, Uttar Pradesh, and have not received your wages for September 2026. You have already requested payment from your employer, but they have not paid you. You have attendance screenshots and bank statements as proof.\n\nUnder the law, every employer is responsible for paying the wages of their employees. If an employer fails to pay, the proprietor of the establishment is responsible for the payment.\n\nFor shops and commercial establishments in Uttar Pradesh, unpaid wages can be recovered in the manner provided under the Payment of Wages Act, 1936.\n\nThe government appoints authorities to hear and decide on wage claims. You may file an application for your claim with the designated authority. This application can generally be filed within three years from the date the claim arose. The authority has the power to order the payment of your claim and may also order additional compensation.\n\nKeep your attendance screenshots and bank statements safe as they are your evidence. You may also want to keep a record of any messages or communication where you asked your employer for the payment.\n\nIf you are unable to resolve this directly with your employer, you may consider consulting a lawyer to help you file a formal claim with the appropriate authority. A lawyer can help you understand the specific procedures for your location and ensure your application is filed correctly.\n\nCould you please provide the name of your employer and your last working date?\n\nSource: Code on Wages, 2019, section 43\nSource: Uttar Pradesh Dookan Aur Vanijya Adhishthan Adhiniyam, 1962, section 18\nSource: Code on Wages, 2019, section 45\n\nWhat I could not verify:\n- where to complain\n\nThis is legal information, not legal advice.",
+        "reply_text": "To recover your unpaid salary, you can file an application for a claim before the authority appointed under the Code on Wages. The application can be filed by you, a registered trade union, or an Inspector-cum-Facilitator, and it may include a claim for the unpaid wages as well as compensation as determined by the authority.\n\nKeep your attendance screenshot, bank statements, and any other employment proof ready. You can file your application in person, by registered post, or electronically through the designated web portal.\n\nYour next steps are: 1. Gather your documents including attendance records and bank statements showing non-credit of wages. 2. Prepare the application specifying the particulars of your employer and establishment, along with an affidavit verifying the facts. 3. File the application before the appointed authority.\n\nI can help you understand the claim process further, but I cannot guarantee any specific outcome or compensation amount, as that depends entirely on the facts and the decision of the authority.\n\nWhat is the exact name of the shop or employer?\n\nOn what specific date was your salary due?\n\nSource: Code on Wages, 2019, section 45\nSource: Code on Wages (Central) Rules, 2026, rule 46\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "wages",
         "action": "answer",
         "citations": [
-          "WAGE-COW2019-S43",
-          "WAGE-UPSHOP1962-S18",
-          "WAGE-COW2019-S45"
+          "WAGE-COW2019-S45",
+          "WAGE-COWRULES2026-R46"
         ],
         "retrieved": [
           {
             "id": "WAGE-COW2019-S45",
-            "score": 0.7047957181930542
-          },
-          {
-            "id": "WAGE-COW2019-S43",
-            "score": 0.6958823204040527
+            "score": 0.7004379034042358
           },
           {
             "id": "WAGE-COW2019-S57",
-            "score": 0.6889472007751465
+            "score": 0.6880147457122803
+          },
+          {
+            "id": "WAGE-COWRULES2026-R46",
+            "score": 0.6864779591560364
+          },
+          {
+            "id": "WAGE-COW2019-S43",
+            "score": 0.6853358149528503
           },
           {
             "id": "WAGE-COW2019-S17",
-            "score": 0.6868636608123779
+            "score": 0.6780646443367004
           },
           {
             "id": "WAGE-COW2019-S5",
-            "score": 0.6781687140464783
-          },
-          {
-            "id": "WAGE-UPSHOP1962-S18",
-            "score": 0.6768016815185547
+            "score": 0.6732301712036133
           },
           {
             "id": "WAGE-COW2019-S49",
             "score": 0.6729814410209656
           },
           {
-            "id": "WAGE-COW2019-S46",
-            "score": 0.6659461259841919
+            "id": "WAGE-UPSHOP1962-S18",
+            "score": 0.6729273796081543
           }
         ],
         "needs_lawyer": false,
@@ -232,7 +232,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "c289ba8b36e9",
+          "session": "72e68b350af5",
           "input_mode": "voice",
           "user_text": "uh matlab main Kanpur UP private shop mein kaam karta hoon September 2026 ki salary salary 15000 abhi tak nahi aayi attendance screenshot aur bank statement hai boss bas wait bolo wait bolo karta hai please English mein samjhao kya next step hai",
           "mode": "advice",
@@ -247,62 +247,76 @@
                 "attendance screenshot",
                 "bank statement"
               ],
-              "counterparty_type": "employer",
-              "already_tried": [
-                "requested payment from boss"
-              ]
+              "counterparty_type": "private shop"
             },
             "missing_facts": [
-              "employer name",
-              "last working date"
+              "name of the shop or employer",
+              "date when the salary was due"
             ],
             "escalation_flags": [],
-            "english_retrieval_query": "legal steps for unpaid salary from private employer in India"
+            "english_retrieval_query": "legal steps for unpaid salary in India",
+            "intent": [
+              "next_steps",
+              "explain_rights"
+            ],
+            "question": "What are the next steps I should take to recover my unpaid salary from my employer?",
+            "new_topic": false,
+            "summary": "कानपुर में एक प्राइवेट दुकान में काम करने के बाद सितंबर 2026 की 15,000 रुपये की सैलरी अभी तक नहीं मिली है और मालिक सिर्फ इंतज़ार करने को कह रहा है।"
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
+          "summary_rejected": "कानपुर में एक प्राइवेट दुकान में काम करने के बाद सितंबर 2026 की 15,000 रुपये की सैलरी अभी तक नहीं मिली है और मालिक सिर्फ इंतज़ार करने को कह रहा है।",
           "retrieval": {
-            "query": "legal steps for unpaid salary from private employer in India",
+            "query": "legal steps for unpaid salary in India",
             "jurisdictions": [
               "central",
               "UP"
             ],
-            "top_score": 0.7047957181930542,
+            "top_score": 0.7004379034042358,
             "min_score": 0.66,
             "old_law": [
               {
                 "id": "WAGE-PWA1936-S15",
-                "score": 0.7144321203231812
+                "score": 0.7140424251556396
               },
               {
                 "id": "WAGE-PWA1936-S5",
-                "score": 0.6955298185348511
+                "score": 0.6843230724334717
               }
             ]
+          },
+          "intent": {
+            "intents": [
+              "explain_rights",
+              "next_steps"
+            ],
+            "question": "What are the next steps I should take to recover my unpaid salary from my employer?",
+            "want_draft": false,
+            "has_question": true
           },
           "judge": "ok",
           "verifier_history": [
             []
           ],
-          "timings_s": 63.915,
+          "timings_s": 24.715,
           "llm": {
             "calls": 5,
             "retries": 0,
-            "latency_s": 63.82,
+            "latency_s": 24.62,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
-              "main:gemini:gemini-3.1-flash-lite",
-              "judge:gemini:gemma-4-31b-it"
+              "main:gemini:gemini-3.5-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite"
             ],
             "fallbacks": [
               {
-                "role": "main",
-                "model": "gemini:gemini-3.5-flash-lite",
-                "reason": "busy for ~363s"
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~12s"
               }
             ]
           },
@@ -311,41 +325,40 @@
           "retrieved": [
             {
               "id": "WAGE-COW2019-S45",
-              "score": 0.7047957181930542
-            },
-            {
-              "id": "WAGE-COW2019-S43",
-              "score": 0.6958823204040527
+              "score": 0.7004379034042358
             },
             {
               "id": "WAGE-COW2019-S57",
-              "score": 0.6889472007751465
+              "score": 0.6880147457122803
+            },
+            {
+              "id": "WAGE-COWRULES2026-R46",
+              "score": 0.6864779591560364
+            },
+            {
+              "id": "WAGE-COW2019-S43",
+              "score": 0.6853358149528503
             },
             {
               "id": "WAGE-COW2019-S17",
-              "score": 0.6868636608123779
+              "score": 0.6780646443367004
             },
             {
               "id": "WAGE-COW2019-S5",
-              "score": 0.6781687140464783
-            },
-            {
-              "id": "WAGE-UPSHOP1962-S18",
-              "score": 0.6768016815185547
+              "score": 0.6732301712036133
             },
             {
               "id": "WAGE-COW2019-S49",
               "score": 0.6729814410209656
             },
             {
-              "id": "WAGE-COW2019-S46",
-              "score": 0.6659461259841919
+              "id": "WAGE-UPSHOP1962-S18",
+              "score": 0.6729273796081543
             }
           ],
           "citations": [
-            "WAGE-COW2019-S43",
-            "WAGE-UPSHOP1962-S18",
-            "WAGE-COW2019-S45"
+            "WAGE-COW2019-S45",
+            "WAGE-COWRULES2026-R46"
           ],
           "verifier": {
             "status": "pass",
@@ -454,7 +467,8 @@
                 "model": "gemma-4-31b-it",
                 "rpm": 30,
                 "tpm": 16000,
-                "rpd": 14000
+                "rpd": 14000,
+                "timeout_s": 25
               },
               {
                 "provider": "gemini",
@@ -479,13 +493,13 @@
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001",
-        "main:gemini:gemini-3.1-flash-lite",
-        "judge:gemini:gemma-4-31b-it"
+        "main:gemini:gemini-3.5-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite"
       ],
-      "latency_s": 63.91767480003182,
-      "finished_at": "2026-11-05T22:27:02.280882+00:00"
+      "latency_s": 24.71754849998979,
+      "finished_at": "2026-11-06T15:20:20.649923+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-05T22:27:02.280882+00:00"
+  "finished_at": "2026-11-06T15:20:20.649923+00:00"
 }
