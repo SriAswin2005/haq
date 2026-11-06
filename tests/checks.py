@@ -13,6 +13,7 @@ import unicodedata
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Mapping
+from urllib.parse import urlsplit
 
 
 @dataclass(frozen=True)
@@ -420,11 +421,179 @@ def check_case_guards(result, case, corpus=None) -> CheckResult:
     return CheckResult("pass", "Amount conflict is visible and both disputed values are left out of the draft.")
 
 
+# Independent display-name aliases. The corpus supplies exact titles/URLs; these
+# aliases recognise everyday English, Hindi and Hinglish spellings, not topic
+# similarity. Retrieval/citation metadata alone never earns referral credit.
+REFERRAL_ALIASES = {
+    "RBI": ["RBI", "Reserve Bank of India", "banking ombudsman", "Integrated Ombudsman", "आरबीआई", "भारतीय रिजर्व बैंक", "बैंकिंग लोकपाल"],
+    "SEBI": ["SEBI", "SCORES", "सेबी"],
+    "IRDAI": ["IRDAI", "Bima Bharosa", "बीमा भरोसा", "आईआरडीएआई", "बीमा विनियामक और विकास प्राधिकरण"],
+    "EPFO": ["EPFO", "EPFiGMS", "Employees' Provident Fund Organisation", "ईपीएफओ", "कर्मचारी भविष्य निधि संगठन"],
+    "ESIC": ["ESIC", "कर्मचारी राज्य बीमा निगम", "ईएसआईसी"],
+    "CYBER": ["National Cyber Crime Reporting Portal", "National Cybercrime Helpline", "Cyber Crime Portal", "साइबर क्राइम पोर्टल", "राष्ट्रीय साइबर अपराध रिपोर्टिंग पोर्टल", "साइबर अपराध हेल्पलाइन"],
+    "SANCHAR": ["Sanchar Saathi", "Sanchar Sathi", "CEIR", "Chakshu", "संचार साथी"],
+    "ECHALLAN": ["eChallan", "e-Challan", "e Challan", "Parivahan", "ई-चालान", "ई चालान", "परिवहन पोर्टल"],
+    "VCOURT": ["Virtual Courts", "Virtual Court", "वर्चुअल कोर्ट", "वर्चुअल न्यायालय"],
+    "RAIL": ["RailMadad", "Rail Madad", "Indian Railways", "railway helpline", "रेल मदद", "रेलमदद", "भारतीय रेलवे", "रेलवे हेल्पलाइन"],
+    "AIRSEWA": ["AirSewa", "Air Sewa", "एयरसेवा", "एयर सेवा"],
+    "CPGRAMS": ["CPGRAMS", "सीपीग्राम्स"],
+    "UPIGRS": ["Jansunwai", "IGRS", "जनसुनवाई"],
+    "RTI": ["RTI Online", "आरटीआई ऑनलाइन", "सूचना का अधिकार ऑनलाइन पोर्टल"],
+    "PASSPORT": ["Passport Seva", "पासपोर्ट सेवा"],
+    "UIDAI": ["UIDAI", "myAadhaar", "यूआईडीएआई", "भारतीय विशिष्ट पहचान प्राधिकरण", "आधार हेल्पलाइन"],
+    "EDAAKHIL": ["e-Daakhil", "e Daakhil", "eDaakhil", "e-Jagriti", "e Jagriti", "NCDRC", "ई दाखिल", "ई-दाखिल", "ई जागृति"],
+    "FSSAI": ["FSSAI", "Food Safety and Standards Authority of India", "Food Safety Connect", "FoSCoS", "एफएसएसएआई", "भारतीय खाद्य सुरक्षा और मानक प्राधिकरण", "फूड सेफ्टी कनेक्ट"],
+    "ESHRAM": ["e-Shram", "e Shram", "ई-श्रम", "ई श्रम"],
+    "UPLABOUR": ["UP Labour Department", "Uttar Pradesh Labour Department", "उत्तर प्रदेश श्रम विभाग"],
+    "UPRERA": ["UP RERA", "UPRERA", "Uttar Pradesh Real Estate Regulatory Authority", "यूपी रेरा", "उत्तर प्रदेश रेरा"],
+    "UPPCL": ["UPPCL", "CGRF", "Uttar Pradesh Power Corporation", "यूपीपीसीएल", "उपभोक्ता शिकायत निवारण फोरम"],
+    "UPPOLICE": ["Uttar Pradesh Police", "UP Police", "UPCOP", "उत्तर प्रदेश पुलिस", "यूपी पुलिस"],
+    "NCW": ["NCW", "National Commission for Women", "राष्ट्रीय महिला आयोग"],
+    "CHILDLINE": ["Childline", "Child Helpline", "चाइल्डलाइन", "बाल हेल्पलाइन"],
+    "NCPCR": ["NCPCR", "e-BaalNidan", "राष्ट्रीय बाल अधिकार संरक्षण आयोग"],
+    "ELDERLINE": ["Elderline", "Elder Line", "National Helpline for Senior Citizens", "एल्डरलाइन", "एल्डर लाइन", "वरिष्ठ नागरिक हेल्पलाइन"],
+    "NHRC": ["NHRC", "HRCNet", "National Human Rights Commission", "राष्ट्रीय मानवाधिकार आयोग"],
+    "LOKADALAT": ["Lok Adalat", "लोक अदालत"],
+    "INCOMETAX": ["Income Tax Department", "e-Nivaran", "आयकर विभाग"],
+    "GST": ["Goods and Services Tax Network", "GST Network", "जीएसटी नेटवर्क"],
+    "INDIAPOST": ["India Post", "Department of Posts", "भारतीय डाक", "डाक विभाग"],
+    "NHAI": ["NHAI", "National Highways Authority", "भारतीय राष्ट्रीय राजमार्ग प्राधिकरण"],
+    "CVC": ["CVC", "Central Vigilance Commission", "केंद्रीय सतर्कता आयोग"],
+    "LPG": ["Ministry of Petroleum and Natural Gas", "पेट्रोलियम और प्राकृतिक गैस मंत्रालय"],
+    "TELECOM": ["Department of Telecommunications", "दूरसंचार विभाग"],
+    "NCH": ["National Consumer Helpline", "NCH", "राष्ट्रीय उपभोक्ता हेल्पलाइन"],
+    "NMC": ["National Medical Commission", "राष्ट्रीय चिकित्सा आयोग"],
+    "MCA": ["Ministry of Corporate Affairs", "MCA21", "कॉर्पोरेट कार्य मंत्रालय"],
+}
+LEGAL_AID_NAME = re.compile(r"legal[ -]aid|legal services authorit|\bNALSA\b|\bUPSLSA\b|\bDLSA\b|"
+                            r"Tele[ -]?Law|विधिक सेवा|कानूनी सहायता|टेली[ -]?लॉ", re.I)
+GENERIC_REFERRAL_LABELS = {
+    "official portal", "government portal", "government helpline", "complaint portal", "grievance portal",
+    "online portal", "multilingual helpline", "toll-free helpline", "toll free helpline", "free helpline",
+    "national helpline", "official helpline", "फ्री हेल्पलाइन", "टोल-फ्री हेल्पलाइन", "टोल फ्री हेल्पलाइन",
+    "ऑनलाइन पोर्टल", "के पोर्टल", "का पोर्टल", "सरकारी पोर्टल", "आधिकारिक पोर्टल",
+}
+
+
+def _referral_alias_pattern(alias):
+    return re.compile(r"(?<!\w)" + re.escape(norm(alias)) + r"(?!\w)")
+
+
+def _referral_urls(text):
+    return re.findall(r"https?://[^\s<>\])]+", text, re.I)
+
+
+def referral_observation(result, case, corpus):
+    """Visible distinct bodies per final reply; legal aid is not a shown referral.
+
+    Unknown named bodies/URLs are wrong, rather than disappearing from precision.
+    Expected IDs are fixed in cases before the run, never derived from outputs.
+    """
+    expected = set(case.get("expected_referral_any", []))
+    text = norm(visible_text(result))
+    profiles, aid_aliases, aid_hosts = {}, ["NALSA", "UPSLSA", "DLSA", "legal aid", "legal-aid", "legal aid office", "Tele-Law", "Tele Law"], set()
+    for cid, chunk in (corpus or {}).items():
+        title = chunk.get("doc_title", "")
+        if chunk.get("doc_type") not in {"portal_procedure", "govt_guidance", "helpline"}:
+            continue
+        urls = _referral_urls(chunk.get("source_url", "") + " " + chunk.get("text", ""))
+        hosts = {urlsplit(u).hostname.removeprefix("www.") for u in urls if urlsplit(u).hostname}
+        if cid == "COM-DIR-TELELAW" or (LEGAL_AID_NAME.search(title) and "lok adalat" not in norm(title)):
+            aid_aliases.append(title)
+            aid_hosts.update(hosts)
+            continue
+        if cid.startswith("COM-DIR-"):
+            aliases = [title, *REFERRAL_ALIASES.get(cid.removeprefix("COM-DIR-"), [])]
+            profiles[cid] = {"aliases": aliases, "hosts": hosts}
+    # Recognise old procedure/helpline chunks too, canonicalising duplicate bodies.
+    for cid, chunk in (corpus or {}).items():
+        if cid.startswith("COM-DIR-") or chunk.get("doc_type") not in {"portal_procedure", "govt_guidance", "helpline"}:
+            continue
+        title = chunk.get("doc_title", "")
+        if LEGAL_AID_NAME.search(title):
+            continue
+        same = next((key for key, p in profiles.items() if any(_referral_alias_pattern(a).search(norm(title)) for a in p["aliases"] if a)), None)
+        if same:
+            profiles[same]["aliases"].append(title)
+        elif title:
+            host = urlsplit(chunk.get("source_url", "")).hostname
+            profiles["OTHER:" + cid] = {"aliases": [title], "hosts": {host.removeprefix("www.")} if host else set()}
+    shown, evidence, spans = set(), {}, []
+    # Longer full titles take precedence over overlapping agency aliases. Thus a
+    # Sanchar Saathi title does not also count as the separate DoT complaint body.
+    candidates = sorted(((a, key) for key, p in profiles.items() for a in p["aliases"] if a), key=lambda x: -len(x[0]))
+    for alias, key in candidates:
+        for match in _referral_alias_pattern(alias).finditer(text):
+            if any(start <= match.start() and match.end() <= end for start, end in spans):
+                continue
+            shown.add(key)
+            evidence.setdefault(key, []).append(match.group())
+            spans.append(match.span())
+    for alias in aid_aliases:
+        if alias:
+            spans.extend(m.span() for m in _referral_alias_pattern(alias).finditer(text))
+    spans.extend(m.span() for m in LEGAL_AID_NAME.finditer(text))
+    for url in _referral_urls(text):
+        host = (urlsplit(url).hostname or "").removeprefix("www.")
+        if any(host == h or host.endswith("." + h) for h in aid_hosts):
+            continue
+        keys = [key for key, p in profiles.items() if any(host == h or host.endswith("." + h) for h in p["hosts"])]
+        key = next((key for key in keys if key in shown), keys[0] if keys else "UNMAPPED:" + host)
+        shown.add(key)
+        evidence.setdefault(key, []).append(url)
+    # Conservatively catch a body absent from the directory, even without a URL.
+    unknown_patterns = [r"(?:contact|approach|complain to|refer to|go to)\s+(?:the\s+)?([^.!?\n]{1,90}?\b(?:board|authority|commission|ombudsman|department|police|portal|helpline))\b",
+                        r"(?:संपर्क करें|शिकायत करें)\s*[:：]?\s*([^।\n]{1,70}?(?:आयोग|प्राधिकरण|विभाग|बोर्ड))"]
+    for pattern in unknown_patterns:
+        for match in re.finditer(pattern, text, re.I):
+            name = match.group(1).strip()
+            known = any(start < match.end(1) and match.start(1) < end for start, end in spans)
+            if not known and not LEGAL_AID_NAME.search(name) and name not in GENERIC_REFERRAL_LABELS:
+                key = "UNMAPPED:" + name
+                shown.add(key)
+                evidence.setdefault(key, []).append(name)
+    # A named body is still a referral when phrased without "contact", e.g.
+    # "Imaginary Relief Board may help". Generic unnamed portals are not bodies.
+    original = visible_text(result)
+    named_patterns = [r"\b(?:[A-Z][A-Za-z'’-]*[ -]+){1,9}(?:Board|Authority|Commission|Department|Ombudsman|Police|Portal|Helpline)\b",
+                      r"(?:[\u0900-\u097f]+\s+){1,6}(?:आयोग|प्राधिकरण|विभाग|बोर्ड)"]
+    for pattern in named_patterns:
+        for match in re.finditer(pattern, original):
+            name = norm(match.group())
+            occurrences = list(_referral_alias_pattern(name).finditer(text))
+            covered = occurrences and all(any(start <= m.start() and m.end() <= end for start, end in spans) for m in occurrences)
+            known = covered or LEGAL_AID_NAME.search(name) or any(_referral_alias_pattern(a).search(name) for p in profiles.values() for a in p["aliases"] if a)
+            if not known and name not in GENERIC_REFERRAL_LABELS:
+                key = "UNMAPPED:" + name
+                shown.add(key)
+                evidence.setdefault(key, []).append(name)
+    statutes = [m.group() for p in REFERENCE_PATTERNS[:3] for m in p.finditer(norm(original))]
+    statutes += [m.group() for m in re.finditer(
+        r"\b(?:[A-Z][A-Za-z'’-]*[\s-]+){1,14}(?:Act|Code|Rules|Regulations|Sanhita)\b|"
+        r"\b(?:IPC|BNS|BNSS|CrPC|CPC|POCSO)\b|अधिनियम|संहिता|संविधान|"
+        r"(?<!\w)(?:[Ss][Ee][Cc][Tt][Ii][Oo][Nn][Ss]?|[Ss][Ee][Cc]\.?|[Ss]\.|[Aa]rticles?|[Rr]ules?|dhara|धारा|अनुच्छेद|नियम)\s*[:#-]?\s*\d+|"
+        r"\b(?:[Aa][Cc][Tt]|[Cc][Oo][Dd][Ee]|[Ss]anhita)\s*,?\s*\d{4}\b",
+        original)]
+    return {"expected": sorted(expected), "shown": sorted(shown), "correct": sorted(shown & expected),
+            "wrong": sorted(shown - expected), "statute_patterns": sorted(set(statutes)), "evidence": evidence}
+
+
+def check_referral(result, case, corpus=None) -> CheckResult:
+    if "expected_referral_any" not in case:
+        return CheckResult("skip", "No directory-referral expectation in this case.")
+    observation = referral_observation(result, case, corpus or {})
+    if observation["wrong"] or observation["statute_patterns"]:
+        return CheckResult("fail", f"HARD FAIL: wrong bodies={observation['wrong']}; statute/section patterns={observation['statute_patterns']}", observation)
+    if observation["correct"]:
+        return CheckResult("pass", "Only acceptable referral bodies are named.", observation)
+    return CheckResult("pass", "No non-legal-aid referral shown; safe fallback, but a recall miss.", observation)
+
+
 CHECKS = {f.__name__: f for f in (
     check_contract, check_routing, check_action, check_citations_valid, check_retrieval_scope, check_no_invented_law,
     check_numbers_grounded, check_must_include, check_must_not_include,
     check_needs_lawyer, check_language, check_draft_placeholders,
-    check_no_promises, check_intake_limit, check_legal_blocks_cited, check_translation_integrity, check_case_guards,
+    check_no_promises, check_intake_limit, check_legal_blocks_cited, check_translation_integrity, check_case_guards, check_referral,
 )}
 EXPECTATION_CHECKS = {"check_routing", "check_action", "check_must_include", "check_must_not_include", "check_needs_lawyer", "check_draft_placeholders", "check_case_guards"}
 

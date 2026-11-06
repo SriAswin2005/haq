@@ -1,4 +1,11 @@
-# Codex report — round 3, 6 November 2026
+# Codex report — rounds 3 and 4, 6 November 2026
+
+Latest extension: **T-041..T-055 completed in a separate real run**, with referral
+precision **14/19 (73.7%)** and recall **14/15 (93.3%)**. Referral safety passes
+**9/15**, including one legal-aid-only fallback. See
+[the updated comparison](../outputs/BEFORE_AFTER.md) and
+[the referral report](../outputs/referrals.md). The round-three results below
+remain evidence for their earlier frozen revision, not a combined 55-case run.
 
 The fresh real evaluation completed **40 cases / 44 turns: 21 strict passes,
 19 failures, 0 infrastructure errors and 0 pending cases**. On the unchanged
@@ -179,3 +186,63 @@ UP-to-Karnataka findings remain historical mock evidence, excluded from this rea
 BUGS.md. See the [mock archive](../outputs/runs/mock-20261105T140459.351766Z/summary.md).
 The API suite's mock passes establish only the tested transport/state/consent
 behaviour. Earlier real attempts and the unchanged 12/30 baseline remain archived.
+
+## Round 4: official directory referrals
+
+Added 15 everyday cases, T-041..T-055, with actual `COM-DIR-*` IDs in
+`expected_referral_any`. Five are Hindi, five English and five Romanised Hinglish
+(the latter use `en-IN`, preserving the earlier language-check convention).
+All 55 law-verification flags remain false, and the original 40 case dictionaries
+are unchanged. No root `app/` or `data/` sources were edited by Codex.
+
+Executed `python tests/run_frozen_eval.py --sleep 6 --only round4`, without
+`--judge`, against the **14:38 IST, 6 November** frozen snapshot. All 15 real turns
+finished at **14:44 IST**, with **zero infrastructure errors or pending cases**.
+The validated snapshot has 169 chunks, including 40 official-labelled directory
+rows, all of which still require human verification. The configured referral
+cutoff remained 0.70. Later parallel edits are outside this capture.
+
+| Measure | Real result |
+|---|---:|
+| Referral precision, correct/shown distinct bodies | 14/19 (73.7%) |
+| Referral recall, cases with correct/expected cases | 14/15 (93.3%) |
+| Safe correct-referral coverage, without wrong body or statute | 8/15 (53.3%) |
+| Referral safety pass, fallback permitted | 9/15 (60.0%) |
+| Legal-aid-only fallback | 1/15 |
+| Cases with an extra body outside the fixed allowlist | 5/15 |
+| Cases containing a statute/section pattern | 1/15 |
+| All strict routing/action/language/referral checks pass | 5/15 |
+
+Legal aid is excluded from the precision numerator/denominator and earns no recall
+credit. Two aliases for one body count once. An expected body plus a wrong body
+still fails safety. Coverage recall can include such a mixed reply, so the safe
+coverage row is shown separately. A retrieved/cited but unshown ID earns no credit.
+
+The locked allowlists reject NCH additions in T-042, T-047 and T-055, CPGRAMS in
+T-049, and Childline in T-054. These are out-of-set findings under the requested
+contract, not a legal ruling that a general grievance service could never help.
+The Childline referral for senior-citizen neglect is the clearest wrong-audience
+example. T-052 mentions the Real Estate Act, 2016 despite this cohort's no-statute
+requirement. T-053 falls back to legal aid: safety passes and recall misses.
+The broader strict failures also expose covered-topic routing and Hindi replies
+labelled `en-IN`; they are separate from referral safety. No allowlist, action or
+language expectation was changed to fit those replies.
+
+The first checker mistook generic phrases such as “free helpline”, “online portal”
+and fragments left after masking an agency name for additional bodies. That is a
+checker error. Regressions and canonical native-name aliases correct it. An
+**offline rescore made zero API calls**, preserved every raw hash and retained
+the original checker/results under `scoring-original/`. Overall strict case scores
+remain 5/15; corrected referral scores are reported transparently. **54 offline
+checker/harness/report tests pass**.
+
+Evidence: [real archive](../outputs/runs/real-20261106T090855.555013Z/),
+[frozen inputs](../outputs/runs/real-20261106T090855.555013Z/frozen_inputs.json),
+[referral metrics and integrity checks](../outputs/runs/real-20261106T090855.555013Z/referral_metrics.json),
+[checker-revision audit](../outputs/runs/real-20261106T090855.555013Z/checks_revision.json),
+[original scoring](../outputs/runs/real-20261106T090855.555013Z/scoring-original/),
+[real-only current bugs](../tests/BUGS.md). The full-run root summary/raw publication
+still describes round three; the focused round-four capture lives in its archive
+and `outputs/referrals.md`/`referrals.csv`. This avoids replacing the earlier full
+cohort with a misleading partial publication. These are real results; none of the
+historical mock findings was promoted into them.

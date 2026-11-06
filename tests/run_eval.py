@@ -94,6 +94,9 @@ def load_cases(path, groups=None):
             raise ValueError(f"{case['id']}: invalid input_mode")
         if any(not isinstance(a, list) or not a or any(not isinstance(p, str) or not p for p in a) for a in case["must_include_any"]):
             raise ValueError(f"{case['id']}: invalid concept alternatives")
+        if "expected_referral_any" in case and (not isinstance(case["expected_referral_any"], list) or not case["expected_referral_any"]
+                or any(not isinstance(cid, str) or not cid.startswith("COM-DIR-") for cid in case["expected_referral_any"])):
+            raise ValueError(f"{case['id']}: expected_referral_any must name actual directory IDs")
         ids.add(case["id"])
         labels = [case["group"], case["group"].split("_")[0], *case.get("tags", [])]
         if not groups or any(g == label or label.startswith(g + "_") for g in groups for label in labels):
@@ -297,6 +300,10 @@ def main(argv=None):
         corpus_path = protect_real_gate(config, args.sample)
     corpus = load_corpus(corpus_path)
     for case in cases:
+        for cid in case.get("expected_referral_any", []):
+            if cid not in corpus or corpus[cid].get("status") != "in_force":
+                raise ValueError(f"{case['id']}: expected referral {cid} is absent/not in force; no API calls made")
+    for case in cases:
         if case.get("amount_inr") is not None and case["amount_inr"] <= config.get("escalation", {}).get("high_amount_inr", 500000):
             raise ValueError(f"{case['id']}: fixture amount is not above configured escalation threshold; review expectation before running")
     backend_name = "app.pipeline" if (ROOT / "app/pipeline.py").is_file() else "tests.mock_pipeline (fixture only; APP ABSENT)"
@@ -326,6 +333,7 @@ def main(argv=None):
         manifest = {**identity, "started_at": utc_now(), "sleep_s": args.sleep,
                     "models": config.get("models", {}), "corpus_path": str(corpus_path),
                     "retrieval_min_score": config.get("retrieval", {}).get("min_score"),
+                    "retrieval_referral_min_score": config.get("retrieval", {}).get("referral_min_score"),
                     "law_expectations_human_verified": sum(c["expected_law_verified"] is True for c in cases)}
         write_json(run_dir / "manifest.json", manifest, exclusive=True)
         write_json(run_dir / "corpus_snapshot.json", corpus, exclusive=True)

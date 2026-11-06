@@ -58,8 +58,8 @@ ALLOWED_VERIFIED = {"agent", "human"}
 
 # Regex for ID: {CAT}-{ACTCODE}-{UNITLETTER}{NUMBER}(optional subchunk)
 # CAT: CONS, WAGE, TEN, COM
-# UNITLETTER: S, R, O, P, J, H
-ID_PATTERN = re.compile(r"^(CONS|WAGE|TEN|COM)-[A-Z0-9]+-[SROPJH][A-Za-z0-9_-]+$")
+# UNITLETTER: S, R, O, P, J, H, or COM-DIR-{SHORTNAME} for grievance directory
+ID_PATTERN = re.compile(r"^((CONS|WAGE|TEN|COM)-[A-Z0-9]+-[SROPJH][A-Za-z0-9_-]+|COM-DIR-[A-Za-z0-9_-]+)$")
 
 # Pattern for numbers/deadlines/money that trigger human_check_required
 # digits followed by words like days, months, years, rupees, lakh, crore, or %
@@ -68,13 +68,24 @@ NUM_TRIGGER_PATTERN = re.compile(
     re.IGNORECASE,
 )
 
+FILE_CATEGORY_MAP = {
+    "consumer": "consumer",
+    "wages": "wages",
+    "tenancy": "tenancy",
+    "common": "common",
+    "directory": "common",
+}
+
 
 def validate_file(file_path: Path, seen_ids: set) -> list[str]:
     errors = []
-    category_from_filename = file_path.stem
+    file_stem = file_path.stem
 
-    if category_from_filename not in ALLOWED_CATEGORIES:
-        errors.append(f"Filename {file_path.name} does not match allowed category names {ALLOWED_CATEGORIES}")
+    if file_stem not in FILE_CATEGORY_MAP:
+        errors.append(f"Filename {file_path.name} does not match allowed corpus files {list(FILE_CATEGORY_MAP.keys())}")
+        return errors
+
+    expected_category = FILE_CATEGORY_MAP[file_stem]
 
     with open(file_path, "r", encoding="utf-8") as f:
         for line_num, line in enumerate(f, start=1):
@@ -112,9 +123,9 @@ def validate_file(file_path: Path, seen_ids: set) -> list[str]:
 
             # Category
             cat = chunk.get("category")
-            if cat != category_from_filename:
+            if cat != expected_category:
                 errors.append(
-                    f"{file_path.name}:{line_num} ({chunk_id}): category '{cat}' does not match file category '{category_from_filename}'"
+                    f"{file_path.name}:{line_num} ({chunk_id}): category '{cat}' does not match expected category '{expected_category}'"
                 )
             if cat not in ALLOWED_CATEGORIES:
                 errors.append(f"{file_path.name}:{line_num} ({chunk_id}): invalid category '{cat}'")

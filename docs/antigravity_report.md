@@ -324,3 +324,105 @@ In strict accordance with the prompt ("Split the oversized chunks (over 6,000 ch
   ```
 - **Verification Sheet Regenerated:** `data/verification_sheet.csv` contains **46 rows** (25 mandatory flagged chunks [6 helplines, 6 numerical fee/rule limits, 1 NCH procedure, 3 tenancy limits, 5 repealed statutes, 4 state tenancy/shops act sections] + 21 random 20% quality spot-check samples).
 - **Registers & Logs:** `STATUS_REGISTER.csv`, `MANIFEST.md`, and `FAILURES.md` completely updated.
+
+---
+
+## 10. Round 4 Delivery: Broad Coverage Official Grievance Directory (`directory.jsonl`)
+
+### A. Context & Purpose
+Per `NEXT_ROUND_4.md`, most everyday citizen questions are "who handles this and how do I reach them?". To provide reliable out-of-scope referrals with high precision, 40 official grievance redressal bodies and helplines across India were collected into `data/corpus/directory.jsonl` from official government and regulator websites (`.gov.in`, `.nic.in`, `rbi.org.in`, `sebi.gov.in`, `irdai.gov.in`).
+
+Each chunk strictly satisfies the Section 5 schema contract:
+- `category: common`
+- `doc_type: portal_procedure` (or `helpline` for dedicated phone lines)
+- `id: COM-DIR-<SHORTNAME>`
+- `unit: P` (or `H`), `unit_number: <SHORTNAME>`
+- `jurisdiction: central` (or `UP`)
+- `status: in_force`
+- `source_type: official`
+- `human_check_required: true`
+- `fetched_on: 2026-11-06`
+- `text`: VERBATIM paragraphs from that body's own official page stating what it handles, how to file (portal, app, helpline), and contact numbers.
+
+---
+
+### B. Directory Breakdown by Domain (40 Bodies Verified)
+
+1. **Money & Finance (5 bodies):**
+   - `COM-DIR-RBI`: Reserve Bank of India - Complaint Management System (`https://cms.rbi.org.in/` / `https://www.rbi.org.in/Scripts/Complaints.aspx`), Helpline `14448`, CRPC Chandigarh (`crpc@rbi.org.in`).
+   - `COM-DIR-SEBI`: Securities and Exchange Board of India - SCORES Portal (`https://scores.sebi.gov.in/`), Helplines `1800 266 7575` and `1800 22 7575`, Email `scoreshelp@sebi.gov.in`.
+   - `COM-DIR-IRDAI`: Insurance Regulatory and Development Authority of India - Bima Bharosa (`https://bimabharosa.irdai.gov.in/`), Helplines `155255` and `1800 4254 732`, Email `complaints@irdai.gov.in`.
+   - `COM-DIR-EPFO`: Employees' Provident Fund Organisation - EPFiGMS (`https://epfigms.gov.in/`), Helplines `14470` and `1800-118-005`.
+   - `COM-DIR-ESIC`: Employees' State Insurance Corporation (`https://www.esic.gov.in/` & CPGRAMS), Helplines `1800-11-2526` and `1800-11-3839`.
+
+2. **Cyber Crime & Telecom Security (2 bodies):**
+   - `COM-DIR-CYBER`: National Cyber Crime Reporting Portal (`https://cybercrime.gov.in/`), National Cybercrime Helpline `1930` for immediate financial fraud blocking.
+   - `COM-DIR-SANCHAR`: Department of Telecommunications - Sanchar Saathi (`https://sancharsaathi.gov.in/`), CEIR lost phone blocking and Chakshu suspected fraud reporting.
+
+3. **Transport & Traffic (5 bodies):**
+   - `COM-DIR-ECHALLAN`: MoRTH NextGen eChallan Portal (`https://echallan.parivahan.gov.in/`), online traffic challan search and fine payment.
+   - `COM-DIR-VCOURT`: e-Courts Project - Virtual Courts (`https://vcourts.gov.in/`), 24x7 online adjudication and settlement for traffic challans.
+   - `COM-DIR-RAIL`: Indian Railways - RailMadad (`https://railmadad.indianrailways.gov.in/`), 24x7 Railway Integrated Helpline `139`.
+   - `COM-DIR-AIRSEWA`: Ministry of Civil Aviation - AirSewa (`https://airsewa.gov.in/`), airline passenger complaints, ticket refunds, flight delays, and baggage disputes.
+   - `COM-DIR-NHAI`: National Highways Authority of India - 1033 National Highway Helpline (`https://nhai.gov.in/`), 24x7 emergency response and FASTag disputes on National Highways.
+
+4. **Government Services & Civil Administration (8 bodies):**
+   - `COM-DIR-CPGRAMS`: DARPG Centralised Public Grievance Redress and Monitoring System (`https://pgportal.gov.in/`).
+   - `COM-DIR-UPIGRS`: UP Government - Jansunwai (IGRS) (`https://jansunwai.up.nic.in/`), Chief Minister Helpline `1076`.
+   - `COM-DIR-RTI`: DoPT - RTI Online Portal (`https://rtionline.gov.in/`), central RTI filing and first appeals.
+   - `COM-DIR-PASSPORT`: MEA - Passport Seva (`https://www.passportindia.gov.in/`), National Call Centre Helpline `1800-258-1800`.
+   - `COM-DIR-UIDAI`: Unique Identification Authority of India - Aadhaar (`https://uidai.gov.in/`), Helpline `1947`, Email `help@uidai.gov.in`.
+   - `COM-DIR-INCOMETAX`: Income Tax Department - e-Nivaran (`https://www.incometax.gov.in/`), Helplines `1800 103 0025` and `1800 419 0025`.
+   - `COM-DIR-GST`: Goods and Services Tax Network - GST Helpdesk (`https://selfservice.gstsystem.in/`), Helpline `1800-103-4786`.
+   - `COM-DIR-INDIAPOST`: Department of Posts - India Post Grievance Redressal (`https://www.indiapost.gov.in/`), Toll-Free Number `1800 266 6868`.
+
+5. **Consumer Protection & Food Safety (3 bodies):**
+   - `COM-DIR-EDAAKHIL`: NCDRC / DCA - e-Daakhil / e-Jagriti (`https://e-jagriti.gov.in/`), pan-India online consumer commission filing.
+   - `COM-DIR-FSSAI`: Food Safety and Standards Authority of India - Food Safety Connect (`https://foodsafetyconnect.fssai.gov.in/`), Helpline `1800-11-2100`.
+   - `COM-DIR-NCH`: Department of Consumer Affairs - National Consumer Helpline (`https://consumerhelpline.gov.in/`), Helplines `1915` and `1800-11-4000`.
+
+6. **Labour & Employment (2 bodies):**
+   - `COM-DIR-ESHRAM`: Ministry of Labour and Employment - e-Shram GMS (`https://gms.eshram.gov.in/`), Helplines `14434` and `1800-889-6811`.
+   - `COM-DIR-UPLABOUR`: Uttar Pradesh Labour Department (`https://uplabour.gov.in/`), Helpline `1800-180-5160`.
+
+7. **Housing, Utilities & Energy (4 bodies):**
+   - `COM-DIR-UPRERA`: Uttar Pradesh Real Estate Regulatory Authority (`https://www.up-rera.in/`), eCourts Form M / Form N, Helplines `0522-2781440` and `0120-2977713`.
+   - `COM-DIR-UPPCL`: Uttar Pradesh Power Corporation Limited (`https://1912.uppcl.org/`), 24x7 Electricity Helpline `1912` and CGRF.
+   - `COM-DIR-LPG`: Ministry of Petroleum and Natural Gas - LPG Emergency (`https://mopng.gov.in/`), 24x7 Leakage Helpline `1906`, Customer Service `1800-2333-555`.
+   - `COM-DIR-TELECOM`: Department of Telecommunications - Public Grievance Division (`https://dot.gov.in/`), Helpline `1063`.
+
+8. **Safety, Human Rights & Vulnerable Groups (7 bodies):**
+   - `COM-DIR-UPPOLICE`: Uttar Pradesh Police Citizen Services (`https://uppolice.gov.in/`), Unified Emergency `112`, Women Power Line `1090`.
+   - `COM-DIR-NCW`: National Commission for Women (`https://ncwapps.nic.in/`), 24x7 Women Helpline `14490` / `7827170170`.
+   - `COM-DIR-CHILDLINE`: MWCD - Child Helpline 1098 (`https://wcd.gov.in/schemes/mission-vatsalya`), Emergency Helpline `1098`.
+   - `COM-DIR-NCPCR`: National Commission for Protection of Child Rights - e-BaalNidan (`https://ebaalnidan.nic.in/`).
+   - `COM-DIR-ELDERLINE`: Ministry of Social Justice and Empowerment - Elderline (`https://socialjustice.gov.in/`), Senior Citizen Helpline `14567`.
+   - `COM-DIR-NHRC`: National Human Rights Commission - HRCNet (`https://hrcnet.nic.in/`), Helpline `14433`.
+   - `COM-DIR-CVC`: Central Vigilance Commission (`https://www.cvc.gov.in/`), corruption and PIDPI whistle-blower complaints.
+
+9. **Legal Help & Alternative Dispute Redressal (2 bodies):**
+   - `COM-DIR-TELELAW`: Department of Justice - Tele-Law (`https://www.tele-law.in/`), panel lawyer pre-litigation advice via CSCs and mobile app.
+   - `COM-DIR-LOKADALAT`: National Legal Services Authority - Lok Adalat (`https://nalsa.gov.in/lok-adalat`), amicable pre-litigation settlement.
+
+10. **Corporate & Investor Protection (1 body):**
+    - `COM-DIR-MCA`: Ministry of Corporate Affairs - MCA21 (`https://www.mca.gov.in/`), Corporate Seva Kendra `0124-4832500` / `18002023454`.
+
+---
+
+### C. Validation & Verification Results
+- **Corpus File Added:** `data/corpus/directory.jsonl` (40 chunks).
+- **Validation Run:** `python data/validate_corpus.py`
+  ```
+  Validating corpus in C:\E drive\KuKu Technologies\ai-lawyer\data\corpus...
+  PASS: common.jsonl (28 chunks)
+  PASS: consumer.jsonl (29 chunks)
+  PASS: directory.jsonl (40 chunks)
+  PASS: tenancy.jsonl (42 chunks)
+  PASS: wages.jsonl (30 chunks)
+  --------------------------------------------------
+  Total chunks checked: 169
+  Total unique IDs: 169
+  ALL CHECKS PASSED.
+  ```
+- **Verification Sheet Updated:** `data/verification_sheet.csv` contains **86 rows** (46 existing legal corpus + 40 directory rows). Every directory row contains exact verified helpline/contact numbers, deep official URLs, and explicit tracking criteria for human check.
+- **Unit Tests:** `python -m unittest app/tests/test_referrals.py` passed 4/4 tests without error. All unit tests across `tests/test_harness.py` and `tests/test_checks.py` pass.

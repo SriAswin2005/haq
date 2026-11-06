@@ -122,3 +122,23 @@ python tests/audit_round3.py --run outputs/runs/real-20261105T214345.363908Z
 ```
 
 The first step rebuilds summary/CSV/calibration and comparison/performance reports; the next two attach trace and quote-validated reviews. The audit checks frozen inputs, before preservation, raw publication identity, report identity, unverified-law flags and secret-value absence. Mock API evidence is separate from the real legal evaluation. API result files now record source hashes before/after their tests so parallel edits are visible.
+
+## Round 4
+
+The catalogue now has 55 cases; --only round4 selects T-041..T-055. Run the new real cohort during parallel app edits with:
+
+```powershell
+python tests/run_frozen_eval.py --sleep 6 --only round4
+```
+
+The filtered run stays in outputs/runs/ and does not overwrite the full-run root summary/raw publication. Precision counts acceptable visible bodies divided by all shown bodies, deduplicated per reply; recall counts cases showing at least one expected body divided by the 15 expected cases. Legal-aid-only fallbacks pass safety but earn no recall credit. Extra bodies and statute/section patterns hard fail, including when a correct body is also present.
+
+Published run: real-20261106T090855.555013Z. Its initial checker had generic-label false positives. Original scoring is preserved, and the corrected offline rescore changes no expected IDs, inputs or raw bytes:
+
+```powershell
+python tests/rescore_round4.py --run outputs/runs/real-20261106T090855.555013Z
+python tests/round4_reports.py --run outputs/runs/real-20261106T090855.555013Z
+python -m unittest tests.test_checks tests.test_harness tests.test_round3_reports tests.test_referrals
+```
+
+The report generator replaces only its marked round-four section in BEFORE_AFTER.md, preserving old tables and any unrelated surrounding content. It checks frozen input hashes, before-archive hashes, rescore provenance, captured raw identity and credential absence. Evidence is in referrals.md, referrals.csv, referral_metrics.json and checks_revision.json. Mock findings are not used for these real metrics.

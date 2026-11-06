@@ -42,7 +42,8 @@ retrieval:
                         # 0.68-0.75, refuse cases 0.65-0.72 (traps are on-topic, so the gate cannot separate them; the
                         # verifier does that). 0.66 is a floor against clearly off-topic retrieval. Known cost: T-030
                         # (Karnataka tenant, top score 0.647) now gets the safe response instead of central-law info.
-  referral_min_score: 0.70   # stricter than min_score: an out-of-scope referral to the wrong office would mislead
+  referral_min_score: 0.70       # stricter than min_score: an out-of-scope referral to the wrong office would mislead
+  referral_second_margin: 0.03   # show a second body only if within this score of the first
   forum_extra: 2        # each forum query adds up to 2 chunks after the main hits (gate uses main query only)
   forum_queries:        # so every answer can say WHERE to go, not just what the law says
     tenancy: ["Rent Authority appointment, application by tenant or landlord, and appeal to Rent Tribunal"]

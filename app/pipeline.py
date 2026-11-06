@@ -260,6 +260,10 @@ def _referral_lines(query: str, state: str | None, m: dict) -> tuple[str, list[s
             and h["chunk"].get("status") == "in_force" and h["chunk"].get("source_type", "official") == "official"
             and h["score"] >= bar
             and not re.search(r"legal services authority|NALSA", h["chunk"]["doc_title"], re.I)][:2]
+    # A second body only when it is about as good a match as the first: round 4 showed weaker seconds were
+    # wrong (Child Helpline for an elderly person, CPGRAMS for an RTI request).
+    margin = float(load_config()["retrieval"].get("referral_second_margin", 0.03))
+    hits = [h for k, h in enumerate(hits) if k == 0 or hits[0]["score"] - h["score"] <= margin]
     if not hits:
         return "", [], []
     lines = [m["referral_intro"]]

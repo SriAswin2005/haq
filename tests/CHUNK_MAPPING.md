@@ -74,3 +74,27 @@ The original 30 mappings remain unchanged. All ten additions retain expected_law
 | T-038 | topic | TEN-TPA1882-S108 |
 | T-039 | topic | CONS-CPA2019-S35, CONS-CPA2019-S39 |
 | T-040 | topic | WAGE-COW2019-S17, WAGE-COW2019-S43, WAGE-COW2019-S45 |
+
+## Round 4 directory mapping (agent-mapped; human confirmation pending)
+
+These IDs were selected before the real run from the 40-row directory. Alternatives within a case are acceptable bodies, not a requirement to name all of them. The prompts ask for a particular sector's official channel; general grievance bodies are not silently added to the acceptable list after seeing outputs. All original 40 mappings and all expected_law_verified=false flags remain unchanged.
+
+| Case | Everyday question | expected_referral_any |
+|---|---|---|
+| T-041 | UPI fraud | COM-DIR-CYBER, COM-DIR-RBI |
+| T-042 | Bank card double charge | COM-DIR-RBI |
+| T-043 | Insurance rejection | COM-DIR-IRDAI |
+| T-044 | PF withdrawal stuck | COM-DIR-EPFO |
+| T-045 | Traffic challan | COM-DIR-ECHALLAN, COM-DIR-VCOURT |
+| T-046 | Train refund | COM-DIR-RAIL |
+| T-047 | Flight refund | COM-DIR-AIRSEWA |
+| T-048 | Lost phone in UP | COM-DIR-SANCHAR, COM-DIR-UPPOLICE |
+| T-049 | Central information request | COM-DIR-RTI |
+| T-050 | Aadhaar update | COM-DIR-UIDAI |
+| T-051 | UP electricity bill | COM-DIR-UPPCL |
+| T-052 | Noida builder delay | COM-DIR-UPRERA |
+| T-053 | NBFC recovery-agent harassment in UP | COM-DIR-RBI, COM-DIR-UPPOLICE |
+| T-054 | Senior citizen neglected | COM-DIR-ELDERLINE |
+| T-055 | Food adulteration, safety complaint | COM-DIR-FSSAI |
+
+Legal-aid services, including NALSA and Tele-Law, are fallback assistance rather than directory-recall targets. The display checker counts recognised body names and visible portal URLs, not merely retrieved/cited IDs. A named extra body remains a hard failure even alongside an expected one. General legal competence of any out-of-set body is not adjudicated by this fixed-allowlist test.

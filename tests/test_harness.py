@@ -25,13 +25,14 @@ def scratch_directory(prefix):
 class HarnessTests(unittest.TestCase):
     def test_priority_inventory(self):
         cases = run_eval.load_cases(run_eval.ROOT / "tests/cases.jsonl")
-        self.assertEqual(len(cases), 40)
+        self.assertEqual(len(cases), 55)
         baseline = cases[:30]
         self.assertEqual(sum(c["input_mode"] == "voice" for c in baseline), 5)
         self.assertEqual(sum(c["group"].startswith("D_") for c in baseline), 7)
         self.assertEqual(sum(c["group"].startswith("F_") for c in baseline), 3)
         self.assertEqual(sum(c["group"].startswith("G_") for c in baseline), 5)
-        self.assertEqual([c["id"] for c in cases[30:]], [f"T-{n:03d}" for n in range(31, 41)])
+        self.assertEqual([c["id"] for c in cases[30:]], [f"T-{n:03d}" for n in range(31, 56)])
+        self.assertEqual(sum("expected_referral_any" in c for c in cases), 15)
         self.assertTrue(all(c["expected_law_verified"] is False for c in cases))
         self.assertTrue(all(isinstance(c["expected_chunk_ids"], list) and c["expected_chunk_ids"] for c in cases))
 

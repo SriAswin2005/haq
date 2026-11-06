@@ -22,7 +22,9 @@ from tests.reporting import write_reports
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--sleep", type=float, default=6)
+    parser.add_argument("--only", action="append", help="Select groups/tags, e.g. --only round4; archives the cohort without replacing the full-run publication")
     args = parser.parse_args()
+    groups = [g.strip() for value in args.only or [] for g in value.split(",") if g.strip()]
     from dotenv import load_dotenv
     load_dotenv(ROOT / ".env", encoding="utf-8-sig")
     if not os.environ.get("GEMINI_API_KEY"):
@@ -54,10 +56,15 @@ def main():
         dest.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(source, dest)
     origin = {"frozen_at": utc_now(), "canonical_root": str(ROOT), "snapshot_root": str(snapshot),
-              "input_sha256": source_hashes, "credentials_copied": False, "harness_judge": False, "sleep_s": args.sleep}
+              "input_sha256": source_hashes, "credentials_copied": False, "harness_judge": False, "sleep_s": args.sleep,
+              "selected_groups": groups}
     write_json(snapshot / "frozen_inputs.json", origin, exclusive=True)
     print(f"Frozen application: {snapshot}", flush=True)
-    result = subprocess.run([sys.executable, "-u", "tests/run_eval.py", "--sleep", str(args.sleep)], cwd=snapshot)
+    selected_cases = load_cases(snapshot / "tests/cases.jsonl", groups)
+    command = [sys.executable, "-u", "tests/run_eval.py", "--sleep", str(args.sleep)]
+    for value in args.only or []:
+        command += ["--only", value]
+    result = subprocess.run(command, cwd=snapshot)
     runs = sorted((snapshot / "outputs/runs").glob("real-*"))
     if len(runs) != 1 or not (runs[0] / "completion.json").is_file():
         print("No completed attempt to collect; inspect the frozen workspace.", flush=True)
@@ -72,7 +79,7 @@ def main():
     corpus = json.loads((target / "corpus_snapshot.json").read_text(encoding="utf-8"))
     records = []
     for repeat in range(1, manifest["runs"] + 1):
-        for case in load_cases(snapshot / "tests/cases.jsonl"):
+        for case in selected_cases:
             raw, path = latest_record(raw_dir(target, repeat, manifest["runs"]), case["id"])
             records.append({"case": case, "repeat": repeat, "raw": raw, "path": path})
     summary = write_reports(target, manifest, records, corpus)
@@ -82,10 +89,10 @@ def main():
         raise ValueError("Collected raw bytes do not match frozen capture")
     write_json(target / "collection.json", {"collected_at": utc_now(), "raw_copied_byte_for_byte": exact,
                "source_run": str(source_run), "raw_files": len(raw_files), "additional_api_calls_for_collection": 0})
-    if not summary["infra_errors"] and not summary["pending"]:
+    if not groups and not summary["infra_errors"] and not summary["pending"]:
         raw_target = ROOT / "outputs/raw"
         raw_target.mkdir(exist_ok=True)
-        for case in load_cases(snapshot / "tests/cases.jsonl"):
+        for case in selected_cases:
             _, raw_path = latest_record(target / "raw", case["id"])
             shutil.copyfile(raw_path, raw_target / f"{case['id']}.json")
         for name in ("summary.md", "results.csv", "calibration.md"):

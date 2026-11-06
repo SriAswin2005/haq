@@ -98,6 +98,11 @@ def _must_verify(text: str):
         yield str(WORD_NUM[m.group(1).lower()]), m.group(0)
 
 
+# Scripts that never belong in an English/Hindi answer: a model glitch (seen in round 4: Hindi "क्леम" with
+# Cyrillic letters). Arabic script is left out because Urdu replies are legitimate.
+STRAY_SCRIPT = re.compile(r"[\u0370-\u03FF\u0400-\u04FF\u0E00-\u0E7F\u3040-\u30FF\u3400-\u9FFF\uAC00-\uD7AF]")
+
+
 def check(answer: dict, retrieved: list[dict], case_file: dict) -> list[str]:
     """Deterministic checks. Returns a list of issue strings (empty = pass).
     answer: {"blocks":[{"text","type","cites"}], ...}; retrieved: chunk dicts for this turn."""
@@ -115,6 +120,8 @@ def check(answer: dict, retrieved: list[dict], case_file: dict) -> list[str]:
             issues.append(f"block {i}: malformed")
             continue
         typ, text, cites = b.get("type"), b["text"], b.get("cites") or []
+        if STRAY_SCRIPT.search(text):
+            issues.append(f"block {i}: garbled text (characters from an unrelated script)")
         if typ not in ("legal", "practical", "question"):
             issues.append(f"block {i}: bad type {typ!r}")
             continue

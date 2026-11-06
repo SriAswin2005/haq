@@ -50,7 +50,7 @@ def failure_reasons(item):
 
 def severity(item):
     names = {n for n, c in item["checks"].items() if c.status == "fail"}
-    critical = {"check_no_invented_law", "check_citations_valid", "check_legal_blocks_cited", "check_retrieval_scope"}
+    critical = {"check_no_invented_law", "check_citations_valid", "check_legal_blocks_cited", "check_retrieval_scope", "check_referral"}
     missing_escalation = item["case"]["expect_needs_lawyer"] and "check_needs_lawyer" in names
     return 1 if names & critical or missing_escalation or item.get("judge_failed") else 2
 
@@ -83,6 +83,21 @@ def flaky_cases(analysed):
     return {cid: {"output_changed": len({v[0] for v in values}) > 1,
                   "checks_changed": len({v[1] for v in values}) > 1, "observations": len(values)}
             for cid, values in by_case.items() if len(values) > 1 and len(set(values)) > 1}
+
+
+def referral_metrics(items):
+    eligible = [i for i in items if i["status"] in {"pass", "fail"} and "expected_referral_any" in i["case"]]
+    observations = [i["turn_checks"][-1]["check_referral"].details for i in eligible]
+    return {"expected_cases": len(eligible), "shown_bodies": sum(len(o.get("shown", [])) for o in observations),
+            "correct_bodies": sum(len(o.get("correct", [])) for o in observations),
+            "wrong_bodies": sum(len(o.get("wrong", [])) for o in observations),
+            "shown_cases": sum(bool(o.get("shown")) for o in observations),
+            "correct_cases": sum(bool(o.get("correct")) for o in observations),
+            "safe_correct_cases": sum(bool(o.get("correct")) and not o.get("wrong") and not o.get("statute_patterns") for o in observations),
+            "wrong_body_cases": sum(bool(o.get("wrong")) for o in observations),
+            "statute_cases": sum(bool(o.get("statute_patterns")) for o in observations),
+            "fallback_cases": sum(not o.get("shown") for o in observations),
+            "referral_check_passes": sum(i["checks"]["check_referral"].status == "pass" for i in eligible)}
 
 
 def metrics(items):
@@ -120,6 +135,14 @@ def metrics(items):
         ("Judge/code flag agreement", rate(agreement, len(judged))),
         ("Final structured legal blocks observable", str(len(legal_blocks))),
     ]
+    referrals = referral_metrics(items)
+    if referrals["expected_cases"]:
+        values += [
+            ("Referral precision (correct bodies / shown bodies)", rate(referrals["correct_bodies"], referrals["shown_bodies"])),
+            ("Referral recall (cases with correct / expected cases)", rate(referrals["correct_cases"], referrals["expected_cases"])),
+            ("Safe correct-referral coverage (no wrong body or statute)", rate(referrals["safe_correct_cases"], referrals["expected_cases"])),
+            ("Referral check pass (fallback allowed)", rate(referrals["referral_check_passes"], referrals["expected_cases"])),
+        ]
     return values
 
 
@@ -203,7 +226,7 @@ def write_bug_report(root, items, manifest, run_dir):
     failures = sorted([i for i in items if i["status"] == "fail"], key=lambda i: (severity(i), i["case"]["id"], i["repeat"]))
     layer_map = {"check_routing": "router", "check_action": "gate/router/draft", "check_citations_valid": "retrieval/verifier",
                  "check_no_invented_law": "answer prompt/verifier", "check_retrieval_scope": "router/retrieval", "check_needs_lawyer": "escalation",
-                 "check_draft_placeholders": "draft", "check_language": "router/rendering"}
+                 "check_draft_placeholders": "draft", "check_language": "router/rendering", "check_referral": "referral retrieval/rendering"}
     for item in failures:
         lines += [f"## Severity {severity(item)}: {item['case']['id']} (repeat {item['repeat']})", "",
                   f"Raw evidence: {item['path']}", "", "Observed visible output:", ""]

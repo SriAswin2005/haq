@@ -33,6 +33,20 @@ class Referrals(unittest.TestCase):
         self.assertIn("1930", text, "helpline numbers come verbatim from the chunk")
         self.assertEqual(ids, ["COM-DIR-CYBER"])
 
+    def test_weaker_second_body_is_dropped(self):
+        # round 4, T-054: Elderline 0.794 and Child Helpline 0.711 were both shown for an elderly person
+        _, ids, _ = self.lines([chunk("COM-DIR-ELDERLINE", "Elderline", 0.794), chunk("COM-DIR-CHILDLINE", "Child Helpline", 0.711)])
+        self.assertEqual(ids, ["COM-DIR-ELDERLINE"])
+
+    def test_equally_good_second_body_is_kept(self):
+        _, ids, _ = self.lines([chunk("COM-DIR-CYBER", "Cyber portal", 0.78), chunk("COM-DIR-RBI", "RBI CMS", 0.765)])
+        self.assertEqual(ids, ["COM-DIR-CYBER", "COM-DIR-RBI"])
+
+    def test_garbled_script_is_flagged(self):
+        from app import verifier
+        ans = {"blocks": [{"type": "practical", "text": "क्леम रिजेक्शन का पत्र तैयार रखें।", "cites": []}]}
+        self.assertTrue(any("garbled" in i for i in verifier.check(ans, [], {})))
+
     def test_weak_match_is_not_shown(self):
         text, ids, _ = self.lines([chunk("COM-DIR-RAIL", "Rail Madad", 0.68)])
         self.assertEqual((text, ids), ("", []))
