@@ -1,0 +1,41 @@
+{
+  "revised_at": "2026-11-06T17:16:27.744030+00:00",
+  "authorization": "Explicit user correction: T-044 may answer as wages when it names and cites EPFO; either lawyer flag is allowed, with a visible referral when true.",
+  "cases_before_sha256": "f42943f67de06d1206ca31ef3616b9543616d18e974240fdae8c662fc74bd5ec",
+  "cases_after_sha256": "cbacbef207ccd1ced4b5c79fc2ad35e38aaff818da55bbbe3131195245749f81",
+  "original_40_case_bytes_preserved": true,
+  "all_inputs_and_body_allowlists_unchanged": true,
+  "deltas": [
+    {
+      "case_id": "T-044",
+      "before": {
+        "category_expected": "out_of_scope",
+        "expect_needs_lawyer": true,
+        "expected_action": "escalate",
+        "expected_outcomes": null
+      },
+      "after": {
+        "category_expected": "wages",
+        "expect_needs_lawyer": false,
+        "expected_action": "answer",
+        "expected_outcomes": [
+          {
+            "category": "wages",
+            "action": "answer",
+            "needs_lawyer": false
+          },
+          {
+            "category": "wages",
+            "action": "answer",
+            "needs_lawyer": true
+          },
+          {
+            "category": "out_of_scope",
+            "action": "escalate",
+            "needs_lawyer": true
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -33,11 +33,12 @@ def main():
     prefix = b"".join(lines[:40])
     path.write_bytes(prefix + "".join(json.dumps(c, ensure_ascii=False) + "\n" for c in replacements).encode("utf-8"))
     assert path.read_bytes().startswith(prefix)
-    write_json(ROOT / "tests/round4_expectations_revision.json", {"revised_at": utc_now(),
-        "authorization": "Explicit user correction of round-four consumer-service routing and scope-aware statute checks.",
+    stamp = utc_now().replace(":", "").replace("+", "_")
+    write_json(ROOT / "tests/expectation_revisions" / (stamp + ".json"), {"revised_at": utc_now(),
+        "authorization": "Explicit user correction of round-four referral outcome expectations.",
         "cases_before_sha256": before_hash, "cases_after_sha256": digest(path),
         "original_40_case_bytes_preserved": True, "all_inputs_and_body_allowlists_unchanged": True, "deltas": deltas})
-    print("Revised seven consumer-service outcomes and scope notes; original 40 case bytes, all inputs and body allowlists preserved.")
+    print(f"Revised {len(deltas)} case records; original 40 case bytes, all inputs and body allowlists preserved.")
 
 
 if __name__ == "__main__":

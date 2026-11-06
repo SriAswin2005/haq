@@ -174,21 +174,23 @@
       }
     ]
   },
-  "started_at": "2026-11-06T15:19:49.931520+00:00",
+  "started_at": "2026-11-06T17:36:28.348134+00:00",
   "turns": [
     {
       "input": "uh matlab main Kanpur UP private shop mein kaam karta hoon September 2026 ki salary salary 15000 abhi tak nahi aayi attendance screenshot aur bank statement hai boss bas wait bolo wait bolo karta hai please English mein samjhao kya next step hai",
       "input_mode": "voice",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-06T15:19:55.932847+00:00",
+      "started_at": "2026-11-06T17:36:34.333239+00:00",
       "result": {
-        "reply_text": "To recover your unpaid salary, you can file an application for a claim before the authority appointed under the Code on Wages. The application can be filed by you, a registered trade union, or an Inspector-cum-Facilitator, and it may include a claim for the unpaid wages as well as compensation as determined by the authority.\n\nKeep your attendance screenshot, bank statements, and any other employment proof ready. You can file your application in person, by registered post, or electronically through the designated web portal.\n\nYour next steps are: 1. Gather your documents including attendance records and bank statements showing non-credit of wages. 2. Prepare the application specifying the particulars of your employer and establishment, along with an affidavit verifying the facts. 3. File the application before the appointed authority.\n\nI can help you understand the claim process further, but I cannot guarantee any specific outcome or compensation amount, as that depends entirely on the facts and the decision of the authority.\n\nWhat is the exact name of the shop or employer?\n\nOn what specific date was your salary due?\n\nSource: Code on Wages, 2019, section 45\nSource: Code on Wages (Central) Rules, 2026, rule 46\n\nThis is legal information, not legal advice.",
+        "reply_text": "To recover your unpaid salary, you can file a claim application before the authority appointed under the law, or through the web portal designated by the Central Government, and you may also be awarded compensation in addition to your claim amount.\n\nWhat I understood: You work at a private shop in Uttar Pradesh, your monthly wage is a specific amount, your salary for September 2026 is unpaid, your boss is delaying payment, and you have an attendance screenshot and bank statement.\n\nWhere you stand: The employer is responsible for paying all amounts required under the law, and monthly wages must be paid before the expiry of the seventh day of the succeeding month.\n\nDocuments needed: Keep your attendance screenshot, bank statement showing non-credit of wages, and any appointment letter or pay slips ready, along with an affidavit verifying the facts.\n\nYour options in order: First, you can file an application in person, by registered post, or electronically through the web portal designated by the Central Government. Second, if an order is passed in your favor and the employer fails to pay, a certificate of recovery will be issued to the Collector or District Magistrate to recover the amount as arrears of land revenue.\n\nWhen to see a lawyer: You may consult a lawyer if you need help drafting your claim application or affidavit properly for the authority.\n\nWhat is the exact date when your salary was due?\n\nWhat is the exact name of the shop or your employer?\n\nSource: Code on Wages, 2019, section 45\nSource: Code on Wages (Central) Rules, 2026, rule 46\nSource: Code on Wages, 2019, section 43\nSource: Code on Wages, 2019, section 17\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "wages",
         "action": "answer",
         "citations": [
           "WAGE-COW2019-S45",
-          "WAGE-COWRULES2026-R46"
+          "WAGE-COWRULES2026-R46",
+          "WAGE-COW2019-S43",
+          "WAGE-COW2019-S17"
         ],
         "retrieved": [
           {
@@ -232,7 +234,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "72e68b350af5",
+          "session": "e6fc86b0dffc",
           "input_mode": "voice",
           "user_text": "uh matlab main Kanpur UP private shop mein kaam karta hoon September 2026 ki salary salary 15000 abhi tak nahi aayi attendance screenshot aur bank statement hai boss bas wait bolo wait bolo karta hai please English mein samjhao kya next step hai",
           "mode": "advice",
@@ -300,11 +302,11 @@
           "verifier_history": [
             []
           ],
-          "timings_s": 24.715,
+          "timings_s": 146.131,
           "llm": {
-            "calls": 5,
-            "retries": 0,
-            "latency_s": 24.62,
+            "calls": 6,
+            "retries": 3,
+            "latency_s": 125.5,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
@@ -316,7 +318,22 @@
               {
                 "role": "judge",
                 "model": "gemini:gemma-4-31b-it",
-                "reason": "busy for ~12s"
+                "reason": "network error (ReadTimeout)"
+              },
+              {
+                "role": "judge",
+                "model": "gemini:gemini-3.1-flash-lite",
+                "reason": "HTTP 503"
+              },
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-26b-a4b-it",
+                "reason": "network error (ReadTimeout)"
+              },
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~510s"
               }
             ]
           },
@@ -358,7 +375,9 @@
           ],
           "citations": [
             "WAGE-COW2019-S45",
-            "WAGE-COWRULES2026-R46"
+            "WAGE-COWRULES2026-R46",
+            "WAGE-COW2019-S43",
+            "WAGE-COW2019-S17"
           ],
           "verifier": {
             "status": "pass",
@@ -496,10 +515,10 @@
         "main:gemini:gemini-3.5-flash-lite",
         "judge:gemini:gemini-3.1-flash-lite"
       ],
-      "latency_s": 24.71754849998979,
-      "finished_at": "2026-11-06T15:20:20.649923+00:00"
+      "latency_s": 146.13440869998885,
+      "finished_at": "2026-11-06T17:39:00.464224+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-06T15:20:20.649923+00:00"
+  "finished_at": "2026-11-06T17:39:00.464224+00:00"
 }

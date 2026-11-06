@@ -162,3 +162,15 @@ python tests/full55_reports.py --run outputs/runs/real-20261106T150609.600967Z
 ```
 
 The alias revision changes only T-043. No input, body allowlist or first-40 outcome changes. checks_revision.json records every referral observation before/after; audit.json records frozen/raw/report identity and credential-value absence. Earlier focused referral numbers use older expectations and should not be compared as if only the app changed.
+
+## Guarantee/PF/secondary-referral/domain check revision
+
+Rescore the last real capture first, without editing its original files or calling a model, then run current committed sources with the corrected tests:
+
+```powershell
+python tests/recheck_eval.py --run outputs/runs/real-20261106T150609.600967Z
+python tests/run_frozen_eval.py --sleep 6 --commit-sources HEAD
+python tests/policy_v2_reports.py --run outputs/runs/<fresh-run>
+```
+
+recheck_eval writes a separate policy-v2 rescore directory plus tests/policy_v2_baseline.json. The comparison shows the published old score, the corrected-check baseline and the new real score separately. Inputs/body IDs stay fixed. --commit-sources preserves parallel app/data edits and resolves the committed app/config/corpus into the snapshot; current tests are copied separately. Credentials remain in environment only. The fresh report includes primary-body and permitted-follow-up precision, specific-body recall, hard domain failures, per-case deltas and all-turn p50/p95. No extra harness judge is used.

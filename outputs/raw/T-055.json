@@ -175,21 +175,22 @@
       }
     ]
   },
-  "started_at": "2026-11-06T15:24:07.393749+00:00",
+  "started_at": "2026-11-06T17:44:06.244400+00:00",
   "turns": [
     {
       "input": "Packaged milk mein milawat ka shak hai aur batch details mere paas hain. Refund nahi, food safety complaint register karni hai. Kaunsa official food-safety complaint service dekhun?",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-06T15:24:13.394703+00:00",
+      "started_at": "2026-11-06T17:44:12.246157+00:00",
       "result": {
-        "reply_text": "For complaints regarding adulterated food, you can use the Food Safety Connect portal and mobile application of the Food Safety and Standards Authority of India (FSSAI) at https://foodsafetyconnect.fssai.gov.in/ or call the FSSAI Toll-Free Helpline at 1800-11-2100.\n\nKeep the packaged milk, purchase receipt, and a clear note of the batch details ready as proof.\n\nYou may also seek guidance and grievance redressal through the National Consumer Helpline (NCH) by calling the toll-free numbers 1915 or 1800-11-4000, or via their web portal at https://consumerhelpline.gov.in/.\n\nCould you please tell me the brand name of the milk and the location where you purchased it?\n\nSource: Food Safety and Standards Authority of India - Food Safety Connect, P FSSAI\nSource: Department of Consumer Affairs - National Consumer Helpline (NCH), H NCH\n\nThis is legal information, not legal advice.",
+        "reply_text": "For filing food safety complaints regarding contaminated or adulterated food, you can lodge and track complaints online through the official consumer portal and mobile application of the Food Safety and Standards Authority of India (FSSAI) called Food Safety Connect, or by calling the FSSAI Toll-Free Helpline.\n\nKeep your packaged milk purchase details, batch details, receipts, and any photographs of the packaging ready to support your complaint.\n\nAs an alternative or alongside, you can also use the National Consumer Helpline (NCH) to register consumer grievances related to defective goods through their web portal, toll-free numbers, or other digital channels.\n\nWhat is the brand name of the milk and the location where you purchased it?\n\nSource: Food Safety and Standards Authority of India - Food Safety Connect, P FSSAI\nSource: Department of Consumer Affairs - National Consumer Helpline (NCH), H NCH\nSource: National Consumer Helpline Guidelines, helpline 1915\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "consumer",
         "action": "answer",
         "citations": [
           "COM-DIR-FSSAI",
-          "COM-DIR-NCH"
+          "COM-DIR-NCH",
+          "COM-NCH-H1915"
         ],
         "retrieved": [
           {
@@ -233,7 +234,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "ee01f6b5f27a",
+          "session": "1bb469b93e0f",
           "input_mode": "text",
           "user_text": "Packaged milk mein milawat ka shak hai aur batch details mere paas hain. Refund nahi, food safety complaint register karni hai. Kaunsa official food-safety complaint service dekhun?",
           "mode": "advice",
@@ -285,11 +286,11 @@
           "verifier_history": [
             []
           ],
-          "timings_s": 9.904,
+          "timings_s": 21.786,
           "llm": {
             "calls": 5,
             "retries": 0,
-            "latency_s": 9.79,
+            "latency_s": 21.7,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
@@ -301,7 +302,7 @@
               {
                 "role": "judge",
                 "model": "gemini:gemma-4-31b-it",
-                "reason": "busy for ~417s"
+                "reason": "busy for ~170s"
               }
             ]
           },
@@ -343,7 +344,8 @@
           ],
           "citations": [
             "COM-DIR-FSSAI",
-            "COM-DIR-NCH"
+            "COM-DIR-NCH",
+            "COM-NCH-H1915"
           ],
           "verifier": {
             "status": "pass",
@@ -481,10 +483,10 @@
         "main:gemini:gemini-3.5-flash-lite",
         "judge:gemini:gemini-3.1-flash-lite"
       ],
-      "latency_s": 9.905756700027268,
-      "finished_at": "2026-11-06T15:24:23.300036+00:00"
+      "latency_s": 21.789666199998464,
+      "finished_at": "2026-11-06T17:44:34.034650+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-06T15:24:23.300036+00:00"
+  "finished_at": "2026-11-06T17:44:34.034650+00:00"
 }

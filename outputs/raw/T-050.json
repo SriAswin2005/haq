@@ -163,15 +163,15 @@
       }
     ]
   },
-  "started_at": "2026-11-06T15:23:02.195748+00:00",
+  "started_at": "2026-11-06T17:42:44.626818+00:00",
   "turns": [
     {
       "input": "My Aadhaar address update has been stuck for weeks and the enrolment centre cannot explain it. Where is the official Aadhaar grievance channel?",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-06T15:23:08.197144+00:00",
+      "started_at": "2026-11-06T17:42:50.631609+00:00",
       "result": {
-        "reply_text": "What I understood: Your Aadhaar address update request has been pending for weeks and the enrolment centre is unable to provide an explanation.\n\nI don't cover this topic with verified law yet, so I won't guess. This doesn't mean you are in trouble: the official channels and free legal aid below can guide you.\n\nAn official service that may handle this (please check its page before relying on it):\n- Unique Identification Authority of India - Aadhaar Grievance Redressal (Aadhaar enrolment, update issues, PVC card delivery, and operator grievances): 1947 (Source: https://uidai.gov.in/)\n\nWhat you can do right now: a free legal aid office can explain this law to you and tell you whether it applies to your situation.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
+        "reply_text": "What I understood: Your Aadhaar address update has been stuck for weeks and the enrolment centre cannot explain it.\n\nI don't cover this topic with verified law yet, so I won't guess. This doesn't mean you are in trouble: the official channels and free legal aid below can guide you.\n\nAn official service that may handle this (please check its page before relying on it):\n- Unique Identification Authority of India - Aadhaar Grievance Redressal (Aadhaar enrolment, update issues, PVC card delivery, and operator grievances): 1947 (Source: https://uidai.gov.in/)\n\nWhat you can do right now: a free legal aid office can explain this law to you and tell you whether it applies to your situation.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "out_of_scope",
         "action": "escalate",
@@ -182,7 +182,7 @@
         "retrieved": [
           {
             "id": "COM-DIR-UIDAI",
-            "score": 0.7832663059234619,
+            "score": 0.79183030128479,
             "via": "referral"
           },
           {
@@ -212,7 +212,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "f7caa4988de7",
+          "session": "d6b13850327d",
           "input_mode": "text",
           "user_text": "My Aadhaar address update has been stuck for weeks and the enrolment centre cannot explain it. Where is the official Aadhaar grievance channel?",
           "mode": "advice",
@@ -221,42 +221,53 @@
             "language": "en-IN",
             "state_or_city": null,
             "case_file_update": {
-              "what_happened": "Aadhaar address update request is pending for weeks without explanation from the enrolment centre.",
-              "counterparty_type": "government_authority"
+              "product_or_service": "Aadhaar address update",
+              "what_happened": "Aadhaar address update has been stuck for weeks and the enrolment centre cannot explain it."
             },
             "missing_facts": [],
             "escalation_flags": [],
-            "english_retrieval_query": "how to file grievance for Aadhaar update delay",
+            "english_retrieval_query": "official Aadhaar grievance channel complaint portal",
             "intent": [
               "where_to_complain"
             ],
-            "question": "Where can I find the official grievance channel to report a delay in my Aadhaar address update?",
+            "question": "Where is the official Aadhaar grievance channel?",
             "new_topic": false,
-            "summary": "Your Aadhaar address update request has been pending for weeks and the enrolment centre is unable to provide an explanation."
+            "summary": "Your Aadhaar address update has been stuck for weeks and the enrolment centre cannot explain it."
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
           "escalation_level": "out_of_scope",
-          "timings_s": 5.549,
+          "timings_s": 5.182,
           "llm": {
             "calls": 3,
             "retries": 0,
-            "latency_s": 5.52,
+            "latency_s": 5.14,
             "models": [
-              "router:gemini:gemini-3.1-flash-lite",
+              "router:gemini:gemini-3.5-flash-lite",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001"
             ],
-            "fallbacks": []
+            "fallbacks": [
+              {
+                "role": "router",
+                "model": "gemini:gemini-3.1-flash-lite",
+                "reason": "busy for ~8s"
+              },
+              {
+                "role": "router",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~263s"
+              }
+            ]
           },
           "action": "escalate",
           "category": "out_of_scope",
           "retrieved": [
             {
               "id": "COM-DIR-UIDAI",
-              "score": 0.7832663059234619,
+              "score": 0.79183030128479,
               "via": "referral"
             },
             {
@@ -412,14 +423,14 @@
         }
       },
       "model_names_used": [
-        "router:gemini:gemini-3.1-flash-lite",
+        "router:gemini:gemini-3.5-flash-lite",
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 5.5559270000085235,
-      "finished_at": "2026-11-06T15:23:13.746338+00:00"
+      "latency_s": 5.185658100002911,
+      "finished_at": "2026-11-06T17:42:55.813269+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-06T15:23:13.746338+00:00"
+  "finished_at": "2026-11-06T17:42:55.813269+00:00"
 }

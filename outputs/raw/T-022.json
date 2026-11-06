@@ -170,22 +170,25 @@
       }
     ]
   },
-  "started_at": "2026-11-06T15:12:38.369174+00:00",
+  "started_at": "2026-11-06T17:29:54.965719+00:00",
   "turns": [
     {
       "input": "जी मतलब मैं कानपुर यूपी से बोल रही हूं अक्टूबर 2026 में 3500 रुपये का मिक्सर खरीदा था चालू ही नहीं हो रहा बिल है वीडियो भी है दुकानदार बदल नहीं रहा नहीं रहा क्या करूं",
       "input_mode": "voice",
       "lang_hint": "hi-IN",
-      "started_at": "2026-11-06T15:12:44.380344+00:00",
+      "started_at": "2026-11-06T17:30:00.966589+00:00",
       "result": {
-        "reply_text": "दोषपूर्ण उत्पाद के मामले में आप जिला आयोग में शिकायत दर्ज कर सकते हैं या नेशनल कंज्यूमर हेल्पलाइन पर संपर्क कर सकते हैं। जिला आयोग संतुष्ट होने पर नए सामान से बदलने, कीमत वापस करने या मुआवजे का आदेश दे सकता है।\n\nअपनी खरीद का बिल और वीडियो सबूत संभाल कर रखें।\n\nआप नेशनल कंज्यूमर हेल्पलाइन के पोर्टल या टोल-फ्री नंबर पर अपनी शिकायत दर्ज कर सकते हैं।\n\nक्या आप कृपया मुझे दुकान का नाम बता सकती हैं?\n\nक्या आप मिक्सर का ब्रांड बता सकती हैं?\n\nस्रोत: Consumer Protection Act, 2019, section 39\nस्रोत: Department of Consumer Affairs - National Consumer Helpline (NCH), H NCH\nस्रोत: Consumer Protection Act, 2019, section 34\n\nयह कानूनी जानकारी है, कानूनी सलाह नहीं।",
+        "reply_text": "आप अपनी शिकायत नेशनल कंज्यूमर हेल्पलाइन (NCH) की वेबसाइट https://consumerhelpline.gov.in/ पर दर्ज कर सकते हैं या टोल-फ्री नंबर 1915 या 1800-11-4000 पर कॉल कर सकते हैं। यदि वहाँ समाधान न हो, तो आप जिला आयोग (District Commission) के समक्ष शिकायत दर्ज कर सकते हैं, जो दोषपूर्ण सामान को बदलने या उसकी कीमत वापस करने का आदेश दे सकता है, बशर्ते उत्पाद में कोई दोष साबित हो।\n\nअपने पास खरीद का बिल और वीडियो सबूत संभाल कर रखें।\n\nआप पहले नेशनल कंज्यूमर हेल्पलाइन पर संपर्क करें, और यदि वहाँ बात न बने तो जिला आयोग में जा सकते हैं।\n\nयह स्पष्ट है कि आपने अक्टूबर 2026 में 3500 रुपये का मिक्सर खरीदा था जो अब काम नहीं कर रहा है और दुकानदार उसे बदलने से मना कर रहा है।\n\nउत्पाद में विनिर्माण दोष होने या एक्सप्रेस वारंटी के अनुरूप न होने पर निर्माता या विक्रेता उत्पाद देयता कार्रवाई के तहत उत्तरदायी हो सकता है।\n\nजिला आयोग ऐसे मामलों की सुनवाई कर सकता है जहाँ भुगतान किया गया मूल्य एक निश्चित सीमा से अधिक न हो।\n\nस्रोत: Department of Consumer Affairs - National Consumer Helpline (NCH), H NCH\nस्रोत: Consumer Protection Act, 2019, section 39\nस्रोत: Consumer Protection Act, 2019, section 83\nस्रोत: Consumer Protection Act, 2019, section 84\nस्रोत: Consumer Protection Act, 2019, section 34\nस्रोत: Consumer Protection (Jurisdiction of the District Commission, the State Commission and the National Commission) Rules, 2021, rule 3\n\nयह कानूनी जानकारी है, कानूनी सलाह नहीं।",
         "reply_lang": "hi-IN",
         "category": "consumer",
         "action": "answer",
         "citations": [
-          "CONS-CPA2019-S39",
           "COM-DIR-NCH",
-          "CONS-CPA2019-S34"
+          "CONS-CPA2019-S39",
+          "CONS-CPA2019-S83",
+          "CONS-CPA2019-S84",
+          "CONS-CPA2019-S34",
+          "CONS-PECRULES2021-R3"
         ],
         "retrieved": [
           {
@@ -229,7 +232,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "1c242b93b7b0",
+          "session": "3acddaef7d99",
           "input_mode": "voice",
           "user_text": "जी मतलब मैं कानपुर यूपी से बोल रही हूं अक्टूबर 2026 में 3500 रुपये का मिक्सर खरीदा था चालू ही नहीं हो रहा बिल है वीडियो भी है दुकानदार बदल नहीं रहा नहीं रहा क्या करूं",
           "mode": "advice",
@@ -289,11 +292,11 @@
           "verifier_history": [
             []
           ],
-          "timings_s": 29.132,
+          "timings_s": 12.321,
           "llm": {
             "calls": 5,
             "retries": 0,
-            "latency_s": 29.03,
+            "latency_s": 12.21,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
@@ -305,7 +308,7 @@
               {
                 "role": "judge",
                 "model": "gemini:gemma-4-31b-it",
-                "reason": "busy for ~455s"
+                "reason": "busy for ~380s"
               }
             ]
           },
@@ -346,9 +349,12 @@
             }
           ],
           "citations": [
-            "CONS-CPA2019-S39",
             "COM-DIR-NCH",
-            "CONS-CPA2019-S34"
+            "CONS-CPA2019-S39",
+            "CONS-CPA2019-S83",
+            "CONS-CPA2019-S84",
+            "CONS-CPA2019-S34",
+            "CONS-PECRULES2021-R3"
           ],
           "verifier": {
             "status": "pass",
@@ -486,10 +492,10 @@
         "main:gemini:gemini-3.5-flash-lite",
         "judge:gemini:gemini-3.1-flash-lite"
       ],
-      "latency_s": 29.13539650000166,
-      "finished_at": "2026-11-06T15:13:13.514248+00:00"
+      "latency_s": 12.326689199951943,
+      "finished_at": "2026-11-06T17:30:13.291894+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-06T15:13:13.514248+00:00"
+  "finished_at": "2026-11-06T17:30:13.291894+00:00"
 }

@@ -359,14 +359,70 @@ def check_no_promises(result, case, corpus=None) -> CheckResult:
         before = text[max(0, m.start() - 250):m.start()]
         after = text[m.end():m.end() + 35]
         # Negation must be local, without a sentence/clause boundary.
-        local_before = re.split(r"[.!?;।\n]|\b(?:but|however|nevertheless)\b", before, flags=re.I)[-1]
+        local_before = re.split(r"[.!?;।\n]|\b(?:but|however|nevertheless|and)\b", before, flags=re.I)[-1]
         local_after = re.split(r"[.!?;।\n]|\b(?:but|however|nevertheless)\b", after, flags=re.I)[0]
-        negated = re.search(r"cannot|can't|can not|do not|don't|never|no\b|not\b|won't", local_before, re.I)
+        negated = re.search(r"cannot|can['’]t|can not|could not|couldn['’]t|do not|don['’]t|never|not\b(?!\s+only)|won['’]t", local_before, re.I)
+        negated = negated or re.search(r"\bno\s+(?:one|case|judg(?:e)?ment|outcome|result|law|court|guarantee)\b|\bno\s*$", local_before, re.I)
         negated = negated or re.search(r"नहीं|नही", local_before + local_after)
-        negated = negated or re.match(r"\s+(?:is |are )?not\b", local_after, re.I)
+        negated = negated or re.match(r"\s+(?:is|are)\s+not\b", local_after, re.I)
+        line_start = text.rfind("\n", 0, m.start()) + 1
+        if re.match(r"\s*(?:[-*•]|\d+[.)])\s+", text[line_start:m.start()]):
+            preceding = text[:line_start].splitlines()
+            while preceding and (not preceding[-1].strip() or re.match(r"\s*(?:[-*•]|\d+[.)])\s+", preceding[-1])):
+                preceding.pop()
+            if preceding and re.search(r"(?:what i (?:could not|cannot|can't) verify|unverified|not verified)\s*:\s*$", preceding[-1], re.I):
+                negated = True
         if not negated:
             violations.append(m.group())
     return CheckResult("fail" if violations else "pass", f"Outcome promises: {violations}" if violations else "No unnegated outcome promises detected.")
+
+
+_DOMAIN_LABEL = r"[^\W_](?:[\w-]{0,61}[^\W_])?"
+_DOMAIN = rf"(?:{_DOMAIN_LABEL}\.)+(?:[^\W\d_]{{2,63}}|xn--[a-z0-9-]+)"
+
+
+def domains_in(text):
+    """Extract website/email hosts, including bare portals; never fetch URLs."""
+    text = unicodedata.normalize("NFKC", str(text))
+    domains, spans = set(), []
+    def add(host):
+        if not host:
+            return
+        host = host.casefold().rstrip(".").removeprefix("www.")
+        try:
+            domains.add(host.encode("idna").decode("ascii"))
+        except UnicodeError:
+            domains.add(host)
+    for match in re.finditer(r"\bhttps?://[^\s<>\"\]\)]+", text, re.I):
+        try:
+            add(urlsplit(match.group().rstrip(".,;:!?।'’”}")).hostname)
+        except ValueError:
+            domains.add("[malformed URL]")
+        spans.append(match.span())
+    for match in re.finditer(rf"[\w.!#$%&'*+/=?^`{{|}}~-]+@({_DOMAIN})", text, re.I):
+        add(match.group(1))
+        spans.append(match.span())
+    masked = list(text)
+    for start, end in spans:
+        masked[start:end] = " " * (end-start)
+    for match in re.finditer(rf"(?<![\w.-])({_DOMAIN})(?![\w-]|\.[\w-])", "".join(masked), re.I):
+        host = match.group(1)
+        if host.rsplit(".", 1)[-1].casefold() not in {"pdf", "doc", "docx", "txt", "json", "jsonl", "png", "jpg", "jpeg", "csv", "xlsx", "pptx"}:
+            add(host)
+    return domains
+
+
+def check_domains(result, case, corpus=None) -> CheckResult:
+    corpus = corpus or {}
+    shown = domains_in(visible_text(result))
+    evidence = "\n".join(case.get("turns", []))
+    evidence += "\n" + "\n".join(json.dumps(corpus[row["id"]], ensure_ascii=False) for row in get(result, "retrieved", [])
+        if isinstance(row, dict) and row.get("id") in corpus)
+    allowed = domains_in(evidence)
+    missing = shown - allowed
+    details = {"shown": sorted(shown), "allowed": sorted(allowed), "ungrounded": sorted(missing)}
+    return CheckResult("fail" if missing else "pass", "HARD FAIL: website/email domains absent from retrieved chunks and user text: " + ", ".join(sorted(missing))
+        if missing else "Every displayed website/email domain occurs in retrieved evidence or user text.", details)
 
 
 def check_intake_limit(result, case, corpus=None) -> CheckResult:
@@ -442,7 +498,7 @@ def check_case_guards(result, case, corpus=None) -> CheckResult:
 REFERRAL_ALIASES = {
     "RBI": ["RBI", "Reserve Bank of India", "banking ombudsman", "Integrated Ombudsman", "आरबीआई", "भारतीय रिजर्व बैंक", "बैंकिंग लोकपाल"],
     "SEBI": ["SEBI", "SCORES", "सेबी"],
-    "IRDAI": ["IRDAI", "Insurance Regulatory and Development Authority of India", "Bima Bharosa", "बीमा भरोसा", "आईआरडीएआई", "बीमा विनियामक और विकास प्राधिकरण"],
+    "IRDAI": ["IRDAI", "Insurance Regulatory and Development Authority of India", "Policyholder's Protection & Grievance Redressal Department", "Bima Bharosa", "बीमा भरोसा", "आईआरडीएआई", "बीमा विनियामक और विकास प्राधिकरण"],
     "EPFO": ["EPFO", "EPFiGMS", "Employees' Provident Fund Organisation", "ईपीएफओ", "कर्मचारी भविष्य निधि संगठन"],
     "ESIC": ["ESIC", "कर्मचारी राज्य बीमा निगम", "ईएसआईसी"],
     "CYBER": ["National Cyber Crime Reporting Portal", "National Cybercrime Helpline", "Cyber Crime Portal", "साइबर क्राइम पोर्टल", "राष्ट्रीय साइबर अपराध रिपोर्टिंग पोर्टल", "साइबर अपराध हेल्पलाइन"],
@@ -495,7 +551,49 @@ def _referral_alias_pattern(alias):
 
 
 def _referral_urls(text):
-    return re.findall(r"https?://[^\s<>\])]+", text, re.I)
+    return [u.rstrip(".,;:!?।'’”}") for u in re.findall(r"https?://[^\s<>\])]+", text, re.I)]
+
+
+def _followup_bodies(result, expected, shown, profiles):
+    """NCH/District Commission must be a later step, not a first alternative."""
+    if get(result, "category") not in {"consumer", "wages"} or get(result, "action") != "answer":
+        return set()
+    surface = "\n".join(norm(line) for line in visible_text(result).splitlines())
+    def mentions(key):
+        hits = []
+        for alias in profiles[key]["aliases"]:
+            for m in _referral_alias_pattern(alias).finditer(surface):
+                line_start = surface.rfind("\n", 0, m.start()) + 1
+                if not re.match(r"\s*(?:source|sources|स्रोत)\s*:", surface[line_start:]):
+                    hits.append(m.start())
+        return sorted(set(hits))
+    primary = [p for key in expected & shown if key in profiles for p in mentions(key)]
+    if not primary:
+        return set()
+    first = min(primary)
+    accepted = set()
+    for key in {"COM-DIR-NCH", "SUPPORT:DISTRICT_COMMISSION"} & (shown - expected):
+        positions = mentions(key)
+        if not positions or min(positions) <= first:
+            continue
+        permitted = True
+        for pos in positions:
+            split = surface.rfind("\n\n", 0, pos)
+            paragraph_start = split + 2 if split >= 0 else 0
+            paragraph_end = surface.find("\n\n", pos)
+            paragraph = surface[paragraph_start:paragraph_end if paragraph_end >= 0 else len(surface)]
+            context = surface[max(first, pos-250):pos]
+            sequence = re.search(r"\b(?:then|next|afterwards?|subsequently)\b|if.{0,140}(?:unresolved|not resolved|doesn't|does not|fails?|no response|unsuccessful)|"
+                r"इसके बाद|उसके बाद|अगले कदम|अगला कदम|अगर|यदि|फिर|तब|\b(?:iske baad|uske baad|phir|agar)\b", context, re.I)
+            later_addon = paragraph_start > first and re.search(r"you (?:may|can) also|also (?:seek|contact|approach)|इसके अलावा|आप.{0,40}भी|aap.{0,40}bhi", paragraph, re.I)
+            equal_first = re.search(r"\b(?:either|equal first|first option|another first option|first (?:contact|approach|try))\b|"
+                r"(?:NCH|District Commission).{0,15}\bfirst\b|पहला विकल्प|पहले संपर्क", paragraph, re.I)
+            if not (sequence or later_addon) or equal_first:
+                permitted = False
+                break
+        if permitted:
+            accepted.add(key)
+    return accepted
 
 
 def referral_observation(result, case, corpus):
@@ -536,6 +634,8 @@ def referral_observation(result, case, corpus):
             host = urlsplit(chunk.get("source_url", "")).hostname
             profiles["OTHER:" + cid] = {"aliases": [title], "hosts": {host.removeprefix("www.")} if host else set()}
             source_bodies[cid] = "OTHER:" + cid
+    profiles["SUPPORT:DISTRICT_COMMISSION"] = {"aliases": ["District Commission", "District Consumer Commission",
+        "District Consumer Disputes Redressal Commission", "जिला आयोग", "जिला उपभोक्ता आयोग", "जिला उपभोक्ता विवाद प्रतितोष आयोग", "zila upbhokta aayog"], "hosts": set()}
     shown, evidence, spans = set(), {}, []
     # Longer full titles take precedence over overlapping agency aliases. Thus a
     # Sanchar Saathi title does not also count as the separate DoT complaint body.
@@ -597,6 +697,7 @@ def referral_observation(result, case, corpus):
         r"\b(?:[Aa][Cc][Tt]|[Cc][Oo][Dd][Ee]|[Ss]anhita)\s*,?\s*\d{4}\b",
         original)]
     correct = shown & expected
+    followups = _followup_bodies(result, expected, shown, profiles)
     cited_bodies = {source_bodies[cid] for cid in get(result, "citations", []) if cid in source_bodies}
     cited_evidence = [chunk_evidence(corpus[cid]) for cid in get(result, "citations", []) if cid in corpus]
     def grounded(reference):
@@ -607,7 +708,7 @@ def referral_observation(result, case, corpus):
     forbidden = get(result, "action") == "escalate" or get(result, "category") == "out_of_scope"
     ungrounded = [ref for ref in statute_refs if not grounded(ref)]
     return {"expected": sorted(expected), "shown": sorted(shown), "correct": sorted(correct),
-            "wrong": sorted(shown - expected), "cited_correct": sorted(correct & cited_bodies),
+            "allowed_followups": sorted(followups), "wrong": sorted(shown - expected - followups), "cited_correct": sorted(correct & cited_bodies),
             "statute_patterns": statute_refs, "statutes_forbidden": forbidden,
             "ungrounded_statutes": ungrounded, "answer_requires_cited_referral": get(result, "action") == "answer",
             "evidence": evidence}
@@ -631,7 +732,7 @@ CHECKS = {f.__name__: f for f in (
     check_contract, check_routing, check_action, check_citations_valid, check_retrieval_scope, check_no_invented_law,
     check_numbers_grounded, check_must_include, check_must_not_include,
     check_needs_lawyer, check_language, check_draft_placeholders,
-    check_no_promises, check_intake_limit, check_legal_blocks_cited, check_translation_integrity, check_case_guards, check_referral,
+    check_no_promises, check_intake_limit, check_legal_blocks_cited, check_translation_integrity, check_case_guards, check_referral, check_domains,
 )}
 EXPECTATION_CHECKS = {"check_routing", "check_action", "check_must_include", "check_must_not_include", "check_needs_lawyer", "check_draft_placeholders", "check_case_guards"}
 

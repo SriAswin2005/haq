@@ -175,15 +175,15 @@
       }
     ]
   },
-  "started_at": "2026-11-06T15:23:30.112915+00:00",
+  "started_at": "2026-11-06T17:43:16.730973+00:00",
   "turns": [
     {
       "input": "Noida UP mein builder promised possession se do saal late hai. Home buyers ke liye property regulator ka official complaint portal kaunsa hai? Mujhe abhi compensation ke legal rules nahi chahiye.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-06T15:23:36.099199+00:00",
+      "started_at": "2026-11-06T17:43:22.733892+00:00",
       "result": {
-        "reply_text": "The official portal for home buyers to file complaints against promoters or agents regarding project delay, possession, or agreement violations with the property regulator in Uttar Pradesh is the UP RERA eCourts module available at https://www.up-rera.in/.\n\nWhat I understood: Your builder in Noida, Uttar Pradesh, is two years late in providing possession of your property.\n\nWhere you stand: Allottees can lodge complaints electronically through the UP RERA eCourts module using Form M for complaints against promoters or agents regarding project delay, possession, or agreement violations, and Form N for claiming compensation before the Adjudicating Officer.\n\nWhat I can prepare for you now: I cannot prepare documents like a demand notice or legal filings because my sources do not contain templates for them.\n\nTo help me give you better information, could you please tell me the name of the builder?\n\nCould you please share the project name?\n\nSource: Uttar Pradesh Real Estate Regulatory Authority - UP RERA eCourts, P UPRERA\n\nWhat I could not verify:\n- name of the builder\n- project name\n\nThis is legal information, not legal advice.",
+        "reply_text": "The official portal to lodge complaints with the Uttar Pradesh Real Estate Regulatory Authority (UP RERA) against builders for project delay, possession, or agreement violations is the UP RERA eCourts module available at https://www.up-rera.in/.\n\nKeep your builder-buyer agreement, payment receipts, payment proofs, and all written communication with the builder ready.\n\nWhat I understood: Your builder in Uttar Pradesh is late by two years in providing possession of your property, and you want to know the official complaint portal for the property regulator.\n\nUnder UP RERA, allottees can lodge complaints electronically through the UP RERA eCourts module using Form M for complaints against promoters or agents regarding project delay, possession, or agreement violations, and track complaints at https://www.up-rera.in/.\n\nCould you please tell me the name of the builder and the project name?\n\nSource: Uttar Pradesh Real Estate Regulatory Authority - UP RERA eCourts, P UPRERA\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "consumer",
         "action": "answer",
@@ -232,7 +232,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "9f518575c587",
+          "session": "76c2f81543c5",
           "input_mode": "text",
           "user_text": "Noida UP mein builder promised possession se do saal late hai. Home buyers ke liye property regulator ka official complaint portal kaunsa hai? Mujhe abhi compensation ke legal rules nahi chahiye.",
           "mode": "advice",
@@ -285,11 +285,11 @@
           "verifier_history": [
             []
           ],
-          "timings_s": 9.371,
+          "timings_s": 18.834,
           "llm": {
             "calls": 5,
             "retries": 0,
-            "latency_s": 9.26,
+            "latency_s": 18.76,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
@@ -301,7 +301,7 @@
               {
                 "role": "judge",
                 "model": "gemini:gemma-4-31b-it",
-                "reason": "busy for ~454s"
+                "reason": "busy for ~217s"
               }
             ]
           },
@@ -480,10 +480,10 @@
         "main:gemini:gemini-3.5-flash-lite",
         "judge:gemini:gemini-3.1-flash-lite"
       ],
-      "latency_s": 9.372877500019968,
-      "finished_at": "2026-11-06T15:23:45.471004+00:00"
+      "latency_s": 18.83905449998565,
+      "finished_at": "2026-11-06T17:43:41.572936+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-06T15:23:45.471004+00:00"
+  "finished_at": "2026-11-06T17:43:41.572936+00:00"
 }

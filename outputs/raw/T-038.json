@@ -172,13 +172,13 @@
       }
     ]
   },
-  "started_at": "2026-11-06T15:18:47.996750+00:00",
+  "started_at": "2026-11-06T17:35:34.177484+00:00",
   "turns": [
     {
       "input": "I'm a residential tenant in Bengaluru Karnataka. I vacated on 20 October 2026 and the owner has kept my Rs 30000 deposit. I have the lease and handover photos. Share whatever central-law information you can verify, and make clear whether your UP rules cover me.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-06T15:18:53.997208+00:00",
+      "started_at": "2026-11-06T17:35:40.163588+00:00",
       "result": {
         "reply_text": "What I understood: You vacated your rental property in Bengaluru on 20 October 2026, but your landlord has not returned your security deposit of Rs 30,000.\n\nI do not have verified information in my sources to answer this part, and I will not guess.\n\nWhat you can do right now: collect your documents (agreement, receipts, bank or UPI records, messages, photos), and write down the dates and amounts in order.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
@@ -233,12 +233,12 @@
         "verifier": {
           "status": "failed",
           "issues": [
-            "block 0: claim not supported by its cited source (The source text does not mention Uttar Pradesh rules or their applicability to Bengaluru.)"
+            "block 0: number '1987' not found in cited source or user's facts"
           ]
         },
         "draft_text": null,
         "trace": {
-          "session": "7fc5e07a503a",
+          "session": "848ca784bde7",
           "input_mode": "text",
           "user_text": "I'm a residential tenant in Bengaluru Karnataka. I vacated on 20 October 2026 and the owner has kept my Rs 30000 deposit. I have the lease and handover photos. Share whatever central-law information you can verify, and make clear whether your UP rules cover me.",
           "mode": "advice",
@@ -291,37 +291,30 @@
             "want_draft": false,
             "has_question": true
           },
-          "judge": "ok",
+          "judge": "skipped",
           "verifier_history": [
             [
               "block 0: legal block without a citation",
-              "block 0: number '1882,' not found in cited source or user's facts"
+              "block 1: legal block without a citation"
             ],
             [
-              "block 0: claim not supported by its cited source (The source text does not mention Uttar Pradesh rules or their applicability to Bengaluru.)"
+              "block 0: number '1987' not found in cited source or user's facts"
             ]
           ],
-          "timings_s": 24.007,
+          "timings_s": 13.963,
           "llm": {
-            "calls": 7,
+            "calls": 6,
             "retries": 0,
-            "latency_s": 22.09,
+            "latency_s": 12.5,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
               "main:gemini:gemini-3.5-flash-lite",
               "main:gemini:gemini-3.5-flash-lite",
-              "judge:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001"
             ],
-            "fallbacks": [
-              {
-                "role": "judge",
-                "model": "gemini:gemma-4-31b-it",
-                "reason": "busy for ~73s"
-              }
-            ]
+            "fallbacks": []
           },
           "action": "refuse_unverified",
           "category": "tenancy",
@@ -370,7 +363,7 @@
           "verifier": {
             "status": "failed",
             "issues": [
-              "block 0: claim not supported by its cited source (The source text does not mention Uttar Pradesh rules or their applicability to Bengaluru.)"
+              "block 0: number '1987' not found in cited source or user's facts"
             ]
           },
           "escalation_reasons": [
@@ -506,13 +499,12 @@
         "embed:gemini:gemini-embedding-001",
         "main:gemini:gemini-3.5-flash-lite",
         "main:gemini:gemini-3.5-flash-lite",
-        "judge:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 24.015540399996098,
-      "finished_at": "2026-11-06T15:19:18.012516+00:00"
+      "latency_s": 13.971887800027616,
+      "finished_at": "2026-11-06T17:35:54.134284+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-06T15:19:18.012516+00:00"
+  "finished_at": "2026-11-06T17:35:54.134284+00:00"
 }

@@ -175,13 +175,13 @@
       }
     ]
   },
-  "started_at": "2026-11-06T15:15:58.307815+00:00",
+  "started_at": "2026-11-06T17:33:09.807072+00:00",
   "turns": [
     {
       "input": "uh matlab I'm really stressed rent for new place due and old owner keeps ignoring me ignoring me Bangalore Karnataka left October 2026 deposit 30000 receipt hai please reply in English can you tell me the UP rent rules apply here also na",
       "input_mode": "voice",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-06T15:16:04.294553+00:00",
+      "started_at": "2026-11-06T17:33:15.792978+00:00",
       "result": {
         "reply_text": "What I understood: You vacated your rental property in Bangalore in October 2026, but your landlord is ignoring your requests to return your 30,000 INR security deposit.\n\nI do not have verified information in my sources to answer this part, and I will not guess.\n\nWhat you can do right now: collect your documents (agreement, receipts, bank or UPI records, messages, photos), and write down the dates and amounts in order.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
@@ -241,7 +241,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "d42b48af5120",
+          "session": "e9a4301a06b0",
           "input_mode": "voice",
           "user_text": "uh matlab I'm really stressed rent for new place due and old owner keeps ignoring me ignoring me Bangalore Karnataka left October 2026 deposit 30000 receipt hai please reply in English can you tell me the UP rent rules apply here also na",
           "mode": "advice",
@@ -283,7 +283,11 @@
             ],
             "top_score": 0.6467012166976929,
             "min_score": 0.66,
-            "old_law": []
+            "old_law": [],
+            "second_query": {
+              "query": "Can I use Uttar Pradesh rent rules for my tenancy dispute in Bangalore, and what are my rights regarding the return of my security deposit?",
+              "top_score": 0.6528342366218567
+            }
           },
           "intent": {
             "intents": [
@@ -294,13 +298,15 @@
             "want_draft": false,
             "has_question": true
           },
-          "timings_s": 6.488,
+          "timings_s": 21.947,
           "llm": {
-            "calls": 4,
+            "calls": 6,
             "retries": 0,
-            "latency_s": 6.44,
+            "latency_s": 21.92,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001"
@@ -488,12 +494,14 @@
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 6.49308630003361,
-      "finished_at": "2026-11-06T15:16:10.786165+00:00"
+      "latency_s": 21.953977700031828,
+      "finished_at": "2026-11-06T17:33:37.739963+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-06T15:16:10.786165+00:00"
+  "finished_at": "2026-11-06T17:33:37.739963+00:00"
 }

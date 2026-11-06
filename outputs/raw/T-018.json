@@ -167,13 +167,13 @@
       }
     ]
   },
-  "started_at": "2026-11-06T15:11:47.902336+00:00",
+  "started_at": "2026-11-06T17:29:03.394539+00:00",
   "turns": [
     {
       "input": "Lucknow UP. My brother says our inherited house belongs to him and the sale deed is fake. This is ownership, not a rental deposit. Tell me how to get the title transferred to me.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-06T15:11:53.903663+00:00",
+      "started_at": "2026-11-06T17:29:09.396671+00:00",
       "result": {
         "reply_text": "What I understood: You are in a dispute with your brother over the ownership of an inherited house and the validity of a sale deed.\n\nI don't cover this topic with verified law yet, so I won't guess. This doesn't mean you are in trouble: the official channels and free legal aid below can guide you.\n\nWhat you can do right now: a free legal aid office can explain this law to you and tell you whether it applies to your situation.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (Source: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
@@ -213,7 +213,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "670d7e485875",
+          "session": "3141ac799c20",
           "input_mode": "text",
           "user_text": "Lucknow UP. My brother says our inherited house belongs to him and the sale deed is fake. This is ownership, not a rental deposit. Tell me how to get the title transferred to me.",
           "mode": "advice",
@@ -243,11 +243,11 @@
             "error": null
           },
           "escalation_level": "out_of_scope",
-          "timings_s": 5.476,
+          "timings_s": 5.557,
           "llm": {
             "calls": 3,
             "retries": 0,
-            "latency_s": 5.43,
+            "latency_s": 5.53,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
@@ -417,10 +417,10 @@
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 5.478946999995969,
-      "finished_at": "2026-11-06T15:11:59.382424+00:00"
+      "latency_s": 5.5610902000335045,
+      "finished_at": "2026-11-06T17:29:14.957642+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-06T15:11:59.382424+00:00"
+  "finished_at": "2026-11-06T17:29:14.957642+00:00"
 }

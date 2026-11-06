@@ -175,15 +175,15 @@
       }
     ]
   },
-  "started_at": "2026-11-06T15:07:18.030294+00:00",
+  "started_at": "2026-11-06T17:24:08.889778+00:00",
   "turns": [
     {
       "input": "I work in a private shop in Kanpur UP, salary Rs 18000 for October 2026 unpaid, payslip and bank statement ready. The Payment of Wages Act, 1936 is the current law right? Tell me what law applies to this new claim, not an old pending case.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-06T15:07:24.038040+00:00",
+      "started_at": "2026-11-06T17:24:14.891431+00:00",
       "result": {
-        "reply_text": "Your unpaid wages from a private shop can be recovered in the manner provided in the Payment of Wages Act, 1936, as made applicable under the Uttar Pradesh Dookan Aur Vanijya Adhishthan Adhiniyam, 1962.\n\nI could not verify if the Payment of Wages Act, 1936 independently applies as the primary governing code without the cited state shop act provisions in your specific case.\n\nKeep your payslip and bank statement ready as proof of non-payment.\n\nWhat is the name of your employer and your last working date?\n\nSource: Uttar Pradesh Dookan Aur Vanijya Adhishthan Adhiniyam, 1962, section 18\n\nNote: Payment of Wages Act, 1936 is no longer in force, so I do not use it.\n\nWhat I could not verify:\n- employer name\n- last working date\n- exact authority designated under the state recovery mechanism\n\nThis is legal information, not legal advice.",
+        "reply_text": "For your claim regarding unpaid wages from a private shop, the Uttar Pradesh Dookan Aur Vanijya Adhishthan Adhiniyam, 1962 states that unpaid wages are recoverable in the manner provided in the Payment of Wages Act, 1936.\n\nI could not verify the Payment of Wages Act, 1936 as the current standalone law for your new claim in my sources, other than how it is applied through the Uttar Pradesh Dookan Aur Vanijya Adhishthan Adhiniyam, 1962.\n\nKeep your payslip and bank statement ready as proof.\n\nWhat is the employer name?\n\nWhat was your last working date?\n\nSource: Uttar Pradesh Dookan Aur Vanijya Adhishthan Adhiniyam, 1962, section 18\n\nNote: Payment of Wages Act, 1936 is no longer in force, so I do not use it.\n\nWhat I could not verify:\n- standalone applicability of the Payment of Wages Act, 1936 for new claims\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "wages",
         "action": "answer",
@@ -237,7 +237,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "e5b53ed901a8",
+          "session": "9beaebeb9a30",
           "input_mode": "text",
           "user_text": "I work in a private shop in Kanpur UP, salary Rs 18000 for October 2026 unpaid, payslip and bank statement ready. The Payment of Wages Act, 1936 is the current law right? Tell me what law applies to this new claim, not an old pending case.",
           "mode": "advice",
@@ -302,11 +302,11 @@
           "verifier_history": [
             []
           ],
-          "timings_s": 39.754,
+          "timings_s": 10.727,
           "llm": {
             "calls": 5,
-            "retries": 1,
-            "latency_s": 39.66,
+            "retries": 0,
+            "latency_s": 10.62,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
@@ -318,7 +318,7 @@
               {
                 "role": "judge",
                 "model": "gemini:gemma-4-31b-it",
-                "reason": "network error (ReadTimeout)"
+                "reason": "busy for ~91s"
               }
             ]
           },
@@ -502,10 +502,10 @@
         "main:gemini:gemini-3.5-flash-lite",
         "judge:gemini:gemini-3.1-flash-lite"
       ],
-      "latency_s": 39.75743150000926,
-      "finished_at": "2026-11-06T15:08:03.795733+00:00"
+      "latency_s": 10.730311699968297,
+      "finished_at": "2026-11-06T17:24:25.620928+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-06T15:08:03.795733+00:00"
+  "finished_at": "2026-11-06T17:24:25.620928+00:00"
 }

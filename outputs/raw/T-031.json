@@ -174,21 +174,23 @@
       }
     ]
   },
-  "started_at": "2026-11-06T15:16:10.794524+00:00",
+  "started_at": "2026-11-06T17:33:37.751316+00:00",
   "turns": [
     {
       "input": "నేను లక్నో, ఉత్తర ప్రదేశ్‌లో 2026 అక్టోబర్ 20న అద్దె ఇల్లు ఖాళీ చేశాను. ఇంటి యజమాని నా 30000 రూపాయల డిపాజిట్ తిరిగి ఇవ్వలేదు. అద్దె ఒప్పందం, రసీదు ఉన్నాయి. రసీదు లింక్ https://example.invalid/t031-receipt . దయచేసి తెలుగులో సమాధానం ఇవ్వండి; 30000 సంఖ్యను, ఈ రసీదు లింక్‌ను సమాధానంలో అలాగే ఉంచండి. నేను తరువాత ఏమి చేయాలి?",
       "input_mode": "text",
       "lang_hint": "te-IN",
-      "started_at": "2026-11-06T15:16:16.795097+00:00",
+      "started_at": "2026-11-06T17:33:43.755080+00:00",
       "result": {
-        "reply_text": "నేను అర్థం చేసుకున్నది: మీరు 2026 అక్టోబర్ 20న లక్నోలో ఇల్లు ఖాళీ చేసినా, యజమాని మీ 30000 రూపాయల డిపాజిట్ తిరిగి ఇవ్వలేదు.\n\nఈ భాగానికి సమాధానం ఇవ్వడానికి నా దగ్గర ధృవీకరించబడిన సమాచారం లేదు, మరియు నేను ఊహించి చెప్పను.\n\nమీరు ఇప్పుడు చేయగలిగినది: మీ పత్రాలను (అగ్రిమెంట్, రసీదులు, బ్యాంక్ లేదా UPI రికార్డులు, మెసేజ్‌లు, ఫోటోలు) సేకరించండి, మరియు తేదీలను, మొత్తాలను వరుస క్రమంలో రాసుకోండి.\n\nనిజమైన లాయర్ లేదా లీగల్ ఎయిడ్ ఆఫీస్ నుండి ఉచిత సహాయం కోసం:\n- National Legal Services Authority హెల్ప్‌లైన్: 15100 (Source: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority కాంటాక్ట్ మరియు హెల్ప్‌లైన్: 1800-419-0234 / 0522-2286395 / 0522-2287972 (Source: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nఇది చట్టపరమైన సమాచారం మాత్రమే, చట్టపరమైన సలహా కాదు.",
+        "reply_text": "ఉత్తర ప్రదేశ్ చట్టం ప్రకారం, మీరు ఇల్లు ఖాళీ చేసిన తేదీన మీ సెక్యూరిటీ డిపాజిట్‌ను యజమాని వెనక్కి ఇవ్వాలి. యజమాని డిపాజిట్ ఇవ్వకపోతే, ఆయనపై సాధారణ వడ్డీ చెల్లించాల్సిన బాధ్యత ఉంటుంది.\n\nమీరు అద్దె ఒప్పందం మరియు https://example.invalid/t031-receipt వద్ద ఉన్న రసీదును సిద్ధంగా ఉంచుకోండి.\n\nతదుపరి దశగా, మీరు మీ డిపాజిట్ మరియు వడ్డీని తిరిగి పొందేందుకు అద్దె అధికారి (Rent Authority) లేదా సంబంధిత వేదికను ఆశ్రయించవచ్చు.\n\nసమస్య పరిష్కారం కాకపోతే న్యాయవాదిని సంప్రదించవచ్చు.\n\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 11\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 24\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 33\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 30\n\nఇది చట్టపరమైన సమాచారం మాత్రమే, చట్టపరమైన సలహా కాదు.",
         "reply_lang": "te-IN",
         "category": "tenancy",
-        "action": "refuse_unverified",
+        "action": "answer",
         "citations": [
-          "COM-NALSA-H15100",
-          "COM-UPSLSA-H1800"
+          "TEN-UPTA2021-S11",
+          "TEN-UPTA2021-S24",
+          "TEN-UPTA2021-S33",
+          "TEN-UPTA2021-S30"
         ],
         "retrieved": [
           {
@@ -222,30 +224,17 @@
           {
             "id": "TEN-UPTA2021-S30",
             "score": 0.7078341245651245
-          },
-          {
-            "id": "COM-NALSA-H15100",
-            "score": 0.7801640033721924,
-            "via": "aid_search"
-          },
-          {
-            "id": "COM-UPSLSA-H1800",
-            "score": 0.7588682770729065,
-            "via": "aid_search"
           }
         ],
-        "needs_lawyer": true,
+        "needs_lawyer": false,
         "escalation_reasons": [],
         "verifier": {
-          "status": "failed",
-          "issues": [
-            "block 0: claim not supported by its cited source (condition dropped: Section 24(1) applies only when the landlord exercises the right of recovery of possession under sect)",
-            "block 2: claim not supported by its cited source (The cited sources do not mention the specific amount of 30000 rupees or the provided URL.)"
-          ]
+          "status": "pass",
+          "issues": []
         },
         "draft_text": null,
         "trace": {
-          "session": "f221315e0d49",
+          "session": "7125a262188f",
           "input_mode": "text",
           "user_text": "నేను లక్నో, ఉత్తర ప్రదేశ్‌లో 2026 అక్టోబర్ 20న అద్దె ఇల్లు ఖాళీ చేశాను. ఇంటి యజమాని నా 30000 రూపాయల డిపాజిట్ తిరిగి ఇవ్వలేదు. అద్దె ఒప్పందం, రసీదు ఉన్నాయి. రసీదు లింక్ https://example.invalid/t031-receipt . దయచేసి తెలుగులో సమాధానం ఇవ్వండి; 30000 సంఖ్యను, ఈ రసీదు లింక్‌ను సమాధానంలో అలాగే ఉంచండి. నేను తరువాత ఏమి చేయాలి?",
           "mode": "advice",
@@ -309,43 +298,29 @@
           },
           "judge": "ok",
           "verifier_history": [
-            [
-              "block 2: claim not supported by its cited source (The source does not state that the landlord must pay simple interest if they fail to refund the security deposit; it onl)"
-            ],
-            [
-              "block 0: claim not supported by its cited source (condition dropped: Section 24(1) applies only when the landlord exercises the right of recovery of possession under sect)",
-              "block 2: claim not supported by its cited source (The cited sources do not mention the specific amount of 30000 rupees or the provided URL.)"
-            ]
+            []
           ],
-          "timings_s": 17.835,
+          "timings_s": 9.723,
           "llm": {
-            "calls": 8,
+            "calls": 5,
             "retries": 0,
-            "latency_s": 17.65,
+            "latency_s": 9.64,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
               "main:gemini:gemini-3.5-flash-lite",
-              "judge:gemini:gemini-3.1-flash-lite",
-              "main:gemini:gemini-3.5-flash-lite",
-              "judge:gemini:gemini-3.1-flash-lite",
-              "embed:gemini:gemini-embedding-001"
+              "judge:gemini:gemini-3.1-flash-lite"
             ],
             "fallbacks": [
               {
                 "role": "judge",
                 "model": "gemini:gemma-4-31b-it",
-                "reason": "busy for ~242s"
-              },
-              {
-                "role": "judge",
-                "model": "gemini:gemma-4-31b-it",
-                "reason": "busy for ~236s"
+                "reason": "busy for ~160s"
               }
             ]
           },
-          "action": "refuse_unverified",
+          "action": "answer",
           "category": "tenancy",
           "retrieved": [
             {
@@ -379,28 +354,17 @@
             {
               "id": "TEN-UPTA2021-S30",
               "score": 0.7078341245651245
-            },
-            {
-              "id": "COM-NALSA-H15100",
-              "score": 0.7801640033721924,
-              "via": "aid_search"
-            },
-            {
-              "id": "COM-UPSLSA-H1800",
-              "score": 0.7588682770729065,
-              "via": "aid_search"
             }
           ],
           "citations": [
-            "COM-NALSA-H15100",
-            "COM-UPSLSA-H1800"
+            "TEN-UPTA2021-S11",
+            "TEN-UPTA2021-S24",
+            "TEN-UPTA2021-S33",
+            "TEN-UPTA2021-S30"
           ],
           "verifier": {
-            "status": "failed",
-            "issues": [
-              "block 0: claim not supported by its cited source (condition dropped: Section 24(1) applies only when the landlord exercises the right of recovery of possession under sect)",
-              "block 2: claim not supported by its cited source (The cited sources do not mention the specific amount of 30000 rupees or the provided URL.)"
-            ]
+            "status": "pass",
+            "issues": []
           },
           "escalation_reasons": [],
           "models": {
@@ -529,7 +493,7 @@
             "to": "te-IN",
             "status": "ok",
             "attempts": 1,
-            "english_original": "What I understood: మీరు 2026 అక్టోబర్ 20న లక్నోలో ఇల్లు ఖాళీ చేసినా, యజమాని మీ 30000 రూపాయల డిపాజిట్ తిరిగి ఇవ్వలేదు.\n\nI do not have verified information in my sources to answer this part, and I will not guess.\n\nWhat you can do right now: collect your documents (agreement, receipts, bank or UPI records, messages, photos), and write down the dates and amounts in order.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (Source: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice."
+            "english_original": "ఉత్తర ప్రదేశ్ చట్టం ప్రకారం, మీరు ఇల్లు ఖాళీ చేసిన తేదీన మీ సెక్యూరిటీ డిపాజిట్‌ను యజమాని వెనక్కి ఇవ్వాలి. యజమాని డిపాజిట్ ఇవ్వకపోతే, ఆయనపై సాధారణ వడ్డీ చెల్లించాల్సిన బాధ్యత ఉంటుంది.\n\nమీరు అద్దె ఒప్పందం మరియు https://example.invalid/t031-receipt వద్ద ఉన్న రసీదును సిద్ధంగా ఉంచుకోండి.\n\nతదుపరి దశగా, మీరు మీ డిపాజిట్ మరియు వడ్డీని తిరిగి పొందేందుకు అద్దె అధికారి (Rent Authority) లేదా సంబంధిత వేదికను ఆశ్రయించవచ్చు.\n\nసమస్య పరిష్కారం కాకపోతే న్యాయవాదిని సంప్రదించవచ్చు.\n\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 11\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 24\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 33\nSource: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 30\n\nThis is legal information, not legal advice."
           }
         }
       },
@@ -538,15 +502,12 @@
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001",
         "main:gemini:gemini-3.5-flash-lite",
-        "judge:gemini:gemini-3.1-flash-lite",
-        "main:gemini:gemini-3.5-flash-lite",
-        "judge:gemini:gemini-3.1-flash-lite",
-        "embed:gemini:gemini-embedding-001"
+        "judge:gemini:gemini-3.1-flash-lite"
       ],
-      "latency_s": 20.829375500034075,
-      "finished_at": "2026-11-06T15:16:37.623801+00:00"
+      "latency_s": 17.574811700033024,
+      "finished_at": "2026-11-06T17:34:01.327078+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-06T15:16:37.623801+00:00"
+  "finished_at": "2026-11-06T17:34:01.327078+00:00"
 }

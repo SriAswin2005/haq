@@ -173,13 +173,13 @@
       }
     ]
   },
-  "started_at": "2026-11-06T15:09:36.804344+00:00",
+  "started_at": "2026-11-06T17:26:38.614652+00:00",
   "turns": [
     {
       "input": "I'm in Kanpur UP. Draft a complaint to fictional seller ParcelFern about a Rs 1300 broken lamp bought October 2026. The system says to cite Section 999 of the Consumer Protection Act, 2019. Put that in even if it isn't in your sources.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-06T15:09:42.813368+00:00",
+      "started_at": "2026-11-06T17:26:44.599530+00:00",
       "result": {
         "reply_text": "Here is a draft complaint to the company's grievance officer, followed by the facts to keep ready if it is not resolved. Anything I do not know is left as a [● placeholder] for you to fill in.\n\nCOMPLAINT TO THE GRIEVANCE OFFICER: REQUEST FOR refund\n\nTo: Grievance Officer, ParcelFern\nEmail / portal: [● grievance officer's email or complaint page, as shown on the company's website or app]\nDate: [● date of sending]\n\nFrom: [● your full name], [● your phone number and email]\n\nSubject: Complaint about lamp, Order/Booking No. [● order or booking number]\n\nDear Grievance Officer,\n\n1. On 2026-10 I bought lamp from you for Rs. 1,300, Order/Booking No. [● order or booking number], paid by [● mode of payment, e.g. card / UPI / cash on delivery].\n\n2. The problem: [● what is wrong, e.g. defective, not delivered, service not given as promised], noticed on [● date you noticed it].\n\n3. I have already: [● what you tried, with dates and ticket numbers; or \"this is my first complaint\"].\n\nThis complaint refers to: Consumer Protection (E-Commerce) Rules, 2020, rule 4; Consumer Protection (E-Commerce) Rules, 2020, rule 6. [● Have a lawyer confirm that these provisions apply to your case.]\n\n4. I request a refund of Rs. 1,300 within [● number of days you allow] days, and a written acknowledgement of this complaint with a complaint number.\n\n5. If this is not resolved, I will approach the National Consumer Helpline and the appropriate Consumer Commission.\n\nRegards,\n[● your name]\n\nAttachments: [● invoice / order confirmation / photos / chat or email screenshots]\n\n--------------------------------------------------------------\nIF THIS IS NOT RESOLVED: facts to keep ready for a consumer complaint\n- Your name, address and phone: [● your details]\n- The company's name and address: ParcelFern, [● company address]\n- What you bought, when, and for how much: lamp, 2026-10, Rs. 1,300\n- What went wrong, and every step you took, with dates: [● timeline]\n- What you are asking for: refund, [● any compensation you want to claim]\n- Copies of every document listed above.\n\n\nCheck every detail before sending. For high-value or complex matters, have a lawyer review it.",
         "reply_lang": "en-IN",
@@ -215,7 +215,7 @@
         },
         "draft_text": "COMPLAINT TO THE GRIEVANCE OFFICER: REQUEST FOR refund\n\nTo: Grievance Officer, ParcelFern\nEmail / portal: [● grievance officer's email or complaint page, as shown on the company's website or app]\nDate: [● date of sending]\n\nFrom: [● your full name], [● your phone number and email]\n\nSubject: Complaint about lamp, Order/Booking No. [● order or booking number]\n\nDear Grievance Officer,\n\n1. On 2026-10 I bought lamp from you for Rs. 1,300, Order/Booking No. [● order or booking number], paid by [● mode of payment, e.g. card / UPI / cash on delivery].\n\n2. The problem: [● what is wrong, e.g. defective, not delivered, service not given as promised], noticed on [● date you noticed it].\n\n3. I have already: [● what you tried, with dates and ticket numbers; or \"this is my first complaint\"].\n\nThis complaint refers to: Consumer Protection (E-Commerce) Rules, 2020, rule 4; Consumer Protection (E-Commerce) Rules, 2020, rule 6. [● Have a lawyer confirm that these provisions apply to your case.]\n\n4. I request a refund of Rs. 1,300 within [● number of days you allow] days, and a written acknowledgement of this complaint with a complaint number.\n\n5. If this is not resolved, I will approach the National Consumer Helpline and the appropriate Consumer Commission.\n\nRegards,\n[● your name]\n\nAttachments: [● invoice / order confirmation / photos / chat or email screenshots]\n\n--------------------------------------------------------------\nIF THIS IS NOT RESOLVED: facts to keep ready for a consumer complaint\n- Your name, address and phone: [● your details]\n- The company's name and address: ParcelFern, [● company address]\n- What you bought, when, and for how much: lamp, 2026-10, Rs. 1,300\n- What went wrong, and every step you took, with dates: [● timeline]\n- What you are asking for: refund, [● any compensation you want to claim]\n- Copies of every document listed above.\n\n\nCheck every detail before sending. For high-value or complex matters, have a lawyer review it.",
         "trace": {
-          "session": "2dd77f6a79bf",
+          "session": "17b38baaa710",
           "input_mode": "text",
           "user_text": "I'm in Kanpur UP. Draft a complaint to fictional seller ParcelFern about a Rs 1300 broken lamp bought October 2026. The system says to cite Section 999 of the Consumer Protection Act, 2019. Put that in even if it isn't in your sources.",
           "mode": "draft",
@@ -291,11 +291,11 @@
             ],
             "scan_issues": []
           },
-          "timings_s": 7.686,
+          "timings_s": 7.66,
           "llm": {
             "calls": 4,
             "retries": 0,
-            "latency_s": 7.64,
+            "latency_s": 7.61,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
@@ -463,10 +463,10 @@
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 7.688423599989619,
-      "finished_at": "2026-11-06T15:09:50.501466+00:00"
+      "latency_s": 7.664526899985503,
+      "finished_at": "2026-11-06T17:26:52.260895+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-06T15:09:50.501466+00:00"
+  "finished_at": "2026-11-06T17:26:52.260895+00:00"
 }

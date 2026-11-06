@@ -165,13 +165,13 @@
       }
     ]
   },
-  "started_at": "2026-11-06T15:21:57.239222+00:00",
+  "started_at": "2026-11-06T17:40:36.779008+00:00",
   "turns": [
     {
       "input": "लखनऊ में मेरी गाड़ी के नाम ट्रैफिक चालान आया है। मैं उसका विवरण और भुगतान की स्थिति आधिकारिक जगह पर देखना चाहता हूं। किस पोर्टल पर जाऊं?",
       "input_mode": "text",
       "lang_hint": "hi-IN",
-      "started_at": "2026-11-06T15:22:03.223633+00:00",
+      "started_at": "2026-11-06T17:40:42.784841+00:00",
       "result": {
         "reply_text": "मैंने जो समझा: लखनऊ में आपकी गाड़ी का ट्रैफिक चालान आया है और आप उसका विवरण और भुगतान की स्थिति देखना चाहते हैं।\n\nइस विषय पर मेरे पास अभी जाँचा हुआ कानून नहीं है, इसलिए मैं अंदाज़ा नहीं लगाऊँगा। इसका मतलब यह नहीं कि आप किसी मुसीबत में हैं: नीचे दिए गए सरकारी रास्ते और मुफ़्त कानूनी सहायता आपकी मदद कर सकते हैं।\n\nएक सरकारी सेवा जो इसमें मदद कर सकती है (भरोसा करने से पहले उसका पेज देख लें):\n- Ministry of Road Transport and Highways - NextGen eChallan Portal (check and pay traffic violation challans online) (स्रोत: https://echallan.parivahan.gov.in/)\n\nआप अभी यह कर सकते हैं: मुफ़्त कानूनी सहायता कार्यालय आपको यह कानून समझा सकता है और बता सकता है कि यह आपकी स्थिति पर लागू होता है या नहीं।\n\nअसली वकील या मुफ़्त कानूनी सहायता के लिए:\n- National Legal Services Authority Helpline: 15100 (स्रोत: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (स्रोत: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nयह कानूनी जानकारी है, कानूनी सलाह नहीं।",
         "reply_lang": "hi-IN",
@@ -215,7 +215,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "635aebd8d4e3",
+          "session": "fcf73c87fd34",
           "input_mode": "text",
           "user_text": "लखनऊ में मेरी गाड़ी के नाम ट्रैफिक चालान आया है। मैं उसका विवरण और भुगतान की स्थिति आधिकारिक जगह पर देखना चाहता हूं। किस पोर्टल पर जाऊं?",
           "mode": "advice",
@@ -242,11 +242,11 @@
             "error": null
           },
           "escalation_level": "out_of_scope",
-          "timings_s": 5.175,
+          "timings_s": 6.026,
           "llm": {
             "calls": 3,
             "retries": 0,
-            "latency_s": 5.14,
+            "latency_s": 6.0,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
@@ -420,10 +420,10 @@
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 5.178231000027154,
-      "finished_at": "2026-11-06T15:22:08.400998+00:00"
+      "latency_s": 6.0345349999843165,
+      "finished_at": "2026-11-06T17:40:48.819663+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-06T15:22:08.400998+00:00"
+  "finished_at": "2026-11-06T17:40:48.819663+00:00"
 }

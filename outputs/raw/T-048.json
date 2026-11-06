@@ -165,13 +165,13 @@
       }
     ]
   },
-  "started_at": "2026-11-06T15:22:41.661001+00:00",
+  "started_at": "2026-11-06T17:41:37.354745+00:00",
   "turns": [
     {
       "input": "लखनऊ में मेरा मोबाइल खो गया है। उसका मोबाइल नेटवर्क पर इस्तेमाल रोकना और खोने की रिपोर्ट करना चाहता हूं। किस आधिकारिक सेवा से मदद मिल सकती है?",
       "input_mode": "text",
       "lang_hint": "hi-IN",
-      "started_at": "2026-11-06T15:22:47.646452+00:00",
+      "started_at": "2026-11-06T17:41:43.359843+00:00",
       "result": {
         "reply_text": "मैंने जो समझा: लखनऊ में आपका मोबाइल खो गया है और आप उसे ब्लॉक करना चाहते हैं।\n\nइस विषय पर मेरे पास अभी जाँचा हुआ कानून नहीं है, इसलिए मैं अंदाज़ा नहीं लगाऊँगा। इसका मतलब यह नहीं कि आप किसी मुसीबत में हैं: नीचे दिए गए सरकारी रास्ते और मुफ़्त कानूनी सहायता आपकी मदद कर सकते हैं।\n\nएक सरकारी सेवा जो इसमें मदद कर सकती है (भरोसा करने से पहले उसका पेज देख लें):\n- Department of Telecommunications - Sanchar Saathi Portal (block lost or stolen mobile phones and report suspected fraud communication) (स्रोत: https://sancharsaathi.gov.in/)\n\nआप अभी यह कर सकते हैं: मुफ़्त कानूनी सहायता कार्यालय आपको यह कानून समझा सकता है और बता सकता है कि यह आपकी स्थिति पर लागू होता है या नहीं।\n\nअसली वकील या मुफ़्त कानूनी सहायता के लिए:\n- National Legal Services Authority Helpline: 15100 (स्रोत: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (स्रोत: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nयह कानूनी जानकारी है, कानूनी सलाह नहीं।",
         "reply_lang": "hi-IN",
@@ -215,7 +215,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "e74dcc170a0e",
+          "session": "dfe57435b23f",
           "input_mode": "text",
           "user_text": "लखनऊ में मेरा मोबाइल खो गया है। उसका मोबाइल नेटवर्क पर इस्तेमाल रोकना और खोने की रिपोर्ट करना चाहता हूं। किस आधिकारिक सेवा से मदद मिल सकती है?",
           "mode": "advice",
@@ -242,11 +242,11 @@
             "error": null
           },
           "escalation_level": "out_of_scope",
-          "timings_s": 4.357,
+          "timings_s": 8.68,
           "llm": {
             "calls": 3,
             "retries": 0,
-            "latency_s": 4.32,
+            "latency_s": 8.64,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
@@ -420,10 +420,10 @@
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 4.363014800008386,
-      "finished_at": "2026-11-06T15:22:52.009497+00:00"
+      "latency_s": 8.691126500023529,
+      "finished_at": "2026-11-06T17:41:52.049478+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-06T15:22:52.009497+00:00"
+  "finished_at": "2026-11-06T17:41:52.049478+00:00"
 }

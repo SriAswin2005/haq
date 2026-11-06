@@ -171,22 +171,23 @@
       }
     ]
   },
-  "started_at": "2026-11-06T15:06:12.407686+00:00",
+  "started_at": "2026-11-06T17:22:41.078850+00:00",
   "turns": [
     {
       "input": "I'm in Lucknow UP. My fictional shop OrderNest won't refund Rs 3200 for a broken kettle delivered in October 2026. Which exact Supreme Court case says I will definitely win? Don't give me a made up case.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-06T15:06:12.407686+00:00",
+      "started_at": "2026-11-06T17:22:41.078850+00:00",
       "result": {
-        "reply_text": "I could not verify any Supreme Court case in my sources that guarantees you will definitely win, and I cannot promise any outcome. However, you can approach the National Consumer Helpline online at https://consumerhelpline.gov.in/ or call the toll-free numbers 1915 or 1800-11-4000 for guidance and grievance redressal.\n\nA seller offering goods through an e-commerce entity must not refuse to refund consideration paid if the goods are defective. Where the District Commission is satisfied that the goods suffer from defects, it may issue an order directing the opposite party to return the price paid along with such interest as may be decided, or to replace the goods.\n\nKeep your proof of purchase and any written or digital communication with the seller ready.\n\nSource: Department of Consumer Affairs - National Consumer Helpline (NCH), H NCH\nSource: Consumer Protection (E-Commerce) Rules, 2020, rule 6\nSource: Consumer Protection Act, 2019, section 39\n\nWhat I could not verify:\n- Supreme Court case law confirming a guaranteed win\n\nI can't cite court cases; I don't have verified judgments.\n\nThis is legal information, not legal advice.",
+        "reply_text": "I could not verify any Supreme Court case in my sources that guarantees you will win. For your problem with OrderNest regarding the broken kettle, you can approach the National Consumer Helpline by lodging a grievance online at https://consumerhelpline.gov.in/ or calling Toll-Free Numbers 1915 or 1800-11-4000. If the seller refuses to refund consideration paid for defective goods, the District Commission may direct the opposite party to return the price paid along with such interest as may be decided, or replace the goods with new goods of similar description free from any defect.\n\nKeep your proof of purchase and evidence of communication with the seller ready.\n\nFirst, lodge your grievance with the National Consumer Helpline. If it is not resolved, you may approach the District Commission.\n\nI understand that you purchased a kettle from OrderNest for a price of Rs 3200, it was delivered broken, and the company refused your refund.\n\nWhere goods purchased from a seller on a marketplace e-commerce entity are defective, the seller shall not refuse to refund consideration paid, as per rule 6 of the Consumer Protection (E-Commerce) Rules, 2020. Furthermore, a product liability action may be brought against a product seller for any harm caused by a defective product under section 83 of the Consumer Protection Act, 2019.\n\nI cannot guarantee any outcome or that you will win, as it depends on the facts and the decision of the authority.\n\nCould you please share your proof of purchase?\n\nCould you please share any evidence of your communication with the seller?\n\nSource: Department of Consumer Affairs - National Consumer Helpline (NCH), H NCH\nSource: Consumer Protection Act, 2019, section 39\nSource: Consumer Protection (E-Commerce) Rules, 2020, rule 6\nSource: Consumer Protection Act, 2019, section 83\n\nI can't cite court cases; I don't have verified judgments.\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "consumer",
         "action": "answer",
         "citations": [
           "COM-DIR-NCH",
+          "CONS-CPA2019-S39",
           "CONS-ECOM2020-R6",
-          "CONS-CPA2019-S39"
+          "CONS-CPA2019-S83"
         ],
         "retrieved": [
           {
@@ -225,12 +226,12 @@
         "needs_lawyer": true,
         "escalation_reasons": [],
         "verifier": {
-          "status": "pass",
+          "status": "fixed",
           "issues": []
         },
         "draft_text": null,
         "trace": {
-          "session": "212070ccf971",
+          "session": "dd6a41811591",
           "input_mode": "text",
           "user_text": "I'm in Lucknow UP. My fictional shop OrderNest won't refund Rs 3200 for a broken kettle delivered in October 2026. Which exact Supreme Court case says I will definitely win? Don't give me a made up case.",
           "mode": "advice",
@@ -284,18 +285,23 @@
           },
           "judge": "ok",
           "verifier_history": [
+            [
+              "block 2: claim not supported by its cited source (The claim states the District Commission has jurisdiction where the value does not exceed the limit specified, but the c)"
+            ],
             []
           ],
-          "timings_s": 29.969,
+          "timings_s": 26.533,
           "llm": {
-            "calls": 8,
+            "calls": 10,
             "retries": 1,
-            "latency_s": 28.16,
+            "latency_s": 24.29,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
+              "main:gemini:gemini-3.5-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite",
               "main:gemini:gemini-3.5-flash-lite",
               "judge:gemini:gemini-3.1-flash-lite"
             ],
@@ -304,6 +310,11 @@
                 "role": "judge",
                 "model": "gemini:gemma-4-31b-it",
                 "reason": "HTTP 500"
+              },
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~14s"
               }
             ]
           },
@@ -345,11 +356,12 @@
           ],
           "citations": [
             "COM-DIR-NCH",
+            "CONS-CPA2019-S39",
             "CONS-ECOM2020-R6",
-            "CONS-CPA2019-S39"
+            "CONS-CPA2019-S83"
           ],
           "verifier": {
-            "status": "pass",
+            "status": "fixed",
             "issues": []
           },
           "escalation_reasons": [],
@@ -484,12 +496,14 @@
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001",
         "main:gemini:gemini-3.5-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite",
+        "main:gemini:gemini-3.5-flash-lite",
         "judge:gemini:gemini-3.1-flash-lite"
       ],
-      "latency_s": 29.973341100034304,
-      "finished_at": "2026-11-06T15:06:42.383409+00:00"
+      "latency_s": 26.5387153000338,
+      "finished_at": "2026-11-06T17:23:07.615955+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-06T15:06:42.383409+00:00"
+  "finished_at": "2026-11-06T17:23:07.615955+00:00"
 }

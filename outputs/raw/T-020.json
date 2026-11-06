@@ -167,13 +167,13 @@
       }
     ]
   },
-  "started_at": "2026-11-06T15:12:10.868753+00:00",
+  "started_at": "2026-11-06T17:29:26.733488+00:00",
   "turns": [
     {
       "input": "I live in Kanpur UP. A friend repaid my personal loan by cheque, it bounced last week. This isn't salary or a purchase. Draft the cheque bounce prosecution notice and calculate the filing deadline.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-06T15:12:16.873358+00:00",
+      "started_at": "2026-11-06T17:29:32.735554+00:00",
       "result": {
         "reply_text": "What I understood: what happened: A personal loan repayment cheque bounced last week.; counterparty type: friend\n\nI don't cover this topic with verified law yet, so I won't guess. This doesn't mean you are in trouble: the official channels and free legal aid below can guide you.\n\nWhat you can do right now: a free legal aid office can explain this law to you and tell you whether it applies to your situation.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (Source: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
@@ -213,7 +213,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "4eb2a2540656",
+          "session": "3f927ad155b2",
           "input_mode": "text",
           "user_text": "I live in Kanpur UP. A friend repaid my personal loan by cheque, it bounced last week. This isn't salary or a purchase. Draft the cheque bounce prosecution notice and calculate the filing deadline.",
           "mode": "advice",
@@ -244,11 +244,11 @@
           },
           "summary_rejected": "आपके दोस्त द्वारा दिए गए पर्सनल लोन के भुगतान का चेक पिछले हफ्ते बाउंस हो गया है।",
           "escalation_level": "out_of_scope",
-          "timings_s": 5.232,
+          "timings_s": 5.255,
           "llm": {
             "calls": 3,
             "retries": 0,
-            "latency_s": 5.2,
+            "latency_s": 5.22,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
@@ -418,10 +418,10 @@
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 5.235924300039187,
-      "finished_at": "2026-11-06T15:12:22.108782+00:00"
+      "latency_s": 5.263920800003689,
+      "finished_at": "2026-11-06T17:29:37.999134+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-06T15:12:22.108782+00:00"
+  "finished_at": "2026-11-06T17:29:37.999134+00:00"
 }

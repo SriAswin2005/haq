@@ -165,13 +165,13 @@
       }
     ]
   },
-  "started_at": "2026-11-06T15:20:20.655564+00:00",
+  "started_at": "2026-11-06T17:39:00.471414+00:00",
   "turns": [
     {
       "input": "Someone posing as a delivery agent tricked me into approving a UPI request and Rs 4800 left my account today. I want to report this online financial fraud. Which official reporting service may help?",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-06T15:20:26.656884+00:00",
+      "started_at": "2026-11-06T17:39:06.475890+00:00",
       "result": {
         "reply_text": "What I understood: Someone posing as a delivery agent tricked you into approving a UPI request, resulting in a loss of Rs 4800 from your account.\n\nI don't cover this topic with verified law yet, so I won't guess. This doesn't mean you are in trouble: the official channels and free legal aid below can guide you.\n\nAn official service that may handle this (please check its page before relying on it):\n- National Cyber Crime Reporting Portal (report online financial fraud and cybercrimes): 1930 (Source: https://cybercrime.gov.in/)\n\nWhat you can do right now: collect your documents (agreement, receipts, bank or UPI records, messages, photos), and write down the dates and amounts in order.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
@@ -215,7 +215,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "59703ecc6ddb",
+          "session": "66cc3f3a19eb",
           "input_mode": "text",
           "user_text": "Someone posing as a delivery agent tricked me into approving a UPI request and Rs 4800 left my account today. I want to report this online financial fraud. Which official reporting service may help?",
           "mode": "advice",
@@ -246,11 +246,11 @@
             "error": null
           },
           "escalation_level": "out_of_scope",
-          "timings_s": 9.162,
+          "timings_s": 21.852,
           "llm": {
             "calls": 3,
             "retries": 0,
-            "latency_s": 9.13,
+            "latency_s": 21.82,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
@@ -424,10 +424,10 @@
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 9.177299300034065,
-      "finished_at": "2026-11-06T15:20:35.834137+00:00"
+      "latency_s": 21.85586389998207,
+      "finished_at": "2026-11-06T17:39:28.331451+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-06T15:20:35.834137+00:00"
+  "finished_at": "2026-11-06T17:39:28.331451+00:00"
 }

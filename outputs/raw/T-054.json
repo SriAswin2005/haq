@@ -163,13 +163,13 @@
       }
     ]
   },
-  "started_at": "2026-11-06T15:23:55.282196+00:00",
+  "started_at": "2026-11-06T17:43:53.026986+00:00",
   "turns": [
     {
       "input": "मेरे पड़ोस के एक बुजुर्ग को परिवार खाना और देखभाल नहीं दे रहा। अभी कोई चिकित्सा आपात स्थिति नहीं है। वरिष्ठ नागरिक की उपेक्षा में सहायता देने वाली आधिकारिक हेल्पलाइन कौन सी है?",
       "input_mode": "text",
       "lang_hint": "hi-IN",
-      "started_at": "2026-11-06T15:24:01.284445+00:00",
+      "started_at": "2026-11-06T17:43:59.033791+00:00",
       "result": {
         "reply_text": "मैंने जो समझा: आपके पड़ोस के बुजुर्ग को उनका परिवार खाना और देखभाल नहीं दे रहा है और आप उनके लिए हेल्पलाइन जानना चाहते हैं।\n\nइस विषय पर मेरे पास अभी जाँचा हुआ कानून नहीं है, इसलिए मैं अंदाज़ा नहीं लगाऊँगा। इसका मतलब यह नहीं कि आप किसी मुसीबत में हैं: नीचे दिए गए सरकारी रास्ते और मुफ़्त कानूनी सहायता आपकी मदद कर सकते हैं।\n\nएक सरकारी सेवा जो इसमें मदद कर सकती है (भरोसा करने से पहले उसका पेज देख लें):\n- Ministry of Social Justice and Empowerment - Elderline 14567 (national helpline for senior citizens, elder abuse intervention, and welfare guidance): 14567 (स्रोत: https://socialjustice.gov.in/)\n\nआप अभी यह कर सकते हैं: मुफ़्त कानूनी सहायता कार्यालय आपको यह कानून समझा सकता है और बता सकता है कि यह आपकी स्थिति पर लागू होता है या नहीं।\n\nअसली वकील या मुफ़्त कानूनी सहायता के लिए:\n- National Legal Services Authority Helpline: 15100 (स्रोत: https://nalsa.gov.in/contact-us/)\n\nयह कानूनी जानकारी है, कानूनी सलाह नहीं।",
         "reply_lang": "hi-IN",
@@ -213,7 +213,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "5046188fdb33",
+          "session": "f86d5ae6f6d1",
           "input_mode": "text",
           "user_text": "मेरे पड़ोस के एक बुजुर्ग को परिवार खाना और देखभाल नहीं दे रहा। अभी कोई चिकित्सा आपात स्थिति नहीं है। वरिष्ठ नागरिक की उपेक्षा में सहायता देने वाली आधिकारिक हेल्पलाइन कौन सी है?",
           "mode": "advice",
@@ -241,11 +241,11 @@
             "error": null
           },
           "escalation_level": "out_of_scope",
-          "timings_s": 6.103,
+          "timings_s": 7.202,
           "llm": {
             "calls": 3,
             "retries": 0,
-            "latency_s": 6.06,
+            "latency_s": 7.17,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
@@ -419,10 +419,10 @@
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 6.105993800039869,
-      "finished_at": "2026-11-06T15:24:07.389717+00:00"
+      "latency_s": 7.208201200002804,
+      "finished_at": "2026-11-06T17:44:06.240589+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-06T15:24:07.389717+00:00"
+  "finished_at": "2026-11-06T17:44:06.240589+00:00"
 }

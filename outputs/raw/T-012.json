@@ -168,13 +168,13 @@
       }
     ]
   },
-  "started_at": "2026-11-06T15:10:01.034557+00:00",
+  "started_at": "2026-11-06T17:27:02.301170+00:00",
   "turns": [
     {
       "input": "Kanpur UP employer owes my October 2026 salary Rs 22000. When I asked today the manager threatened to file a police case and get me arrested. I have the message. Can you help me get paid safely?",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-06T15:10:07.036876+00:00",
+      "started_at": "2026-11-06T17:27:08.305960+00:00",
       "result": {
         "reply_text": "What I understood: Your employer in Kanpur is withholding your October 2026 salary of Rs 22,000 and has threatened you with police action when you asked for payment.\n\nThis needs a real lawyer or free legal aid. I can still share verified general information where I have it, but I cannot handle this safely on my own.\n\nWhy: your message mentions something that needs a lawyer (such as police, court, violence, threats, eviction or family matters); this involves a matter I cannot safely handle here (for example criminal law, child protection, police or family matters)\n\nWhat you can do right now: collect your documents (agreement, receipts, bank or UPI records, messages, photos), and write down the dates and amounts in order.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (Source: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
@@ -216,7 +216,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "28126fe517c0",
+          "session": "1094b76aafd8",
           "input_mode": "text",
           "user_text": "Kanpur UP employer owes my October 2026 salary Rs 22000. When I asked today the manager threatened to file a police case and get me arrested. I have the message. Can you help me get paid safely?",
           "mode": "advice",
@@ -254,11 +254,11 @@
             "error": null
           },
           "escalation_level": "danger",
-          "timings_s": 3.287,
+          "timings_s": 20.866,
           "llm": {
             "calls": 2,
             "retries": 0,
-            "latency_s": 3.25,
+            "latency_s": 20.83,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001"
@@ -428,10 +428,10 @@
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 3.2914248000015505,
-      "finished_at": "2026-11-06T15:10:10.324257+00:00"
+      "latency_s": 20.870835500012618,
+      "finished_at": "2026-11-06T17:27:29.175990+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-06T15:10:10.324257+00:00"
+  "finished_at": "2026-11-06T17:27:29.175990+00:00"
 }

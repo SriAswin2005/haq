@@ -175,15 +175,15 @@
       }
     ]
   },
-  "started_at": "2026-11-06T15:22:08.405027+00:00",
+  "started_at": "2026-11-06T17:40:48.821675+00:00",
   "turns": [
     {
       "input": "Meri train cancel hui thi, ticket ka refund ab tak nahi mila. Railway ki official passenger grievance service mein complaint kahan karun? Bas sahi service bata do.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-06T15:22:14.405905+00:00",
+      "started_at": "2026-11-06T17:40:54.823978+00:00",
       "result": {
-        "reply_text": "आप अपनी शिकायत रेलमदद पोर्टल (RailMadad) पर ऑनलाइन दर्ज कर सकते हैं या चौबीसों घंटे चलने वाली रेलवे हेल्पलाइन 139 पर कॉल कर सकते हैं।\n\nशिकायत दर्ज करने के लिए अपने पास ट्रेन का टिकट, पीएनआर नंबर (PNR number) और यात्रा की तारीख (date of journey) तैयार रखें।\n\nक्या आप अपना पीएनआर नंबर (PNR number) और यात्रा की तारीख (date of journey) बता सकते हैं?\n\nSource: Indian Railways - RailMadad Portal, P RAIL\n\nThis is legal information, not legal advice.",
+        "reply_text": "You can register and track your ticket refund grievance with the unified passenger grievance redressal portal of Indian Railways, RailMadad, at https://railmadad.indianrailways.gov.in/, via the RailMadad mobile app, or by dialing the 24x7 integrated railway helpline at 139.\n\nKeep your ticket details, PNR number, and any cancellation messages ready as proof.\n\nCould you please tell me your PNR number and date of journey?\n\nSource: Indian Railways - RailMadad Portal, P RAIL\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "consumer",
         "action": "answer",
@@ -232,7 +232,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "1a70a9bcacaf",
+          "session": "33b8cc920ae0",
           "input_mode": "text",
           "user_text": "Meri train cancel hui thi, ticket ka refund ab tak nahi mila. Railway ki official passenger grievance service mein complaint kahan karun? Bas sahi service bata do.",
           "mode": "advice",
@@ -284,11 +284,11 @@
           "verifier_history": [
             []
           ],
-          "timings_s": 12.945,
+          "timings_s": 17.683,
           "llm": {
             "calls": 5,
             "retries": 0,
-            "latency_s": 12.85,
+            "latency_s": 17.59,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
@@ -300,7 +300,7 @@
               {
                 "role": "judge",
                 "model": "gemini:gemma-4-31b-it",
-                "reason": "busy for ~532s"
+                "reason": "busy for ~367s"
               }
             ]
           },
@@ -479,10 +479,10 @@
         "main:gemini:gemini-3.5-flash-lite",
         "judge:gemini:gemini-3.1-flash-lite"
       ],
-      "latency_s": 12.946713900018949,
-      "finished_at": "2026-11-06T15:22:27.350413+00:00"
+      "latency_s": 17.687072100001387,
+      "finished_at": "2026-11-06T17:41:12.509162+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-06T15:22:27.350413+00:00"
+  "finished_at": "2026-11-06T17:41:12.509162+00:00"
 }

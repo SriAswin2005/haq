@@ -178,13 +178,13 @@
       }
     ]
   },
-  "started_at": "2026-11-06T15:17:49.678851+00:00",
+  "started_at": "2026-11-06T17:35:06.229438+00:00",
   "turns": [
     {
       "input": "I am Asha Example in Kanpur UP. Fictional seller OrderNest delivered a broken lamp on 10 October 2026, order FN-236, price Rs 2400. I have the invoice and photos; support refused a refund. Draft a consumer grievance email asking for a refund. I haven't given you addresses or an email recipient.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-06T15:17:55.666034+00:00",
+      "started_at": "2026-11-06T17:35:12.233429+00:00",
       "result": {
         "reply_text": "Here is a draft complaint to the company's grievance officer, followed by the facts to keep ready if it is not resolved. Anything I do not know is left as a [● placeholder] for you to fill in.\n\nCOMPLAINT TO THE GRIEVANCE OFFICER: REQUEST FOR refund\n\nTo: Grievance Officer, OrderNest\nEmail / portal: [● grievance officer's email or complaint page, as shown on the company's website or app]\nDate: [● date of sending]\n\nFrom: Asha Example, [● your phone number and email]\n\nSubject: Complaint about lamp, Order/Booking No. FN-236\n\nDear Grievance Officer,\n\n1. On 2026-10-10 I bought lamp from you for Rs. 2,400, Order/Booking No. FN-236, paid by [● mode of payment, e.g. card / UPI / cash on delivery].\n\n2. The problem: [● what is wrong, e.g. defective, not delivered, service not given as promised], noticed on [● date you noticed it].\n\n3. I have already: [● what you tried, with dates and ticket numbers; or \"this is my first complaint\"].\n\nThis complaint refers to: Consumer Protection (E-Commerce) Rules, 2020, rule 4; Consumer Protection (E-Commerce) Rules, 2020, rule 6. [● Have a lawyer confirm that these provisions apply to your case.]\n\n4. I request a refund of Rs. 2,400 within [● number of days you allow] days, and a written acknowledgement of this complaint with a complaint number.\n\n5. If this is not resolved, I will approach the National Consumer Helpline and the appropriate Consumer Commission.\n\nRegards,\nAsha Example\n\nAttachments: [● invoice / order confirmation / photos / chat or email screenshots]\n\n--------------------------------------------------------------\nIF THIS IS NOT RESOLVED: facts to keep ready for a consumer complaint\n- Your name, address and phone: [● your details]\n- The company's name and address: OrderNest, [● company address]\n- What you bought, when, and for how much: lamp, 2026-10-10, Rs. 2,400\n- What went wrong, and every step you took, with dates: [● timeline]\n- What you are asking for: refund, [● any compensation you want to claim]\n- Copies of every document listed above.\n\n\nCheck every detail before sending. For high-value or complex matters, have a lawyer review it.",
         "reply_lang": "en-IN",
@@ -220,7 +220,7 @@
         },
         "draft_text": "COMPLAINT TO THE GRIEVANCE OFFICER: REQUEST FOR refund\n\nTo: Grievance Officer, OrderNest\nEmail / portal: [● grievance officer's email or complaint page, as shown on the company's website or app]\nDate: [● date of sending]\n\nFrom: Asha Example, [● your phone number and email]\n\nSubject: Complaint about lamp, Order/Booking No. FN-236\n\nDear Grievance Officer,\n\n1. On 2026-10-10 I bought lamp from you for Rs. 2,400, Order/Booking No. FN-236, paid by [● mode of payment, e.g. card / UPI / cash on delivery].\n\n2. The problem: [● what is wrong, e.g. defective, not delivered, service not given as promised], noticed on [● date you noticed it].\n\n3. I have already: [● what you tried, with dates and ticket numbers; or \"this is my first complaint\"].\n\nThis complaint refers to: Consumer Protection (E-Commerce) Rules, 2020, rule 4; Consumer Protection (E-Commerce) Rules, 2020, rule 6. [● Have a lawyer confirm that these provisions apply to your case.]\n\n4. I request a refund of Rs. 2,400 within [● number of days you allow] days, and a written acknowledgement of this complaint with a complaint number.\n\n5. If this is not resolved, I will approach the National Consumer Helpline and the appropriate Consumer Commission.\n\nRegards,\nAsha Example\n\nAttachments: [● invoice / order confirmation / photos / chat or email screenshots]\n\n--------------------------------------------------------------\nIF THIS IS NOT RESOLVED: facts to keep ready for a consumer complaint\n- Your name, address and phone: [● your details]\n- The company's name and address: OrderNest, [● company address]\n- What you bought, when, and for how much: lamp, 2026-10-10, Rs. 2,400\n- What went wrong, and every step you took, with dates: [● timeline]\n- What you are asking for: refund, [● any compensation you want to claim]\n- Copies of every document listed above.\n\n\nCheck every detail before sending. For high-value or complex matters, have a lawyer review it.",
         "trace": {
-          "session": "9f760e251591",
+          "session": "186d9f8f387d",
           "input_mode": "text",
           "user_text": "I am Asha Example in Kanpur UP. Fictional seller OrderNest delivered a broken lamp on 10 October 2026, order FN-236, price Rs 2400. I have the invoice and photos; support refused a refund. Draft a consumer grievance email asking for a refund. I haven't given you addresses or an email recipient.",
           "mode": "draft",
@@ -302,11 +302,11 @@
             ],
             "scan_issues": []
           },
-          "timings_s": 6.275,
+          "timings_s": 8.499,
           "llm": {
             "calls": 4,
             "retries": 0,
-            "latency_s": 6.23,
+            "latency_s": 8.45,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
@@ -474,10 +474,10 @@
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 6.277976999990642,
-      "finished_at": "2026-11-06T15:18:01.942104+00:00"
+      "latency_s": 8.503651200036984,
+      "finished_at": "2026-11-06T17:35:20.732500+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-06T15:18:01.942104+00:00"
+  "finished_at": "2026-11-06T17:35:20.732500+00:00"
 }

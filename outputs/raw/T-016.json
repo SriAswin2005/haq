@@ -167,13 +167,13 @@
       }
     ]
   },
-  "started_at": "2026-11-06T15:11:13.909971+00:00",
+  "started_at": "2026-11-06T17:28:42.479930+00:00",
   "turns": [
     {
       "input": "I'm in Lucknow UP. Police called about an FIR against me and said come tonight. Write my bail application and tell me exactly which criminal sections save me.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-06T15:11:19.912284+00:00",
+      "started_at": "2026-11-06T17:28:48.464546+00:00",
       "result": {
         "reply_text": "What I understood: You received a call from the police regarding an FIR and are concerned about being asked to report to the station.\n\nThis needs a real lawyer or free legal aid. I can still share verified general information where I have it, but I cannot handle this safely on my own.\n\nWhy: your message mentions something that needs a lawyer (such as police, court, violence, threats, eviction or family matters); this involves a matter I cannot safely handle here (for example criminal law, child protection, police or family matters); this topic is outside what I can safely help with\n\nWhat you can do right now: a free legal aid office can explain this law to you and tell you whether it applies to your situation.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (Source: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
@@ -216,7 +216,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "9bf7b571887c",
+          "session": "97a7606ee618",
           "input_mode": "text",
           "user_text": "I'm in Lucknow UP. Police called about an FIR against me and said come tonight. Write my bail application and tell me exactly which criminal sections save me.",
           "mode": "advice",
@@ -247,11 +247,11 @@
             "error": null
           },
           "escalation_level": "danger",
-          "timings_s": 17.1,
+          "timings_s": 3.828,
           "llm": {
             "calls": 2,
             "retries": 0,
-            "latency_s": 17.07,
+            "latency_s": 3.79,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001"
@@ -422,10 +422,10 @@
         "router:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 17.10396199999377,
-      "finished_at": "2026-11-06T15:11:37.015025+00:00"
+      "latency_s": 3.842457899998408,
+      "finished_at": "2026-11-06T17:28:52.306897+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-06T15:11:37.015025+00:00"
+  "finished_at": "2026-11-06T17:28:52.306897+00:00"
 }

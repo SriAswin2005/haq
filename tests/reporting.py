@@ -50,7 +50,7 @@ def failure_reasons(item):
 
 def severity(item):
     names = {n for n, c in item["checks"].items() if c.status == "fail"}
-    critical = {"check_no_invented_law", "check_citations_valid", "check_legal_blocks_cited", "check_retrieval_scope", "check_referral"}
+    critical = {"check_no_invented_law", "check_citations_valid", "check_legal_blocks_cited", "check_retrieval_scope", "check_referral", "check_domains"}
     missing_escalation = item["case"]["expect_needs_lawyer"] and "check_needs_lawyer" in names
     return 1 if names & critical or missing_escalation or item.get("judge_failed") else 2
 
@@ -89,7 +89,9 @@ def referral_metrics(items):
     eligible = [i for i in items if i["status"] in {"pass", "fail"} and "expected_referral_any" in i["case"]]
     observations = [i["turn_checks"][-1]["check_referral"].details for i in eligible]
     return {"expected_cases": len(eligible), "shown_bodies": sum(len(o.get("shown", [])) for o in observations),
-            "correct_bodies": sum(len(o.get("correct", [])) for o in observations),
+            "correct_bodies": sum(len(o.get("correct", [])) + len(o.get("allowed_followups", [])) for o in observations),
+            "specific_correct_bodies": sum(len(o.get("correct", [])) for o in observations),
+            "allowed_followup_bodies": sum(len(o.get("allowed_followups", [])) for o in observations),
             "wrong_bodies": sum(len(o.get("wrong", [])) for o in observations),
             "shown_cases": sum(bool(o.get("shown")) for o in observations),
             "correct_cases": sum(bool(o.get("correct")) for o in observations),
@@ -224,7 +226,7 @@ def calibration_text(items, manifest):
     return "\n".join(lines) + "\n"
 
 
-def write_bug_report(root, items, manifest, run_dir):
+def write_bug_report(root, items, manifest, run_dir, publish=True):
     if manifest["stage"] == "fixture_mock":
         return  # Canned fixture failures are not app bugs.
     lines = ["# Evaluation bugs", "", f"Generated from {run_dir}. Stage: {manifest['stage']}.",
@@ -258,11 +260,11 @@ def write_bug_report(root, items, manifest, run_dir):
     lines += ["## Findings requiring review", ""] + [f"- {i['case']['id']} repeat {i['repeat']}, {name}: {c.reason}" for i, name, c in warnings]
     text = "\n".join(lines) + "\n"
     (run_dir / "BUGS.md").write_text(text, encoding="utf-8")
-    if manifest["stage"] == "real":
+    if manifest["stage"] == "real" and publish:
         (root / "tests/BUGS.md").write_text(text, encoding="utf-8")
 
 
-def write_reports(run_dir: Path, manifest: dict, records: list, corpus: dict):
+def write_reports(run_dir: Path, manifest: dict, records: list, corpus: dict, publish_bugs=True):
     items = [analyse(r, corpus) for r in records]
     counts = Counter(i["status"] for i in items)
     fields = ["case_id", "group", "repeat", "status", "overall_pass", "raw_file", "infra_error"]
@@ -310,5 +312,5 @@ def write_reports(run_dir: Path, manifest: dict, records: list, corpus: dict):
               "Resume skips saved files; --retry-infra appends attempts. Start a fresh run after any app, config, corpus, case or checker change."]
     (run_dir / "summary.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     (run_dir / "calibration.md").write_text(calibration_text(items, manifest), encoding="utf-8")
-    write_bug_report(run_dir.parents[2], items, manifest, run_dir)
+    write_bug_report(run_dir.parents[2], items, manifest, run_dir, publish=publish_bugs)
     return {"passed": counts["pass"], "failed": counts["fail"], "infra_errors": counts["infra_error"], "pending": counts["pending"], "flaky": flaky}

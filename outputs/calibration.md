@@ -6,8 +6,8 @@ Skipped observations: {}. Repeats are correlated, not independent samples.
 
 | Population | n | min | median | max |
 |---|---:|---:|---:|---:|
-| answer | 7 | 0.6419 | 0.7120 | 0.7461 |
-| refuse | 3 | 0.6598 | 0.6893 | 0.7310 |
+| answer | 7 | 0.6419 | 0.7195 | 0.7461 |
+| refuse | 3 | 0.6719 | 0.6893 | 0.7310 |
 
 ```text
 Score histogram (cosine score bins; a count is one saved final turn)
@@ -35,7 +35,7 @@ refuse:
   [ 0.8,  1.0]  0
 ```
 
-Observed score-range overlap: [0.6598, 0.7310].
+Observed score-range overlap: [0.6719, 0.7310].
 
 Gate refuses when top score < threshold. Candidate errors below are in-sample estimates, not validation guarantees.
 
@@ -55,9 +55,9 @@ Observed case scores:
 - answer: T-022: 0.710528
 - answer: T-023: 0.702665
 - answer: T-024: 0.719528
-- answer: T-025: 0.712011
+- answer: T-025: 0.726849
 - answer: T-026: 0.641950
 - answer: T-028: 0.746098
 - refuse: T-001: 0.689258
-- refuse: T-002: 0.659783
+- refuse: T-002: 0.671921
 - refuse: T-007: 0.731044

@@ -163,26 +163,32 @@
       }
     ]
   },
-  "started_at": "2026-11-06T15:22:52.013531+00:00",
+  "started_at": "2026-11-06T17:41:52.054476+00:00",
   "turns": [
     {
       "input": "Mujhe ek central government department se apni application ki file records maangni hain. Online information request bhejne ke liye kaunsa official portal hai? Kanoon ki explanation nahi chahiye.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-06T15:22:58.014308+00:00",
+      "started_at": "2026-11-06T17:41:58.041498+00:00",
       "result": {
-        "reply_text": "What I understood: what happened: User wants to request file records from a central government department.\n\nI don't cover this topic with verified law yet, so I won't guess. This doesn't mean you are in trouble: the official channels and free legal aid below can guide you.\n\nAn official service that may handle this (please check its page before relying on it):\n- Department of Personnel and Training - RTI Online Portal (submit online RTI applications and first appeals to central public authorities) (Source: https://rtionline.gov.in/)\n\nWhat you can do right now: a free legal aid office can explain this law to you and tell you whether it applies to your situation.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
+        "reply_text": "What I understood: what happened: User wants to request file records of their application from a central government department and is asking for the official online portal to submit the information request.\n\nI don't cover this topic with verified law yet, so I won't guess. This doesn't mean you are in trouble: the official channels and free legal aid below can guide you.\n\nAn official service that may handle this (please check its page before relying on it):\n- Department of Personnel and Training - RTI Online Portal (submit online RTI applications and first appeals to central public authorities) (Source: https://rtionline.gov.in/)\n- Department of Administrative Reforms and Public Grievances - CPGRAMS (public grievances regarding central government ministries and departments) (Source: https://pgportal.gov.in/)\n\nWhat you can do right now: a free legal aid office can explain this law to you and tell you whether it applies to your situation.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "out_of_scope",
         "action": "escalate",
         "citations": [
           "COM-DIR-RTI",
+          "COM-DIR-CPGRAMS",
           "COM-NALSA-H15100"
         ],
         "retrieved": [
           {
             "id": "COM-DIR-RTI",
-            "score": 0.7885792851448059,
+            "score": 0.744296669960022,
+            "via": "referral"
+          },
+          {
+            "id": "COM-DIR-CPGRAMS",
+            "score": 0.7296162843704224,
             "via": "referral"
           },
           {
@@ -212,7 +218,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "3c1c7f7e0139",
+          "session": "b43a9b5bf8b0",
           "input_mode": "text",
           "user_text": "Mujhe ek central government department se apni application ki file records maangni hain. Online information request bhejne ke liye kaunsa official portal hai? Kanoon ki explanation nahi chahiye.",
           "mode": "advice",
@@ -221,42 +227,58 @@
             "language": "hi-IN",
             "state_or_city": null,
             "case_file_update": {
-              "what_happened": "User wants to request file records from a central government department."
+              "what_happened": "User wants to request file records of their application from a central government department and is asking for the official online portal to submit the information request."
             },
             "missing_facts": [],
             "escalation_flags": [],
-            "english_retrieval_query": "official portal for RTI application central government",
+            "english_retrieval_query": "official portal for central government information request",
             "intent": [
               "where_to_complain"
             ],
-            "question": "Which official portal should be used to send an online information request to a central government department?",
-            "new_topic": true,
-            "summary": "आप केंद्र सरकार के किसी विभाग से अपनी एप्लीकेशन के फाइल रिकॉर्ड्स मांगना चाहते हैं और इसके लिए आधिकारिक पोर्टल जानना चाहते हैं।"
+            "question": "Which official portal should I use to send an online information request to a central government department?",
+            "new_topic": false,
+            "summary": "आप केंद्रीय सरकारी विभाग से अपनी एप्लीकेशन के रिकॉर्ड मांगना चाहते हैं और इसके लिए आधिकारिक ऑनलाइन पोर्टल के बारे में पूछ रहे हैं।"
           },
           "router_info": {
             "attempts": 1,
             "error": null
           },
-          "summary_rejected": "आप केंद्र सरकार के किसी विभाग से अपनी एप्लीकेशन के फाइल रिकॉर्ड्स मांगना चाहते हैं और इसके लिए आधिकारिक पोर्टल जानना चाहते हैं।",
+          "summary_rejected": "आप केंद्रीय सरकारी विभाग से अपनी एप्लीकेशन के रिकॉर्ड मांगना चाहते हैं और इसके लिए आधिकारिक ऑनलाइन पोर्टल के बारे में पूछ रहे हैं।",
           "escalation_level": "out_of_scope",
-          "timings_s": 4.177,
+          "timings_s": 46.578,
           "llm": {
             "calls": 3,
-            "retries": 0,
-            "latency_s": 4.14,
+            "retries": 1,
+            "latency_s": 46.54,
             "models": [
-              "router:gemini:gemini-3.1-flash-lite",
+              "router:gemini:gemini-3.5-flash-lite",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001"
             ],
-            "fallbacks": []
+            "fallbacks": [
+              {
+                "role": "router",
+                "model": "gemini:gemini-3.1-flash-lite",
+                "reason": "network error (ReadTimeout)"
+              },
+              {
+                "role": "router",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~275s"
+              }
+            ]
           },
           "action": "escalate",
           "category": "out_of_scope",
           "retrieved": [
             {
               "id": "COM-DIR-RTI",
-              "score": 0.7885792851448059,
+              "score": 0.744296669960022,
+              "via": "referral"
+            },
+            {
+              "id": "COM-DIR-CPGRAMS",
+              "score": 0.7296162843704224,
               "via": "referral"
             },
             {
@@ -278,6 +300,7 @@
           ],
           "citations": [
             "COM-DIR-RTI",
+            "COM-DIR-CPGRAMS",
             "COM-NALSA-H15100"
           ],
           "verifier": {
@@ -412,14 +435,14 @@
         }
       },
       "model_names_used": [
-        "router:gemini:gemini-3.1-flash-lite",
+        "router:gemini:gemini-3.5-flash-lite",
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 4.179054600012023,
-      "finished_at": "2026-11-06T15:23:02.193249+00:00"
+      "latency_s": 46.5841805000091,
+      "finished_at": "2026-11-06T17:42:44.624275+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-06T15:23:02.193249+00:00"
+  "finished_at": "2026-11-06T17:42:44.624275+00:00"
 }

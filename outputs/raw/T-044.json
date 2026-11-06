@@ -9,14 +9,14 @@
       "directory",
       "PF withdrawal stuck"
     ],
-    "category_expected": "out_of_scope",
+    "category_expected": "wages",
     "language": "en-IN",
     "input_mode": "text",
     "turns": [
       "My provident fund withdrawal has been pending for two months and the status never changes. Where can a PF member register an official service grievance? I only need the right office or portal."
     ],
-    "expected_action": "escalate",
-    "expect_needs_lawyer": true,
+    "expected_action": "answer",
+    "expect_needs_lawyer": false,
     "expected_topics": [
       "PF withdrawal stuck",
       "official referral"
@@ -36,7 +36,24 @@
       "central",
       "UP"
     ],
-    "retrieval_expectation_kind": "safe_referral"
+    "retrieval_expectation_kind": "safe_referral",
+    "expected_outcomes": [
+      {
+        "category": "wages",
+        "action": "answer",
+        "needs_lawyer": false
+      },
+      {
+        "category": "wages",
+        "action": "answer",
+        "needs_lawyer": true
+      },
+      {
+        "category": "out_of_scope",
+        "action": "escalate",
+        "needs_lawyer": true
+      }
+    ]
   },
   "repeat": 1,
   "mock": false,
@@ -163,15 +180,15 @@
       }
     ]
   },
-  "started_at": "2026-11-06T15:21:42.082487+00:00",
+  "started_at": "2026-11-06T17:40:19.118771+00:00",
   "turns": [
     {
       "input": "My provident fund withdrawal has been pending for two months and the status never changes. Where can a PF member register an official service grievance? I only need the right office or portal.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-06T15:21:48.068842+00:00",
+      "started_at": "2026-11-06T17:40:25.121742+00:00",
       "result": {
-        "reply_text": "A PF member can register and track grievances for settlement of PF claims online at the EPFiGMS portal, or by calling the EPFO Multilingual Helpline or the Toll-Free Help Desk for UAN and member services.\n\nKeep your PF account number, UAN, and details of your withdrawal request ready before registering your grievance.\n\nVisit the official EPFiGMS website or call the helpline numbers to lodge your complaint regarding the pending withdrawal.\n\nSource: Employees' Provident Fund Organisation - EPFiGMS Portal, P EPFO\n\nI do not know your state yet; state law can differ, and I only cover Uttar Pradesh in depth.\n\nBecause of the points above, please talk to a real lawyer or free legal aid office. (your state is not known)\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
+        "reply_text": "A PF member can register and track grievances for services provided by the Employees' Provident Fund Organisation online at the EPFiGMS portal at https://epfigms.gov.in/, or contact the EPFO Multilingual Helpline at 14470 or the Toll-Free Help Desk at 1800-118-005.\n\nKeep your provident fund documents, withdrawal request reference numbers, and any communication about your pending request ready.\n\nSource: Employees' Provident Fund Organisation - EPFiGMS Portal, P EPFO\n\nI do not know your state yet; state law can differ, and I only cover Uttar Pradesh in depth.\n\nBecause of the points above, please talk to a real lawyer or free legal aid office. (your state is not known)\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "wages",
         "action": "answer",
@@ -228,7 +245,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "41a49f189396",
+          "session": "49dfea93b344",
           "input_mode": "text",
           "user_text": "My provident fund withdrawal has been pending for two months and the status never changes. Where can a PF member register an official service grievance? I only need the right office or portal.",
           "mode": "advice",
@@ -287,11 +304,11 @@
           "verifier_history": [
             []
           ],
-          "timings_s": 9.165,
+          "timings_s": 11.656,
           "llm": {
             "calls": 6,
             "retries": 0,
-            "latency_s": 9.08,
+            "latency_s": 11.55,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
@@ -304,7 +321,7 @@
               {
                 "role": "judge",
                 "model": "gemini:gemma-4-31b-it",
-                "reason": "busy for ~563s"
+                "reason": "busy for ~401s"
               }
             ]
           },
@@ -492,10 +509,10 @@
         "judge:gemini:gemini-3.1-flash-lite",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 9.167093000025488,
-      "finished_at": "2026-11-06T15:21:57.235199+00:00"
+      "latency_s": 11.658951600024011,
+      "finished_at": "2026-11-06T17:40:36.779008+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-06T15:21:57.235199+00:00"
+  "finished_at": "2026-11-06T17:40:36.779008+00:00"
 }

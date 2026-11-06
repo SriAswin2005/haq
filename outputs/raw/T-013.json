@@ -173,22 +173,23 @@
       }
     ]
   },
-  "started_at": "2026-11-06T15:10:10.331509+00:00",
+  "started_at": "2026-11-06T17:27:29.180017+00:00",
   "turns": [
     {
       "input": "Today is 5 November 2026. I am in Lucknow UP. A fictional repair shop took Rs 7000 on 1 January 2023 and never repaired my mixer. I have done nothing since. Can I start now?",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-06T15:10:16.333079+00:00",
+      "started_at": "2026-11-06T17:27:35.167463+00:00",
       "result": {
-        "reply_text": "A complaint must be filed within two years from the date on which the cause of action has arisen, though a commission may entertain a complaint after this period if the complainant satisfies it that there was sufficient cause for the delay.\n\nKeep your receipts, payment proofs, and any written messages or communication ready.\n\nYou can approach the National Consumer Helpline for guidance and grievance redressal online at https://consumerhelpline.gov.in/ or by calling their toll-free numbers, and you can also file a complaint electronically before the District Commission using the e-Daakhil or e-Jagriti portal at https://e-jagriti.gov.in/.\n\nDo you have any receipts or proof of payment?\n\nHave you contacted the shop since the payment?\n\nSource: Consumer Protection Act, 2019, section 69\nSource: Department of Consumer Affairs - National Consumer Helpline (NCH), H NCH\nSource: National Consumer Disputes Redressal Commission - e-Daakhil / e-Jagriti Portal, P EDAAKHIL\n\nThis is legal information, not legal advice.",
+        "reply_text": "The District Commission shall not admit a complaint unless it is filed within two years from the date on which the cause of action has arisen, though a complaint may be entertained after this period if you satisfy the Commission that you had sufficient cause for not filing it within such period and the Commission records its reasons for condoning the delay.\n\nYou can seek guidance and lodge a grievance online through the National Consumer Helpline at https://consumerhelpline.gov.in/ or call their toll-free numbers 1915 or 1800-11-4000.\n\nYou may also file a consumer complaint electronically before the District Commission through the e-Jagriti portal at https://e-jagriti.gov.in/.\n\nKeep your receipts, payment proofs, and any communication with the repair shop ready.\n\nDo you have any receipts or proof of payment?\n\nHave you contacted the shop since the payment?\n\nSource: Consumer Protection Act, 2019, section 69\nSource: Department of Consumer Affairs - National Consumer Helpline (NCH), H NCH\n\nWhat I could not verify:\n- I left out one point because I could not match it exactly to the official text. A lawyer or legal aid office can confirm it.\n\nBecause of the points above, please talk to a real lawyer or free legal aid office. (the event may be old enough that time limits could be a problem)\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (Source: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "consumer",
         "action": "answer",
         "citations": [
           "CONS-CPA2019-S69",
           "COM-DIR-NCH",
-          "COM-DIR-EDAAKHIL"
+          "COM-NALSA-H15100",
+          "COM-UPSLSA-H1800"
         ],
         "retrieved": [
           {
@@ -222,17 +223,30 @@
           {
             "id": "COM-DIR-EDAAKHIL",
             "score": 0.7234513759613037
+          },
+          {
+            "id": "COM-NALSA-H15100",
+            "score": 0.7801640033721924,
+            "via": "aid_search"
+          },
+          {
+            "id": "COM-UPSLSA-H1800",
+            "score": 0.7588682770729065,
+            "via": "aid_search"
           }
         ],
-        "needs_lawyer": false,
-        "escalation_reasons": [],
+        "needs_lawyer": true,
+        "escalation_reasons": [
+          "limitation_risk"
+        ],
         "verifier": {
-          "status": "pass",
-          "issues": []
+          "status": "fixed",
+          "issues": [],
+          "pruned": true
         },
         "draft_text": null,
         "trace": {
-          "session": "567ed05a2c95",
+          "session": "568ed932f489",
           "input_mode": "text",
           "user_text": "Today is 5 November 2026. I am in Lucknow UP. A fictional repair shop took Rs 7000 on 1 January 2023 and never repaired my mixer. I have done nothing since. Can I start now?",
           "mode": "advice",
@@ -288,25 +302,63 @@
           },
           "judge": "ok",
           "verifier_history": [
-            []
+            [
+              "block 4: claim not supported by its cited source (The claim omits the requirement that the act of omission, commission, or negligence must have caused harm.)",
+              "block 5: claim not supported by its cited source (The claim implies the District Commission has jurisdiction for both amounts simultaneously or interchangeably, whereas t)"
+            ],
+            [
+              "block 4: claim not supported by its cited source (The claim implies the limit is either one crore OR fifty lakh, whereas the sources indicate the limit is one crore, and )"
+            ]
           ],
-          "timings_s": 12.617,
+          "pruned": {
+            "removed_blocks": [
+              4,
+              5
+            ],
+            "reasons": [
+              "block 4: claim not supported by its cited source (The claim omits the requirement that the act of omission, commission, or negligence must have caused harm.)",
+              "block 5: claim not supported by its cited source (The claim implies the District Commission has jurisdiction for both amounts simultaneously or interchangeably, whereas t)"
+            ],
+            "recheck": [],
+            "judge": "ok"
+          },
+          "timings_s": 32.088,
           "llm": {
-            "calls": 6,
-            "retries": 1,
-            "latency_s": 12.5,
+            "calls": 10,
+            "retries": 0,
+            "latency_s": 31.83,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
               "main:gemini:gemini-3.5-flash-lite",
-              "judge:gemini:gemini-3.1-flash-lite"
+              "judge:gemini:gemini-3.1-flash-lite",
+              "main:gemini:gemini-3.5-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001"
             ],
             "fallbacks": [
               {
                 "role": "judge",
                 "model": "gemini:gemma-4-31b-it",
-                "reason": "HTTP 500"
+                "reason": "busy for ~526s"
+              },
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~519s"
+              },
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~515s"
+              },
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~508s"
               }
             ]
           },
@@ -344,18 +396,32 @@
             {
               "id": "COM-DIR-EDAAKHIL",
               "score": 0.7234513759613037
+            },
+            {
+              "id": "COM-NALSA-H15100",
+              "score": 0.7801640033721924,
+              "via": "aid_search"
+            },
+            {
+              "id": "COM-UPSLSA-H1800",
+              "score": 0.7588682770729065,
+              "via": "aid_search"
             }
           ],
           "citations": [
             "CONS-CPA2019-S69",
             "COM-DIR-NCH",
-            "COM-DIR-EDAAKHIL"
+            "COM-NALSA-H15100",
+            "COM-UPSLSA-H1800"
           ],
           "verifier": {
-            "status": "pass",
-            "issues": []
+            "status": "fixed",
+            "issues": [],
+            "pruned": true
           },
-          "escalation_reasons": [],
+          "escalation_reasons": [
+            "limitation_risk"
+          ],
           "models": {
             "router": [
               {
@@ -485,12 +551,17 @@
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001",
         "main:gemini:gemini-3.5-flash-lite",
-        "judge:gemini:gemini-3.1-flash-lite"
+        "judge:gemini:gemini-3.1-flash-lite",
+        "main:gemini:gemini-3.5-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 12.620068599993829,
-      "finished_at": "2026-11-06T15:10:28.949938+00:00"
+      "latency_s": 32.10512119997293,
+      "finished_at": "2026-11-06T17:28:07.271356+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-06T15:10:28.949938+00:00"
+  "finished_at": "2026-11-06T17:28:07.271356+00:00"
 }

@@ -177,13 +177,13 @@
       }
     ]
   },
-  "started_at": "2026-11-06T15:13:56.717317+00:00",
+  "started_at": "2026-11-06T17:31:04.613174+00:00",
   "turns": [
     {
       "input": "mera paisa wapas nahi aaya. Please reply in English.",
       "input_mode": "voice",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-06T15:14:02.718283+00:00",
+      "started_at": "2026-11-06T17:31:10.615701+00:00",
       "result": {
         "reply_text": "What I understood: You described a problem but I do not have details yet.\n\nCould you tell me a little more? Is this about (a) a refund or a defective product or service, (b) unpaid salary or dues from an employer, or (c) a rental security deposit that was not returned?\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
@@ -201,7 +201,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "8175c453644d",
+          "session": "c7b1847e61c2",
           "input_mode": "voice",
           "user_text": "mera paisa wapas nahi aaya. Please reply in English.",
           "mode": "advice",
@@ -228,11 +228,11 @@
             "error": null
           },
           "summary_rejected": "आपका पैसा वापस नहीं आया है और आप इसके बारे में जानकारी चाहते हैं।",
-          "timings_s": 2.659,
+          "timings_s": 2.576,
           "llm": {
             "calls": 1,
             "retries": 0,
-            "latency_s": 2.64,
+            "latency_s": 2.55,
             "models": [
               "router:gemini:gemini-3.1-flash-lite"
             ],
@@ -376,23 +376,22 @@
       "model_names_used": [
         "router:gemini:gemini-3.1-flash-lite"
       ],
-      "latency_s": 2.6622041999944486,
-      "finished_at": "2026-11-06T15:14:05.378893+00:00"
+      "latency_s": 2.5802818999509327,
+      "finished_at": "2026-11-06T17:31:13.191799+00:00"
     },
     {
       "input": "Not a shopping refund, salary hai. Kanpur UP private shop, October 2026 ka 14000 unpaid. Still working there.",
       "input_mode": "voice",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-06T15:14:11.380949+00:00",
+      "started_at": "2026-11-06T17:31:19.196905+00:00",
       "result": {
-        "reply_text": "For monthly wages, the employer must pay before the expiry of the seventh day of the succeeding month, and if payment is not made, you can file a claim before the authority appointed by the appropriate Government.\n\nWhat I understood: You are working at a private shop in Kanpur, Uttar Pradesh, and your monthly salary of 14,000 INR for October 2026 has not been paid yet.\n\nWhere an employer fails to make payment in accordance with the Code, the company, firm, association, or proprietor who is the owner of the establishment is responsible for such payment.\n\nYou can file an application for your claim before the appointed authority within three years from the date on which the claim arises, and the authority may order payment of the claim along with compensation that may extend to ten times of the claim determined.\n\nKeep your appointment letter, pay slips, attendance records, and bank statements ready to show the non-credit of wages.\n\nWhat is the exact name of the shop where you are working?\n\nWhat is the date when your salary for October 2026 was due?\n\nSource: Code on Wages, 2019, section 17\nSource: Code on Wages, 2019, section 45\nSource: Code on Wages, 2019, section 43\n\nThis is legal information, not legal advice.",
+        "reply_text": "For monthly-basis employees, the employer shall pay wages before the expiry of the seventh day of the succeeding month. If wages are not paid, an application for claims may be filed before the appointed authority by the employee, a registered trade union, or an Inspector-cum-Facilitator.\n\nWhat I understood: You are currently working at a private shop in Kanpur, Uttar Pradesh, and your monthly wage of 14,000 INR for October 2026 remains unpaid.\n\nThe authority may order the payment of the claim and compensation in addition to the claim, which may extend to ten times of the claim determined. An application may be filed within a period of three years from the date on which the claim arises.\n\nDocuments needed: Keep ready your appointment letter, pay slips, attendance records, or bank statements showing the non-credit of wages, and an affidavit verifying the facts.\n\nCould you please tell me the name of the shop and the exact date when the salary was due?\n\nSource: Code on Wages, 2019, section 17\nSource: Code on Wages, 2019, section 45\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "wages",
         "action": "answer",
         "citations": [
           "WAGE-COW2019-S17",
-          "WAGE-COW2019-S45",
-          "WAGE-COW2019-S43"
+          "WAGE-COW2019-S45"
         ],
         "retrieved": [
           {
@@ -431,12 +430,12 @@
         "needs_lawyer": false,
         "escalation_reasons": [],
         "verifier": {
-          "status": "fixed",
+          "status": "pass",
           "issues": []
         },
         "draft_text": null,
         "trace": {
-          "session": "8175c453644d",
+          "session": "c7b1847e61c2",
           "input_mode": "voice",
           "user_text": "Not a shopping refund, salary hai. Kanpur UP private shop, October 2026 ka 14000 unpaid. Still working there.",
           "mode": "advice",
@@ -498,22 +497,17 @@
           },
           "judge": "ok",
           "verifier_history": [
-            [
-              "block 2: claim not supported by its cited source (condition dropped: The employer is primarily responsible; the proprietor is only responsible if the employer fails to ma)"
-            ],
             []
           ],
-          "timings_s": 16.243,
+          "timings_s": 9.461,
           "llm": {
-            "calls": 7,
+            "calls": 5,
             "retries": 0,
-            "latency_s": 16.07,
+            "latency_s": 9.37,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
-              "main:gemini:gemini-3.5-flash-lite",
-              "judge:gemini:gemini-3.1-flash-lite",
               "main:gemini:gemini-3.5-flash-lite",
               "judge:gemini:gemini-3.1-flash-lite"
             ],
@@ -521,12 +515,7 @@
               {
                 "role": "judge",
                 "model": "gemini:gemma-4-31b-it",
-                "reason": "busy for ~367s"
-              },
-              {
-                "role": "judge",
-                "model": "gemini:gemma-4-31b-it",
-                "reason": "busy for ~361s"
+                "reason": "busy for ~305s"
               }
             ]
           },
@@ -568,329 +557,7 @@
           ],
           "citations": [
             "WAGE-COW2019-S17",
-            "WAGE-COW2019-S45",
-            "WAGE-COW2019-S43"
-          ],
-          "verifier": {
-            "status": "fixed",
-            "issues": []
-          },
-          "escalation_reasons": [],
-          "models": {
-            "router": [
-              {
-                "provider": "gemini",
-                "model": "gemini-3.1-flash-lite",
-                "rpm": 15,
-                "tpm": 250000,
-                "rpd": 495
-              },
-              {
-                "provider": "gemini",
-                "model": "gemma-4-31b-it",
-                "rpm": 30,
-                "tpm": 16000,
-                "rpd": 14000
-              },
-              {
-                "provider": "gemini",
-                "model": "gemini-3.5-flash-lite",
-                "rpm": 15,
-                "tpm": 250000,
-                "rpd": 495
-              },
-              {
-                "provider": "gemini",
-                "model": "gemma-4-26b-a4b-it",
-                "rpm": 30,
-                "tpm": 16000,
-                "rpd": 14000
-              },
-              {
-                "provider": "gemini",
-                "model": "gemini-2.5-flash-lite"
-              }
-            ],
-            "main": [
-              {
-                "provider": "gemini",
-                "model": "gemini-3.5-flash-lite",
-                "rpm": 15,
-                "tpm": 250000,
-                "rpd": 495
-              },
-              {
-                "provider": "gemini",
-                "model": "gemini-3.1-flash-lite",
-                "rpm": 15,
-                "tpm": 250000,
-                "rpd": 495
-              },
-              {
-                "provider": "gemini",
-                "model": "gemma-4-31b-it",
-                "rpm": 30,
-                "tpm": 16000,
-                "rpd": 14000
-              },
-              {
-                "provider": "gemini",
-                "model": "gemini-2.5-flash-lite"
-              },
-              {
-                "provider": "gemini",
-                "model": "gemini-3.5-flash",
-                "rpm": 5,
-                "tpm": 250000,
-                "rpd": 19
-              }
-            ],
-            "translate": [
-              {
-                "provider": "gemini",
-                "model": "gemini-3.1-flash-lite",
-                "rpm": 15,
-                "tpm": 250000,
-                "rpd": 495
-              },
-              {
-                "provider": "gemini",
-                "model": "gemini-3.5-flash-lite",
-                "rpm": 15,
-                "tpm": 250000,
-                "rpd": 495
-              },
-              {
-                "provider": "gemini",
-                "model": "gemma-4-31b-it",
-                "rpm": 30,
-                "tpm": 16000,
-                "rpd": 14000
-              },
-              {
-                "provider": "gemini",
-                "model": "gemini-2.5-flash-lite"
-              }
-            ],
-            "judge": [
-              {
-                "provider": "gemini",
-                "model": "gemma-4-31b-it",
-                "rpm": 30,
-                "tpm": 16000,
-                "rpd": 14000,
-                "timeout_s": 25
-              },
-              {
-                "provider": "gemini",
-                "model": "gemini-3.1-flash-lite",
-                "rpm": 15,
-                "tpm": 250000,
-                "rpd": 495
-              },
-              {
-                "provider": "gemini",
-                "model": "gemma-4-26b-a4b-it",
-                "rpm": 30,
-                "tpm": 16000,
-                "rpd": 14000
-              }
-            ]
-          },
-          "mock": false
-        }
-      },
-      "model_names_used": [
-        "router:gemini:gemini-3.1-flash-lite",
-        "embed:gemini:gemini-embedding-001",
-        "embed:gemini:gemini-embedding-001",
-        "main:gemini:gemini-3.5-flash-lite",
-        "judge:gemini:gemini-3.1-flash-lite",
-        "main:gemini:gemini-3.5-flash-lite",
-        "judge:gemini:gemini-3.1-flash-lite"
-      ],
-      "latency_s": 16.245703699998558,
-      "finished_at": "2026-11-06T15:14:27.624023+00:00"
-    },
-    {
-      "input": "I have attendance screenshots and bank statement, manager ne bas wait bola. What's the next sensible step?",
-      "input_mode": "voice",
-      "lang_hint": "en-IN",
-      "started_at": "2026-11-06T15:14:33.627100+00:00",
-      "result": {
-        "reply_text": "Since your manager is only asking you to wait, you can register a complaint online at the Uttar Pradesh Labour Department portal at https://uplabour.gov.in/, or call their toll-free helpline at 1800-180-5160, or file a formal claim before the authority appointed under section 45 of the Code on Wages, 2019.\n\nWhat I understood: You are working at a private shop in Kanpur, Uttar Pradesh, your monthly salary of 14,000 INR for October 2026 is unpaid, and your manager has only asked you to wait. You have attendance screenshots and bank statements as proof.\n\nKeep your attendance records and bank statements ready as supporting documents for your claim.\n\nUnder section 17 of the Code on Wages, 2019, an employer must pay monthly wages before the expiry of the seventh day of the succeeding month.\n\nUnder section 45 of the Code on Wages, 2019, you can file a claim for your unpaid wages, and the authority may order payment of the claim along with compensation which may extend to ten times the claim determined.\n\nSource: Uttar Pradesh Labour Department - Citizen Grievance Portal, P UPLABOUR\nSource: Code on Wages, 2019, section 45\nSource: Code on Wages, 2019, section 17\n\nThis is legal information, not legal advice.",
-        "reply_lang": "en-IN",
-        "category": "wages",
-        "action": "answer",
-        "citations": [
-          "COM-DIR-UPLABOUR",
-          "WAGE-COW2019-S45",
-          "WAGE-COW2019-S17"
-        ],
-        "retrieved": [
-          {
-            "id": "WAGE-COW2019-S45",
-            "score": 0.712011456489563
-          },
-          {
-            "id": "WAGE-COWRULES2026-R46",
-            "score": 0.7050159573554993
-          },
-          {
-            "id": "WAGE-COW2019-S57",
-            "score": 0.6932367086410522
-          },
-          {
-            "id": "WAGE-COW2019-S17",
-            "score": 0.6770153045654297
-          },
-          {
-            "id": "COM-DIR-UPLABOUR",
-            "score": 0.6748226881027222
-          },
-          {
-            "id": "COM-DIR-LOKADALAT",
-            "score": 0.6741304397583008
-          },
-          {
-            "id": "WAGE-COW2019-S49",
-            "score": 0.6729814410209656
-          },
-          {
-            "id": "WAGE-UPSHOP1962-S18",
-            "score": 0.6729273796081543
-          }
-        ],
-        "needs_lawyer": false,
-        "escalation_reasons": [],
-        "verifier": {
-          "status": "pass",
-          "issues": []
-        },
-        "draft_text": null,
-        "trace": {
-          "session": "8175c453644d",
-          "input_mode": "voice",
-          "user_text": "I have attendance screenshots and bank statement, manager ne bas wait bola. What's the next sensible step?",
-          "mode": "advice",
-          "router": {
-            "category": "wages",
-            "language": "en-IN",
-            "state_or_city": "UP",
-            "case_file_update": {
-              "proof": [
-                "attendance screenshots",
-                "bank statement"
-              ],
-              "already_tried": [
-                "spoke to manager who asked to wait"
-              ]
-            },
-            "missing_facts": [],
-            "escalation_flags": [],
-            "english_retrieval_query": "next steps for unpaid salary claim India",
-            "intent": [
-              "next_steps"
-            ],
-            "question": "What are the next practical steps I should take to recover my unpaid salary since my manager is just asking me to wait?",
-            "new_topic": false,
-            "summary": "You have attendance records and bank statements as proof, but your manager is only asking you to wait for your unpaid October salary."
-          },
-          "router_info": {
-            "attempts": 1,
-            "error": null
-          },
-          "retrieval": {
-            "query": "next steps for unpaid salary claim India",
-            "jurisdictions": [
-              "central",
-              "UP"
-            ],
-            "top_score": 0.712011456489563,
-            "min_score": 0.66,
-            "old_law": [
-              {
-                "id": "WAGE-PWA1936-S15",
-                "score": 0.714012622833252
-              },
-              {
-                "id": "WAGE-PWA1936-S5",
-                "score": 0.6852701902389526
-              }
-            ]
-          },
-          "intent": {
-            "intents": [
-              "next_steps"
-            ],
-            "question": "What are the next practical steps I should take to recover my unpaid salary since my manager is just asking me to wait?",
-            "want_draft": false,
-            "has_question": true
-          },
-          "judge": "ok",
-          "verifier_history": [
-            []
-          ],
-          "timings_s": 12.017,
-          "llm": {
-            "calls": 5,
-            "retries": 0,
-            "latency_s": 11.93,
-            "models": [
-              "router:gemini:gemini-3.1-flash-lite",
-              "embed:gemini:gemini-embedding-001",
-              "embed:gemini:gemini-embedding-001",
-              "main:gemini:gemini-3.5-flash-lite",
-              "judge:gemini:gemini-3.1-flash-lite"
-            ],
-            "fallbacks": [
-              {
-                "role": "judge",
-                "model": "gemini:gemma-4-31b-it",
-                "reason": "busy for ~345s"
-              }
-            ]
-          },
-          "action": "answer",
-          "category": "wages",
-          "retrieved": [
-            {
-              "id": "WAGE-COW2019-S45",
-              "score": 0.712011456489563
-            },
-            {
-              "id": "WAGE-COWRULES2026-R46",
-              "score": 0.7050159573554993
-            },
-            {
-              "id": "WAGE-COW2019-S57",
-              "score": 0.6932367086410522
-            },
-            {
-              "id": "WAGE-COW2019-S17",
-              "score": 0.6770153045654297
-            },
-            {
-              "id": "COM-DIR-UPLABOUR",
-              "score": 0.6748226881027222
-            },
-            {
-              "id": "COM-DIR-LOKADALAT",
-              "score": 0.6741304397583008
-            },
-            {
-              "id": "WAGE-COW2019-S49",
-              "score": 0.6729814410209656
-            },
-            {
-              "id": "WAGE-UPSHOP1962-S18",
-              "score": 0.6729273796081543
-            }
-          ],
-          "citations": [
-            "COM-DIR-UPLABOUR",
-            "WAGE-COW2019-S45",
-            "WAGE-COW2019-S17"
+            "WAGE-COW2019-S45"
           ],
           "verifier": {
             "status": "pass",
@@ -1028,10 +695,325 @@
         "main:gemini:gemini-3.5-flash-lite",
         "judge:gemini:gemini-3.1-flash-lite"
       ],
-      "latency_s": 12.020893300010357,
-      "finished_at": "2026-11-06T15:14:45.646393+00:00"
+      "latency_s": 9.465108399977908,
+      "finished_at": "2026-11-06T17:31:28.658318+00:00"
+    },
+    {
+      "input": "I have attendance screenshots and bank statement, manager ne bas wait bola. What's the next sensible step?",
+      "input_mode": "voice",
+      "lang_hint": "en-IN",
+      "started_at": "2026-11-06T17:31:34.662730+00:00",
+      "result": {
+        "reply_text": "The next sensible step is to file an application for claims before the authority appointed under the law, which can be done by the employee, a registered trade union, or an Inspector-cum-Facilitator. While deciding the claim, the authority may order the payment of compensation which may extend to ten times of the claim determined.\n\nWhat I understood: Your manager has only asked you to wait for your unpaid salary for October 2026, and you currently have your attendance screenshots and bank statement ready as proof.\n\nKeep your attendance records, bank statements showing non-credit of wages, and any available appointment letter ready as supporting documents.\n\nIf the employer fails to pay the claim and compensation determined by the authority, the authority shall issue a certificate of recovery to the Collector or District Magistrate of the district where the establishment is located, who shall recover the same as arrears of land revenue.\n\nSource: Code on Wages, 2019, section 45\n\nThis is legal information, not legal advice.",
+        "reply_lang": "en-IN",
+        "category": "wages",
+        "action": "answer",
+        "citations": [
+          "WAGE-COW2019-S45"
+        ],
+        "retrieved": [
+          {
+            "id": "WAGE-COW2019-S45",
+            "score": 0.7268487215042114
+          },
+          {
+            "id": "WAGE-COW2019-S57",
+            "score": 0.7193549871444702
+          },
+          {
+            "id": "WAGE-COWRULES2026-R46",
+            "score": 0.7107541561126709
+          },
+          {
+            "id": "WAGE-COW2019-S17",
+            "score": 0.7107004523277283
+          },
+          {
+            "id": "WAGE-COW2019-S5",
+            "score": 0.7092376947402954
+          },
+          {
+            "id": "WAGE-COW2019-S43",
+            "score": 0.7059862017631531
+          },
+          {
+            "id": "WAGE-COW2019-S49",
+            "score": 0.6729814410209656
+          },
+          {
+            "id": "WAGE-UPSHOP1962-S18",
+            "score": 0.6729273796081543
+          }
+        ],
+        "needs_lawyer": false,
+        "escalation_reasons": [],
+        "verifier": {
+          "status": "pass",
+          "issues": []
+        },
+        "draft_text": null,
+        "trace": {
+          "session": "c7b1847e61c2",
+          "input_mode": "voice",
+          "user_text": "I have attendance screenshots and bank statement, manager ne bas wait bola. What's the next sensible step?",
+          "mode": "advice",
+          "router": {
+            "category": "wages",
+            "language": "en-IN",
+            "state_or_city": "UP",
+            "case_file_update": {
+              "proof": [
+                "attendance screenshots",
+                "bank statement"
+              ],
+              "already_tried": [
+                "spoke to manager who asked to wait"
+              ]
+            },
+            "missing_facts": [],
+            "escalation_flags": [],
+            "english_retrieval_query": "legal steps for unpaid wages in India",
+            "intent": [
+              "next_steps"
+            ],
+            "question": "What are the next practical steps I should take to recover my unpaid salary since my manager is just asking me to wait?",
+            "new_topic": false,
+            "summary": "You have attendance records and bank statements as proof, but your manager is only asking you to wait for your unpaid October salary."
+          },
+          "router_info": {
+            "attempts": 1,
+            "error": null
+          },
+          "retrieval": {
+            "query": "legal steps for unpaid wages in India",
+            "jurisdictions": [
+              "central",
+              "UP"
+            ],
+            "top_score": 0.7268487215042114,
+            "min_score": 0.66,
+            "old_law": [
+              {
+                "id": "WAGE-PWA1936-S15",
+                "score": 0.7376765012741089
+              },
+              {
+                "id": "WAGE-PWA1936-S5",
+                "score": 0.7153443098068237
+              }
+            ]
+          },
+          "intent": {
+            "intents": [
+              "next_steps"
+            ],
+            "question": "What are the next practical steps I should take to recover my unpaid salary since my manager is just asking me to wait?",
+            "want_draft": false,
+            "has_question": true
+          },
+          "judge": "ok",
+          "verifier_history": [
+            []
+          ],
+          "timings_s": 10.378,
+          "llm": {
+            "calls": 5,
+            "retries": 0,
+            "latency_s": 10.29,
+            "models": [
+              "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "embed:gemini:gemini-embedding-001",
+              "main:gemini:gemini-3.5-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite"
+            ],
+            "fallbacks": [
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~289s"
+              }
+            ]
+          },
+          "action": "answer",
+          "category": "wages",
+          "retrieved": [
+            {
+              "id": "WAGE-COW2019-S45",
+              "score": 0.7268487215042114
+            },
+            {
+              "id": "WAGE-COW2019-S57",
+              "score": 0.7193549871444702
+            },
+            {
+              "id": "WAGE-COWRULES2026-R46",
+              "score": 0.7107541561126709
+            },
+            {
+              "id": "WAGE-COW2019-S17",
+              "score": 0.7107004523277283
+            },
+            {
+              "id": "WAGE-COW2019-S5",
+              "score": 0.7092376947402954
+            },
+            {
+              "id": "WAGE-COW2019-S43",
+              "score": 0.7059862017631531
+            },
+            {
+              "id": "WAGE-COW2019-S49",
+              "score": 0.6729814410209656
+            },
+            {
+              "id": "WAGE-UPSHOP1962-S18",
+              "score": 0.6729273796081543
+            }
+          ],
+          "citations": [
+            "WAGE-COW2019-S45"
+          ],
+          "verifier": {
+            "status": "pass",
+            "issues": []
+          },
+          "escalation_reasons": [],
+          "models": {
+            "router": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "main": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash",
+                "rpm": 5,
+                "tpm": 250000,
+                "rpd": 19
+              }
+            ],
+            "translate": [
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.5-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-2.5-flash-lite"
+              }
+            ],
+            "judge": [
+              {
+                "provider": "gemini",
+                "model": "gemma-4-31b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000,
+                "timeout_s": 25
+              },
+              {
+                "provider": "gemini",
+                "model": "gemini-3.1-flash-lite",
+                "rpm": 15,
+                "tpm": 250000,
+                "rpd": 495
+              },
+              {
+                "provider": "gemini",
+                "model": "gemma-4-26b-a4b-it",
+                "rpm": 30,
+                "tpm": 16000,
+                "rpd": 14000
+              }
+            ]
+          },
+          "mock": false
+        }
+      },
+      "model_names_used": [
+        "router:gemini:gemini-3.1-flash-lite",
+        "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001",
+        "main:gemini:gemini-3.5-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite"
+      ],
+      "latency_s": 10.38186930003576,
+      "finished_at": "2026-11-06T17:31:45.042545+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-06T15:14:45.646393+00:00"
+  "finished_at": "2026-11-06T17:31:45.042545+00:00"
 }

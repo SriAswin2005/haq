@@ -171,23 +171,22 @@
       }
     ]
   },
-  "started_at": "2026-11-06T15:15:12.626532+00:00",
+  "started_at": "2026-11-06T17:32:16.867483+00:00",
   "turns": [
     {
       "input": "UH LOOK LUCKNOW UP OK I PAID 800 FOR THIS PHONE CHARGER OCTOBER 2026 IT'S DEAD DEAD I HAVE THE BILL AND SUPPORT JUST SAYS WAIT I'M SO FED UP HOW DO I COMPLAIN",
       "input_mode": "voice",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-06T15:15:18.626926+00:00",
+      "started_at": "2026-11-06T17:32:22.852596+00:00",
       "result": {
-        "reply_text": "You can lodge a grievance through the National Consumer Helpline by visiting their web portal or calling their toll-free numbers, or you can file a complaint with the District Commission. The remedies and options depend on the facts and the authority's decision.\n\nKeep the bill and screenshots of your chats with company support ready as proof.\n\nWhat I understood: You bought a phone charger for a certain amount, it is defective, and company support is unresponsive.\n\nA product liability action may be brought by a complainant against a product manufacturer, service provider, or seller for any harm caused by a defective product.\n\nA product manufacturer is liable in a product liability action if the product contains a manufacturing defect, design defect, deviates from specifications, fails to conform to an express warranty, or lacks adequate instructions or warnings.\n\nYou can approach the National Consumer Helpline online at their web portal or by calling their toll-free numbers.\n\nYou may also file a complaint with the District Commission.\n\nPlease tell me the name of the company that made or sold the phone charger.\n\nSource: Department of Consumer Affairs - National Consumer Helpline (NCH), H NCH\nSource: Consumer Protection Act, 2019, section 35\nSource: Consumer Protection Act, 2019, section 83\nSource: Consumer Protection Act, 2019, section 84\n\nThis is legal information, not legal advice.",
+        "reply_text": "You can lodge a grievance online at https://consumerhelpline.gov.in/ or call the National Consumer Helpline Toll-Free Numbers: 1915 or 1800-11-4000 before or alongside filing a complaint before a District Commission.\n\nKeep your purchase bill and any screenshots of chats with support ready as proof.\n\nA product liability action may be brought against a product manufacturer, service provider, or seller for any harm caused by a defective product.\n\nCould you please tell me the name of the company that made or sold the phone charger?\n\nSource: Department of Consumer Affairs - National Consumer Helpline (NCH), H NCH\nSource: Consumer Protection Act, 2019, section 35\nSource: Consumer Protection Act, 2019, section 83\n\nWhat I could not verify:\n- company name\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "consumer",
         "action": "answer",
         "citations": [
           "COM-DIR-NCH",
           "CONS-CPA2019-S35",
-          "CONS-CPA2019-S83",
-          "CONS-CPA2019-S84"
+          "CONS-CPA2019-S83"
         ],
         "retrieved": [
           {
@@ -231,7 +230,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "d42ccec66044",
+          "session": "1a58cfa0d98f",
           "input_mode": "voice",
           "user_text": "UH LOOK LUCKNOW UP OK I PAID 800 FOR THIS PHONE CHARGER OCTOBER 2026 IT'S DEAD DEAD I HAVE THE BILL AND SUPPORT JUST SAYS WAIT I'M SO FED UP HOW DO I COMPLAIN",
           "mode": "advice",
@@ -294,11 +293,11 @@
           "verifier_history": [
             []
           ],
-          "timings_s": 11.881,
+          "timings_s": 16.318,
           "llm": {
             "calls": 5,
             "retries": 0,
-            "latency_s": 11.76,
+            "latency_s": 16.23,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
@@ -310,7 +309,7 @@
               {
                 "role": "judge",
                 "model": "gemini:gemma-4-31b-it",
-                "reason": "busy for ~300s"
+                "reason": "busy for ~234s"
               }
             ]
           },
@@ -353,8 +352,7 @@
           "citations": [
             "COM-DIR-NCH",
             "CONS-CPA2019-S35",
-            "CONS-CPA2019-S83",
-            "CONS-CPA2019-S84"
+            "CONS-CPA2019-S83"
           ],
           "verifier": {
             "status": "pass",
@@ -492,10 +490,10 @@
         "main:gemini:gemini-3.5-flash-lite",
         "judge:gemini:gemini-3.1-flash-lite"
       ],
-      "latency_s": 11.88337459997274,
-      "finished_at": "2026-11-06T15:15:30.509886+00:00"
+      "latency_s": 16.320715299982112,
+      "finished_at": "2026-11-06T17:32:39.172928+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-06T15:15:30.509886+00:00"
+  "finished_at": "2026-11-06T17:32:39.172928+00:00"
 }

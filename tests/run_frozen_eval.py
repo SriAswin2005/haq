@@ -5,6 +5,8 @@ inside ignored tests/_scratch. Captured raw files are copied byte-for-byte to
 the canonical outputs archive, then derived reports are regenerated there.
 """
 import argparse
+import hashlib
+import io
 from datetime import datetime, timezone
 import json
 import os
@@ -12,6 +14,7 @@ from pathlib import Path
 import shutil
 import subprocess
 import sys
+import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -23,8 +26,15 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--sleep", type=float, default=6)
     parser.add_argument("--only", action="append", help="Select groups/tags, e.g. --only round4; archives the cohort without replacing the full-run publication")
+    parser.add_argument("--require-commit", action="store_true", help="Require app/config/corpus to match HEAD, while allowing test/report edits")
+    parser.add_argument("--commit-sources", help="Copy app/config/corpus directly from this git commit; preserve parallel working-tree edits")
     args = parser.parse_args()
     groups = [g.strip() for value in args.only or [] for g in value.split(",") if g.strip()]
+    commit = subprocess.check_output(["git", "rev-parse", "--verify", (args.commit_sources or "HEAD") + "^{commit}"], cwd=ROOT, text=True).strip()
+    source_paths = ["app", "data/corpus", "data/validate_corpus.py", "config.yaml", "docs/claude_code_report.md"]
+    source_status = subprocess.check_output(["git", "status", "--porcelain", "--", *source_paths], cwd=ROOT, text=True)
+    if args.require_commit and source_status.strip():
+        raise ValueError("App/config/corpus has uncommitted changes; no model called")
     from dotenv import load_dotenv
     load_dotenv(ROOT / ".env", encoding="utf-8-sig")
     if not os.environ.get("GEMINI_API_KEY"):
@@ -33,21 +43,41 @@ def main():
     snapshot = ROOT / "tests/_scratch" / f"frozen-eval-{stamp}"
     if not snapshot.resolve().is_relative_to((ROOT / "tests/_scratch").resolve()):
         raise ValueError("Snapshot must stay within tests/_scratch")
-    sources = [ROOT / "config.yaml", ROOT / "docs/claude_code_report.md", ROOT / "data/validate_corpus.py"]
-    sources += [p for p in (ROOT / "app").rglob("*") if p.is_file() and "__pycache__" not in p.parts and p.suffix != ".pyc"]
-    sources += list((ROOT / "data/corpus").glob("*.jsonl"))
+    sources = []
+    committed = {}
+    if args.commit_sources:
+        archive = subprocess.check_output(["git", "archive", "--format=zip", commit, "--", *source_paths], cwd=ROOT)
+        with zipfile.ZipFile(io.BytesIO(archive)) as zipped:
+            for name in zipped.namelist():
+                rel = Path(name)
+                if not name.endswith("/") and "__pycache__" not in rel.parts and rel.suffix != ".pyc" and rel.name != ".env":
+                    committed[str(rel)] = zipped.read(name)
+    else:
+        sources = [ROOT / "config.yaml", ROOT / "docs/claude_code_report.md", ROOT / "data/validate_corpus.py"]
+        sources += [p for p in (ROOT / "app").rglob("*") if p.is_file() and "__pycache__" not in p.parts and p.suffix != ".pyc"]
+        sources += list((ROOT / "data/corpus").glob("*.jsonl"))
     sources += [ROOT / "tests" / name for name in ("__init__.py", "run_eval.py", "checks.py", "reporting.py", "cases.jsonl", "mock_pipeline.py")]
     sources += list((ROOT / "tests/prompts").glob("*.md"))
     source_hashes = {str(p.relative_to(ROOT)): digest(p) for p in sources}
     snapshot.mkdir(parents=True, exist_ok=False)
+    for rel, blob in committed.items():
+        dest = snapshot / rel
+        if not dest.resolve().is_relative_to(snapshot.resolve()):
+            raise ValueError("Commit archive path escapes snapshot")
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_bytes(blob)
+        source_hashes[rel] = hashlib.sha256(blob).hexdigest()
     for source in sources:
         if not source.resolve().is_relative_to(ROOT.resolve()):
             raise ValueError("Snapshot source escapes workspace")
         dest = snapshot / source.relative_to(ROOT)
         dest.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(source, dest)
-    if any(digest(ROOT / rel) != h or digest(snapshot / rel) != h for rel, h in source_hashes.items()):
+    if any((rel not in committed and digest(ROOT / rel) != h) or digest(snapshot / rel) != h for rel, h in source_hashes.items()):
         raise ValueError("Inputs changed during snapshot creation; start a new frozen run")
+    if args.require_commit and (subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip() != commit
+            or subprocess.check_output(["git", "status", "--porcelain", "--", *source_paths], cwd=ROOT, text=True).strip()):
+        raise ValueError("Commit/source state changed during capture; no model called")
     # Reuse public corpus embeddings/model metadata and current local budgets.
     # The isolated app manages its own cache thereafter; it cannot reload source
     # files which another agent changes in the canonical checkout.
@@ -58,6 +88,8 @@ def main():
     origin = {"frozen_at": utc_now(), "canonical_root": str(ROOT), "snapshot_root": str(snapshot),
               "input_sha256": source_hashes, "credentials_copied": False, "harness_judge": False, "sleep_s": args.sleep,
               "selected_groups": groups}
+    origin.update(git_commit=commit, source_worktree_status=source_status, snapshot_from_commit=bool(args.commit_sources),
+        app_config_corpus_match_commit=bool(args.commit_sources) or not source_status.strip())
     write_json(snapshot / "frozen_inputs.json", origin, exclusive=True)
     print(f"Frozen application: {snapshot}", flush=True)
     selected_cases = load_cases(snapshot / "tests/cases.jsonl", groups)

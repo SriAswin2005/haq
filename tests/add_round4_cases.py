@@ -42,6 +42,11 @@ def build_cases():
             cases[-1].update(category_expected="consumer", expected_action="answer", expect_needs_lawyer=False,
                 expected_outcomes=[{"category": "consumer", "action": "answer", "needs_lawyer": False},
                                    {"category": "out_of_scope", "action": "escalate", "needs_lawyer": True}])
+        if number == 44:
+            cases[-1].update(category_expected="wages", expected_action="answer", expect_needs_lawyer=False,
+                expected_outcomes=[{"category": "wages", "action": "answer", "needs_lawyer": False},
+                    {"category": "wages", "action": "answer", "needs_lawyer": True},
+                    {"category": "out_of_scope", "action": "escalate", "needs_lawyer": True}])
     return cases
 
 

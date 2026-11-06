@@ -171,27 +171,22 @@
       }
     ]
   },
-  "started_at": "2026-11-06T15:12:22.115636+00:00",
+  "started_at": "2026-11-06T17:29:38.007663+00:00",
   "turns": [
     {
       "input": "Lucknow UP. Fictional seller CloudBasket took Rs 2400 for shoes on 10 October 2026, cancelled the order and still hasn't refunded me. I have the invoice, cancellation email and bank statement. Support keeps closing tickets. What can I do?",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-06T15:12:28.100729+00:00",
+      "started_at": "2026-11-06T17:29:43.993462+00:00",
       "result": {
-        "reply_text": "You can complain to the National Consumer Helpline by visiting their web portal, using their app, emailing, messaging on WhatsApp, or calling their toll-free numbers. You can also file a complaint before a District Commission.\n\nKeep your invoice, cancellation email, and bank statement ready as proof.\n\nYour next steps are to register your grievance with the National Consumer Helpline, and if needed, you can file a complaint with the District Commission.\n\nWhat I understood: CloudBasket cancelled your order for shoes and did not refund your money, and support tickets were closed without resolution.\n\nEvery e-commerce entity must appoint a grievance officer who must acknowledge a consumer complaint within forty-eight hours and redress it within one month from receipt. Also, e-commerce entities must effect refunds for requests made according to the rules within a reasonable period of time.\n\nThe District Commission can entertain complaints where the value of the goods or services paid as consideration does not exceed up to fifty lakh rupees or one crore rupees.\n\nA complaint to the District Commission must be filed within two years from the date on which the cause of action has arisen, unless the commission permits a delay for sufficient cause.\n\nSource: Department of Consumer Affairs - National Consumer Helpline (NCH), H NCH\nSource: National Consumer Helpline Grievance Redressal Procedure, procedure 1\nSource: National Consumer Helpline Guidelines, helpline 1915\nSource: Consumer Protection Act, 2019, section 35\nSource: Consumer Protection (E-Commerce) Rules, 2020, rule 4\nSource: Consumer Protection Act, 2019, section 34\nSource: Consumer Protection (Jurisdiction of the District Commission, the State Commission and the National Commission) Rules, 2021, rule 3\nSource: Consumer Protection Act, 2019, section 69\n\nThis is legal information, not legal advice.",
+        "reply_text": "You can lodge a grievance online at https://consumerhelpline.gov.in/ or call the National Consumer Helpline Toll-Free Numbers: 1915 or 1800-11-4000. You can also file a complaint with the District Commission under section 35 of the Consumer Protection Act, 2019.\n\nKeep your invoice, cancellation email, and bank statement ready as proof.\n\nFirst, use the National Consumer Helpline portal or toll-free number to register your complaint. If that does not resolve the issue, you can file a complaint at the District Commission.\n\nWhat I understood: CloudBasket cancelled your order for shoes and has not refunded your money despite support tickets.\n\nUnder the Consumer Protection (E-Commerce) Rules, 2020, every e-commerce entity must effect all refunds for requests made according to the rules within a reasonable period of time.\n\nSource: Department of Consumer Affairs - National Consumer Helpline (NCH), H NCH\nSource: Consumer Protection Act, 2019, section 35\nSource: Consumer Protection (E-Commerce) Rules, 2020, rule 4\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "consumer",
         "action": "answer",
         "citations": [
           "COM-DIR-NCH",
-          "CONS-NCH-P1",
-          "COM-NCH-H1915",
           "CONS-CPA2019-S35",
-          "CONS-ECOM2020-R4",
-          "CONS-CPA2019-S34",
-          "CONS-PECRULES2021-R3",
-          "CONS-CPA2019-S69"
+          "CONS-ECOM2020-R4"
         ],
         "retrieved": [
           {
@@ -235,7 +230,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "1bd7b022444a",
+          "session": "d4135f69d77a",
           "input_mode": "text",
           "user_text": "Lucknow UP. Fictional seller CloudBasket took Rs 2400 for shoes on 10 October 2026, cancelled the order and still hasn't refunded me. I have the invoice, cancellation email and bank statement. Support keeps closing tickets. What can I do?",
           "mode": "advice",
@@ -297,11 +292,11 @@
           "verifier_history": [
             []
           ],
-          "timings_s": 10.268,
+          "timings_s": 10.965,
           "llm": {
             "calls": 5,
             "retries": 0,
-            "latency_s": 10.16,
+            "latency_s": 10.86,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
@@ -313,7 +308,7 @@
               {
                 "role": "judge",
                 "model": "gemini:gemma-4-31b-it",
-                "reason": "busy for ~471s"
+                "reason": "busy for ~398s"
               }
             ]
           },
@@ -355,13 +350,8 @@
           ],
           "citations": [
             "COM-DIR-NCH",
-            "CONS-NCH-P1",
-            "COM-NCH-H1915",
             "CONS-CPA2019-S35",
-            "CONS-ECOM2020-R4",
-            "CONS-CPA2019-S34",
-            "CONS-PECRULES2021-R3",
-            "CONS-CPA2019-S69"
+            "CONS-ECOM2020-R4"
           ],
           "verifier": {
             "status": "pass",
@@ -499,10 +489,10 @@
         "main:gemini:gemini-3.5-flash-lite",
         "judge:gemini:gemini-3.1-flash-lite"
       ],
-      "latency_s": 10.27502950001508,
-      "finished_at": "2026-11-06T15:12:38.369174+00:00"
+      "latency_s": 10.967834900016896,
+      "finished_at": "2026-11-06T17:29:54.960109+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-06T15:12:38.369174+00:00"
+  "finished_at": "2026-11-06T17:29:54.960109+00:00"
 }

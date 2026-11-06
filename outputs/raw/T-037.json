@@ -180,13 +180,13 @@
       }
     ]
   },
-  "started_at": "2026-11-06T15:18:01.947622+00:00",
+  "started_at": "2026-11-06T17:35:20.742152+00:00",
   "turns": [
     {
       "input": "I am Mira Example, a sales assistant at fictional FableMart in Lucknow UP. I resigned after handover on 15 October 2026. Rs 14000 of salary is still unpaid. I have payslips, attendance and my resignation email. Please draft a polite salary demand notice. I have not supplied either address or the manager's name.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-06T15:18:07.948590+00:00",
+      "started_at": "2026-11-06T17:35:26.726946+00:00",
       "result": {
         "reply_text": "Here is a draft demand notice for your unpaid wages. Anything I do not know is left as a [● placeholder] for you to fill in.\n\nLEGAL NOTICE: DEMAND FOR PAYMENT OF UNPAID WAGES AND DUES\n\nDate: [● date of sending]\nBy: [● registered post / speed post / email, as you choose]\n\nTo,\nFableMart\n[● employer's address]\nAttn: [● HR / manager / proprietor name, if known]\n\nFrom,\nMira Example\n[● your address and phone number]\n\nSubject: Demand for payment of unpaid wages of Rs. [● amount due] for 14000\n\nDear Sir/Madam,\n\n1. I worked with you as sales assistant from [● date you joined] to 2026-10-15. [● proof of employment, e.g. offer letter, ID card, salary slips, bank credits].\n\n2. My agreed wage was Rs. [● monthly wage] per month, paid by [● mode of payment, e.g. bank transfer / UPI / cash].\n\n3. The following amount has not been paid: Rs. [● amount due] for 14000. [● other dues, if any, e.g. leave encashment or reimbursements; or delete this line].\n\n4. [● what happened when you asked, with dates, e.g. emails or messages already sent].\n\nThis demand is made with reference to: Code on Wages, 2019, section 17; Uttar Pradesh Dookan Aur Vanijya Adhishthan Adhiniyam, 1962, section 13. [● Have a lawyer confirm that these provisions apply to your case.]\n\n5. I therefore request you to pay Rs. [● amount due] within [● number of days you allow] days of receiving this notice, to [● your bank account details / UPI ID].\n\n6. If the amount is not paid within this time, I will be free to take further steps available to me under the law, without further notice.\n\nYours faithfully,\nMira Example\n[● signature]\n\nEnclosures (copies): [● offer letter / salary slips / bank statements / attendance record / messages]\n\n\nCheck every detail before sending. For high-value or complex matters, have a lawyer review it.",
         "reply_lang": "en-IN",
@@ -222,7 +222,7 @@
         },
         "draft_text": "LEGAL NOTICE: DEMAND FOR PAYMENT OF UNPAID WAGES AND DUES\n\nDate: [● date of sending]\nBy: [● registered post / speed post / email, as you choose]\n\nTo,\nFableMart\n[● employer's address]\nAttn: [● HR / manager / proprietor name, if known]\n\nFrom,\nMira Example\n[● your address and phone number]\n\nSubject: Demand for payment of unpaid wages of Rs. [● amount due] for 14000\n\nDear Sir/Madam,\n\n1. I worked with you as sales assistant from [● date you joined] to 2026-10-15. [● proof of employment, e.g. offer letter, ID card, salary slips, bank credits].\n\n2. My agreed wage was Rs. [● monthly wage] per month, paid by [● mode of payment, e.g. bank transfer / UPI / cash].\n\n3. The following amount has not been paid: Rs. [● amount due] for 14000. [● other dues, if any, e.g. leave encashment or reimbursements; or delete this line].\n\n4. [● what happened when you asked, with dates, e.g. emails or messages already sent].\n\nThis demand is made with reference to: Code on Wages, 2019, section 17; Uttar Pradesh Dookan Aur Vanijya Adhishthan Adhiniyam, 1962, section 13. [● Have a lawyer confirm that these provisions apply to your case.]\n\n5. I therefore request you to pay Rs. [● amount due] within [● number of days you allow] days of receiving this notice, to [● your bank account details / UPI ID].\n\n6. If the amount is not paid within this time, I will be free to take further steps available to me under the law, without further notice.\n\nYours faithfully,\nMira Example\n[● signature]\n\nEnclosures (copies): [● offer letter / salary slips / bank statements / attendance record / messages]\n\n\nCheck every detail before sending. For high-value or complex matters, have a lawyer review it.",
         "trace": {
-          "session": "4629d688e9f8",
+          "session": "d8229c5d920c",
           "input_mode": "text",
           "user_text": "I am Mira Example, a sales assistant at fictional FableMart in Lucknow UP. I resigned after handover on 15 October 2026. Rs 14000 of salary is still unpaid. I have payslips, attendance and my resignation email. Please draft a polite salary demand notice. I have not supplied either address or the manager's name.",
           "mode": "draft",
@@ -311,11 +311,11 @@
             ],
             "scan_issues": []
           },
-          "timings_s": 40.042,
+          "timings_s": 7.44,
           "llm": {
             "calls": 4,
             "retries": 0,
-            "latency_s": 39.99,
+            "latency_s": 7.4,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
@@ -483,10 +483,10 @@
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 40.04400319996057,
-      "finished_at": "2026-11-06T15:18:47.992389+00:00"
+      "latency_s": 7.4455747999600135,
+      "finished_at": "2026-11-06T17:35:34.166654+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-06T15:18:47.992389+00:00"
+  "finished_at": "2026-11-06T17:35:34.166654+00:00"
 }

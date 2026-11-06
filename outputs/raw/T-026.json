@@ -177,13 +177,13 @@
       }
     ]
   },
-  "started_at": "2026-11-06T15:14:45.653287+00:00",
+  "started_at": "2026-11-06T17:31:45.050206+00:00",
   "turns": [
     {
       "input": "Lucknow UP residential flat, agreement signed January 2026, vacated 20 October 2026. Landlord kept Rs 20000 deposit for painting though I have move-in and move-out photos and paid all rent. No threats. How can I ask for an explanation and refund?",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-06T15:14:51.654744+00:00",
+      "started_at": "2026-11-06T17:31:51.050749+00:00",
       "result": {
         "reply_text": "What I understood: Lucknow mein aapke landlord ne painting ke naam par aapka 20,000 rupaye ka security deposit wapas nahi kiya hai, jabki aapne saara kiraya chuka diya hai aur aapke paas photos ka saboot bhi hai.\n\nI do not have verified information in my sources to answer this part, and I will not guess.\n\nWhat you can do right now: collect your documents (agreement, receipts, bank or UPI records, messages, photos), and write down the dates and amounts in order.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (Source: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.\n\nHere is a draft demand notice for your security deposit. Anything I do not know is left as a [● placeholder] for you to fill in.\n\nLEGAL NOTICE: DEMAND FOR RETURN OF SECURITY DEPOSIT\n\nDate: [● date of sending]\nBy: [● registered post / speed post / email, as you choose]\n\nTo,\n[● landlord's full name]\n[● landlord's address]\n\nFrom,\n[● your full name]\n[● your address and phone number]\n\nSubject: Demand for return of security deposit of Rs. [● deposit amount] for the premises at [● property address]\n\nDear Sir/Madam,\n\n1. I was your tenant at [● property address] from 2026-01 to 2026-10-20 under [● rent agreement / verbal arrangement].\n\n2. At the start of the tenancy I paid you a security deposit of Rs. [● deposit amount] on [● date of payment] by [● mode of payment, e.g. bank transfer / UPI / cash]. [● reference or proof, e.g. receipt, transaction ID, agreement clause].\n\n3. I vacated the premises on 2026-10-20 and handed over [● possession details, e.g. keys handed over on date / to whom].\n\n4. The deposit has not been returned. [● what happened when you asked, with dates, e.g. calls or messages already sent]. [● any deductions the landlord claimed, and why they are not justified, or \"No deductions were agreed.\"]\n\nThis demand is made with reference to: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 11; Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 24. [● Have a lawyer confirm that these provisions apply to your case.]\n\n5. I therefore request you to return the full security deposit of Rs. [● deposit amount] within [● number of days you allow] days of receiving this notice, by [● how you want to be paid, e.g. transfer to your bank account details].\n\n6. If the amount is not returned within this time, I will be free to take further steps available to me under the law, without further notice, at your cost and risk.\n\nYours faithfully,\n[● your name]\n[● signature]\n\nEnclosures (copies): [● agreement / receipts / transaction record / messages]\n\n\nCheck every detail before sending. For high-value or complex matters, have a lawyer review it.",
         "reply_lang": "en-IN",
@@ -249,7 +249,7 @@
         },
         "draft_text": "LEGAL NOTICE: DEMAND FOR RETURN OF SECURITY DEPOSIT\n\nDate: [● date of sending]\nBy: [● registered post / speed post / email, as you choose]\n\nTo,\n[● landlord's full name]\n[● landlord's address]\n\nFrom,\n[● your full name]\n[● your address and phone number]\n\nSubject: Demand for return of security deposit of Rs. [● deposit amount] for the premises at [● property address]\n\nDear Sir/Madam,\n\n1. I was your tenant at [● property address] from 2026-01 to 2026-10-20 under [● rent agreement / verbal arrangement].\n\n2. At the start of the tenancy I paid you a security deposit of Rs. [● deposit amount] on [● date of payment] by [● mode of payment, e.g. bank transfer / UPI / cash]. [● reference or proof, e.g. receipt, transaction ID, agreement clause].\n\n3. I vacated the premises on 2026-10-20 and handed over [● possession details, e.g. keys handed over on date / to whom].\n\n4. The deposit has not been returned. [● what happened when you asked, with dates, e.g. calls or messages already sent]. [● any deductions the landlord claimed, and why they are not justified, or \"No deductions were agreed.\"]\n\nThis demand is made with reference to: Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 11; Uttar Pradesh Regulation of Urban Premises Tenancy Act, 2021, section 24. [● Have a lawyer confirm that these provisions apply to your case.]\n\n5. I therefore request you to return the full security deposit of Rs. [● deposit amount] within [● number of days you allow] days of receiving this notice, by [● how you want to be paid, e.g. transfer to your bank account details].\n\n6. If the amount is not returned within this time, I will be free to take further steps available to me under the law, without further notice, at your cost and risk.\n\nYours faithfully,\n[● your name]\n[● signature]\n\nEnclosures (copies): [● agreement / receipts / transaction record / messages]\n\n\nCheck every detail before sending. For high-value or complex matters, have a lawyer review it.",
         "trace": {
-          "session": "2824e3e32aea",
+          "session": "52f581fbba10",
           "input_mode": "text",
           "user_text": "Lucknow UP residential flat, agreement signed January 2026, vacated 20 October 2026. Landlord kept Rs 20000 deposit for painting though I have move-in and move-out photos and paid all rent. No threats. How can I ask for an explanation and refund?",
           "mode": "advice",
@@ -303,7 +303,11 @@
                 "id": "TEN-UP1972-S21",
                 "score": 0.5763630867004395
               }
-            ]
+            ],
+            "second_query": {
+              "query": "How can I formally request an explanation and the refund of my security deposit from my landlord?",
+              "top_score": 0.6472312211990356
+            }
           },
           "intent": {
             "intents": [
@@ -344,13 +348,15 @@
             "scan_issues": [],
             "attached_to_answer": true
           },
-          "timings_s": 8.453,
+          "timings_s": 11.84,
           "llm": {
-            "calls": 5,
+            "calls": 7,
             "retries": 0,
-            "latency_s": 8.42,
+            "latency_s": 11.78,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
+              "embed:gemini:gemini-embedding-001",
+              "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
@@ -544,12 +550,14 @@
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001",
+        "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 8.45650830003433,
-      "finished_at": "2026-11-06T15:15:00.108043+00:00"
+      "latency_s": 11.843262300011702,
+      "finished_at": "2026-11-06T17:32:02.891107+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-06T15:15:00.108043+00:00"
+  "finished_at": "2026-11-06T17:32:02.891107+00:00"
 }

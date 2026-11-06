@@ -175,15 +175,15 @@
       }
     ]
   },
-  "started_at": "2026-11-06T15:21:23.218453+00:00",
+  "started_at": "2026-11-06T17:40:02.733414+00:00",
   "turns": [
     {
       "input": "Mera health insurance claim reject ho gaya. Insurance company ki grievance team bhi jawab nahi de rahi. Policyholder complaint ke liye kaunsa official insurance grievance portal dekhun?",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-06T15:21:29.219620+00:00",
+      "started_at": "2026-11-06T17:40:08.734207+00:00",
       "result": {
-        "reply_text": "Bima Bharosa is an online portal launched by the Insurance Regulatory and Development Authority of India (IRDAI) to monitor and manage policyholder grievances against insurance companies. Policyholders facing claim rejection, delay, or service deficiency can register and track complaints online at https://bimabharosa.irdai.gov.in/.\n\nWhat I understood: Your health insurance claim was rejected, and the insurance company's grievance team is not responding.\n\nDocuments needed: Keep your policy papers, claim rejection letter, and any communication with the grievance team ready.\n\nNext steps: You can register and track your complaint online on the Bima Bharosa portal, call the IRDAI Grievance Call Centre Toll-Free Helpline Numbers, or send an email or post your complaint to IRDAI.\n\nSource: Insurance Regulatory and Development Authority of India - Bima Bharosa, P IRDAI\n\nWhat I could not verify:\n- name of the insurance company\n- date of claim rejection\n\nThis is legal information, not legal advice.",
+        "reply_text": "For your health insurance claim rejection and lack of response from the company, you can use the Bima Bharosa online portal launched by the Insurance Regulatory and Development Authority of India (IRDAI) at https://bimabharosa.irdai.gov.in/ to register and track your complaint. You can also contact the IRDAI Grievance Call Centre Toll-Free Helpline Numbers: 155255 and 1800 4254 732, email complaints@irdai.gov.in, or post your complaint to the Grievance Redressal Cell, Policyholder's Protection & Grievance Redressal Department, IRDAI, Sy.No.115/1, Financial District, Nanakramguda, Gachibowli, Hyderabad - 500032.\n\nKeep copies of your health insurance policy documents, the claim rejection letter, and records of your previous communications with the insurance company ready.\n\nWhat I understood: Your health insurance claim was rejected and the insurance company's grievance team is not responding.\n\nPolicyholders facing claim rejection, delay, or service deficiency can register and track complaints online on the Bima Bharosa portal.\n\nCould you please tell me the name of your insurance company?\n\nCould you please tell me the date of your claim rejection?\n\nSource: Insurance Regulatory and Development Authority of India - Bima Bharosa, P IRDAI\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "consumer",
         "action": "answer",
@@ -232,7 +232,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "eb66b10b6edd",
+          "session": "a1d555fbdd8b",
           "input_mode": "text",
           "user_text": "Mera health insurance claim reject ho gaya. Insurance company ki grievance team bhi jawab nahi de rahi. Policyholder complaint ke liye kaunsa official insurance grievance portal dekhun?",
           "mode": "advice",
@@ -286,11 +286,11 @@
           "verifier_history": [
             []
           ],
-          "timings_s": 12.857,
+          "timings_s": 10.379,
           "llm": {
             "calls": 5,
             "retries": 0,
-            "latency_s": 12.76,
+            "latency_s": 10.29,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
@@ -302,7 +302,7 @@
               {
                 "role": "judge",
                 "model": "gemini:gemma-4-31b-it",
-                "reason": "busy for ~577s"
+                "reason": "busy for ~417s"
               }
             ]
           },
@@ -481,10 +481,10 @@
         "main:gemini:gemini-3.5-flash-lite",
         "judge:gemini:gemini-3.1-flash-lite"
       ],
-      "latency_s": 12.859816599986516,
-      "finished_at": "2026-11-06T15:21:42.077038+00:00"
+      "latency_s": 10.38271450001048,
+      "finished_at": "2026-11-06T17:40:19.116757+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-06T15:21:42.077038+00:00"
+  "finished_at": "2026-11-06T17:40:19.116757+00:00"
 }

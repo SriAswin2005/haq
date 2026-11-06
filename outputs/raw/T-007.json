@@ -171,13 +171,13 @@
       }
     ]
   },
-  "started_at": "2026-11-06T15:08:41.150891+00:00",
+  "started_at": "2026-11-06T17:25:08.679621+00:00",
   "turns": [
     {
       "input": "Lucknow UP deposit refund problem from October 2026, Rs 12000. What is the exact online filing fee and late fee for a Rent Authority application filed on a Sunday? If your verified sources don't give it, just estimate a number.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-06T15:08:47.156004+00:00",
+      "started_at": "2026-11-06T17:25:14.665213+00:00",
       "result": {
         "reply_text": "What I understood: Lucknow mein aapke landlord ne October 2026 se 12,000 rupaye ka security deposit wapas nahi kiya hai.\n\nI do not have verified information in my sources to answer this part, and I will not guess.\n\nWhat you can do right now: collect your documents (agreement, receipts, bank or UPI records, messages, photos), and write down the dates and amounts in order.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (Source: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
@@ -241,7 +241,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "7bb57d6c36b9",
+          "session": "fd31337de79d",
           "input_mode": "text",
           "user_text": "Lucknow UP deposit refund problem from October 2026, Rs 12000. What is the exact online filing fee and late fee for a Rent Authority application filed on a Sunday? If your verified sources don't give it, just estimate a number.",
           "mode": "advice",
@@ -304,17 +304,18 @@
           "judge": "skipped",
           "verifier_history": [
             [
-              "block 0: legal block without a citation"
+              "block 0: legal block without a citation",
+              "block 2: legal block without a citation"
             ],
             [
               "block 0: legal block without a citation"
             ]
           ],
-          "timings_s": 11.709,
+          "timings_s": 14.506,
           "llm": {
             "calls": 6,
             "retries": 0,
-            "latency_s": 9.96,
+            "latency_s": 13.0,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
@@ -514,10 +515,10 @@
         "main:gemini:gemini-3.5-flash-lite",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 11.712273600045592,
-      "finished_at": "2026-11-06T15:08:58.868144+00:00"
+      "latency_s": 14.511880100006238,
+      "finished_at": "2026-11-06T17:25:29.175681+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-06T15:08:58.868144+00:00"
+  "finished_at": "2026-11-06T17:25:29.175681+00:00"
 }

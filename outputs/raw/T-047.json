@@ -175,15 +175,15 @@
       }
     ]
   },
-  "started_at": "2026-11-06T15:22:27.356430+00:00",
+  "started_at": "2026-11-06T17:41:12.516384+00:00",
   "turns": [
     {
       "input": "My airline cancelled my flight and has not returned the ticket payment despite repeated requests. Which official aviation grievance service may handle the refund complaint?",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-06T15:22:33.357245+00:00",
+      "started_at": "2026-11-06T17:41:18.516968+00:00",
       "result": {
-        "reply_text": "आप अपनी शिकायत एयर सेवा पोर्टल (https://airseva.gov.in/) या एयर सेवा मोबाइल ऐप के माध्यम से दर्ज और ट्रैक कर सकते हैं।\n\nअपनी बुकिंग की रसीद और एयरलाइन के साथ हुई बातचीत के स्क्रीनशॉट तैयार रखें।\n\nपहले अपनी शिकायत एयर सेवा पोर्टल पर दर्ज करें। यदि वहां समाधान नहीं होता है, तो आप राष्ट्रीय उपभोक्ता हेल्पलाइन (NCH) से संपर्क कर सकते हैं या उपभोक्ता आयोग जा सकते हैं।\n\nएयर सेवा पोर्टल नागरिक उड्डयन मंत्रालय, भारत सरकार की एक पहल है, जो विमान यात्रियों को एयरलाइंस से जुड़ी शिकायतों के लिए एक मंच प्रदान करता है।\n\nआप चाहें तो राष्ट्रीय उपभोक्ता हेल्पलाइन (NCH) के टोल-फ्री नंबर 1915 पर कॉल करके भी मदद ले सकते हैं।\n\nक्या आप अपने टिकट का कुल मूल्य (रुपये में) बता सकते हैं?\n\nSource: Ministry of Civil Aviation - AirSewa Portal, P AIRSEWA\nSource: Department of Consumer Affairs - National Consumer Helpline (NCH), H NCH\nSource: National Consumer Helpline Grievance Redressal Procedure, procedure 1\n\nWhat I could not verify:\n- amount_inr\n- purchase_date\n\nThis is legal information, not legal advice.",
+        "reply_text": "You can lodge, categorize, and track your refund grievance related to the airline's flight cancellation online at the AirSewa portal or via the AirSewa mobile application provided by the Ministry of Civil Aviation, Government of India.\n\nKeep your flight ticket, booking reference, payment receipts, and copies of your written requests to the airline ready.\n\nSubmit your complaint online at https://airsewa.gov.in/ or through the AirSewa mobile application.\n\nIf you need further guidance or wish to use pre-litigation consumer helplines, you may also contact the National Consumer Helpline at https://consumerhelpline.gov.in/ or call the toll-free numbers 1915 or 1800-11-4000.\n\nSource: Ministry of Civil Aviation - AirSewa Portal, P AIRSEWA\nSource: Department of Consumer Affairs - National Consumer Helpline (NCH), H NCH\nSource: National Consumer Helpline Grievance Redressal Procedure, procedure 1\n\nWhat I could not verify:\n- amount_inr\n- purchase_date\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "consumer",
         "action": "answer",
@@ -229,12 +229,12 @@
         "needs_lawyer": false,
         "escalation_reasons": [],
         "verifier": {
-          "status": "pass",
+          "status": "fixed",
           "issues": []
         },
         "draft_text": null,
         "trace": {
-          "session": "cc7de0bd7ddd",
+          "session": "a269e2f33572",
           "input_mode": "text",
           "user_text": "My airline cancelled my flight and has not returned the ticket payment despite repeated requests. Which official aviation grievance service may handle the refund complaint?",
           "mode": "advice",
@@ -286,17 +286,22 @@
           },
           "judge": "ok",
           "verifier_history": [
+            [
+              "block 2: claim not supported by its cited source (condition dropped: the source does not state that the NCH is a secondary option to be used only if the issue is not reso)"
+            ],
             []
           ],
-          "timings_s": 8.301,
+          "timings_s": 18.834,
           "llm": {
-            "calls": 5,
+            "calls": 7,
             "retries": 0,
-            "latency_s": 8.21,
+            "latency_s": 18.69,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
+              "main:gemini:gemini-3.5-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite",
               "main:gemini:gemini-3.5-flash-lite",
               "judge:gemini:gemini-3.1-flash-lite"
             ],
@@ -304,7 +309,12 @@
               {
                 "role": "judge",
                 "model": "gemini:gemma-4-31b-it",
-                "reason": "busy for ~517s"
+                "reason": "busy for ~346s"
+              },
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~339s"
               }
             ]
           },
@@ -350,7 +360,7 @@
             "CONS-NCH-P1"
           ],
           "verifier": {
-            "status": "pass",
+            "status": "fixed",
             "issues": []
           },
           "escalation_reasons": [],
@@ -483,12 +493,14 @@
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001",
         "main:gemini:gemini-3.5-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite",
+        "main:gemini:gemini-3.5-flash-lite",
         "judge:gemini:gemini-3.1-flash-lite"
       ],
-      "latency_s": 8.301990900014061,
-      "finished_at": "2026-11-06T15:22:41.658845+00:00"
+      "latency_s": 18.838007100042887,
+      "finished_at": "2026-11-06T17:41:37.354745+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-06T15:22:41.658845+00:00"
+  "finished_at": "2026-11-06T17:41:37.354745+00:00"
 }

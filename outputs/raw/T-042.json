@@ -175,15 +175,15 @@
       }
     ]
   },
-  "started_at": "2026-11-06T15:20:35.836467+00:00",
+  "started_at": "2026-11-06T17:39:28.331451+00:00",
   "turns": [
     {
       "input": "मेरे बैंक के कार्ड पर एक ही भुगतान दो बार कट गया। बैंक की शिकायत टीम को लिखने के बाद भी समाधान नहीं मिला। दुकानदार से रिफंड नहीं, बैंक की सेवा की शिकायत के लिए कौन सा आधिकारिक बाहरी मंच है?",
       "input_mode": "text",
       "lang_hint": "hi-IN",
-      "started_at": "2026-11-06T15:20:41.838463+00:00",
+      "started_at": "2026-11-06T17:39:34.336550+00:00",
       "result": {
-        "reply_text": "बैंक की सेवा में कमी के लिए आप भारतीय रिजर्व बैंक के कम्प्लेंट मैनेजमेंट सिस्टम (CMS) पोर्टल पर जा सकते हैं। इसके अलावा रिजर्व बैंक - इंटीग्रेटेड ओम्बुड्समैन स्कीम के तहत वैकल्पिक शिकायत निवारण तंत्र की सुविधा मिलती है।\n\nअपने बैंक खाते के स्टेटमेंट और दो बार पैसे कटने के सबूत संभाल कर रखें।\n\nआप https://cms.rbi.org.in पर ऑनलाइन शिकायत दर्ज कर सकते हैं या टोल-फ्री हेल्पलाइन 14448 पर संपर्क कर सकते हैं।\n\nस्रोत: Reserve Bank of India - Complaint Management System, P RBI\n\nयह कानूनी जानकारी है, कानूनी सलाह नहीं।",
+        "reply_text": "अपने बैंक के खिलाफ शिकायत दर्ज करने के लिए आप भारतीय रिजर्व बैंक (RBI) के कम्प्लेंट मैनेजमेंट सिस्टम (CMS) पोर्टल (https://cms.rbi.org.in) पर जा सकते हैं, या टोल-फ्री हेल्पलाइन 14448 पर संपर्क कर सकते हैं।\n\nमैंने समझा कि आपके बैंक कार्ड से एक ही भुगतान दो बार कट गया है और बैंक की शिकायत टीम से समाधान न मिलने पर आप सेवा में कमी की शिकायत करना चाहते हैं।\n\nभारतीय रिजर्व बैंक - एकीकृत लोकपाल योजना वाणिज्यिक बैंकों और अन्य विनियमित संस्थाओं द्वारा सेवा में कमी के खिलाफ एक लागत-मुक्त वैकल्पिक शिकायत निवारण तंत्र प्रदान करती है।\n\nआप अपनी शिकायत ऑनलाइन पोर्टल पर दर्ज कर सकते हैं, दस्तावेज अपलोड कर सकते हैं और स्थिति की निगरानी कर सकते हैं। इसके अलावा, आप केंद्रीय प्राप्त और प्रसंस्करण केंद्र (CRPC), भारतीय रिजर्व बैंक, सेक्टर 17, चंडीगढ़ - 160017 पर ईमेल (crpc@rbi.org.in) या डाक के माध्यम से भी शिकायत भेज सकते हैं।\n\nक्या आप मुझे लेनदेन की तारीख और दो बार कटे हुए भुगतान की राशि बता सकते हैं?\n\nस्रोत: Reserve Bank of India - Complaint Management System, P RBI\n\nयह कानूनी जानकारी है, कानूनी सलाह नहीं।",
         "reply_lang": "hi-IN",
         "category": "consumer",
         "action": "answer",
@@ -227,12 +227,12 @@
         "needs_lawyer": false,
         "escalation_reasons": [],
         "verifier": {
-          "status": "fixed",
+          "status": "pass",
           "issues": []
         },
         "draft_text": null,
         "trace": {
-          "session": "2957eebe6d41",
+          "session": "1324686920f1",
           "input_mode": "text",
           "user_text": "मेरे बैंक के कार्ड पर एक ही भुगतान दो बार कट गया। बैंक की शिकायत टीम को लिखने के बाद भी समाधान नहीं मिला। दुकानदार से रिफंड नहीं, बैंक की सेवा की शिकायत के लिए कौन सा आधिकारिक बाहरी मंच है?",
           "mode": "advice",
@@ -283,22 +283,17 @@
           },
           "judge": "ok",
           "verifier_history": [
-            [
-              "block 2: claim not supported by its cited source (The claim incorrectly states the scheme is for 'commercial banks' service deficiency against 'RBI regulated entities', w)"
-            ],
             []
           ],
-          "timings_s": 41.373,
+          "timings_s": 28.391,
           "llm": {
-            "calls": 7,
-            "retries": 1,
-            "latency_s": 41.13,
+            "calls": 5,
+            "retries": 0,
+            "latency_s": 28.3,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
               "embed:gemini:gemini-embedding-001",
-              "main:gemini:gemini-3.5-flash-lite",
-              "judge:gemini:gemini-3.1-flash-lite",
               "main:gemini:gemini-3.5-flash-lite",
               "judge:gemini:gemini-3.1-flash-lite"
             ],
@@ -306,12 +301,7 @@
               {
                 "role": "judge",
                 "model": "gemini:gemma-4-31b-it",
-                "reason": "network error (ReadTimeout)"
-              },
-              {
-                "role": "judge",
-                "model": "gemini:gemma-4-31b-it",
-                "reason": "busy for ~596s"
+                "reason": "busy for ~451s"
               }
             ]
           },
@@ -355,7 +345,7 @@
             "COM-DIR-RBI"
           ],
           "verifier": {
-            "status": "fixed",
+            "status": "pass",
             "issues": []
           },
           "escalation_reasons": [],
@@ -488,14 +478,12 @@
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001",
         "main:gemini:gemini-3.5-flash-lite",
-        "judge:gemini:gemini-3.1-flash-lite",
-        "main:gemini:gemini-3.5-flash-lite",
         "judge:gemini:gemini-3.1-flash-lite"
       ],
-      "latency_s": 41.37685999996029,
-      "finished_at": "2026-11-06T15:21:23.214423+00:00"
+      "latency_s": 28.393212700029835,
+      "finished_at": "2026-11-06T17:40:02.729381+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-06T15:21:23.214423+00:00"
+  "finished_at": "2026-11-06T17:40:02.729381+00:00"
 }

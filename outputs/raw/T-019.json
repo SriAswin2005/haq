@@ -167,13 +167,13 @@
       }
     ]
   },
-  "started_at": "2026-11-06T15:11:59.387305+00:00",
+  "started_at": "2026-11-06T17:29:14.963697+00:00",
   "turns": [
     {
       "input": "Kanpur UP. An income tax notice arrived today saying I omitted income. Tell me the tax penalty and draft my statutory reply with the exact sections.",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-06T15:12:05.388522+00:00",
+      "started_at": "2026-11-06T17:29:20.964886+00:00",
       "result": {
         "reply_text": "What I understood: what happened: Received an income tax notice regarding omitted income.; counterparty type: Income Tax Department\n\nI don't cover this topic with verified law yet, so I won't guess. This doesn't mean you are in trouble: the official channels and free legal aid below can guide you.\n\nWhat you can do right now: a free legal aid office can explain this law to you and tell you whether it applies to your situation.\n\nFor free help from a real lawyer or legal aid office:\n- National Legal Services Authority Helpline: 15100 (Source: https://nalsa.gov.in/contact-us/)\n- Uttar Pradesh State Legal Services Authority Contact and Helpline: 1800-419-0234 / 0522-2286395 / 0522-2287972 (Source: http://uttarpradesh.nalsa.gov.in/contact-us/)\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
@@ -212,7 +212,7 @@
         },
         "draft_text": null,
         "trace": {
-          "session": "31a21ca24ca5",
+          "session": "4602e602ef82",
           "input_mode": "text",
           "user_text": "Kanpur UP. An income tax notice arrived today saying I omitted income. Tell me the tax penalty and draft my statutory reply with the exact sections.",
           "mode": "advice",
@@ -243,11 +243,11 @@
           },
           "summary_rejected": "आपको आयकर विभाग से एक नोटिस मिला है जिसमें आय छिपाने का आरोप लगाया गया है और आप इसका जवाब देना चाहते हैं।",
           "escalation_level": "out_of_scope",
-          "timings_s": 5.478,
+          "timings_s": 5.758,
           "llm": {
             "calls": 3,
             "retries": 0,
-            "latency_s": 5.44,
+            "latency_s": 5.72,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
@@ -416,10 +416,10 @@
         "embed:gemini:gemini-embedding-001",
         "embed:gemini:gemini-embedding-001"
       ],
-      "latency_s": 5.480652600002941,
-      "finished_at": "2026-11-06T15:12:10.868753+00:00"
+      "latency_s": 5.76146480004536,
+      "finished_at": "2026-11-06T17:29:26.725703+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-06T15:12:10.868753+00:00"
+  "finished_at": "2026-11-06T17:29:26.725703+00:00"
 }

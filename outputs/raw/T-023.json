@@ -174,22 +174,21 @@
       }
     ]
   },
-  "started_at": "2026-11-06T15:13:13.518861+00:00",
+  "started_at": "2026-11-06T17:30:13.298041+00:00",
   "turns": [
     {
       "input": "Kanpur UP repair service charged Rs 1900 in October 2026 to fix my washing machine. It still leaks and they stopped replying. I have a service bill and videos. How do I complain without making things worse?",
       "input_mode": "text",
       "lang_hint": "en-IN",
-      "started_at": "2026-11-06T15:13:19.521008+00:00",
+      "started_at": "2026-11-06T17:30:19.299755+00:00",
       "result": {
-        "reply_text": "आप नेशनल कंज्यूमर हेल्पलाइन (NCH) में शिकायत दर्ज करा सकते हैं। इसके लिए आप टोल-फ्री नंबर 1915 पर कॉल कर सकते हैं या इनकी वेबसाइट consumerhelpline.gov.in पर जा सकते हैं।\n\nअपने पास सेवा का बिल (service bill) और रिपेयर के बाद मशीन के लीक होने के वीडियो सुरक्षित रखें।\n\nआप नेशनल कंज्यूमर हेल्पलाइन पर ऑनलाइन पोर्टल, व्हाट्सएप, ईमेल या टोल-फ्री नंबर के जरिए अपनी शिकायत दर्ज करा सकते हैं। यदि वहाँ समाधान नहीं होता है, तो आप जिला आयोग (District Commission) में भी शिकायत दर्ज करा सकते हैं।\n\nक्या आप बता सकते हैं कि रिपेयर कंपनी का नाम क्या है और उनकी तरफ से आखिरी बार कब बात हुई थी?\n\nSource: Department of Consumer Affairs - National Consumer Helpline (NCH), H NCH\nSource: Consumer Protection Act, 2019, section 35\nSource: National Consumer Helpline Guidelines, helpline 1915\n\nThis is legal information, not legal advice.",
+        "reply_text": "You can register your grievance before or alongside filing before Consumer Commissions through the National Consumer Helpline (NCH) by lodging it online at https://consumerhelpline.gov.in/ or by calling the toll-free numbers 1915 or 1800-11-4000. Alternatively, a consumer complaint may be filed with the District Commission under Section 35 of the Consumer Protection Act, 2019.\n\nKeep your service bill and videos ready as proof of the repair service and the defect.\n\n1. Approach the National Consumer Helpline using their online portal, toll-free numbers, WhatsApp, or email for pre-litigation grievance redressal. \n2. If the issue is not resolved, you can file a complaint with the District Commission.\n\nWhat is the name of the repair company?\n\nWhat is the date of your last communication with them?\n\nSource: Department of Consumer Affairs - National Consumer Helpline (NCH), H NCH\nSource: Consumer Protection Act, 2019, section 35\n\nWhat I could not verify:\n- I left out one point because I could not match it exactly to the official text. A lawyer or legal aid office can confirm it.\n\nThis is legal information, not legal advice.",
         "reply_lang": "en-IN",
         "category": "consumer",
         "action": "answer",
         "citations": [
           "COM-DIR-NCH",
-          "CONS-CPA2019-S35",
-          "COM-NCH-H1915"
+          "CONS-CPA2019-S35"
         ],
         "retrieved": [
           {
@@ -229,11 +228,12 @@
         "escalation_reasons": [],
         "verifier": {
           "status": "fixed",
-          "issues": []
+          "issues": [],
+          "pruned": true
         },
         "draft_text": null,
         "trace": {
-          "session": "bc70abb5d153",
+          "session": "df94e610a313",
           "input_mode": "text",
           "user_text": "Kanpur UP repair service charged Rs 1900 in October 2026 to fix my washing machine. It still leaks and they stopped replying. I have a service bill and videos. How do I complain without making things worse?",
           "mode": "advice",
@@ -292,15 +292,27 @@
           "judge": "ok",
           "verifier_history": [
             [
-              "block 3: claim not supported by its cited source (The source specifies product liability action is for harm caused by a 'defective product', whereas the claim refers to ')"
+              "block 3: claim not supported by its cited source (condition dropped: Section 69(2) allows for complaints to be admitted after two years if sufficient cause is shown.)"
             ],
-            []
+            [
+              "block 3: claim not supported by its cited source (condition dropped: the source allows for complaints to be admitted after two years if the complainant satisfies the comm)"
+            ]
           ],
-          "timings_s": 20.461,
+          "pruned": {
+            "removed_blocks": [
+              3
+            ],
+            "reasons": [
+              "block 3: claim not supported by its cited source (condition dropped: Section 69(2) allows for complaints to be admitted after two years if sufficient cause is shown.)"
+            ],
+            "recheck": [],
+            "judge": "ok"
+          },
+          "timings_s": 26.551,
           "llm": {
-            "calls": 7,
+            "calls": 9,
             "retries": 0,
-            "latency_s": 20.3,
+            "latency_s": 22.25,
             "models": [
               "router:gemini:gemini-3.1-flash-lite",
               "embed:gemini:gemini-embedding-001",
@@ -308,18 +320,30 @@
               "main:gemini:gemini-3.5-flash-lite",
               "judge:gemini:gemini-3.1-flash-lite",
               "main:gemini:gemini-3.5-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite",
+              "judge:gemini:gemini-3.1-flash-lite",
               "judge:gemini:gemini-3.1-flash-lite"
             ],
             "fallbacks": [
               {
                 "role": "judge",
                 "model": "gemini:gemma-4-31b-it",
-                "reason": "busy for ~419s"
+                "reason": "busy for ~362s"
               },
               {
                 "role": "judge",
                 "model": "gemini:gemma-4-31b-it",
-                "reason": "busy for ~412s"
+                "reason": "busy for ~356s"
+              },
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~354s"
+              },
+              {
+                "role": "judge",
+                "model": "gemini:gemma-4-31b-it",
+                "reason": "busy for ~350s"
               }
             ]
           },
@@ -361,12 +385,12 @@
           ],
           "citations": [
             "COM-DIR-NCH",
-            "CONS-CPA2019-S35",
-            "COM-NCH-H1915"
+            "CONS-CPA2019-S35"
           ],
           "verifier": {
             "status": "fixed",
-            "issues": []
+            "issues": [],
+            "pruned": true
           },
           "escalation_reasons": [],
           "models": {
@@ -500,12 +524,14 @@
         "main:gemini:gemini-3.5-flash-lite",
         "judge:gemini:gemini-3.1-flash-lite",
         "main:gemini:gemini-3.5-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite",
+        "judge:gemini:gemini-3.1-flash-lite",
         "judge:gemini:gemini-3.1-flash-lite"
       ],
-      "latency_s": 20.4640835999744,
-      "finished_at": "2026-11-06T15:13:39.985200+00:00"
+      "latency_s": 26.555774200009182,
+      "finished_at": "2026-11-06T17:30:45.855948+00:00"
     }
   ],
   "error": null,
-  "finished_at": "2026-11-06T15:13:39.985200+00:00"
+  "finished_at": "2026-11-06T17:30:45.855948+00:00"
 }
