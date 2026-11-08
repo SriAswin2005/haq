@@ -194,8 +194,10 @@ class ServerAPITests(unittest.TestCase):
                                                     "state": state, "mode": "draft"})
         self.assertEqual(second.status_code, 200)
         second = second.json()
-        self.assertEqual(second["session_id"], sid)
-        self.assertIsNot(self.server._sessions[sid], previous_object)
+        # Nov 2026: the server never adopts a session id it does not hold; it issues a new one and the
+        # browser's saved state restores the conversation under it.
+        self.assertNotEqual(second["session_id"], sid)
+        self.assertIsNot(self.server._sessions[second["session_id"]], previous_object)
         self.assertEqual(second["state"]["case_file"]["amount_inr"], state["case_file"]["amount_inr"])
         self.assertEqual(second["state"]["case_file"]["state"], state["case_file"]["state"])
         self.assertEqual(second["state"]["lang"], state["lang"])

@@ -36,7 +36,18 @@ REQUIRED_FIELDS = [
     "language",
 ]
 
-ALLOWED_CATEGORIES = {"consumer", "wages", "tenancy", "common"}
+ALLOWED_CATEGORIES = {
+    "consumer",
+    "wages",
+    "tenancy",
+    "common",
+    "rights",
+    "criminal",
+    "family",
+    "civic",
+    "money",
+    "property",
+}
 ALLOWED_DOC_TYPES = {
     "statute",
     "rule",
@@ -57,9 +68,11 @@ ALLOWED_SOURCE_TYPES = {"official", "secondary"}
 ALLOWED_VERIFIED = {"agent", "human"}
 
 # Regex for ID: {CAT}-{ACTCODE}-{UNITLETTER}{NUMBER}(optional subchunk)
-# CAT: CONS, WAGE, TEN, COM
-# UNITLETTER: S, R, O, P, J, H, or COM-DIR-{SHORTNAME} for grievance directory
-ID_PATTERN = re.compile(r"^((CONS|WAGE|TEN|COM)-[A-Z0-9]+-[SROPJH][A-Za-z0-9_-]+|COM-DIR-[A-Za-z0-9_-]+)$")
+# CAT: CONS, WAGE, TEN, COM, RGT, CRM, FAM, CIV, MON, PRP
+# UNITLETTER: S, R, O, P, J, H, A, L, or COM-DIR-{SHORTNAME} for grievance directory
+ID_PATTERN = re.compile(
+    r"^((CONS|WAGE|TEN|COM|RGT|CRM|FAM|CIV|MON|PRP)-[A-Z0-9]+-[SROPJHAL][A-Za-z0-9_-]+|COM-DIR-[A-Za-z0-9_-]+)$"
+)
 
 # Pattern for numbers/deadlines/money that trigger human_check_required
 # digits followed by words like days, months, years, rupees, lakh, crore, or %
@@ -74,6 +87,12 @@ FILE_CATEGORY_MAP = {
     "tenancy": "tenancy",
     "common": "common",
     "directory": "common",
+    "rights": "rights",
+    "criminal": "criminal",
+    "family": "family",
+    "civic": "civic",
+    "money": "money",
+    "property": "property",
 }
 
 
@@ -178,7 +197,11 @@ def validate_file(file_path: Path, seen_ids: set) -> list[str]:
                     errors.append(
                         f"{file_path.name}:{line_num} ({chunk_id}): secondary source requires human_check_required: true"
                     )
-                if (dt == "helpline" or chunk.get("unit") == "helpline" or "-H" in chunk_id) and not hcr:
+                if (
+                    dt == "helpline"
+                    or chunk.get("unit") == "helpline"
+                    or bool(re.search(r"-[A-Z0-9]+-H[A-Za-z0-9_]+", chunk_id))
+                ) and not hcr:
                     errors.append(
                         f"{file_path.name}:{line_num} ({chunk_id}): helpline chunk requires human_check_required: true"
                     )

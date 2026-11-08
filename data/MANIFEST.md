@@ -1,12 +1,12 @@
 # Legal Corpus Manifest
 
 **Author:** Antigravity (Corpus Agent)  
-**Date:** 2026-11-06 (Updated Round 4)  
-**Version:** 4.0  
-**Scope:** Verified official legal corpus for Consumer Refunds, Tenancy Deposits (UP, Central & Tamil Nadu), and Unpaid Wages (UP & Central), plus Cross-Cutting Common Provisions, Helplines, and Broad Coverage Official Grievance Body Directory.  
-**Total Chunks:** 169  
-**Total Files:** 5 (`common.jsonl`: 28, `consumer.jsonl`: 29, `directory.jsonl`: 40, `tenancy.jsonl`: 42, `wages.jsonl`: 30)  
-**Total Unique Statutory / Official Documents & Portals:** 64  
+**Date:** 2026-11-07 (Updated Round 5)  
+**Version:** 5.0  
+**Scope:** Verified official legal corpus for Citizen Rights (COI), Criminal Law & Procedure (BNSS, BNS, BSA & repealed IPC/CrPC/IEA equivalents), Family Law (HMA, SMA, PWDVA, DPA, MWPSC, PCMA), Civic Laws (RTI, MVA, IT Act, POSH), Money & Financial Recovery (NI Act, ICA, Partnership, Limitation, CPC Summary Suits), Property & Succession (HSA, ISA, Registration), Multi-State Tenancy (UP, TN, KA, MH, DL, Central TPA & Model Tenancy), Wages & Gratuity (PGA 1972, COW 2019, State Shops), Consumer Protection, and Cross-Cutting Helplines & Official Grievance Redressal Bodies.  
+**Total Chunks:** 431  
+**Total Files:** 11 (`civic.jsonl`: 35, `common.jsonl`: 28, `consumer.jsonl`: 29, `criminal.jsonl`: 87, `directory.jsonl`: 40, `family.jsonl`: 47, `money.jsonl`: 37, `property.jsonl`: 13, `rights.jsonl`: 20, `tenancy.jsonl`: 61, `wages.jsonl`: 34)  
+**Total Unique Statutory / Official Documents & Portals:** 95+  
 
 ---
 
@@ -133,3 +133,88 @@ The Round 4 directory establishes broad, verified coverage for everyday "who han
 2. **Ministry of Labour Samadhan Portal (`samadhan.labour.gov.in`):** The conciliation framework was framed under the repealed Industrial Disputes Act, 1947 (superseded on 21 November 2025 by the Industrial Relations Code, 2020). The live public portal is an interactive application without a static statutory text. Consolidated into general labour welfare entries (`COM-DIR-ESHRAM` and `COM-DIR-UPLABOUR`).
 3. **Physical Traffic Challan Court Counters:** Physical visits to regular traffic courts have been superseded by the pan-India digital e-Courts Virtual Court system (`vcourts.gov.in`) and NextGen eChallan (`echallan.parivahan.gov.in`). Verified and cataloged under `COM-DIR-ECHALLAN` and `COM-DIR-VCOURT`.
 4. **Informal Consumer Forums / Commercial Law Aggregators:** Law firm blogs and commercial consumer complaint aggregators (e.g., Voxya, Consumer Helpline private blogs) were excluded per Non-Negotiable Rule 2 (Official sources only: `.gov.in`, `.nic.in`, or regulator domains). All consumer referrals route exclusively to official statutory bodies (`COM-DIR-NCH` and `COM-DIR-EDAAKHIL`).
+
+---
+
+## 4. Round 5: Everyday Law Library
+
+### A. Round 5 Overview & Scope
+Round 5 expands the Haq legal library from 169 passages to **431 passages** (+262 passages added across 6 new category files and 2 existing category files). The library now contains verbatim statutory text for real-world legal queries across fundamental rights, the new criminal codes (and repealed equivalents), family laws, civic compliance, money and recovery, property and succession, tenancy across major urban centers, and statutory gratuity.
+
+### B. Verified Statutory Inventory & Source URLs
+
+| Act Title | Category | Jurisdiction | Status | Chunks | Source URL |
+|---|---|---|---|---|---|
+| **Constitution of India** | rights | central | `in_force` | 20 | [legislative.gov.in/constitution-of-india](https://legislative.gov.in/constitution-of-india/) |
+| **Bharatiya Nagarik Suraksha Sanhita, 2023 (BNSS)** | criminal | central | `in_force` (w.e.f. 2024-07-01) | 21 | [India Code Handle 21689](https://indiacode.nic.in/handle/123456789/21689) |
+| **Bharatiya Nyaya Sanhita, 2023 (BNS)** | criminal | central | `in_force` (w.e.f. 2024-07-01) | 21 | [India Code Handle 21688](https://indiacode.nic.in/handle/123456789/21688) |
+| **Bharatiya Sakshya Adhiniyam, 2023 (BSA)** | criminal | central | `in_force` (w.e.f. 2024-07-01) | 4 | [India Code Handle 21690](https://indiacode.nic.in/handle/123456789/21690) |
+| **Indian Penal Code, 1860 (Repealed)** | criminal | central | `repealed` | 23 | [India Code Handle 2263](https://www.indiacode.nic.in/handle/123456789/2263) |
+| **Code of Criminal Procedure, 1973 (Repealed)** | criminal | central | `repealed` | 16 | [India Code Handle 1611](https://www.indiacode.nic.in/handle/123456789/1611) |
+| **Indian Evidence Act, 1872 (Repealed)** | criminal | central | `repealed` | 2 | [India Code Handle 2188](https://www.indiacode.nic.in/handle/123456789/2188) |
+| **Hindu Marriage Act, 1955** | family | central | `in_force` | 8 | [India Code Handle 1563](https://www.indiacode.nic.in/handle/123456789/1563) |
+| **Special Marriage Act, 1954** | family | central | `in_force` | 10 | [India Code Handle 1564](https://www.indiacode.nic.in/handle/123456789/1564) |
+| **Protection of Women from Domestic Violence Act, 2005** | family | central | `in_force` | 13 | [India Code Handle 2085](https://www.indiacode.nic.in/handle/123456789/2085) |
+| **Dowry Prohibition Act, 1961** | family | central | `in_force` | 4 | [India Code Handle 2186](https://www.indiacode.nic.in/handle/123456789/2186) |
+| **Maintenance and Welfare of Parents and Senior Citizens Act, 2007** | family | central | `in_force` | 6 | [India Code Handle 2084](https://www.indiacode.nic.in/handle/123456789/2084) |
+| **Prohibition of Child Marriage Act, 2006** | family | central | `in_force` | 6 | [India Code Handle 2079](https://www.indiacode.nic.in/handle/123456789/2079) |
+| **Right to Information Act, 2005** | civic | central | `in_force` | 9 | [India Code Handle 2065](https://www.indiacode.nic.in/handle/123456789/2065) |
+| **Motor Vehicles Act, 1988 (Amended 2019)** | civic | central | `in_force` | 12 | [India Code Handle 1798](https://www.indiacode.nic.in/handle/123456789/1798) |
+| **Information Technology Act, 2000** | civic | central | `in_force` | 5 | [India Code Handle 1999](https://www.indiacode.nic.in/handle/123456789/1999) |
+| **Sexual Harassment of Women at Workplace Act, 2013 (POSH)** | civic | central | `in_force` | 9 | [India Code Handle 2104](https://www.indiacode.nic.in/handle/123456789/2104) |
+| **Negotiable Instruments Act, 1881** | money | central | `in_force` | 7 | [India Code Handle 2189](https://www.indiacode.nic.in/handle/123456789/2189) |
+| **Indian Contract Act, 1872** | money | central | `in_force` | 7 | [India Code Handle 2187](https://www.indiacode.nic.in/handle/123456789/2187) |
+| **Indian Partnership Act, 1932** | money | central | `in_force` | 11 | [India Code Handle 2185](https://www.indiacode.nic.in/handle/123456789/2185) |
+| **Limitation Act, 1963** | money | central | `in_force` | 8 | [India Code Handle 1565](https://www.indiacode.nic.in/handle/123456789/1565) |
+| **Code of Civil Procedure, 1908 (Summary Suits & S.15)** | money | central | `in_force` | 4 | [India Code Handle 2191](https://www.indiacode.nic.in/handle/123456789/2191) |
+| **Hindu Succession Act, 1956** | property | central | `in_force` | 9 | [India Code Handle 1702](https://www.indiacode.nic.in/handle/123456789/1702) |
+| **Indian Succession Act, 1925** | property | central | `in_force` | 2 | [India Code Handle 2385](https://www.indiacode.nic.in/handle/123456789/2385) |
+| **Registration Act, 1908** | property | central | `in_force` | 2 | [India Code Handle 2261](https://www.indiacode.nic.in/handle/123456789/2261) |
+| **Payment of Gratuity Act, 1972** | wages | central | `in_force` | 4 | [India Code Handle 1454](https://www.indiacode.nic.in/handle/123456789/1454) |
+| **Karnataka Rent Act, 1999** | tenancy | KA | `in_force` | 5 | [India Code Handle 7641](https://www.indiacode.nic.in/handle/123456789/7641) |
+| **Maharashtra Rent Control Act, 1999** | tenancy | MH | `in_force` | 5 | [India Code Handle 2485](https://www.indiacode.nic.in/handle/123456789/2485) |
+| **Delhi Rent Control Act, 1958** | tenancy | DL | `in_force` | 4 | [India Code Handle 1429](https://www.indiacode.nic.in/handle/123456789/1429) |
+| **Tamil Nadu Act, 2017 (TNRRRLT Act)** | tenancy | TN | `in_force` | 4 | [India Code Handle 20507](https://www.indiacode.nic.in/handle/123456789/20507) |
+| **Model Tenancy Act, 2021** | tenancy | central | `model_only` | 1 | [MoHUA Portal PDF](https://mohua.gov.in/pdf/60b86a8779b5cModel_Tenancy_Act_English.pdf) |
+| **Total Round 5 Added Passages** | | | | **262** | |
+
+*(Note: Prior to Round 5, TNTA 2017 had 1 passage [s.11] in `tenancy.jsonl`; 4 additions complete the set to 5. TPA 1882 s.105, 106, 108 were already present in `tenancy.jsonl`. LSAA 1987 s.12 and s.21 were already present in `common.jsonl`.)*
+
+### C. Section Discrepancies & Pointer Corrections
+Every section pointer in the Round 5 brief was rigorously audited against the official gazettes and India Code texts. The following discrepancies were identified and resolved:
+1. **Meeting Advocate During Interrogation under BNSS:**
+   - *Brief Pointer:* Suggested checking around Section 40.
+   - *Official Text:* Under the official BNSS, 2023, Section 40 is titled *"Arrest by private person and procedure on such arrest"*. The right of an arrested person to meet an advocate of their choice during interrogation (corresponding to CrPC Section 41D) is codified at **Section 38** (`CRM-BNSS2023-S38`).
+2. **Defamation vs. Criminal Intimidation in BNS:**
+   - *Brief Pointer:* Requested sections on criminal intimidation and defamation.
+   - *Official Text:* In BNS, 2023, Criminal Intimidation is codified under **Section 351** (`CRM-BNS2023-S351`, replacing IPC 503/506), whereas Defamation is codified under **Section 356** (`CRM-BNS2023-S356-a`, `CRM-BNS2023-S356-b`, replacing IPC 499/500).
+3. **Karnataka Rent Act, 1999 Deposit Limits:**
+   - *Brief Pointer:* "the deposit or advance limit, receipts for rent, eviction grounds, and the Rent Court".
+   - *Official Text:* Unlike Tamil Nadu (3 months) or Uttar Pradesh (2 months), the Karnataka Rent Act, 1999 does not impose a statewide flat monthly cap on security deposit. Section 15 prohibits claiming or receiving unlawful charges/advance not permitted by the Act, Section 16 mandates receipts for rent/advance and prescribes refund of unauthorized amounts, Section 27-a/b governs eviction grounds, and Section 42 defines Rent Court procedure.
+4. **Maharashtra Rent Control Act, 1999 Pagdi / Premium Legality:**
+   - *Brief Pointer:* "the deposit or premium provisions, receipts, eviction grounds, and the Rent Controller".
+   - *Official Text:* While Section 10 prohibits rent in excess of standard rent, **Section 56** explicitly permits the receipt of a fine, premium (pagdi), or deposit for grant, renewal, or assignment of a lease, recognizing Maharashtra's historic pagdi tenancy framework.
+5. **Delhi Rent Control Act, 1958 Advance Limit:**
+   - *Brief Pointer:* "the same topics [deposit/advance limit, receipts, eviction, controller]".
+   - *Official Text:* Section 13(1)(b) explicitly prohibits landlords from demanding or receiving any advance payment of rent exceeding **one month's rent**, unless written permission from the Controller is obtained.
+6. **Code of Civil Procedure, 1908 Summary Suits Structure:**
+   - *Brief Pointer:* "summary suits (Order XXXVII)".
+   - *Official Text:* Summary procedure in CPC 1908 is codified in the First Schedule, **Order XXXVII** (Rules 1, 2, and 3), rather than numbered substantive sections. Captured as `MON-CPC1908-O37R1`, `MON-CPC1908-O37R2`, and `MON-CPC1908-O37R3`.
+
+### D. Statutory Commencement Findings & Audits
+1. **Code on Social Security, 2020 (Chapter V - Gratuity):**
+   - *Audit Finding:* While central labor codes were drafted in 2020, Chapter V (Gratuity, Section 53) of the Code on Social Security, 2020 has not been notified for nationwide commencement by the Central Government.
+   - *Operative Law:* The **Payment of Gratuity Act, 1972 remains the operative, binding law in force across India**. Verbatim provisions of Section 4 (payment eligibility, 15 days wages per year, 5-year requirement, ₹20 Lakh cap), Section 7 (determination & 30-day timeline), and Section 8 (recovery) were incorporated under `status: "in_force"`.
+2. **Bharatiya Nyaya Sanhita (BNS), BNSS, and BSA 2023 Commencement:**
+   - All three criminal statutes officially came into force on **1 July 2024** pursuant to Ministry of Home Affairs notifications (S.O. 848(E), S.O. 849(E), S.O. 850(E)). The corpus includes verbatim provisions from the 2023 enactments alongside repealed IPC 1860, CrPC 1973, and IEA 1872 provisions tagged `status: "repealed"` and mapped with `status_note` cross-references.
+3. **Model Tenancy Act, 2021:**
+   - Notified by the Union Cabinet as a model framework for states to adopt. Cataloged under `status: "model_only"` with Section 11 (2-month residential and 6-month non-residential deposit guidance) so the system can contrast state-specific tenancy enactments with central model guidance.
+
+### E. Items Audited as Already Present in Library
+1. **Legal Services Authorities Act, 1987 (s.12 and s.21):**
+   - Audited `data/corpus/common.jsonl`; both Section 12 (`COM-LSAA1987-S12`, criteria for giving legal services) and Section 21 (`COM-LSAA1987-S21`, award of Lok Adalat) were already present from Round 1.
+2. **Transfer of Property Act, 1882 (s.105, s.106, s.108):**
+   - Audited `data/corpus/tenancy.jsonl`; Section 105 (`TEN-TPA1882-S105`, lease definition), Section 106 (`TEN-TPA1882-S106`, duration & notice), and Section 108 (`TEN-TPA1882-S108`, rights & liabilities) were already present from Round 1.
+
+### F. Omissions / Could Not Find
+- **Zero Omissions:** Every Act, article, section, order, and schedule listed in the Round 5 brief was located in official gazettes/repositories, verified verbatim, parsed into compliant chunks (<2,500 characters), and validated. All monetary caps, statutory deadlines, age criteria, and percentages were documented in `data/verification_sheet.csv`.

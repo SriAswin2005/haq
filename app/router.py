@@ -1,5 +1,7 @@
-"""Router: one LLM call -> category, language, facts, flags, English retrieval query.
-Plus deterministic escalation rules (config keywords + fact triggers), merged with the LLM's flags."""
+"""Router: one LLM call -> kind (chat / legal / harmful), topic, language, place, danger, facts, retrieval query.
+
+Escalation no longer replaces an answer. A lawyer recommendation is one line under a useful answer, and
+only immediate danger changes the reply (safety first, then the answer). See escalation()."""
 import json
 import logging
 import re
@@ -12,7 +14,11 @@ log = logging.getLogger("ai_lawyer.router")
 INTENTS = {"explain_rights", "where_to_complain", "what_can_i_get", "documents_needed", "next_steps", "deadline",
            "draft_document", "follow_up", "other"}
 QUESTION_INTENTS = INTENTS - {"draft_document", "other"}
-VALID_CATS = {"consumer", "wages", "tenancy", "out_of_scope", "unclear"}
+VALID_CATS = {"consumer", "wages", "tenancy", "other_law", "unclear"}
+KINDS = {"chat", "legal", "harmful"}
+STATE_CODES = {"AP", "AR", "AS", "BR", "CG", "GA", "GJ", "HR", "HP", "JH", "KA", "KL", "MP", "MH", "MN", "ML", "MZ",
+               "NL", "OR", "OD", "PB", "RJ", "SK", "TN", "TG", "TS", "TR", "UP", "UK", "UT", "WB", "DL", "JK", "LA",
+               "CH", "PY", "AN", "DN", "DD", "LD"}
 
 
 HARD_LLM = re.compile(r"arrest|police|fir\b|summons|notice_received|court_notice|legal_notice_received|bail|criminal|"
@@ -36,18 +42,37 @@ def keyword_flags(text: str) -> list[str]:
 
 
 def _fallback() -> dict:
-    return {"category": "unclear", "language": "en-IN", "state_or_city": None, "case_file_update": {},
+    return {"kind": "legal", "category": "unclear", "topic": "", "language": "en-IN", "country": None,
+            "state_or_city": None, "danger_now": False, "lawyer_note": "", "case_file_update": {},
             "missing_facts": [], "escalation_flags": [], "english_retrieval_query": "", "intent": [], "question": ""}
 
 
+def _truthy(v) -> bool:
+    return v in (True, "true", "True", 1, "yes")
+
+
 def _validate(d) -> dict | None:
-    if not isinstance(d, dict) or d.get("category") not in VALID_CATS:
+    if not isinstance(d, dict):
+        return None
+    cat = d.get("category")
+    if cat == "out_of_scope":          # older prompt / model habit
+        cat = "other_law"
+    if cat not in VALID_CATS:
         return None
     out = _fallback()
-    out["category"] = d["category"]
+    out["category"] = cat
+    kind = str(d.get("kind") or "legal").lower()
+    out["kind"] = kind if kind in KINDS else "legal"
+    out["topic"] = str(d.get("topic") or "")[:120]
     out["language"] = d.get("language") or "en-IN"
+    c = d.get("country")
+    out["country"] = c.upper()[:2] if isinstance(c, str) and c.strip() else None
     s = d.get("state_or_city")
-    out["state_or_city"] = s if isinstance(s, str) and s else None
+    s = s.strip().upper() if isinstance(s, str) else ""
+    out["state_or_city"] = {"TS": "TG", "OD": "OR", "UT": "UK"}.get(s, s) if s in STATE_CODES else None
+    out["danger_now"] = _truthy(d.get("danger_now"))
+    ln = d.get("lawyer_note")
+    out["lawyer_note"] = ln.strip()[:300] if isinstance(ln, str) else ""
     cfu = d.get("case_file_update")
     out["case_file_update"] = cfu if isinstance(cfu, dict) else {}
     for k in ("missing_facts", "escalation_flags"):
@@ -94,22 +119,18 @@ def route(case_file: dict, history: list[dict], user_text: str) -> tuple[dict, d
 
 
 def escalation(user_text: str, router_json: dict, case_file: dict) -> dict:
-    """Deterministic + LLM escalation. Returns {"hard": [...], "soft": [...], "reasons": [...]}.
-    hard  -> SAFE RESPONSE path (topic is outside scope / needs a lawyer now)
-    soft  -> still answer from verified sources, but add lawyer/legal-aid message."""
+    """Returns {"hard": [], "soft": [...], "reasons": [...], "danger": bool}.
+    Nothing here blocks an answer any more (the old keyword list sent every question that mentioned the
+    police, harassment or family to "see a lawyer" with no information). soft reasons add one lawyer /
+    legal-aid line under the answer; danger puts a safety line first."""
     cfg = load_config()
     esc = cfg["escalation"]
-    # LLM flags are hard only when they name a real hard trigger; anything else (e.g. "supreme_court",
-    # "legal_precedent") becomes soft: still answer from verified sources, plus the lawyer pointer.
-    llm_flags = [str(f) for f in router_json.get("escalation_flags", []) if f]
-    hard_llm = [f"llm:{f}" for f in llm_flags if HARD_LLM.search(f)]
-    soft_llm = [f"llm:{f}" for f in llm_flags if not HARD_LLM.search(f)]
-    hard = keyword_flags(user_text) + hard_llm
-    if case_file.get("minor_stated") and "minor_age" not in hard:
-        hard.append("minor_age")  # a stated age under 18 stays in force for the whole session
-    if router_json["category"] == "out_of_scope":
-        hard.append("out_of_scope_topic")
-    soft = list(soft_llm)
+    soft = []
+    if router_json.get("lawyer_note"):
+        soft.append("lawyer_note")
+    minor = guards.minor_flags(guards.norm(user_text))
+    if minor or case_file.get("minor_stated"):
+        soft.append("minor_age")   # a stated age under 18 stays in force for the whole session
     amt = case_file.get("amount_inr")
     try:
         if amt is not None and float(amt) > float(esc["high_amount_inr"]):
@@ -125,11 +146,18 @@ def escalation(user_text: str, router_json: dict, case_file: dict) -> dict:
     cat = router_json["category"]
     state = case_file.get("state") or router_json.get("state_or_city")
     covered = [s.upper() for s in cfg.get("covered_states", [])]
-    if cat in ("tenancy", "wages"):
+    try:   # a state counts as covered for a topic once the library holds that state's own law for it
+        from . import retrieval
+        covered += [c["jurisdiction"].upper() for c in retrieval.get_index()["chunks"]
+                    if c.get("category") == cat and c.get("jurisdiction") not in (None, "central")]
+    except Exception:  # noqa: BLE001 (never block routing on the index)
+        pass
+    if cat == "tenancy":   # wage law is central (Code on Wages), so no state note there
         if not state:
             soft.append("state_unknown")
         elif str(state).upper() not in covered:
             soft.append("state_not_covered")
     if cat == "unclear":
         soft.append("unclear")
-    return {"hard": hard, "soft": soft, "reasons": hard + soft}
+    danger = bool(router_json.get("danger_now"))
+    return {"hard": [], "soft": soft, "reasons": soft, "danger": danger}

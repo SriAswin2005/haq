@@ -10,3 +10,9 @@ data/index/quota_state.json
 data/index/available_models.json
 data/index/embeddings_mock-hash.json
 outputs/feedback.jsonl
+tests
+outputs/raw
+docs
+tmp
+outputs
+data/index/embeddings_gemini-embedding-001*.json

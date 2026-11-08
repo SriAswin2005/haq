@@ -1,6 +1,6 @@
 .env
 data/index/*
-!data/index/embeddings_gemini-embedding-001.json
+!data/index/embeddings_gemini-embedding-*.json
 __pycache__/
 *.pyc
 outputs/live_trace.jsonl
@@ -8,3 +8,11 @@ outputs/live_trace.jsonl
 outputs/feedback.jsonl
 tests/_scratch/
 outputs/runs/
+output/
+Kuku*.pdf
+_claude_scratch/
+
+# scratch builders and the unused older embedding index
+tmp/
+data/index/embeddings_gemini-embedding-001*.json
+docs/solution/Haq_solution_doc_draft.pdf

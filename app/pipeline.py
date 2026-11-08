@@ -1,13 +1,14 @@
 """handle_turn(): the ONLY entry point tests and the UI use (Architecture Sections 6, 7, 8, 10)."""
 import contextvars
 import json
+import os
 import logging
 import re
 import time
 import uuid
 from dataclasses import dataclass, field
 
-from . import drafts, guards, llm, retrieval, router, verifier
+from . import guidance, drafts, guards, llm, retrieval, router, verifier, websearch
 from .config import ROOT, load_config, read_prompt, resolve
 
 log = logging.getLogger("ai_lawyer.pipeline")
@@ -59,6 +60,21 @@ def _translate_target(lang: str | None) -> bool:
     return lang.lower() in allowed or lang.split("-")[0].lower() in allowed
 
 
+# Unicode block of each translated language: a "translation" that is still English must not count as one.
+SCRIPTS = {"te": "\u0c00-\u0c7f", "ta": "\u0b80-\u0bff", "bn": "\u0980-\u09ff", "mr": "\u0900-\u097f",
+           "hi": "\u0900-\u097f", "gu": "\u0a80-\u0aff", "kn": "\u0c80-\u0cff", "ml": "\u0d00-\u0d7f",
+           "pa": "\u0a00-\u0a7f", "od": "\u0b00-\u0b7f", "or": "\u0b00-\u0b7f", "ur": "\u0600-\u06ff"}
+
+
+def _in_script(text: str, lang: str) -> bool:
+    rng = SCRIPTS.get(lang.split("-")[0].lower())
+    if not rng:
+        return True
+    native = len(re.findall(f"[{rng}]", text))
+    latin = len(re.findall(r"[A-Za-z]", re.sub(r"https?://\S+", "", text)))
+    return native >= 0.5 * (native + latin) if native + latin else False
+
+
 _KEEP = re.compile(r"https?://\S+|[A-Z]{2,}-[A-Z0-9-]+|\d[\d,]*")
 
 
@@ -88,7 +104,8 @@ def _translate_reply(res: "TurnResult", trace: dict) -> "TurnResult":
             break
         out = re.sub(r"^```\w*\s*|\s*```$", "", out).strip()
         missing = sorted(must - _keep_tokens(out))
-        plausible = len(out) >= 0.3 * len(res.reply_text) and not out.lstrip().startswith(("{", "["))
+        plausible = len(out) >= 0.3 * len(res.reply_text) and not out.lstrip().startswith(("{", "[")) \
+            and _in_script(out, target)
         if out and plausible and not missing:
             trace["translation"] = {"to": target, "status": "ok", "attempts": attempt + 1,
                                     "english_original": res.reply_text}
@@ -127,7 +144,8 @@ def _prune_unverified(answer: dict, issues: list[str], chunks: list[dict], cf: d
     return pruned, [], "fixed"
 
 
-IN_SCOPE = {"consumer", "wages", "tenancy"}
+IN_SCOPE = {"consumer", "wages", "tenancy", "other_law"}   # legal topics that keep a case file
+DRAFT_CATS = {"consumer", "wages", "tenancy"}
 SESSION_KEYS = ("person_name", "state", "city", "minor_stated", "previous_cases", "side_topics")
 CHUNK_ID_BRACKETS = re.compile(r"\s*[\[(]\s*(?:[A-Z]{2,6}-[A-Z0-9]+-[A-Za-z0-9-]+\s*[,;]?\s*)+[\])]")
 DANGER = re.compile(r"arrest|\bfir\b|bail|summons|court_notice|notice_received|violen|threat|assault|harass|lock|"
@@ -227,12 +245,13 @@ def _aid_lines(lang: str, state: str | None) -> tuple[str, list[str], list[dict]
     m = _m(lang)
     try:
         res = retrieval.search("free legal aid helpline legal services authority", ["common"],
-                               ["central"] + ([state] if state else []), 4)
+                               ["central"] + ([state] if state else []), 8)
     except Exception as e:  # never crash on retrieval problems
         log.warning("aid retrieval failed: %s", e)
         return m["aid_missing"], [], []
     hits = [h for h in res["hits"] if h["chunk"].get("doc_type") == "helpline"
-            and h["chunk"].get("status") == "in_force"][:2]
+            and h["chunk"].get("status") == "in_force"
+            and "legal services" in h["chunk"].get("doc_title", "").lower()][:2]
     if not hits or not retrieval.passes_gate(res["top_score"]):
         return m["aid_missing"], [], [{"id": h["id"], "score": h["score"]} for h in res["hits"]]
     lines = [m["aid_pointer"]]
@@ -253,7 +272,9 @@ def _referral_lines(query: str, state: str | None, m: dict) -> tuple[str, list[s
         return "", [], []
     # Precision over recall: a wrong referral misleads, a missing one only falls back to legal aid. So only
     # verified official directory/procedure/helpline chunks, above a stricter bar than the answer gate.
-    bar = float(load_config()["retrieval"].get("referral_min_score", 0.70))
+    rc = load_config()["retrieval"]
+    bar = float((rc.get("referral_min_score_by_model") or {}).get(load_config()["embeddings"].get("model", ""),
+                                                                   rc.get("referral_min_score", 0.70)))
     if llm.is_mock():
         bar = float(load_config()["retrieval"].get("mock_min_score", 0.0))
     hits = [h for h in res["hits"] if h["chunk"].get("doc_type") in ("portal_procedure", "govt_guidance", "helpline")
@@ -305,6 +326,88 @@ def safe_response(lang: str, case_file: dict, state: str | None, reasons: list[s
     parts += [m["oos_info"] if info_only else m["can_do_now"], aid]
     parts.append(m["disclaimer"])
     return "\n\n".join(parts), cites, ret
+
+
+def _guided(kind: str, lang: str, user_text: str, session, state: str | None, reasons: list[str],
+            referral_query: str | None, trace: dict) -> tuple[str, list[str], list[dict], str] | None:
+    """General guidance instead of the fixed safe response (see guidance.py). None = use the safe response.
+    kind: chat | harmful | unverified (| out_of_scope | danger, older callers)."""
+    m = _m(lang)
+    aid, cites, ret = ("", [], []) if kind in ("chat", "harmful") else _aid_lines(lang, state)
+    ref, rc, rr = ("", [], [])
+    if referral_query and kind != "unverified":
+        ref, rc, rr = _referral_lines(referral_query, state, m)
+    by_id = {c["id"]: c for c in retrieval.get_index()["chunks"]}
+    offices = [by_id[i] for i in rc + cites if i in by_id]
+    recent = "\n".join(f"{h['role']}: {router._short(h['text'], 300)}" for h in session.history[-4:])
+    g = guidance.answer(user_text, recent, lang, kind, offices,
+                        json.dumps(session.case_file, ensure_ascii=False))
+    if g is None:
+        return None
+    trace["general_guidance"] = {"type": g["type"], "removed": g["removed"][:8], "judge": g["judge"]}
+    if g["type"] == "chat":
+        return f"{g['text']}\n\n{m['chat_footer']}", [], [], "chat"
+    if g["type"] == "refuse_harm":
+        return (f"{g['text']}\n\n{aid}" if aid else g["text"]), cites, ret, "refuse_harm"
+    parts = []
+    if kind == "danger":
+        parts.append(m["guide_danger"])
+    parts.append(m["general_label_unverified"] if kind == "unverified" else m["general_label"])
+    parts.append(g["text"])
+    if ref:
+        parts.append(ref)
+        cites, ret = rc + cites, rr + ret
+    parts += [aid, m["disclaimer"]]
+    return "\n\n".join(parts), cites, ret, "guidance"
+
+
+def _lawyer_lines(lang: str, m: dict, rj: dict, reasons: list[str], state: str | None) -> tuple[str, list[str]]:
+    """One line on why a lawyer helps (only when there is a real reason) + the free legal aid contact."""
+    why = []
+    if rj.get("lawyer_note"):
+        why.append(rj["lawyer_note"])
+    rt = _reason_text([r for r in reasons if r in ("high_amount", "limitation_risk", "minor_age")], m)
+    if rt:
+        why.append(m["see_lawyer"] + f" ({rt})")
+    if not why:
+        return "", []
+    aid, aid_ids, _ = _aid_lines(lang, state)
+    return "\n".join(why) + "\n\n" + aid, aid_ids
+
+
+def _no_library_answer(lang, m, cat, user_text, session, rj, reasons, state_code, danger, retrieved, issues,
+                       trace) -> "TurnResult":
+    """The library has no passage that answers this: answer from a live Google Search (only sentences
+    Google ties to a source are kept), else labelled general information, else the safe response."""
+    recent = "\n".join(f"{h['role']}: {router._short(h['text'], 300)}" for h in session.history[-4:])
+    _emit("searching_web")
+    w = websearch.answer(rj.get("question") or "", user_text, lang, rj.get("country"), state_code, recent)
+    if w:
+        trace["web"] = {"queries": w["queries"], "sources": w["sources"], "dropped": w["dropped"]}
+        trace["web_sources"] = w["sources"]
+        trace["search_html"] = w["search_html"]
+        body = m["web_label"] + "\n\n" + w["text"]
+        tail, aid_ids = _lawyer_lines(lang, m, rj, reasons, state_code)
+        if tail:
+            body += "\n\n" + tail
+        if danger:
+            body = m["safety_now"] + "\n\n" + body
+        body += "\n\n" + m["disclaimer"]
+        web_ids = [f"WEB-{s['n']}" for s in w["sources"]]
+        ret = list(retrieved) + [{"id": i, "score": 0.0, "via": "web"} for i in web_ids] + \
+            [{"id": a, "score": 0.0, "via": "aid_search"} for a in aid_ids]
+        return TurnResult(body, lang, cat, "answer", web_ids + aid_ids, ret, "lawyer_note" in reasons, reasons,
+                          {"status": "pass", "issues": [], "source": "web_search"}, None, trace)
+    g = _guided("unverified", lang, user_text, session, state_code, reasons, None, trace)
+    if g and g[3] == "chat":
+        return TurnResult(g[0], lang, cat, "clarify", [], retrieved, False, [], {"status": "pass", "issues": []},
+                          None, trace)
+    text, cites, ret = (g[0], g[1], g[2]) if g else safe_response(lang, session.case_file, state_code, reasons, False)
+    if danger and g:
+        text = m["safety_now"] + "\n\n" + text
+    return TurnResult(text, lang, cat, "refuse_unverified", cites, retrieved, True, reasons,
+                      {"status": "failed" if issues and not str(issues[0]).startswith("confidence gate") else "pass",
+                       "issues": issues}, None, trace)
 
 
 def _mentions_law(chunk: dict, texts: list[str]) -> bool:
@@ -361,6 +464,10 @@ def _generate_answer(msgs) -> dict | None:
 
 
 def _trace_write(trace: dict) -> None:
+    """Diagnostic trace file. OFF unless HAQ_WRITE_TRACES=1: traces hold the user's words, and the app tells
+    users their chats are saved only in their browser."""
+    if os.environ.get("HAQ_WRITE_TRACES") != "1":
+        return
     try:
         p = resolve("outputs/live_trace.jsonl")
         p.parent.mkdir(parents=True, exist_ok=True)
@@ -371,13 +478,13 @@ def _trace_write(trace: dict) -> None:
 
 
 def handle_turn(session: Session, user_text: str, input_mode: str = "text",
-                lang_hint: str | None = None) -> TurnResult:
+                lang_hint: str | None = None, heard_lang: str | None = None) -> TurnResult:
     t0 = time.time()
     llm.reset_stats()
     cfg = load_config()
     trace: dict = {"session": session.id, "input_mode": input_mode, "user_text": user_text, "mode": session.mode}
     try:
-        res = _handle(session, user_text, lang_hint, cfg, trace)
+        res = _handle(session, user_text, lang_hint, cfg, trace, heard_lang)
     except Exception as e:  # last-resort: never crash, degrade honestly
         log.exception("unhandled error in handle_turn")
         trace["fatal_error"] = f"{type(e).__name__}: {e}"
@@ -440,10 +547,13 @@ def _case_law_line(res: TurnResult, user_text: str, trace: dict) -> TurnResult:
     return res
 
 
-def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
+def _handle(session, user_text, lang_hint, cfg, trace, heard_lang=None) -> TurnResult:
     # ---- route
     _emit("understanding")
     rj, info = router.route(session.case_file, session.history, user_text)
+    if rj.get("category") == "out_of_scope":   # older label: any other legal topic
+        rj["category"] = "other_law"
+    rj.setdefault("kind", "legal")
     trace["router"] = rj
     trace["router_info"] = {k: v for k, v in info.items() if k != "raw"}
     if info.get("error") and rj["category"] == "unclear":  # model unreachable: say so, do not pretend to clarify
@@ -451,7 +561,14 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
         text, cites, ret = safe_response(lang0, session.case_file, session.case_file.get("state"), [], False, error=True)
         return TurnResult(text, lang0, "unclear", "refuse_unverified", cites, ret, True, ["service_error"],
                           {"status": "failed", "issues": [f"router failed: {info['error']}"]}, None, trace)
+    # Reply language, in order: the user's explicit setting; the language the router read (which honours
+    # "answer in English" in the message); for speech, the recogniser's language when the router fell back to
+    # English for Romanised words; then the conversation's language.
     lang = lang_hint or rj.get("language") or session.lang
+    if not lang_hint and heard_lang and not heard_lang.lower().startswith("en") and lang.lower().startswith("en") \
+            and not re.search(r"\b(?:in|reply in|answer in)\s+english\b", user_text, re.I):
+        lang = heard_lang
+    trace["language"] = {"setting": lang_hint, "heard": heard_lang, "read": rj.get("language"), "reply": lang}
     session.lang = lang
     if _translate_target(lang):           # e.g. te-IN: work in English (verifier, scans), translate at the end
         trace["translate_to"] = lang
@@ -466,7 +583,7 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
         prevs = list(keep.pop("previous_cases", []) or [])
         old = {k: v for k, v in cf.items() if k not in SESSION_KEYS}
         restored = None
-        if new_cat != prev_cat:
+        if new_cat != prev_cat and new_cat in DRAFT_CATS:   # "other_law" cases differ by topic: never auto-restore
             for i in range(len(prevs) - 1, -1, -1):
                 if prevs[i].get("category") == new_cat:
                     restored = prevs.pop(i)
@@ -477,7 +594,7 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
         cf.update(keep)
         if restored:
             cf.update(restored)
-    out_of_scope_turn = new_cat == "out_of_scope"
+    out_of_scope_turn = rj.get("kind", "legal") in ("chat", "harmful")   # these never change the case
     for k, v in (rj.get("case_file_update") or {}).items():
         if out_of_scope_turn:      # a question outside my topics never changes the active case
             break
@@ -528,11 +645,12 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
     if cat in ("unclear",) and session.case_file.get("category"):
         cat = session.case_file["category"]  # keep the topic across turns when the follow-up is short
         rj["category"] = cat
-    elif cat in ("consumer", "wages", "tenancy"):
+    elif cat in IN_SCOPE:
         cf["category"] = cat
+        if cat == "other_law" and rj.get("topic"):
+            cf["topic"] = rj["topic"]
     state = cf.get("state")
-    covered = [s.upper() for s in cfg.get("covered_states", [])]
-    state_code = state.upper() if state and state.upper() in covered else None
+    state_code = state.upper() if isinstance(state, str) and state.upper() in router.STATE_CODES else None
     esc = router.escalation(user_text, rj, cf)
     reasons = esc["reasons"]
     if "minor_age" in reasons:
@@ -543,23 +661,27 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
         return TurnResult(m["practice_unavailable"], lang, cat, "practice", [], [], False, [],
                           {"status": "pass", "issues": []}, None, trace)
 
-    # ---- hard escalation / out of scope -> SAFE RESPONSE
-    if esc["hard"]:
-        danger = any(DANGER.search(r) for r in reasons)
-        trace["escalation_level"] = "danger" if danger else "out_of_scope"
-        facts = cf if cat in IN_SCOPE else {k: v for k, v in (rj.get("case_file_update") or {}).items() if v}
-        if cat not in IN_SCOPE:
-            facts = dict(facts, summary=turn_summary) if turn_summary else facts
-        elif cf.get("summary"):
-            facts = dict(facts, summary=cf["summary"])
-        text, cites, ret = safe_response(lang, facts, state_code, reasons, escalate=True, danger=danger,
-                                         referral_query=rj.get("english_retrieval_query") or user_text)
-        return TurnResult(text, lang, cat, "escalate", cites, ret, True, reasons,
+    kind = rj.get("kind", "legal")
+    danger = bool(esc.get("danger"))
+    trace["kind"], trace["danger_now"] = kind, danger
+
+    # ---- not a legal question: a short, normal reply (no legal-aid referral)
+    if kind == "chat":
+        g = _guided("chat", lang, user_text, session, state_code, [], None, trace)
+        text = g[0] if g else m["chat_fallback"]
+        return TurnResult(text, lang, cat, "clarify", [], [], False, [], {"status": "pass", "issues": []}, None, trace)
+
+    # ---- a request to cause harm or escape the law: refuse, de-escalate, never steps
+    if kind == "harmful":
+        g = _guided("harmful", lang, user_text, session, state_code, [], None, trace)
+        text, cites, ret = (g[0], g[1], g[2]) if g and g[3] == "refuse_harm" else (m["harm_refusal"], [], [])
+        return TurnResult(text, lang, cat, "escalate", cites, ret, False, ["harmful_request"],
                           {"status": "pass", "issues": []}, None, trace)
 
-    # ---- unclear -> clarify (no retrieval, no legal statement)
-    if cat == "unclear":
-        text = f"{m['understood']} {_facts_line(cf, m)}\n\n{m['clarify_category']}\n\n{m['disclaimer']}"
+    # ---- unclear -> one useful question (no retrieval, no legal statement)
+    if cat == "unclear" and not (rj.get("question") or "").strip():
+        qs = [q for q in (rj.get("missing_facts") or []) if q][:2]
+        text = "\n".join(qs) if qs else m["clarify_category"]
         return TurnResult(text, lang, cat, "clarify", [], [], False, reasons, {"status": "pass", "issues": []},
                           None, trace)
 
@@ -567,8 +689,9 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
     juris = ["central"] + ([state_code] if state_code else [])
     query = rj.get("english_retrieval_query") or user_text
     rcfg = cfg["retrieval"]
+    cats = [cat, "common"] if cat in DRAFT_CATS else None      # other topics: search the whole library
     _emit("searching")
-    sr = retrieval.search(query, [cat, "common"], juris,
+    sr = retrieval.search(query, cats, juris,
                           extra_queries=(rcfg.get("forum_queries") or {}).get(cat), extra_k=int(rcfg.get("forum_extra", 2)))
     retrieved = [{"id": h["id"], "score": h["score"]} for h in sr["hits"]]
     trace["retrieval"] = {"query": query, "jurisdictions": juris, "top_score": sr["top_score"],
@@ -617,7 +740,7 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
     # falls short, try the user's question as a second phrasing of the same need before refusing.
     q2 = (rj.get("question") or "").strip()
     if not retrieval.passes_gate(sr["top_score"]) and q2 and q2.lower() != query.lower():
-        sr2 = retrieval.search(q2, [cat, "common"], juris,
+        sr2 = retrieval.search(q2, cats, juris,
                                extra_queries=(rcfg.get("forum_queries") or {}).get(cat), extra_k=int(rcfg.get("forum_extra", 2)))
         trace["retrieval"]["second_query"] = {"query": q2, "top_score": sr2["top_score"]}
         if retrieval.passes_gate(sr2["top_score"]):
@@ -628,9 +751,8 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
             text = f"{m['understood']} {_facts_line(cf, m)}\n\n{m['ask_state']}\n\n{m['disclaimer']}"
             return TurnResult(text, lang, cat, "clarify", [], retrieved, False, reasons,
                               {"status": "pass", "issues": ["confidence gate: state unknown"]}, None, trace)
-        text, cites, ret = safe_response(lang, cf, state_code, reasons, False)
-        return TurnResult(text, lang, cat, "refuse_unverified", cites, retrieved, True, reasons,
-                          {"status": "pass", "issues": ["confidence gate: no verified information"]}, None, trace)
+        return _no_library_answer(lang, m, cat, user_text, session, rj, reasons, state_code, danger, retrieved,
+                                  ["confidence gate: no passage in the library"], trace)
 
     chunks = [h["chunk"] for h in sr["hits"]]
     missing = rj.get("missing_facts", [])
@@ -687,9 +809,8 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
         else:
             issues = attempts[-1][1]
     if status == "failed":
-        text, cites, ret = safe_response(lang, cf, state_code, reasons, False)
-        return TurnResult(text, lang, cat, "refuse_unverified", cites, retrieved, True, reasons,
-                          {"status": "failed", "issues": issues}, None, trace)
+        return _no_library_answer(lang, m, cat, user_text, session, rj, reasons, state_code, danger, retrieved,
+                                  issues, trace)
 
     # ---- render
     by_id = {c["id"]: c for c in chunks}
@@ -726,18 +847,24 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
             retrieved.append({"id": o["id"], "score": o["score"], "old_law": True})
     if answer.get("gaps"):
         body += "\n\n" + m["gaps"] + "\n- " + "\n- ".join(str(g) for g in answer["gaps"][:4])
-    needs_lawyer = bool(answer.get("needs_lawyer")) or bool(reasons)
+    has_legal = any(b["type"] == "legal" for b in answer["blocks"])
+    if not has_legal and not want_draft:   # the library had passages, but none answered the question
+        trace["library_no_answer"] = True
+        return _no_library_answer(lang, m, cat, user_text, session, rj, reasons, state_code, danger, retrieved,
+                                  ["library passages did not answer the question"], trace)
+    needs_lawyer = bool(answer.get("needs_lawyer"))
     for r in reasons:
         if r in ("state_unknown", "state_not_covered"):
             body += "\n\n" + m[r]
-    if reasons:
-        rt = _reason_text(reasons, m)
-        body += "\n\n" + m["see_lawyer"] + (f" ({rt})" if rt else "")
-        aid, aid_ids, _ = _aid_lines(lang, state_code)
-        body += "\n\n" + aid
+    tail, aid_ids = _lawyer_lines(lang, m, rj, reasons, state_code)
+    if tail:
+        needs_lawyer = True
+        body += "\n\n" + tail
         for a in aid_ids:
             if a not in cited:
                 cited.append(a)
+    if danger:
+        body = m["safety_now"] + "\n\n" + body
     if cf.get("conflicts"):
         body += "\n\n" + m["conflict_intro"] + "\n" + _conflict_lines(cf, m)
     body += "\n\n" + m["disclaimer"]
@@ -749,7 +876,6 @@ def _handle(session, user_text, lang_hint, cfg, trace) -> TurnResult:
         text, cites, ret = safe_response(lang, cf, state_code, reasons, False)
         return TurnResult(text, lang, cat, "refuse_unverified", cites, retrieved, True, reasons,
                           {"status": "failed", "issues": final_issues}, None, trace)
-    has_legal = any(b["type"] == "legal" for b in answer["blocks"])
     action = "answer" if has_legal else "clarify"
     return TurnResult(body, lang, cat, action, cited, retrieved, needs_lawyer, reasons,
                       dict({"status": status, "issues": []}, **({"pruned": True} if trace.get("pruned") and not trace["pruned"].get("recheck") else {})),

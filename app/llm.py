@@ -28,6 +28,7 @@ paced to `embeddings.rpm` and retried with backoff instead.
 
 Mock mode (config mock: true or AI_LAWYER_MOCK=1) uses app/llm_mock.py, no network.
 """
+import contextvars
 import json
 import os
 import re
@@ -301,6 +302,9 @@ def _send(e: dict, url: str, headers: dict, payload: dict, est_tokens: int,
 
 
 # ---------------------------------------------------------------- providers
+# Google Search grounding: generate_grounded() sets this to a dict; the Gemini provider then adds the
+# google_search tool and stores the response's groundingMetadata in it.
+_search_box: contextvars.ContextVar = contextvars.ContextVar("search_box", default=None)
 _JSON_ASK = "\n\nReturn ONLY one valid JSON object. No prose, no code fences."
 
 
@@ -326,6 +330,11 @@ def _gemini_generate(e: dict, system: str, turns: list[dict], want_json: bool,
             gen["responseMimeType"] = "application/json"
         gen.update(e.get("generation_config") or {})
         payload = {"contents": contents, "generationConfig": gen}
+        box = _search_box.get()
+        if box is not None:
+            if is_gemma:
+                raise _Skip("search grounding not supported on Gemma")
+            payload["tools"] = [{"google_search": {}}]
         if sys_text and not no_system:
             payload["systemInstruction"] = {"parts": [{"text": sys_text}]}
         code, data = _send(e, f"{GEMINI_BASE}/models/{name}:generateContent",
@@ -349,6 +358,9 @@ def _gemini_generate(e: dict, system: str, turns: list[dict], want_json: bool,
             raise _Skip(f"empty or blocked response{f' ({reason})' if reason else ''}")
         if not text.strip():
             raise _Skip("empty response")
+        if box is not None:
+            box["meta"] = data["candidates"][0].get("groundingMetadata") or {}
+            box["model"] = name
         um = data.get("usageMetadata") or {}
         if um.get("promptTokenCount") and _tok.get(k):
             _tok[k][-1] = (_tok[k][-1][0], int(um["promptTokenCount"]))
@@ -462,6 +474,20 @@ def generate(messages: list[dict], role: str = "main", json_schema: dict | None 
     raise LLMError(f"all models failed for role '{role}': " + "; ".join(reasons[-8:]))
 
 
+def generate_grounded(messages: list[dict], role: str = "search") -> tuple[str, dict]:
+    """generate() with Google Search grounding (Gemini only). Returns (text, groundingMetadata).
+    Raises LLMError like generate(); in mock mode returns ("", {})."""
+    if is_mock():
+        return "", {}
+    box: dict = {}
+    token = _search_box.set(box)
+    try:
+        text = generate(messages, role=role)
+    finally:
+        _search_box.reset(token)
+    return text, box.get("meta") or {}
+
+
 def parse_json(text: str):
     """Tolerant JSON parse (strips code fences, finds the outermost object). Raises ValueError."""
     t = text.strip()
@@ -543,16 +569,37 @@ def embed(texts: list[str], task: str = "document") -> np.ndarray:
         name = _resolve_gemini_name(model)
         url = f"{GEMINI_BASE}/models/{name}:batchEmbedContents"
         tt = "RETRIEVAL_QUERY" if task == "query" else "RETRIEVAL_DOCUMENT"
+        v2 = name.startswith("gemini-embedding-2")
+        dims = ec.get("dims")
+        hdr = {"x-goog-api-key": _key("GEMINI_API_KEY")}
         for i in range(0, len(texts), batch):
             chunk = texts[i:i + batch]
-            payload = {"requests": [{"model": f"models/{name}", "content": {"parts": [{"text": t}]},
-                                     "taskType": tt} for t in chunk]}
-            data = _embed_post(url, {"x-goog-api-key": _key("GEMINI_API_KEY")}, payload, len(chunk), rpm,
-                               _toks(chunk), tpm)
+            if v2 and task == "query":
+                # Embedding 2 has no taskType: the task goes in the text (documents are formatted by retrieval)
+                chunk = [f"task: question answering | query: {t}" for t in chunk]
+
+            def req(t):
+                r = {"model": f"models/{name}", "content": {"parts": [{"text": t}]}}
+                if not v2:
+                    r["taskType"] = tt
+                if dims:
+                    r["outputDimensionality"] = int(dims)
+                return r
+            data = _embed_post(url, hdr, {"requests": [req(t) for t in chunk]}, len(chunk), rpm, _toks(chunk), tpm)
             try:
-                out.extend(e["values"] for e in data["embeddings"])
+                vecs = [e["values"] for e in data["embeddings"]]
             except (KeyError, TypeError):
                 raise LLMError("bad embedding response")
+            if len(vecs) != len(chunk):   # never pair a vector with the wrong text: embed one by one instead
+                vecs = []
+                one = f"{GEMINI_BASE}/models/{name}:embedContent"
+                for t in chunk:
+                    d1 = _embed_post(one, hdr, req(t), 1, rpm, _toks([t]), tpm)
+                    try:
+                        vecs.append(d1["embedding"]["values"])
+                    except (KeyError, TypeError):
+                        raise LLMError("bad embedding response")
+            out.extend(vecs)
         stats["models"].append(f"embed:gemini:{name}")
     elif provider == "openai_compatible":
         base = ec["base_url"].rstrip("/")

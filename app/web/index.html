@@ -28,37 +28,21 @@
 
     <button class="btn-new" id="btnNew" type="button" data-i18n="newCase">Start a new case</button>
 
+    <fieldset class="field seg" id="segMode">
+      <legend data-i18n="whatNeed">What do you need?</legend>
+      <label><input type="radio" name="mode" value="advice" checked><span data-i18n="modeAdvice">Understand my options</span></label>
+      <label><input type="radio" name="mode" value="draft"><span data-i18n="modeDraft">Draft a notice or complaint</span></label>
+    </fieldset>
+
     <nav class="chats" id="chatList" aria-label="Saved chats"></nav>
-
-    <div class="settings">
-      <label class="field">
-        <span data-i18n="replyLang">Reply language</span>
-        <select id="selLang"></select>
-      </label>
-
-      <fieldset class="field seg" id="segMode">
-        <legend data-i18n="whatNeed">What do you need?</legend>
-        <label><input type="radio" name="mode" value="advice" checked><span data-i18n="modeAdvice">Understand my options</span></label>
-        <label><input type="radio" name="mode" value="draft"><span data-i18n="modeDraft">Draft a notice or complaint</span></label>
-      </fieldset>
-
-      <label class="field">
-        <span data-i18n="readAloud">Read answers aloud</span>
-        <select id="selSpeak">
-          <option value="voice" data-i18n="speakVoice">When I speak</option>
-          <option value="always" data-i18n="speakAlways">Always</option>
-          <option value="never" data-i18n="speakNever">Never</option>
-        </select>
-      </label>
-    </div>
 
     <div class="shelf-foot">
       <button type="button" class="btn-install" id="btnInstall" hidden data-i18n="installApp">Install app</button>
+      <button type="button" class="btn-settings" id="btnSettings" aria-haspopup="dialog">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.4 13a7.6 7.6 0 0 0 0-2l2-1.6-2-3.4-2.4 1a7.4 7.4 0 0 0-1.7-1L15 3.5h-4l-.4 2.5a7.4 7.4 0 0 0-1.7 1l-2.4-1-2 3.4L6.6 11a7.6 7.6 0 0 0 0 2l-2 1.6 2 3.4 2.4-1a7.4 7.4 0 0 0 1.7 1l.4 2.5h4l.4-2.5a7.4 7.4 0 0 0 1.7-1l2.4 1 2-3.4-2-1.6ZM13 15.5A3.5 3.5 0 1 1 13 8.5a3.5 3.5 0 0 1 0 7Z" transform="translate(-1 0)"/></svg>
+        <span data-i18n="settingsBtn">Settings</span>
+      </button>
       <p class="privacy" data-i18n="privacy">Chats are saved only in this browser.</p>
-      <div class="foot-actions">
-        <button type="button" class="link" id="btnExport" data-i18n="exportAll">Export all chats</button>
-        <button type="button" class="link danger" id="btnClear" data-i18n="deleteAll">Delete all chats</button>
-      </div>
     </div>
   </aside>
 
@@ -104,6 +88,62 @@
 
   <div class="scrim" id="scrim" hidden></div>
 </div>
+
+<dialog class="guide settings-dlg" id="settingsDlg" aria-labelledby="settingsTitle">
+  <div class="guide-scroll">
+    <h2 id="settingsTitle" data-i18n="settingsBtn">Settings</h2>
+    <div class="settings">
+        <label class="field">
+          <span data-i18n="replyLang">Reply language</span>
+          <select id="selLang"></select>
+        </label>
+
+        <label class="field">
+          <span data-i18n="uiLangLabel">App language</span>
+          <select id="selUi">
+            <option value="en">English</option>
+            <option value="hi">हिन्दी</option>
+            <option value="te">తెలుగు</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span data-i18n="readAloud">Read answers aloud</span>
+          <select id="selSpeak">
+            <option value="voice" data-i18n="speakVoice">When I speak</option>
+            <option value="always" data-i18n="speakAlways">Always</option>
+            <option value="never" data-i18n="speakNever">Never</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span data-i18n="sttService">Speech to text</span>
+          <select id="selStt">
+            <option value="google" data-i18n="voiceGoogle">Google (free)</option>
+            <option value="sarvam" data-i18n="voiceSarvam">Sarvam (Indian voices, paid credits)</option>
+          </select>
+        </label>
+
+        <label class="field">
+          <span data-i18n="ttsService">Read aloud with</span>
+          <select id="selTts">
+            <option value="google" data-i18n="voiceGoogle">Google (free)</option>
+            <option value="sarvam" data-i18n="voiceSarvam">Sarvam (Indian voices, paid credits)</option>
+          </select>
+        </label>
+
+        <label class="field check">
+          <input type="checkbox" id="chkFallback">
+          <span data-i18n="voiceFallback">If it fails, try the other service</span>
+        </label>
+      <div class="foot-actions">
+        <button type="button" class="link" id="btnExport" data-i18n="exportAll">Export all chats</button>
+        <button type="button" class="link danger" id="btnClear" data-i18n="deleteAll">Delete all chats</button>
+      </div>
+    </div>
+  </div>
+  <form method="dialog" class="guide-foot"><button class="btn-new" value="ok" data-i18n="done">Done</button></form>
+</dialog>
 
 <dialog class="guide" id="guide" aria-labelledby="guideTitle">
   <div class="guide-scroll" id="guideBody"></div>

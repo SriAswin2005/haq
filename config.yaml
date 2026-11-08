@@ -1,48 +1,59 @@
-# Model routing (2026-11-05). Each role is an ORDERED fallback chain: the first usable model
+# Model routing (2026-11-05; -latest aliases added 2026-11-06 for long-running deployment). Each role is an ORDERED fallback chain: the first usable model
 # wins; on a 429, daily quota, 5xx, timeout or unknown model the client moves to the next one.
 # rpm / tpm (input tokens) / rpd are this account's free-tier limits from AI Studio, so the
 # client paces itself and skips a model before Google refuses it. Check names and chains:
 #   python -m app.models          (python -m app.models --probe sends 1 tiny request per model)
-# Why this order:
-#  - Flash-Lite (15 RPM, 500/day) carries routine traffic; a 30-case eval is ~50 router + ~60 main calls.
-#  - router and main START on DIFFERENT Flash-Lite models, so each gets its own 500/day.
-#  - Gemma 4 (30 RPM, 14.4K/day, but only 16K tokens/min = about 2-3 answer calls a minute) is the deep reserve.
-#  - judge starts on Gemma: a different model family from the answer model is a more independent check.
-#  - Flash (5 RPM, 20/day) is the last resort only. For the interview demo, move gemini-3.5-flash to the top of main.
+# Why this order (limits from AI Studio, 7 Nov 2026):
+#  - Where two models have the SAME limits, the newer, better one goes first: 3.5 Flash-Lite before 3.1 Flash-Lite
+#    (both 15 RPM / 250K TPM / 500 a day). When the first runs out for the day, the client moves on by itself.
+#  - Live web answers ("search") are now the main path for most topics, so they start on the strongest models:
+#    3.8 Flash, then 3.6 Flash (5 RPM, 20 a day each: about 40 top-quality answers a day), then Flash-Lite.
+#  - judge starts on Gemma 4 (30 RPM, 14.4K a day): a different model family is a more independent check.
+#  - Gemini 2.5 models are retired, so they are no longer listed. The -latest alias is the last resort.
 # Interview swap: put their model FIRST in a chain (old single-dict form also works), e.g.
 #   - {provider: openai_compatible, model: "<their model>", base_url: "<their url>", api_key_env: KUKU_API_KEY}
 models:
   router:
+    - {provider: gemini, model: "gemini-3.5-flash-lite", rpm: 15, tpm: 250000, rpd: 495}
     - {provider: gemini, model: "gemini-3.1-flash-lite", rpm: 15, tpm: 250000, rpd: 495}
     - {provider: gemini, model: "gemma-4-31b-it",       rpm: 30, tpm: 16000,  rpd: 14000}
-    - {provider: gemini, model: "gemini-3.5-flash-lite", rpm: 15, tpm: 250000, rpd: 495}
-    - {provider: gemini, model: "gemma-4-26b-a4b-it",   rpm: 30, tpm: 16000,  rpd: 14000}  # 500s in probe 2026-11-05
-    - {provider: gemini, model: "gemini-2.5-flash-lite"}   # limits unknown; 429 handling covers it
+    - {provider: gemini, model: "gemini-flash-lite-latest", rpm: 15, tpm: 250000, rpd: 495}   # Google-maintained alias
   main:
     - {provider: gemini, model: "gemini-3.5-flash-lite", rpm: 15, tpm: 250000, rpd: 495}
     - {provider: gemini, model: "gemini-3.1-flash-lite", rpm: 15, tpm: 250000, rpd: 495}
     - {provider: gemini, model: "gemma-4-31b-it",       rpm: 30, tpm: 16000,  rpd: 14000}
-    - {provider: gemini, model: "gemini-2.5-flash-lite"}   # limits unknown; 429 handling covers it
-    - {provider: gemini, model: "gemini-3.5-flash",     rpm: 5,  tpm: 250000, rpd: 19}
+    - {provider: gemini, model: "gemini-flash-lite-latest", rpm: 15, tpm: 250000, rpd: 495}
   translate:
-    - {provider: gemini, model: "gemini-3.1-flash-lite", rpm: 15, tpm: 250000, rpd: 495}
     - {provider: gemini, model: "gemini-3.5-flash-lite", rpm: 15, tpm: 250000, rpd: 495}
-    - {provider: gemini, model: "gemma-4-31b-it",       rpm: 30, tpm: 16000,  rpd: 14000}
-    - {provider: gemini, model: "gemini-2.5-flash-lite"}
-  judge:
-    - {provider: gemini, model: "gemma-4-31b-it",       rpm: 30, tpm: 16000,  rpd: 14000, timeout_s: 25}  # slow tail in round-3 eval: cut off and fall through
     - {provider: gemini, model: "gemini-3.1-flash-lite", rpm: 15, tpm: 250000, rpd: 495}
-    - {provider: gemini, model: "gemma-4-26b-a4b-it",   rpm: 30, tpm: 16000,  rpd: 14000}  # 500s in probe 2026-11-05
+    - {provider: gemini, model: "gemma-4-31b-it",       rpm: 30, tpm: 16000,  rpd: 14000}
+    - {provider: gemini, model: "gemini-flash-lite-latest", rpm: 15, tpm: 250000, rpd: 495}
+  search:     # live Google Search grounding (app/websearch.py); Gemini 3 grounding: 5,000 free searches a month
+    - {provider: gemini, model: "gemini-3.8-flash",      rpm: 5,  tpm: 250000, rpd: 19, timeout_s: 60}
+    - {provider: gemini, model: "gemini-3.6-flash",      rpm: 5,  tpm: 250000, rpd: 19, timeout_s: 60}
+    - {provider: gemini, model: "gemini-3.5-flash-lite", rpm: 15, tpm: 250000, rpd: 495, timeout_s: 45}
+    - {provider: gemini, model: "gemini-3.1-flash-lite", rpm: 15, tpm: 250000, rpd: 495, timeout_s: 45}
+    - {provider: gemini, model: "gemini-flash-lite-latest", rpm: 15, tpm: 250000, rpd: 495, timeout_s: 45}
+  judge:
+    - {provider: gemini, model: "gemma-4-31b-it",       rpm: 30, tpm: 16000,  rpd: 14000, timeout_s: 25}
+    - {provider: gemini, model: "gemini-3.5-flash-lite", rpm: 15, tpm: 250000, rpd: 495}
+    - {provider: gemini, model: "gemini-3.1-flash-lite", rpm: 15, tpm: 250000, rpd: 495}
+    - {provider: gemini, model: "gemma-4-26b-a4b-it",   rpm: 30, tpm: 16000,  rpd: 14000}
 # Embeddings never fall back to another model: two models' vectors are not comparable.
-embeddings: {provider: gemini, model: "gemini-embedding-001", rpm: 100, tpm: 30000, batch: 20}
+embeddings: {provider: gemini, model: "gemini-embedding-2", rpm: 100, tpm: 30000, batch: 20, dims: 768}   # Embedding 2: same limits as 001, newer, 100+ languages, 8K-token inputs; 768-d keeps the cache small
 corpus: {path: data/corpus}        # switched 2026-11-05 after validate_corpus.py passed (122 chunks); data/sample for dev
 retrieval:
   top_k: 6
+  keyword_extra: 2      # BM25 keyword hits added after the vector hits (exact Act names, section numbers)
   min_score: 0.66       # chosen by the human 2026-11-06 from outputs/calibration.md (real run): answerable cases scored
                         # 0.68-0.75, refuse cases 0.65-0.72 (traps are on-topic, so the gate cannot separate them; the
                         # verifier does that). 0.66 is a floor against clearly off-topic retrieval. Known cost: T-030
                         # (Karnataka tenant, top score 0.647) now gets the safe response instead of central-law info.
+  min_score_by_model:   # the gate per embedding model; scores from different models are not comparable
+    gemini-embedding-001: 0.66
+    gemini-embedding-2: 0.60     # PROVISIONAL (7 Nov): recalibrate from the top_score column of the first live run
   referral_min_score: 0.70       # stricter than min_score: an out-of-scope referral to the wrong office would mislead
+  referral_min_score_by_model: {gemini-embedding-001: 0.70, gemini-embedding-2: 0.64}   # 2: PROVISIONAL, recalibrate
   referral_second_margin: 0.03   # show a second body only if within this score of the first
   forum_extra: 2        # each forum query adds up to 2 chunks after the main hits (gate uses main query only)
   forum_queries:        # so every answer can say WHERE to go, not just what the law says
@@ -50,6 +61,10 @@ retrieval:
     consumer: ["where to file a consumer complaint: District Commission jurisdiction and how a complaint is made"]
     wages: ["authority to hear and decide claims for unpaid wages and how an employee files a claim"]
 verifier: {llm_judge: true, max_regenerations: 1}
+# General guidance when no verified passage applies (app/guidance.py): labelled, code-filtered, judge-checked.
+guidance: {enabled: true, judge: true}
+# Live web answers when the library has no passage: keep only sentences Google ties to a source.
+web_search: {enabled: true, min_supported_sentences: 2}
 escalation:
   high_amount_inr: 500000
   limitation_warn_months: 30
@@ -66,14 +81,14 @@ voice:
   # Ordered chains: free Google models first, paid Sarvam credits only if every Google model fails.
   stt_chain:
     - {provider: gemini, model: "gemini-3.5-transcribe"}                       # dedicated transcription model
-    - {provider: gemini, model: "gemini-3.1-flash-lite", rpm: 15, rpd: 495}    # audio input (shares router budget)
-    - {provider: gemini, model: "gemini-2.5-flash-lite"}
+    - {provider: gemini, model: "gemini-3.5-flash-lite", rpm: 15, rpd: 495}    # audio input (shares the text budget)
+    - {provider: gemini, model: "gemini-3.1-flash-lite", rpm: 15, rpd: 495}
     - {provider: sarvam, model: "saaras:v3"}                                   # paid backup
     - {provider: sarvam, model: "saaras:v4"}
-  tts_chain:
-    - {provider: gemini, model: "gemini-2.5-flash-preview-tts", voice: "Kore"}
-    - {provider: gemini, model: "gemini-3.1-flash-tts-preview", voice: "Kore"}
+  tts_chain:                 # Google TTS: 3 RPM and 10 a day per model, so about 30 read-alouds a day in total
     - {provider: gemini, model: "gemini-3.8-flash-tts", voice: "Kore"}
+    - {provider: gemini, model: "gemini-3.8-flash-lite-tts", voice: "Kore"}
+    - {provider: gemini, model: "gemini-3.1-flash-tts-preview", voice: "Kore"}
     - {provider: sarvam, model: "bulbul:v3"}                                   # paid backup
     - {provider: sarvam, model: "bulbul:v2"}
   sarvam_speaker: null    # null = the model's default voice

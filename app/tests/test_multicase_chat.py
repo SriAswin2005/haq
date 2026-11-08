@@ -1,5 +1,5 @@
 """Real users mix cases in one chat. The case file must follow them (live test, 6 Nov 2026):
-Jio refund -> traffic police (out of scope) -> rental deposit -> back to Jio."""
+Jio refund -> traffic police (another legal topic) -> rental deposit -> back to Jio."""
 import os
 import unittest
 
@@ -29,17 +29,15 @@ class MultiCaseChat(unittest.TestCase):
                                       "Your Jio recharge refund has not arrived.")
         pipeline.handle_turn(s, "jio refund not received", lang_hint="en-IN")
 
-        pipeline.router.route = route("out_of_scope", {"what_happened": "Traffic police seized bike over unpaid challan",
-                                                       "counterparty_type": "police"},
+        pipeline.router.route = route("other_law", {"what_happened": "Traffic police seized bike over unpaid challan",
+                                                    "counterparty_type": "police"},
                                       "Traffic police seized your bike over an unpaid challan.", new_topic=True)
-        r2 = pipeline.handle_turn(s, "police seized my bike for a challan", lang_hint="en-IN")
+        pipeline.handle_turn(s, "police seized my bike for a challan", lang_hint="en-IN")
         cf = s.case_file
-        self.assertEqual(cf["category"], "consumer", "out-of-scope question must not change the active case")
-        self.assertIn("Jio", cf["what_happened"])
-        self.assertNotEqual(cf.get("counterparty_type"), "police")
-        self.assertEqual(cf["summary"], "Your Jio recharge refund has not arrived.")
-        self.assertIn("Traffic police seized your bike", cf["side_topics"][-1])
-        self.assertIn("Traffic police seized your bike", r2.reply_text, "the reply still says what it understood")
+        self.assertEqual(cf["category"], "other_law", "a different legal problem becomes the active case")
+        self.assertEqual(cf.get("counterparty_type"), "police")
+        self.assertNotIn("counterparty_name", cf, "the Jio name does not leak into the police case")
+        self.assertEqual(cf["previous_cases"][-1]["counterparty_name"], "Jio")
 
         pipeline.router.route = route("tenancy", {"counterparty_type": "landlord", "amount_inr": 20000,
                                                   "what_happened": "Landlord kept the deposit"},
@@ -47,7 +45,8 @@ class MultiCaseChat(unittest.TestCase):
         pipeline.handle_turn(s, "another problem, landlord kept my 20000 deposit", lang_hint="en-IN")
         self.assertEqual(s.case_file["category"], "tenancy")
         self.assertNotIn("counterparty_name", s.case_file, "the Jio name does not leak into the deposit case")
-        self.assertEqual(s.case_file["previous_cases"][-1]["counterparty_name"], "Jio")
+        self.assertEqual(s.case_file["previous_cases"][-1]["category"], "other_law")
+        self.assertTrue(any(c.get("counterparty_name") == "Jio" for c in s.case_file["previous_cases"]))
 
         pipeline.router.route = route("consumer", {"order_id": "JIO-123"}, "Your Jio refund, order JIO-123.")
         r4 = pipeline.handle_turn(s, "back to the jio refund, order id JIO-123", lang_hint="en-IN")
@@ -56,7 +55,6 @@ class MultiCaseChat(unittest.TestCase):
         self.assertEqual(s.case_file["order_id"], "JIO-123")
         self.assertNotIn("amount_inr", s.case_file, "the deposit amount stays with the deposit case")
         self.assertEqual(s.case_file["previous_cases"][-1]["category"], "tenancy")
-        self.assertTrue(s.case_file["side_topics"], "out-of-scope questions are remembered for the panel")
 
 
 if __name__ == "__main__":

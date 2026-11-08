@@ -15,9 +15,18 @@
   const HIDE_FACTS = new Set(["minor_stated", "category", "months_since_event", "language", "conflicts", "previous_cases", "summary", "side_topics"]);
 
   let chats = load(KEY, []);
-  let settings = Object.assign({ lang: "", mode: "advice", speak: "voice" }, load(SKEY, {}));
+  // lang = reply language ("" = same as the user's message); ui = interface language; voice = speech provider
+  let settings = Object.assign({ lang: "", ui: "", mode: "advice", speak: "voice", stt: "", tts: "", fallback: true }, load(SKEY, {}));
+  if (!settings.stt) settings.stt = settings.voice || "google";   // one shared setting before; now one per direction
+  if (!settings.tts) settings.tts = settings.voice || "google";
+  if (!settings.v2) {   // v1 used one setting for both; a forced reply language made Telugu speakers get English
+    const old = (settings.lang || "").slice(0, 2).toLowerCase();
+    if (!settings.ui && I18N[old]) settings.ui = old;
+    settings.lang = ""; settings.v2 = true;
+  }
   let current = null;
   let busy = false;
+  let ctrl = null;   // AbortController for the request in flight (transcription or answer); the Stop button aborts it
   let stage = "start";
   let installEvt = null;
   const audioUrls = {};
@@ -35,7 +44,7 @@
   // ---------------------------------------------------------------- i18n
   function uiLang() {
     const pick = (code) => (code || "").slice(0, 2).toLowerCase();
-    if (I18N[pick(settings.lang)]) return pick(settings.lang);
+    if (I18N[pick(settings.ui)]) return pick(settings.ui);
     if (I18N[pick(navigator.language)]) return pick(navigator.language);
     return "en";
   }
@@ -130,9 +139,11 @@
     return `<div class="sources">` + r.citations.map((cid) => {
       const s = (sources || {})[cid];
       if (!s) return "";
+      const web = s.doc_type === "web";
       const caution = s.source_type === "secondary" || /REVIEW/.test(s.status_note || "");
-      const where = s.doc_type === "helpline" ? t("helpline") : `${s.unit || ""} ${s.unit_number || ""}`.trim();
-      const checked = s.verified === "human" ? t("sourceHuman") : t("sourceOfficial");
+      const where = web ? `[${s.unit_number}]` : s.doc_type === "helpline" ? t("helpline") : `${s.unit || ""} ${s.unit_number || ""}`.trim();
+      const checked = web ? (s.source_type === "official" ? t("sourceWebOfficial") : t("sourceWeb"))
+        : s.verified === "human" ? t("sourceHuman") : t("sourceOfficial");
       return `<a class="stamp${caution ? " caution" : ""}" href="${esc(s.source_url)}" target="_blank" rel="noopener"
         title="${esc(s.source_url)} (${esc(s.fetched_on)})"><b>${esc(s.doc_title)}</b><span>${esc(where)}</span>
         <small>${caution ? t("sourceCaution") : checked}</small></a>`;
@@ -201,6 +212,7 @@
     m.autoplay = false;
     return `<div class="msg bot"><div class="avatar" aria-hidden="true">हक़</div><div class="bot-body">
       ${banner}<div class="answer" lang="${esc((r.reply_lang || "en").slice(0, 2))}">${body}</div>${sourceChips(r, m.sources)}
+      ${m.searchKey ? `<iframe class="search-chip" title="Google Search suggestions" sandbox="allow-popups allow-popups-to-escape-sandbox" src="/api/search-suggestions/${esc(m.searchKey)}"></iframe>` : ""}
       <div class="bot-actions">${audio}<button type="button" class="chip-btn" data-copyans="${m.id}">${t("copyAnswer")}</button>
         ${m.ttsError ? `<span class="meta-line">${esc(m.ttsError)}</span>` : ""}</div>
       <div class="bot-actions fb">${feedbackRow(m)}</div>
@@ -273,11 +285,18 @@
     applyI18n();
     $("#chatTitle").textContent = current && current.title ? current.title : t("newCaseTitle");
     renderChatList(); renderLog(); renderCaseFile();
-    $("#btnSend").disabled = busy;
+    updateSend();
     $("#btnDelChat").hidden = !(current && current.messages.length);
     document.querySelectorAll('input[name="mode"]').forEach((i) => { i.checked = i.value === settings.mode; });
     $("#selSpeak").value = settings.speak;
-    if ($("#selLang").options.length) $("#selLang").value = settings.lang;
+    if ($("#selLang").options.length) {
+      const auto = $("#selLang").querySelector('option[value=""]'); if (auto) auto.textContent = t("replyAuto");
+      $("#selLang").value = settings.lang;
+    }
+    $("#selUi").value = settings.ui || uiLang();
+    $("#selStt").value = settings.stt;
+    $("#selTts").value = settings.tts;
+    $("#chkFallback").checked = settings.fallback !== false;
     const mn = $("#modeNotice");
     if (mn.dataset.sticky) { mn.textContent = t(mn.dataset.key || ""); return; }
     if (settings.mode === "draft") { mn.hidden = false; mn.className = "notice"; mn.textContent = t("draftNotice"); }
@@ -328,18 +347,18 @@
   // ---------------------------------------------------------------- talking to the server
   function setStage(s) { stage = s; const el = $("#step"); if (el) el.textContent = t("steps." + s) + "…"; }
 
-  async function postTurn(payload) {
+  async function postTurn(payload, signal) {
     // Streams real stages; falls back to the plain endpoint if streaming is unavailable.
     let res;
     try {
-      res = await fetch("/api/turn/stream", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
-    } catch (e) { throw new Error(e.message || "network error"); }
+      res = await fetch("/api/turn/stream", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload), signal });
+    } catch (e) { if (e.name === "AbortError") throw e; throw new Error(e.message || "network error"); }
     if (!res.ok) {
       const d = await res.json().catch(() => ({}));
       throw new Error(d.detail || `HTTP ${res.status}`);
     }
     if (!res.body || !res.body.getReader) {
-      const r2 = await fetch("/api/turn", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+      const r2 = await fetch("/api/turn", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload), signal });
       const d2 = await r2.json().catch(() => ({}));
       if (!r2.ok) throw new Error(d2.detail || `HTTP ${r2.status}`);
       return d2;
@@ -372,21 +391,31 @@
     if (!text || busy) return;
     if (!current) newChat();
     const chat = current;
-    chat.messages.push({ id: uid(), role: "user", text, voice: inputMode === "voice" });
+    const userMsg = { id: uid(), role: "user", text, voice: inputMode === "voice" };
+    chat.messages.push(userMsg);
     if (!chat.title) chat.title = text.length > 60 ? text.slice(0, 57) + "…" : text;
     chat.updated = Date.now();
-    busy = true; stage = "start"; persist(); render();
+    busy = true; stage = "start"; ctrl = new AbortController(); const myCtrl = ctrl; persist(); render();
     try {
       const data = await postTurn({ text, session_id: chat.session_id, lang: settings.lang || null, mode: settings.mode,
-        input_mode: inputMode, state: chat.state });
+        input_mode: inputMode, heard_lang: (stt && stt.language) || null, state: chat.state }, myCtrl.signal);
       chat.session_id = data.session_id; chat.state = data.state; chat.missing = data.missing_facts || [];
-      const msg = { id: uid(), role: "assistant", result: data.result, sources: data.sources, seconds: data.seconds, stt };
+      const msg = { id: uid(), role: "assistant", result: data.result, sources: data.sources, seconds: data.seconds, stt,
+        searchKey: data.search_key || null };
       chat.messages.push(msg);
       if (settings.speak === "always" || (settings.speak === "voice" && inputMode === "voice")) { msg.speaking = true; speak(msg, true); }
     } catch (e) {
-      chat.messages.push({ id: uid(), role: "assistant", error: t("errEngine", { e: e.message }), retryText: text });
+      if (myCtrl.signal.aborted) {   // Stop pressed: drop this question, keep the case as it was, let the user fix the words
+        const i = chat.messages.indexOf(userMsg);
+        if (i >= 0) chat.messages.splice(i, 1);
+        if (!chat.messages.length) chat.title = "";
+        $("#txt").value = text; autosize();
+        showNotice("stopped", true);
+      } else {
+        chat.messages.push({ id: uid(), role: "assistant", error: t("errEngine", { e: e.message }), retryText: text });
+      }
     } finally {
-      busy = false; chat.updated = Date.now(); persist();
+      busy = false; if (ctrl === myCtrl) ctrl = null; chat.updated = Date.now(); persist();
       if (chat === current) render();
     }
   }
@@ -396,7 +425,7 @@
     try {
       const r = msg.result;
       const res = await fetch("/api/tts", { method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: r.draft_text ? replyWithoutDraft(r) : r.reply_text, lang: r.reply_lang }) });
+        body: JSON.stringify({ text: r.draft_text ? replyWithoutDraft(r) : r.reply_text, lang: r.reply_lang, prefer: settings.tts, fallback: settings.fallback !== false }) });
       if (!res.ok) { const d = await res.json().catch(() => ({})); throw new Error(d.error || d.detail || "Audio is not available right now."); }
       msg.ttsVia = res.headers.get("X-Voice-Provider") || "";
       audioUrls[msg.id] = URL.createObjectURL(await res.blob());
@@ -441,17 +470,26 @@
       recorder = null;
       if (blob.size < 2000) { showNotice("tooShort", true); return; }
       mic.classList.add("busy"); mic.disabled = true;
+      ctrl = new AbortController(); const sttCtrl = ctrl; updateSend();
+      let heard = null;
       try {
         const fd = new FormData();
         fd.append("audio", blob, "recording." + ((blob.type.split("/")[1] || "webm").split(";")[0]));
         fd.append("lang", settings.lang || "");
-        const res = await fetch("/api/stt", { method: "POST", body: fd });
+        fd.append("prefer", settings.stt || "google");
+        fd.append("fallback", settings.fallback === false ? "0" : "1");
+        const res = await fetch("/api/stt", { method: "POST", body: fd, signal: sttCtrl.signal });
         const d = await res.json().catch(() => ({}));
         if (!res.ok || !d.text) throw new Error(d.error || d.detail || t("sttFail"));
-        await send(d.text, "voice", { provider: d.provider, model: d.model, language: d.language });
+        heard = d;
       } catch (e) {
-        showNotice(e.message, true);
-      } finally { mic.classList.remove("busy"); mic.disabled = false; }
+        showNotice(sttCtrl.signal.aborted ? "stopped" : e.message, true);
+      } finally {
+        mic.classList.remove("busy"); mic.disabled = false;
+        if (ctrl === sttCtrl) ctrl = null;
+        updateSend();
+      }
+      if (heard) await send(heard.text, "voice", { provider: heard.provider, model: heard.model, language: heard.language });
     };
     recorder.start();
     recStart = Date.now();
@@ -527,14 +565,30 @@
   });
 
   const autosize = () => { const ta = $("#txt"); ta.style.height = "auto"; ta.style.height = Math.min(ta.scrollHeight, 180) + "px"; };
-  $("#composer").addEventListener("submit", (e) => { e.preventDefault(); const v = $("#txt").value; $("#txt").value = ""; autosize(); send(v); });
-  $("#txt").addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey && !e.isComposing) { e.preventDefault(); $("#composer").requestSubmit(); } });
+  function updateSend() {
+    const b = $("#btnSend"), working = !!ctrl;
+    b.disabled = false;
+    b.classList.toggle("stop", working);
+    b.textContent = working ? t("stop") : t("send");
+    b.setAttribute("aria-label", working ? t("stopLong") : t("send"));
+  }
+  function stopWork() { if (ctrl) ctrl.abort(); }
+  $("#composer").addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (ctrl) { stopWork(); return; }
+    const v = $("#txt").value; $("#txt").value = ""; autosize(); send(v);
+  });
+  $("#txt").addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey && !e.isComposing) { e.preventDefault(); if (!ctrl) $("#composer").requestSubmit(); } });
   $("#txt").addEventListener("input", autosize);
   $("#btnMic").addEventListener("click", toggleMic);
   $("#btnNew").addEventListener("click", newChat);
   $("#btnDelChat").addEventListener("click", deleteChat);
   $("#selSpeak").addEventListener("change", (e) => { settings.speak = e.target.value; persist(); });
   $("#selLang").addEventListener("change", (e) => { settings.lang = e.target.value; persist(); render(); });
+  $("#selUi").addEventListener("change", (e) => { settings.ui = e.target.value; persist(); render(); });
+  $("#selStt").addEventListener("change", (e) => { settings.stt = e.target.value; persist(); });
+  $("#selTts").addEventListener("change", (e) => { settings.tts = e.target.value; persist(); });
+  $("#chkFallback").addEventListener("change", (e) => { settings.fallback = e.target.checked; persist(); });
   document.querySelectorAll('input[name="mode"]').forEach((i) => i.addEventListener("change", (e) => {
     settings.mode = e.target.value; delete $("#modeNotice").dataset.sticky; persist(); render(); }));
   $("#btnExport").addEventListener("click", () => download("haq-chats.json", JSON.stringify(chats, null, 2), "application/json"));
@@ -543,6 +597,7 @@
     if (!confirm(t("confirmDeleteAll"))) return;
     chats = []; current = null; persist(); newChat();
   });
+  $("#btnSettings").addEventListener("click", () => { closeDrawers(); const d = $("#settingsDlg"); if (d.showModal) d.showModal(); });
   $("#btnShelf").addEventListener("click", () => toggleDrawer($("#shelf"), $("#btnShelf")));
   $("#btnFile").addEventListener("click", () => toggleDrawer($("#casefile"), $("#btnFile")));
   $("#scrim").addEventListener("click", closeDrawers);

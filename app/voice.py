@@ -341,12 +341,22 @@ _TTS = {"gemini": _tts_gemini, "sarvam": _tts_sarvam}
 
 
 # ---------------------------------------------------------------- public API
-def stt(audio: bytes, lang_hint: str | None = None) -> dict:
+def _ordered(chain: list[dict], prefer: str | None, fallback: bool = True) -> list[dict]:
+    """The user's choice in Settings ("google" or "sarvam") goes first. With fallback off, ONLY that provider
+    is used (no silent switch to a paid one); with it on, the other provider is tried if the chosen one fails."""
+    want = {"google": "gemini", "gemini": "gemini", "sarvam": "sarvam"}.get((prefer or "").lower())
+    if not want:
+        return chain
+    mine = [e for e in chain if e.get("provider", "gemini") == want]
+    return mine + ([e for e in chain if e.get("provider", "gemini") != want] if fallback else [])
+
+
+def stt(audio: bytes, lang_hint: str | None = None, prefer: str | None = None, fallback: bool = True) -> dict:
     """Transcribe a recording. Raises VoiceError only if every model in the chain fails."""
     if not audio:
         raise VoiceError("empty recording")
     errors: list[str] = []
-    for e in _vcfg()["stt_chain"]:
+    for e in _ordered(_vcfg()["stt_chain"], prefer, fallback):
         prov = e.get("provider", "gemini")
         fn = _STT.get(prov)
         tag = f"{prov}:{e['model']}"
@@ -364,7 +374,7 @@ def stt(audio: bytes, lang_hint: str | None = None) -> dict:
     raise VoiceError("could not transcribe: " + "; ".join(errors[-4:]))
 
 
-def tts(text: str, lang: str) -> dict:
+def tts(text: str, lang: str, prefer: str | None = None, fallback: bool = True) -> dict:
     """Speak a reply. Raises VoiceError if every model in the chain fails."""
     cfg = _vcfg()
     lang = lang if lang in SUPPORTED else "en-IN"
@@ -376,7 +386,7 @@ def tts(text: str, lang: str) -> dict:
     if not clean:
         raise VoiceError("nothing to speak")
     errors: list[str] = []
-    for e in cfg["tts_chain"]:
+    for e in _ordered(cfg["tts_chain"], prefer, fallback):
         prov = e.get("provider", "gemini")
         fn = _TTS.get(prov)
         tag = f"{prov}:{e['model']}"

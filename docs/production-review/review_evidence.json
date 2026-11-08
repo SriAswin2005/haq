@@ -1,0 +1,673 @@
+{
+  "review_date": "2026-11-07",
+  "review_scope": "Application, browser, prompts, configuration, deployment, corpus structure, evaluation tooling and operational documentation; historical raw runs not re-audited claim by claim.",
+  "limitations": [
+    "No live provider benchmark or exhaustive legal audit.",
+    "Chat export and stored runs describe earlier captured versions, not necessarily current uncommitted changes.",
+    "Passing offline tests does not establish legal accuracy."
+  ],
+  "preservation": {
+    "baseline_timing": "Snapshot after the five authorised cleanup deletions, before isolated checks and report authoring.",
+    "retained_files_checked": 132,
+    "changed_files": [],
+    "existing_application_git_diff_unchanged": true,
+    "file_fingerprints": {
+      "app/cli.py": {
+        "sha256": "555984f40dc5c12fbdf403461b016a29cddec99e6ad4a46f835ccf5879de0a0e",
+        "size": 3465
+      },
+      "app/config.py": {
+        "sha256": "11628de4c99bf326f12e946dc45b3dbdf1389b7afbec351dea0874e9dfc7454c",
+        "size": 1062
+      },
+      "app/drafts.py": {
+        "sha256": "65f5a82adedd6fa8cbbaaa102505e3dd93ea1880ce793cf3a4978c18ebdc51bd",
+        "size": 5904
+      },
+      "app/guards.py": {
+        "sha256": "f622c9d90faa3e412a898c2bfd71f46afe7ce4ad4d1686b2e04c30b0a557a9f1",
+        "size": 7605
+      },
+      "app/guidance.py": {
+        "sha256": "28e82b27a2242b41859ce5e18e4b8af60bb46375103d81402e3df74ed7b0877e",
+        "size": 7190
+      },
+      "app/llm.py": {
+        "sha256": "e66ac08f4fd21f4dd2b1991c1bdd34ff2fae4c57a26b2787ad7f8a9688244f22",
+        "size": 24774
+      },
+      "app/llm_mock.py": {
+        "sha256": "86b8972c372c74d2a52f3bfe7d8f941e876c1ae03f25b3fae59b633cd3f1d614",
+        "size": 7814
+      },
+      "app/models.py": {
+        "sha256": "bab3b0203b78db729d9ab99985c25b41260915436b4e81111509ef9298552439",
+        "size": 3126
+      },
+      "app/pipeline.py": {
+        "sha256": "2ad2419aadeabfc41d5f3a1c0977edb4f8188b25e7a1991675049e96a9ff891f",
+        "size": 42183
+      },
+      "app/practice.py": {
+        "sha256": "c9d9573de4c48e7257c36fe0e3b95494093ea2939a1692ecc05844a44394f5aa",
+        "size": 146
+      },
+      "app/retrieval.py": {
+        "sha256": "5426c10942214f20c09addfa40ff03e13308129b48dd96799c83c6a66d60d19e",
+        "size": 7154
+      },
+      "app/router.py": {
+        "sha256": "36b927bbba45f82f21c21ddc68d92a3c0d00853a338488d03e3678b7258c85f7",
+        "size": 6327
+      },
+      "app/selfcheck_fallback.py": {
+        "sha256": "670c45fd983b007ee4525054ad22cdac0a1e93d8a81852ec4d50a1b7dafb93d8",
+        "size": 5947
+      },
+      "app/selfcheck_server.py": {
+        "sha256": "c906d50418dbc596dca7c132259bde139dfcee1d3a04fbd91bf4fc6957a39c5d",
+        "size": 5284
+      },
+      "app/selfcheck_voice.py": {
+        "sha256": "7a48a0b1d161a4c1d850e5bcce4ec513ffc977e82a98e63d8bcdb948bf4acccd",
+        "size": 6840
+      },
+      "app/serve.py": {
+        "sha256": "1cbf4bc5a9e33bac0797c402487186e3db1a240aabedc6edf6a732193e4c6a26",
+        "size": 1022
+      },
+      "app/server.py": {
+        "sha256": "21fe772870181a9346f46c741e43075049a1b1236b6a876c23ceea313c7e06f8",
+        "size": 14193
+      },
+      "app/ui.py": {
+        "sha256": "c876e72e467b047156f7e2de2cfd15b9cec38cb96693f1076b6fa395ee742c3e",
+        "size": 7891
+      },
+      "app/verifier.py": {
+        "sha256": "b0d1cf0bde72edd0eee9bbe4d773a62b9ba21e7394ae43f0a8cc731eb25861aa",
+        "size": 9866
+      },
+      "app/voice.py": {
+        "sha256": "06f365c43df45265d697cd71e8fbb74aede97f586e38d7add508b452cad465ee",
+        "size": 16811
+      },
+      "app/__init__.py": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size": 0
+      },
+      "app/prompts/answer.md": {
+        "sha256": "38af3ce2587c6c39a3ef7683e8b2df63de67f65a3cf5ed6ed9518bce12151999",
+        "size": 4788
+      },
+      "app/prompts/guidance.md": {
+        "sha256": "9fef8bda2d139bb46e98d5286b7a850b72de3f3314a18c6997f7f7477ace259c",
+        "size": 2799
+      },
+      "app/prompts/guidance_judge.md": {
+        "sha256": "d6b05df475a843e9871fb3f6cff9b435949d24e823e79a0e6acdb89ee0c0d073",
+        "size": 620
+      },
+      "app/prompts/judge.md": {
+        "sha256": "6f70b6bf0823fd7c8370ee0af5877bce865df02b1a0682b09780636d664b14d1",
+        "size": 769
+      },
+      "app/prompts/language_retry.md": {
+        "sha256": "87e3c0ee14e70f2df29e59f0741234dc6c8a0d2ed756d15281aa5176b6410b8f",
+        "size": 392
+      },
+      "app/prompts/router.md": {
+        "sha256": "8a81490bafd937fc09b3810a4595e5b994d338cb026c922d9049691dce45eb5c",
+        "size": 5051
+      },
+      "app/prompts/translate.md": {
+        "sha256": "c2f410601c14ce2e0e8d8b59f6140b7603a5249909c6f31f05019ba75def943b",
+        "size": 641
+      },
+      "app/templates/consumer_grievance_en.txt": {
+        "sha256": "141ccb5170e49200f660b5c3225cb01f4d97e7c7809a2990ea4d744be7fb8be5",
+        "size": 1964
+      },
+      "app/templates/deposit_notice_en.txt": {
+        "sha256": "fb51cadae2649dc02519cd0c5e649757d33e01137a326a80c8e90d08c989d4f8",
+        "size": 1719
+      },
+      "app/templates/messages.json": {
+        "sha256": "6a0121b0434bc1c759f3a8961ab3d8342f377bb50ddde1f205cd28ed297f9b3b",
+        "size": 16868
+      },
+      "app/templates/salary_notice_en.txt": {
+        "sha256": "c819d0a8982c0e9223fbb47a4a49fd152a7a7554e42c9945d5f0c1cd96975e41",
+        "size": 1554
+      },
+      "app/tests/test_conflicts.py": {
+        "sha256": "4c18ce84f1991dd8513001b34f6649a8f170f758a446dfe7f0a6e7e0a5d335bb",
+        "size": 1493
+      },
+      "app/tests/test_guidance.py": {
+        "sha256": "240879d62381b83c34482be1cbcc927a31990f448f6a09ea302ff269596fe345",
+        "size": 4165
+      },
+      "app/tests/test_intent.py": {
+        "sha256": "e944567d43f3345d43c0dd05543657c762d6b3a55e16a8436095ea1d4b18773d",
+        "size": 3687
+      },
+      "app/tests/test_multicase_chat.py": {
+        "sha256": "a9621990a02b21a1de5a62c169595790952beb0c4cd7250022fa5f6f9d110bd8",
+        "size": 3802
+      },
+      "app/tests/test_pruning.py": {
+        "sha256": "1e86136c7a85b3b188da20b08f9e97a668c68ae9a1265cd179ad5185b8f3d428",
+        "size": 2405
+      },
+      "app/tests/test_referrals.py": {
+        "sha256": "47e6227dba4852582beae784d8b32570a813797ba35c275e46cf2e3c100673db",
+        "size": 3234
+      },
+      "app/tests/test_round2.py": {
+        "sha256": "ca8c614d34c653e9a2ee15b71c556408ff04715b671a222f4e447c3346f307d6",
+        "size": 9283
+      },
+      "app/tests/test_round4_fixes.py": {
+        "sha256": "45405ac15f7befa032ffe29272fb87fc264a8fbc731ea05ff06957c53a9251da",
+        "size": 4006
+      },
+      "app/tests/test_summary_language.py": {
+        "sha256": "e65fd4d3940ff6a7ddad90e34d76a72cef5365b27cc66c4239eaa5918b82fab0",
+        "size": 2196
+      },
+      "app/tests/test_topic_and_scope.py": {
+        "sha256": "9bb78b7b67f5c13eb1da1de217bbde4c420aaa29047fa8e5c1d0fde05355f5c1",
+        "size": 3227
+      },
+      "app/tests/__init__.py": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "size": 0
+      },
+      "app/web/app.css": {
+        "sha256": "ad5e83df611245c051f48696a685c0093058a733418495fd2b7cc5553b3bb406",
+        "size": 20728
+      },
+      "app/web/app.js": {
+        "sha256": "322ddf005143b4bef590618c6bf68212f270d5153a13163be3c03466928c56d9",
+        "size": 33716
+      },
+      "app/web/i18n.js": {
+        "sha256": "850e21cbed57eca55a09a267d47faeda5d6d4c99d6f44c530d9bd564abb159f9",
+        "size": 54988
+      },
+      "app/web/index.html": {
+        "sha256": "053c424132a503d16c5c5b13d9362a0e99c50e85dcf8216a1614ebbd96504be6",
+        "size": 9300
+      },
+      "app/web/manifest.webmanifest": {
+        "sha256": "b6a0176c253ab58c5697c12fbc064440e04c1abf40c9b28953c655a926e6d333",
+        "size": 793
+      },
+      "app/web/sw.js": {
+        "sha256": "ffe9a1df575898100099e498f9c3ee032cdd4550dad7cc50b03f06fbd2d85b40",
+        "size": 1326
+      },
+      "app/web/icons/apple-touch-icon.png": {
+        "sha256": "a4416f5a488cf2e649c376452336dd936a4d5143a313f4610fa6fab56947a38a",
+        "size": 22802
+      },
+      "app/web/icons/icon-192.png": {
+        "sha256": "0276414fe5e45e4101844e39639d54b90423785e3e813edb5e8308760b238925",
+        "size": 24310
+      },
+      "app/web/icons/icon-512.png": {
+        "sha256": "6eab1c9360c41c864c253c9ce8fdc5270e6babb81f4e84d42018d880b51448c6",
+        "size": 44465
+      },
+      "tests/.gitignore": {
+        "sha256": "1e4ed9c1ed14e951b1cac018ce438fa820c27cd4cdcc09db9228a188277a38a0",
+        "size": 23
+      },
+      "tests/add_real_review.py": {
+        "sha256": "8fccb82937417157a9c299fa5d870e3f9269344080bf69cf22f903228f423a81",
+        "size": 5208
+      },
+      "tests/add_round4_cases.py": {
+        "sha256": "b592a35ef0c165eff94b0625ed49dcdf6ea929a287f1ff3b98dee5e75c89e423",
+        "size": 8408
+      },
+      "tests/audit_round3.py": {
+        "sha256": "5d73977b93f35beea178483d1d87d34291641f461d843a4b8ebaae6fc961aea7",
+        "size": 5347
+      },
+      "tests/BUGS.md": {
+        "sha256": "772b4b56ec057db1981914b6e9b1c8f1604fbed5df1726ccee8d3f61858b158c",
+        "size": 41110
+      },
+      "tests/cases.jsonl": {
+        "sha256": "cbacbef207ccd1ced4b5c79fc2ad35e38aaff818da55bbbe3131195245749f81",
+        "size": 68485
+      },
+      "tests/CHANGELOG.md": {
+        "sha256": "12741ac45fda3e19538357679d4a09baa40c9574a54b231f7e5bf62b8c380a7b",
+        "size": 10084
+      },
+      "tests/checks.py": {
+        "sha256": "02540fd9cb9ae2aa6ff4aeee099a5c9a390ff16573caa68d857427a230641960",
+        "size": 48935
+      },
+      "tests/CHUNK_MAPPING.md": {
+        "sha256": "f108d2c87e03c6dddc17614475878c685a70f6133daa3e77147146d08014ff46",
+        "size": 9517
+      },
+      "tests/full55_before_manifest.json": {
+        "sha256": "70e5e3d1035194d9de2d845ac11ffba0ddc4d520fa4e30f90613f4048250ff49",
+        "size": 5383
+      },
+      "tests/full55_reports.py": {
+        "sha256": "bbdca0c8d3c1442e5175f9ddcef7407021fa293d102e6c57a657277cb645274d",
+        "size": 19529
+      },
+      "tests/mock_pipeline.py": {
+        "sha256": "2dc2d0535ee93b2db4cb6db771fa5af8fde5cbfa1a36002f1a506c947e390f48",
+        "size": 3247
+      },
+      "tests/policy_v2_baseline.json": {
+        "sha256": "9f2ed3b5250fe798e568b41cbc03c55a7b23dc659487927fb8009284b70c5f34",
+        "size": 5677
+      },
+      "tests/policy_v2_expectations_revision.json": {
+        "sha256": "fbb9ff696c3b62d5018c85a89742237cdd96df6e55fd1ead64c3f980f0bf0945",
+        "size": 1302
+      },
+      "tests/policy_v2_reports.py": {
+        "sha256": "b4e6253cc9db4040b199564faf1cc07da67af7e464f5de6665af9df9e5993cf9",
+        "size": 16703
+      },
+      "tests/README.md": {
+        "sha256": "82e58cfccb72851c00367b1a23bbe61cc0257878b8d687928f13438ff0af6636",
+        "size": 12867
+      },
+      "tests/real_findings.jsonl": {
+        "sha256": "e79c9ebf61a7925a3d937b72a5b769e4c5b816a6bbdbb95d5ba5c3247d78c46d",
+        "size": 767
+      },
+      "tests/recheck_eval.py": {
+        "sha256": "667f5a00e2654f19a39c84d0da2ab9ac6b55ecc9d9c77a662ac913dd374f8ae1",
+        "size": 5124
+      },
+      "tests/reporting.py": {
+        "sha256": "959cae3b6e034495f8fee4ee86409baabc04126ee59567290e5d6704ce63a8b0",
+        "size": 24412
+      },
+      "tests/requirements.txt": {
+        "sha256": "982c7bcb9fb9364d065330059c0e9b3b3c9828e0f38d7dac2a54d04e974b2e97",
+        "size": 79
+      },
+      "tests/rescore_full55.py": {
+        "sha256": "1cbcd775bf0799ec39dcc418bbc589d1c000ab29b9a5ad0d49250d63f26e6a16",
+        "size": 4813
+      },
+      "tests/rescore_round4.py": {
+        "sha256": "bbfcb4dffe8f0824caa2ca8e182037aa0656a35de4980b7eecd7abdc786419a4",
+        "size": 4808
+      },
+      "tests/revise_round4_expectations.py": {
+        "sha256": "57918d4e2ecc41a12c60521d3d92225c39a3770481b2e3bbce9f48f520bb1b47",
+        "size": 2164
+      },
+      "tests/round3_before_manifest.json": {
+        "sha256": "e5ca94f7403ccdc4b6e991fdf4208564eee166dcb3b7950c951af1fd0177f754",
+        "size": 2787
+      },
+      "tests/round3_bugs.py": {
+        "sha256": "7e9bd3240bb3bb185d84b980e9af4a20765dfd78f29069c4fa9295120c4a2cf3",
+        "size": 7520
+      },
+      "tests/round3_real_findings.jsonl": {
+        "sha256": "8885539e6969e227017f0b45d23c548350ddbb19a74ee4402a8d0045b1d3bfb5",
+        "size": 3526
+      },
+      "tests/round3_reports.py": {
+        "sha256": "831161345af8346a61cdc54c4f7a6758648e921602f597591fd51b6c1b9651e7",
+        "size": 20263
+      },
+      "tests/round4_before_manifest.json": {
+        "sha256": "be0c8c20ec5c34fecb6eaca98c257b207eef71b6663e193da637c6031ca55682",
+        "size": 3725
+      },
+      "tests/round4_expectations_revision.json": {
+        "sha256": "8761fe345f1c8d6e6b5844cdc57d51cf03baaaac02dfe7c2de206fb87c7ad644",
+        "size": 15051
+      },
+      "tests/round4_reports.py": {
+        "sha256": "c533872c3665127e43833301065e6a89189767097b426af54df79cde968f9f42",
+        "size": 11749
+      },
+      "tests/run_eval.py": {
+        "sha256": "3d02446baa84a24e13baabbd70a591635b6ff40e7db32af1bf205c0daf573298",
+        "size": 22277
+      },
+      "tests/run_frozen_eval.py": {
+        "sha256": "3a16c81a11a63705c9e36e71f06f3f9b253be28a0fc3f6b5c1035c916c6ecd19",
+        "size": 8502
+      },
+      "tests/test_checks.py": {
+        "sha256": "0d81d56e6fc0af13322cbe97528625ccbe674360c9cfa5f88d024f25275db11c",
+        "size": 9706
+      },
+      "tests/test_harness.py": {
+        "sha256": "6e0f7987c0acb3c21175eb34cb4b6d56f13e0378fca041fbd3e784c82eb49efa",
+        "size": 8055
+      },
+      "tests/test_policy_v2.py": {
+        "sha256": "a3dd82e24569362b046129d8fb21fc16949169af60a0cc9ec676aed2519e3b5e",
+        "size": 7739
+      },
+      "tests/test_referrals.py": {
+        "sha256": "bd22ed2153aed4e969e93ddc67c9f148d597ab61cf44520f0c89fdf54971fe34",
+        "size": 15791
+      },
+      "tests/test_round3_reports.py": {
+        "sha256": "fbe3bada177ddab47f56b5373d5c52d07599183859792f07a3c87acd20507e31",
+        "size": 3223
+      },
+      "tests/test_server_api.py": {
+        "sha256": "e82828f805b96948808a769c9d25298ed20817e470043ef8e4fe37a2a4845c38",
+        "size": 14666
+      },
+      "tests/__init__.py": {
+        "sha256": "870863e4c331b22abf4d80561ccc4ba0ed1f0e418c9ea6ddd00f8fa6974cf1f5",
+        "size": 74
+      },
+      "tests/prompts/faithfulness.md": {
+        "sha256": "318265e918b99792678c1538de7ca8abc450ec232e15b3cc931757ee936a4e91",
+        "size": 777
+      },
+      "data/FAILURES.md": {
+        "sha256": "6252c927ee9f277b9daad5d011836ff0136637169981bed1cf48fe51e0cef446",
+        "size": 8817
+      },
+      "data/MANIFEST.md": {
+        "sha256": "64a2b7b6a9d366ffab635a9eeab8f859896acdcf52e9fd1231964da684e6d5c3",
+        "size": 23366
+      },
+      "data/STATUS_REGISTER.csv": {
+        "sha256": "72129e488aef1ac5fb99d5fd90d6ab2d48ee7a972f7f1e9e6ed3f7b1b715a1a7",
+        "size": 6019
+      },
+      "data/validate_corpus.py": {
+        "sha256": "cbfffd28394ca7cb2b2ac9740de102e6b3130f613a687c67844a3ee4aa01f1db",
+        "size": 8348
+      },
+      "data/verification_sheet.csv": {
+        "sha256": "8cfa50f2877d9b8bb2522b7602c6a324ab2c4c47b6ad2764c63b31fab250b614",
+        "size": 15569
+      },
+      "data/corpus/common.jsonl": {
+        "sha256": "fba18596ea87bb9abbb47bbee6c7a41cc59a36f13355822a4a7da752610e46ba",
+        "size": 52431
+      },
+      "data/corpus/consumer.jsonl": {
+        "sha256": "1a60c3aa46e2b91d0cbf5b29a8e0a1486689f28ce6acae6a9393f36fadafcbd4",
+        "size": 76936
+      },
+      "data/corpus/directory.jsonl": {
+        "sha256": "0627474befe84cab34b81c94a05ba3bcecfa350e0341f0f9bcffb100bafdabe2",
+        "size": 43866
+      },
+      "data/corpus/tenancy.jsonl": {
+        "sha256": "0aad8ac016fed3359454cffc8f4f213b8e573ecc9bd7e7d7cb524ff3e2d42f44",
+        "size": 99170
+      },
+      "data/corpus/wages.jsonl": {
+        "sha256": "ea07278a988a64eb548502eb7725b79675a76668bd3763c7d3bf843cf029edee",
+        "size": 65267
+      },
+      "data/index/available_models.json": {
+        "sha256": "57a214ee49ee750dde7fdcab0df3d26156eb85cfaf30fe8d74e56b4efce5dd84",
+        "size": 11181
+      },
+      "data/index/embeddings_gemini-embedding-001.json": {
+        "sha256": "3c1c92508f41f4d675dbc6b0fbb49718c536fc859b1e77b5a9a3eb12a6e62da8",
+        "size": 5408172
+      },
+      "data/index/embeddings_mock-hash.json": {
+        "sha256": "a533a965d732c878f140233f15e7fbb95bfe13755472951504e0f898a5c3e62f",
+        "size": 508138
+      },
+      "data/index/quota_state.json": {
+        "sha256": "df08e977446221d8cda105022607702518645f4d9f7770bb2ef0cac2becf1cec",
+        "size": 294
+      },
+      "data/sample/sample_chunks.jsonl": {
+        "sha256": "9874473756d5d35c8cd937ce974707e3177e84a1afc589cfa3ff03bbfa7f844c",
+        "size": 4306
+      },
+      "docs/ai_mistakes.md": {
+        "sha256": "bf6a0dee3dc4700436382676b50598e39a06b3d136d633f8f2ab79ce6e9d54b8",
+        "size": 30113
+      },
+      "docs/antigravity_report.md": {
+        "sha256": "74510a8a4cf11f9d6a9e7e9ce7f866fb5befb3c313239917c1a87e7aeb0ae986",
+        "size": 38374
+      },
+      "docs/ASSUMPTIONS.md": {
+        "sha256": "d37260c708f777fb9896153ad949f135d08ebb2f44d3cbd1fb0be417365170de",
+        "size": 13069
+      },
+      "docs/claude_code_report.md": {
+        "sha256": "3448c06d6855fc53a8fa4b7ec1eba8615d9be13f6ab05586c82a25eb54e18dd7",
+        "size": 15265
+      },
+      "docs/codex_report.md": {
+        "sha256": "d9bc5fbd0ba3f04cefd162bb924211c58fbbcb19dbaf3f3cb44c2d6155c7a2ae",
+        "size": 6253
+      },
+      "docs/CONTRACT_CHANGE_REQUESTS.md": {
+        "sha256": "dae88c54168806659068bce8805520752c04e359361fc3791e102d8f9badee13",
+        "size": 110
+      },
+      "docs/solution/build.py": {
+        "sha256": "391eb071d90553747c6aae0f2159aedb7ccd5f194a8d9658e59ccd731647ba07",
+        "size": 1583
+      },
+      "docs/solution/haq.html": {
+        "sha256": "e408e55585883b16a654fd0b82d50f9301c5809ae45368e2708e2c4b9225f904",
+        "size": 11541
+      },
+      "docs/solution/haq.md": {
+        "sha256": "318b9c9322febda5a14988ee000034a7733aca0982ceaca81c41e53dfaf07c11",
+        "size": 10002
+      },
+      "docs/solution/Haq_solution_doc_draft.pdf": {
+        "sha256": "cd5c94d0857a12f7a26a90123b1222007593bb5eab04952874887b55b2bfcd52",
+        "size": 149036
+      },
+      ".dockerignore": {
+        "sha256": "a0be2d349db1c3204572844c1adbe0379de4993220bbc67ac2626aa6f59e9e63",
+        "size": 231
+      },
+      ".env.example": {
+        "sha256": "eb09f58bcf1e8de4c8f634064acb1ba9df6ead27eea1ce8cc32fba57a11d5799",
+        "size": 154
+      },
+      ".gitignore": {
+        "sha256": "795007ed9a6e1297799d32a770df1f98c55483f17cd4a23f4c4f2afb3dfd3aff",
+        "size": 171
+      },
+      "00_ARCHITECTURE.md": {
+        "sha256": "c6dc1a112d2e69302ebcb6393bb6a09ed94c15c27e97dfe48e0da63625ba4851",
+        "size": 21824
+      },
+      "01_CLAUDE_CODE_BUILD.md": {
+        "sha256": "461e50fbc4f2c21ac86da6789618cf3fdeab43e8b96648f7ced3d3c948f22d7d",
+        "size": 9965
+      },
+      "02_ANTIGRAVITY_CORPUS.md": {
+        "sha256": "bb07f371424563d60a57c39d15dd2f08d06625aa7309948fe5118b41b62913aa",
+        "size": 12676
+      },
+      "03_CODEX_TESTS.md": {
+        "sha256": "007624c328db8afd6a95eb4e9817fc093686c0a82cddcea6d2882adeff1e6d58",
+        "size": 12670
+      },
+      "config.yaml": {
+        "sha256": "be7b2a4e7fd4f9d7bd656e66598b2607baa6443763fadeafabd55df4e4aae985",
+        "size": 8160
+      },
+      "Dockerfile": {
+        "sha256": "071229471a1a7c4cce368b403e5412fee53558b54e18a0c04c23a7a4f1ef8b28",
+        "size": 453
+      },
+      "Kuku — AI Generalist Assignment.pdf": {
+        "sha256": "933615201b349366743205c83fe0105fbeafd54efc61d600d38a1e9f6aba013d",
+        "size": 146517
+      },
+      "README.md": {
+        "sha256": "8cc3547350e0daeb0f199a78b12242a6fe4773cb9a9ee148a3d7da224b065e80",
+        "size": 7540
+      },
+      "render.yaml": {
+        "sha256": "c8422c138945fdcaf7461600b57acca302949bc86c2b7457cf9e0c1f7f78d1e4",
+        "size": 732
+      },
+      "requirements-ui.txt": {
+        "sha256": "db76168c80eb198298b59f0778c5ebbd58f30f965720c7385c6d7c83920856a1",
+        "size": 88
+      },
+      "requirements.txt": {
+        "sha256": "ca5a47aa110b4fb82b14ba92ae2e7f1d7d182b701f76429838f81e311f7aea03",
+        "size": 111
+      },
+      "START_HERE.md": {
+        "sha256": "6629ff34a4677dd280be8375f2e26817cad812c9f0da5d47fd45dec9353cd921",
+        "size": 1599
+      }
+    }
+  },
+  "cleanup": {
+    "review_date": "2026-11-07",
+    "scope": "Only obsolete iteration instructions and empty editing remnants removed; no application implementation changes.",
+    "removed_file_count": 5,
+    "removed_bytes": 14839,
+    "files": [
+      {
+        "path": "NEXT_ROUND.md",
+        "bytes": 4682,
+        "git_blob_sha256": "b1fb10044244037a26cf65b648ae9bf16289f37fd377cb6be419416c0bf4474e",
+        "reason": "Superseded iteration instructions",
+        "previously_tracked": true,
+        "hash_basis": "SHA-256 of Git HEAD blob"
+      },
+      {
+        "path": "NEXT_ROUND_3.md",
+        "bytes": 4844,
+        "git_blob_sha256": "b3835ef40013d84f770e8c3b87cfc00545b0323339e7c1945bbc0bbdc2618fbe",
+        "reason": "Superseded iteration instructions",
+        "previously_tracked": true,
+        "hash_basis": "SHA-256 of Git HEAD blob"
+      },
+      {
+        "path": "NEXT_ROUND_4.md",
+        "bytes": 5313,
+        "git_blob_sha256": "907e4480eac4416158d8ad5ddad6d48db18484794f429cd938811af9fd83b889",
+        "reason": "Superseded iteration instructions",
+        "previously_tracked": true,
+        "hash_basis": "SHA-256 of Git HEAD blob"
+      },
+      {
+        "path": "app/tests/test_referrals.py.tmp",
+        "bytes": 0,
+        "git_blob_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "reason": "Empty editing remnant",
+        "previously_tracked": true,
+        "hash_basis": "SHA-256 of Git HEAD blob"
+      },
+      {
+        "path": "app/tests/test_guidance.py.add",
+        "bytes": 0,
+        "reason": "Empty editing remnant",
+        "previously_tracked": false,
+        "hash_basis": "SHA-256 of observed empty file",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "retention_decisions": [
+      "Retained evaluation archives and old-named helpers imported by current tests.",
+      "Retained original assignment, prior solution documents, current build briefs, corpus and user changes."
+    ]
+  },
+  "checks": {
+    "application_unit_tests": {
+      "passed": 48
+    },
+    "evaluation_tool_tests": {
+      "passed": 73
+    },
+    "corpus_schema_validation": {
+      "passages_passed": 169
+    },
+    "javascript_syntax": {
+      "passed": [
+        "app/web/app.js",
+        "app/web/i18n.js",
+        "app/web/sw.js"
+      ]
+    },
+    "api_suite": {
+      "tests_run": 0,
+      "status": "blocked at setup",
+      "reason": "Installed Starlette test client requires missing httpx2 package; dependencies were not altered."
+    },
+    "test_isolation": "Python suites and probes used an isolated copy without .env; outbound requests blocked where model calls could occur.",
+    "pdf_visual_review": {
+      "page_count": 17,
+      "all_rendered_pages_reviewed": true
+    }
+  },
+  "diagnostic_probes": {
+    "empty_judge_response": [
+      [],
+      "ok"
+    ],
+    "judge_outage": [
+      [],
+      {
+        "judge": "judge_unavailable: simulated outage"
+      }
+    ],
+    "unsupported_plain_language_survives_cleaner": [
+      "A synthetic unsupported entitlement applies to everyone.",
+      []
+    ],
+    "practical_block_not_semantically_checked": [
+      [],
+      {
+        "judge": "no legal blocks"
+      }
+    ],
+    "english_accepted_as_telugu": {
+      "text": "This is still an English answer.",
+      "reply_lang": "te-IN",
+      "translation_status": "ok"
+    },
+    "same_session_id_reuses_state_without_owner_check": {
+      "same_object": true,
+      "fact": "first client"
+    }
+  },
+  "logs": {
+    "app-tests.log": "................................................\n----------------------------------------------------------------------\nRan 48 tests in 0.441s\n\nOK\n",
+    "harness-tests.log": ".........................................................................\n----------------------------------------------------------------------\nRan 73 tests in 0.490s\n\nOK\n",
+    "corpus-validation.log": "Validating corpus in C:\\E drive\\KuKu Technologies\\ai-lawyer\\tmp\\production-review\\snapshot\\data\\corpus...\nPASS: common.jsonl (28 chunks)\nPASS: consumer.jsonl (29 chunks)\nPASS: directory.jsonl (40 chunks)\nPASS: tenancy.jsonl (42 chunks)\nPASS: wages.jsonl (30 chunks)\n--------------------------------------------------\nTotal chunks checked: 169\nTotal unique IDs: 169\nALL CHECKS PASSED.\n",
+    "diagnostic-probes.log": "judge unavailable: simulated outage\n{\n  \"empty_judge_response\": [\n    [],\n    \"ok\"\n  ],\n  \"judge_outage\": [\n    [],\n    {\n      \"judge\": \"judge_unavailable: simulated outage\"\n    }\n  ],\n  \"unsupported_plain_language_survives_cleaner\": [\n    \"A synthetic unsupported entitlement applies to everyone.\",\n    []\n  ],\n  \"practical_block_not_semantically_checked\": [\n    [],\n    {\n      \"judge\": \"no legal blocks\"\n    }\n  ],\n  \"english_accepted_as_telugu\": {\n    \"text\": \"This is still an English answer.\",\n    \"reply_lang\": \"te-IN\",\n    \"translation_status\": \"ok\"\n  },\n  \"same_session_id_reuses_state_without_owner_check\": {\n    \"same_object\": true,\n    \"fact\": \"first client\"\n  }\n}\n",
+    "api-tests.log": "setUpClass (tests.test_server_api.ServerAPITests) ... ERROR\n\n======================================================================\nERROR: setUpClass (tests.test_server_api.ServerAPITests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\E drive\\KuKu Technologies\\ai-lawyer\\tmp\\production-review\\snapshot\\tests\\test_server_api.py\", line 68, in setUpClass\n    from fastapi.testclient import TestClient\n  File \"C:\\E drive\\KuKu Technologies\\ai-lawyer\\.venv\\Lib\\site-packages\\fastapi\\testclient.py\", line 1, in <module>\n    from starlette.testclient import TestClient as TestClient  # noqa\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\E drive\\KuKu Technologies\\ai-lawyer\\.venv\\Lib\\site-packages\\starlette\\testclient.py\", line 34, in <module>\n    raise RuntimeError(\nRuntimeError: The starlette.testclient module requires the httpx2 package to be installed.\nYou can install this with:\n    $ pip install httpx2\n\n\n----------------------------------------------------------------------\nRan 0 tests in 0.813s\n\nFAILED (errors=1)\n"
+  },
+  "report_artifacts": {
+    "docs/production-review/Haq_production_architecture_review.md": {
+      "sha256": "5a452c5a9618f4a5f2ba026f787b5c4ab4427406b99b3aa39526d05b87e86f29",
+      "bytes": 45155
+    },
+    "output/pdf/Haq_production_architecture_review.pdf": {
+      "sha256": "b98c5c3ac4b772f4322c462c83ac1479c6010823895233e3a43110de04489a90",
+      "bytes": 49486
+    }
+  }
+}

@@ -31,13 +31,14 @@ class MinorDetection(unittest.TestCase):
                   "I worked 3 years there", "5 साल का किराया बाकी है", "मैं 30 साल का हूँ", "I am 18", "umar 45"]:
             self.assertEqual(guards.minor_flags(t), [], t)
 
-    def test_pipeline_hard_escalation_and_persists(self):
+    def test_pipeline_answers_with_lawyer_line_and_persists(self):
+        # Nov 2026 policy: a minor still gets the answer, plus a lawyer / legal-aid line
         r, s = turn("I am 16 and my landlord in Lucknow kept my deposit of Rs 20000")
-        self.assertEqual(r.action, "escalate")
+        self.assertNotEqual(r.action, "escalate")
         self.assertIn("minor_age", r.escalation_reasons)
         self.assertTrue(r.needs_lawyer)
-        r2, _ = turn("he still has not paid", session=s)  # no age restated: still escalates
-        self.assertEqual(r2.action, "escalate")
+        r2, _ = turn("he still has not paid", session=s)  # no age restated: still flagged
+        self.assertIn("minor_age", r2.escalation_reasons)
         self.assertNotIn("minor stated", r2.reply_text)
 
 
@@ -52,9 +53,10 @@ class CriminalKeywords(unittest.TestCase):
         for t in ["Rs 4200 deposit", "my first order", "deposit not returned"]:
             self.assertEqual(router.keyword_flags(t), [], t)
 
-    def test_pipeline_escalates(self):
+    def test_pipeline_still_answers(self):
+        # Nov 2026 policy: words like "jail" no longer replace the answer with a referral
         r, _ = turn("landlord in Lucknow kept my deposit, I want him in jail")
-        self.assertEqual(r.action, "escalate")
+        self.assertNotEqual(r.action, "escalate")
 
 
 class LimitationInCode(unittest.TestCase):

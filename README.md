@@ -1,18 +1,10 @@
----
-title: Haq - AI legal help for everyday problems
-emoji: ⚖️
-colorFrom: indigo
-colorTo: green
-sdk: docker
-app_port: 7860
-pinned: false
----
+# Haq: an AI lawyer for India (prototype)
 
-# AI Lawyer for India (prototype)
+**Haq** is a chat assistant that explains everyday legal problems in India to ordinary people, by text or voice, in their own language: what the law says, what they can get and what to do. It gives legal **information, not legal advice**, and is built so it never invents law: every legal point cites a passage from its law library (431 passages from about 45 Acts and rules, plus 40 official offices) or a web page found by live Google Search, or it is not shown.
 
-A chat assistant that helps ordinary people with three everyday legal problems (consumer refunds, unpaid salary, rental security deposits), in English and Hindi. It gives legal **information, not legal advice**, and is built so it never invents law: every legal statement must cite a verified source chunk or it is not shown.
+Solution doc: `docs/solution/`. Test questions and raw outputs: `tests/`, `outputs/`. Mistakes the AI tools made while building it: `docs/ai_mistakes.md`.
 
-Design contract: `00_ARCHITECTURE.md`. Build brief: `01_CLAUDE_CODE_BUILD.md`. Status and tuning notes: `docs/claude_code_report.md`.
+Original design contract (before the November redesign below): `00_ARCHITECTURE.md`. Build brief: `01_CLAUDE_CODE_BUILD.md`. Review that led to the redesign: `docs/production-review/`.
 
 ## Setup
 ```
@@ -32,6 +24,21 @@ python -m app.cli "message" --mode draft      # deposit demand notice
 ```
 **No keys needed:** add `--mock`, or set `AI_LAWYER_MOCK=1`, or `mock: true` in `config.yaml`. Mock mode uses a canned model and hash embeddings, so retrieval, the verifier and the whole pipeline still run. It is not real model behaviour.
 
+## How an answer is built (Nov 2026 redesign)
+1. **Router** decides the kind of message: small talk (a normal short reply), a request to cause harm (refused, no steps), or a legal question; plus topic, state, country, language and whether anyone is in danger right now.
+2. **Law library first.** For a legal question, Haq searches the whole library (vectors plus keywords for exact Act names and section numbers). If a passage matches, the answer quotes and cites it: short answer, what the law says, what you can get, what to do. Every claim is checked by code and by a judge model; claims that fail are removed.
+3. **Live web search** when the library has no passage: Gemini with Google Search. Only sentences Google ties to a source are kept, each with its numbered source; forums and social media never count. Google's search-suggestion chip is shown as required.
+4. **Labelled general information** only if both fail, with everything specific (sections, fines, deadlines, case names) removed by code.
+5. A lawyer is mentioned only when there is a real reason (already in court, arrested, large sums, deadline), as one line under the answer. Real danger puts a 112 line first; the answer still follows.
+
+Useful commands:
+```
+python -m app.build_index                 # embed new library passages ahead of time (free quota: ~1,000 a day)
+python -m app.try_questions               # run tests/live_questions.jsonl on real models -> outputs/live/<time>.md
+python -m app.try_questions --text "can police arrest me without a warrant"
+```
+Diagnostic traces (they contain users' words) are written only when `HAQ_WRITE_TRACES=1`.
+
 ## Corpus: sample vs real
 `config.yaml` -> `corpus.path`. `data/sample` holds FAKE chunks (ids start `SAMPLE-`); the UI shows a red banner when any are loaded. Switch to `data/corpus` once the real corpus passes `data/validate_corpus.py`. The embedding cache in `data/index/` rebuilds only changed chunks.
 
@@ -44,7 +51,7 @@ models:
 Providers: `gemini`, `openai_compatible`, `anthropic`. Set the matching key in `.env`, rerun the same command. Embeddings are configured separately under `embeddings:`; if you change the embedding model, the cache keys on the model name so it re-embeds automatically.
 
 ## Tune
-`retrieval.min_score` (confidence gate) should be set from `outputs/calibration.md`. `escalation.*` holds the amount threshold, the limitation warning and the English/Hindi keyword lists.
+`retrieval.min_score_by_model` is the confidence gate for each embedding model (below it, Haq goes to live web search instead of the library). `escalation.*` holds the amount and limitation thresholds that add a lawyer note under the answer.
 
 ## Tests
 Codex's harness lives in `tests/` and calls only `app.pipeline.handle_turn`. Run with `AI_LAWYER_MOCK=1` for keyless runs (see `tests/` for the exact command).
@@ -92,14 +99,40 @@ Engine safeguards added in this round:
 
 Offline checks: `python -m app.selfcheck_server` (21 checks, mock mode).
 
-## Deploy (free): Hugging Face Spaces, Docker
-1. Create a new Space at huggingface.co/new-space. Choose SDK **Docker** and a blank template, and make it Public.
-2. Push this folder to the Space's git repo (or link the GitHub repo). The YAML header at the top of this README configures the Space (port 7860). `.env` and run outputs are excluded by `.gitignore` and `.dockerignore`.
-3. In the Space's Settings, under Variables and secrets, add the secrets `GEMINI_API_KEY` and `SARVAM_API_KEY`.
-4. The Space builds the Dockerfile and starts. The embedding cache is committed, so a cold start does not re-embed the corpus.
-5. A public Space uses your free-tier quota for every visitor. The model fallback chain handles 429s, but share the link only with reviewers.
+## Deploy (main): Azure Container Apps + GitHub Container Registry
+Free with Azure for Students (no card): Container Apps has a permanent free monthly grant (180,000 vCPU-seconds,
+360,000 GiB-seconds, 2 million requests) and the app scales to zero when idle, waking in seconds.
+1. Every push to `main` runs `.github/workflows/container.yml`, which builds the Dockerfile and publishes
+   `ghcr.io/<github-user>/haq:latest` (make the package public once in GitHub -> Packages -> haq -> settings).
+2. One-time setup (Azure CLI):
+   ```
+   az group create -n haq-rg -l centralindia
+   az containerapp env create -n haq-env -g haq-rg -l centralindia --logs-destination none
+   az containerapp create -n haq -g haq-rg --environment haq-env --image ghcr.io/<github-user>/haq:latest \
+     --target-port 7860 --ingress external --cpu 0.5 --memory 1.0Gi --min-replicas 0 --max-replicas 1 \
+     --secrets gemini-key=<your key> --env-vars GEMINI_API_KEY=secretref:gemini-key
+   ```
+3. After a new push has built: `az containerapp update -n haq -g haq-rg --image ghcr.io/<github-user>/haq:<commit sha>`.
 
-The same Dockerfile runs on Render or Railway (they set `PORT`). The Streamlit Community Cloud route also still works with `app/ui.py`.
+## Deploy (alternative, free, long-running): Render + GitHub
+Why Render: its free web service has no expiry date and no credit card. One service running all month uses about
+744 of the 750 free hours each workspace gets, so it is never suspended. (Hugging Face now needs a paid plan for
+Docker Spaces; Railway and Fly.io have no lasting free tier.) The catch: after 15 minutes without visitors it sleeps,
+and the next visit takes about a minute to wake it.
+
+1. Push this repo to GitHub (public, so reviewers can read it).
+2. On render.com, sign in with GitHub, then New -> Blueprint -> pick the repo. `render.yaml` sets up one free Docker
+   web service. Paste your `GEMINI_API_KEY` when asked (`SARVAM_API_KEY` is optional).
+3. Wait for the first build (about 5 minutes). The app is at `https://haq-ai-lawyer.onrender.com` (or the name Render shows).
+4. Every push to GitHub redeploys automatically.
+5. Optional, while reviewers are looking: a free cron-job.org job that opens `/api/meta` every 14 minutes keeps it
+   awake. That endpoint never calls the AI, so it costs no Gemini quota. Only do this if it is your only free Render service.
+
+What keeps it working for months: the embedding cache is committed (no re-embedding on restart), every AI role has a
+fallback chain ending in Google's `gemini-flash-lite-latest` alias (which moves to the newest model when old ones
+retire), and the app needs no database. What could still break it: the Gemini key being revoked or the free tier
+being withdrawn, or `gemini-embedding-2` being retired (then set a new model under `embeddings:` and run `python -m app.build_index`).
+The same Dockerfile runs anywhere that sets `PORT`.
 
 ## Not built yet
-Practice mode (roleplay against the other side). Languages beyond English and Hindi are untested.
+Practice mode (roleplay against the other side). No lawyer has reviewed the answers, and about 200 library passages with numbers still await a human check against the official page (`data/verification_sheet.csv`).

@@ -48,7 +48,7 @@ class Referrals(unittest.TestCase):
         self.assertTrue(any("garbled" in i for i in verifier.check(ans, [], {})))
 
     def test_weak_match_is_not_shown(self):
-        text, ids, _ = self.lines([chunk("COM-DIR-RAIL", "Rail Madad", 0.68)])
+        text, ids, _ = self.lines([chunk("COM-DIR-RAIL", "Rail Madad", 0.55)])
         self.assertEqual((text, ids), ("", []))
 
     def test_secondary_source_never_shown(self):

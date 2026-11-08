@@ -19,6 +19,7 @@ Design notes for running this for many people:
 """
 import collections
 import dataclasses
+import hashlib
 import json
 import os
 import queue
@@ -88,12 +89,15 @@ class TurnIn(BaseModel):
     lang: str | None = None
     mode: str = "advice"
     input_mode: str = "text"
+    heard_lang: str | None = None   # language the speech recogniser heard (voice turns)
     state: dict | None = None   # {"case_file": {...}, "history": [...], "lang": "..."} from the browser
 
 
 class TTSIn(BaseModel):
     text: str
     lang: str = "en-IN"
+    prefer: str = ""            # "google" | "sarvam": the read-aloud provider chosen in Settings
+    fallback: bool = True       # False: never switch to the other provider
 
 
 class FeedbackIn(BaseModel):
@@ -130,7 +134,9 @@ def _limit(request: Request, kind: str) -> None:
 
 
 def _session(t: TurnIn) -> pipeline.Session:
-    sid = t.session_id or uuid.uuid4().hex[:12]
+    # Session ids are issued by the server (128-bit random). An id the server does not hold is never adopted:
+    # the browser's saved state starts a fresh server session under a new id.
+    sid = t.session_id if t.session_id in _sessions else uuid.uuid4().hex
     s = _sessions.get(sid)
     if s is None:
         s = pipeline.new_session(t.lang or None)
@@ -154,6 +160,17 @@ def _session(t: TurnIn) -> pipeline.Session:
 def _chunk_card(c: dict) -> dict:
     return {k: c.get(k) for k in ("id", "doc_title", "unit", "unit_number", "source_url", "status", "verified",
                                   "fetched_on", "source_type", "status_note", "doc_type", "category")}
+
+
+_search_html: "collections.OrderedDict[str, str]" = collections.OrderedDict()   # Google search-suggestion widgets
+
+
+def _web_card(w: dict) -> dict:
+    """A web page found by the live search, shaped like a library source card."""
+    return {"id": f"WEB-{w['n']}", "doc_title": w.get("domain", "web"), "unit": "web", "unit_number": str(w["n"]),
+            "source_url": w.get("uri", ""), "status": "in_force", "verified": "web",
+            "source_type": "official" if w.get("official") else "web", "status_note": "", "doc_type": "web",
+            "category": "web", "fetched_on": ""}
 
 
 def _validate(t: TurnIn) -> str:
@@ -184,20 +201,31 @@ def _run_turn(t: TurnIn, text: str) -> dict:
     try:
         s = _session(t)
         t0 = time.time()
-        r = pipeline.handle_turn(s, text, input_mode=t.input_mode, lang_hint=t.lang or None)
+        r = pipeline.handle_turn(s, text, input_mode=t.input_mode, lang_hint=t.lang or None,
+                                 heard_lang=t.heard_lang or None)
         took = round(time.time() - t0, 2)
     finally:
         _turn_lock.release()
     by_id = {c["id"]: c for c in retrieval.get_index()["chunks"]}
     res = dataclasses.asdict(r)
+    html = r.trace.pop("search_html", "") or ""
+    search_key = None
+    if html:   # Google requires showing its search suggestions with grounded answers: served in a sandboxed frame
+        search_key = hashlib.sha256(html.encode("utf-8")).hexdigest()[:20]
+        with _hits_lock:
+            _search_html[search_key] = html
+            while len(_search_html) > 300:
+                _search_html.popitem(last=False)
     res["trace"] = json.loads(json.dumps(r.trace, default=str))
     return {
         "session_id": s.id,
         "result": res,
-        "sources": {cid: _chunk_card(by_id[cid]) for cid in r.citations if cid in by_id},
+        "sources": dict({cid: _chunk_card(by_id[cid]) for cid in r.citations if cid in by_id},
+                        **{f"WEB-{w['n']}": _web_card(w) for w in (r.trace.get("web_sources") or [])}),
         "state": {"case_file": s.case_file, "history": s.history[-40:], "lang": s.lang},
         "missing_facts": (r.trace.get("router") or {}).get("missing_facts") or [],
         "seconds": took,
+        "search_key": search_key,
     }
 
 
@@ -221,6 +249,20 @@ def service_worker():
 @app.get("/api/health")
 def health():
     return {"ok": True, "mock": is_mock()}
+
+
+@app.get("/api/search-suggestions/{key}")
+def search_suggestions(key: str):
+    """Google's search-suggestion chip for a grounded answer, shown as-is in a sandboxed frame."""
+    html = _search_html.get(key)
+    if not html:
+        raise HTTPException(404, "expired")
+    page = ("<!doctype html><html><head><meta charset='utf-8'><base target='_blank'></head>"
+            f"<body style='margin:0'>{html}</body></html>")
+    return Response(page, media_type="text/html", headers={
+        "Content-Security-Policy": "default-src 'none'; style-src 'unsafe-inline'; img-src https: data:; "
+                                   "base-uri 'none'; frame-ancestors 'self'",
+        "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff"})
 
 
 @app.get("/api/meta")
@@ -280,7 +322,8 @@ def turn_stream(t: TurnIn, request: Request):
 
 
 @app.post("/api/stt")
-async def stt(request: Request, audio: UploadFile = File(...), lang: str = Form("")):
+async def stt(request: Request, audio: UploadFile = File(...), lang: str = Form(""), prefer: str = Form(""),
+              fallback: str = Form("1")):
     _limit(request, "voice")
     data = await audio.read()
     if not data:
@@ -288,7 +331,7 @@ async def stt(request: Request, audio: UploadFile = File(...), lang: str = Form(
     if len(data) > 15 * 1024 * 1024:
         raise HTTPException(400, "The recording is too long. Please keep it under two minutes.")
     try:
-        heard = voice.stt(data, lang or None)
+        heard = voice.stt(data, lang or None, prefer or None, fallback != "0")
     except voice.VoiceError as e:
         return JSONResponse({"error": "I could not understand the recording. Try again closer to the mic, "
                                       "or type your problem.", "detail": str(e)}, status_code=422)
@@ -299,7 +342,7 @@ async def stt(request: Request, audio: UploadFile = File(...), lang: str = Form(
 def tts(t: TTSIn, request: Request):
     _limit(request, "voice")
     try:
-        out = voice.tts(t.text, t.lang or "en-IN")
+        out = voice.tts(t.text, t.lang or "en-IN", t.prefer or None, t.fallback)
     except voice.VoiceError as e:
         return JSONResponse({"error": "This answer could not be read aloud right now.", "detail": str(e)},
                             status_code=503)

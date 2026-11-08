@@ -159,6 +159,9 @@ def check(answer: dict, retrieved: list[dict], case_file: dict) -> list[str]:
                 support |= _nums_in(c.get("text", "")) | _nums_in(_meta_text(c))
         elif typ == "practical":
             support = set(cf_nums) | all_text_nums
+            if any(PATTERNS[k].search(text) for k in ("section", "article", "rule", "act", "case_v", "case_cite")):
+                # a statement of law labelled "practical" would skip the judge (production review, 7 Nov)
+                issues.append(f"block {i}: legal reference in a practical block (must be a cited legal block)")
         else:
             support = None
         if support is not None:
@@ -185,14 +188,27 @@ def judge(answer: dict, retrieved: list[dict]) -> tuple[list[str], str]:
     try:
         raw = llm.generate(msgs, role="judge", json_schema={"type": "object"})
         d = llm.parse_json(raw)
-        issues = []
-        for v in d.get("verdicts", []):
+        issues, seen = [], set()
+        for v in d.get("verdicts", []) if isinstance(d.get("verdicts"), list) else []:
+            if not isinstance(v, dict):
+                continue
+            try:
+                seen.add(int(v.get("block")))
+            except (TypeError, ValueError):
+                pass
             if not v.get("supported", False):
                 issues.append(f"block {v.get('block')}: claim not supported by its cited source "
                               f"({str(v.get('reason', ''))[:120]})")
+        # An empty or partial verdict list is a failure to check, not a pass (production review, 7 Nov).
+        for i, b in enumerate(answer.get("blocks", [])):
+            if b.get("type") == "legal" and i not in seen:
+                issues.append(f"block {i}: the judge returned no verdict for this claim")
         return issues, "ok"
     except (llm.LLMError, ValueError, AttributeError) as e:
         log.warning("judge unavailable: %s", e)
+        if load_config().get("verifier", {}).get("require_judge", True):
+            return [f"block {i}: not checked (judge unavailable)" for i, b in enumerate(answer.get("blocks", []))
+                    if b.get("type") == "legal"], f"judge_unavailable: {e}"
         return [], f"judge_unavailable: {e}"
 
 

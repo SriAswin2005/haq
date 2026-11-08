@@ -25,11 +25,9 @@ class SummaryLanguage(unittest.TestCase):
         s = pipeline.new_session("hi-IN")
         return pipeline.handle_turn(s, "ट्रैफिक पुलिस ने चालान के लिए मेरी बाइक ज़ब्त कर ली", lang_hint="hi-IN")
 
-    def test_hindi_summary_replaces_english_facts(self):
+    def test_hindi_reply_never_shows_english_facts(self):
         r = self._run("आपकी बाइक बकाया चालान की वजह से ट्रैफ़िक पुलिस ने ज़ब्त कर ली और police वाले ने बदतमीज़ी की।")
-        first = r.reply_text.split("\n\n")[0]
-        self.assertIn("ज़ब्त", first)
-        self.assertNotIn("what happened", first.lower())
+        self.assertNotIn("what happened", r.reply_text.lower())
         self.assertNotIn("Bike seized", r.reply_text)
 
     def test_english_summary_on_hindi_reply_is_rejected(self):

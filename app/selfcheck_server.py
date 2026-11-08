@@ -49,11 +49,11 @@ def main() -> None:
     buf = io.BytesIO()
     with wave.open(buf, "wb") as w:
         w.setnchannels(1); w.setsampwidth(2); w.setframerate(16000); w.writeframes(b"\0\0" * 16000)
-    voice.stt = lambda data, lang=None: {"text": "mera deposit wapas nahi mila", "language": "hi-IN",
+    voice.stt = lambda data, lang=None, prefer=None, fallback=True: {"text": "mera deposit wapas nahi mila", "language": "hi-IN",
                                          "provider": "gemini", "model": "test", "pieces": 1, "errors": []}
     s = c.post("/api/stt", files={"audio": ("r.webm", buf.getvalue(), "audio/webm")}, data={"lang": ""})
     check("STT endpoint returns transcript", s.status_code == 200 and "deposit" in s.json()["text"])
-    voice.tts = lambda text, lang: {"audio": buf.getvalue(), "provider": "gemini", "model": "test-tts",
+    voice.tts = lambda text, lang, prefer=None, fallback=True: {"audio": buf.getvalue(), "provider": "gemini", "model": "test-tts",
                                     "truncated": False}
     t = c.post("/api/tts", json={"text": "hello", "lang": "en-IN"})
     check("TTS endpoint returns WAV + provider header", t.status_code == 200 and t.content[:4] == b"RIFF"

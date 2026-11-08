@@ -1,0 +1,52 @@
+{
+  "review_date": "2026-11-07",
+  "scope": "Only obsolete iteration instructions and empty editing remnants removed; no application implementation changes.",
+  "removed_file_count": 5,
+  "removed_bytes": 14839,
+  "files": [
+    {
+      "path": "NEXT_ROUND.md",
+      "bytes": 4682,
+      "git_blob_sha256": "b1fb10044244037a26cf65b648ae9bf16289f37fd377cb6be419416c0bf4474e",
+      "reason": "Superseded iteration instructions",
+      "previously_tracked": true,
+      "hash_basis": "SHA-256 of Git HEAD blob"
+    },
+    {
+      "path": "NEXT_ROUND_3.md",
+      "bytes": 4844,
+      "git_blob_sha256": "b3835ef40013d84f770e8c3b87cfc00545b0323339e7c1945bbc0bbdc2618fbe",
+      "reason": "Superseded iteration instructions",
+      "previously_tracked": true,
+      "hash_basis": "SHA-256 of Git HEAD blob"
+    },
+    {
+      "path": "NEXT_ROUND_4.md",
+      "bytes": 5313,
+      "git_blob_sha256": "907e4480eac4416158d8ad5ddad6d48db18484794f429cd938811af9fd83b889",
+      "reason": "Superseded iteration instructions",
+      "previously_tracked": true,
+      "hash_basis": "SHA-256 of Git HEAD blob"
+    },
+    {
+      "path": "app/tests/test_referrals.py.tmp",
+      "bytes": 0,
+      "git_blob_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reason": "Empty editing remnant",
+      "previously_tracked": true,
+      "hash_basis": "SHA-256 of Git HEAD blob"
+    },
+    {
+      "path": "app/tests/test_guidance.py.add",
+      "bytes": 0,
+      "reason": "Empty editing remnant",
+      "previously_tracked": false,
+      "hash_basis": "SHA-256 of observed empty file",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "retention_decisions": [
+    "Retained evaluation archives and old-named helpers imported by current tests.",
+    "Retained original assignment, prior solution documents, current build briefs, corpus and user changes."
+  ]
+}

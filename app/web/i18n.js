@@ -19,7 +19,7 @@ window.HAQ_I18N = {
     cat: { tenancy: "Rental deposit", wages: "Unpaid salary", consumer: "Refund or faulty product",
       out_of_scope: "Outside what I cover", unclear: "Not sure yet" },
     steps: { start: "Sending your message", waiting: "Waiting for the previous question to finish",
-      understanding: "Reading what you wrote", searching: "Finding the law that applies", writing: "Writing your answer",
+      understanding: "Reading what you wrote", searching: "Finding the law that applies", searching_web: "Searching official and legal sources on the web", writing: "Writing your answer",
       rewriting: "Rewriting a part that did not match the law", checking: "Checking each claim against its source",
       translating: "Translating into your language", drafting: "Preparing your draft" },
     bannerHard: "This needs a real lawyer or free legal aid. Contact details are below.",
@@ -74,7 +74,7 @@ window.HAQ_I18N = {
     cat: { tenancy: "किराये की डिपॉज़िट", wages: "बकाया तनख़्वाह", consumer: "रिफ़ंड या ख़राब सामान",
       out_of_scope: "मेरे दायरे से बाहर", unclear: "अभी साफ़ नहीं" },
     steps: { start: "आपका संदेश भेज रहा हूँ", waiting: "पिछले सवाल के पूरा होने का इंतज़ार",
-      understanding: "आपने जो लिखा उसे पढ़ रहा हूँ", searching: "लागू कानून खोज रहा हूँ", writing: "जवाब लिख रहा हूँ",
+      understanding: "आपने जो लिखा उसे पढ़ रहा हूँ", searching: "लागू कानून खोज रहा हूँ", searching_web: "वेब पर सरकारी और कानूनी स्रोत खोज रहा हूँ", writing: "जवाब लिख रहा हूँ",
       rewriting: "जो हिस्सा कानून से मेल नहीं खाया उसे फिर लिख रहा हूँ", checking: "हर बात को स्रोत से मिला रहा हूँ",
       translating: "आपकी भाषा में अनुवाद कर रहा हूँ", drafting: "आपका मसौदा तैयार कर रहा हूँ" },
     bannerHard: "इसके लिए असली वकील या मुफ़्त कानूनी सहायता ज़रूरी है। संपर्क नीचे है।",
@@ -129,7 +129,7 @@ window.HAQ_I18N = {
     cat: { tenancy: "అద్దె డిపాజిట్", wages: "జీతం బకాయి", consumer: "రీఫండ్ / లోపం ఉన్న వస్తువు",
       out_of_scope: "నేను చూసే విషయాల్లో లేదు", unclear: "ఇంకా స్పష్టం కాలేదు" },
     steps: { start: "మీ సందేశం పంపుతున్నాను", waiting: "ముందు ప్రశ్న పూర్తయ్యే వరకు ఆగుతున్నాను",
-      understanding: "మీరు రాసింది చదువుతున్నాను", searching: "వర్తించే చట్టం వెతుకుతున్నాను", writing: "జవాబు రాస్తున్నాను",
+      understanding: "మీరు రాసింది చదువుతున్నాను", searching: "వర్తించే చట్టం వెతుకుతున్నాను", searching_web: "వెబ్‌లో ప్రభుత్వ, చట్ట మూలాలు వెతుకుతున్నాను", writing: "జవాబు రాస్తున్నాను",
       rewriting: "చట్టంతో సరిపోని భాగాన్ని మళ్ళీ రాస్తున్నాను", checking: "ప్రతి విషయాన్ని మూలంతో సరిచూస్తున్నాను",
       translating: "మీ భాషలోకి అనువదిస్తున్నాను", drafting: "మీ డ్రాఫ్ట్ తయారు చేస్తున్నాను" },
     bannerHard: "దీనికి నిజమైన న్యాయవాది లేదా ఉచిత న్యాయ సహాయం అవసరం. వివరాలు కింద ఉన్నాయి.",
@@ -181,7 +181,7 @@ Object.assign(window.HAQ_I18N.en, {
   coverMini: [
     { k: "full", h: "Full help", p: "Rental deposit, unpaid salary, refund or faulty product: your rights, with the law shown, and a notice you can send." },
     { k: "ref", h: "Where to complain", p: "Bank or UPI fraud, insurance, PF, train or flight refunds, Aadhaar and more: the official office and its helpline." },
-    { k: "no", h: "Not covered", p: "Police and criminal cases, family matters, property disputes, court cases: I point you to free legal aid." },
+    { k: "no", h: "Not covered", p: "Police and criminal cases, family matters, property disputes, court cases: general information only, clearly marked, plus free legal aid." },
   ],
   seeAll: "See everything Haq can and can't do",
   legalNote: "Legal information, not legal advice. In danger? Call 112. Free legal aid: NALSA 15100.",
@@ -198,11 +198,11 @@ Object.assign(window.HAQ_I18N.en, {
         items: ["Bank, card or UPI problems and online fraud", "Insurance claims, PF and ESI",
                 "Train and flight refunds, traffic challans, lost phones", "Aadhaar, passport, RTI, electricity bills and builders in UP",
                 "Food safety, senior citizens, women and children"],
-        note: "For these, Haq names the official portal or helpline that handles it. It does not explain the law for them." },
+        note: "For these, Haq names the official portal or helpline that handles it, with general information clearly marked as not checked against a law text." },
       { k: "no", h: "Not covered: please get a lawyer or free legal aid",
         items: ["Police, FIR, arrest, bail or any criminal case", "Divorce, custody, maintenance, inheritance and wills",
                 "Who owns a property, eviction, and cases already in court", "Cheque bounce, and anything about a child under 18"],
-        note: "Haq will say so and give you the free legal aid helpline, NALSA 15100. Outside Uttar Pradesh, state rules on renting may differ from what Haq knows." },
+        note: "Haq gives general information, clearly marked as not checked against a law text, and the free legal aid helpline, NALSA 15100. It never helps anyone commit or hide a crime. Outside Uttar Pradesh, state rules on renting may differ from what Haq knows." },
     ],
     useH: "How to use it",
     use: ["Tell Haq what happened, in any language: type or tap the mic. Your city, the amount, the dates and the proof you have all help.",
@@ -213,7 +213,7 @@ Object.assign(window.HAQ_I18N.en, {
     not: ["Legal advice or a lawyer: Haq cannot represent you, file anything or contact anyone for you.",
           "Court judgments: Haq does not cite case law.",
           "Promises: no one can guarantee you will win or how much you will get.",
-          "A guess: when Haq cannot check something in the law, it says so instead of guessing. That is on purpose.",
+          "Specifics without a source: when Haq has no law text for your question, it gives only general information, clearly marked, never sections, fines or deadlines. That is on purpose.",
           "Instant replies: each answer is checked against the law, so it can take 10 to 30 seconds."],
     emergH: "In an emergency",
     emerg: "If anyone is in danger, call 112. If money was just taken by online fraud, call 1930 at once.",
@@ -231,7 +231,7 @@ Object.assign(window.HAQ_I18N.hi, {
   coverMini: [
     { k: "full", h: "पूरी मदद", p: "किराये की डिपॉज़िट, बकाया तनख़्वाह, रिफ़ंड या ख़राब सामान: आपके अधिकार, कानून के साथ, और भेजने लायक नोटिस।" },
     { k: "ref", h: "शिकायत कहाँ करें", p: "बैंक या UPI धोखाधड़ी, बीमा, PF, ट्रेन या फ़्लाइट रिफ़ंड, आधार और बहुत कुछ: सरकारी दफ़्तर और उसकी हेल्पलाइन।" },
-    { k: "no", h: "दायरे से बाहर", p: "पुलिस और आपराधिक मामले, पारिवारिक मामले, संपत्ति के विवाद, अदालत के केस: मैं मुफ़्त कानूनी सहायता का रास्ता बताता हूँ।" },
+    { k: "no", h: "दायरे से बाहर", p: "पुलिस और आपराधिक मामले, पारिवारिक मामले, संपत्ति के विवाद, अदालत के केस: साफ़ चिह्नित सामान्य जानकारी, और मुफ़्त कानूनी सहायता।" },
   ],
   seeAll: "देखिए हक़ क्या कर सकता है और क्या नहीं",
   legalNote: "यह कानूनी जानकारी है, कानूनी सलाह नहीं। ख़तरे में हों तो 112 पर कॉल करें। मुफ़्त कानूनी सहायता: NALSA 15100।",
@@ -248,11 +248,11 @@ Object.assign(window.HAQ_I18N.hi, {
         items: ["बैंक, कार्ड या UPI की समस्या और ऑनलाइन धोखाधड़ी", "बीमा क्लेम, PF और ESI",
                 "ट्रेन और फ़्लाइट रिफ़ंड, ट्रैफ़िक चालान, खोया मोबाइल", "आधार, पासपोर्ट, RTI, बिजली बिल और उत्तर प्रदेश में बिल्डर",
                 "खाद्य सुरक्षा, बुज़ुर्ग, महिलाएँ और बच्चे"],
-        note: "इनके लिए हक़ उस सरकारी पोर्टल या हेल्पलाइन का नाम बताता है जो यह काम देखती है। इनका कानून यह नहीं समझाता।" },
+        note: "इनके लिए हक़ उस सरकारी पोर्टल या हेल्पलाइन का नाम बताता है जो यह काम देखती है, साथ में सामान्य जानकारी, साफ़ चिह्नित कि यह किसी कानूनी पाठ से जाँची नहीं गई।" },
       { k: "no", h: "दायरे से बाहर: वकील या मुफ़्त कानूनी सहायता लें",
         items: ["पुलिस, FIR, गिरफ़्तारी, ज़मानत या कोई भी आपराधिक मामला", "तलाक़, बच्चों की कस्टडी, गुज़ारा भत्ता, विरासत और वसीयत",
                 "संपत्ति किसकी है, बेदख़ली, और अदालत में चल रहे केस", "चेक बाउंस, और 18 साल से कम उम्र के बच्चे से जुड़ा कोई भी मामला"],
-        note: "हक़ यह साफ़ बताएगा और मुफ़्त कानूनी सहायता की हेल्पलाइन NALSA 15100 देगा। उत्तर प्रदेश के बाहर किराये के राज्य नियम अलग हो सकते हैं।" },
+        note: "हक़ सामान्य जानकारी देता है, साफ़ चिह्नित कि यह किसी कानूनी पाठ से जाँची नहीं गई, और मुफ़्त कानूनी सहायता की हेल्पलाइन NALSA 15100। अपराध करने या छिपाने में यह कभी मदद नहीं करता। उत्तर प्रदेश के बाहर किराये के राज्य नियम अलग हो सकते हैं।" },
     ],
     useH: "इस्तेमाल कैसे करें",
     use: ["किसी भी भाषा में बताइए क्या हुआ: लिखिए या माइक दबाइए। शहर, रकम, तारीखें और आपके सबूत, सब मदद करते हैं।",
@@ -263,7 +263,7 @@ Object.assign(window.HAQ_I18N.hi, {
     not: ["कानूनी सलाह या वकील: हक़ आपकी तरफ़ से पेश नहीं हो सकता, कुछ फ़ाइल नहीं कर सकता, किसी से संपर्क नहीं कर सकता।",
           "अदालत के फ़ैसले: हक़ केस लॉ का हवाला नहीं देता।",
           "वादे: कोई गारंटी नहीं दे सकता कि आप जीतेंगे या कितना मिलेगा।",
-          "अंदाज़ा: जो बात हक़ कानून में जाँच नहीं पाता, वह साफ़ कह देता है, अंदाज़ा नहीं लगाता। यह जान-बूझकर है।",
+          "बिना स्रोत की बारीकियाँ: जिस सवाल का कानूनी पाठ हक़ के पास नहीं, उस पर सिर्फ़ साफ़ चिह्नित सामान्य जानकारी मिलती है, कभी धारा, जुर्माना या समय-सीमा नहीं। यह जान-बूझकर है।",
           "तुरंत जवाब: हर जवाब कानून से जाँचा जाता है, इसलिए 10 से 30 सेकंड लग सकते हैं।"],
     emergH: "आपात स्थिति में",
     emerg: "अगर कोई ख़तरे में है तो 112 पर कॉल करें। अगर अभी-अभी ऑनलाइन धोखाधड़ी से पैसे गए हैं, तो तुरंत 1930 पर कॉल करें।",
@@ -281,7 +281,7 @@ Object.assign(window.HAQ_I18N.te, {
   coverMini: [
     { k: "full", h: "పూర్తి సహాయం", p: "అద్దె డిపాజిట్, బకాయి జీతం, రీఫండ్ లేదా లోపం ఉన్న వస్తువు: మీ హక్కులు, చట్టంతో సహా, పంపగలిగే నోటీసు." },
     { k: "ref", h: "ఫిర్యాదు ఎక్కడ", p: "బ్యాంక్ లేదా UPI మోసం, బీమా, PF, రైలు లేదా విమాన రీఫండ్, ఆధార్ మొదలైనవి: అధికారిక కార్యాలయం, దాని హెల్ప్‌లైన్." },
-    { k: "no", h: "పరిధిలో లేనివి", p: "పోలీసు, క్రిమినల్ కేసులు, కుటుంబ విషయాలు, ఆస్తి వివాదాలు, కోర్టు కేసులు: ఉచిత న్యాయ సహాయం వైపు చూపిస్తాను." },
+    { k: "no", h: "పరిధిలో లేనివి", p: "పోలీసు, క్రిమినల్ కేసులు, కుటుంబ విషయాలు, ఆస్తి వివాదాలు, కోర్టు కేసులు: స్పష్టంగా గుర్తించిన సాధారణ సమాచారం, ఉచిత న్యాయ సహాయం." },
   ],
   seeAll: "హక్ ఏం చేయగలదో, ఏం చేయలేదో చూడండి",
   legalNote: "ఇది చట్టపరమైన సమాచారం, న్యాయ సలహా కాదు. ప్రమాదంలో ఉంటే 112కు కాల్ చేయండి. ఉచిత న్యాయ సహాయం: NALSA 15100.",
@@ -298,11 +298,11 @@ Object.assign(window.HAQ_I18N.te, {
         items: ["బ్యాంక్, కార్డ్ లేదా UPI సమస్యలు, ఆన్‌లైన్ మోసం", "బీమా క్లెయిమ్‌లు, PF, ESI",
                 "రైలు, విమాన రీఫండ్‌లు, ట్రాఫిక్ చలాన్‌లు, పోయిన ఫోన్", "ఆధార్, పాస్‌పోర్ట్, RTI, కరెంటు బిల్లులు, ఉత్తర ప్రదేశ్‌లో బిల్డర్లు",
                 "ఆహార భద్రత, వృద్ధులు, మహిళలు, పిల్లలు"],
-        note: "వీటికి, ఆ పని చూసే అధికారిక పోర్టల్ లేదా హెల్ప్‌లైన్ పేరు హక్ చెబుతుంది. వీటి చట్టాన్ని వివరించదు." },
+        note: "వీటికి, ఆ పని చూసే అధికారిక పోర్టల్ లేదా హెల్ప్‌లైన్ పేరు హక్ చెబుతుంది, చట్ట పాఠంతో సరిచూడని సాధారణ సమాచారం అని స్పష్టంగా గుర్తించి." },
       { k: "no", h: "పరిధిలో లేనివి: న్యాయవాది లేదా ఉచిత న్యాయ సహాయం తీసుకోండి",
         items: ["పోలీసు, FIR, అరెస్టు, బెయిల్ లేదా ఏ క్రిమినల్ కేసైనా", "విడాకులు, పిల్లల కస్టడీ, భరణం, వారసత్వం, వీలునామా",
                 "ఆస్తి ఎవరిది, ఖాళీ చేయించడం, ఇప్పటికే కోర్టులో ఉన్న కేసులు", "చెక్ బౌన్స్, 18 ఏళ్ల లోపు పిల్లలకు సంబంధించిన ఏ విషయమైనా"],
-        note: "హక్ ఈ విషయం స్పష్టంగా చెప్పి, ఉచిత న్యాయ సహాయం హెల్ప్‌లైన్ NALSA 15100 ఇస్తుంది. ఉత్తర ప్రదేశ్ బయట, అద్దెకు సంబంధించిన రాష్ట్ర నియమాలు వేరుగా ఉండవచ్చు." },
+        note: "హక్ సాధారణ సమాచారం ఇస్తుంది, చట్ట పాఠంతో సరిచూడనిది అని స్పష్టంగా గుర్తించి, ఉచిత న్యాయ సహాయం హెల్ప్‌లైన్ NALSA 15100 కూడా ఇస్తుంది. నేరం చేయడానికి లేదా దాచడానికి ఎప్పుడూ సహాయం చేయదు. ఉత్తర ప్రదేశ్ బయట, అద్దెకు సంబంధించిన రాష్ట్ర నియమాలు వేరుగా ఉండవచ్చు." },
     ],
     useH: "ఎలా ఉపయోగించాలి",
     use: ["ఏం జరిగిందో ఏ భాషలోనైనా చెప్పండి: టైప్ చేయండి లేదా మైక్ నొక్కండి. మీ నగరం, మొత్తం, తేదీలు, మీ దగ్గర ఉన్న ఆధారాలు అన్నీ సహాయపడతాయి.",
@@ -313,7 +313,7 @@ Object.assign(window.HAQ_I18N.te, {
     not: ["న్యాయ సలహా లేదా న్యాయవాది: హక్ మీ తరపున వాదించదు, ఏదీ ఫైల్ చేయదు, ఎవరినీ సంప్రదించదు.",
           "కోర్టు తీర్పులు: హక్ కేసు చట్టాన్ని ఉదహరించదు.",
           "హామీలు: మీరు గెలుస్తారని లేదా ఎంత వస్తుందని ఎవరూ హామీ ఇవ్వలేరు.",
-          "ఊహలు: చట్టంలో సరిచూడలేని విషయాన్ని హక్ ఊహించకుండా స్పష్టంగా చెబుతుంది. ఇది కావాలనే.",
+          "మూలం లేని వివరాలు: మీ ప్రశ్నకు చట్ట పాఠం లేనప్పుడు, హక్ స్పష్టంగా గుర్తించిన సాధారణ సమాచారం మాత్రమే ఇస్తుంది, సెక్షన్లు, జరిమానాలు, గడువులు ఎప్పుడూ కాదు. ఇది కావాలనే.",
           "వెంటనే సమాధానం: ప్రతి సమాధానం చట్టంతో సరిచూస్తారు, కాబట్టి 10 నుంచి 30 సెకన్లు పట్టవచ్చు."],
     emergH: "అత్యవసర పరిస్థితిలో",
     emerg: "ఎవరైనా ప్రమాదంలో ఉంటే 112కు కాల్ చేయండి. ఆన్‌లైన్ మోసంలో ఇప్పుడే డబ్బు పోయి ఉంటే, వెంటనే 1930కు కాల్ చేయండి.",
@@ -322,3 +322,169 @@ Object.assign(window.HAQ_I18N.te, {
     ok: "అర్థమైంది, మొదలుపెడదాం", close: "మూసివేయండి",
   },
 });
+
+/* Settings split (Nov 2026): reply language follows the user's message by default; app language and the
+   voice provider are separate choices. */
+Object.assign(window.HAQ_I18N.en, { replyAuto: "Same as my message", uiLangLabel: "App language",
+  voiceService: "Voice service", voiceGoogle: "Google (free)", voiceSarvam: "Sarvam (Indian voices, paid credits)" });
+Object.assign(window.HAQ_I18N.hi, { replyAuto: "जिस भाषा में मैं लिखूँ/बोलूँ", uiLangLabel: "ऐप की भाषा",
+  voiceService: "आवाज़ सेवा", voiceGoogle: "Google (मुफ़्त)", voiceSarvam: "Sarvam (भारतीय आवाज़ें, पेड क्रेडिट)" });
+Object.assign(window.HAQ_I18N.te, { replyAuto: "నేను రాసిన/మాట్లాడిన భాషలోనే", uiLangLabel: "యాప్ భాష",
+  voiceService: "వాయిస్ సేవ", voiceGoogle: "Google (ఉచితం)", voiceSarvam: "Sarvam (భారతీయ గొంతులు, చెల్లింపు క్రెడిట్లు)" });
+
+/* Live web search answers (Nov 2026) */
+Object.assign(window.HAQ_I18N.en, { sourceWeb: "web page found by live search", sourceWebOfficial: "official site, found by live search" });
+Object.assign(window.HAQ_I18N.hi, { sourceWeb: "लाइव खोज में मिला वेब पेज", sourceWebOfficial: "सरकारी साइट, लाइव खोज में मिली" });
+Object.assign(window.HAQ_I18N.te, { sourceWeb: "లైవ్ సెర్చ్‌లో దొరికిన వెబ్ పేజీ", sourceWebOfficial: "ప్రభుత్వ సైట్, లైవ్ సెర్చ్‌లో దొరికింది" });
+
+/* Any legal topic (Nov 2026): the case-file panel names it */
+window.HAQ_I18N.en.cat.other_law = "Legal question"; window.HAQ_I18N.en.facts.topic = "Topic";
+window.HAQ_I18N.hi.cat.other_law = "कानूनी सवाल"; window.HAQ_I18N.hi.facts.topic = "विषय";
+window.HAQ_I18N.te.cat.other_law = "చట్టపరమైన ప్రశ్న"; window.HAQ_I18N.te.facts.topic = "విషయం";
+
+/* Voice settings split (Nov 2026) */
+Object.assign(window.HAQ_I18N.en, { sttService: "Speech to text", ttsService: "Read aloud with", voiceFallback: "If it fails, try the other service" });
+Object.assign(window.HAQ_I18N.hi, { sttService: "बोलकर लिखना", ttsService: "पढ़कर सुनाने के लिए", voiceFallback: "विफल होने पर दूसरी सेवा आज़माएँ" });
+Object.assign(window.HAQ_I18N.te, { sttService: "మాటను టెక్స్ట్‌గా", ttsService: "చదివి వినిపించడానికి", voiceFallback: "విఫలమైతే మరో సేవను ప్రయత్నించండి" });
+
+/* Coverage after the Nov 2026 redesign: broad law library + live search. Overrides the earlier guide text. */
+Object.assign(window.HAQ_I18N.en, {
+  scope: "Everyday legal problems in India, explained with the law: what it says, what you can get, what to do.",
+  emptyP: "Tell me in your own words, in any language, by typing or with the mic. Mention your city or state, the amount and the dates if you can.",
+  coverMini: [
+    { k: "full", h: "Explained with the law", p: "Deposits and rent, salary, refunds, police and FIRs, arrest and bail, marriage and divorce, domestic violence, maintenance, RTI, traffic fines, cheque bounce, inheritance and more." },
+    { k: "ref", h: "Where to go", p: "The right official office or helpline: RBI, cyber crime 1930, Rail Madad, AirSewa, UIDAI, RTI and 30 more, plus a notice you can send for deposits, salary and refunds." },
+    { k: "no", h: "What I won't do", p: "I'm not a lawyer: I can't represent you, file anything or promise an outcome, and I never help anyone commit a crime." },
+  ],
+  guide: {
+    title: "What Haq can and can't do",
+    intro: "Haq is a free legal helper for people in India. Tell it what happened, and it explains what the law says, what you can get and what to do next, in your language. It is not a lawyer.",
+    tiers: [
+      { k: "full", h: "Explained with the law",
+        items: ["Rent and deposits (Uttar Pradesh, Karnataka, Maharashtra, Delhi and Tamil Nadu laws, central law elsewhere)",
+                "Unpaid salary, gratuity, refunds and faulty goods or services",
+                "Police and FIRs, arrest and bail, cheating, threats, harassment",
+                "Marriage, divorce, domestic violence, dowry, maintenance, senior citizens",
+                "RTI, traffic fines, cyber fraud, workplace sexual harassment, cheque bounce, partnership disputes, inheritance"],
+        note: "Answers come from a library of 431 law passages copied from official sources, and each legal point shows its section. If the library doesn't have the law yet, Haq searches official and legal websites live and shows the page each point comes from." },
+      { k: "ref", h: "Where to go and what to send",
+        items: ["The right official office or helpline for 40 common problems (banks, insurance, PF, trains, flights, Aadhaar, RTI and more)",
+                "A notice or complaint you can send for deposits, salary and refunds, with blanks for anything Haq doesn't know"],
+        note: "Haq never sends or files anything for you. You check the draft and send it yourself." },
+      { k: "no", h: "When a lawyer really helps",
+        items: ["You've been arrested, charged or summoned to court", "Large sums or property are at stake", "A deadline is close"],
+        note: "Haq still explains the law, then says why a lawyer helps and gives the free legal aid helpline, NALSA 15100. It never helps anyone commit or hide a crime." },
+    ],
+    useH: "How to use it",
+    use: ["Tell Haq what happened, in any language: type or tap the mic. Your city or state, the amount, the dates and the proof you have all help.",
+          "Read the answer. Each legal point shows its source. The case file on the right collects the facts Haq understood: check them.",
+          "For deposits, salary or refunds, choose \"Draft a notice or complaint\" when you are ready. Anything Haq does not know stays as a highlighted blank.",
+          "One problem per chat. For a different problem, tap \"Start a new case\"."],
+    notH: "Please don't expect",
+    not: ["A lawyer: Haq cannot represent you, file anything or contact anyone for you.",
+          "Promises: no one can guarantee you will win or how much you will get.",
+          "Guesses: every legal point comes from a law text or a web page you can open. If Haq finds neither, it says so.",
+          "Instant replies: answers are checked against their sources, so they can take 10 to 40 seconds."],
+    emergH: "In an emergency",
+    emerg: "If anyone is in danger, call 112. If money was just taken by online fraud, call 1930 at once.",
+    privH: "Your privacy",
+    priv: "Chats are saved only in this browser. To answer, your message is sent to Haq's server and to Google's AI models and search. Please do not type Aadhaar, bank account or card numbers.",
+    ok: "I understand, let's start", close: "Close",
+  },
+});
+Object.assign(window.HAQ_I18N.hi, {
+  scope: "भारत की रोज़मर्रा की कानूनी समस्याएँ, कानून के साथ समझाई गईं: कानून क्या कहता है, आपको क्या मिल सकता है, क्या करें।",
+  emptyP: "अपने शब्दों में, किसी भी भाषा में बताइए: लिखकर या माइक से। हो सके तो शहर या राज्य, रकम और तारीखें भी बताइए।",
+  coverMini: [
+    { k: "full", h: "कानून के साथ समझाया गया", p: "डिपॉज़िट और किराया, वेतन, रिफ़ंड, पुलिस और FIR, गिरफ़्तारी और ज़मानत, शादी और तलाक़, घरेलू हिंसा, गुज़ारा भत्ता, RTI, ट्रैफ़िक जुर्माना, चेक बाउंस, विरासत और बहुत कुछ।" },
+    { k: "ref", h: "कहाँ जाएँ", p: "सही सरकारी दफ़्तर या हेल्पलाइन: RBI, साइबर अपराध 1930, रेल मदद, एयरसेवा, UIDAI, RTI और 30 और, साथ में डिपॉज़िट, वेतन और रिफ़ंड के लिए भेजने लायक नोटिस।" },
+    { k: "no", h: "मैं क्या नहीं करूँगा", p: "मैं वकील नहीं हूँ: आपकी तरफ़ से पेश नहीं हो सकता, कुछ फ़ाइल नहीं कर सकता, नतीजे का वादा नहीं कर सकता, और अपराध में कभी मदद नहीं करता।" },
+  ],
+  guide: {
+    title: "हक़ क्या कर सकता है और क्या नहीं",
+    intro: "हक़ भारत के लोगों के लिए एक मुफ़्त कानूनी मददगार है। बताइए क्या हुआ, और यह आपकी भाषा में समझाता है कि कानून क्या कहता है, आपको क्या मिल सकता है और आगे क्या करें। यह वकील नहीं है।",
+    tiers: [
+      { k: "full", h: "कानून के साथ समझाया गया",
+        items: ["किराया और डिपॉज़िट (उत्तर प्रदेश, कर्नाटक, महाराष्ट्र, दिल्ली और तमिलनाडु के कानून, बाकी जगह केंद्रीय कानून)",
+                "बकाया वेतन, ग्रेच्युटी, रिफ़ंड और ख़राब सामान या सेवा",
+                "पुलिस और FIR, गिरफ़्तारी और ज़मानत, धोखाधड़ी, धमकी, उत्पीड़न",
+                "शादी, तलाक़, घरेलू हिंसा, दहेज, गुज़ारा भत्ता, वरिष्ठ नागरिक",
+                "RTI, ट्रैफ़िक जुर्माना, साइबर धोखाधड़ी, कार्यस्थल पर यौन उत्पीड़न, चेक बाउंस, साझेदारी के विवाद, विरासत"],
+        note: "जवाब सरकारी स्रोतों से लिए गए 431 कानूनी अंशों की लाइब्रेरी से आते हैं, और हर कानूनी बात के साथ उसकी धारा दिखती है। अगर लाइब्रेरी में वह कानून अभी नहीं है, तो हक़ सरकारी और कानूनी वेबसाइटें लाइव खोजता है और हर बात का पेज दिखाता है।" },
+      { k: "ref", h: "कहाँ जाएँ और क्या भेजें",
+        items: ["40 आम समस्याओं के लिए सही सरकारी दफ़्तर या हेल्पलाइन (बैंक, बीमा, PF, ट्रेन, फ़्लाइट, आधार, RTI और बहुत कुछ)",
+                "डिपॉज़िट, वेतन और रिफ़ंड के लिए भेजने लायक नोटिस या शिकायत, जिसमें जो हक़ को नहीं पता वह खाली रहता है"],
+        note: "हक़ आपकी तरफ़ से कुछ नहीं भेजता या फ़ाइल नहीं करता। मसौदा आप जाँचकर ख़ुद भेजते हैं।" },
+      { k: "no", h: "कब वकील सच में मदद करता है",
+        items: ["आपको गिरफ़्तार किया गया है, आप पर आरोप है या अदालत से समन आया है", "बड़ी रकम या संपत्ति दाँव पर है", "समय-सीमा पास है"],
+        note: "हक़ फिर भी कानून समझाता है, फिर बताता है कि वकील क्यों मदद करेगा और मुफ़्त कानूनी सहायता की हेल्पलाइन NALSA 15100 देता है। अपराध करने या छिपाने में यह कभी मदद नहीं करता।" },
+    ],
+    useH: "इस्तेमाल कैसे करें",
+    use: ["किसी भी भाषा में बताइए क्या हुआ: लिखिए या माइक दबाइए। शहर या राज्य, रकम, तारीखें और आपके सबूत, सब मदद करते हैं।",
+          "जवाब पढ़िए। हर कानूनी बात का स्रोत दिखता है। दाईं ओर की केस फ़ाइल में वे बातें आती हैं जो हक़ ने समझीं: उन्हें जाँच लीजिए।",
+          "डिपॉज़िट, वेतन या रिफ़ंड के लिए, तैयार हों तो \"नोटिस या शिकायत तैयार करें\" चुनिए। जो बात हक़ को नहीं पता, वह पीले खाली स्थान के रूप में रहती है।",
+          "एक चैट में एक ही समस्या। दूसरी समस्या के लिए \"नया मामला शुरू करें\" दबाइए।"],
+    notH: "यह उम्मीद न रखें",
+    not: ["वकील: हक़ आपकी तरफ़ से पेश नहीं हो सकता, कुछ फ़ाइल नहीं कर सकता, किसी से संपर्क नहीं कर सकता।",
+          "वादे: कोई गारंटी नहीं दे सकता कि आप जीतेंगे या कितना मिलेगा।",
+          "अंदाज़े: हर कानूनी बात किसी कानूनी पाठ या खोलने लायक वेब पेज से आती है। अगर हक़ को दोनों नहीं मिलते, तो वह साफ़ कह देता है।",
+          "तुरंत जवाब: जवाब उनके स्रोतों से जाँचे जाते हैं, इसलिए 10 से 40 सेकंड लग सकते हैं।"],
+    emergH: "आपात स्थिति में",
+    emerg: "अगर कोई ख़तरे में है तो 112 पर कॉल करें। अगर अभी-अभी ऑनलाइन धोखाधड़ी से पैसे गए हैं, तो तुरंत 1930 पर कॉल करें।",
+    privH: "आपकी निजता",
+    priv: "चैट सिर्फ़ इसी ब्राउज़र में सेव होती हैं। जवाब देने के लिए आपका संदेश हक़ के सर्वर और Google के AI मॉडल और खोज को भेजा जाता है। कृपया आधार, बैंक खाता या कार्ड नंबर न लिखें।",
+    ok: "समझ गया, शुरू करें", close: "बंद करें",
+  },
+});
+Object.assign(window.HAQ_I18N.te, {
+  scope: "భారతదేశంలో రోజువారీ చట్ట సమస్యలు, చట్టంతో వివరణ: చట్టం ఏం చెబుతుంది, మీకు ఏం దక్కుతుంది, ఏం చేయాలి.",
+  emptyP: "మీ మాటల్లో, ఏ భాషలోనైనా చెప్పండి: టైప్ చేయండి లేదా మైక్ నొక్కండి. వీలైతే మీ నగరం లేదా రాష్ట్రం, మొత్తం, తేదీలు కూడా చెప్పండి.",
+  coverMini: [
+    { k: "full", h: "చట్టంతో వివరణ", p: "డిపాజిట్, అద్దె, జీతం, రీఫండ్, పోలీసు, FIR, అరెస్టు, బెయిల్, పెళ్లి, విడాకులు, గృహ హింస, భరణం, RTI, ట్రాఫిక్ జరిమానాలు, చెక్ బౌన్స్, వారసత్వం మొదలైనవి." },
+    { k: "ref", h: "ఎక్కడికి వెళ్లాలి", p: "సరైన అధికారిక కార్యాలయం లేదా హెల్ప్‌లైన్: RBI, సైబర్ క్రైమ్ 1930, రైల్ మదద్, ఎయిర్‌సేవా, UIDAI, RTI ఇంకా 30, డిపాజిట్, జీతం, రీఫండ్‌లకు పంపగలిగే నోటీసు కూడా." },
+    { k: "no", h: "నేను ఏం చేయను", p: "నేను న్యాయవాదిని కాదు: మీ తరపున వాదించలేను, ఏదీ ఫైల్ చేయలేను, ఫలితానికి హామీ ఇవ్వలేను, నేరానికి ఎప్పుడూ సహాయం చేయను." },
+  ],
+  guide: {
+    title: "హక్ ఏం చేయగలదు, ఏం చేయలేదు",
+    intro: "హక్ భారతదేశంలోని ప్రజల కోసం ఒక ఉచిత న్యాయ సహాయకుడు. ఏం జరిగిందో చెప్పండి, చట్టం ఏం చెబుతుందో, మీకు ఏం దక్కుతుందో, తర్వాత ఏం చేయాలో మీ భాషలో వివరిస్తుంది. ఇది న్యాయవాది కాదు.",
+    tiers: [
+      { k: "full", h: "చట్టంతో వివరణ",
+        items: ["అద్దె, డిపాజిట్ (ఉత్తర ప్రదేశ్, కర్ణాటక, మహారాష్ట్ర, ఢిల్లీ, తమిళనాడు చట్టాలు, ఇతర చోట్ల కేంద్ర చట్టం)",
+                "బకాయి జీతం, గ్రాట్యుటీ, రీఫండ్‌లు, లోపం ఉన్న వస్తువులు లేదా సేవలు",
+                "పోలీసు, FIR, అరెస్టు, బెయిల్, మోసం, బెదిరింపులు, వేధింపులు",
+                "పెళ్లి, విడాకులు, గృహ హింస, కట్నం, భరణం, వృద్ధులు",
+                "RTI, ట్రాఫిక్ జరిమానాలు, సైబర్ మోసం, పని చోట లైంగిక వేధింపులు, చెక్ బౌన్స్, భాగస్వామ్య వివాదాలు, వారసత్వం"],
+        note: "సమాధానాలు అధికారిక మూలాల నుంచి తీసుకున్న 431 చట్ట భాగాల లైబ్రరీ నుంచి వస్తాయి, ప్రతి చట్టపరమైన అంశానికి దాని సెక్షన్ కనిపిస్తుంది. లైబ్రరీలో ఆ చట్టం ఇంకా లేకపోతే, హక్ అధికారిక, చట్ట వెబ్‌సైట్లను లైవ్‌గా వెతికి, ప్రతి అంశం ఏ పేజీ నుంచి వచ్చిందో చూపిస్తుంది." },
+      { k: "ref", h: "ఎక్కడికి వెళ్లాలి, ఏం పంపాలి",
+        items: ["40 సాధారణ సమస్యలకు సరైన అధికారిక కార్యాలయం లేదా హెల్ప్‌లైన్ (బ్యాంకులు, బీమా, PF, రైళ్లు, విమానాలు, ఆధార్, RTI మొదలైనవి)",
+                "డిపాజిట్, జీతం, రీఫండ్‌లకు పంపగలిగే నోటీసు లేదా ఫిర్యాదు, హక్‌కు తెలియని వివరాలు ఖాళీగా ఉంటాయి"],
+        note: "హక్ మీ తరపున ఏదీ పంపదు, ఫైల్ చేయదు. డ్రాఫ్ట్‌ను మీరు చూసి మీరే పంపాలి." },
+      { k: "no", h: "న్యాయవాది నిజంగా ఎప్పుడు సహాయపడతారు",
+        items: ["మిమ్మల్ని అరెస్టు చేసినా, మీపై కేసు పెట్టినా, కోర్టు సమన్లు వచ్చినా", "పెద్ద మొత్తం లేదా ఆస్తి విషయమైతే", "గడువు దగ్గర పడితే"],
+        note: "హక్ అయినా చట్టాన్ని వివరిస్తుంది, తర్వాత న్యాయవాది ఎందుకు సహాయపడతారో చెప్పి, ఉచిత న్యాయ సహాయం హెల్ప్‌లైన్ NALSA 15100 ఇస్తుంది. నేరం చేయడానికి లేదా దాచడానికి ఎప్పుడూ సహాయం చేయదు." },
+    ],
+    useH: "ఎలా ఉపయోగించాలి",
+    use: ["ఏం జరిగిందో ఏ భాషలోనైనా చెప్పండి: టైప్ చేయండి లేదా మైక్ నొక్కండి. మీ నగరం లేదా రాష్ట్రం, మొత్తం, తేదీలు, మీ దగ్గర ఉన్న ఆధారాలు అన్నీ సహాయపడతాయి.",
+          "సమాధానం చదవండి. ప్రతి చట్టపరమైన అంశానికి మూలం కనిపిస్తుంది. కుడివైపు కేస్ ఫైల్‌లో హక్ అర్థం చేసుకున్న వివరాలు ఉంటాయి: వాటిని సరిచూసుకోండి.",
+          "డిపాజిట్, జీతం లేదా రీఫండ్ కోసం, సిద్ధమైనప్పుడు \"నోటీసు లేదా ఫిర్యాదు తయారు చేయాలి\" ఎంచుకోండి. హక్‌కు తెలియని వివరాలు హైలైట్ చేసిన ఖాళీలుగా ఉంటాయి.",
+          "ఒక చాట్‌లో ఒకే సమస్య. వేరే సమస్యకు \"కొత్త కేసు ప్రారంభించండి\" నొక్కండి."],
+    notH: "ఇవి ఆశించవద్దు",
+    not: ["న్యాయవాది: హక్ మీ తరపున వాదించదు, ఏదీ ఫైల్ చేయదు, ఎవరినీ సంప్రదించదు.",
+          "హామీలు: మీరు గెలుస్తారని లేదా ఎంత వస్తుందని ఎవరూ హామీ ఇవ్వలేరు.",
+          "ఊహలు: ప్రతి చట్టపరమైన అంశం ఒక చట్ట పాఠం లేదా మీరు తెరవగలిగే వెబ్ పేజీ నుంచి వస్తుంది. రెండూ దొరకకపోతే హక్ స్పష్టంగా చెబుతుంది.",
+          "వెంటనే సమాధానం: సమాధానాలు వాటి మూలాలతో సరిచూస్తారు, కాబట్టి 10 నుంచి 40 సెకన్లు పట్టవచ్చు."],
+    emergH: "అత్యవసర పరిస్థితిలో",
+    emerg: "ఎవరైనా ప్రమాదంలో ఉంటే 112కు కాల్ చేయండి. ఆన్‌లైన్ మోసంలో ఇప్పుడే డబ్బు పోయి ఉంటే, వెంటనే 1930కు కాల్ చేయండి.",
+    privH: "మీ గోప్యత",
+    priv: "చాట్‌లు ఈ బ్రౌజర్‌లో మాత్రమే సేవ్ అవుతాయి. సమాధానం ఇవ్వడానికి మీ సందేశం హక్ సర్వర్‌కు, Google AI మోడల్‌లకు, సెర్చ్‌కు వెళ్తుంది. దయచేసి ఆధార్, బ్యాంక్ ఖాతా లేదా కార్డ్ నంబర్లు టైప్ చేయవద్దు.",
+    ok: "అర్థమైంది, మొదలుపెడదాం", close: "మూసివేయండి",
+  },
+});
+
+/* Stop button and the settings dialog. */
+Object.assign(window.HAQ_I18N.en, { stop: "Stop", stopLong: "Stop this answer", settingsBtn: "Settings", done: "Done",
+  stopped: "Stopped. Your words are back in the box: fix them and send again, or ask something else." });
+Object.assign(window.HAQ_I18N.hi, { stop: "रोकें", stopLong: "यह जवाब रोकें", settingsBtn: "सेटिंग्स", done: "हो गया",
+  stopped: "रोक दिया। आपके शब्द फिर से बॉक्स में हैं: ठीक करके दोबारा भेजें, या कुछ और पूछें।" });
+Object.assign(window.HAQ_I18N.te, { stop: "ఆపండి", stopLong: "ఈ సమాధానం ఆపండి", settingsBtn: "సెట్టింగ్‌లు", done: "పూర్తయింది",
+  stopped: "ఆపేశాను. మీ మాటలు మళ్లీ బాక్స్‌లో ఉన్నాయి: సరిచేసి మళ్లీ పంపండి, లేదా వేరే ఏదైనా అడగండి." });
